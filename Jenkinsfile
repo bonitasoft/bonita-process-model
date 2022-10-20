@@ -2,9 +2,7 @@ def buildOptions = buildOptions(env, params)
 
 pipeline {
      
-    agent {
-        label 'studio-7.15'
-    }
+    agent any
     
     options {
         skipDefaultCheckout() // Custom shallow clone in stage
@@ -15,6 +13,7 @@ pipeline {
     
     environment {
        JAVA_TOOL_OPTIONS = ''
+       JAVA_HOME = "$JAVA_HOME_17"
        MAVEN_OPTS = '-Xmx2g -Dstyle.color=always -Djansi.passthrough=true'
     }
     
