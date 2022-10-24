@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (C) 2009-2019 BonitaSoft S.A.&#xD;&#xA;BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble&#xD;&#xA;&#xD;&#xA;This program is free software: you can redistribute it and/or modify&#xD;&#xA;it under the terms of the GNU General Public License as published by&#xD;&#xA;the Free Software Foundation, either version 2.0 of the License, or&#xD;&#xA;(at your option) any later version.&#xD;&#xA;&#xD;&#xA;This program is distributed in the hope that it will be useful,&#xD;&#xA;but WITHOUT ANY WARRANTY; without even the implied warranty of&#xD;&#xA;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xD;&#xA;GNU General Public License for more details.&#xD;&#xA;&#xD;&#xA;You should have received a copy of the GNU General Public License&#xD;&#xA;along with this program.  If not, see &lt;http://www.gnu.org/licenses/>."
-    modelDirectory="/org.bonitasoft.studio.model/src" editDirectory="/org.bonitasoft.studio.model.edit/src"
-    modelPluginID="org.bonitasoft.studio.model" templateDirectory="org.bonitasoft.studio-models/EMFTemplates/"
-    dynamicTemplates="true" redirection="" forceOverwrite="true" modelName="Process"
-    editPluginClass="org.bonitasoft.studio.model.edit.ProcessEditPlugin" nonNLSMarkers="true"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
-    editPluginID="org.bonitasoft.studio.model.edit" runtimeVersion="2.9" language="">
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (C) 2009-2022 BonitaSoft S.A.&#xD;&#xA;BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble&#xD;&#xA;&#xD;&#xA;This program is free software: you can redistribute it and/or modify&#xD;&#xA;it under the terms of the GNU General Public License as published by&#xD;&#xA;the Free Software Foundation, either version 2.0 of the License, or&#xD;&#xA;(at your option) any later version.&#xD;&#xA;&#xD;&#xA;This program is distributed in the hope that it will be useful,&#xD;&#xA;but WITHOUT ANY WARRANTY; without even the implied warranty of&#xD;&#xA;MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the&#xD;&#xA;GNU General Public License for more details.&#xD;&#xA;&#xD;&#xA;You should have received a copy of the GNU General Public License&#xD;&#xA;along with this program.  If not, see &lt;http://www.gnu.org/licenses/>."
+    modelDirectory="/org.bonitasoft.bpm.model/src-gen" editDirectory="/org.bonitasoft.bpm.model.edit/src-gen"
+    editorDirectory="/org.bonitasoft.bpm.model.editor/src-gen" modelPluginID="org.bonitasoft.bpm.model"
+    templateDirectory="org.bonitasoft.studio-models/EMFTemplates/" dynamicTemplates="true"
+    redirection="" forceOverwrite="true" modelName="Process" editPluginClass="org.bonitasoft.bpm.model.edit.ProcessEditPlugin"
+    editorPluginClass="org.bonitasoft.bpm.model..presentation.ProcessEditorPlugin"
+    nonNLSMarkers="true" testsDirectory="/org.bonitasoft.bpm.model.tests/src-gen"
+    testSuiteClass="org.bonitasoft.bpm.model..tests.ProcessAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="7.0" copyrightFields="false" editPluginID="org.bonitasoft.bpm.model.edit"
+    editorPluginID="org.bonitasoft.bpm.model.editor" testsPluginID="org.bonitasoft.bpm.model.tests"
+    runtimeVersion="2.9" language="">
   <foreignModel>ActorMapping.ecore</foreignModel>
   <foreignModel>configuration.ecore</foreignModel>
   <foreignModel>connector-configuration.ecore</foreignModel>
@@ -16,7 +20,7 @@
   <foreignModel>process.ecore</foreignModel>
   <foreignModel>form.ecore</foreignModel>
   <foreignModel>simulation.ecore</foreignModel>
-  <genPackages prefix="ActorMapping" basePackage="org.bonitasoft.studio.model" resource="XML"
+  <genPackages prefix="ActorMapping" basePackage="org.bonitasoft.bpm.model" resource="XML"
       disposableProviderFactory="true" ecorePackage="ActorMapping.ecore#/">
     <genClasses ecoreClass="ActorMapping.ecore#//ActorMapping">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ActorMapping.ecore#//ActorMapping/name"/>
@@ -51,7 +55,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ActorMapping.ecore#//Users/user"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Configuration" basePackage="org.bonitasoft.studio.model" resource="XML"
+  <genPackages prefix="Configuration" basePackage="org.bonitasoft.bpm.model" resource="XML"
       fileExtensions="conf" ecorePackage="configuration.ecore#/">
     <genClasses ecoreClass="configuration.ecore#//Configuration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//Configuration/name"/>
@@ -92,7 +96,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//Resource/projectPath"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="ConnectorConfiguration" basePackage="org.bonitasoft.studio.model"
+  <genPackages prefix="ConnectorConfiguration" basePackage="org.bonitasoft.bpm.model"
       resource="XML" fileExtensions="connectorconfig" ecorePackage="connector-configuration.ecore#/">
     <genClasses ecoreClass="connector-configuration.ecore#//ConnectorConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute connector-configuration.ecore#//ConnectorConfiguration/definitionId"/>
@@ -106,7 +110,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference connector-configuration.ecore#//ConnectorParameter/expression"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Expression" basePackage="org.bonitasoft.studio.model" ecorePackage="expression.ecore#/">
+  <genPackages prefix="Expression" basePackage="org.bonitasoft.bpm.model" ecorePackage="expression.ecore#/">
     <genClasses image="false" ecoreClass="expression.ecore#//AbstractExpression"/>
     <genClasses ecoreClass="expression.ecore#//Expression">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expression.ecore#//Expression/name"/>
@@ -141,7 +145,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute expression.ecore#//Operator/inputTypes"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Kpi" basePackage="org.bonitasoft.studio.model" ecorePackage="kpi.ecore#/">
+  <genPackages prefix="Kpi" basePackage="org.bonitasoft.bpm.model" ecorePackage="kpi.ecore#/">
     <genClasses image="false" ecoreClass="kpi.ecore#//AbstractKPIDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpi.ecore#//AbstractKPIDefinition/version"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kpi.ecore#//AbstractKPIDefinition/fields"/>
@@ -181,7 +185,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kpi.ecore#//KPIField/useQuotes"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Parameter" basePackage="org.bonitasoft.studio.model" ecorePackage="parameter.ecore#/">
+  <genPackages prefix="Parameter" basePackage="org.bonitasoft.bpm.model" ecorePackage="parameter.ecore#/">
     <genClasses ecoreClass="parameter.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parameter.ecore#//Parameter/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parameter.ecore#//Parameter/value"/>
@@ -195,7 +199,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute parameter.ecore#//ParameterContext/defaultContext"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Process" basePackage="org.bonitasoft.studio.model" disposableProviderFactory="true"
+  <genPackages prefix="Process" basePackage="org.bonitasoft.bpm.model" disposableProviderFactory="true"
       ecorePackage="process.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="process.ecore#//CorrelationTypeActive">
       <genEnumLiterals ecoreEnumLiteral="process.ecore#//CorrelationTypeActive/INACTIVE"/>
@@ -583,7 +587,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//AdditionalResource/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//AdditionalResource/description"/>
     </genClasses>
-    <nestedGenPackages prefix="Decision" basePackage="org.bonitasoft.studio.model.process"
+    <nestedGenPackages prefix="Decision" basePackage="org.bonitasoft.bpm.model.process"
         resource="XML" disposableProviderFactory="true" ecorePackage="process.ecore#//decision">
       <genClasses ecoreClass="process.ecore#//decision/DecisionTable">
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//decision/DecisionTable/lines"/>
@@ -594,7 +598,7 @@
         <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//decision/DecisionTableLine/action"/>
       </genClasses>
       <genClasses image="false" ecoreClass="process.ecore#//decision/DecisionTableAction"/>
-      <nestedGenPackages prefix="Transitions" basePackage="org.bonitasoft.studio.model.process.decision"
+      <nestedGenPackages prefix="Transitions" basePackage="org.bonitasoft.bpm.model.process.decision"
           resource="XML" disposableProviderFactory="true" ecorePackage="process.ecore#//decision/transitions">
         <genClasses ecoreClass="process.ecore#//decision/transitions/TakeTransitionAction">
           <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//decision/transitions/TakeTransitionAction/takeTransition"/>
@@ -602,7 +606,7 @@
       </nestedGenPackages>
     </nestedGenPackages>
   </genPackages>
-  <genPackages prefix="Form" basePackage="org.bonitasoft.studio.model" disposableProviderFactory="true"
+  <genPackages prefix="Form" basePackage="org.bonitasoft.bpm.model" disposableProviderFactory="true"
       ecorePackage="form.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="form.ecore#//EventDependencyType">
       <genEnumLiterals ecoreEnumLiteral="form.ecore#//EventDependencyType/onValueChange"/>
@@ -837,7 +841,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute form.ecore#//GroupIterator/className"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Simulation" basePackage="org.bonitasoft.studio.model" disposableProviderFactory="true"
+  <genPackages prefix="Simulation" basePackage="org.bonitasoft.bpm.model" disposableProviderFactory="true"
       ecorePackage="simulation.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="simulation.ecore#//TimeUnit">
       <genEnumLiterals ecoreEnumLiteral="simulation.ecore#//TimeUnit/Minute"/>
