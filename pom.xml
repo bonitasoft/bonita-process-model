@@ -7,12 +7,87 @@
     <version>8.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Bonita Business Process Model</name>
+    <description>Contains the Bonita Process Domain Logic.</description>
+    <licenses>
+        <license>
+            <name>GNU General Public License v2.0 or later</name>
+            <url>http://www.gnu.org/licenses/gpl-2.0.html</url>
+            <distribution>repo</distribution>
+            <comments>Copyright (C) 2022 BonitaSoft S.A.
+BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2.0 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</comments>
+        </license>
+    </licenses>
+    <organization>
+        <name>BonitaSoft S.A.</name>
+        <url>https://www.bonitasoft.com/</url>
+    </organization>
 
     <properties>
+        <cyclonedx.version>2.7.2</cyclonedx.version>
         <tycho.version>3.0.0</tycho.version>
+        
+        <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+        <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
         <groovy-maven-plugin.groovy.version>3.0.11</groovy-maven-plugin.groovy.version>
+        
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    
+    <profiles>
+        <profile>
+            <id>release</id>
+            <properties>
+                <maven.javadoc.skip>false</maven.javadoc.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <!-- GPG plugin -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven-gpg-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <!-- Prevent `gpg` from using pinentry programs -->
+                                    <gpgArguments>
+                                        <arg>--pinentry-mode</arg>
+                                        <arg>loopback</arg>
+                                    </gpgArguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <version>${maven-release-plugin.version}</version>
+                        <configuration>
+                            <tagNameFormat>@{project.version}</tagNameFormat>
+                            <releaseProfiles>release</releaseProfiles>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <build>
         <pluginManagement>
@@ -37,6 +112,16 @@
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.cyclonedx</groupId>
+                <artifactId>cyclonedx-maven-plugin</artifactId>
+                <version>${cyclonedx.version}</version>
+                <configuration>
+                    <includeLicenseText>true</includeLicenseText>
+                    <outputReactorProjects>true</outputReactorProjects>
+                    <outputFormat>json</outputFormat>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho.versions-plugin</artifactId>
@@ -90,5 +175,33 @@
         <!--<module>tests/</module>-->
         <module>sites/</module>
     </modules>
+    
+    <distributionManagement>
+        <!-- Jfrog Repository for now -->
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>https://bonitasoft.jfrog.io/artifactory/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>releases</id>
+            <url>https://bonitasoft.jfrog.io/artifactory/releases</url>
+        </repository>
+        <!-- Central Repository in the future -->
+        <!-- <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository> -->
+    </distributionManagement>
+    
+    <scm>
+        <developerConnection>scm:git:https://github.com/bonitasoft/bonita-process-model.git</developerConnection>
+        <connection>scm:git:https://github.com/bonitasoft/bonita-process-model.git</connection>
+        <url>https://github.com/bonitasoft/bonita-project-maven-plugin</url>
+        <tag>HEAD</tag>
+    </scm>
 
 </project>
