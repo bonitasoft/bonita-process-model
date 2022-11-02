@@ -31,7 +31,11 @@ pipeline {
            }
         }
         
-        stage('⚙ Build') {
+        stage('⚙ Build only') {
+        
+            when {
+                expression { return buildOptions.isPRBuild }
+            }
     
             steps {
                 dir('sources'){
@@ -39,10 +43,28 @@ pipeline {
                     echo "buildOptions=$buildOptions"
                     sh './mvnw --version'
                     configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
-                        sh "./mvnw -s $MAVEN_SETTINGS --no-transfer-progress install -DmavenSettingsFile=$MAVEN_SETTINGS -DsignServiceURL=${env.SIGN_SERVICE_URL} -DmacSignServiceURL=${env.MAC_SIGN_SERVICE_URL} -DmacBuildAndSignInstallerServiceURL=${env.BUILD_AND_SIGN_MAC_INSTALLER_SERVICE_URL} -Dtest.workspace.dir=\"${env.WORKSPACE}\" ${buildOptions.mvnProfiles} ${buildOptions.mvnArgs} 2> /dev/null"
+                        sh "./mvnw -s $MAVEN_SETTINGS --no-transfer-progress clean install -DmavenSettingsFile=$MAVEN_SETTINGS -DsignServiceURL=${env.SIGN_SERVICE_URL} -DmacSignServiceURL=${env.MAC_SIGN_SERVICE_URL} -DmacBuildAndSignInstallerServiceURL=${env.BUILD_AND_SIGN_MAC_INSTALLER_SERVICE_URL} -Dtest.workspace.dir=\"${env.WORKSPACE}\" ${buildOptions.mvnProfiles} ${buildOptions.mvnArgs} 2> /dev/null"
                     }
                 }
            }
+        }
+        
+        stage('🚀 Build & Deploy') {
+        
+            when {
+                expression { return !buildOptions.isPRBuild }
+            }
+                   
+            steps {
+                dir('sources') {
+                    echo "params=$params"
+                    echo "buildOptions=$buildOptions"
+                    sh './mvnw --version'
+                    configFileProvider([configFile(fileId: 'maven-settings', variable: 'MAVEN_SETTINGS')]) {
+                        sh "./mvnw -s $MAVEN_SETTINGS --no-transfer-progress clean deploy -DmavenSettingsFile=$MAVEN_SETTINGS -DsignServiceURL=${env.SIGN_SERVICE_URL} -DmacSignServiceURL=${env.MAC_SIGN_SERVICE_URL} -DmacBuildAndSignInstallerServiceURL=${env.BUILD_AND_SIGN_MAC_INSTALLER_SERVICE_URL} -Dtest.workspace.dir=\"${env.WORKSPACE}\" ${buildOptions.mvnProfiles} ${buildOptions.mvnArgs} 2> /dev/null"
+                    }
+                }
+            }
         }
      
     }
