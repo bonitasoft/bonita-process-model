@@ -14,18 +14,13 @@
  */
 package org.bonitasoft.bpm.model.edit.custom.process;
 
-import java.net.URL;
+import java.util.List;
 
-import org.bonitasoft.bpm.model.edit.custom.EMFEditCustomPlugin;
+import org.bonitasoft.bpm.model.edit.ProcessEditPlugin;
+import org.bonitasoft.bpm.model.edit.custom.provider.BottomLeftDecoratedImage;
 import org.bonitasoft.bpm.model.process.Data;
 import org.bonitasoft.bpm.model.process.provider.DataItemProvider;
-import org.bonitasoft.studio.pics.Pics;
 import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
-import org.eclipse.jface.viewers.DecorationOverlayIcon;
-import org.eclipse.jface.viewers.IDecoration;
-import org.eclipse.swt.graphics.Image;
 
 /**
  * @author Romain Bioteau
@@ -45,24 +40,12 @@ public class CustomDataItemProvider extends DataItemProvider {
     @Override
     public Object getImage(final Object object) {
         final Object icon = super.getImage(object);
-        if (object instanceof Data) {
-            Image iconImage = null;
-            if (icon instanceof URL) {
-                iconImage = ExtendedImageRegistry.getInstance().getImage(icon);
-            } else if (icon instanceof Image) {
-                iconImage = (Image) icon;
-            }
-            if (iconImage != null) {
-                final boolean formTransient = ((Data) object).getDatasourceId() != null && ((Data) object).getDatasourceId().equals("PAGEFLOW");
-                if (formTransient) {
-                    Image img = EMFEditCustomPlugin.getDefault().getImageRegistry().get("decoratedImageFor" + ((EObject) object).eClass().getName());
-                    if (img == null) {
-                        img = new DecorationOverlayIcon(iconImage, Pics.getImageDescriptor("form_decorator.png", EMFEditCustomPlugin.getDefault()),
-                                IDecoration.BOTTOM_LEFT).createImage();
-                        EMFEditCustomPlugin.getDefault().getImageRegistry().put("decoratedImageFor" + ((EObject) object).eClass().getName(), img);
-                    }
-                    return img;
-                }
+        if (object instanceof Data && icon != null) {
+            final boolean formTransient = ((Data) object).getDatasourceId() != null
+                    && ((Data) object).getDatasourceId().equals("PAGEFLOW");
+            if (formTransient) {
+                Object formDeco = ProcessEditPlugin.INSTANCE.getImage("form_decorator.png");
+                return new BottomLeftDecoratedImage(List.of(icon, formDeco));
             }
         }
         return icon;

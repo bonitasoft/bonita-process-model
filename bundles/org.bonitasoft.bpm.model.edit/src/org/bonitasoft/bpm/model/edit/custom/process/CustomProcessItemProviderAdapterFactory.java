@@ -23,15 +23,6 @@ import org.eclipse.emf.common.notify.Adapter;
 public class CustomProcessItemProviderAdapterFactory extends ProcessItemProviderAdapterFactory {
 
     @Override
-    public Adapter createConnectorAdapter() {
-        if (connectorItemProvider == null) {
-            connectorItemProvider = new CustomConnectorItemProvider(this);
-        }
-
-        return connectorItemProvider;
-    }
-
-    @Override
     public Adapter createDataAdapter() {
         if (dataItemProvider == null) {
             dataItemProvider = new CustomDataItemProvider(this);
@@ -48,7 +39,6 @@ public class CustomProcessItemProviderAdapterFactory extends ProcessItemProvider
 
         return javaObjectDataItemProvider;
     }
-
 
     @Override
     public Adapter createMessageAdapter() {
