@@ -190,6 +190,14 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                     <outputReactorProjects>true</outputReactorProjects>
                     <outputFormat>json</outputFormat>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>makeAggregateBom</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
