@@ -15,15 +15,23 @@
 package org.bonitasoft.bpm.model.edit.custom.process;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.bonitasoft.bpm.model.edit.ProcessEditPlugin;
 import org.bonitasoft.bpm.model.edit.custom.provider.BottomLeftDecoratedImage;
 import org.bonitasoft.bpm.model.process.Data;
 import org.bonitasoft.bpm.model.process.JavaObjectData;
 import org.bonitasoft.bpm.model.process.provider.JavaObjectDataItemProvider;
-import org.bonitasoft.studio.common.repository.RepositoryManager;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 
 /**
@@ -48,10 +56,12 @@ public class CustomJavaObjectDataItemProvider extends JavaObjectDataItemProvider
             boolean formTransient = ((Data) object).getDatasourceId() != null
                     && ((Data) object).getDatasourceId().equals("PAGEFLOW");
             if (object instanceof JavaObjectData) {
-                if (((JavaObjectData) object).getClassName() != null) {
+                String className = ((JavaObjectData) object).getClassName();
+                if (className != null) {
                     try {
-                        IType t = RepositoryManager.getInstance().getCurrentRepository().orElseThrow().getJavaProject()
-                                .findType(((JavaObjectData) object).getClassName());
+                        Optional<IJavaProject> javaProj = getJavaProjectIfPossible(
+                                ((JavaObjectData) object).eResource());
+                        IType t = javaProj.isPresent() ? javaProj.get().findType(className) : null;
                         if (t != null && t.isInterface()) {
                             Object mainImage = ProcessEditPlugin.INSTANCE.getImage("int_obj.gif");
                             if (formTransient) {
@@ -68,12 +78,35 @@ public class CustomJavaObjectDataItemProvider extends JavaObjectDataItemProvider
                             return mainImage;
                         }
                     } catch (JavaModelException e) {
-
+                        // class loading failed, just use the default icon
                     }
                 }
             }
         }
         return icon;
+    }
+
+    /**
+     * Get the java project containing the model resource
+     * 
+     * @param eResource the model resource
+     * @return the java project when there is one
+     */
+    private Optional<IJavaProject> getJavaProjectIfPossible(Resource eResource) {
+        URI uri = eResource.getResourceSet().getURIConverter().normalize(eResource.getURI());
+        if (uri.isFile()) {
+            String fileString = uri.toFileString();
+            IPath path = Path.fromOSString(fileString);
+            IFile iFile = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(path);
+            return Optional.ofNullable(JavaCore.create(iFile.getProject()));
+        } else if (uri.isPlatformResource()) {
+            String platformString = uri.toPlatformString(true);
+            IPath path = Path.fromPortableString(platformString);
+            IFile iFile = ResourcesPlugin.getWorkspace().getRoot().getFile(path);
+            return Optional.ofNullable(JavaCore.create(iFile.getProject()));
+        } else {
+            return Optional.empty();
+        }
     }
 
 }

@@ -22,5 +22,7 @@ Export-Package: org.bonitasoft.bpm.model.actormapping.provider,
  org.bonitasoft.bpm.model.simulation.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.bonitasoft.bpm.model;visibility:=reexport,
- org.eclipse.emf.edit;visibility:=reexport
+ org.eclipse.emf.edit;visibility:=reexport,
+ org.eclipse.jdt.core,
+ org.eclipse.core.resources
 Bundle-ActivationPolicy: lazy
