@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.bonitasoft.bpm.definitions.feature">
+      <category name="Bonita Business Process Model"/>
+   </feature>
+   <category-def name="Bonita Business Process Model" label="Contains the Bonita Process Domain Logic."/>
+</site>

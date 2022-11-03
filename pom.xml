@@ -87,6 +87,75 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                 </plugins>
             </build>
         </profile>
+        <!-- do not deploy connector pom.xml files -->
+        <profile>
+            <id>skip-deploy-connector-pom</id>
+            <activation>
+                <file><exists>.polyglot.pom.tycho</exists></file>
+            </activation>
+            <properties>
+                <maven.deploy.skip>true</maven.deploy.skip>
+            </properties>
+        </profile>
+        <!-- do not deploy features -->
+        <profile>
+            <id>skip-deploy-eclipse-feature</id>
+            <activation>
+                <file><exists>feature.xml</exists></file>
+            </activation>
+            <properties>
+                <maven.deploy.skip>true</maven.deploy.skip>
+            </properties>
+        </profile>
+        <!-- do not deploy test bundles -->
+        <profile>
+            <id>skip-deploy-eclipse-test</id>
+            <activation>
+                <file><exists>no_deploy.txt</exists></file>
+            </activation>
+            <properties>
+                <maven.deploy.skip>true</maven.deploy.skip>
+            </properties>
+        </profile>
+        <!-- do not deploy target definitions -->
+        <profile>
+            <id>skip-deploy-eclipse-target</id>
+            <activation>
+                <file><exists>target-platform.target</exists></file>
+            </activation>
+            <properties>
+                <maven.deploy.skip>true</maven.deploy.skip>
+            </properties>
+        </profile>
+        <!-- Deploy update sites on maven
+             Update site will be available e.g. on mvn:org.bonitasoft.bpm:org.bonitasoft.bpm.eclipse-repository:8.0.0-SNAPSHOT:zip -->
+        <profile>
+            <id>deploy-eclipse-updatesite-on-maven</id>
+            <activation>
+                <file><exists>category.xml</exists></file>
+            </activation>
+            <properties>
+                <maven.deploy.skip>false</maven.deploy.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eclipse.tycho</groupId>
+                        <artifactId>tycho-p2-repository-plugin</artifactId>
+                        <version>${tycho.version}</version>
+                        <executions>
+                            <execution>
+                                <id>maven-p2-site</id>
+                                <phase>prepare-package</phase>
+                                <goals>
+                                    <goal>remap-artifacts-to-m2-repo</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
     </profiles>
 
     <build>
@@ -121,6 +190,14 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                     <outputReactorProjects>true</outputReactorProjects>
                     <outputFormat>json</outputFormat>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>makeAggregateBom</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
