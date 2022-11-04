@@ -41,9 +41,17 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
+        <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
+        <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
+        <maven-install-plugin.version>3.0.1</maven-install-plugin.version>
+        <maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
         <groovy-maven-plugin.groovy.version>3.0.11</groovy-maven-plugin.groovy.version>
+        <archetype-packaging.version>3.2.1</archetype-packaging.version>
         
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>11</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
     
     <profiles>
@@ -178,6 +186,26 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                         </dependency>
                     </dependencies>
                 </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>${maven-clean-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>${archetype-packaging.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven-resources-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven-install-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -277,7 +305,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <scm>
         <developerConnection>scm:git:https://github.com/bonitasoft/bonita-process-model.git</developerConnection>
         <connection>scm:git:https://github.com/bonitasoft/bonita-process-model.git</connection>
-        <url>https://github.com/bonitasoft/bonita-project-maven-plugin</url>
+        <url>https://github.com/bonitasoft/bonita-process-model</url>
         <tag>HEAD</tag>
     </scm>
 

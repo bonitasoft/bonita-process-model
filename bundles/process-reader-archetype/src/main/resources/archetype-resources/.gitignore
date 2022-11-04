@@ -1,0 +1,9 @@
+# maven build folder
+target/
+
+# uncomment to ignore IntelliJ project content
+#.idea
+
+# uncomment to ignore Eclipse project content
+#.project
+#.settings/
