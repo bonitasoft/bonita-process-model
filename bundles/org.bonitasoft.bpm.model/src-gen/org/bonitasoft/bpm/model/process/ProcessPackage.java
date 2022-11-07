@@ -53,7 +53,7 @@ public interface ProcessPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.bonitasoft.org/ns/studio/process"; //$NON-NLS-1$
+	String eNS_URI = "http://www.bonitasoft.org/ns/bpm/process"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.

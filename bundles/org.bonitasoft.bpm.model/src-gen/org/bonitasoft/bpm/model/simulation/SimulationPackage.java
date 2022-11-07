@@ -54,7 +54,7 @@ public interface SimulationPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.bonitasoft.org/ns/studio/process/simulation"; //$NON-NLS-1$
+	String eNS_URI = "http://www.bonitasoft.org/ns/bpm/process/simulation"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.

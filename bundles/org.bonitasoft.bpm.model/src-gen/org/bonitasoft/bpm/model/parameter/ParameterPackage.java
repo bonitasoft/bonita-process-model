@@ -53,7 +53,7 @@ public interface ParameterPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.bonitasoft.org/ns/studio/parameter"; //$NON-NLS-1$
+	String eNS_URI = "http://www.bonitasoft.org/ns/bpm/parameter"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.

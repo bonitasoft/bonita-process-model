@@ -25,7 +25,8 @@
       <!-- @generated process -->
       <package
             uri="http://www.bonitasoft.org/ns/actormapping/6.0"
-            class="org.bonitasoft.bpm.model.actormapping.ActorMappingPackage"/>
+            class="org.bonitasoft.bpm.model.actormapping.ActorMappingPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
@@ -38,8 +39,9 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated process -->
       <package
-            uri="http://www.bonitasoft.org/ns/studio/configuration"
-            class="org.bonitasoft.bpm.model.configuration.ConfigurationPackage"/>
+            uri="http://www.bonitasoft.org/ns/bpm/configuration"
+            class="org.bonitasoft.bpm.model.configuration.ConfigurationPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
@@ -53,7 +55,8 @@
       <!-- @generated process -->
       <package
             uri="http://wwww.bonitasoft.org/model/connector/configuration"
-            class="org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage"/>
+            class="org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
@@ -66,36 +69,41 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated process -->
       <package
-            uri="http://www.bonitasoft.org/ns/studio/expression"
-            class="org.bonitasoft.bpm.model.expression.ExpressionPackage"/>
+            uri="http://www.bonitasoft.org/ns/bpm/expression"
+            class="org.bonitasoft.bpm.model.expression.ExpressionPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated process -->
       <package
-            uri="http://www.bonitasoft.org/ns/studio/kpi"
-            class="org.bonitasoft.bpm.model.kpi.KpiPackage"/>
+            uri="http://www.bonitasoft.org/ns/bpm/kpi"
+            class="org.bonitasoft.bpm.model.kpi.KpiPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated process -->
       <package
-            uri="http://www.bonitasoft.org/ns/studio/parameter"
-            class="org.bonitasoft.bpm.model.parameter.ParameterPackage"/>
+            uri="http://www.bonitasoft.org/ns/bpm/parameter"
+            class="org.bonitasoft.bpm.model.parameter.ParameterPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated process -->
       <package
-            uri="http://www.bonitasoft.org/ns/studio/process"
-            class="org.bonitasoft.bpm.model.process.ProcessPackage"/>
+            uri="http://www.bonitasoft.org/ns/bpm/process"
+            class="org.bonitasoft.bpm.model.process.ProcessPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated process -->
       <package
             uri="http://www.bonitasoft.org/ns/studio/process/decision"
-            class="org.bonitasoft.bpm.model.process.decision.DecisionPackage"/>
+            class="org.bonitasoft.bpm.model.process.decision.DecisionPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
@@ -109,7 +117,8 @@
       <!-- @generated process -->
       <package
             uri="http://www.bonitasoft.org/ns/studio/process/decision/transitions"
-            class="org.bonitasoft.bpm.model.process.decision.transitions.TransitionsPackage"/>
+            class="org.bonitasoft.bpm.model.process.decision.transitions.TransitionsPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
@@ -122,15 +131,17 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated process -->
       <package
-            uri="http://www.bonitasoft.org/ns/studio/form"
-            class="org.bonitasoft.bpm.model.form.FormPackage"/>
+            uri="http://www.bonitasoft.org/ns/bpm/form"
+            class="org.bonitasoft.bpm.model.form.FormPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated process -->
       <package
-            uri="http://www.bonitasoft.org/ns/studio/process/simulation"
-            class="org.bonitasoft.bpm.model.simulation.SimulationPackage"/>
+            uri="http://www.bonitasoft.org/ns/bpm/process/simulation"
+            class="org.bonitasoft.bpm.model.simulation.SimulationPackage"
+            genModel="model/process.genmodel"/>
    </extension>
 
 </plugin>

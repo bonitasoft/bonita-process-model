@@ -53,7 +53,7 @@ public interface ExpressionPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.bonitasoft.org/ns/studio/expression"; //$NON-NLS-1$
+	String eNS_URI = "http://www.bonitasoft.org/ns/bpm/expression"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.

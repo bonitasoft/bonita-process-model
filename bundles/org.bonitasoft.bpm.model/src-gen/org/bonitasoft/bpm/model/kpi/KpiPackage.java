@@ -55,7 +55,7 @@ public interface KpiPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.bonitasoft.org/ns/studio/kpi"; //$NON-NLS-1$
+	String eNS_URI = "http://www.bonitasoft.org/ns/bpm/kpi"; //$NON-NLS-1$
 
 	/**
 	 * The package namespace name.
