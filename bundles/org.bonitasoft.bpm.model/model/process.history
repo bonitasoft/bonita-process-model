@@ -15146,7 +15146,7 @@
   <releases xmi:id="_JE4CPo2IhfYz_Ev-OD6UY" date="2021-02-09T10:25:27.494+0100" label="7.12.0-004">
     <changes xsi:type="history:MigrationChange" xmi:id="_JE4CPo2IhfYz_Ev-OD6UY" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateDeprecatedGroovyConnector"/>
   </releases>
-  <releases xmi:id="_tt2RcE8LEeq0LYHRol2p7w">
+  <releases xmi:id="_tt2RcE8LEeq0LYHRol2p7w" date="2022-11-08T10:29:00.661+0100" label="8.0.0">
     <changes xsi:type="history:Set" xmi:id="_bX8esF6cEe2-2NKBMlb2Tw" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/bpm/process" oldDataValue="http://www.bonitasoft.org/ns/studio/process">
       <element href="process.ecore#/"/>
     </changes>
@@ -15169,4 +15169,5 @@
       <element href="parameter.ecore#/"/>
     </changes>
   </releases>
+  <releases xmi:id="_xyMngF9HEe24H9qpSeta3A"/>
 </history:History>
