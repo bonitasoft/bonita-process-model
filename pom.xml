@@ -38,15 +38,22 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <properties>
         <cyclonedx.version>2.7.2</cyclonedx.version>
         <tycho.version>3.0.0</tycho.version>
+        <emf.version>2.27.0</emf.version>
         
         <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
         <maven-release-plugin.version>2.5.3</maven-release-plugin.version>
-        <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
-        <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
-        <maven-install-plugin.version>3.0.1</maven-install-plugin.version>
-        <maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
+        <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
         <groovy-maven-plugin.groovy.version>3.0.11</groovy-maven-plugin.groovy.version>
         <archetype-packaging.version>3.2.1</archetype-packaging.version>
+        
+        <!-- standard maven plugins versions -->
+        <maven-clean-plugin.version>3.2.0</maven-clean-plugin.version>
+        <maven-resources-plugin.version>3.3.0</maven-resources-plugin.version>
+        <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
+        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+        <maven-install-plugin.version>3.0.1</maven-install-plugin.version>
+        <maven-deploy-plugin.version>3.0.0</maven-deploy-plugin.version>
         
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
@@ -177,7 +184,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                 <plugin>
                     <groupId>org.codehaus.gmaven</groupId>
                     <artifactId>groovy-maven-plugin</artifactId>
-                    <version>2.1.1</version>
+                    <version>${groovy-maven-plugin.version}</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.codehaus.groovy</groupId>
@@ -187,16 +194,29 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                     </dependencies>
                 </plugin>
                 <plugin>
+                    <artifactId>maven-archetype-plugin</artifactId>
+                    <version>${archetype-packaging.version}</version>
+                </plugin>
+                <!-- standard maven plugins with version locked down -->
+                <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven-clean-plugin.version}</version>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-archetype-plugin</artifactId>
-                    <version>${archetype-packaging.version}</version>
-                </plugin>
-                <plugin>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven-resources-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>${maven-compiler-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>${maven-jar-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
