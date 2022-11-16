@@ -144,4 +144,27 @@
             genModel="model/process.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated NOT process manual resource factory
+      (registered with process extension, not used for now) -->
+      <parser
+            type="process"
+            class="org.bonitasoft.bpm.model.process.util.ProcessResourceFactoryImpl"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.content_handler">
+      <!-- @generated NOT content handler for .proc extension -->
+      <contentHandler
+            priority="10000"
+            class="org.bonitasoft.bpm.model.util.internal.ProcContentHandler">
+      </contentHandler>
+   </extension>
+   <extension
+         point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated NOT linking the process resource factory to the content type -->
+      <parser
+            class="org.bonitasoft.bpm.model.process.util.ProcessResourceFactoryImpl"
+            contentTypeIdentifier="bonita-process-model">
+      </parser>
+   </extension>
+
 </plugin>
