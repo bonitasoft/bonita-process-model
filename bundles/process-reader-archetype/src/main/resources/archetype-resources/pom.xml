@@ -18,7 +18,9 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <bonita.bpm.version>${bonita-process-model-version}</bonita.bpm.version>
-    <emf.version>${emf-version}</emf.version>
+    <emf.ecore.version>${emf-ecore-version}</emf.ecore.version>
+    <emf.common.version>${emf-common-version}</emf.common.version>
+    <emf.xmi.version>${emf-xmi-version}</emf.xmi.version>
     
     <maven-clean-plugin.version>${maven-clean-version}</maven-clean-plugin.version>
     <maven-resources-plugin.version>${maven-resources-version}</maven-resources-plugin.version>
@@ -45,7 +47,17 @@
     <dependency>
       <groupId>org.eclipse.emf</groupId>
       <artifactId>org.eclipse.emf.ecore</artifactId>
-      <version>${emf.version}</version>
+      <version>${emf.ecore.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.emf</groupId>
+      <artifactId>org.eclipse.emf.common</artifactId>
+      <version>${emf.common.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.emf</groupId>
+      <artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+      <version>${emf.xmi.version}</version>
     </dependency>
     <!-- Tests -->
     <dependency>

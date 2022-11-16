@@ -1,6 +1,6 @@
 import groovy.transform.Field
 
-@Field final versionProperties = ['java-version', 'bonita-process-model-version', 'emf-version',
+@Field final versionProperties = ['java-version', 'bonita-process-model-version', 'emf-ecore-version','emf-common-version','emf-xmi-version',
     'maven-clean-version', 'maven-resources-version', 'maven-compiler-version',
     'maven-surefire-version', 'maven-jar-version', 'maven-install-version', 'maven-deploy-version']
 
