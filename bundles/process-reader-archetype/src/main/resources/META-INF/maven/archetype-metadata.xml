@@ -18,9 +18,15 @@
     <requiredProperty key="bonita-process-model-version">
       <defaultValue>8.0.0-SNAPSHOT</defaultValue>
     </requiredProperty>
-    <requiredProperty key="emf-version">
+    <requiredProperty key="emf-ecore-version">
       <defaultValue>2.27.0</defaultValue>
     </requiredProperty>
+    <requiredProperty key="emf-common-version">
+      <defaultValue>2.25.0</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="emf-xmi-version">
+      <defaultValue>2.16.0</defaultValue>
+    </requiredProperty>        
     <requiredProperty key="maven-clean-version">
       <defaultValue>3.2.0</defaultValue>
     </requiredProperty>
