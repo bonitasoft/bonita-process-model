@@ -22,12 +22,23 @@ However, as an exception to the GNU General Public License, programs generated b
 Modules created by using the archetype are not to be considered as derivative work and can be licensed however it pleases their authors.
 
 ## Prerequisites
+For building the code in this repository : Java [JDK 17+]
 
-Java 11
+For using the libraries released : Java [JDK 11+]
 
 ## How to build
 
-TODO
+### With Eclipse
+Different launch configurations exists in this repository. Build Bonita Process Model.launch can be used to compile and build the model java classes. 
+
+In your Eclipse IDE, right click on the launch file, Run as => Build Bonita Process Model. 
+
+A console should appear and after a while, the build will be done. You can found the jar in the target folder of each bundle project. 
+
+### With Maven
+```
+mvn install
+```
 
 ## process-reader-archetype
 
@@ -58,3 +69,5 @@ mvn archetype:generate \
 | -Dpackage         | __false__  | suggested and asked interactively | Name of the root java package|
 | -Ddescription     | __false__  |     Describe your project here    | Description of the project|
 | -Dwrapper         | __false__  | true                              | If set to true, project will setup a [maven wrapper](https://github.com/takari/maven-wrapper)|
+
+## Tutorial : creating a new project and using the bonita-process-model
