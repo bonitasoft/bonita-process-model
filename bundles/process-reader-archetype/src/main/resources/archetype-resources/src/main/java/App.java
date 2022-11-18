@@ -72,6 +72,8 @@ public class App {
         }
         for (String arg : args) {
             if (readArg.filter(IN_ARG::equals).isPresent()) {
+                //reset readArg
+                readArg = Optional.empty();
                 // reading -in argument
                 try {
                     if (!arg.endsWith(".proc")) {
@@ -89,6 +91,8 @@ public class App {
                     return;
                 }
             } else if (readArg.filter(TREE_ARG::equals).isPresent()) {
+                //reset readArg
+                readArg = Optional.empty();
                 // reading -tree argument
                 try {
                     displayTree = DisplayTreeIn.valueOf(arg);
@@ -101,6 +105,8 @@ public class App {
                     return;
                 }
             } else if (readArg.filter(OUT_ARG::equals).isPresent()) {
+                //reset readArg
+                readArg = Optional.empty();
                 // reading -out argument
                 try {
                     if (!arg.endsWith(".html")) {

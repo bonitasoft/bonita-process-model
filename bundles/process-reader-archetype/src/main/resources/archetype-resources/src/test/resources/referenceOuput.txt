@@ -1,0 +1,115 @@
+Reading model with version 7.12.0-004
+Diagram MyDiagram has 1 pool(s), 1 actor(s) and 1 lane(s).
+MyDiagram (1.0)
+└─ Pool Pool
+   └─ Lane Employee lane
+      └─ Start Event Start
+      └─ Task Login
+         └─ Operation
+            └─ Expression username
+            └─ Expression usernameText
+            └─ Operator ASSIGNMENT
+         └─ Expression
+         └─ Expression
+         └─ Expression
+         └─ Expression multiInstanceIterator
+         └─ Expression
+         └─ Form Mapping INTERNAL
+            └─ Expression loginForm
+         └─ Contract
+            └─ Contract Input usernameText
+               └─ Contract Input Mapping
+         └─ Expression
+      └─ AND Gateway And
+      └─ AND Gateway Then
+      └─ Service Task AutoLogout
+         └─ Expression
+         └─ Expression
+         └─ Expression
+         └─ Expression multiInstanceIterator
+         └─ Expression
+      └─ End Event End
+      └─ Task Test
+         └─ Expression
+         └─ Expression
+         └─ Expression
+         └─ Expression multiInstanceIterator
+         └─ Expression
+         └─ Form Mapping INTERNAL
+            └─ Expression testForm
+         └─ Contract
+         └─ Expression
+      └─ Task Play
+         └─ Operation
+            └─ Expression playText
+            └─ Expression inputText
+            └─ Operator ASSIGNMENT
+         └─ Expression
+         └─ Expression
+         └─ Expression
+         └─ Expression multiInstanceIterator
+         └─ Expression
+         └─ Form Mapping INTERNAL
+            └─ Expression playForm
+         └─ Contract
+            └─ Contract Input inputText
+               └─ Contract Input Mapping
+         └─ Expression
+   └─ Data username
+      └─ Expression
+   └─ Data playText
+      └─ Expression
+   └─ Form Mapping NONE
+      └─ Expression
+   └─ Form Mapping NONE
+      └─ Expression
+   └─ Sequence Flow
+      └─ Table
+      └─ Expression
+   └─ Sequence Flow
+      └─ Table
+      └─ Expression
+   └─ Sequence Flow
+      └─ Table
+      └─ Expression
+   └─ Sequence Flow
+      └─ Table
+      └─ Expression
+   └─ Sequence Flow
+      └─ Table
+      └─ Expression
+   └─ Sequence Flow
+      └─ Table
+      └─ Expression
+   └─ Sequence Flow
+      └─ Table
+      └─ Expression
+   └─ Sequence Flow
+      └─ Table
+      └─ Expression
+   └─ Actor Employee actor
+   └─ Contract
+   └─ Search Index
+      └─ Expression
+      └─ Expression
+   └─ Search Index
+      └─ Expression
+      └─ Expression
+   └─ Search Index
+      └─ Expression
+      └─ Expression
+   └─ Search Index
+      └─ Expression
+      └─ Expression
+   └─ Search Index
+      └─ Expression
+      └─ Expression
+└─ Boolean Type Boolean
+└─ Date Type Date
+└─ Integer Type Integer
+└─ Long Type Long
+└─ Double Type Double
+└─ String Type Text
+└─ Java Type Java_object
+└─ XML Type XML
+└─ Business Object Type Business_Object
