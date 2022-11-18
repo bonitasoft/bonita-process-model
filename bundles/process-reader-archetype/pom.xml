@@ -47,6 +47,7 @@
                   <emf-ecore-version>${emf-ecore.version}</emf-ecore-version>
                   <emf-common-version>${emf-common.version}</emf-common-version>
                   <emf-xmi-version>${emf-xmi.version}</emf-xmi-version>
+                  <emf-edit-version>${emf-edit.version}</emf-edit-version>
                   <maven-clean-version>${maven-clean-plugin.version}</maven-clean-version>
                   <maven-resources-version>${maven-resources-plugin.version}</maven-resources-version>
                   <maven-compiler-version>${maven-compiler-plugin.version}</maven-compiler-version>
