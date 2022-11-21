@@ -29,6 +29,10 @@ import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPac
 
 import org.bonitasoft.bpm.model.connectorconfiguration.impl.ConnectorConfigurationPackageImpl;
 
+import org.bonitasoft.bpm.model.decision.DecisionPackage;
+
+import org.bonitasoft.bpm.model.decision.impl.DecisionPackageImpl;
+
 import org.bonitasoft.bpm.model.expression.ExpressionPackage;
 
 import org.bonitasoft.bpm.model.expression.impl.ExpressionPackageImpl;
@@ -159,17 +163,13 @@ import org.bonitasoft.bpm.model.process.XMLData;
 import org.bonitasoft.bpm.model.process.XMLType;
 import org.bonitasoft.bpm.model.process.XORGateway;
 
-import org.bonitasoft.bpm.model.process.decision.DecisionPackage;
-
-import org.bonitasoft.bpm.model.process.decision.impl.DecisionPackageImpl;
-
-import org.bonitasoft.bpm.model.process.decision.transitions.TransitionsPackage;
-
-import org.bonitasoft.bpm.model.process.decision.transitions.impl.TransitionsPackageImpl;
-
 import org.bonitasoft.bpm.model.simulation.SimulationPackage;
 
 import org.bonitasoft.bpm.model.simulation.impl.SimulationPackageImpl;
+
+import org.bonitasoft.bpm.model.transitions.TransitionsPackage;
+
+import org.bonitasoft.bpm.model.transitions.impl.TransitionsPackageImpl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -1029,14 +1029,14 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
 		KpiPackageImpl theKpiPackage = (KpiPackageImpl)(registeredPackage instanceof KpiPackageImpl ? registeredPackage : KpiPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ParameterPackage.eNS_URI);
 		ParameterPackageImpl theParameterPackage = (ParameterPackageImpl)(registeredPackage instanceof ParameterPackageImpl ? registeredPackage : ParameterPackage.eINSTANCE);
-		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DecisionPackage.eNS_URI);
-		DecisionPackageImpl theDecisionPackage = (DecisionPackageImpl)(registeredPackage instanceof DecisionPackageImpl ? registeredPackage : DecisionPackage.eINSTANCE);
-		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TransitionsPackage.eNS_URI);
-		TransitionsPackageImpl theTransitionsPackage = (TransitionsPackageImpl)(registeredPackage instanceof TransitionsPackageImpl ? registeredPackage : TransitionsPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(FormPackage.eNS_URI);
 		FormPackageImpl theFormPackage = (FormPackageImpl)(registeredPackage instanceof FormPackageImpl ? registeredPackage : FormPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimulationPackage.eNS_URI);
 		SimulationPackageImpl theSimulationPackage = (SimulationPackageImpl)(registeredPackage instanceof SimulationPackageImpl ? registeredPackage : SimulationPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DecisionPackage.eNS_URI);
+		DecisionPackageImpl theDecisionPackage = (DecisionPackageImpl)(registeredPackage instanceof DecisionPackageImpl ? registeredPackage : DecisionPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TransitionsPackage.eNS_URI);
+		TransitionsPackageImpl theTransitionsPackage = (TransitionsPackageImpl)(registeredPackage instanceof TransitionsPackageImpl ? registeredPackage : TransitionsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theProcessPackage.createPackageContents();
@@ -1046,10 +1046,10 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
 		theExpressionPackage.createPackageContents();
 		theKpiPackage.createPackageContents();
 		theParameterPackage.createPackageContents();
-		theDecisionPackage.createPackageContents();
-		theTransitionsPackage.createPackageContents();
 		theFormPackage.createPackageContents();
 		theSimulationPackage.createPackageContents();
+		theDecisionPackage.createPackageContents();
+		theTransitionsPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theProcessPackage.initializePackageContents();
@@ -1059,10 +1059,10 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
 		theExpressionPackage.initializePackageContents();
 		theKpiPackage.initializePackageContents();
 		theParameterPackage.initializePackageContents();
-		theDecisionPackage.initializePackageContents();
-		theTransitionsPackage.initializePackageContents();
 		theFormPackage.initializePackageContents();
 		theSimulationPackage.initializePackageContents();
+		theDecisionPackage.initializePackageContents();
+		theTransitionsPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theProcessPackage.freeze();
@@ -4256,15 +4256,12 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		DecisionPackage theDecisionPackage = (DecisionPackage)EPackage.Registry.INSTANCE.getEPackage(DecisionPackage.eNS_URI);
 		ExpressionPackage theExpressionPackage = (ExpressionPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionPackage.eNS_URI);
 		ConfigurationPackage theConfigurationPackage = (ConfigurationPackage)EPackage.Registry.INSTANCE.getEPackage(ConfigurationPackage.eNS_URI);
 		ParameterPackage theParameterPackage = (ParameterPackage)EPackage.Registry.INSTANCE.getEPackage(ParameterPackage.eNS_URI);
 		KpiPackage theKpiPackage = (KpiPackage)EPackage.Registry.INSTANCE.getEPackage(KpiPackage.eNS_URI);
 		ConnectorConfigurationPackage theConnectorConfigurationPackage = (ConnectorConfigurationPackage)EPackage.Registry.INSTANCE.getEPackage(ConnectorConfigurationPackage.eNS_URI);
-
-		// Add subpackages
-		getESubpackages().add(theDecisionPackage);
+		DecisionPackage theDecisionPackage = (DecisionPackage)EPackage.Registry.INSTANCE.getEPackage(DecisionPackage.eNS_URI);
 
 		// Create type parameters
 

@@ -1858,67 +1858,30 @@
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14E3tmnREeaTLbmqFFisdA" referenceName="eSubpackages">
         <target href="process.ecore#/"/>
-        <element href="process.ecore#//decision"/>
-        <changes xsi:type="history:Set" xmi:id="_14E3t2nREeaTLbmqFFisdA" featureName="name" dataValue="decision">
-          <element href="process.ecore#//decision"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14E3uGnREeaTLbmqFFisdA" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/studio/process/decision">
-          <element href="process.ecore#//decision"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14E3uWnREeaTLbmqFFisdA" featureName="nsPrefix" dataValue="decision">
-          <element href="process.ecore#//decision"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14E3t2nREeaTLbmqFFisdA" featureName="name" dataValue="decision"/>
+        <changes xsi:type="history:Set" xmi:id="_14E3uGnREeaTLbmqFFisdA" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/studio/process/decision"/>
+        <changes xsi:type="history:Set" xmi:id="_14E3uWnREeaTLbmqFFisdA" featureName="nsPrefix" dataValue="decision"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14E3umnREeaTLbmqFFisdA" referenceName="eClassifiers">
-        <target href="process.ecore#//decision"/>
-        <element href="process.ecore#//decision/DecisionTable"/>
-        <changes xsi:type="history:Set" xmi:id="_14E3u2nREeaTLbmqFFisdA" featureName="name" dataValue="DecisionTable">
-          <element href="process.ecore#//decision/DecisionTable"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14E3u2nREeaTLbmqFFisdA" featureName="name" dataValue="DecisionTable"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14E3vGnREeaTLbmqFFisdA" referenceName="eClassifiers">
-        <target href="process.ecore#//decision"/>
-        <element href="process.ecore#//decision/DecisionTableLine"/>
-        <changes xsi:type="history:Set" xmi:id="_14E3vWnREeaTLbmqFFisdA" featureName="name" dataValue="DecisionTableLine">
-          <element href="process.ecore#//decision/DecisionTableLine"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14E3vWnREeaTLbmqFFisdA" featureName="name" dataValue="DecisionTableLine"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14E3vmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
-        <target href="process.ecore#//decision/DecisionTable"/>
-        <element href="process.ecore#//decision/DecisionTable/lines"/>
-        <changes xsi:type="history:Set" xmi:id="_14E3v2nREeaTLbmqFFisdA" featureName="name" dataValue="lines">
-          <element href="process.ecore#//decision/DecisionTable/lines"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14E3wGnREeaTLbmqFFisdA" featureName="upperBound" dataValue="-1" oldDataValue="1">
-          <element href="process.ecore#//decision/DecisionTable/lines"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14E3wWnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false">
-          <element href="process.ecore#//decision/DecisionTable/lines"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14E3wmnREeaTLbmqFFisdA" featureName="eType">
-          <element href="process.ecore#//decision/DecisionTable/lines"/>
-          <referenceValue href="process.ecore#//decision/DecisionTableLine"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14E3v2nREeaTLbmqFFisdA" featureName="name" dataValue="lines"/>
+        <changes xsi:type="history:Set" xmi:id="_14E3wGnREeaTLbmqFFisdA" featureName="upperBound" dataValue="-1" oldDataValue="1"/>
+        <changes xsi:type="history:Set" xmi:id="_14E3wWnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false"/>
+        <changes xsi:type="history:Set" xmi:id="_14E3wmnREeaTLbmqFFisdA" featureName="eType"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14E3w2nREeaTLbmqFFisdA" referenceName="eClassifiers" element="_15DIN2nREeaTLbmqFFisdA">
-        <target href="process.ecore#//decision"/>
         <changes xsi:type="history:Set" xmi:id="_14E3xGnREeaTLbmqFFisdA" element="_15DIN2nREeaTLbmqFFisdA" featureName="name" dataValue="DecisionTableCondition"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14E3xWnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
-        <target href="process.ecore#//decision/DecisionTableLine"/>
-        <element href="process.ecore#//decision/DecisionTableLine/conditions"/>
-        <changes xsi:type="history:Set" xmi:id="_14E3xmnREeaTLbmqFFisdA" featureName="name" dataValue="conditions">
-          <element href="process.ecore#//decision/DecisionTableLine/conditions"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14E3x2nREeaTLbmqFFisdA" featureName="upperBound" dataValue="-1" oldDataValue="1">
-          <element href="process.ecore#//decision/DecisionTableLine/conditions"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14E3yGnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false">
-          <element href="process.ecore#//decision/DecisionTableLine/conditions"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14E3yWnREeaTLbmqFFisdA" featureName="eType" referenceValue="_15DIN2nREeaTLbmqFFisdA">
-          <element href="process.ecore#//decision/DecisionTableLine/conditions"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14E3xmnREeaTLbmqFFisdA" featureName="name" dataValue="conditions"/>
+        <changes xsi:type="history:Set" xmi:id="_14E3x2nREeaTLbmqFFisdA" featureName="upperBound" dataValue="-1" oldDataValue="1"/>
+        <changes xsi:type="history:Set" xmi:id="_14E3yGnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false"/>
+        <changes xsi:type="history:Set" xmi:id="_14E3yWnREeaTLbmqFFisdA" featureName="eType" referenceValue="_15DIN2nREeaTLbmqFFisdA"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14E3ymnREeaTLbmqFFisdA" target="_15DIN2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures" element="_15DILGnREeaTLbmqFFisdA">
         <changes xsi:type="history:Set" xmi:id="_14E3y2nREeaTLbmqFFisdA" element="_15DILGnREeaTLbmqFFisdA" featureName="name" dataValue="operand1"/>
@@ -1939,78 +1902,32 @@
         </changes>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14Few2nREeaTLbmqFFisdA" referenceName="eClassifiers">
-        <target href="process.ecore#//decision"/>
-        <element href="process.ecore#//decision/DecisionTableAction"/>
-        <changes xsi:type="history:Set" xmi:id="_14FexGnREeaTLbmqFFisdA" featureName="name" dataValue="DecisionTableAction">
-          <element href="process.ecore#//decision/DecisionTableAction"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14FexWnREeaTLbmqFFisdA" featureName="abstract" dataValue="true" oldDataValue="false">
-          <element href="process.ecore#//decision/DecisionTableAction"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14FexGnREeaTLbmqFFisdA" featureName="name" dataValue="DecisionTableAction"/>
+        <changes xsi:type="history:Set" xmi:id="_14FexWnREeaTLbmqFFisdA" featureName="abstract" dataValue="true" oldDataValue="false"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14FexmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
-        <target href="process.ecore#//decision/DecisionTable"/>
-        <element href="process.ecore#//decision/DecisionTable/defaultAction"/>
-        <changes xsi:type="history:Set" xmi:id="_14Fex2nREeaTLbmqFFisdA" featureName="name" dataValue="defaultAction">
-          <element href="process.ecore#//decision/DecisionTable/defaultAction"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14FeyGnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false">
-          <element href="process.ecore#//decision/DecisionTable/defaultAction"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14FeyWnREeaTLbmqFFisdA" featureName="eType">
-          <element href="process.ecore#//decision/DecisionTable/defaultAction"/>
-          <referenceValue href="process.ecore#//decision/DecisionTableAction"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14Fex2nREeaTLbmqFFisdA" featureName="name" dataValue="defaultAction"/>
+        <changes xsi:type="history:Set" xmi:id="_14FeyGnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false"/>
+        <changes xsi:type="history:Set" xmi:id="_14FeyWnREeaTLbmqFFisdA" featureName="eType"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14FeymnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
-        <target href="process.ecore#//decision/DecisionTableLine"/>
-        <element href="process.ecore#//decision/DecisionTableLine/action"/>
-        <changes xsi:type="history:Set" xmi:id="_14Fey2nREeaTLbmqFFisdA" featureName="name" dataValue="action">
-          <element href="process.ecore#//decision/DecisionTableLine/action"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14FezGnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false">
-          <element href="process.ecore#//decision/DecisionTableLine/action"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14FezWnREeaTLbmqFFisdA" featureName="eType">
-          <element href="process.ecore#//decision/DecisionTableLine/action"/>
-          <referenceValue href="process.ecore#//decision/DecisionTableAction"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14Fey2nREeaTLbmqFFisdA" featureName="name" dataValue="action"/>
+        <changes xsi:type="history:Set" xmi:id="_14FezGnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false"/>
+        <changes xsi:type="history:Set" xmi:id="_14FezWnREeaTLbmqFFisdA" featureName="eType"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14FezmnREeaTLbmqFFisdA" referenceName="eSubpackages">
-        <target href="process.ecore#//decision"/>
-        <element href="process.ecore#//decision/transitions"/>
-        <changes xsi:type="history:Set" xmi:id="_14Fez2nREeaTLbmqFFisdA" featureName="name" dataValue="transitions">
-          <element href="process.ecore#//decision/transitions"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14Fe0GnREeaTLbmqFFisdA" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/studio/process/decision/transitions">
-          <element href="process.ecore#//decision/transitions"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14Fe0WnREeaTLbmqFFisdA" featureName="nsPrefix" dataValue="transitions">
-          <element href="process.ecore#//decision/transitions"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14Fez2nREeaTLbmqFFisdA" featureName="name" dataValue="transitions"/>
+        <changes xsi:type="history:Set" xmi:id="_14Fe0GnREeaTLbmqFFisdA" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/studio/process/decision/transitions"/>
+        <changes xsi:type="history:Set" xmi:id="_14Fe0WnREeaTLbmqFFisdA" featureName="nsPrefix" dataValue="transitions"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14Fe0mnREeaTLbmqFFisdA" referenceName="eClassifiers">
-        <target href="process.ecore#//decision/transitions"/>
-        <element href="process.ecore#//decision/transitions/TakeTransitionAction"/>
-        <changes xsi:type="history:Set" xmi:id="_14Fe02nREeaTLbmqFFisdA" featureName="name" dataValue="TakeTransitionAction">
-          <element href="process.ecore#//decision/transitions/TakeTransitionAction"/>
-        </changes>
-        <changes xsi:type="history:Add" xmi:id="_14Fe1GnREeaTLbmqFFisdA" featureName="eSuperTypes">
-          <element href="process.ecore#//decision/transitions/TakeTransitionAction"/>
-          <referenceValue href="process.ecore#//decision/DecisionTableAction"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14Fe02nREeaTLbmqFFisdA" featureName="name" dataValue="TakeTransitionAction"/>
+        <changes xsi:type="history:Add" xmi:id="_14Fe1GnREeaTLbmqFFisdA" featureName="eSuperTypes"/>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14Fe1WnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
-        <target href="process.ecore#//decision/transitions/TakeTransitionAction"/>
-        <element href="process.ecore#//decision/transitions/TakeTransitionAction/takeTransition"/>
-        <changes xsi:type="history:Set" xmi:id="_14Fe1mnREeaTLbmqFFisdA" featureName="name" dataValue="takeTransition">
-          <element href="process.ecore#//decision/transitions/TakeTransitionAction/takeTransition"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14Fe12nREeaTLbmqFFisdA" featureName="iD" dataValue="true" oldDataValue="false">
-          <element href="process.ecore#//decision/transitions/TakeTransitionAction/takeTransition"/>
-        </changes>
+        <changes xsi:type="history:Set" xmi:id="_14Fe1mnREeaTLbmqFFisdA" featureName="name" dataValue="takeTransition"/>
+        <changes xsi:type="history:Set" xmi:id="_14Fe12nREeaTLbmqFFisdA" featureName="iD" dataValue="true" oldDataValue="false"/>
         <changes xsi:type="history:Set" xmi:id="_14Fe2GnREeaTLbmqFFisdA" featureName="eType">
-          <element href="process.ecore#//decision/transitions/TakeTransitionAction/takeTransition"/>
           <referenceValue href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
         </changes>
       </changes>
@@ -2220,7 +2137,6 @@
         </changes>
         <changes xsi:type="history:Set" xmi:id="_14HUBWnREeaTLbmqFFisdA" featureName="eType">
           <element href="process.ecore#//SequenceFlow/decisionTable"/>
-          <referenceValue href="process.ecore#//decision/DecisionTable"/>
         </changes>
       </changes>
       <changes xsi:type="history:Create" xmi:id="_14HUBmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
@@ -10721,11 +10637,9 @@
         </changes>
         <changes xsi:type="history:Set" xmi:id="_15DINGnREeaTLbmqFFisdA" element="_15DvIGnREeaTLbmqFFisdA" featureName="name" dataValue="condition" oldDataValue="operand1"/>
         <changes xsi:type="history:Set" xmi:id="_15DINWnREeaTLbmqFFisdA" featureName="eType" oldReferenceValue="_15DIN2nREeaTLbmqFFisdA">
-          <element href="process.ecore#//decision/DecisionTableLine/conditions"/>
           <referenceValue href="expression.ecore#//Expression"/>
         </changes>
         <changes xsi:type="history:Delete" xmi:id="_15DINmnREeaTLbmqFFisdA" referenceName="eClassifiers">
-          <target href="process.ecore#//decision"/>
           <element xsi:type="ecore:EClass" xmi:id="_15DIN2nREeaTLbmqFFisdA" name="DecisionTableCondition">
             <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_15DvIGnREeaTLbmqFFisdA" name="condition" ordered="false" lowerBound="1" containment="true">
               <eType xsi:type="ecore:EClass" href="expression.ecore#//Expression"/>
@@ -15167,6 +15081,206 @@
     </changes>
     <changes xsi:type="history:Set" xmi:id="_ln2BMF6cEe2-2NKBMlb2Tw" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/bpm/parameter" oldDataValue="http://www.bonitasoft.org/ns/studio/parameter">
       <element href="parameter.ecore#/"/>
+    </changes>
+    <changes xsi:type="history:CompositeChange" xmi:id="_bOjNQGmAEe250rNvz8LzNw">
+      <changes xsi:type="history:Create" xmi:id="_bOjNQWmAEe250rNvz8LzNw">
+        <element href="decision.ecore#/"/>
+        <changes xsi:type="history:Set" xmi:id="_bOjNQmmAEe250rNvz8LzNw" featureName="name" dataValue="decision">
+          <element href="decision.ecore#/"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNQ2mAEe250rNvz8LzNw" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/bpm/decision">
+          <element href="decision.ecore#/"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNRGmAEe250rNvz8LzNw" featureName="nsPrefix" dataValue="decision">
+          <element href="decision.ecore#/"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_bOjNRWmAEe250rNvz8LzNw" referenceName="eAnnotations">
+        <target href="decision.ecore#/"/>
+        <element href="decision.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%"/>
+        <changes xsi:type="history:Set" xmi:id="_bOjNRmmAEe250rNvz8LzNw" featureName="source" dataValue="http://www.eclipse.org/edapt">
+          <element href="decision.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_bOjNR2mAEe250rNvz8LzNw" referenceName="details">
+        <target href="decision.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%"/>
+        <element href="decision.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%/@details.0"/>
+        <changes xsi:type="history:Set" xmi:id="_bOjNSGmAEe250rNvz8LzNw" featureName="key" dataValue="historyURI">
+          <element href="decision.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%/@details.0"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNSWmAEe250rNvz8LzNw" featureName="value" dataValue="process.history">
+          <element href="decision.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%/@details.0"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_bOjNSmmAEe250rNvz8LzNw" referenceName="eClassifiers">
+        <target href="decision.ecore#/"/>
+        <element href="decision.ecore#//DecisionTable"/>
+        <changes xsi:type="history:Set" xmi:id="_bOjNS2mAEe250rNvz8LzNw" featureName="name" dataValue="DecisionTable">
+          <element href="decision.ecore#//DecisionTable"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_bOjNTGmAEe250rNvz8LzNw" referenceName="eClassifiers">
+        <target href="decision.ecore#/"/>
+        <element href="decision.ecore#//DecisionTableLine"/>
+        <changes xsi:type="history:Set" xmi:id="_bOjNTWmAEe250rNvz8LzNw" featureName="name" dataValue="DecisionTableLine">
+          <element href="decision.ecore#//DecisionTableLine"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_bOjNTmmAEe250rNvz8LzNw" referenceName="eStructuralFeatures">
+        <target href="decision.ecore#//DecisionTable"/>
+        <element href="decision.ecore#//DecisionTable/lines"/>
+        <changes xsi:type="history:Set" xmi:id="_bOjNT2mAEe250rNvz8LzNw" featureName="name" dataValue="lines">
+          <element href="decision.ecore#//DecisionTable/lines"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNUGmAEe250rNvz8LzNw" featureName="upperBound" dataValue="-1" oldDataValue="1">
+          <element href="decision.ecore#//DecisionTable/lines"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNUWmAEe250rNvz8LzNw" featureName="containment" dataValue="true" oldDataValue="false">
+          <element href="decision.ecore#//DecisionTable/lines"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNUmmAEe250rNvz8LzNw" featureName="eType">
+          <element href="decision.ecore#//DecisionTable/lines"/>
+          <referenceValue href="decision.ecore#//DecisionTableLine"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_bOjNU2mAEe250rNvz8LzNw" referenceName="eStructuralFeatures">
+        <target href="decision.ecore#//DecisionTableLine"/>
+        <element href="decision.ecore#//DecisionTableLine/conditions"/>
+        <changes xsi:type="history:Set" xmi:id="_bOjNVGmAEe250rNvz8LzNw" featureName="name" dataValue="conditions">
+          <element href="decision.ecore#//DecisionTableLine/conditions"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNVWmAEe250rNvz8LzNw" featureName="upperBound" dataValue="-1" oldDataValue="1">
+          <element href="decision.ecore#//DecisionTableLine/conditions"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNVmmAEe250rNvz8LzNw" featureName="containment" dataValue="true" oldDataValue="false">
+          <element href="decision.ecore#//DecisionTableLine/conditions"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNV2mAEe250rNvz8LzNw" featureName="eType">
+          <element href="decision.ecore#//DecisionTableLine/conditions"/>
+          <referenceValue href="expression.ecore#//Expression"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_bOjNWGmAEe250rNvz8LzNw" referenceName="eClassifiers">
+        <target href="decision.ecore#/"/>
+        <element href="decision.ecore#//DecisionTableAction"/>
+        <changes xsi:type="history:Set" xmi:id="_bOjNWWmAEe250rNvz8LzNw" featureName="name" dataValue="DecisionTableAction">
+          <element href="decision.ecore#//DecisionTableAction"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNWmmAEe250rNvz8LzNw" featureName="abstract" dataValue="true" oldDataValue="false">
+          <element href="decision.ecore#//DecisionTableAction"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_bOjNW2mAEe250rNvz8LzNw" referenceName="eStructuralFeatures">
+        <target href="decision.ecore#//DecisionTable"/>
+        <element href="decision.ecore#//DecisionTable/defaultAction"/>
+        <changes xsi:type="history:Set" xmi:id="_bOjNXGmAEe250rNvz8LzNw" featureName="name" dataValue="defaultAction">
+          <element href="decision.ecore#//DecisionTable/defaultAction"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNXWmAEe250rNvz8LzNw" featureName="containment" dataValue="true" oldDataValue="false">
+          <element href="decision.ecore#//DecisionTable/defaultAction"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNXmmAEe250rNvz8LzNw" featureName="eType">
+          <element href="decision.ecore#//DecisionTable/defaultAction"/>
+          <referenceValue href="decision.ecore#//DecisionTableAction"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_bOjNX2mAEe250rNvz8LzNw" referenceName="eStructuralFeatures">
+        <target href="decision.ecore#//DecisionTableLine"/>
+        <element href="decision.ecore#//DecisionTableLine/action"/>
+        <changes xsi:type="history:Set" xmi:id="_bOjNYGmAEe250rNvz8LzNw" featureName="name" dataValue="action">
+          <element href="decision.ecore#//DecisionTableLine/action"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNYWmAEe250rNvz8LzNw" featureName="containment" dataValue="true" oldDataValue="false">
+          <element href="decision.ecore#//DecisionTableLine/action"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_bOjNYmmAEe250rNvz8LzNw" featureName="eType">
+          <element href="decision.ecore#//DecisionTableLine/action"/>
+          <referenceValue href="decision.ecore#//DecisionTableAction"/>
+        </changes>
+      </changes>
+    </changes>
+    <changes xsi:type="history:CompositeChange" xmi:id="_jbKz8GmBEe250rNvz8LzNw">
+      <changes xsi:type="history:Create" xmi:id="_jbKz8WmBEe250rNvz8LzNw">
+        <element href="transitions.ecore#/"/>
+        <changes xsi:type="history:Set" xmi:id="_jbKz8mmBEe250rNvz8LzNw" featureName="name" dataValue="transitions">
+          <element href="transitions.ecore#/"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_jbKz82mBEe250rNvz8LzNw" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/bpm/transitions">
+          <element href="transitions.ecore#/"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_jbKz9GmBEe250rNvz8LzNw" featureName="nsPrefix" dataValue="transitions">
+          <element href="transitions.ecore#/"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_jbKz9WmBEe250rNvz8LzNw" referenceName="eAnnotations">
+        <target href="transitions.ecore#/"/>
+        <element href="transitions.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%"/>
+        <changes xsi:type="history:Set" xmi:id="_jbKz9mmBEe250rNvz8LzNw" featureName="source" dataValue="http://www.eclipse.org/edapt">
+          <element href="transitions.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_jbKz92mBEe250rNvz8LzNw" referenceName="details">
+        <target href="transitions.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%"/>
+        <element href="transitions.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%/@details.0"/>
+        <changes xsi:type="history:Set" xmi:id="_jbKz-GmBEe250rNvz8LzNw" featureName="key" dataValue="historyURI">
+          <element href="transitions.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%/@details.0"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_jbKz-WmBEe250rNvz8LzNw" featureName="value" dataValue="process.history">
+          <element href="transitions.ecore#//%http:%2F%2Fwww.eclipse.org%2Fedapt%/@details.0"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_jbKz-mmBEe250rNvz8LzNw" referenceName="eClassifiers">
+        <target href="transitions.ecore#/"/>
+        <element href="transitions.ecore#//TakeTransitionAction"/>
+        <changes xsi:type="history:Set" xmi:id="_jbKz-2mBEe250rNvz8LzNw" featureName="name" dataValue="TakeTransitionAction">
+          <element href="transitions.ecore#//TakeTransitionAction"/>
+        </changes>
+      </changes>
+      <changes xsi:type="history:Create" xmi:id="_jbKz_GmBEe250rNvz8LzNw" referenceName="eStructuralFeatures">
+        <target href="transitions.ecore#//TakeTransitionAction"/>
+        <element href="transitions.ecore#//TakeTransitionAction/takeTransition"/>
+        <changes xsi:type="history:Set" xmi:id="_jbKz_WmBEe250rNvz8LzNw" featureName="name" dataValue="takeTransition">
+          <element href="transitions.ecore#//TakeTransitionAction/takeTransition"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_jbKz_mmBEe250rNvz8LzNw" featureName="iD" dataValue="true" oldDataValue="false">
+          <element href="transitions.ecore#//TakeTransitionAction/takeTransition"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_jbKz_2mBEe250rNvz8LzNw" featureName="eType">
+          <element href="transitions.ecore#//TakeTransitionAction/takeTransition"/>
+          <referenceValue href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+        </changes>
+      </changes>
+    </changes>
+    <changes xsi:type="history:Set" xmi:id="_xGRSAGmBEe250rNvz8LzNw" featureName="eType">
+      <element href="process.ecore#//SequenceFlow/decisionTable"/>
+      <referenceValue href="decision.ecore#//DecisionTable"/>
+    </changes>
+    <changes xsi:type="history:Delete" xmi:id="_BRuM8GmCEe250rNvz8LzNw" referenceName="eSubpackages">
+      <target href="process.ecore#/"/>
+      <element xsi:type="ecore:EPackage" xmi:id="_BRuM8WmCEe250rNvz8LzNw" name="decision" nsURI="http://www.bonitasoft.org/ns/studio/process/decision" nsPrefix="decision">
+        <eClassifiers xsi:type="ecore:EClass" xmi:id="_BRuM8mmCEe250rNvz8LzNw" name="DecisionTable">
+          <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_BRuM82mCEe250rNvz8LzNw" name="lines" upperBound="-1" eType="_BRuM92mCEe250rNvz8LzNw" containment="true"/>
+          <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_BRuM9WmCEe250rNvz8LzNw" name="defaultAction" eType="_BRuM_GmCEe250rNvz8LzNw" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" xmi:id="_BRuM92mCEe250rNvz8LzNw" name="DecisionTableLine">
+          <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_BRuM-GmCEe250rNvz8LzNw" name="conditions" upperBound="-1" containment="true">
+            <eType xsi:type="ecore:EClass" href="expression.ecore#//Expression"/>
+          </eStructuralFeatures>
+          <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="_BRuM-mmCEe250rNvz8LzNw" name="action" eType="_BRuM_GmCEe250rNvz8LzNw" containment="true"/>
+        </eClassifiers>
+        <eClassifiers xsi:type="ecore:EClass" xmi:id="_BRuM_GmCEe250rNvz8LzNw" name="DecisionTableAction" abstract="true"/>
+        <eSubpackages xmi:id="_BRuM_WmCEe250rNvz8LzNw" name="transitions" nsURI="http://www.bonitasoft.org/ns/studio/process/decision/transitions" nsPrefix="transitions">
+          <eClassifiers xsi:type="ecore:EClass" xmi:id="_BRuM_mmCEe250rNvz8LzNw" name="TakeTransitionAction" eSuperTypes="_BRuM_GmCEe250rNvz8LzNw">
+            <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="_BRuM_2mCEe250rNvz8LzNw" name="takeTransition" iD="true">
+              <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+            </eStructuralFeatures>
+          </eClassifiers>
+        </eSubpackages>
+      </element>
+    </changes>
+    <changes xsi:type="history:Add" xmi:id="_Ky7A8GmDEe250rNvz8LzNw" featureName="eSuperTypes">
+      <element href="transitions.ecore#//TakeTransitionAction"/>
+      <referenceValue href="decision.ecore#//DecisionTableAction"/>
     </changes>
   </releases>
   <releases xmi:id="_xyMngF9HEe24H9qpSeta3A"/>

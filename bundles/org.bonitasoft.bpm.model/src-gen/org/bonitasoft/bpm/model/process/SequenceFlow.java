@@ -17,9 +17,9 @@
  */
 package org.bonitasoft.bpm.model.process;
 
-import org.bonitasoft.bpm.model.expression.Expression;
+import org.bonitasoft.bpm.model.decision.DecisionTable;
 
-import org.bonitasoft.bpm.model.process.decision.DecisionTable;
+import org.bonitasoft.bpm.model.expression.Expression;
 
 /**
  * <!-- begin-user-doc -->

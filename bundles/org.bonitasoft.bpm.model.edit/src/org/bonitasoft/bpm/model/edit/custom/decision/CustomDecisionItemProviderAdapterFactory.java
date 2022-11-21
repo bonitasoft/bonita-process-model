@@ -17,8 +17,8 @@
  */
 package org.bonitasoft.bpm.model.edit.custom.decision;
 
-import org.bonitasoft.bpm.model.process.decision.provider.DecisionItemProviderAdapterFactory;
-import org.bonitasoft.bpm.model.process.decision.provider.DecisionTableActionItemProvider;
+import org.bonitasoft.bpm.model.decision.provider.DecisionItemProviderAdapterFactory;
+import org.bonitasoft.bpm.model.decision.provider.DecisionTableActionItemProvider;
 import org.eclipse.emf.common.notify.Adapter;
 
 /**

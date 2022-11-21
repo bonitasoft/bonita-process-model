@@ -101,36 +101,6 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated process -->
       <package
-            uri="http://www.bonitasoft.org/ns/studio/process/decision"
-            class="org.bonitasoft.bpm.model.process.decision.DecisionPackage"
-            genModel="model/process.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated process -->
-      <parser
-            type="decision"
-            class="org.bonitasoft.bpm.model.process.decision.util.DecisionResourceFactoryImpl"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated process -->
-      <package
-            uri="http://www.bonitasoft.org/ns/studio/process/decision/transitions"
-            class="org.bonitasoft.bpm.model.process.decision.transitions.TransitionsPackage"
-            genModel="model/process.genmodel"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated process -->
-      <parser
-            type="transitions"
-            class="org.bonitasoft.bpm.model.process.decision.transitions.util.TransitionsResourceFactoryImpl"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated process -->
-      <package
             uri="http://www.bonitasoft.org/ns/bpm/form"
             class="org.bonitasoft.bpm.model.form.FormPackage"
             genModel="model/process.genmodel"/>
@@ -141,6 +111,22 @@
       <package
             uri="http://www.bonitasoft.org/ns/bpm/process/simulation"
             class="org.bonitasoft.bpm.model.simulation.SimulationPackage"
+            genModel="model/process.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated process -->
+      <package
+            uri="http://www.bonitasoft.org/ns/bpm/decision"
+            class="org.bonitasoft.bpm.model.decision.DecisionPackage"
+            genModel="model/process.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated process -->
+      <package
+            uri="http://www.bonitasoft.org/ns/bpm/transitions"
+            class="org.bonitasoft.bpm.model.transitions.TransitionsPackage"
             genModel="model/process.genmodel"/>
    </extension>
 

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.connectorconfiguration.impl;
+package org.bonitasoft.bpm.model.decision.impl;
 
 import org.bonitasoft.bpm.model.actormapping.ActorMappingPackage;
 
@@ -25,14 +25,15 @@ import org.bonitasoft.bpm.model.configuration.ConfigurationPackage;
 
 import org.bonitasoft.bpm.model.configuration.impl.ConfigurationPackageImpl;
 
-import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfiguration;
-import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationFactory;
 import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage;
-import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorParameter;
 
+import org.bonitasoft.bpm.model.connectorconfiguration.impl.ConnectorConfigurationPackageImpl;
+
+import org.bonitasoft.bpm.model.decision.DecisionFactory;
 import org.bonitasoft.bpm.model.decision.DecisionPackage;
-
-import org.bonitasoft.bpm.model.decision.impl.DecisionPackageImpl;
+import org.bonitasoft.bpm.model.decision.DecisionTable;
+import org.bonitasoft.bpm.model.decision.DecisionTableAction;
+import org.bonitasoft.bpm.model.decision.DecisionTableLine;
 
 import org.bonitasoft.bpm.model.expression.ExpressionPackage;
 
@@ -62,14 +63,11 @@ import org.bonitasoft.bpm.model.transitions.TransitionsPackage;
 
 import org.bonitasoft.bpm.model.transitions.impl.TransitionsPackageImpl;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
-import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -77,20 +75,27 @@ import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ConnectorConfigurationPackageImpl extends EPackageImpl implements ConnectorConfigurationPackage {
+public class DecisionPackageImpl extends EPackageImpl implements DecisionPackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass connectorConfigurationEClass = null;
+	private EClass decisionTableEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass connectorParameterEClass = null;
+	private EClass decisionTableLineEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass decisionTableActionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -103,12 +108,12 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage#eNS_URI
+	 * @see org.bonitasoft.bpm.model.decision.DecisionPackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private ConnectorConfigurationPackageImpl() {
-		super(eNS_URI, ConnectorConfigurationFactory.eINSTANCE);
+	private DecisionPackageImpl() {
+		super(eNS_URI, DecisionFactory.eINSTANCE);
 	}
 	/**
 	 * <!-- begin-user-doc -->
@@ -120,7 +125,7 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 *
-	 * <p>This method is used to initialize {@link ConnectorConfigurationPackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link DecisionPackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -129,23 +134,22 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static ConnectorConfigurationPackage init() {
-		if (isInited) return (ConnectorConfigurationPackage)EPackage.Registry.INSTANCE.getEPackage(ConnectorConfigurationPackage.eNS_URI);
+	public static DecisionPackage init() {
+		if (isInited) return (DecisionPackage)EPackage.Registry.INSTANCE.getEPackage(DecisionPackage.eNS_URI);
 
 		// Obtain or create and register package
-		Object registeredConnectorConfigurationPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
-		ConnectorConfigurationPackageImpl theConnectorConfigurationPackage = registeredConnectorConfigurationPackage instanceof ConnectorConfigurationPackageImpl ? (ConnectorConfigurationPackageImpl)registeredConnectorConfigurationPackage : new ConnectorConfigurationPackageImpl();
+		Object registeredDecisionPackage = EPackage.Registry.INSTANCE.get(eNS_URI);
+		DecisionPackageImpl theDecisionPackage = registeredDecisionPackage instanceof DecisionPackageImpl ? (DecisionPackageImpl)registeredDecisionPackage : new DecisionPackageImpl();
 
 		isInited = true;
-
-		// Initialize simple dependencies
-		XMLTypePackage.eINSTANCE.eClass();
 
 		// Obtain or create and register interdependencies
 		Object registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ActorMappingPackage.eNS_URI);
 		ActorMappingPackageImpl theActorMappingPackage = (ActorMappingPackageImpl)(registeredPackage instanceof ActorMappingPackageImpl ? registeredPackage : ActorMappingPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ConfigurationPackage.eNS_URI);
 		ConfigurationPackageImpl theConfigurationPackage = (ConfigurationPackageImpl)(registeredPackage instanceof ConfigurationPackageImpl ? registeredPackage : ConfigurationPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ConnectorConfigurationPackage.eNS_URI);
+		ConnectorConfigurationPackageImpl theConnectorConfigurationPackage = (ConnectorConfigurationPackageImpl)(registeredPackage instanceof ConnectorConfigurationPackageImpl ? registeredPackage : ConnectorConfigurationPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ExpressionPackage.eNS_URI);
 		ExpressionPackageImpl theExpressionPackage = (ExpressionPackageImpl)(registeredPackage instanceof ExpressionPackageImpl ? registeredPackage : ExpressionPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(KpiPackage.eNS_URI);
@@ -158,43 +162,41 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 		FormPackageImpl theFormPackage = (FormPackageImpl)(registeredPackage instanceof FormPackageImpl ? registeredPackage : FormPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimulationPackage.eNS_URI);
 		SimulationPackageImpl theSimulationPackage = (SimulationPackageImpl)(registeredPackage instanceof SimulationPackageImpl ? registeredPackage : SimulationPackage.eINSTANCE);
-		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DecisionPackage.eNS_URI);
-		DecisionPackageImpl theDecisionPackage = (DecisionPackageImpl)(registeredPackage instanceof DecisionPackageImpl ? registeredPackage : DecisionPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TransitionsPackage.eNS_URI);
 		TransitionsPackageImpl theTransitionsPackage = (TransitionsPackageImpl)(registeredPackage instanceof TransitionsPackageImpl ? registeredPackage : TransitionsPackage.eINSTANCE);
 
 		// Create package meta-data objects
-		theConnectorConfigurationPackage.createPackageContents();
+		theDecisionPackage.createPackageContents();
 		theActorMappingPackage.createPackageContents();
 		theConfigurationPackage.createPackageContents();
+		theConnectorConfigurationPackage.createPackageContents();
 		theExpressionPackage.createPackageContents();
 		theKpiPackage.createPackageContents();
 		theParameterPackage.createPackageContents();
 		theProcessPackage.createPackageContents();
 		theFormPackage.createPackageContents();
 		theSimulationPackage.createPackageContents();
-		theDecisionPackage.createPackageContents();
 		theTransitionsPackage.createPackageContents();
 
 		// Initialize created meta-data
-		theConnectorConfigurationPackage.initializePackageContents();
+		theDecisionPackage.initializePackageContents();
 		theActorMappingPackage.initializePackageContents();
 		theConfigurationPackage.initializePackageContents();
+		theConnectorConfigurationPackage.initializePackageContents();
 		theExpressionPackage.initializePackageContents();
 		theKpiPackage.initializePackageContents();
 		theParameterPackage.initializePackageContents();
 		theProcessPackage.initializePackageContents();
 		theFormPackage.initializePackageContents();
 		theSimulationPackage.initializePackageContents();
-		theDecisionPackage.initializePackageContents();
 		theTransitionsPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theConnectorConfigurationPackage.freeze();
+		theDecisionPackage.freeze();
 
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(ConnectorConfigurationPackage.eNS_URI, theConnectorConfigurationPackage);
-		return theConnectorConfigurationPackage;
+		EPackage.Registry.INSTANCE.put(DecisionPackage.eNS_URI, theDecisionPackage);
+		return theDecisionPackage;
 	}
 
 	/**
@@ -203,8 +205,8 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	 * @generated
 	 */
 	@Override
-	public EClass getConnectorConfiguration() {
-		return connectorConfigurationEClass;
+	public EClass getDecisionTable() {
+		return decisionTableEClass;
 	}
 
 	/**
@@ -213,8 +215,8 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	 * @generated
 	 */
 	@Override
-	public EAttribute getConnectorConfiguration_DefinitionId() {
-		return (EAttribute)connectorConfigurationEClass.getEStructuralFeatures().get(0);
+	public EReference getDecisionTable_Lines() {
+		return (EReference)decisionTableEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -223,8 +225,8 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	 * @generated
 	 */
 	@Override
-	public EAttribute getConnectorConfiguration_Version() {
-		return (EAttribute)connectorConfigurationEClass.getEStructuralFeatures().get(1);
+	public EReference getDecisionTable_DefaultAction() {
+		return (EReference)decisionTableEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -233,8 +235,8 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	 * @generated
 	 */
 	@Override
-	public EAttribute getConnectorConfiguration_Name() {
-		return (EAttribute)connectorConfigurationEClass.getEStructuralFeatures().get(2);
+	public EClass getDecisionTableLine() {
+		return decisionTableLineEClass;
 	}
 
 	/**
@@ -243,8 +245,8 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	 * @generated
 	 */
 	@Override
-	public EReference getConnectorConfiguration_Parameters() {
-		return (EReference)connectorConfigurationEClass.getEStructuralFeatures().get(3);
+	public EReference getDecisionTableLine_Conditions() {
+		return (EReference)decisionTableLineEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -253,8 +255,8 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	 * @generated
 	 */
 	@Override
-	public EAttribute getConnectorConfiguration_ModelVersion() {
-		return (EAttribute)connectorConfigurationEClass.getEStructuralFeatures().get(4);
+	public EReference getDecisionTableLine_Action() {
+		return (EReference)decisionTableLineEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -263,8 +265,8 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	 * @generated
 	 */
 	@Override
-	public EClass getConnectorParameter() {
-		return connectorParameterEClass;
+	public EClass getDecisionTableAction() {
+		return decisionTableActionEClass;
 	}
 
 	/**
@@ -273,28 +275,8 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 	 * @generated
 	 */
 	@Override
-	public EAttribute getConnectorParameter_Key() {
-		return (EAttribute)connectorParameterEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getConnectorParameter_Expression() {
-		return (EReference)connectorParameterEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ConnectorConfigurationFactory getConnectorConfigurationFactory() {
-		return (ConnectorConfigurationFactory)getEFactoryInstance();
+	public DecisionFactory getDecisionFactory() {
+		return (DecisionFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -316,16 +298,15 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 		isCreated = true;
 
 		// Create classes and their features
-		connectorConfigurationEClass = createEClass(CONNECTOR_CONFIGURATION);
-		createEAttribute(connectorConfigurationEClass, CONNECTOR_CONFIGURATION__DEFINITION_ID);
-		createEAttribute(connectorConfigurationEClass, CONNECTOR_CONFIGURATION__VERSION);
-		createEAttribute(connectorConfigurationEClass, CONNECTOR_CONFIGURATION__NAME);
-		createEReference(connectorConfigurationEClass, CONNECTOR_CONFIGURATION__PARAMETERS);
-		createEAttribute(connectorConfigurationEClass, CONNECTOR_CONFIGURATION__MODEL_VERSION);
+		decisionTableEClass = createEClass(DECISION_TABLE);
+		createEReference(decisionTableEClass, DECISION_TABLE__LINES);
+		createEReference(decisionTableEClass, DECISION_TABLE__DEFAULT_ACTION);
 
-		connectorParameterEClass = createEClass(CONNECTOR_PARAMETER);
-		createEAttribute(connectorParameterEClass, CONNECTOR_PARAMETER__KEY);
-		createEReference(connectorParameterEClass, CONNECTOR_PARAMETER__EXPRESSION);
+		decisionTableLineEClass = createEClass(DECISION_TABLE_LINE);
+		createEReference(decisionTableLineEClass, DECISION_TABLE_LINE__CONDITIONS);
+		createEReference(decisionTableLineEClass, DECISION_TABLE_LINE__ACTION);
+
+		decisionTableActionEClass = createEClass(DECISION_TABLE_ACTION);
 	}
 
 	/**
@@ -352,7 +333,6 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		XMLTypePackage theXMLTypePackage = (XMLTypePackage)EPackage.Registry.INSTANCE.getEPackage(XMLTypePackage.eNS_URI);
 		ExpressionPackage theExpressionPackage = (ExpressionPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionPackage.eNS_URI);
 
 		// Create type parameters
@@ -362,16 +342,15 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 		// Add supertypes to classes
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(connectorConfigurationEClass, ConnectorConfiguration.class, "ConnectorConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getConnectorConfiguration_DefinitionId(), theXMLTypePackage.getString(), "definitionId", null, 1, 1, ConnectorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getConnectorConfiguration_Version(), ecorePackage.getEString(), "version", null, 1, 1, ConnectorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getConnectorConfiguration_Name(), ecorePackage.getEString(), "name", null, 0, 1, ConnectorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getConnectorConfiguration_Parameters(), this.getConnectorParameter(), null, "parameters", null, 0, -1, ConnectorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEAttribute(getConnectorConfiguration_ModelVersion(), ecorePackage.getEString(), "modelVersion", "", 0, 1, ConnectorConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
+		initEClass(decisionTableEClass, DecisionTable.class, "DecisionTable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getDecisionTable_Lines(), this.getDecisionTableLine(), null, "lines", null, 0, -1, DecisionTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getDecisionTable_DefaultAction(), this.getDecisionTableAction(), null, "defaultAction", null, 0, 1, DecisionTable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
-		initEClass(connectorParameterEClass, ConnectorParameter.class, "ConnectorParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-		initEAttribute(getConnectorParameter_Key(), ecorePackage.getEString(), "key", null, 1, 1, ConnectorParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-		initEReference(getConnectorParameter_Expression(), theExpressionPackage.getAbstractExpression(), null, "expression", null, 0, 1, ConnectorParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEClass(decisionTableLineEClass, DecisionTableLine.class, "DecisionTableLine", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
+		initEReference(getDecisionTableLine_Conditions(), theExpressionPackage.getExpression(), null, "conditions", null, 0, -1, DecisionTableLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+		initEReference(getDecisionTableLine_Action(), this.getDecisionTableAction(), null, "action", null, 0, 1, DecisionTableLine.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
+
+		initEClass(decisionTableActionEClass, DecisionTableAction.class, "DecisionTableAction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
 		// Create resource
 		createResource(eNS_URI);
@@ -397,4 +376,4 @@ public class ConnectorConfigurationPackageImpl extends EPackageImpl implements C
 		   });
 	}
 
-} //ConnectorConfigurationPackageImpl
+} //DecisionPackageImpl

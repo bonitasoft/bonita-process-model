@@ -33,6 +33,10 @@ import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPac
 
 import org.bonitasoft.bpm.model.connectorconfiguration.impl.ConnectorConfigurationPackageImpl;
 
+import org.bonitasoft.bpm.model.decision.DecisionPackage;
+
+import org.bonitasoft.bpm.model.decision.impl.DecisionPackageImpl;
+
 import org.bonitasoft.bpm.model.expression.ExpressionPackage;
 
 import org.bonitasoft.bpm.model.expression.impl.ExpressionPackageImpl;
@@ -51,19 +55,15 @@ import org.bonitasoft.bpm.model.parameter.impl.ParameterPackageImpl;
 
 import org.bonitasoft.bpm.model.process.ProcessPackage;
 
-import org.bonitasoft.bpm.model.process.decision.DecisionPackage;
-
-import org.bonitasoft.bpm.model.process.decision.impl.DecisionPackageImpl;
-
-import org.bonitasoft.bpm.model.process.decision.transitions.TransitionsPackage;
-
-import org.bonitasoft.bpm.model.process.decision.transitions.impl.TransitionsPackageImpl;
-
 import org.bonitasoft.bpm.model.process.impl.ProcessPackageImpl;
 
 import org.bonitasoft.bpm.model.simulation.SimulationPackage;
 
 import org.bonitasoft.bpm.model.simulation.impl.SimulationPackageImpl;
+
+import org.bonitasoft.bpm.model.transitions.TransitionsPackage;
+
+import org.bonitasoft.bpm.model.transitions.impl.TransitionsPackageImpl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -173,14 +173,14 @@ public class ConfigurationPackageImpl extends EPackageImpl implements Configurat
 		ParameterPackageImpl theParameterPackage = (ParameterPackageImpl)(registeredPackage instanceof ParameterPackageImpl ? registeredPackage : ParameterPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ProcessPackage.eNS_URI);
 		ProcessPackageImpl theProcessPackage = (ProcessPackageImpl)(registeredPackage instanceof ProcessPackageImpl ? registeredPackage : ProcessPackage.eINSTANCE);
-		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DecisionPackage.eNS_URI);
-		DecisionPackageImpl theDecisionPackage = (DecisionPackageImpl)(registeredPackage instanceof DecisionPackageImpl ? registeredPackage : DecisionPackage.eINSTANCE);
-		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TransitionsPackage.eNS_URI);
-		TransitionsPackageImpl theTransitionsPackage = (TransitionsPackageImpl)(registeredPackage instanceof TransitionsPackageImpl ? registeredPackage : TransitionsPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(FormPackage.eNS_URI);
 		FormPackageImpl theFormPackage = (FormPackageImpl)(registeredPackage instanceof FormPackageImpl ? registeredPackage : FormPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(SimulationPackage.eNS_URI);
 		SimulationPackageImpl theSimulationPackage = (SimulationPackageImpl)(registeredPackage instanceof SimulationPackageImpl ? registeredPackage : SimulationPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DecisionPackage.eNS_URI);
+		DecisionPackageImpl theDecisionPackage = (DecisionPackageImpl)(registeredPackage instanceof DecisionPackageImpl ? registeredPackage : DecisionPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TransitionsPackage.eNS_URI);
+		TransitionsPackageImpl theTransitionsPackage = (TransitionsPackageImpl)(registeredPackage instanceof TransitionsPackageImpl ? registeredPackage : TransitionsPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theConfigurationPackage.createPackageContents();
@@ -190,10 +190,10 @@ public class ConfigurationPackageImpl extends EPackageImpl implements Configurat
 		theKpiPackage.createPackageContents();
 		theParameterPackage.createPackageContents();
 		theProcessPackage.createPackageContents();
-		theDecisionPackage.createPackageContents();
-		theTransitionsPackage.createPackageContents();
 		theFormPackage.createPackageContents();
 		theSimulationPackage.createPackageContents();
+		theDecisionPackage.createPackageContents();
+		theTransitionsPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theConfigurationPackage.initializePackageContents();
@@ -203,10 +203,10 @@ public class ConfigurationPackageImpl extends EPackageImpl implements Configurat
 		theKpiPackage.initializePackageContents();
 		theParameterPackage.initializePackageContents();
 		theProcessPackage.initializePackageContents();
-		theDecisionPackage.initializePackageContents();
-		theTransitionsPackage.initializePackageContents();
 		theFormPackage.initializePackageContents();
 		theSimulationPackage.initializePackageContents();
+		theDecisionPackage.initializePackageContents();
+		theTransitionsPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theConfigurationPackage.freeze();

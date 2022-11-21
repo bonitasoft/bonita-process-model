@@ -21,12 +21,12 @@ package org.bonitasoft.bpm.model.process.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.bonitasoft.bpm.model.decision.DecisionFactory;
+
 import org.bonitasoft.bpm.model.expression.ExpressionFactory;
 
 import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.process.SequenceFlow;
-
-import org.bonitasoft.bpm.model.process.decision.DecisionFactory;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;

@@ -29,6 +29,10 @@ import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPac
 
 import org.bonitasoft.bpm.model.connectorconfiguration.impl.ConnectorConfigurationPackageImpl;
 
+import org.bonitasoft.bpm.model.decision.DecisionPackage;
+
+import org.bonitasoft.bpm.model.decision.impl.DecisionPackageImpl;
+
 import org.bonitasoft.bpm.model.expression.ExpressionPackage;
 
 import org.bonitasoft.bpm.model.expression.impl.ExpressionPackageImpl;
@@ -46,14 +50,6 @@ import org.bonitasoft.bpm.model.parameter.ParameterPackage;
 import org.bonitasoft.bpm.model.parameter.impl.ParameterPackageImpl;
 
 import org.bonitasoft.bpm.model.process.ProcessPackage;
-
-import org.bonitasoft.bpm.model.process.decision.DecisionPackage;
-
-import org.bonitasoft.bpm.model.process.decision.impl.DecisionPackageImpl;
-
-import org.bonitasoft.bpm.model.process.decision.transitions.TransitionsPackage;
-
-import org.bonitasoft.bpm.model.process.decision.transitions.impl.TransitionsPackageImpl;
 
 import org.bonitasoft.bpm.model.process.impl.ProcessPackageImpl;
 
@@ -80,6 +76,10 @@ import org.bonitasoft.bpm.model.simulation.SimulationNumberRange;
 import org.bonitasoft.bpm.model.simulation.SimulationPackage;
 import org.bonitasoft.bpm.model.simulation.SimulationTransition;
 import org.bonitasoft.bpm.model.simulation.TimeUnit;
+
+import org.bonitasoft.bpm.model.transitions.TransitionsPackage;
+
+import org.bonitasoft.bpm.model.transitions.impl.TransitionsPackageImpl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -304,12 +304,12 @@ public class SimulationPackageImpl extends EPackageImpl implements SimulationPac
 		ParameterPackageImpl theParameterPackage = (ParameterPackageImpl)(registeredPackage instanceof ParameterPackageImpl ? registeredPackage : ParameterPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(ProcessPackage.eNS_URI);
 		ProcessPackageImpl theProcessPackage = (ProcessPackageImpl)(registeredPackage instanceof ProcessPackageImpl ? registeredPackage : ProcessPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(FormPackage.eNS_URI);
+		FormPackageImpl theFormPackage = (FormPackageImpl)(registeredPackage instanceof FormPackageImpl ? registeredPackage : FormPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DecisionPackage.eNS_URI);
 		DecisionPackageImpl theDecisionPackage = (DecisionPackageImpl)(registeredPackage instanceof DecisionPackageImpl ? registeredPackage : DecisionPackage.eINSTANCE);
 		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(TransitionsPackage.eNS_URI);
 		TransitionsPackageImpl theTransitionsPackage = (TransitionsPackageImpl)(registeredPackage instanceof TransitionsPackageImpl ? registeredPackage : TransitionsPackage.eINSTANCE);
-		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(FormPackage.eNS_URI);
-		FormPackageImpl theFormPackage = (FormPackageImpl)(registeredPackage instanceof FormPackageImpl ? registeredPackage : FormPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theSimulationPackage.createPackageContents();
@@ -320,9 +320,9 @@ public class SimulationPackageImpl extends EPackageImpl implements SimulationPac
 		theKpiPackage.createPackageContents();
 		theParameterPackage.createPackageContents();
 		theProcessPackage.createPackageContents();
+		theFormPackage.createPackageContents();
 		theDecisionPackage.createPackageContents();
 		theTransitionsPackage.createPackageContents();
-		theFormPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theSimulationPackage.initializePackageContents();
@@ -333,9 +333,9 @@ public class SimulationPackageImpl extends EPackageImpl implements SimulationPac
 		theKpiPackage.initializePackageContents();
 		theParameterPackage.initializePackageContents();
 		theProcessPackage.initializePackageContents();
+		theFormPackage.initializePackageContents();
 		theDecisionPackage.initializePackageContents();
 		theTransitionsPackage.initializePackageContents();
-		theFormPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theSimulationPackage.freeze();

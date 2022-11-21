@@ -17,9 +17,9 @@
  */
 package org.bonitasoft.bpm.model.edit.custom.decision;
 
+import org.bonitasoft.bpm.model.decision.provider.DecisionTableActionItemProvider;
 import org.bonitasoft.bpm.model.edit.custom.i18n.Messages;
-import org.bonitasoft.bpm.model.process.decision.provider.DecisionTableActionItemProvider;
-import org.bonitasoft.bpm.model.process.decision.transitions.TakeTransitionAction;
+import org.bonitasoft.bpm.model.transitions.TakeTransitionAction;
 import org.eclipse.emf.common.notify.AdapterFactory;
 
 /**

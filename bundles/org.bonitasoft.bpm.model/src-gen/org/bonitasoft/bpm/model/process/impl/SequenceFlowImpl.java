@@ -17,13 +17,13 @@
  */
 package org.bonitasoft.bpm.model.process.impl;
 
+import org.bonitasoft.bpm.model.decision.DecisionTable;
+
 import org.bonitasoft.bpm.model.expression.Expression;
 
 import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.process.SequenceFlow;
 import org.bonitasoft.bpm.model.process.SequenceFlowConditionType;
-
-import org.bonitasoft.bpm.model.process.decision.DecisionTable;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
