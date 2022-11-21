@@ -11,7 +11,7 @@ if(Boolean.valueOf(request.properties.get("wrapper"))) {
 }
 
 def installMavenWrapper(Logger logger, Path projectPath) {
-	def wrapperCommand = 'mvn -N io.takari:maven:0.7.7:wrapper -Dmaven=3.8.6'
+	def wrapperCommand = 'mvn -N wrapper:wrapper -Dmaven=3.8.6 --no-transfer-progress'
     def cmd = System.properties['os.name'].toLowerCase().contains('windows') ? "cmd /c $wrapperCommand" : wrapperCommand
     logger.info("Installing maven wrapper... ($cmd)")
     println cmd.execute(null, projectPath.toFile()).text
