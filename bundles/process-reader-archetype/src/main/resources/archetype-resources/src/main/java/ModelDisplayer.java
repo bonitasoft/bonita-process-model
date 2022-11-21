@@ -241,7 +241,16 @@ public class ModelDisplayer {
                     displayElement((EObject) c, childLevel + 1);
                 } else {
                     // tree may eventually have non-model objects
-                    System.out.println(c);
+                    if (displayTree.inConsole()) {
+                        // indent is (childLevel +1) -1
+                        String indent = IntStream.range(0, childLevel).mapToObj(i -> "   ")
+                                .collect(Collectors.joining(""));
+                        String prefix = indent + "└─ ";
+                        System.out.println(prefix + c.toString());
+                    }
+                    if (outputStreamToHtml.isPresent()) {
+                        HtmlTreeGenerator.writeTreeEntry(outputStreamToHtml.get(), c.toString());
+                    }
                 }
             }
             if (outputStreamToHtml.isPresent()) {

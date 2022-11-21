@@ -54,6 +54,27 @@ public class HtmlTreeGenerator {
     }
 
     /**
+     * Write a simple tree entry to the HTML file
+     * 
+     * @param out the output stream
+     * @param label the label text (without image)
+     * @throws IOException writing exception
+     */
+    public static void writeTreeEntry(OutputStream out, String label)
+            throws IOException {
+        // display the tree entry, whithout children nor image
+        out.write(String.join(App.LINE_SEPARATOR,
+                // start list item
+                "<li>",
+                // display label only
+                "<div>",
+                label + "</div>",
+                // end list item
+                "</li>",
+                "").getBytes());
+    }
+
+    /**
      * Write a tree entry to the HTML file
      * 
      * @param out the output stream
