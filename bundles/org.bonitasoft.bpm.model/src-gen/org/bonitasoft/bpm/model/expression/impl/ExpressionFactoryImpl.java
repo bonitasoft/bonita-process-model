@@ -34,127 +34,127 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * @generated
  */
 public class ExpressionFactoryImpl extends EFactoryImpl implements ExpressionFactory {
-	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static ExpressionFactory init() {
-		try {
-			ExpressionFactory theExpressionFactory = (ExpressionFactory)EPackage.Registry.INSTANCE.getEFactory(ExpressionPackage.eNS_URI);
-			if (theExpressionFactory != null) {
-				return theExpressionFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new ExpressionFactoryImpl();
-	}
+    /**
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static ExpressionFactory init() {
+        try {
+            ExpressionFactory theExpressionFactory = (ExpressionFactory)EPackage.Registry.INSTANCE.getEFactory(ExpressionPackage.eNS_URI);
+            if (theExpressionFactory != null) {
+                return theExpressionFactory;
+            }
+        }
+        catch (Exception exception) {
+            EcorePlugin.INSTANCE.log(exception);
+        }
+        return new ExpressionFactoryImpl();
+    }
 
-	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ExpressionFactoryImpl() {
-		super();
-	}
+    /**
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ExpressionFactoryImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case ExpressionPackage.EXPRESSION: return createExpression();
-			case ExpressionPackage.LIST_EXPRESSION: return createListExpression();
-			case ExpressionPackage.TABLE_EXPRESSION: return createTableExpression();
-			case ExpressionPackage.OPERATION: return createOperation();
-			case ExpressionPackage.OPERATOR: return createOperator();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EObject create(EClass eClass) {
+        switch (eClass.getClassifierID()) {
+            case ExpressionPackage.EXPRESSION: return createExpression();
+            case ExpressionPackage.LIST_EXPRESSION: return createListExpression();
+            case ExpressionPackage.TABLE_EXPRESSION: return createTableExpression();
+            case ExpressionPackage.OPERATION: return createOperation();
+            case ExpressionPackage.OPERATOR: return createOperator();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Expression createExpression() {
-		ExpressionImpl expression = new ExpressionImpl();
-		return expression;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Expression createExpression() {
+        ExpressionImpl expression = new ExpressionImpl();
+        return expression;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ListExpression createListExpression() {
-		ListExpressionImpl listExpression = new ListExpressionImpl();
-		return listExpression;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public ListExpression createListExpression() {
+        ListExpressionImpl listExpression = new ListExpressionImpl();
+        return listExpression;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public TableExpression createTableExpression() {
-		TableExpressionImpl tableExpression = new TableExpressionImpl();
-		return tableExpression;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public TableExpression createTableExpression() {
+        TableExpressionImpl tableExpression = new TableExpressionImpl();
+        return tableExpression;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Operation createOperation() {
-		OperationImpl operation = new OperationImpl();
-		return operation;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Operation createOperation() {
+        OperationImpl operation = new OperationImpl();
+        return operation;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Operator createOperator() {
-		OperatorImpl operator = new OperatorImpl();
-		return operator;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Operator createOperator() {
+        OperatorImpl operator = new OperatorImpl();
+        return operator;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ExpressionPackage getExpressionPackage() {
-		return (ExpressionPackage)getEPackage();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public ExpressionPackage getExpressionPackage() {
+        return (ExpressionPackage)getEPackage();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
-	@Deprecated
-	public static ExpressionPackage getPackage() {
-		return ExpressionPackage.eINSTANCE;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @deprecated
+     * @generated
+     */
+    @Deprecated
+    public static ExpressionPackage getPackage() {
+        return ExpressionPackage.eINSTANCE;
+    }
 
 } //ExpressionFactoryImpl

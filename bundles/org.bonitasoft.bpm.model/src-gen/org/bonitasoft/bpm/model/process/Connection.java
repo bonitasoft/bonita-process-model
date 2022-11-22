@@ -36,52 +36,52 @@ package org.bonitasoft.bpm.model.process;
  * @generated
  */
 public interface Connection extends Element {
-	/**
-	 * Returns the value of the '<em><b>Target</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.TargetElement#getIncoming <em>Incoming</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target</em>' reference.
-	 * @see #setTarget(TargetElement)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getConnection_Target()
-	 * @see org.bonitasoft.bpm.model.process.TargetElement#getIncoming
-	 * @model opposite="incoming"
-	 * @generated
-	 */
-	TargetElement getTarget();
+    /**
+     * Returns the value of the '<em><b>Target</b></em>' reference.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.TargetElement#getIncoming <em>Incoming</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Target</em>' reference.
+     * @see #setTarget(TargetElement)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getConnection_Target()
+     * @see org.bonitasoft.bpm.model.process.TargetElement#getIncoming
+     * @model opposite="incoming"
+     * @generated
+     */
+    TargetElement getTarget();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Connection#getTarget <em>Target</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target</em>' reference.
-	 * @see #getTarget()
-	 * @generated
-	 */
-	void setTarget(TargetElement value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Connection#getTarget <em>Target</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Target</em>' reference.
+     * @see #getTarget()
+     * @generated
+     */
+    void setTarget(TargetElement value);
 
-	/**
-	 * Returns the value of the '<em><b>Source</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.SourceElement#getOutgoing <em>Outgoing</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(SourceElement)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getConnection_Source()
-	 * @see org.bonitasoft.bpm.model.process.SourceElement#getOutgoing
-	 * @model opposite="outgoing" derived="true"
-	 * @generated
-	 */
-	SourceElement getSource();
+    /**
+     * Returns the value of the '<em><b>Source</b></em>' reference.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.SourceElement#getOutgoing <em>Outgoing</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Source</em>' reference.
+     * @see #setSource(SourceElement)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getConnection_Source()
+     * @see org.bonitasoft.bpm.model.process.SourceElement#getOutgoing
+     * @model opposite="outgoing" derived="true"
+     * @generated
+     */
+    SourceElement getSource();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Connection#getSource <em>Source</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' reference.
-	 * @see #getSource()
-	 * @generated
-	 */
-	void setSource(SourceElement value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Connection#getSource <em>Source</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Source</em>' reference.
+     * @see #getSource()
+     * @generated
+     */
+    void setSource(SourceElement value);
 
 } // Connection

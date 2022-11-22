@@ -41,172 +41,172 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class RadioFormFieldImpl extends MultipleValuatedFormFieldImpl implements RadioFormField {
-	/**
-	 * The default value of the '{@link #getItemClass() <em>Item Class</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getItemClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String ITEM_CLASS_EDEFAULT = null;
+    /**
+     * The default value of the '{@link #getItemClass() <em>Item Class</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getItemClass()
+     * @generated
+     * @ordered
+     */
+    protected static final String ITEM_CLASS_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getItemClass() <em>Item Class</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getItemClass()
-	 * @generated
-	 * @ordered
-	 */
-	protected String itemClass = ITEM_CLASS_EDEFAULT;
+    /**
+     * The cached value of the '{@link #getItemClass() <em>Item Class</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getItemClass()
+     * @generated
+     * @ordered
+     */
+    protected String itemClass = ITEM_CLASS_EDEFAULT;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RadioFormFieldImpl() {
-		super();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected RadioFormFieldImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return FormPackage.Literals.RADIO_FORM_FIELD;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected EClass eStaticClass() {
+        return FormPackage.Literals.RADIO_FORM_FIELD;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getItemClass() {
-		return itemClass;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getItemClass() {
+        return itemClass;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setItemClass(String newItemClass) {
-		String oldItemClass = itemClass;
-		itemClass = newItemClass;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.RADIO_FORM_FIELD__ITEM_CLASS, oldItemClass, itemClass));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setItemClass(String newItemClass) {
+        String oldItemClass = itemClass;
+        itemClass = newItemClass;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, FormPackage.RADIO_FORM_FIELD__ITEM_CLASS, oldItemClass, itemClass));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case FormPackage.RADIO_FORM_FIELD__ITEM_CLASS:
-				return getItemClass();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case FormPackage.RADIO_FORM_FIELD__ITEM_CLASS:
+                return getItemClass();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case FormPackage.RADIO_FORM_FIELD__ITEM_CLASS:
-				setItemClass((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case FormPackage.RADIO_FORM_FIELD__ITEM_CLASS:
+                setItemClass((String)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case FormPackage.RADIO_FORM_FIELD__ITEM_CLASS:
-				setItemClass(ITEM_CLASS_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case FormPackage.RADIO_FORM_FIELD__ITEM_CLASS:
+                setItemClass(ITEM_CLASS_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case FormPackage.RADIO_FORM_FIELD__ITEM_CLASS:
-				return ITEM_CLASS_EDEFAULT == null ? itemClass != null : !ITEM_CLASS_EDEFAULT.equals(itemClass);
-		}
-		return super.eIsSet(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case FormPackage.RADIO_FORM_FIELD__ITEM_CLASS:
+                return ITEM_CLASS_EDEFAULT == null ? itemClass != null : !ITEM_CLASS_EDEFAULT.equals(itemClass);
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ItemContainer.class) {
-			switch (derivedFeatureID) {
-				case FormPackage.RADIO_FORM_FIELD__ITEM_CLASS: return FormPackage.ITEM_CONTAINER__ITEM_CLASS;
-				default: return -1;
-			}
-		}
-		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+        if (baseClass == ItemContainer.class) {
+            switch (derivedFeatureID) {
+                case FormPackage.RADIO_FORM_FIELD__ITEM_CLASS: return FormPackage.ITEM_CONTAINER__ITEM_CLASS;
+                default: return -1;
+            }
+        }
+        return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ItemContainer.class) {
-			switch (baseFeatureID) {
-				case FormPackage.ITEM_CONTAINER__ITEM_CLASS: return FormPackage.RADIO_FORM_FIELD__ITEM_CLASS;
-				default: return -1;
-			}
-		}
-		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+        if (baseClass == ItemContainer.class) {
+            switch (baseFeatureID) {
+                case FormPackage.ITEM_CONTAINER__ITEM_CLASS: return FormPackage.RADIO_FORM_FIELD__ITEM_CLASS;
+                default: return -1;
+            }
+        }
+        return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString() {
+        if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (itemClass: "); //$NON-NLS-1$
-		result.append(itemClass);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuilder result = new StringBuilder(super.toString());
+        result.append(" (itemClass: "); //$NON-NLS-1$
+        result.append(itemClass);
+        result.append(')');
+        return result.toString();
+    }
 
 } //RadioFormFieldImpl

@@ -38,96 +38,96 @@ package org.bonitasoft.bpm.model.form;
  * @generated
  */
 public interface DurationFormField extends SingleValuatedFormField, ItemContainer {
-	/**
-	 * Returns the value of the '<em><b>Day</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Day</em>' attribute.
-	 * @see #setDay(Boolean)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getDurationFormField_Day()
-	 * @model default="true" required="true"
-	 * @generated
-	 */
-	Boolean getDay();
+    /**
+     * Returns the value of the '<em><b>Day</b></em>' attribute.
+     * The default value is <code>"true"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Day</em>' attribute.
+     * @see #setDay(Boolean)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getDurationFormField_Day()
+     * @model default="true" required="true"
+     * @generated
+     */
+    Boolean getDay();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.DurationFormField#getDay <em>Day</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Day</em>' attribute.
-	 * @see #getDay()
-	 * @generated
-	 */
-	void setDay(Boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.DurationFormField#getDay <em>Day</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Day</em>' attribute.
+     * @see #getDay()
+     * @generated
+     */
+    void setDay(Boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Hour</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Hour</em>' attribute.
-	 * @see #setHour(Boolean)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getDurationFormField_Hour()
-	 * @model default="true" required="true"
-	 * @generated
-	 */
-	Boolean getHour();
+    /**
+     * Returns the value of the '<em><b>Hour</b></em>' attribute.
+     * The default value is <code>"true"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Hour</em>' attribute.
+     * @see #setHour(Boolean)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getDurationFormField_Hour()
+     * @model default="true" required="true"
+     * @generated
+     */
+    Boolean getHour();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.DurationFormField#getHour <em>Hour</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Hour</em>' attribute.
-	 * @see #getHour()
-	 * @generated
-	 */
-	void setHour(Boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.DurationFormField#getHour <em>Hour</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Hour</em>' attribute.
+     * @see #getHour()
+     * @generated
+     */
+    void setHour(Boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Min</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Min</em>' attribute.
-	 * @see #setMin(Boolean)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getDurationFormField_Min()
-	 * @model default="true" required="true"
-	 * @generated
-	 */
-	Boolean getMin();
+    /**
+     * Returns the value of the '<em><b>Min</b></em>' attribute.
+     * The default value is <code>"true"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Min</em>' attribute.
+     * @see #setMin(Boolean)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getDurationFormField_Min()
+     * @model default="true" required="true"
+     * @generated
+     */
+    Boolean getMin();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.DurationFormField#getMin <em>Min</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Min</em>' attribute.
-	 * @see #getMin()
-	 * @generated
-	 */
-	void setMin(Boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.DurationFormField#getMin <em>Min</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Min</em>' attribute.
+     * @see #getMin()
+     * @generated
+     */
+    void setMin(Boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Sec</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sec</em>' attribute.
-	 * @see #setSec(Boolean)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getDurationFormField_Sec()
-	 * @model default="true" required="true"
-	 * @generated
-	 */
-	Boolean getSec();
+    /**
+     * Returns the value of the '<em><b>Sec</b></em>' attribute.
+     * The default value is <code>"true"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Sec</em>' attribute.
+     * @see #setSec(Boolean)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getDurationFormField_Sec()
+     * @model default="true" required="true"
+     * @generated
+     */
+    Boolean getSec();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.DurationFormField#getSec <em>Sec</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Sec</em>' attribute.
-	 * @see #getSec()
-	 * @generated
-	 */
-	void setSec(Boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.DurationFormField#getSec <em>Sec</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Sec</em>' attribute.
+     * @see #getSec()
+     * @generated
+     */
+    void setSec(Boolean value);
 
 } // DurationFormField

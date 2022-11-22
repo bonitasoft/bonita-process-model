@@ -36,16 +36,16 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface TableExpression extends AbstractExpression {
-	/**
-	 * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.expression.ListExpression}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expressions</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.expression.ExpressionPackage#getTableExpression_Expressions()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ListExpression> getExpressions();
+    /**
+     * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.expression.ListExpression}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Expressions</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.expression.ExpressionPackage#getTableExpression_Expressions()
+     * @model containment="true"
+     * @generated
+     */
+    EList<ListExpression> getExpressions();
 
 } // TableExpression

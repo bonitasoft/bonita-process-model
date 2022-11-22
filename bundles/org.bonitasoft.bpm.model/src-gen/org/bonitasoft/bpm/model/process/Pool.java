@@ -39,62 +39,62 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Pool extends AbstractProcess, ContractContainer {
-	/**
-	 * Returns the value of the '<em><b>Documents</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.Document}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Documents</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getPool_Documents()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Document> getDocuments();
+    /**
+     * Returns the value of the '<em><b>Documents</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.Document}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Documents</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getPool_Documents()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Document> getDocuments();
 
-	/**
-	 * Returns the value of the '<em><b>Search Indexes</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.SearchIndex}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Search Indexes</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getPool_SearchIndexes()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<SearchIndex> getSearchIndexes();
+    /**
+     * Returns the value of the '<em><b>Search Indexes</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.SearchIndex}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Search Indexes</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getPool_SearchIndexes()
+     * @model containment="true"
+     * @generated
+     */
+    EList<SearchIndex> getSearchIndexes();
 
-	/**
-	 * Returns the value of the '<em><b>Display Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Display Name</em>' attribute.
-	 * @see #setDisplayName(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getPool_DisplayName()
-	 * @model
-	 * @generated
-	 */
-	String getDisplayName();
+    /**
+     * Returns the value of the '<em><b>Display Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Display Name</em>' attribute.
+     * @see #setDisplayName(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getPool_DisplayName()
+     * @model
+     * @generated
+     */
+    String getDisplayName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Pool#getDisplayName <em>Display Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Display Name</em>' attribute.
-	 * @see #getDisplayName()
-	 * @generated
-	 */
-	void setDisplayName(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Pool#getDisplayName <em>Display Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Display Name</em>' attribute.
+     * @see #getDisplayName()
+     * @generated
+     */
+    void setDisplayName(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Additional Resources</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.AdditionalResource}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Additional Resources</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getPool_AdditionalResources()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<AdditionalResource> getAdditionalResources();
+    /**
+     * Returns the value of the '<em><b>Additional Resources</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.AdditionalResource}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Additional Resources</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getPool_AdditionalResources()
+     * @model containment="true"
+     * @generated
+     */
+    EList<AdditionalResource> getAdditionalResources();
 
 } // Pool

@@ -932,7 +932,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simulation.ecore#//Resource/unlimited"/>
     </genClasses>
   </genPackages>
-  <genPackages prefix="Decision" basePackage="org.bonitasoft.bpm.model" ecorePackage="decision.ecore#/">
+  <genPackages prefix="Decision" basePackage="org.bonitasoft.bpm.model.process" ecorePackage="decision.ecore#/">
     <genClasses ecoreClass="decision.ecore#//DecisionTable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference decision.ecore#//DecisionTable/lines"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference decision.ecore#//DecisionTable/defaultAction"/>
@@ -943,7 +943,8 @@
     </genClasses>
     <genClasses image="false" ecoreClass="decision.ecore#//DecisionTableAction"/>
   </genPackages>
-  <genPackages prefix="Transitions" basePackage="org.bonitasoft.bpm.model" ecorePackage="transitions.ecore#/">
+  <genPackages prefix="Transitions" basePackage="org.bonitasoft.bpm.model.process.decision"
+      ecorePackage="transitions.ecore#/">
     <genClasses ecoreClass="transitions.ecore#//TakeTransitionAction">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute transitions.ecore#//TakeTransitionAction/takeTransition"/>
     </genClasses>

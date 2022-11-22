@@ -34,127 +34,127 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * @generated
  */
 public class ConfigurationFactoryImpl extends EFactoryImpl implements ConfigurationFactory {
-	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static ConfigurationFactory init() {
-		try {
-			ConfigurationFactory theConfigurationFactory = (ConfigurationFactory)EPackage.Registry.INSTANCE.getEFactory(ConfigurationPackage.eNS_URI);
-			if (theConfigurationFactory != null) {
-				return theConfigurationFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new ConfigurationFactoryImpl();
-	}
+    /**
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static ConfigurationFactory init() {
+        try {
+            ConfigurationFactory theConfigurationFactory = (ConfigurationFactory)EPackage.Registry.INSTANCE.getEFactory(ConfigurationPackage.eNS_URI);
+            if (theConfigurationFactory != null) {
+                return theConfigurationFactory;
+            }
+        }
+        catch (Exception exception) {
+            EcorePlugin.INSTANCE.log(exception);
+        }
+        return new ConfigurationFactoryImpl();
+    }
 
-	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ConfigurationFactoryImpl() {
-		super();
-	}
+    /**
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ConfigurationFactoryImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case ConfigurationPackage.CONFIGURATION: return createConfiguration();
-			case ConfigurationPackage.FRAGMENT: return createFragment();
-			case ConfigurationPackage.DEFINITION_MAPPING: return createDefinitionMapping();
-			case ConfigurationPackage.FRAGMENT_CONTAINER: return createFragmentContainer();
-			case ConfigurationPackage.RESOURCE: return createResource();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EObject create(EClass eClass) {
+        switch (eClass.getClassifierID()) {
+            case ConfigurationPackage.CONFIGURATION: return createConfiguration();
+            case ConfigurationPackage.FRAGMENT: return createFragment();
+            case ConfigurationPackage.DEFINITION_MAPPING: return createDefinitionMapping();
+            case ConfigurationPackage.FRAGMENT_CONTAINER: return createFragmentContainer();
+            case ConfigurationPackage.RESOURCE: return createResource();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Configuration createConfiguration() {
-		ConfigurationImpl configuration = new ConfigurationImpl();
-		return configuration;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Configuration createConfiguration() {
+        ConfigurationImpl configuration = new ConfigurationImpl();
+        return configuration;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Fragment createFragment() {
-		FragmentImpl fragment = new FragmentImpl();
-		return fragment;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Fragment createFragment() {
+        FragmentImpl fragment = new FragmentImpl();
+        return fragment;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public DefinitionMapping createDefinitionMapping() {
-		DefinitionMappingImpl definitionMapping = new DefinitionMappingImpl();
-		return definitionMapping;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public DefinitionMapping createDefinitionMapping() {
+        DefinitionMappingImpl definitionMapping = new DefinitionMappingImpl();
+        return definitionMapping;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FragmentContainer createFragmentContainer() {
-		FragmentContainerImpl fragmentContainer = new FragmentContainerImpl();
-		return fragmentContainer;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public FragmentContainer createFragmentContainer() {
+        FragmentContainerImpl fragmentContainer = new FragmentContainerImpl();
+        return fragmentContainer;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Resource createResource() {
-		ResourceImpl resource = new ResourceImpl();
-		return resource;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Resource createResource() {
+        ResourceImpl resource = new ResourceImpl();
+        return resource;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ConfigurationPackage getConfigurationPackage() {
-		return (ConfigurationPackage)getEPackage();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public ConfigurationPackage getConfigurationPackage() {
+        return (ConfigurationPackage)getEPackage();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
-	@Deprecated
-	public static ConfigurationPackage getPackage() {
-		return ConfigurationPackage.eINSTANCE;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @deprecated
+     * @generated
+     */
+    @Deprecated
+    public static ConfigurationPackage getPackage() {
+        return ConfigurationPackage.eINSTANCE;
+    }
 
 } //ConfigurationFactoryImpl

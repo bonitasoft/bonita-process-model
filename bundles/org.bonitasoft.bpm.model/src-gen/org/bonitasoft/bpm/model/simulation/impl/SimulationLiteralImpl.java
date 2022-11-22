@@ -42,195 +42,195 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class SimulationLiteralImpl extends EObjectImpl implements SimulationLiteral {
-	/**
-	 * The default value of the '{@link #getProbability() <em>Probability</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProbability()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final double PROBABILITY_EDEFAULT = 1.0;
+    /**
+     * The default value of the '{@link #getProbability() <em>Probability</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getProbability()
+     * @generated
+     * @ordered
+     */
+    protected static final double PROBABILITY_EDEFAULT = 1.0;
 
-	/**
-	 * The cached value of the '{@link #getProbability() <em>Probability</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProbability()
-	 * @generated
-	 * @ordered
-	 */
-	protected double probability = PROBABILITY_EDEFAULT;
+    /**
+     * The cached value of the '{@link #getProbability() <em>Probability</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getProbability()
+     * @generated
+     * @ordered
+     */
+    protected double probability = PROBABILITY_EDEFAULT;
 
-	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String VALUE_EDEFAULT = ""; //$NON-NLS-1$
+    /**
+     * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getValue()
+     * @generated
+     * @ordered
+     */
+    protected static final String VALUE_EDEFAULT = ""; //$NON-NLS-1$
 
-	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected String value = VALUE_EDEFAULT;
+    /**
+     * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getValue()
+     * @generated
+     * @ordered
+     */
+    protected String value = VALUE_EDEFAULT;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SimulationLiteralImpl() {
-		super();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected SimulationLiteralImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return SimulationPackage.Literals.SIMULATION_LITERAL;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected EClass eStaticClass() {
+        return SimulationPackage.Literals.SIMULATION_LITERAL;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public double getProbability() {
-		return probability;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public double getProbability() {
+        return probability;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setProbability(double newProbability) {
-		double oldProbability = probability;
-		probability = newProbability;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimulationPackage.SIMULATION_LITERAL__PROBABILITY, oldProbability, probability));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setProbability(double newProbability) {
+        double oldProbability = probability;
+        probability = newProbability;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SimulationPackage.SIMULATION_LITERAL__PROBABILITY, oldProbability, probability));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getValue() {
-		return value;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getValue() {
+        return value;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setValue(String newValue) {
-		String oldValue = value;
-		value = newValue;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SimulationPackage.SIMULATION_LITERAL__VALUE, oldValue, value));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setValue(String newValue) {
+        String oldValue = value;
+        value = newValue;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, SimulationPackage.SIMULATION_LITERAL__VALUE, oldValue, value));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case SimulationPackage.SIMULATION_LITERAL__PROBABILITY:
-				return getProbability();
-			case SimulationPackage.SIMULATION_LITERAL__VALUE:
-				return getValue();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case SimulationPackage.SIMULATION_LITERAL__PROBABILITY:
+                return getProbability();
+            case SimulationPackage.SIMULATION_LITERAL__VALUE:
+                return getValue();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case SimulationPackage.SIMULATION_LITERAL__PROBABILITY:
-				setProbability((Double)newValue);
-				return;
-			case SimulationPackage.SIMULATION_LITERAL__VALUE:
-				setValue((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case SimulationPackage.SIMULATION_LITERAL__PROBABILITY:
+                setProbability((Double)newValue);
+                return;
+            case SimulationPackage.SIMULATION_LITERAL__VALUE:
+                setValue((String)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case SimulationPackage.SIMULATION_LITERAL__PROBABILITY:
-				setProbability(PROBABILITY_EDEFAULT);
-				return;
-			case SimulationPackage.SIMULATION_LITERAL__VALUE:
-				setValue(VALUE_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case SimulationPackage.SIMULATION_LITERAL__PROBABILITY:
+                setProbability(PROBABILITY_EDEFAULT);
+                return;
+            case SimulationPackage.SIMULATION_LITERAL__VALUE:
+                setValue(VALUE_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case SimulationPackage.SIMULATION_LITERAL__PROBABILITY:
-				return probability != PROBABILITY_EDEFAULT;
-			case SimulationPackage.SIMULATION_LITERAL__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-		}
-		return super.eIsSet(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case SimulationPackage.SIMULATION_LITERAL__PROBABILITY:
+                return probability != PROBABILITY_EDEFAULT;
+            case SimulationPackage.SIMULATION_LITERAL__VALUE:
+                return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString() {
+        if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (probability: "); //$NON-NLS-1$
-		result.append(probability);
-		result.append(", value: "); //$NON-NLS-1$
-		result.append(value);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuilder result = new StringBuilder(super.toString());
+        result.append(" (probability: "); //$NON-NLS-1$
+        result.append(probability);
+        result.append(", value: "); //$NON-NLS-1$
+        result.append(value);
+        result.append(')');
+        return result.toString();
+    }
 
 } //SimulationLiteralImpl

@@ -28,93 +28,93 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface ActorMappingFactory extends EFactory {
-	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	ActorMappingFactory eINSTANCE = org.bonitasoft.bpm.model.actormapping.impl.ActorMappingFactoryImpl.init();
+    /**
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    ActorMappingFactory eINSTANCE = org.bonitasoft.bpm.model.actormapping.impl.ActorMappingFactoryImpl.init();
 
-	/**
-	 * Returns a new object of class '<em>Actor Mapping</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Actor Mapping</em>'.
-	 * @generated
-	 */
-	ActorMapping createActorMapping();
+    /**
+     * Returns a new object of class '<em>Actor Mapping</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Actor Mapping</em>'.
+     * @generated
+     */
+    ActorMapping createActorMapping();
 
-	/**
-	 * Returns a new object of class '<em>Actor Mappings Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Actor Mappings Type</em>'.
-	 * @generated
-	 */
-	ActorMappingsType createActorMappingsType();
+    /**
+     * Returns a new object of class '<em>Actor Mappings Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Actor Mappings Type</em>'.
+     * @generated
+     */
+    ActorMappingsType createActorMappingsType();
 
-	/**
-	 * Returns a new object of class '<em>Document Root</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Document Root</em>'.
-	 * @generated
-	 */
-	DocumentRoot createDocumentRoot();
+    /**
+     * Returns a new object of class '<em>Document Root</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Document Root</em>'.
+     * @generated
+     */
+    DocumentRoot createDocumentRoot();
 
-	/**
-	 * Returns a new object of class '<em>Groups</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Groups</em>'.
-	 * @generated
-	 */
-	Groups createGroups();
+    /**
+     * Returns a new object of class '<em>Groups</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Groups</em>'.
+     * @generated
+     */
+    Groups createGroups();
 
-	/**
-	 * Returns a new object of class '<em>Membership</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Membership</em>'.
-	 * @generated
-	 */
-	Membership createMembership();
+    /**
+     * Returns a new object of class '<em>Membership</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Membership</em>'.
+     * @generated
+     */
+    Membership createMembership();
 
-	/**
-	 * Returns a new object of class '<em>Membership Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Membership Type</em>'.
-	 * @generated
-	 */
-	MembershipType createMembershipType();
+    /**
+     * Returns a new object of class '<em>Membership Type</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Membership Type</em>'.
+     * @generated
+     */
+    MembershipType createMembershipType();
 
-	/**
-	 * Returns a new object of class '<em>Roles</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Roles</em>'.
-	 * @generated
-	 */
-	Roles createRoles();
+    /**
+     * Returns a new object of class '<em>Roles</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Roles</em>'.
+     * @generated
+     */
+    Roles createRoles();
 
-	/**
-	 * Returns a new object of class '<em>Users</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Users</em>'.
-	 * @generated
-	 */
-	Users createUsers();
+    /**
+     * Returns a new object of class '<em>Users</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Users</em>'.
+     * @generated
+     */
+    Users createUsers();
 
-	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
-	ActorMappingPackage getActorMappingPackage();
+    /**
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the package supported by this factory.
+     * @generated
+     */
+    ActorMappingPackage getActorMappingPackage();
 
 } //ActorMappingFactory

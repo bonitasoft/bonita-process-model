@@ -36,16 +36,16 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface EnumType extends DataType {
-	/**
-	 * Returns the value of the '<em><b>Literals</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Literals</em>' attribute list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getEnumType_Literals()
-	 * @model
-	 * @generated
-	 */
-	EList<String> getLiterals();
+    /**
+     * Returns the value of the '<em><b>Literals</b></em>' attribute list.
+     * The list contents are of type {@link java.lang.String}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Literals</em>' attribute list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getEnumType_Literals()
+     * @model
+     * @generated
+     */
+    EList<String> getLiterals();
 
 } // EnumType

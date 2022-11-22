@@ -38,17 +38,17 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Roles extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Role</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Role</em>' attribute list.
-	 * @see org.bonitasoft.bpm.model.actormapping.ActorMappingPackage#getRoles_Role()
-	 * @model unique="false" dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='element' name='role'"
-	 * @generated
-	 */
-	EList<String> getRole();
+    /**
+     * Returns the value of the '<em><b>Role</b></em>' attribute list.
+     * The list contents are of type {@link java.lang.String}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Role</em>' attribute list.
+     * @see org.bonitasoft.bpm.model.actormapping.ActorMappingPackage#getRoles_Role()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.xml.type.String"
+     *        extendedMetaData="kind='element' name='role'"
+     * @generated
+     */
+    EList<String> getRole();
 
 } // Roles

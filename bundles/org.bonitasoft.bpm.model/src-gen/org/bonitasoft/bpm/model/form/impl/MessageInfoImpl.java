@@ -30,23 +30,23 @@ import org.eclipse.emf.ecore.EClass;
  * @generated
  */
 public class MessageInfoImpl extends InfoImpl implements MessageInfo {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected MessageInfoImpl() {
-		super();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected MessageInfoImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return FormPackage.Literals.MESSAGE_INFO;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected EClass eStaticClass() {
+        return FormPackage.Literals.MESSAGE_INFO;
+    }
 
 } //MessageInfoImpl

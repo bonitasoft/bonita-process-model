@@ -39,99 +39,99 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface SimulationNumberRange extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Min</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Min</em>' attribute.
-	 * @see #setMin(long)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationNumberRange_Min()
-	 * @model default="0" required="true"
-	 * @generated
-	 */
-	long getMin();
+    /**
+     * Returns the value of the '<em><b>Min</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Min</em>' attribute.
+     * @see #setMin(long)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationNumberRange_Min()
+     * @model default="0" required="true"
+     * @generated
+     */
+    long getMin();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationNumberRange#getMin <em>Min</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Min</em>' attribute.
-	 * @see #getMin()
-	 * @generated
-	 */
-	void setMin(long value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationNumberRange#getMin <em>Min</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Min</em>' attribute.
+     * @see #getMin()
+     * @generated
+     */
+    void setMin(long value);
 
-	/**
-	 * Returns the value of the '<em><b>Max</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Max</em>' attribute.
-	 * @see #setMax(long)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationNumberRange_Max()
-	 * @model default="0" required="true"
-	 * @generated
-	 */
-	long getMax();
+    /**
+     * Returns the value of the '<em><b>Max</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Max</em>' attribute.
+     * @see #setMax(long)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationNumberRange_Max()
+     * @model default="0" required="true"
+     * @generated
+     */
+    long getMax();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationNumberRange#getMax <em>Max</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Max</em>' attribute.
-	 * @see #getMax()
-	 * @generated
-	 */
-	void setMax(long value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationNumberRange#getMax <em>Max</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Max</em>' attribute.
+     * @see #getMax()
+     * @generated
+     */
+    void setMax(long value);
 
-	/**
-	 * Returns the value of the '<em><b>Probability</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Probability</em>' attribute.
-	 * @see #setProbability(double)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationNumberRange_Probability()
-	 * @model default="1"
-	 * @generated
-	 */
-	double getProbability();
+    /**
+     * Returns the value of the '<em><b>Probability</b></em>' attribute.
+     * The default value is <code>"1"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Probability</em>' attribute.
+     * @see #setProbability(double)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationNumberRange_Probability()
+     * @model default="1"
+     * @generated
+     */
+    double getProbability();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationNumberRange#getProbability <em>Probability</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Probability</em>' attribute.
-	 * @see #getProbability()
-	 * @generated
-	 */
-	void setProbability(double value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationNumberRange#getProbability <em>Probability</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Probability</em>' attribute.
+     * @see #getProbability()
+     * @generated
+     */
+    void setProbability(double value);
 
-	/**
-	 * Returns the value of the '<em><b>Repartition Type</b></em>' attribute.
-	 * The default value is <code>"CONSTANT"</code>.
-	 * The literals are from the enumeration {@link org.bonitasoft.bpm.model.simulation.RepartitionType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Repartition Type</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.simulation.RepartitionType
-	 * @see #setRepartitionType(RepartitionType)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationNumberRange_RepartitionType()
-	 * @model default="CONSTANT" required="true"
-	 * @generated
-	 */
-	RepartitionType getRepartitionType();
+    /**
+     * Returns the value of the '<em><b>Repartition Type</b></em>' attribute.
+     * The default value is <code>"CONSTANT"</code>.
+     * The literals are from the enumeration {@link org.bonitasoft.bpm.model.simulation.RepartitionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Repartition Type</em>' attribute.
+     * @see org.bonitasoft.bpm.model.simulation.RepartitionType
+     * @see #setRepartitionType(RepartitionType)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationNumberRange_RepartitionType()
+     * @model default="CONSTANT" required="true"
+     * @generated
+     */
+    RepartitionType getRepartitionType();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationNumberRange#getRepartitionType <em>Repartition Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Repartition Type</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.simulation.RepartitionType
-	 * @see #getRepartitionType()
-	 * @generated
-	 */
-	void setRepartitionType(RepartitionType value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationNumberRange#getRepartitionType <em>Repartition Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Repartition Type</em>' attribute.
+     * @see org.bonitasoft.bpm.model.simulation.RepartitionType
+     * @see #getRepartitionType()
+     * @generated
+     */
+    void setRepartitionType(RepartitionType value);
 
 } // SimulationNumberRange

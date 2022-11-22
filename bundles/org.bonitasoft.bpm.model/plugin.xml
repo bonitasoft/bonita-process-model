@@ -118,7 +118,7 @@
       <!-- @generated process -->
       <package
             uri="http://www.bonitasoft.org/ns/bpm/decision"
-            class="org.bonitasoft.bpm.model.decision.DecisionPackage"
+            class="org.bonitasoft.bpm.model.process.decision.DecisionPackage"
             genModel="model/process.genmodel"/>
    </extension>
 
@@ -126,7 +126,7 @@
       <!-- @generated process -->
       <package
             uri="http://www.bonitasoft.org/ns/bpm/transitions"
-            class="org.bonitasoft.bpm.model.transitions.TransitionsPackage"
+            class="org.bonitasoft.bpm.model.process.decision.transitions.TransitionsPackage"
             genModel="model/process.genmodel"/>
    </extension>
 

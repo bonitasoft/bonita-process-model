@@ -28,57 +28,57 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface KpiFactory extends EFactory {
-	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	KpiFactory eINSTANCE = org.bonitasoft.bpm.model.kpi.impl.KpiFactoryImpl.init();
+    /**
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    KpiFactory eINSTANCE = org.bonitasoft.bpm.model.kpi.impl.KpiFactoryImpl.init();
 
-	/**
-	 * Returns a new object of class '<em>KPI Parameter Mapping</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>KPI Parameter Mapping</em>'.
-	 * @generated
-	 */
-	KPIParameterMapping createKPIParameterMapping();
+    /**
+     * Returns a new object of class '<em>KPI Parameter Mapping</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>KPI Parameter Mapping</em>'.
+     * @generated
+     */
+    KPIParameterMapping createKPIParameterMapping();
 
-	/**
-	 * Returns a new object of class '<em>Database KPI Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Database KPI Binding</em>'.
-	 * @generated
-	 */
-	DatabaseKPIBinding createDatabaseKPIBinding();
+    /**
+     * Returns a new object of class '<em>Database KPI Binding</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Database KPI Binding</em>'.
+     * @generated
+     */
+    DatabaseKPIBinding createDatabaseKPIBinding();
 
-	/**
-	 * Returns a new object of class '<em>Database KPI Definition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Database KPI Definition</em>'.
-	 * @generated
-	 */
-	DatabaseKPIDefinition createDatabaseKPIDefinition();
+    /**
+     * Returns a new object of class '<em>Database KPI Definition</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Database KPI Definition</em>'.
+     * @generated
+     */
+    DatabaseKPIDefinition createDatabaseKPIDefinition();
 
-	/**
-	 * Returns a new object of class '<em>KPI Field</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>KPI Field</em>'.
-	 * @generated
-	 */
-	KPIField createKPIField();
+    /**
+     * Returns a new object of class '<em>KPI Field</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>KPI Field</em>'.
+     * @generated
+     */
+    KPIField createKPIField();
 
-	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
-	KpiPackage getKpiPackage();
+    /**
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the package supported by this factory.
+     * @generated
+     */
+    KpiPackage getKpiPackage();
 
 } //KpiFactory

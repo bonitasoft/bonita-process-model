@@ -36,18 +36,18 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface SourceElement extends Element {
-	/**
-	 * Returns the value of the '<em><b>Outgoing</b></em>' reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.Connection}.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.Connection#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Outgoing</em>' reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSourceElement_Outgoing()
-	 * @see org.bonitasoft.bpm.model.process.Connection#getSource
-	 * @model opposite="source"
-	 * @generated
-	 */
-	EList<Connection> getOutgoing();
+    /**
+     * Returns the value of the '<em><b>Outgoing</b></em>' reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.Connection}.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.Connection#getSource <em>Source</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Outgoing</em>' reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSourceElement_Outgoing()
+     * @see org.bonitasoft.bpm.model.process.Connection#getSource
+     * @model opposite="source"
+     * @generated
+     */
+    EList<Connection> getOutgoing();
 
 } // SourceElement

@@ -36,16 +36,16 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Activity extends FlowElement, ConnectableElement, OperationContainer, MultiInstantiable {
-	/**
-	 * Returns the value of the '<em><b>Boundary Intermediate Events</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.BoundaryEvent}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Boundary Intermediate Events</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getActivity_BoundaryIntermediateEvents()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<BoundaryEvent> getBoundaryIntermediateEvents();
+    /**
+     * Returns the value of the '<em><b>Boundary Intermediate Events</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.BoundaryEvent}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Boundary Intermediate Events</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getActivity_BoundaryIntermediateEvents()
+     * @model containment="true"
+     * @generated
+     */
+    EList<BoundaryEvent> getBoundaryIntermediateEvents();
 
 } // Activity

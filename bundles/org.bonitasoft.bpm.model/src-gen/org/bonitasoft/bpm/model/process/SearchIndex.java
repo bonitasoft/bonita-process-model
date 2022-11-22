@@ -39,48 +39,48 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface SearchIndex extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' containment reference.
-	 * @see #setName(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSearchIndex_Name()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getName();
+    /**
+     * Returns the value of the '<em><b>Name</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Name</em>' containment reference.
+     * @see #setName(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSearchIndex_Name()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SearchIndex#getName <em>Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' containment reference.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SearchIndex#getName <em>Name</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Name</em>' containment reference.
+     * @see #getName()
+     * @generated
+     */
+    void setName(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSearchIndex_Value()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getValue();
+    /**
+     * Returns the value of the '<em><b>Value</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Value</em>' containment reference.
+     * @see #setValue(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSearchIndex_Value()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getValue();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SearchIndex#getValue <em>Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
-	 * @generated
-	 */
-	void setValue(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SearchIndex#getValue <em>Value</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Value</em>' containment reference.
+     * @see #getValue()
+     * @generated
+     */
+    void setValue(Expression value);
 
 } // SearchIndex

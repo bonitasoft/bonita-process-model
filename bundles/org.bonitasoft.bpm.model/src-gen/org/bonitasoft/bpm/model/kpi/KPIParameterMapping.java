@@ -39,48 +39,48 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface KPIParameterMapping extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Kpi Field Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Kpi Field Name</em>' attribute.
-	 * @see #setKpiFieldName(String)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getKPIParameterMapping_KpiFieldName()
-	 * @model
-	 * @generated
-	 */
-	String getKpiFieldName();
+    /**
+     * Returns the value of the '<em><b>Kpi Field Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Kpi Field Name</em>' attribute.
+     * @see #setKpiFieldName(String)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getKPIParameterMapping_KpiFieldName()
+     * @model
+     * @generated
+     */
+    String getKpiFieldName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.KPIParameterMapping#getKpiFieldName <em>Kpi Field Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Kpi Field Name</em>' attribute.
-	 * @see #getKpiFieldName()
-	 * @generated
-	 */
-	void setKpiFieldName(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.KPIParameterMapping#getKpiFieldName <em>Kpi Field Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Kpi Field Name</em>' attribute.
+     * @see #getKpiFieldName()
+     * @generated
+     */
+    void setKpiFieldName(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getKPIParameterMapping_Value()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getValue();
+    /**
+     * Returns the value of the '<em><b>Value</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Value</em>' containment reference.
+     * @see #setValue(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getKPIParameterMapping_Value()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getValue();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.KPIParameterMapping#getValue <em>Value</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
-	 * @generated
-	 */
-	void setValue(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.KPIParameterMapping#getValue <em>Value</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Value</em>' containment reference.
+     * @see #getValue()
+     * @generated
+     */
+    void setValue(Expression value);
 
 } // KPIParameterMapping

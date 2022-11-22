@@ -37,48 +37,48 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Resource extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Bar Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Bar Path</em>' attribute.
-	 * @see #setBarPath(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getResource_BarPath()
-	 * @model
-	 * @generated
-	 */
-	String getBarPath();
+    /**
+     * Returns the value of the '<em><b>Bar Path</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Bar Path</em>' attribute.
+     * @see #setBarPath(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getResource_BarPath()
+     * @model
+     * @generated
+     */
+    String getBarPath();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Resource#getBarPath <em>Bar Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Bar Path</em>' attribute.
-	 * @see #getBarPath()
-	 * @generated
-	 */
-	void setBarPath(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Resource#getBarPath <em>Bar Path</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Bar Path</em>' attribute.
+     * @see #getBarPath()
+     * @generated
+     */
+    void setBarPath(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Project Path</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Project Path</em>' attribute.
-	 * @see #setProjectPath(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getResource_ProjectPath()
-	 * @model
-	 * @generated
-	 */
-	String getProjectPath();
+    /**
+     * Returns the value of the '<em><b>Project Path</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Project Path</em>' attribute.
+     * @see #setProjectPath(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getResource_ProjectPath()
+     * @model
+     * @generated
+     */
+    String getProjectPath();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Resource#getProjectPath <em>Project Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Project Path</em>' attribute.
-	 * @see #getProjectPath()
-	 * @generated
-	 */
-	void setProjectPath(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Resource#getProjectPath <em>Project Path</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Project Path</em>' attribute.
+     * @see #getProjectPath()
+     * @generated
+     */
+    void setProjectPath(String value);
 
 } // Resource

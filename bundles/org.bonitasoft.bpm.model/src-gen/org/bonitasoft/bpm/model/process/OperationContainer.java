@@ -40,16 +40,16 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface OperationContainer extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.expression.Operation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Operations</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getOperationContainer_Operations()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Operation> getOperations();
+    /**
+     * Returns the value of the '<em><b>Operations</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.expression.Operation}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Operations</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getOperationContainer_Operations()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Operation> getOperations();
 
 } // OperationContainer

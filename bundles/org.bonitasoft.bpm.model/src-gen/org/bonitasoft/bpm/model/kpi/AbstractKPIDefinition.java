@@ -39,38 +39,38 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface AbstractKPIDefinition extends Element {
-	/**
-	 * Returns the value of the '<em><b>Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Version</em>' attribute.
-	 * @see #setVersion(String)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getAbstractKPIDefinition_Version()
-	 * @model
-	 * @generated
-	 */
-	String getVersion();
+    /**
+     * Returns the value of the '<em><b>Version</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Version</em>' attribute.
+     * @see #setVersion(String)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getAbstractKPIDefinition_Version()
+     * @model
+     * @generated
+     */
+    String getVersion();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.AbstractKPIDefinition#getVersion <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Version</em>' attribute.
-	 * @see #getVersion()
-	 * @generated
-	 */
-	void setVersion(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.AbstractKPIDefinition#getVersion <em>Version</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Version</em>' attribute.
+     * @see #getVersion()
+     * @generated
+     */
+    void setVersion(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Fields</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.kpi.KPIField}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Fields</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getAbstractKPIDefinition_Fields()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<KPIField> getFields();
+    /**
+     * Returns the value of the '<em><b>Fields</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.kpi.KPIField}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Fields</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getAbstractKPIDefinition_Fields()
+     * @model containment="true"
+     * @generated
+     */
+    EList<KPIField> getFields();
 
 } // AbstractKPIDefinition

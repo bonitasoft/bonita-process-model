@@ -36,26 +36,26 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface ModelVersion extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Version</em>' attribute.
-	 * @see #setVersion(String)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getModelVersion_Version()
-	 * @model
-	 * @generated
-	 */
-	String getVersion();
+    /**
+     * Returns the value of the '<em><b>Version</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Version</em>' attribute.
+     * @see #setVersion(String)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getModelVersion_Version()
+     * @model
+     * @generated
+     */
+    String getVersion();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.ModelVersion#getVersion <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Version</em>' attribute.
-	 * @see #getVersion()
-	 * @generated
-	 */
-	void setVersion(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.ModelVersion#getVersion <em>Version</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Version</em>' attribute.
+     * @see #getVersion()
+     * @generated
+     */
+    void setVersion(String value);
 
 } // ModelVersion

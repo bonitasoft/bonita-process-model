@@ -35,26 +35,26 @@ package org.bonitasoft.bpm.model.process;
  * @generated
  */
 public interface RecapFlow extends AbstractPageFlow {
-	/**
-	 * Returns the value of the '<em><b>Overview Form Mapping</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Overview Form Mapping</em>' containment reference.
-	 * @see #setOverviewFormMapping(FormMapping)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getRecapFlow_OverviewFormMapping()
-	 * @model containment="true"
-	 * @generated
-	 */
-	FormMapping getOverviewFormMapping();
+    /**
+     * Returns the value of the '<em><b>Overview Form Mapping</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Overview Form Mapping</em>' containment reference.
+     * @see #setOverviewFormMapping(FormMapping)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getRecapFlow_OverviewFormMapping()
+     * @model containment="true"
+     * @generated
+     */
+    FormMapping getOverviewFormMapping();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.RecapFlow#getOverviewFormMapping <em>Overview Form Mapping</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Overview Form Mapping</em>' containment reference.
-	 * @see #getOverviewFormMapping()
-	 * @generated
-	 */
-	void setOverviewFormMapping(FormMapping value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.RecapFlow#getOverviewFormMapping <em>Overview Form Mapping</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Overview Form Mapping</em>' containment reference.
+     * @see #getOverviewFormMapping()
+     * @generated
+     */
+    void setOverviewFormMapping(FormMapping value);
 
 } // RecapFlow

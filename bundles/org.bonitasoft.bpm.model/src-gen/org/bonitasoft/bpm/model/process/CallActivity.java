@@ -41,72 +41,72 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface CallActivity extends Activity {
-	/**
-	 * Returns the value of the '<em><b>Input Mappings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.InputMapping}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Input Mappings</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getCallActivity_InputMappings()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<InputMapping> getInputMappings();
+    /**
+     * Returns the value of the '<em><b>Input Mappings</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.InputMapping}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Input Mappings</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getCallActivity_InputMappings()
+     * @model containment="true"
+     * @generated
+     */
+    EList<InputMapping> getInputMappings();
 
-	/**
-	 * Returns the value of the '<em><b>Output Mappings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.OutputMapping}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Output Mappings</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getCallActivity_OutputMappings()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<OutputMapping> getOutputMappings();
+    /**
+     * Returns the value of the '<em><b>Output Mappings</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.OutputMapping}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Output Mappings</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getCallActivity_OutputMappings()
+     * @model containment="true"
+     * @generated
+     */
+    EList<OutputMapping> getOutputMappings();
 
-	/**
-	 * Returns the value of the '<em><b>Called Activity Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Called Activity Name</em>' containment reference.
-	 * @see #setCalledActivityName(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getCallActivity_CalledActivityName()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getCalledActivityName();
+    /**
+     * Returns the value of the '<em><b>Called Activity Name</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Called Activity Name</em>' containment reference.
+     * @see #setCalledActivityName(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getCallActivity_CalledActivityName()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getCalledActivityName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.CallActivity#getCalledActivityName <em>Called Activity Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Called Activity Name</em>' containment reference.
-	 * @see #getCalledActivityName()
-	 * @generated
-	 */
-	void setCalledActivityName(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.CallActivity#getCalledActivityName <em>Called Activity Name</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Called Activity Name</em>' containment reference.
+     * @see #getCalledActivityName()
+     * @generated
+     */
+    void setCalledActivityName(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Called Activity Version</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Called Activity Version</em>' containment reference.
-	 * @see #setCalledActivityVersion(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getCallActivity_CalledActivityVersion()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getCalledActivityVersion();
+    /**
+     * Returns the value of the '<em><b>Called Activity Version</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Called Activity Version</em>' containment reference.
+     * @see #setCalledActivityVersion(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getCallActivity_CalledActivityVersion()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getCalledActivityVersion();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.CallActivity#getCalledActivityVersion <em>Called Activity Version</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Called Activity Version</em>' containment reference.
-	 * @see #getCalledActivityVersion()
-	 * @generated
-	 */
-	void setCalledActivityVersion(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.CallActivity#getCalledActivityVersion <em>Called Activity Version</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Called Activity Version</em>' containment reference.
+     * @see #getCalledActivityVersion()
+     * @generated
+     */
+    void setCalledActivityVersion(Expression value);
 
 } // CallActivity

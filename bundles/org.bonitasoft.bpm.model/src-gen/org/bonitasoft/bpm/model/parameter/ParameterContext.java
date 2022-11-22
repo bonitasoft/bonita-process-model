@@ -41,83 +41,83 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface ParameterContext extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.bonitasoft.bpm.model.parameter.ParameterPackage#getParameterContext_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
+    /**
+     * Returns the value of the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Name</em>' attribute.
+     * @see #setName(String)
+     * @see org.bonitasoft.bpm.model.parameter.ParameterPackage#getParameterContext_Name()
+     * @model
+     * @generated
+     */
+    String getName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.parameter.ParameterContext#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.parameter.ParameterContext#getName <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Name</em>' attribute.
+     * @see #getName()
+     * @generated
+     */
+    void setName(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' attribute.
-	 * @see #setDescription(String)
-	 * @see org.bonitasoft.bpm.model.parameter.ParameterPackage#getParameterContext_Description()
-	 * @model
-	 * @generated
-	 */
-	String getDescription();
+    /**
+     * Returns the value of the '<em><b>Description</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Description</em>' attribute.
+     * @see #setDescription(String)
+     * @see org.bonitasoft.bpm.model.parameter.ParameterPackage#getParameterContext_Description()
+     * @model
+     * @generated
+     */
+    String getDescription();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.parameter.ParameterContext#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.parameter.ParameterContext#getDescription <em>Description</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Description</em>' attribute.
+     * @see #getDescription()
+     * @generated
+     */
+    void setDescription(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.parameter.Parameter}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.parameter.ParameterPackage#getParameterContext_Parameters()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Parameter> getParameters();
+    /**
+     * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.parameter.Parameter}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Parameters</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.parameter.ParameterPackage#getParameterContext_Parameters()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Parameter> getParameters();
 
-	/**
-	 * Returns the value of the '<em><b>Default Context</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Context</em>' attribute.
-	 * @see #setDefaultContext(boolean)
-	 * @see org.bonitasoft.bpm.model.parameter.ParameterPackage#getParameterContext_DefaultContext()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isDefaultContext();
+    /**
+     * Returns the value of the '<em><b>Default Context</b></em>' attribute.
+     * The default value is <code>"false"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default Context</em>' attribute.
+     * @see #setDefaultContext(boolean)
+     * @see org.bonitasoft.bpm.model.parameter.ParameterPackage#getParameterContext_DefaultContext()
+     * @model default="false"
+     * @generated
+     */
+    boolean isDefaultContext();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.parameter.ParameterContext#isDefaultContext <em>Default Context</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Context</em>' attribute.
-	 * @see #isDefaultContext()
-	 * @generated
-	 */
-	void setDefaultContext(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.parameter.ParameterContext#isDefaultContext <em>Default Context</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default Context</em>' attribute.
+     * @see #isDefaultContext()
+     * @generated
+     */
+    void setDefaultContext(boolean value);
 
 } // ParameterContext

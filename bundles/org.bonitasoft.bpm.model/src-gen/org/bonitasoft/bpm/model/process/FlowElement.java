@@ -38,70 +38,70 @@ import org.bonitasoft.bpm.model.expression.Expression;
  * @generated
  */
 public interface FlowElement extends Element, SourceElement, TargetElement {
-	/**
-	 * Returns the value of the '<em><b>Dynamic Label</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dynamic Label</em>' containment reference.
-	 * @see #setDynamicLabel(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFlowElement_DynamicLabel()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDynamicLabel();
+    /**
+     * Returns the value of the '<em><b>Dynamic Label</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Dynamic Label</em>' containment reference.
+     * @see #setDynamicLabel(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFlowElement_DynamicLabel()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDynamicLabel();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FlowElement#getDynamicLabel <em>Dynamic Label</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dynamic Label</em>' containment reference.
-	 * @see #getDynamicLabel()
-	 * @generated
-	 */
-	void setDynamicLabel(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FlowElement#getDynamicLabel <em>Dynamic Label</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Dynamic Label</em>' containment reference.
+     * @see #getDynamicLabel()
+     * @generated
+     */
+    void setDynamicLabel(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Dynamic Description</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dynamic Description</em>' containment reference.
-	 * @see #setDynamicDescription(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFlowElement_DynamicDescription()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDynamicDescription();
+    /**
+     * Returns the value of the '<em><b>Dynamic Description</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Dynamic Description</em>' containment reference.
+     * @see #setDynamicDescription(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFlowElement_DynamicDescription()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDynamicDescription();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FlowElement#getDynamicDescription <em>Dynamic Description</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dynamic Description</em>' containment reference.
-	 * @see #getDynamicDescription()
-	 * @generated
-	 */
-	void setDynamicDescription(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FlowElement#getDynamicDescription <em>Dynamic Description</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Dynamic Description</em>' containment reference.
+     * @see #getDynamicDescription()
+     * @generated
+     */
+    void setDynamicDescription(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Step Summary</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Step Summary</em>' containment reference.
-	 * @see #setStepSummary(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFlowElement_StepSummary()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getStepSummary();
+    /**
+     * Returns the value of the '<em><b>Step Summary</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Step Summary</em>' containment reference.
+     * @see #setStepSummary(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFlowElement_StepSummary()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getStepSummary();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FlowElement#getStepSummary <em>Step Summary</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Step Summary</em>' containment reference.
-	 * @see #getStepSummary()
-	 * @generated
-	 */
-	void setStepSummary(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FlowElement#getStepSummary <em>Step Summary</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Step Summary</em>' containment reference.
+     * @see #getStepSummary()
+     * @generated
+     */
+    void setStepSummary(Expression value);
 
 } // FlowElement

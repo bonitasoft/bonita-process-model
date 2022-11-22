@@ -44,154 +44,154 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class SimulationNumberDataItemProvider extends SimulationElementItemProvider {
-	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SimulationNumberDataItemProvider(AdapterFactory adapterFactory) {
-		super(adapterFactory);
-	}
+    /**
+     * This constructs an instance from a factory and a notifier.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public SimulationNumberDataItemProvider(AdapterFactory adapterFactory) {
+        super(adapterFactory);
+    }
 
-	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null) {
-			super.getPropertyDescriptors(object);
+    /**
+     * This returns the property descriptors for the adapted class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
+        if (itemPropertyDescriptors == null) {
+            super.getPropertyDescriptors(object);
 
-			addExpressionBasedPropertyDescriptor(object);
-		}
-		return itemPropertyDescriptors;
-	}
+            addExpressionBasedPropertyDescriptor(object);
+        }
+        return itemPropertyDescriptors;
+    }
 
-	/**
-	 * This adds a property descriptor for the Expression Based feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addExpressionBasedPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_SimulationData_expressionBased_feature"), //$NON-NLS-1$
-				 getString("_UI_PropertyDescriptor_description", "_UI_SimulationData_expressionBased_feature", "_UI_SimulationData_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				 SimulationPackage.Literals.SIMULATION_DATA__EXPRESSION_BASED,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
+    /**
+     * This adds a property descriptor for the Expression Based feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected void addExpressionBasedPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_SimulationData_expressionBased_feature"), //$NON-NLS-1$
+                 getString("_UI_PropertyDescriptor_description", "_UI_SimulationData_expressionBased_feature", "_UI_SimulationData_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+                 SimulationPackage.Literals.SIMULATION_DATA__EXPRESSION_BASED,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+                 null,
+                 null));
+    }
 
-	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(SimulationPackage.Literals.SIMULATION_DATA__EXPRESSION);
-			childrenFeatures.add(SimulationPackage.Literals.SIMULATION_NUMBER_DATA__RANGES);
-		}
-		return childrenFeatures;
-	}
+    /**
+     * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+     * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+     * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+        if (childrenFeatures == null) {
+            super.getChildrenFeatures(object);
+            childrenFeatures.add(SimulationPackage.Literals.SIMULATION_DATA__EXPRESSION);
+            childrenFeatures.add(SimulationPackage.Literals.SIMULATION_NUMBER_DATA__RANGES);
+        }
+        return childrenFeatures;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected EStructuralFeature getChildFeature(Object object, Object child) {
+        // Check the type of the specified child object and return the proper feature to use for
+        // adding (see {@link AddCommand}) it as a child.
 
-		return super.getChildFeature(object, child);
-	}
+        return super.getChildFeature(object, child);
+    }
 
-	/**
-	 * This returns SimulationNumberData.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/SimulationNumberData")); //$NON-NLS-1$
-	}
+    /**
+     * This returns SimulationNumberData.gif.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object getImage(Object object) {
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/SimulationNumberData")); //$NON-NLS-1$
+    }
 
-	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getText(Object object) {
-		String label = ((SimulationNumberData)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_SimulationNumberData_type") : //$NON-NLS-1$
-			getString("_UI_SimulationNumberData_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
-	}
+    /**
+     * This returns the label text for the adapted class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getText(Object object) {
+        String label = ((SimulationNumberData)object).getName();
+        return label == null || label.length() == 0 ?
+            getString("_UI_SimulationNumberData_type") : //$NON-NLS-1$
+            getString("_UI_SimulationNumberData_type") + " " + label; //$NON-NLS-1$ //$NON-NLS-2$
+    }
 
 
-	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void notifyChanged(Notification notification) {
-		updateChildren(notification);
+    /**
+     * This handles model notifications by calling {@link #updateChildren} to update any cached
+     * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void notifyChanged(Notification notification) {
+        updateChildren(notification);
 
-		switch (notification.getFeatureID(SimulationNumberData.class)) {
-			case SimulationPackage.SIMULATION_NUMBER_DATA__EXPRESSION_BASED:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case SimulationPackage.SIMULATION_NUMBER_DATA__EXPRESSION:
-			case SimulationPackage.SIMULATION_NUMBER_DATA__RANGES:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
-		super.notifyChanged(notification);
-	}
+        switch (notification.getFeatureID(SimulationNumberData.class)) {
+            case SimulationPackage.SIMULATION_NUMBER_DATA__EXPRESSION_BASED:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+                return;
+            case SimulationPackage.SIMULATION_NUMBER_DATA__EXPRESSION:
+            case SimulationPackage.SIMULATION_NUMBER_DATA__RANGES:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+                return;
+        }
+        super.notifyChanged(notification);
+    }
 
-	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
+    /**
+     * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+     * that can be created under this object.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
+        super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(SimulationPackage.Literals.SIMULATION_DATA__EXPRESSION,
-				 ExpressionFactory.eINSTANCE.createExpression()));
+        newChildDescriptors.add
+            (createChildParameter
+                (SimulationPackage.Literals.SIMULATION_DATA__EXPRESSION,
+                 ExpressionFactory.eINSTANCE.createExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(SimulationPackage.Literals.SIMULATION_NUMBER_DATA__RANGES,
-				 SimulationFactory.eINSTANCE.createSimulationNumberRange()));
-	}
+        newChildDescriptors.add
+            (createChildParameter
+                (SimulationPackage.Literals.SIMULATION_NUMBER_DATA__RANGES,
+                 SimulationFactory.eINSTANCE.createSimulationNumberRange()));
+    }
 
 }
