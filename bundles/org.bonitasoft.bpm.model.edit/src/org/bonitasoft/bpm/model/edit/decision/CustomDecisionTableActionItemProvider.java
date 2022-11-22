@@ -15,11 +15,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.edit.custom.decision;
+package org.bonitasoft.bpm.model.edit.decision;
 
-import org.bonitasoft.bpm.model.decision.DecisionTableLine;
-import org.bonitasoft.bpm.model.decision.provider.DecisionTableLineItemProvider;
-import org.bonitasoft.bpm.model.edit.custom.i18n.Messages;
+import org.bonitasoft.bpm.model.decision.provider.DecisionTableActionItemProvider;
+import org.bonitasoft.bpm.model.edit.i18n.Messages;
 import org.bonitasoft.bpm.model.transitions.TakeTransitionAction;
 import org.eclipse.emf.common.notify.AdapterFactory;
 
@@ -27,24 +26,33 @@ import org.eclipse.emf.common.notify.AdapterFactory;
  * @author Romain Bioteau
  *
  */
-public class CustomDecisionTableLineItemProvider extends DecisionTableLineItemProvider {
+public class CustomDecisionTableActionItemProvider extends DecisionTableActionItemProvider {
 
-	public CustomDecisionTableLineItemProvider(AdapterFactory adapterFactory) {
+	public CustomDecisionTableActionItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 	
 	@Override
 	public String getText(Object object) {
-		DecisionTableLine line = (DecisionTableLine) object;
-		if(line.getAction() instanceof TakeTransitionAction){
-			if(((TakeTransitionAction)line.getAction()).isTakeTransition()){
-				return Messages.line + " : " + Messages.takeTransitionAction;
+		if(object instanceof TakeTransitionAction){
+			TakeTransitionAction action = (TakeTransitionAction) object;
+			if(action.isTakeTransition()){
+				return Messages.takeTransitionAction ;
 			}else{
-				return Messages.line + " : " + Messages.dontTakeTransitionAction;
+				return Messages.dontTakeTransitionAction;
 			}
 		}
 	
 		return super.getText(object);
+	}
+	
+	@Override
+	public Object getImage(Object object) {
+		if(object instanceof TakeTransitionAction){
+			return overlayImage(object, getResourceLocator().getImage("full/obj16/TakeTransitionAction")); //$NON-NLS-1$
+		}
+	
+		return super.getImage(object);
 	}
 
 }

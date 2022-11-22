@@ -15,27 +15,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.edit.custom.actormapping;
+package org.bonitasoft.bpm.model.edit.actormapping;
 
 
 import java.util.Collection;
 
-import org.bonitasoft.bpm.model.actormapping.Membership;
-import org.bonitasoft.bpm.model.actormapping.provider.MembershipItemProvider;
+import org.bonitasoft.bpm.model.actormapping.Groups;
+import org.bonitasoft.bpm.model.actormapping.provider.GroupsItemProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 
 
-public class CustomMembershipItemProvider extends MembershipItemProvider {
+public class CustomGroupsItemProvider extends GroupsItemProvider {
 
-	public CustomMembershipItemProvider(AdapterFactory adapterFactory) {
+	public CustomGroupsItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
 	@Override
 	public Collection<?> getChildren(Object object) {
-		return ((Membership)object).getMembership();
+		return ((Groups)object).getGroup();
 	}
-	
-
 
 }

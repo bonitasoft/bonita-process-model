@@ -15,24 +15,29 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.edit.custom.actormapping;
+package org.bonitasoft.bpm.model.edit.actormapping;
 
 
 import java.util.Collection;
 
-import org.bonitasoft.bpm.model.actormapping.Users;
-import org.bonitasoft.bpm.model.actormapping.provider.UsersItemProvider;
+import org.bonitasoft.bpm.model.actormapping.Roles;
+import org.bonitasoft.bpm.model.actormapping.provider.RolesItemProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 
+/**
+ * This is the item provider adapter for a {@link org.bonitasoft.studio.model.actormapping.Roles} object.
+ * <!-- begin-user-doc -->
+ * <!-- end-user-doc -->
+ * @generated
+ */
+public class CustomRolesItemProvider extends RolesItemProvider {
 
-public class CustomUsersItemProvider extends UsersItemProvider {
-
-	public CustomUsersItemProvider(AdapterFactory adapterFactory) {
+	public CustomRolesItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
+	
 	@Override
 	public Collection<?> getChildren(Object object) {
-		return ((Users)object).getUser();
+		return ((Roles)object).getRole();
 	}
-	
 }

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.edit.custom.decision;
+package org.bonitasoft.bpm.model.edit.decision;
 
 import org.bonitasoft.bpm.model.decision.provider.DecisionItemProviderAdapterFactory;
 import org.bonitasoft.bpm.model.decision.provider.DecisionTableActionItemProvider;

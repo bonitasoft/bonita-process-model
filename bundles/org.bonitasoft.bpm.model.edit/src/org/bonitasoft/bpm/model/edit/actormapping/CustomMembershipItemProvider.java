@@ -15,32 +15,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.edit.custom.actormapping;
+package org.bonitasoft.bpm.model.edit.actormapping;
 
 
-import org.bonitasoft.bpm.model.actormapping.MembershipType;
-import org.bonitasoft.bpm.model.actormapping.provider.MembershipTypeItemProvider;
-import org.bonitasoft.bpm.model.edit.custom.i18n.Messages;
+import java.util.Collection;
+
+import org.bonitasoft.bpm.model.actormapping.Membership;
+import org.bonitasoft.bpm.model.actormapping.provider.MembershipItemProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 
-public class CustomMembershipTypeItemProvider extends MembershipTypeItemProvider {
 
-	public CustomMembershipTypeItemProvider(AdapterFactory adapterFactory) {
+public class CustomMembershipItemProvider extends MembershipItemProvider {
+
+	public CustomMembershipItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
-	
+
 	@Override
-	public String getText(Object object) {
-		MembershipType type = (MembershipType) object ;
-		String path = type.getGroup() ;
-		String groupName = "" ;
-		if(path != null && !path.isEmpty()){
-			String[] split = path.split("/") ;
-			groupName = split[split.length-1] ;
-		}
-		
-		return Messages.belongsTo + " " + groupName + " " + Messages.havingRole +" " + type.getRole()  ;
+	public Collection<?> getChildren(Object object) {
+		return ((Membership)object).getMembership();
 	}
 	
+
 
 }
