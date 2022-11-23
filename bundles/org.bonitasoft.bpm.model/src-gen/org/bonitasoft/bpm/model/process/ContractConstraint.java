@@ -42,104 +42,104 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface ContractConstraint extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' attribute.
-	 * @see #setExpression(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContractConstraint_Expression()
-	 * @model
-	 * @generated
-	 */
-	String getExpression();
+    /**
+     * Returns the value of the '<em><b>Expression</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Expression</em>' attribute.
+     * @see #setExpression(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContractConstraint_Expression()
+     * @model
+     * @generated
+     */
+    String getExpression();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.ContractConstraint#getExpression <em>Expression</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' attribute.
-	 * @see #getExpression()
-	 * @generated
-	 */
-	void setExpression(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.ContractConstraint#getExpression <em>Expression</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Expression</em>' attribute.
+     * @see #getExpression()
+     * @generated
+     */
+    void setExpression(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Error Message</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Error Message</em>' attribute.
-	 * @see #setErrorMessage(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContractConstraint_ErrorMessage()
-	 * @model
-	 * @generated
-	 */
-	String getErrorMessage();
+    /**
+     * Returns the value of the '<em><b>Error Message</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Error Message</em>' attribute.
+     * @see #setErrorMessage(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContractConstraint_ErrorMessage()
+     * @model
+     * @generated
+     */
+    String getErrorMessage();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.ContractConstraint#getErrorMessage <em>Error Message</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Error Message</em>' attribute.
-	 * @see #getErrorMessage()
-	 * @generated
-	 */
-	void setErrorMessage(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.ContractConstraint#getErrorMessage <em>Error Message</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Error Message</em>' attribute.
+     * @see #getErrorMessage()
+     * @generated
+     */
+    void setErrorMessage(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContractConstraint_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
+    /**
+     * Returns the value of the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Name</em>' attribute.
+     * @see #setName(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContractConstraint_Name()
+     * @model
+     * @generated
+     */
+    String getName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.ContractConstraint#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.ContractConstraint#getName <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Name</em>' attribute.
+     * @see #getName()
+     * @generated
+     */
+    void setName(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Input Names</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Input Names</em>' attribute list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContractConstraint_InputNames()
-	 * @model
-	 * @generated
-	 */
-	EList<String> getInputNames();
+    /**
+     * Returns the value of the '<em><b>Input Names</b></em>' attribute list.
+     * The list contents are of type {@link java.lang.String}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Input Names</em>' attribute list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContractConstraint_InputNames()
+     * @model
+     * @generated
+     */
+    EList<String> getInputNames();
 
-	/**
-	 * Returns the value of the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' attribute.
-	 * @see #setDescription(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContractConstraint_Description()
-	 * @model
-	 * @generated
-	 */
-	String getDescription();
+    /**
+     * Returns the value of the '<em><b>Description</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Description</em>' attribute.
+     * @see #setDescription(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContractConstraint_Description()
+     * @model
+     * @generated
+     */
+    String getDescription();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.ContractConstraint#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.ContractConstraint#getDescription <em>Description</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Description</em>' attribute.
+     * @see #getDescription()
+     * @generated
+     */
+    void setDescription(String value);
 
 } // ContractConstraint

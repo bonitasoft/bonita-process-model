@@ -35,26 +35,26 @@ package org.bonitasoft.bpm.model.process;
  * @generated
  */
 public interface TextAnnotation extends Element {
-	/**
-	 * Returns the value of the '<em><b>Text</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Text</em>' attribute.
-	 * @see #setText(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getTextAnnotation_Text()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getText();
+    /**
+     * Returns the value of the '<em><b>Text</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Text</em>' attribute.
+     * @see #setText(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getTextAnnotation_Text()
+     * @model required="true"
+     * @generated
+     */
+    String getText();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.TextAnnotation#getText <em>Text</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Text</em>' attribute.
-	 * @see #getText()
-	 * @generated
-	 */
-	void setText(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.TextAnnotation#getText <em>Text</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Text</em>' attribute.
+     * @see #getText()
+     * @generated
+     */
+    void setText(String value);
 
 } // TextAnnotation

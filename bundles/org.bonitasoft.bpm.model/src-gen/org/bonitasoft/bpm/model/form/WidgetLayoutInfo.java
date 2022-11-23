@@ -43,94 +43,94 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface WidgetLayoutInfo extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Line</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Line</em>' attribute.
-	 * @see #setLine(int)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getWidgetLayoutInfo_Line()
-	 * @model
-	 * @generated
-	 */
-	int getLine();
+    /**
+     * Returns the value of the '<em><b>Line</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Line</em>' attribute.
+     * @see #setLine(int)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getWidgetLayoutInfo_Line()
+     * @model
+     * @generated
+     */
+    int getLine();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.WidgetLayoutInfo#getLine <em>Line</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Line</em>' attribute.
-	 * @see #getLine()
-	 * @generated
-	 */
-	void setLine(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.WidgetLayoutInfo#getLine <em>Line</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Line</em>' attribute.
+     * @see #getLine()
+     * @generated
+     */
+    void setLine(int value);
 
-	/**
-	 * Returns the value of the '<em><b>Column</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Column</em>' attribute.
-	 * @see #setColumn(int)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getWidgetLayoutInfo_Column()
-	 * @model
-	 * @generated
-	 */
-	int getColumn();
+    /**
+     * Returns the value of the '<em><b>Column</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Column</em>' attribute.
+     * @see #setColumn(int)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getWidgetLayoutInfo_Column()
+     * @model
+     * @generated
+     */
+    int getColumn();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.WidgetLayoutInfo#getColumn <em>Column</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Column</em>' attribute.
-	 * @see #getColumn()
-	 * @generated
-	 */
-	void setColumn(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.WidgetLayoutInfo#getColumn <em>Column</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Column</em>' attribute.
+     * @see #getColumn()
+     * @generated
+     */
+    void setColumn(int value);
 
-	/**
-	 * Returns the value of the '<em><b>Vertical Span</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Vertical Span</em>' attribute.
-	 * @see #setVerticalSpan(int)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getWidgetLayoutInfo_VerticalSpan()
-	 * @model default="1"
-	 * @generated
-	 */
-	int getVerticalSpan();
+    /**
+     * Returns the value of the '<em><b>Vertical Span</b></em>' attribute.
+     * The default value is <code>"1"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Vertical Span</em>' attribute.
+     * @see #setVerticalSpan(int)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getWidgetLayoutInfo_VerticalSpan()
+     * @model default="1"
+     * @generated
+     */
+    int getVerticalSpan();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.WidgetLayoutInfo#getVerticalSpan <em>Vertical Span</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Vertical Span</em>' attribute.
-	 * @see #getVerticalSpan()
-	 * @generated
-	 */
-	void setVerticalSpan(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.WidgetLayoutInfo#getVerticalSpan <em>Vertical Span</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Vertical Span</em>' attribute.
+     * @see #getVerticalSpan()
+     * @generated
+     */
+    void setVerticalSpan(int value);
 
-	/**
-	 * Returns the value of the '<em><b>Horizontal Span</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Horizontal Span</em>' attribute.
-	 * @see #setHorizontalSpan(int)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getWidgetLayoutInfo_HorizontalSpan()
-	 * @model default="1"
-	 * @generated
-	 */
-	int getHorizontalSpan();
+    /**
+     * Returns the value of the '<em><b>Horizontal Span</b></em>' attribute.
+     * The default value is <code>"1"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Horizontal Span</em>' attribute.
+     * @see #setHorizontalSpan(int)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getWidgetLayoutInfo_HorizontalSpan()
+     * @model default="1"
+     * @generated
+     */
+    int getHorizontalSpan();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.WidgetLayoutInfo#getHorizontalSpan <em>Horizontal Span</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Horizontal Span</em>' attribute.
-	 * @see #getHorizontalSpan()
-	 * @generated
-	 */
-	void setHorizontalSpan(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.WidgetLayoutInfo#getHorizontalSpan <em>Horizontal Span</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Horizontal Span</em>' attribute.
+     * @see #getHorizontalSpan()
+     * @generated
+     */
+    void setHorizontalSpan(int value);
 
 } // WidgetLayoutInfo

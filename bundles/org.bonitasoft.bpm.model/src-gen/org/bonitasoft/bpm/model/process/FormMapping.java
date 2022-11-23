@@ -40,74 +40,74 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface FormMapping extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Target Form</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target Form</em>' containment reference.
-	 * @see #setTargetForm(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFormMapping_TargetForm()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getTargetForm();
+    /**
+     * Returns the value of the '<em><b>Target Form</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Target Form</em>' containment reference.
+     * @see #setTargetForm(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFormMapping_TargetForm()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getTargetForm();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FormMapping#getTargetForm <em>Target Form</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target Form</em>' containment reference.
-	 * @see #getTargetForm()
-	 * @generated
-	 */
-	void setTargetForm(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FormMapping#getTargetForm <em>Target Form</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Target Form</em>' containment reference.
+     * @see #getTargetForm()
+     * @generated
+     */
+    void setTargetForm(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' attribute.
-	 * The default value is <code>"INTERNAL"</code>.
-	 * The literals are from the enumeration {@link org.bonitasoft.bpm.model.process.FormMappingType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.process.FormMappingType
-	 * @see #setType(FormMappingType)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFormMapping_Type()
-	 * @model default="INTERNAL"
-	 * @generated
-	 */
-	FormMappingType getType();
+    /**
+     * Returns the value of the '<em><b>Type</b></em>' attribute.
+     * The default value is <code>"INTERNAL"</code>.
+     * The literals are from the enumeration {@link org.bonitasoft.bpm.model.process.FormMappingType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Type</em>' attribute.
+     * @see org.bonitasoft.bpm.model.process.FormMappingType
+     * @see #setType(FormMappingType)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFormMapping_Type()
+     * @model default="INTERNAL"
+     * @generated
+     */
+    FormMappingType getType();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FormMapping#getType <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.process.FormMappingType
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(FormMappingType value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FormMapping#getType <em>Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Type</em>' attribute.
+     * @see org.bonitasoft.bpm.model.process.FormMappingType
+     * @see #getType()
+     * @generated
+     */
+    void setType(FormMappingType value);
 
-	/**
-	 * Returns the value of the '<em><b>Url</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Url</em>' attribute.
-	 * @see #setUrl(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFormMapping_Url()
-	 * @model
-	 * @generated
-	 */
-	String getUrl();
+    /**
+     * Returns the value of the '<em><b>Url</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Url</em>' attribute.
+     * @see #setUrl(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getFormMapping_Url()
+     * @model
+     * @generated
+     */
+    String getUrl();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FormMapping#getUrl <em>Url</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Url</em>' attribute.
-	 * @see #getUrl()
-	 * @generated
-	 */
-	void setUrl(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.FormMapping#getUrl <em>Url</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Url</em>' attribute.
+     * @see #getUrl()
+     * @generated
+     */
+    void setUrl(String value);
 
 } // FormMapping

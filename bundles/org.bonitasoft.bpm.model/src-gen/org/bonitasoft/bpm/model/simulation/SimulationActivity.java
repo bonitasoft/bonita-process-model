@@ -43,162 +43,162 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface SimulationActivity extends SimulationDataContainer {
-	/**
-	 * Returns the value of the '<em><b>Resources Usages</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.simulation.ResourceUsage}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Resources Usages</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_ResourcesUsages()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ResourceUsage> getResourcesUsages();
+    /**
+     * Returns the value of the '<em><b>Resources Usages</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.simulation.ResourceUsage}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Resources Usages</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_ResourcesUsages()
+     * @model containment="true"
+     * @generated
+     */
+    EList<ResourceUsage> getResourcesUsages();
 
-	/**
-	 * Returns the value of the '<em><b>Execution Time</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Execution Time</em>' attribute.
-	 * @see #setExecutionTime(long)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_ExecutionTime()
-	 * @model
-	 * @generated
-	 */
-	long getExecutionTime();
+    /**
+     * Returns the value of the '<em><b>Execution Time</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Execution Time</em>' attribute.
+     * @see #setExecutionTime(long)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_ExecutionTime()
+     * @model
+     * @generated
+     */
+    long getExecutionTime();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#getExecutionTime <em>Execution Time</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Execution Time</em>' attribute.
-	 * @see #getExecutionTime()
-	 * @generated
-	 */
-	void setExecutionTime(long value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#getExecutionTime <em>Execution Time</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Execution Time</em>' attribute.
+     * @see #getExecutionTime()
+     * @generated
+     */
+    void setExecutionTime(long value);
 
-	/**
-	 * Returns the value of the '<em><b>Estimated Time</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Estimated Time</em>' attribute.
-	 * @see #setEstimatedTime(double)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_EstimatedTime()
-	 * @model default="0"
-	 * @generated
-	 */
-	double getEstimatedTime();
+    /**
+     * Returns the value of the '<em><b>Estimated Time</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Estimated Time</em>' attribute.
+     * @see #setEstimatedTime(double)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_EstimatedTime()
+     * @model default="0"
+     * @generated
+     */
+    double getEstimatedTime();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#getEstimatedTime <em>Estimated Time</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Estimated Time</em>' attribute.
-	 * @see #getEstimatedTime()
-	 * @generated
-	 */
-	void setEstimatedTime(double value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#getEstimatedTime <em>Estimated Time</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Estimated Time</em>' attribute.
+     * @see #getEstimatedTime()
+     * @generated
+     */
+    void setEstimatedTime(double value);
 
-	/**
-	 * Returns the value of the '<em><b>Maximum Time</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Maximum Time</em>' attribute.
-	 * @see #setMaximumTime(double)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_MaximumTime()
-	 * @model default="0"
-	 * @generated
-	 */
-	double getMaximumTime();
+    /**
+     * Returns the value of the '<em><b>Maximum Time</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Maximum Time</em>' attribute.
+     * @see #setMaximumTime(double)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_MaximumTime()
+     * @model default="0"
+     * @generated
+     */
+    double getMaximumTime();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#getMaximumTime <em>Maximum Time</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Maximum Time</em>' attribute.
-	 * @see #getMaximumTime()
-	 * @generated
-	 */
-	void setMaximumTime(double value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#getMaximumTime <em>Maximum Time</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Maximum Time</em>' attribute.
+     * @see #getMaximumTime()
+     * @generated
+     */
+    void setMaximumTime(double value);
 
-	/**
-	 * Returns the value of the '<em><b>Contigous</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Contigous</em>' attribute.
-	 * @see #setContigous(boolean)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_Contigous()
-	 * @model
-	 * @generated
-	 */
-	boolean isContigous();
+    /**
+     * Returns the value of the '<em><b>Contigous</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Contigous</em>' attribute.
+     * @see #setContigous(boolean)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_Contigous()
+     * @model
+     * @generated
+     */
+    boolean isContigous();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#isContigous <em>Contigous</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Contigous</em>' attribute.
-	 * @see #isContigous()
-	 * @generated
-	 */
-	void setContigous(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#isContigous <em>Contigous</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Contigous</em>' attribute.
+     * @see #isContigous()
+     * @generated
+     */
+    void setContigous(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Exclusive Outgoing Transition</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Exclusive Outgoing Transition</em>' attribute.
-	 * @see #setExclusiveOutgoingTransition(boolean)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_ExclusiveOutgoingTransition()
-	 * @model
-	 * @generated
-	 */
-	boolean isExclusiveOutgoingTransition();
+    /**
+     * Returns the value of the '<em><b>Exclusive Outgoing Transition</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Exclusive Outgoing Transition</em>' attribute.
+     * @see #setExclusiveOutgoingTransition(boolean)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_ExclusiveOutgoingTransition()
+     * @model
+     * @generated
+     */
+    boolean isExclusiveOutgoingTransition();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#isExclusiveOutgoingTransition <em>Exclusive Outgoing Transition</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Exclusive Outgoing Transition</em>' attribute.
-	 * @see #isExclusiveOutgoingTransition()
-	 * @generated
-	 */
-	void setExclusiveOutgoingTransition(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#isExclusiveOutgoingTransition <em>Exclusive Outgoing Transition</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Exclusive Outgoing Transition</em>' attribute.
+     * @see #isExclusiveOutgoingTransition()
+     * @generated
+     */
+    void setExclusiveOutgoingTransition(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Loop Transition</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Loop Transition</em>' containment reference.
-	 * @see #setLoopTransition(SimulationTransition)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_LoopTransition()
-	 * @model containment="true"
-	 * @generated
-	 */
-	SimulationTransition getLoopTransition();
+    /**
+     * Returns the value of the '<em><b>Loop Transition</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Loop Transition</em>' containment reference.
+     * @see #setLoopTransition(SimulationTransition)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_LoopTransition()
+     * @model containment="true"
+     * @generated
+     */
+    SimulationTransition getLoopTransition();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#getLoopTransition <em>Loop Transition</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Loop Transition</em>' containment reference.
-	 * @see #getLoopTransition()
-	 * @generated
-	 */
-	void setLoopTransition(SimulationTransition value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationActivity#getLoopTransition <em>Loop Transition</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Loop Transition</em>' containment reference.
+     * @see #getLoopTransition()
+     * @generated
+     */
+    void setLoopTransition(SimulationTransition value);
 
-	/**
-	 * Returns the value of the '<em><b>Data Change</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.simulation.DataChange}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Change</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_DataChange()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<DataChange> getDataChange();
+    /**
+     * Returns the value of the '<em><b>Data Change</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.simulation.DataChange}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Data Change</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationActivity_DataChange()
+     * @model containment="true"
+     * @generated
+     */
+    EList<DataChange> getDataChange();
 
 } // SimulationActivity

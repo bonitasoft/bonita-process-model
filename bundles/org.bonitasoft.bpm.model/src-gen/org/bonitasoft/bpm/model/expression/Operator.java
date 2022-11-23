@@ -40,60 +40,60 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Operator extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see #setType(String)
-	 * @see org.bonitasoft.bpm.model.expression.ExpressionPackage#getOperator_Type()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getType();
+    /**
+     * Returns the value of the '<em><b>Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Type</em>' attribute.
+     * @see #setType(String)
+     * @see org.bonitasoft.bpm.model.expression.ExpressionPackage#getOperator_Type()
+     * @model required="true"
+     * @generated
+     */
+    String getType();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.expression.Operator#getType <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' attribute.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.expression.Operator#getType <em>Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Type</em>' attribute.
+     * @see #getType()
+     * @generated
+     */
+    void setType(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' attribute.
-	 * @see #setExpression(String)
-	 * @see org.bonitasoft.bpm.model.expression.ExpressionPackage#getOperator_Expression()
-	 * @model
-	 * @generated
-	 */
-	String getExpression();
+    /**
+     * Returns the value of the '<em><b>Expression</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Expression</em>' attribute.
+     * @see #setExpression(String)
+     * @see org.bonitasoft.bpm.model.expression.ExpressionPackage#getOperator_Expression()
+     * @model
+     * @generated
+     */
+    String getExpression();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.expression.Operator#getExpression <em>Expression</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' attribute.
-	 * @see #getExpression()
-	 * @generated
-	 */
-	void setExpression(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.expression.Operator#getExpression <em>Expression</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Expression</em>' attribute.
+     * @see #getExpression()
+     * @generated
+     */
+    void setExpression(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Input Types</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Input Types</em>' attribute list.
-	 * @see org.bonitasoft.bpm.model.expression.ExpressionPackage#getOperator_InputTypes()
-	 * @model
-	 * @generated
-	 */
-	EList<String> getInputTypes();
+    /**
+     * Returns the value of the '<em><b>Input Types</b></em>' attribute list.
+     * The list contents are of type {@link java.lang.String}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Input Types</em>' attribute list.
+     * @see org.bonitasoft.bpm.model.expression.ExpressionPackage#getOperator_InputTypes()
+     * @model
+     * @generated
+     */
+    EList<String> getInputTypes();
 
 } // Operator

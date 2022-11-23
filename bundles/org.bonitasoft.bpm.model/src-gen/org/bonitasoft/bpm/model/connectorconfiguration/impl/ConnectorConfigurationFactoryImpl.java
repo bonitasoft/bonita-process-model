@@ -34,91 +34,91 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  * @generated
  */
 public class ConnectorConfigurationFactoryImpl extends EFactoryImpl implements ConnectorConfigurationFactory {
-	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public static ConnectorConfigurationFactory init() {
-		try {
-			ConnectorConfigurationFactory theConnectorConfigurationFactory = (ConnectorConfigurationFactory)EPackage.Registry.INSTANCE.getEFactory(ConnectorConfigurationPackage.eNS_URI);
-			if (theConnectorConfigurationFactory != null) {
-				return theConnectorConfigurationFactory;
-			}
-		}
-		catch (Exception exception) {
-			EcorePlugin.INSTANCE.log(exception);
-		}
-		return new ConnectorConfigurationFactoryImpl();
-	}
+    /**
+     * Creates the default factory implementation.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public static ConnectorConfigurationFactory init() {
+        try {
+            ConnectorConfigurationFactory theConnectorConfigurationFactory = (ConnectorConfigurationFactory)EPackage.Registry.INSTANCE.getEFactory(ConnectorConfigurationPackage.eNS_URI);
+            if (theConnectorConfigurationFactory != null) {
+                return theConnectorConfigurationFactory;
+            }
+        }
+        catch (Exception exception) {
+            EcorePlugin.INSTANCE.log(exception);
+        }
+        return new ConnectorConfigurationFactoryImpl();
+    }
 
-	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ConnectorConfigurationFactoryImpl() {
-		super();
-	}
+    /**
+     * Creates an instance of the factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ConnectorConfigurationFactoryImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EObject create(EClass eClass) {
-		switch (eClass.getClassifierID()) {
-			case ConnectorConfigurationPackage.CONNECTOR_CONFIGURATION: return createConnectorConfiguration();
-			case ConnectorConfigurationPackage.CONNECTOR_PARAMETER: return createConnectorParameter();
-			default:
-				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
-		}
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EObject create(EClass eClass) {
+        switch (eClass.getClassifierID()) {
+            case ConnectorConfigurationPackage.CONNECTOR_CONFIGURATION: return createConnectorConfiguration();
+            case ConnectorConfigurationPackage.CONNECTOR_PARAMETER: return createConnectorParameter();
+            default:
+                throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier"); //$NON-NLS-1$ //$NON-NLS-2$
+        }
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ConnectorConfiguration createConnectorConfiguration() {
-		ConnectorConfigurationImpl connectorConfiguration = new ConnectorConfigurationImpl();
-		return connectorConfiguration;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public ConnectorConfiguration createConnectorConfiguration() {
+        ConnectorConfigurationImpl connectorConfiguration = new ConnectorConfigurationImpl();
+        return connectorConfiguration;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ConnectorParameter createConnectorParameter() {
-		ConnectorParameterImpl connectorParameter = new ConnectorParameterImpl();
-		return connectorParameter;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public ConnectorParameter createConnectorParameter() {
+        ConnectorParameterImpl connectorParameter = new ConnectorParameterImpl();
+        return connectorParameter;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ConnectorConfigurationPackage getConnectorConfigurationPackage() {
-		return (ConnectorConfigurationPackage)getEPackage();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public ConnectorConfigurationPackage getConnectorConfigurationPackage() {
+        return (ConnectorConfigurationPackage)getEPackage();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @deprecated
-	 * @generated
-	 */
-	@Deprecated
-	public static ConnectorConfigurationPackage getPackage() {
-		return ConnectorConfigurationPackage.eINSTANCE;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @deprecated
+     * @generated
+     */
+    @Deprecated
+    public static ConnectorConfigurationPackage getPackage() {
+        return ConnectorConfigurationPackage.eINSTANCE;
+    }
 
 } //ConnectorConfigurationFactoryImpl

@@ -42,119 +42,119 @@ import org.bonitasoft.bpm.model.process.decision.DecisionTable;
  * @generated
  */
 public interface SequenceFlow extends Connection {
-	/**
-	 * Returns the value of the '<em><b>Is Default</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Default</em>' attribute.
-	 * @see #setIsDefault(boolean)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSequenceFlow_IsDefault()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isIsDefault();
+    /**
+     * Returns the value of the '<em><b>Is Default</b></em>' attribute.
+     * The default value is <code>"false"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Is Default</em>' attribute.
+     * @see #setIsDefault(boolean)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSequenceFlow_IsDefault()
+     * @model default="false"
+     * @generated
+     */
+    boolean isIsDefault();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SequenceFlow#isIsDefault <em>Is Default</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Default</em>' attribute.
-	 * @see #isIsDefault()
-	 * @generated
-	 */
-	void setIsDefault(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SequenceFlow#isIsDefault <em>Is Default</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Is Default</em>' attribute.
+     * @see #isIsDefault()
+     * @generated
+     */
+    void setIsDefault(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Condition Type</b></em>' attribute.
-	 * The default value is <code>"EXPRESSION"</code>.
-	 * The literals are from the enumeration {@link org.bonitasoft.bpm.model.process.SequenceFlowConditionType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Condition Type</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.process.SequenceFlowConditionType
-	 * @see #setConditionType(SequenceFlowConditionType)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSequenceFlow_ConditionType()
-	 * @model default="EXPRESSION"
-	 * @generated
-	 */
-	SequenceFlowConditionType getConditionType();
+    /**
+     * Returns the value of the '<em><b>Condition Type</b></em>' attribute.
+     * The default value is <code>"EXPRESSION"</code>.
+     * The literals are from the enumeration {@link org.bonitasoft.bpm.model.process.SequenceFlowConditionType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Condition Type</em>' attribute.
+     * @see org.bonitasoft.bpm.model.process.SequenceFlowConditionType
+     * @see #setConditionType(SequenceFlowConditionType)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSequenceFlow_ConditionType()
+     * @model default="EXPRESSION"
+     * @generated
+     */
+    SequenceFlowConditionType getConditionType();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SequenceFlow#getConditionType <em>Condition Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Condition Type</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.process.SequenceFlowConditionType
-	 * @see #getConditionType()
-	 * @generated
-	 */
-	void setConditionType(SequenceFlowConditionType value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SequenceFlow#getConditionType <em>Condition Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Condition Type</em>' attribute.
+     * @see org.bonitasoft.bpm.model.process.SequenceFlowConditionType
+     * @see #getConditionType()
+     * @generated
+     */
+    void setConditionType(SequenceFlowConditionType value);
 
-	/**
-	 * Returns the value of the '<em><b>Decision Table</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Decision Table</em>' containment reference.
-	 * @see #setDecisionTable(DecisionTable)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSequenceFlow_DecisionTable()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	DecisionTable getDecisionTable();
+    /**
+     * Returns the value of the '<em><b>Decision Table</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Decision Table</em>' containment reference.
+     * @see #setDecisionTable(DecisionTable)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSequenceFlow_DecisionTable()
+     * @model containment="true" required="true"
+     * @generated
+     */
+    DecisionTable getDecisionTable();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SequenceFlow#getDecisionTable <em>Decision Table</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Decision Table</em>' containment reference.
-	 * @see #getDecisionTable()
-	 * @generated
-	 */
-	void setDecisionTable(DecisionTable value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SequenceFlow#getDecisionTable <em>Decision Table</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Decision Table</em>' containment reference.
+     * @see #getDecisionTable()
+     * @generated
+     */
+    void setDecisionTable(DecisionTable value);
 
-	/**
-	 * Returns the value of the '<em><b>Condition</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Condition</em>' containment reference.
-	 * @see #setCondition(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSequenceFlow_Condition()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getCondition();
+    /**
+     * Returns the value of the '<em><b>Condition</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Condition</em>' containment reference.
+     * @see #setCondition(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSequenceFlow_Condition()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getCondition();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SequenceFlow#getCondition <em>Condition</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Condition</em>' containment reference.
-	 * @see #getCondition()
-	 * @generated
-	 */
-	void setCondition(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SequenceFlow#getCondition <em>Condition</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Condition</em>' containment reference.
+     * @see #getCondition()
+     * @generated
+     */
+    void setCondition(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Path Token</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Path Token</em>' attribute.
-	 * @see #setPathToken(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSequenceFlow_PathToken()
-	 * @model
-	 * @generated
-	 */
-	String getPathToken();
+    /**
+     * Returns the value of the '<em><b>Path Token</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Path Token</em>' attribute.
+     * @see #setPathToken(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSequenceFlow_PathToken()
+     * @model
+     * @generated
+     */
+    String getPathToken();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SequenceFlow#getPathToken <em>Path Token</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Path Token</em>' attribute.
-	 * @see #getPathToken()
-	 * @generated
-	 */
-	void setPathToken(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SequenceFlow#getPathToken <em>Path Token</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Path Token</em>' attribute.
+     * @see #getPathToken()
+     * @generated
+     */
+    void setPathToken(String value);
 
 } // SequenceFlow

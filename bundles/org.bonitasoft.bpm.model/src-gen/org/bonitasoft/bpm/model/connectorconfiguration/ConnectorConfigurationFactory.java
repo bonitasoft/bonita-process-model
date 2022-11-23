@@ -28,39 +28,39 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface ConnectorConfigurationFactory extends EFactory {
-	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	ConnectorConfigurationFactory eINSTANCE = org.bonitasoft.bpm.model.connectorconfiguration.impl.ConnectorConfigurationFactoryImpl.init();
+    /**
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    ConnectorConfigurationFactory eINSTANCE = org.bonitasoft.bpm.model.connectorconfiguration.impl.ConnectorConfigurationFactoryImpl.init();
 
-	/**
-	 * Returns a new object of class '<em>Connector Configuration</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Connector Configuration</em>'.
-	 * @generated
-	 */
-	ConnectorConfiguration createConnectorConfiguration();
+    /**
+     * Returns a new object of class '<em>Connector Configuration</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Connector Configuration</em>'.
+     * @generated
+     */
+    ConnectorConfiguration createConnectorConfiguration();
 
-	/**
-	 * Returns a new object of class '<em>Connector Parameter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Connector Parameter</em>'.
-	 * @generated
-	 */
-	ConnectorParameter createConnectorParameter();
+    /**
+     * Returns a new object of class '<em>Connector Parameter</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Connector Parameter</em>'.
+     * @generated
+     */
+    ConnectorParameter createConnectorParameter();
 
-	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
-	ConnectorConfigurationPackage getConnectorConfigurationPackage();
+    /**
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the package supported by this factory.
+     * @generated
+     */
+    ConnectorConfigurationPackage getConnectorConfigurationPackage();
 
 } //ConnectorConfigurationFactory

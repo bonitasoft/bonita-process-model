@@ -49,119 +49,119 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public abstract class CSSCustomizableImpl extends EObjectImpl implements CSSCustomizable {
-	/**
-	 * The cached value of the '{@link #getHtmlAttributes() <em>Html Attributes</em>}' map.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getHtmlAttributes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EMap<String, String> htmlAttributes;
+    /**
+     * The cached value of the '{@link #getHtmlAttributes() <em>Html Attributes</em>}' map.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getHtmlAttributes()
+     * @generated
+     * @ordered
+     */
+    protected EMap<String, String> htmlAttributes;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected CSSCustomizableImpl() {
-		super();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected CSSCustomizableImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return FormPackage.Literals.CSS_CUSTOMIZABLE;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected EClass eStaticClass() {
+        return FormPackage.Literals.CSS_CUSTOMIZABLE;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EMap<String, String> getHtmlAttributes() {
-		if (htmlAttributes == null) {
-			htmlAttributes = new EcoreEMap<String,String>(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, EStringToStringMapEntryImpl.class, this, FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES);
-		}
-		return htmlAttributes;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public EMap<String, String> getHtmlAttributes() {
+        if (htmlAttributes == null) {
+            htmlAttributes = new EcoreEMap<String,String>(EcorePackage.Literals.ESTRING_TO_STRING_MAP_ENTRY, EStringToStringMapEntryImpl.class, this, FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES);
+        }
+        return htmlAttributes;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES:
-				return ((InternalEList<?>)getHtmlAttributes()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+        switch (featureID) {
+            case FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES:
+                return ((InternalEList<?>)getHtmlAttributes()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES:
-				if (coreType) return getHtmlAttributes();
-				else return getHtmlAttributes().map();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES:
+                if (coreType) return getHtmlAttributes();
+                else return getHtmlAttributes().map();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES:
-				((EStructuralFeature.Setting)getHtmlAttributes()).set(newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES:
+                ((EStructuralFeature.Setting)getHtmlAttributes()).set(newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES:
-				getHtmlAttributes().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES:
+                getHtmlAttributes().clear();
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES:
-				return htmlAttributes != null && !htmlAttributes.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case FormPackage.CSS_CUSTOMIZABLE__HTML_ATTRIBUTES:
+                return htmlAttributes != null && !htmlAttributes.isEmpty();
+        }
+        return super.eIsSet(featureID);
+    }
 
 } //CSSCustomizableImpl

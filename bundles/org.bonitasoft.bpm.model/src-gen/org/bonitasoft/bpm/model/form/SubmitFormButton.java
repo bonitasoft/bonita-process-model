@@ -40,16 +40,16 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface SubmitFormButton extends FormButton, ConnectableElement {
-	/**
-	 * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.expression.Operation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Actions</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getSubmitFormButton_Actions()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Operation> getActions();
+    /**
+     * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.expression.Operation}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Actions</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getSubmitFormButton_Actions()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Operation> getActions();
 
 } // SubmitFormButton

@@ -36,18 +36,18 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface CatchLinkEvent extends LinkEvent {
-	/**
-	 * Returns the value of the '<em><b>From</b></em>' reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.ThrowLinkEvent}.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.ThrowLinkEvent#getTo <em>To</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>From</em>' reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getCatchLinkEvent_From()
-	 * @see org.bonitasoft.bpm.model.process.ThrowLinkEvent#getTo
-	 * @model opposite="to"
-	 * @generated
-	 */
-	EList<ThrowLinkEvent> getFrom();
+    /**
+     * Returns the value of the '<em><b>From</b></em>' reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.ThrowLinkEvent}.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.ThrowLinkEvent#getTo <em>To</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>From</em>' reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getCatchLinkEvent_From()
+     * @see org.bonitasoft.bpm.model.process.ThrowLinkEvent#getTo
+     * @model opposite="to"
+     * @generated
+     */
+    EList<ThrowLinkEvent> getFrom();
 
 } // CatchLinkEvent

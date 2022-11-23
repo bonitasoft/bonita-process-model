@@ -433,7 +433,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="conditionType" eType="#//SequenceFlowConditionType"
         defaultValueLiteral="EXPRESSION"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="decisionTable" lowerBound="1"
-        eType="#//decision/DecisionTable" containment="true"/>
+        eType="ecore:EClass decision.ecore#//DecisionTable" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass expression.ecore#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="pathToken" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -545,27 +545,4 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eSubpackages name="decision" nsURI="http://www.bonitasoft.org/ns/studio/process/decision"
-      nsPrefix="decision">
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionTable">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="lines" upperBound="-1"
-          eType="#//decision/DecisionTableLine" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="defaultAction" eType="#//decision/DecisionTableAction"
-          containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionTableLine">
-      <eStructuralFeatures xsi:type="ecore:EReference" name="conditions" upperBound="-1"
-          eType="ecore:EClass expression.ecore#//Expression" containment="true"/>
-      <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//decision/DecisionTableAction"
-          containment="true"/>
-    </eClassifiers>
-    <eClassifiers xsi:type="ecore:EClass" name="DecisionTableAction" abstract="true"/>
-    <eSubpackages name="transitions" nsURI="http://www.bonitasoft.org/ns/studio/process/decision/transitions"
-        nsPrefix="transitions">
-      <eClassifiers xsi:type="ecore:EClass" name="TakeTransitionAction" eSuperTypes="#//decision/DecisionTableAction">
-        <eStructuralFeatures xsi:type="ecore:EAttribute" name="takeTransition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-            iD="true"/>
-      </eClassifiers>
-    </eSubpackages>
-  </eSubpackages>
 </ecore:EPackage>

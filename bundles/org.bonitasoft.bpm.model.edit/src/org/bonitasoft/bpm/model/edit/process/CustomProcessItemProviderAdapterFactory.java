@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.edit.custom.process;
+package org.bonitasoft.bpm.model.edit.process;
 
 import org.bonitasoft.bpm.model.process.provider.ProcessItemProviderAdapterFactory;
 import org.eclipse.emf.common.notify.Adapter;

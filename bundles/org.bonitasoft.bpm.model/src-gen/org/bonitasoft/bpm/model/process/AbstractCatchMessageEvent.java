@@ -42,84 +42,84 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface AbstractCatchMessageEvent extends Element {
-	/**
-	 * Returns the value of the '<em><b>Event</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Event</em>' attribute.
-	 * @see #setEvent(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAbstractCatchMessageEvent_Event()
-	 * @model
-	 * @generated
-	 */
-	String getEvent();
+    /**
+     * Returns the value of the '<em><b>Event</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Event</em>' attribute.
+     * @see #setEvent(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAbstractCatchMessageEvent_Event()
+     * @model
+     * @generated
+     */
+    String getEvent();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.AbstractCatchMessageEvent#getEvent <em>Event</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Event</em>' attribute.
-	 * @see #getEvent()
-	 * @generated
-	 */
-	void setEvent(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.AbstractCatchMessageEvent#getEvent <em>Event</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Event</em>' attribute.
+     * @see #getEvent()
+     * @generated
+     */
+    void setEvent(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Incoming Messag</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.MessageFlow#getTarget <em>Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Incoming Messag</em>' reference.
-	 * @see #setIncomingMessag(MessageFlow)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAbstractCatchMessageEvent_IncomingMessag()
-	 * @see org.bonitasoft.bpm.model.process.MessageFlow#getTarget
-	 * @model opposite="target"
-	 * @generated
-	 */
-	MessageFlow getIncomingMessag();
+    /**
+     * Returns the value of the '<em><b>Incoming Messag</b></em>' reference.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.MessageFlow#getTarget <em>Target</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Incoming Messag</em>' reference.
+     * @see #setIncomingMessag(MessageFlow)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAbstractCatchMessageEvent_IncomingMessag()
+     * @see org.bonitasoft.bpm.model.process.MessageFlow#getTarget
+     * @model opposite="target"
+     * @generated
+     */
+    MessageFlow getIncomingMessag();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.AbstractCatchMessageEvent#getIncomingMessag <em>Incoming Messag</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Incoming Messag</em>' reference.
-	 * @see #getIncomingMessag()
-	 * @generated
-	 */
-	void setIncomingMessag(MessageFlow value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.AbstractCatchMessageEvent#getIncomingMessag <em>Incoming Messag</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Incoming Messag</em>' reference.
+     * @see #getIncomingMessag()
+     * @generated
+     */
+    void setIncomingMessag(MessageFlow value);
 
-	/**
-	 * Returns the value of the '<em><b>Correlation</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Correlation</em>' containment reference.
-	 * @see #setCorrelation(TableExpression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAbstractCatchMessageEvent_Correlation()
-	 * @model containment="true"
-	 * @generated
-	 */
-	TableExpression getCorrelation();
+    /**
+     * Returns the value of the '<em><b>Correlation</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Correlation</em>' containment reference.
+     * @see #setCorrelation(TableExpression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAbstractCatchMessageEvent_Correlation()
+     * @model containment="true"
+     * @generated
+     */
+    TableExpression getCorrelation();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.AbstractCatchMessageEvent#getCorrelation <em>Correlation</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Correlation</em>' containment reference.
-	 * @see #getCorrelation()
-	 * @generated
-	 */
-	void setCorrelation(TableExpression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.AbstractCatchMessageEvent#getCorrelation <em>Correlation</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Correlation</em>' containment reference.
+     * @see #getCorrelation()
+     * @generated
+     */
+    void setCorrelation(TableExpression value);
 
-	/**
-	 * Returns the value of the '<em><b>Message Content</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.expression.Operation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Message Content</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAbstractCatchMessageEvent_MessageContent()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Operation> getMessageContent();
+    /**
+     * Returns the value of the '<em><b>Message Content</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.expression.Operation}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Message Content</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAbstractCatchMessageEvent_MessageContent()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Operation> getMessageContent();
 
 } // AbstractCatchMessageEvent

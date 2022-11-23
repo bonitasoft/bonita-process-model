@@ -41,38 +41,38 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface DecisionTableLine extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Conditions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.expression.Expression}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Conditions</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.decision.DecisionPackage#getDecisionTableLine_Conditions()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Expression> getConditions();
+    /**
+     * Returns the value of the '<em><b>Conditions</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.expression.Expression}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Conditions</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.decision.DecisionPackage#getDecisionTableLine_Conditions()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Expression> getConditions();
 
-	/**
-	 * Returns the value of the '<em><b>Action</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Action</em>' containment reference.
-	 * @see #setAction(DecisionTableAction)
-	 * @see org.bonitasoft.bpm.model.process.decision.DecisionPackage#getDecisionTableLine_Action()
-	 * @model containment="true"
-	 * @generated
-	 */
-	DecisionTableAction getAction();
+    /**
+     * Returns the value of the '<em><b>Action</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Action</em>' containment reference.
+     * @see #setAction(DecisionTableAction)
+     * @see org.bonitasoft.bpm.model.process.decision.DecisionPackage#getDecisionTableLine_Action()
+     * @model containment="true"
+     * @generated
+     */
+    DecisionTableAction getAction();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.decision.DecisionTableLine#getAction <em>Action</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Action</em>' containment reference.
-	 * @see #getAction()
-	 * @generated
-	 */
-	void setAction(DecisionTableAction value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.decision.DecisionTableLine#getAction <em>Action</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Action</em>' containment reference.
+     * @see #getAction()
+     * @generated
+     */
+    void setAction(DecisionTableAction value);
 
 } // DecisionTableLine

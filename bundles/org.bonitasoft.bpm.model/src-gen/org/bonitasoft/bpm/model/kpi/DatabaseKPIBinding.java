@@ -41,136 +41,136 @@ import org.bonitasoft.bpm.model.expression.Expression;
  * @generated
  */
 public interface DatabaseKPIBinding extends AbstractKPIBinding {
-	/**
-	 * Returns the value of the '<em><b>Driverclass Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Driverclass Name</em>' containment reference.
-	 * @see #setDriverclassName(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_DriverclassName()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDriverclassName();
+    /**
+     * Returns the value of the '<em><b>Driverclass Name</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Driverclass Name</em>' containment reference.
+     * @see #setDriverclassName(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_DriverclassName()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDriverclassName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getDriverclassName <em>Driverclass Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Driverclass Name</em>' containment reference.
-	 * @see #getDriverclassName()
-	 * @generated
-	 */
-	void setDriverclassName(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getDriverclassName <em>Driverclass Name</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Driverclass Name</em>' containment reference.
+     * @see #getDriverclassName()
+     * @generated
+     */
+    void setDriverclassName(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Jdbc Url</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Jdbc Url</em>' containment reference.
-	 * @see #setJdbcUrl(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_JdbcUrl()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getJdbcUrl();
+    /**
+     * Returns the value of the '<em><b>Jdbc Url</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Jdbc Url</em>' containment reference.
+     * @see #setJdbcUrl(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_JdbcUrl()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getJdbcUrl();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getJdbcUrl <em>Jdbc Url</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Jdbc Url</em>' containment reference.
-	 * @see #getJdbcUrl()
-	 * @generated
-	 */
-	void setJdbcUrl(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getJdbcUrl <em>Jdbc Url</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Jdbc Url</em>' containment reference.
+     * @see #getJdbcUrl()
+     * @generated
+     */
+    void setJdbcUrl(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>User</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>User</em>' containment reference.
-	 * @see #setUser(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_User()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getUser();
+    /**
+     * Returns the value of the '<em><b>User</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>User</em>' containment reference.
+     * @see #setUser(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_User()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getUser();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getUser <em>User</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>User</em>' containment reference.
-	 * @see #getUser()
-	 * @generated
-	 */
-	void setUser(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getUser <em>User</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>User</em>' containment reference.
+     * @see #getUser()
+     * @generated
+     */
+    void setUser(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Password</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Password</em>' containment reference.
-	 * @see #setPassword(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_Password()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getPassword();
+    /**
+     * Returns the value of the '<em><b>Password</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Password</em>' containment reference.
+     * @see #setPassword(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_Password()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getPassword();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getPassword <em>Password</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Password</em>' containment reference.
-	 * @see #getPassword()
-	 * @generated
-	 */
-	void setPassword(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getPassword <em>Password</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Password</em>' containment reference.
+     * @see #getPassword()
+     * @generated
+     */
+    void setPassword(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Jndi Url</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Jndi Url</em>' containment reference.
-	 * @see #setJndiUrl(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_JndiUrl()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getJndiUrl();
+    /**
+     * Returns the value of the '<em><b>Jndi Url</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Jndi Url</em>' containment reference.
+     * @see #setJndiUrl(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_JndiUrl()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getJndiUrl();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getJndiUrl <em>Jndi Url</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Jndi Url</em>' containment reference.
-	 * @see #getJndiUrl()
-	 * @generated
-	 */
-	void setJndiUrl(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getJndiUrl <em>Jndi Url</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Jndi Url</em>' containment reference.
+     * @see #getJndiUrl()
+     * @generated
+     */
+    void setJndiUrl(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Table Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Table Name</em>' attribute.
-	 * @see #setTableName(String)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_TableName()
-	 * @model
-	 * @generated
-	 */
-	String getTableName();
+    /**
+     * Returns the value of the '<em><b>Table Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Table Name</em>' attribute.
+     * @see #setTableName(String)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIBinding_TableName()
+     * @model
+     * @generated
+     */
+    String getTableName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getTableName <em>Table Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Table Name</em>' attribute.
-	 * @see #getTableName()
-	 * @generated
-	 */
-	void setTableName(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIBinding#getTableName <em>Table Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Table Name</em>' attribute.
+     * @see #getTableName()
+     * @generated
+     */
+    void setTableName(String value);
 
 } // DatabaseKPIBinding

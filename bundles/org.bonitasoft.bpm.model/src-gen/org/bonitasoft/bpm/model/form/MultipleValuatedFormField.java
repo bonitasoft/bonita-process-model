@@ -37,48 +37,48 @@ import org.bonitasoft.bpm.model.expression.Expression;
  * @generated
  */
 public interface MultipleValuatedFormField extends FormField {
-	/**
-	 * Returns the value of the '<em><b>Default Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Expression</em>' containment reference.
-	 * @see #setDefaultExpression(Expression)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getMultipleValuatedFormField_DefaultExpression()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDefaultExpression();
+    /**
+     * Returns the value of the '<em><b>Default Expression</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default Expression</em>' containment reference.
+     * @see #setDefaultExpression(Expression)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getMultipleValuatedFormField_DefaultExpression()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDefaultExpression();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.MultipleValuatedFormField#getDefaultExpression <em>Default Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Expression</em>' containment reference.
-	 * @see #getDefaultExpression()
-	 * @generated
-	 */
-	void setDefaultExpression(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.MultipleValuatedFormField#getDefaultExpression <em>Default Expression</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default Expression</em>' containment reference.
+     * @see #getDefaultExpression()
+     * @generated
+     */
+    void setDefaultExpression(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Default Expression After Event</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Expression After Event</em>' containment reference.
-	 * @see #setDefaultExpressionAfterEvent(Expression)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getMultipleValuatedFormField_DefaultExpressionAfterEvent()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDefaultExpressionAfterEvent();
+    /**
+     * Returns the value of the '<em><b>Default Expression After Event</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default Expression After Event</em>' containment reference.
+     * @see #setDefaultExpressionAfterEvent(Expression)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getMultipleValuatedFormField_DefaultExpressionAfterEvent()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDefaultExpressionAfterEvent();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.MultipleValuatedFormField#getDefaultExpressionAfterEvent <em>Default Expression After Event</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Expression After Event</em>' containment reference.
-	 * @see #getDefaultExpressionAfterEvent()
-	 * @generated
-	 */
-	void setDefaultExpressionAfterEvent(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.MultipleValuatedFormField#getDefaultExpressionAfterEvent <em>Default Expression After Event</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default Expression After Event</em>' containment reference.
+     * @see #getDefaultExpressionAfterEvent()
+     * @generated
+     */
+    void setDefaultExpressionAfterEvent(Expression value);
 
 } // MultipleValuatedFormField

@@ -39,38 +39,38 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Assignable extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Actor</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Actor</em>' reference.
-	 * @see #setActor(Actor)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAssignable_Actor()
-	 * @model
-	 * @generated
-	 */
-	Actor getActor();
+    /**
+     * Returns the value of the '<em><b>Actor</b></em>' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Actor</em>' reference.
+     * @see #setActor(Actor)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAssignable_Actor()
+     * @model
+     * @generated
+     */
+    Actor getActor();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Assignable#getActor <em>Actor</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Actor</em>' reference.
-	 * @see #getActor()
-	 * @generated
-	 */
-	void setActor(Actor value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Assignable#getActor <em>Actor</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Actor</em>' reference.
+     * @see #getActor()
+     * @generated
+     */
+    void setActor(Actor value);
 
-	/**
-	 * Returns the value of the '<em><b>Filters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.ActorFilter}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Filters</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAssignable_Filters()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ActorFilter> getFilters();
+    /**
+     * Returns the value of the '<em><b>Filters</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.ActorFilter}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Filters</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAssignable_Filters()
+     * @model containment="true"
+     * @generated
+     */
+    EList<ActorFilter> getFilters();
 
 } // Assignable

@@ -39,28 +39,28 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Contract extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.ContractInput}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Inputs</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContract_Inputs()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ContractInput> getInputs();
+    /**
+     * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.ContractInput}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Inputs</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContract_Inputs()
+     * @model containment="true"
+     * @generated
+     */
+    EList<ContractInput> getInputs();
 
-	/**
-	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.ContractConstraint}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constraints</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContract_Constraints()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<ContractConstraint> getConstraints();
+    /**
+     * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.ContractConstraint}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Constraints</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContract_Constraints()
+     * @model containment="true"
+     * @generated
+     */
+    EList<ContractConstraint> getConstraints();
 
 } // Contract

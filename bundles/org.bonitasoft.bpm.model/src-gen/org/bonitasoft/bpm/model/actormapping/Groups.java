@@ -38,17 +38,17 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Groups extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Group</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Group</em>' attribute list.
-	 * @see org.bonitasoft.bpm.model.actormapping.ActorMappingPackage#getGroups_Group()
-	 * @model unique="false" dataType="org.eclipse.emf.ecore.xml.type.String"
-	 *        extendedMetaData="kind='element' name='group'"
-	 * @generated
-	 */
-	EList<String> getGroup();
+    /**
+     * Returns the value of the '<em><b>Group</b></em>' attribute list.
+     * The list contents are of type {@link java.lang.String}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Group</em>' attribute list.
+     * @see org.bonitasoft.bpm.model.actormapping.ActorMappingPackage#getGroups_Group()
+     * @model unique="false" dataType="org.eclipse.emf.ecore.xml.type.String"
+     *        extendedMetaData="kind='element' name='group'"
+     * @generated
+     */
+    EList<String> getGroup();
 
 } // Groups

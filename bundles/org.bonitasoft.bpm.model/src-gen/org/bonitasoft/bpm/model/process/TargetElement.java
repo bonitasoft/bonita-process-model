@@ -36,18 +36,18 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface TargetElement extends Element {
-	/**
-	 * Returns the value of the '<em><b>Incoming</b></em>' reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.Connection}.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.Connection#getTarget <em>Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Incoming</em>' reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getTargetElement_Incoming()
-	 * @see org.bonitasoft.bpm.model.process.Connection#getTarget
-	 * @model opposite="target"
-	 * @generated
-	 */
-	EList<Connection> getIncoming();
+    /**
+     * Returns the value of the '<em><b>Incoming</b></em>' reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.Connection}.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.Connection#getTarget <em>Target</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Incoming</em>' reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getTargetElement_Incoming()
+     * @see org.bonitasoft.bpm.model.process.Connection#getTarget
+     * @model opposite="target"
+     * @generated
+     */
+    EList<Connection> getIncoming();
 
 } // TargetElement

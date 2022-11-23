@@ -38,17 +38,17 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface ActorMappingsType extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Actor Mapping</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.actormapping.ActorMapping}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Actor Mapping</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.actormapping.ActorMappingPackage#getActorMappingsType_ActorMapping()
-	 * @model containment="true" required="true"
-	 *        extendedMetaData="kind='element' name='actorMapping'"
-	 * @generated
-	 */
-	EList<ActorMapping> getActorMapping();
+    /**
+     * Returns the value of the '<em><b>Actor Mapping</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.actormapping.ActorMapping}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Actor Mapping</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.actormapping.ActorMappingPackage#getActorMappingsType_ActorMapping()
+     * @model containment="true" required="true"
+     *        extendedMetaData="kind='element' name='actorMapping'"
+     * @generated
+     */
+    EList<ActorMapping> getActorMapping();
 
 } // ActorMappingsType

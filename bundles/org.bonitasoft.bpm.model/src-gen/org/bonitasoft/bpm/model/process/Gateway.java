@@ -35,29 +35,29 @@ package org.bonitasoft.bpm.model.process;
  * @generated
  */
 public interface Gateway extends FlowElement {
-	/**
-	 * Returns the value of the '<em><b>Gateway Type</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.bonitasoft.bpm.model.process.GatewayType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Gateway Type</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.process.GatewayType
-	 * @see #setGatewayType(GatewayType)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getGateway_GatewayType()
-	 * @model
-	 * @generated
-	 */
-	GatewayType getGatewayType();
+    /**
+     * Returns the value of the '<em><b>Gateway Type</b></em>' attribute.
+     * The literals are from the enumeration {@link org.bonitasoft.bpm.model.process.GatewayType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Gateway Type</em>' attribute.
+     * @see org.bonitasoft.bpm.model.process.GatewayType
+     * @see #setGatewayType(GatewayType)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getGateway_GatewayType()
+     * @model
+     * @generated
+     */
+    GatewayType getGatewayType();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Gateway#getGatewayType <em>Gateway Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Gateway Type</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.process.GatewayType
-	 * @see #getGatewayType()
-	 * @generated
-	 */
-	void setGatewayType(GatewayType value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Gateway#getGatewayType <em>Gateway Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Gateway Type</em>' attribute.
+     * @see org.bonitasoft.bpm.model.process.GatewayType
+     * @see #getGatewayType()
+     * @generated
+     */
+    void setGatewayType(GatewayType value);
 
 } // Gateway

@@ -42,108 +42,108 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface DayPeriod extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Day</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.Integer}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Day</em>' attribute list.
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getDayPeriod_Day()
-	 * @model
-	 * @generated
-	 */
-	EList<Integer> getDay();
+    /**
+     * Returns the value of the '<em><b>Day</b></em>' attribute list.
+     * The list contents are of type {@link java.lang.Integer}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Day</em>' attribute list.
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getDayPeriod_Day()
+     * @model
+     * @generated
+     */
+    EList<Integer> getDay();
 
-	/**
-	 * Returns the value of the '<em><b>Start Hour</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Start Hour</em>' attribute.
-	 * @see #setStartHour(int)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getDayPeriod_StartHour()
-	 * @model default="0" required="true"
-	 * @generated
-	 */
-	int getStartHour();
+    /**
+     * Returns the value of the '<em><b>Start Hour</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Start Hour</em>' attribute.
+     * @see #setStartHour(int)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getDayPeriod_StartHour()
+     * @model default="0" required="true"
+     * @generated
+     */
+    int getStartHour();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.DayPeriod#getStartHour <em>Start Hour</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Start Hour</em>' attribute.
-	 * @see #getStartHour()
-	 * @generated
-	 */
-	void setStartHour(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.DayPeriod#getStartHour <em>Start Hour</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Start Hour</em>' attribute.
+     * @see #getStartHour()
+     * @generated
+     */
+    void setStartHour(int value);
 
-	/**
-	 * Returns the value of the '<em><b>End Hour</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>End Hour</em>' attribute.
-	 * @see #setEndHour(int)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getDayPeriod_EndHour()
-	 * @model default="0" required="true"
-	 * @generated
-	 */
-	int getEndHour();
+    /**
+     * Returns the value of the '<em><b>End Hour</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>End Hour</em>' attribute.
+     * @see #setEndHour(int)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getDayPeriod_EndHour()
+     * @model default="0" required="true"
+     * @generated
+     */
+    int getEndHour();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.DayPeriod#getEndHour <em>End Hour</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>End Hour</em>' attribute.
-	 * @see #getEndHour()
-	 * @generated
-	 */
-	void setEndHour(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.DayPeriod#getEndHour <em>End Hour</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>End Hour</em>' attribute.
+     * @see #getEndHour()
+     * @generated
+     */
+    void setEndHour(int value);
 
-	/**
-	 * Returns the value of the '<em><b>Start Minute</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Start Minute</em>' attribute.
-	 * @see #setStartMinute(int)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getDayPeriod_StartMinute()
-	 * @model default="0" required="true"
-	 * @generated
-	 */
-	int getStartMinute();
+    /**
+     * Returns the value of the '<em><b>Start Minute</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Start Minute</em>' attribute.
+     * @see #setStartMinute(int)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getDayPeriod_StartMinute()
+     * @model default="0" required="true"
+     * @generated
+     */
+    int getStartMinute();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.DayPeriod#getStartMinute <em>Start Minute</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Start Minute</em>' attribute.
-	 * @see #getStartMinute()
-	 * @generated
-	 */
-	void setStartMinute(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.DayPeriod#getStartMinute <em>Start Minute</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Start Minute</em>' attribute.
+     * @see #getStartMinute()
+     * @generated
+     */
+    void setStartMinute(int value);
 
-	/**
-	 * Returns the value of the '<em><b>End Minute</b></em>' attribute.
-	 * The default value is <code>"0"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>End Minute</em>' attribute.
-	 * @see #setEndMinute(int)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getDayPeriod_EndMinute()
-	 * @model default="0" required="true"
-	 * @generated
-	 */
-	int getEndMinute();
+    /**
+     * Returns the value of the '<em><b>End Minute</b></em>' attribute.
+     * The default value is <code>"0"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>End Minute</em>' attribute.
+     * @see #setEndMinute(int)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getDayPeriod_EndMinute()
+     * @model default="0" required="true"
+     * @generated
+     */
+    int getEndMinute();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.DayPeriod#getEndMinute <em>End Minute</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>End Minute</em>' attribute.
-	 * @see #getEndMinute()
-	 * @generated
-	 */
-	void setEndMinute(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.DayPeriod#getEndMinute <em>End Minute</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>End Minute</em>' attribute.
+     * @see #getEndMinute()
+     * @generated
+     */
+    void setEndMinute(int value);
 
 } // DayPeriod

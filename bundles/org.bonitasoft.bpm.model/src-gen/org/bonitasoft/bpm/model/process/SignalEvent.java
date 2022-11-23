@@ -35,26 +35,26 @@ package org.bonitasoft.bpm.model.process;
  * @generated
  */
 public interface SignalEvent extends Element {
-	/**
-	 * Returns the value of the '<em><b>Signal Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Signal Code</em>' attribute.
-	 * @see #setSignalCode(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSignalEvent_SignalCode()
-	 * @model
-	 * @generated
-	 */
-	String getSignalCode();
+    /**
+     * Returns the value of the '<em><b>Signal Code</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Signal Code</em>' attribute.
+     * @see #setSignalCode(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getSignalEvent_SignalCode()
+     * @model
+     * @generated
+     */
+    String getSignalCode();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SignalEvent#getSignalCode <em>Signal Code</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Signal Code</em>' attribute.
-	 * @see #getSignalCode()
-	 * @generated
-	 */
-	void setSignalCode(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.SignalEvent#getSignalCode <em>Signal Code</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Signal Code</em>' attribute.
+     * @see #getSignalCode()
+     * @generated
+     */
+    void setSignalCode(String value);
 
 } // SignalEvent

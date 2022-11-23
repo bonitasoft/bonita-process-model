@@ -35,31 +35,31 @@ import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
  */
 public class ConfigurationXMLProcessor extends XMLProcessor {
 
-	/**
-	 * Public constructor to instantiate the helper.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ConfigurationXMLProcessor() {
-		super((EPackage.Registry.INSTANCE));
-		ConfigurationPackage.eINSTANCE.eClass();
-	}
-	
-	/**
-	 * Register for "*" and "xml" file extensions the ConfigurationResourceFactoryImpl factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected Map<String, Resource.Factory> getRegistrations() {
-		if (registrations == null) {
-			super.getRegistrations();
-			registrations.put(XML_EXTENSION, new ConfigurationResourceFactoryImpl());
-			registrations.put(STAR_EXTENSION, new ConfigurationResourceFactoryImpl());
-		}
-		return registrations;
-	}
+    /**
+     * Public constructor to instantiate the helper.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ConfigurationXMLProcessor() {
+        super((EPackage.Registry.INSTANCE));
+        ConfigurationPackage.eINSTANCE.eClass();
+    }
+    
+    /**
+     * Register for "*" and "xml" file extensions the ConfigurationResourceFactoryImpl factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected Map<String, Resource.Factory> getRegistrations() {
+        if (registrations == null) {
+            super.getRegistrations();
+            registrations.put(XML_EXTENSION, new ConfigurationResourceFactoryImpl());
+            registrations.put(STAR_EXTENSION, new ConfigurationResourceFactoryImpl());
+        }
+        return registrations;
+    }
 
 } //ConfigurationXMLProcessor

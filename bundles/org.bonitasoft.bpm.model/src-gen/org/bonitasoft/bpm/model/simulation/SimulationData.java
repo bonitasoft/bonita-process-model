@@ -37,49 +37,49 @@ import org.bonitasoft.bpm.model.expression.Expression;
  * @generated
  */
 public interface SimulationData extends SimulationElement {
-	/**
-	 * Returns the value of the '<em><b>Expression Based</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression Based</em>' attribute.
-	 * @see #setExpressionBased(boolean)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationData_ExpressionBased()
-	 * @model default="true" required="true"
-	 * @generated
-	 */
-	boolean isExpressionBased();
+    /**
+     * Returns the value of the '<em><b>Expression Based</b></em>' attribute.
+     * The default value is <code>"true"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Expression Based</em>' attribute.
+     * @see #setExpressionBased(boolean)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationData_ExpressionBased()
+     * @model default="true" required="true"
+     * @generated
+     */
+    boolean isExpressionBased();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationData#isExpressionBased <em>Expression Based</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression Based</em>' attribute.
-	 * @see #isExpressionBased()
-	 * @generated
-	 */
-	void setExpressionBased(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationData#isExpressionBased <em>Expression Based</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Expression Based</em>' attribute.
+     * @see #isExpressionBased()
+     * @generated
+     */
+    void setExpressionBased(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(Expression)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationData_Expression()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getExpression();
+    /**
+     * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Expression</em>' containment reference.
+     * @see #setExpression(Expression)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationData_Expression()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getExpression();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationData#getExpression <em>Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' containment reference.
-	 * @see #getExpression()
-	 * @generated
-	 */
-	void setExpression(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationData#getExpression <em>Expression</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Expression</em>' containment reference.
+     * @see #getExpression()
+     * @generated
+     */
+    void setExpression(Expression value);
 
 } // SimulationData

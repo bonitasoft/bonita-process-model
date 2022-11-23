@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.edit.custom.i18n;
+package org.bonitasoft.bpm.model.edit.i18n;
 
 import org.eclipse.osgi.util.NLS;
 

@@ -43,207 +43,207 @@ package org.bonitasoft.bpm.model.simulation;
  * @generated
  */
 public interface Resource extends SimulationElement, ModelVersion {
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see #setType(String)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_Type()
-	 * @model
-	 * @generated
-	 */
-	String getType();
+    /**
+     * Returns the value of the '<em><b>Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Type</em>' attribute.
+     * @see #setType(String)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_Type()
+     * @model
+     * @generated
+     */
+    String getType();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getType <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' attribute.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getType <em>Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Type</em>' attribute.
+     * @see #getType()
+     * @generated
+     */
+    void setType(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Quantity</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Quantity</em>' attribute.
-	 * @see #setQuantity(int)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_Quantity()
-	 * @model default="1"
-	 * @generated
-	 */
-	int getQuantity();
+    /**
+     * Returns the value of the '<em><b>Quantity</b></em>' attribute.
+     * The default value is <code>"1"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Quantity</em>' attribute.
+     * @see #setQuantity(int)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_Quantity()
+     * @model default="1"
+     * @generated
+     */
+    int getQuantity();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getQuantity <em>Quantity</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Quantity</em>' attribute.
-	 * @see #getQuantity()
-	 * @generated
-	 */
-	void setQuantity(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getQuantity <em>Quantity</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Quantity</em>' attribute.
+     * @see #getQuantity()
+     * @generated
+     */
+    void setQuantity(int value);
 
-	/**
-	 * Returns the value of the '<em><b>Maximum Quantity</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Maximum Quantity</em>' attribute.
-	 * @see #setMaximumQuantity(int)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_MaximumQuantity()
-	 * @model
-	 * @generated
-	 */
-	int getMaximumQuantity();
+    /**
+     * Returns the value of the '<em><b>Maximum Quantity</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Maximum Quantity</em>' attribute.
+     * @see #setMaximumQuantity(int)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_MaximumQuantity()
+     * @model
+     * @generated
+     */
+    int getMaximumQuantity();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getMaximumQuantity <em>Maximum Quantity</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Maximum Quantity</em>' attribute.
-	 * @see #getMaximumQuantity()
-	 * @generated
-	 */
-	void setMaximumQuantity(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getMaximumQuantity <em>Maximum Quantity</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Maximum Quantity</em>' attribute.
+     * @see #getMaximumQuantity()
+     * @generated
+     */
+    void setMaximumQuantity(int value);
 
-	/**
-	 * Returns the value of the '<em><b>Cost Unit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Cost Unit</em>' attribute.
-	 * @see #setCostUnit(String)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_CostUnit()
-	 * @model
-	 * @generated
-	 */
-	String getCostUnit();
+    /**
+     * Returns the value of the '<em><b>Cost Unit</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Cost Unit</em>' attribute.
+     * @see #setCostUnit(String)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_CostUnit()
+     * @model
+     * @generated
+     */
+    String getCostUnit();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getCostUnit <em>Cost Unit</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Cost Unit</em>' attribute.
-	 * @see #getCostUnit()
-	 * @generated
-	 */
-	void setCostUnit(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getCostUnit <em>Cost Unit</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Cost Unit</em>' attribute.
+     * @see #getCostUnit()
+     * @generated
+     */
+    void setCostUnit(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Time Unit</b></em>' attribute.
-	 * The literals are from the enumeration {@link org.bonitasoft.bpm.model.simulation.TimeUnit}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Time Unit</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.simulation.TimeUnit
-	 * @see #setTimeUnit(TimeUnit)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_TimeUnit()
-	 * @model
-	 * @generated
-	 */
-	TimeUnit getTimeUnit();
+    /**
+     * Returns the value of the '<em><b>Time Unit</b></em>' attribute.
+     * The literals are from the enumeration {@link org.bonitasoft.bpm.model.simulation.TimeUnit}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Time Unit</em>' attribute.
+     * @see org.bonitasoft.bpm.model.simulation.TimeUnit
+     * @see #setTimeUnit(TimeUnit)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_TimeUnit()
+     * @model
+     * @generated
+     */
+    TimeUnit getTimeUnit();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getTimeUnit <em>Time Unit</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Time Unit</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.simulation.TimeUnit
-	 * @see #getTimeUnit()
-	 * @generated
-	 */
-	void setTimeUnit(TimeUnit value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getTimeUnit <em>Time Unit</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Time Unit</em>' attribute.
+     * @see org.bonitasoft.bpm.model.simulation.TimeUnit
+     * @see #getTimeUnit()
+     * @generated
+     */
+    void setTimeUnit(TimeUnit value);
 
-	/**
-	 * Returns the value of the '<em><b>Fixed Cost</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Fixed Cost</em>' attribute.
-	 * @see #setFixedCost(double)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_FixedCost()
-	 * @model
-	 * @generated
-	 */
-	double getFixedCost();
+    /**
+     * Returns the value of the '<em><b>Fixed Cost</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Fixed Cost</em>' attribute.
+     * @see #setFixedCost(double)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_FixedCost()
+     * @model
+     * @generated
+     */
+    double getFixedCost();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getFixedCost <em>Fixed Cost</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Fixed Cost</em>' attribute.
-	 * @see #getFixedCost()
-	 * @generated
-	 */
-	void setFixedCost(double value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getFixedCost <em>Fixed Cost</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Fixed Cost</em>' attribute.
+     * @see #getFixedCost()
+     * @generated
+     */
+    void setFixedCost(double value);
 
-	/**
-	 * Returns the value of the '<em><b>Time Cost</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Time Cost</em>' attribute.
-	 * @see #setTimeCost(double)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_TimeCost()
-	 * @model
-	 * @generated
-	 */
-	double getTimeCost();
+    /**
+     * Returns the value of the '<em><b>Time Cost</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Time Cost</em>' attribute.
+     * @see #setTimeCost(double)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_TimeCost()
+     * @model
+     * @generated
+     */
+    double getTimeCost();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getTimeCost <em>Time Cost</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Time Cost</em>' attribute.
-	 * @see #getTimeCost()
-	 * @generated
-	 */
-	void setTimeCost(double value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getTimeCost <em>Time Cost</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Time Cost</em>' attribute.
+     * @see #getTimeCost()
+     * @generated
+     */
+    void setTimeCost(double value);
 
-	/**
-	 * Returns the value of the '<em><b>Calendar</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Calendar</em>' containment reference.
-	 * @see #setCalendar(SimulationCalendar)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_Calendar()
-	 * @model containment="true"
-	 * @generated
-	 */
-	SimulationCalendar getCalendar();
+    /**
+     * Returns the value of the '<em><b>Calendar</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Calendar</em>' containment reference.
+     * @see #setCalendar(SimulationCalendar)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_Calendar()
+     * @model containment="true"
+     * @generated
+     */
+    SimulationCalendar getCalendar();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getCalendar <em>Calendar</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Calendar</em>' containment reference.
-	 * @see #getCalendar()
-	 * @generated
-	 */
-	void setCalendar(SimulationCalendar value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#getCalendar <em>Calendar</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Calendar</em>' containment reference.
+     * @see #getCalendar()
+     * @generated
+     */
+    void setCalendar(SimulationCalendar value);
 
-	/**
-	 * Returns the value of the '<em><b>Unlimited</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Unlimited</em>' attribute.
-	 * @see #setUnlimited(boolean)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_Unlimited()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isUnlimited();
+    /**
+     * Returns the value of the '<em><b>Unlimited</b></em>' attribute.
+     * The default value is <code>"false"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Unlimited</em>' attribute.
+     * @see #setUnlimited(boolean)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getResource_Unlimited()
+     * @model default="false"
+     * @generated
+     */
+    boolean isUnlimited();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#isUnlimited <em>Unlimited</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Unlimited</em>' attribute.
-	 * @see #isUnlimited()
-	 * @generated
-	 */
-	void setUnlimited(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.Resource#isUnlimited <em>Unlimited</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Unlimited</em>' attribute.
+     * @see #isUnlimited()
+     * @generated
+     */
+    void setUnlimited(boolean value);
 
 } // Resource

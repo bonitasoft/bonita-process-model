@@ -37,38 +37,38 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface LoadProfile extends SimulationElement, ModelVersion {
-	/**
-	 * Returns the value of the '<em><b>Calendar</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Calendar</em>' containment reference.
-	 * @see #setCalendar(SimulationCalendar)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getLoadProfile_Calendar()
-	 * @model containment="true"
-	 * @generated
-	 */
-	SimulationCalendar getCalendar();
+    /**
+     * Returns the value of the '<em><b>Calendar</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Calendar</em>' containment reference.
+     * @see #setCalendar(SimulationCalendar)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getLoadProfile_Calendar()
+     * @model containment="true"
+     * @generated
+     */
+    SimulationCalendar getCalendar();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.LoadProfile#getCalendar <em>Calendar</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Calendar</em>' containment reference.
-	 * @see #getCalendar()
-	 * @generated
-	 */
-	void setCalendar(SimulationCalendar value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.LoadProfile#getCalendar <em>Calendar</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Calendar</em>' containment reference.
+     * @see #getCalendar()
+     * @generated
+     */
+    void setCalendar(SimulationCalendar value);
 
-	/**
-	 * Returns the value of the '<em><b>Injection Periods</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.simulation.InjectionPeriod}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Injection Periods</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getLoadProfile_InjectionPeriods()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<InjectionPeriod> getInjectionPeriods();
+    /**
+     * Returns the value of the '<em><b>Injection Periods</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.simulation.InjectionPeriod}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Injection Periods</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getLoadProfile_InjectionPeriods()
+     * @model containment="true"
+     * @generated
+     */
+    EList<InjectionPeriod> getInjectionPeriods();
 
 } // LoadProfile
