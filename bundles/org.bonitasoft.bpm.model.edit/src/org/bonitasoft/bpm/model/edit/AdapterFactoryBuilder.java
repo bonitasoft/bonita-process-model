@@ -18,9 +18,9 @@ import java.util.List;
 
 import org.bonitasoft.bpm.model.configuration.provider.ConfigurationItemProviderAdapterFactory;
 import org.bonitasoft.bpm.model.connectorconfiguration.provider.ConnectorConfigurationItemProviderAdapterFactory;
-import org.bonitasoft.bpm.model.edit.custom.actormapping.CustomActorMappingItemProviderAdapterFactory;
-import org.bonitasoft.bpm.model.edit.custom.decision.CustomDecisionItemProviderAdapterFactory;
-import org.bonitasoft.bpm.model.edit.custom.process.CustomProcessItemProviderAdapterFactory;
+import org.bonitasoft.bpm.model.edit.actormapping.CustomActorMappingItemProviderAdapterFactory;
+import org.bonitasoft.bpm.model.edit.decision.CustomDecisionItemProviderAdapterFactory;
+import org.bonitasoft.bpm.model.edit.process.CustomProcessItemProviderAdapterFactory;
 import org.bonitasoft.bpm.model.expression.provider.ExpressionItemProviderAdapterFactory;
 import org.bonitasoft.bpm.model.form.provider.FormItemProviderAdapterFactory;
 import org.bonitasoft.bpm.model.kpi.provider.KpiItemProviderAdapterFactory;
