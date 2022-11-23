@@ -40,74 +40,74 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface InputMapping extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Process Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Process Source</em>' containment reference.
-	 * @see #setProcessSource(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getInputMapping_ProcessSource()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getProcessSource();
+    /**
+     * Returns the value of the '<em><b>Process Source</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Process Source</em>' containment reference.
+     * @see #setProcessSource(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getInputMapping_ProcessSource()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getProcessSource();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.InputMapping#getProcessSource <em>Process Source</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Process Source</em>' containment reference.
-	 * @see #getProcessSource()
-	 * @generated
-	 */
-	void setProcessSource(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.InputMapping#getProcessSource <em>Process Source</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Process Source</em>' containment reference.
+     * @see #getProcessSource()
+     * @generated
+     */
+    void setProcessSource(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Subprocess Target</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Subprocess Target</em>' attribute.
-	 * @see #setSubprocessTarget(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getInputMapping_SubprocessTarget()
-	 * @model
-	 * @generated
-	 */
-	String getSubprocessTarget();
+    /**
+     * Returns the value of the '<em><b>Subprocess Target</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Subprocess Target</em>' attribute.
+     * @see #setSubprocessTarget(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getInputMapping_SubprocessTarget()
+     * @model
+     * @generated
+     */
+    String getSubprocessTarget();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.InputMapping#getSubprocessTarget <em>Subprocess Target</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Subprocess Target</em>' attribute.
-	 * @see #getSubprocessTarget()
-	 * @generated
-	 */
-	void setSubprocessTarget(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.InputMapping#getSubprocessTarget <em>Subprocess Target</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Subprocess Target</em>' attribute.
+     * @see #getSubprocessTarget()
+     * @generated
+     */
+    void setSubprocessTarget(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Assignation Type</b></em>' attribute.
-	 * The default value is <code>"ContractInput"</code>.
-	 * The literals are from the enumeration {@link org.bonitasoft.bpm.model.process.InputMappingAssignationType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Assignation Type</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.process.InputMappingAssignationType
-	 * @see #setAssignationType(InputMappingAssignationType)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getInputMapping_AssignationType()
-	 * @model default="ContractInput" required="true"
-	 * @generated
-	 */
-	InputMappingAssignationType getAssignationType();
+    /**
+     * Returns the value of the '<em><b>Assignation Type</b></em>' attribute.
+     * The default value is <code>"ContractInput"</code>.
+     * The literals are from the enumeration {@link org.bonitasoft.bpm.model.process.InputMappingAssignationType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Assignation Type</em>' attribute.
+     * @see org.bonitasoft.bpm.model.process.InputMappingAssignationType
+     * @see #setAssignationType(InputMappingAssignationType)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getInputMapping_AssignationType()
+     * @model default="ContractInput" required="true"
+     * @generated
+     */
+    InputMappingAssignationType getAssignationType();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.InputMapping#getAssignationType <em>Assignation Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Assignation Type</em>' attribute.
-	 * @see org.bonitasoft.bpm.model.process.InputMappingAssignationType
-	 * @see #getAssignationType()
-	 * @generated
-	 */
-	void setAssignationType(InputMappingAssignationType value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.InputMapping#getAssignationType <em>Assignation Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Assignation Type</em>' attribute.
+     * @see org.bonitasoft.bpm.model.process.InputMappingAssignationType
+     * @see #getAssignationType()
+     * @generated
+     */
+    void setAssignationType(InputMappingAssignationType value);
 
 } // InputMapping

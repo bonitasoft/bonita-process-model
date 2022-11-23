@@ -48,341 +48,341 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class ActorMappingItemProviderAdapterFactory extends ActorMappingAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
-	/**
-	 * This keeps track of the root adapter factory that delegates to this adapter factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ComposedAdapterFactory parentAdapterFactory;
+    /**
+     * This keeps track of the root adapter factory that delegates to this adapter factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ComposedAdapterFactory parentAdapterFactory;
 
-	/**
-	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected IChangeNotifier changeNotifier = new ChangeNotifier();
+    /**
+     * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
-	/**
-	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Collection<Object> supportedTypes = new ArrayList<Object>();
+    /**
+     * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
-	/**
-	 * This constructs an instance.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ActorMappingItemProviderAdapterFactory() {
-		supportedTypes.add(IEditingDomainItemProvider.class);
-		supportedTypes.add(IStructuredItemContentProvider.class);
-		supportedTypes.add(ITreeItemContentProvider.class);
-		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);
-	}
+    /**
+     * This constructs an instance.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ActorMappingItemProviderAdapterFactory() {
+        supportedTypes.add(IEditingDomainItemProvider.class);
+        supportedTypes.add(IStructuredItemContentProvider.class);
+        supportedTypes.add(ITreeItemContentProvider.class);
+        supportedTypes.add(IItemLabelProvider.class);
+        supportedTypes.add(IItemPropertySource.class);
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.ActorMapping} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ActorMappingItemProvider actorMappingItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.ActorMapping} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ActorMappingItemProvider actorMappingItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.ActorMapping}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createActorMappingAdapter() {
-		if (actorMappingItemProvider == null) {
-			actorMappingItemProvider = new ActorMappingItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.ActorMapping}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createActorMappingAdapter() {
+        if (actorMappingItemProvider == null) {
+            actorMappingItemProvider = new ActorMappingItemProvider(this);
+        }
 
-		return actorMappingItemProvider;
-	}
+        return actorMappingItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.ActorMappingsType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ActorMappingsTypeItemProvider actorMappingsTypeItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.ActorMappingsType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ActorMappingsTypeItemProvider actorMappingsTypeItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.ActorMappingsType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createActorMappingsTypeAdapter() {
-		if (actorMappingsTypeItemProvider == null) {
-			actorMappingsTypeItemProvider = new ActorMappingsTypeItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.ActorMappingsType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createActorMappingsTypeAdapter() {
+        if (actorMappingsTypeItemProvider == null) {
+            actorMappingsTypeItemProvider = new ActorMappingsTypeItemProvider(this);
+        }
 
-		return actorMappingsTypeItemProvider;
-	}
+        return actorMappingsTypeItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.DocumentRoot} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DocumentRootItemProvider documentRootItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.DocumentRoot} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected DocumentRootItemProvider documentRootItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.DocumentRoot}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDocumentRootAdapter() {
-		if (documentRootItemProvider == null) {
-			documentRootItemProvider = new DocumentRootItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.DocumentRoot}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createDocumentRootAdapter() {
+        if (documentRootItemProvider == null) {
+            documentRootItemProvider = new DocumentRootItemProvider(this);
+        }
 
-		return documentRootItemProvider;
-	}
+        return documentRootItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.Groups} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected GroupsItemProvider groupsItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.Groups} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected GroupsItemProvider groupsItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.Groups}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createGroupsAdapter() {
-		if (groupsItemProvider == null) {
-			groupsItemProvider = new GroupsItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.Groups}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createGroupsAdapter() {
+        if (groupsItemProvider == null) {
+            groupsItemProvider = new GroupsItemProvider(this);
+        }
 
-		return groupsItemProvider;
-	}
+        return groupsItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.Membership} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected MembershipItemProvider membershipItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.Membership} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected MembershipItemProvider membershipItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.Membership}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createMembershipAdapter() {
-		if (membershipItemProvider == null) {
-			membershipItemProvider = new MembershipItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.Membership}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createMembershipAdapter() {
+        if (membershipItemProvider == null) {
+            membershipItemProvider = new MembershipItemProvider(this);
+        }
 
-		return membershipItemProvider;
-	}
+        return membershipItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.MembershipType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected MembershipTypeItemProvider membershipTypeItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.MembershipType} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected MembershipTypeItemProvider membershipTypeItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.MembershipType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createMembershipTypeAdapter() {
-		if (membershipTypeItemProvider == null) {
-			membershipTypeItemProvider = new MembershipTypeItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.MembershipType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createMembershipTypeAdapter() {
+        if (membershipTypeItemProvider == null) {
+            membershipTypeItemProvider = new MembershipTypeItemProvider(this);
+        }
 
-		return membershipTypeItemProvider;
-	}
+        return membershipTypeItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.Roles} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected RolesItemProvider rolesItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.Roles} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected RolesItemProvider rolesItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.Roles}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createRolesAdapter() {
-		if (rolesItemProvider == null) {
-			rolesItemProvider = new RolesItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.Roles}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createRolesAdapter() {
+        if (rolesItemProvider == null) {
+            rolesItemProvider = new RolesItemProvider(this);
+        }
 
-		return rolesItemProvider;
-	}
+        return rolesItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.Users} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected UsersItemProvider usersItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.actormapping.Users} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected UsersItemProvider usersItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.Users}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createUsersAdapter() {
-		if (usersItemProvider == null) {
-			usersItemProvider = new UsersItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.actormapping.Users}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createUsersAdapter() {
+        if (usersItemProvider == null) {
+            usersItemProvider = new UsersItemProvider(this);
+        }
 
-		return usersItemProvider;
-	}
+        return usersItemProvider;
+    }
 
-	/**
-	 * This returns the root adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-	}
+    /**
+     * This returns the root adapter factory that contains this factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public ComposeableAdapterFactory getRootAdapterFactory() {
+        return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+    }
 
-	/**
-	 * This sets the composed adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-		this.parentAdapterFactory = parentAdapterFactory;
-	}
+    /**
+     * This sets the composed adapter factory that contains this factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
+        this.parentAdapterFactory = parentAdapterFactory;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isFactoryForType(Object type) {
-		return supportedTypes.contains(type) || super.isFactoryForType(type);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public boolean isFactoryForType(Object type) {
+        return supportedTypes.contains(type) || super.isFactoryForType(type);
+    }
 
-	/**
-	 * This implementation substitutes the factory itself as the key for the adapter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter adapt(Notifier notifier, Object type) {
-		return super.adapt(notifier, this);
-	}
+    /**
+     * This implementation substitutes the factory itself as the key for the adapter.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter adapt(Notifier notifier, Object type) {
+        return super.adapt(notifier, this);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
-			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
-				return adapter;
-			}
-		}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object adapt(Object object, Object type) {
+        if (isFactoryForType(type)) {
+            Object adapter = super.adapt(object, type);
+            if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
+                return adapter;
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	/**
-	 * This adds a listener.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void addListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.addListener(notifyChangedListener);
-	}
+    /**
+     * This adds a listener.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void addListener(INotifyChangedListener notifyChangedListener) {
+        changeNotifier.addListener(notifyChangedListener);
+    }
 
-	/**
-	 * This removes a listener.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void removeListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.removeListener(notifyChangedListener);
-	}
+    /**
+     * This removes a listener.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void removeListener(INotifyChangedListener notifyChangedListener) {
+        changeNotifier.removeListener(notifyChangedListener);
+    }
 
-	/**
-	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void fireNotifyChanged(Notification notification) {
-		changeNotifier.fireNotifyChanged(notification);
+    /**
+     * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void fireNotifyChanged(Notification notification) {
+        changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
-			parentAdapterFactory.fireNotifyChanged(notification);
-		}
-	}
+        if (parentAdapterFactory != null) {
+            parentAdapterFactory.fireNotifyChanged(notification);
+        }
+    }
 
-	/**
-	 * This disposes all of the item providers created by this factory. 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void dispose() {
-		if (actorMappingItemProvider != null) actorMappingItemProvider.dispose();
-		if (actorMappingsTypeItemProvider != null) actorMappingsTypeItemProvider.dispose();
-		if (documentRootItemProvider != null) documentRootItemProvider.dispose();
-		if (groupsItemProvider != null) groupsItemProvider.dispose();
-		if (membershipItemProvider != null) membershipItemProvider.dispose();
-		if (membershipTypeItemProvider != null) membershipTypeItemProvider.dispose();
-		if (rolesItemProvider != null) rolesItemProvider.dispose();
-		if (usersItemProvider != null) usersItemProvider.dispose();
-	}
+    /**
+     * This disposes all of the item providers created by this factory. 
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void dispose() {
+        if (actorMappingItemProvider != null) actorMappingItemProvider.dispose();
+        if (actorMappingsTypeItemProvider != null) actorMappingsTypeItemProvider.dispose();
+        if (documentRootItemProvider != null) documentRootItemProvider.dispose();
+        if (groupsItemProvider != null) groupsItemProvider.dispose();
+        if (membershipItemProvider != null) membershipItemProvider.dispose();
+        if (membershipTypeItemProvider != null) membershipTypeItemProvider.dispose();
+        if (rolesItemProvider != null) rolesItemProvider.dispose();
+        if (usersItemProvider != null) usersItemProvider.dispose();
+    }
 
 }

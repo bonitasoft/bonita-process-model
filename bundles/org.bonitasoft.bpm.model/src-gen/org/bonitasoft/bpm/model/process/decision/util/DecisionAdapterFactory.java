@@ -35,137 +35,137 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public class DecisionAdapterFactory extends AdapterFactoryImpl {
-	/**
-	 * The cached model package.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected static DecisionPackage modelPackage;
+    /**
+     * The cached model package.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected static DecisionPackage modelPackage;
 
-	/**
-	 * Creates an instance of the adapter factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DecisionAdapterFactory() {
-		if (modelPackage == null) {
-			modelPackage = DecisionPackage.eINSTANCE;
-		}
-	}
+    /**
+     * Creates an instance of the adapter factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public DecisionAdapterFactory() {
+        if (modelPackage == null) {
+            modelPackage = DecisionPackage.eINSTANCE;
+        }
+    }
 
-	/**
-	 * Returns whether this factory is applicable for the type of the object.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
-	 * <!-- end-user-doc -->
-	 * @return whether this factory is applicable for the type of the object.
-	 * @generated
-	 */
-	@Override
-	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
-			return true;
-		}
-		if (object instanceof EObject) {
-			return ((EObject)object).eClass().getEPackage() == modelPackage;
-		}
-		return false;
-	}
+    /**
+     * Returns whether this factory is applicable for the type of the object.
+     * <!-- begin-user-doc -->
+     * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+     * <!-- end-user-doc -->
+     * @return whether this factory is applicable for the type of the object.
+     * @generated
+     */
+    @Override
+    public boolean isFactoryForType(Object object) {
+        if (object == modelPackage) {
+            return true;
+        }
+        if (object instanceof EObject) {
+            return ((EObject)object).eClass().getEPackage() == modelPackage;
+        }
+        return false;
+    }
 
-	/**
-	 * The switch that delegates to the <code>createXXX</code> methods.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DecisionSwitch<Adapter> modelSwitch =
-		new DecisionSwitch<Adapter>() {
-			@Override
-			public Adapter caseDecisionTable(DecisionTable object) {
-				return createDecisionTableAdapter();
-			}
-			@Override
-			public Adapter caseDecisionTableLine(DecisionTableLine object) {
-				return createDecisionTableLineAdapter();
-			}
-			@Override
-			public Adapter caseDecisionTableAction(DecisionTableAction object) {
-				return createDecisionTableActionAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+    /**
+     * The switch that delegates to the <code>createXXX</code> methods.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected DecisionSwitch<Adapter> modelSwitch =
+        new DecisionSwitch<Adapter>() {
+            @Override
+            public Adapter caseDecisionTable(DecisionTable object) {
+                return createDecisionTableAdapter();
+            }
+            @Override
+            public Adapter caseDecisionTableLine(DecisionTableLine object) {
+                return createDecisionTableLineAdapter();
+            }
+            @Override
+            public Adapter caseDecisionTableAction(DecisionTableAction object) {
+                return createDecisionTableActionAdapter();
+            }
+            @Override
+            public Adapter defaultCase(EObject object) {
+                return createEObjectAdapter();
+            }
+        };
 
-	/**
-	 * Creates an adapter for the <code>target</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param target the object to adapt.
-	 * @return the adapter for the <code>target</code>.
-	 * @generated
-	 */
-	@Override
-	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject)target);
-	}
+    /**
+     * Creates an adapter for the <code>target</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param target the object to adapt.
+     * @return the adapter for the <code>target</code>.
+     * @generated
+     */
+    @Override
+    public Adapter createAdapter(Notifier target) {
+        return modelSwitch.doSwitch((EObject)target);
+    }
 
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.process.decision.DecisionTable <em>Table</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.process.decision.DecisionTable
-	 * @generated
-	 */
-	public Adapter createDecisionTableAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.process.decision.DecisionTable <em>Table</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.process.decision.DecisionTable
+     * @generated
+     */
+    public Adapter createDecisionTableAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.process.decision.DecisionTableLine <em>Table Line</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.process.decision.DecisionTableLine
-	 * @generated
-	 */
-	public Adapter createDecisionTableLineAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.process.decision.DecisionTableLine <em>Table Line</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.process.decision.DecisionTableLine
+     * @generated
+     */
+    public Adapter createDecisionTableLineAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.process.decision.DecisionTableAction <em>Table Action</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.process.decision.DecisionTableAction
-	 * @generated
-	 */
-	public Adapter createDecisionTableActionAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.process.decision.DecisionTableAction <em>Table Action</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.process.decision.DecisionTableAction
+     * @generated
+     */
+    public Adapter createDecisionTableActionAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for the default case.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @generated
-	 */
-	public Adapter createEObjectAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for the default case.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @generated
+     */
+    public Adapter createEObjectAdapter() {
+        return null;
+    }
 
 } //DecisionAdapterFactory

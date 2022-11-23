@@ -39,26 +39,26 @@ package org.bonitasoft.bpm.model.form;
  * @generated
  */
 public interface TextFormField extends SingleValuatedFormField {
-	/**
-	 * Returns the value of the '<em><b>Max Length</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Max Length</em>' attribute.
-	 * @see #setMaxLength(int)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getTextFormField_MaxLength()
-	 * @model
-	 * @generated
-	 */
-	int getMaxLength();
+    /**
+     * Returns the value of the '<em><b>Max Length</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Max Length</em>' attribute.
+     * @see #setMaxLength(int)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getTextFormField_MaxLength()
+     * @model
+     * @generated
+     */
+    int getMaxLength();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.TextFormField#getMaxLength <em>Max Length</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Max Length</em>' attribute.
-	 * @see #getMaxLength()
-	 * @generated
-	 */
-	void setMaxLength(int value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.TextFormField#getMaxLength <em>Max Length</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Max Length</em>' attribute.
+     * @see #getMaxLength()
+     * @generated
+     */
+    void setMaxLength(int value);
 
 } // TextFormField

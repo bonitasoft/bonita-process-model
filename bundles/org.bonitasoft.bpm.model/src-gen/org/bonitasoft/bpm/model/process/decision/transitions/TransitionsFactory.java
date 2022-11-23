@@ -28,30 +28,30 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface TransitionsFactory extends EFactory {
-	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	TransitionsFactory eINSTANCE = org.bonitasoft.bpm.model.process.decision.transitions.impl.TransitionsFactoryImpl.init();
+    /**
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    TransitionsFactory eINSTANCE = org.bonitasoft.bpm.model.process.decision.transitions.impl.TransitionsFactoryImpl.init();
 
-	/**
-	 * Returns a new object of class '<em>Take Transition Action</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Take Transition Action</em>'.
-	 * @generated
-	 */
-	TakeTransitionAction createTakeTransitionAction();
+    /**
+     * Returns a new object of class '<em>Take Transition Action</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Take Transition Action</em>'.
+     * @generated
+     */
+    TakeTransitionAction createTakeTransitionAction();
 
-	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
-	TransitionsPackage getTransitionsPackage();
+    /**
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the package supported by this factory.
+     * @generated
+     */
+    TransitionsPackage getTransitionsPackage();
 
 } //TransitionsFactory

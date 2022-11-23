@@ -12,9 +12,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.edit.custom.process;
+package org.bonitasoft.bpm.model.edit.process;
 
-import org.bonitasoft.bpm.model.edit.custom.i18n.Messages;
+import org.bonitasoft.bpm.model.edit.i18n.Messages;
 import org.bonitasoft.bpm.model.process.FormMapping;
 import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.process.provider.FormMappingItemProvider;

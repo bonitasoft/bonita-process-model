@@ -35,26 +35,26 @@ package org.bonitasoft.bpm.model.process;
  * @generated
  */
 public interface JavaObjectData extends Data {
-	/**
-	 * Returns the value of the '<em><b>Class Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Class Name</em>' attribute.
-	 * @see #setClassName(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getJavaObjectData_ClassName()
-	 * @model
-	 * @generated
-	 */
-	String getClassName();
+    /**
+     * Returns the value of the '<em><b>Class Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Class Name</em>' attribute.
+     * @see #setClassName(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getJavaObjectData_ClassName()
+     * @model
+     * @generated
+     */
+    String getClassName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.JavaObjectData#getClassName <em>Class Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Class Name</em>' attribute.
-	 * @see #getClassName()
-	 * @generated
-	 */
-	void setClassName(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.JavaObjectData#getClassName <em>Class Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Class Name</em>' attribute.
+     * @see #getClassName()
+     * @generated
+     */
+    void setClassName(String value);
 
 } // JavaObjectData

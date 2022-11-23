@@ -41,139 +41,139 @@ import org.bonitasoft.bpm.model.expression.Expression;
  * @generated
  */
 public interface Table extends AbstractTable, MultipleValuatedFormField {
-	/**
-	 * Returns the value of the '<em><b>Use Pagination</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Use Pagination</em>' attribute.
-	 * @see #setUsePagination(boolean)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_UsePagination()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isUsePagination();
+    /**
+     * Returns the value of the '<em><b>Use Pagination</b></em>' attribute.
+     * The default value is <code>"false"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Use Pagination</em>' attribute.
+     * @see #setUsePagination(boolean)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_UsePagination()
+     * @model default="false"
+     * @generated
+     */
+    boolean isUsePagination();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#isUsePagination <em>Use Pagination</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Use Pagination</em>' attribute.
-	 * @see #isUsePagination()
-	 * @generated
-	 */
-	void setUsePagination(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#isUsePagination <em>Use Pagination</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Use Pagination</em>' attribute.
+     * @see #isUsePagination()
+     * @generated
+     */
+    void setUsePagination(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Allow Selection</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Allow Selection</em>' attribute.
-	 * @see #setAllowSelection(boolean)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_AllowSelection()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isAllowSelection();
+    /**
+     * Returns the value of the '<em><b>Allow Selection</b></em>' attribute.
+     * The default value is <code>"false"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Allow Selection</em>' attribute.
+     * @see #setAllowSelection(boolean)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_AllowSelection()
+     * @model default="false"
+     * @generated
+     */
+    boolean isAllowSelection();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#isAllowSelection <em>Allow Selection</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Allow Selection</em>' attribute.
-	 * @see #isAllowSelection()
-	 * @generated
-	 */
-	void setAllowSelection(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#isAllowSelection <em>Allow Selection</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Allow Selection</em>' attribute.
+     * @see #isAllowSelection()
+     * @generated
+     */
+    void setAllowSelection(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Selection Mode Is Multiple</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Selection Mode Is Multiple</em>' attribute.
-	 * @see #setSelectionModeIsMultiple(boolean)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_SelectionModeIsMultiple()
-	 * @model default="true"
-	 * @generated
-	 */
-	boolean isSelectionModeIsMultiple();
+    /**
+     * Returns the value of the '<em><b>Selection Mode Is Multiple</b></em>' attribute.
+     * The default value is <code>"true"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Selection Mode Is Multiple</em>' attribute.
+     * @see #setSelectionModeIsMultiple(boolean)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_SelectionModeIsMultiple()
+     * @model default="true"
+     * @generated
+     */
+    boolean isSelectionModeIsMultiple();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#isSelectionModeIsMultiple <em>Selection Mode Is Multiple</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Selection Mode Is Multiple</em>' attribute.
-	 * @see #isSelectionModeIsMultiple()
-	 * @generated
-	 */
-	void setSelectionModeIsMultiple(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#isSelectionModeIsMultiple <em>Selection Mode Is Multiple</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Selection Mode Is Multiple</em>' attribute.
+     * @see #isSelectionModeIsMultiple()
+     * @generated
+     */
+    void setSelectionModeIsMultiple(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Max Row For Pagination</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Max Row For Pagination</em>' containment reference.
-	 * @see #setMaxRowForPagination(Expression)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_MaxRowForPagination()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getMaxRowForPagination();
+    /**
+     * Returns the value of the '<em><b>Max Row For Pagination</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Max Row For Pagination</em>' containment reference.
+     * @see #setMaxRowForPagination(Expression)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_MaxRowForPagination()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getMaxRowForPagination();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#getMaxRowForPagination <em>Max Row For Pagination</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Max Row For Pagination</em>' containment reference.
-	 * @see #getMaxRowForPagination()
-	 * @generated
-	 */
-	void setMaxRowForPagination(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#getMaxRowForPagination <em>Max Row For Pagination</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Max Row For Pagination</em>' containment reference.
+     * @see #getMaxRowForPagination()
+     * @generated
+     */
+    void setMaxRowForPagination(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Column For Initial Selection Index</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Column For Initial Selection Index</em>' containment reference.
-	 * @see #setColumnForInitialSelectionIndex(Expression)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_ColumnForInitialSelectionIndex()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getColumnForInitialSelectionIndex();
+    /**
+     * Returns the value of the '<em><b>Column For Initial Selection Index</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Column For Initial Selection Index</em>' containment reference.
+     * @see #setColumnForInitialSelectionIndex(Expression)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_ColumnForInitialSelectionIndex()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getColumnForInitialSelectionIndex();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#getColumnForInitialSelectionIndex <em>Column For Initial Selection Index</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Column For Initial Selection Index</em>' containment reference.
-	 * @see #getColumnForInitialSelectionIndex()
-	 * @generated
-	 */
-	void setColumnForInitialSelectionIndex(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#getColumnForInitialSelectionIndex <em>Column For Initial Selection Index</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Column For Initial Selection Index</em>' containment reference.
+     * @see #getColumnForInitialSelectionIndex()
+     * @generated
+     */
+    void setColumnForInitialSelectionIndex(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Selected Values</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Selected Values</em>' containment reference.
-	 * @see #setSelectedValues(Expression)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_SelectedValues()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getSelectedValues();
+    /**
+     * Returns the value of the '<em><b>Selected Values</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Selected Values</em>' containment reference.
+     * @see #setSelectedValues(Expression)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getTable_SelectedValues()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getSelectedValues();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#getSelectedValues <em>Selected Values</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Selected Values</em>' containment reference.
-	 * @see #getSelectedValues()
-	 * @generated
-	 */
-	void setSelectedValues(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Table#getSelectedValues <em>Selected Values</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Selected Values</em>' containment reference.
+     * @see #getSelectedValues()
+     * @generated
+     */
+    void setSelectedValues(Expression value);
 
 } // Table

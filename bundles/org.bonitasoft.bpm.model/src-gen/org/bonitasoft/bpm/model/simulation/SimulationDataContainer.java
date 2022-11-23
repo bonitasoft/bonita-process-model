@@ -38,16 +38,16 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface SimulationDataContainer extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Simulation Data</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.simulation.SimulationData}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Simulation Data</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationDataContainer_SimulationData()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<SimulationData> getSimulationData();
+    /**
+     * Returns the value of the '<em><b>Simulation Data</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.simulation.SimulationData}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Simulation Data</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationDataContainer_SimulationData()
+     * @model containment="true"
+     * @generated
+     */
+    EList<SimulationData> getSimulationData();
 
 } // SimulationDataContainer

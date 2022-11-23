@@ -36,16 +36,16 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface Container extends Element {
-	/**
-	 * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.Element}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Elements</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContainer_Elements()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Element> getElements();
+    /**
+     * Returns the value of the '<em><b>Elements</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.Element}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Elements</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getContainer_Elements()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Element> getElements();
 
 } // Container

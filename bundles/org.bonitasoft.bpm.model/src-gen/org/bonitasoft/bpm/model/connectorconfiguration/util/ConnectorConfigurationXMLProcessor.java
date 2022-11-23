@@ -35,31 +35,31 @@ import org.eclipse.emf.ecore.xmi.util.XMLProcessor;
  */
 public class ConnectorConfigurationXMLProcessor extends XMLProcessor {
 
-	/**
-	 * Public constructor to instantiate the helper.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ConnectorConfigurationXMLProcessor() {
-		super((EPackage.Registry.INSTANCE));
-		ConnectorConfigurationPackage.eINSTANCE.eClass();
-	}
-	
-	/**
-	 * Register for "*" and "xml" file extensions the ConnectorConfigurationResourceFactoryImpl factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected Map<String, Resource.Factory> getRegistrations() {
-		if (registrations == null) {
-			super.getRegistrations();
-			registrations.put(XML_EXTENSION, new ConnectorConfigurationResourceFactoryImpl());
-			registrations.put(STAR_EXTENSION, new ConnectorConfigurationResourceFactoryImpl());
-		}
-		return registrations;
-	}
+    /**
+     * Public constructor to instantiate the helper.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ConnectorConfigurationXMLProcessor() {
+        super((EPackage.Registry.INSTANCE));
+        ConnectorConfigurationPackage.eINSTANCE.eClass();
+    }
+    
+    /**
+     * Register for "*" and "xml" file extensions the ConnectorConfigurationResourceFactoryImpl factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected Map<String, Resource.Factory> getRegistrations() {
+        if (registrations == null) {
+            super.getRegistrations();
+            registrations.put(XML_EXTENSION, new ConnectorConfigurationResourceFactoryImpl());
+            registrations.put(STAR_EXTENSION, new ConnectorConfigurationResourceFactoryImpl());
+        }
+        return registrations;
+    }
 
 } //ConnectorConfigurationXMLProcessor

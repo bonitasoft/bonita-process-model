@@ -36,16 +36,16 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface SimulationLiteralData extends SimulationData {
-	/**
-	 * Returns the value of the '<em><b>Literals</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.simulation.SimulationLiteral}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Literals</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationLiteralData_Literals()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<SimulationLiteral> getLiterals();
+    /**
+     * Returns the value of the '<em><b>Literals</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.simulation.SimulationLiteral}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Literals</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationLiteralData_Literals()
+     * @model containment="true"
+     * @generated
+     */
+    EList<SimulationLiteral> getLiterals();
 
 } // SimulationLiteralData

@@ -45,256 +45,256 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class ContractInputMappingImpl extends EObjectImpl implements ContractInputMapping {
-	/**
-	 * The cached value of the '{@link #getData() <em>Data</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getData()
-	 * @generated
-	 * @ordered
-	 */
-	protected Data data;
+    /**
+     * The cached value of the '{@link #getData() <em>Data</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getData()
+     * @generated
+     * @ordered
+     */
+    protected Data data;
 
-	/**
-	 * The default value of the '{@link #getSetterName() <em>Setter Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSetterName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SETTER_NAME_EDEFAULT = null;
+    /**
+     * The default value of the '{@link #getSetterName() <em>Setter Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getSetterName()
+     * @generated
+     * @ordered
+     */
+    protected static final String SETTER_NAME_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getSetterName() <em>Setter Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSetterName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String setterName = SETTER_NAME_EDEFAULT;
+    /**
+     * The cached value of the '{@link #getSetterName() <em>Setter Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getSetterName()
+     * @generated
+     * @ordered
+     */
+    protected String setterName = SETTER_NAME_EDEFAULT;
 
-	/**
-	 * The default value of the '{@link #getSetterParamType() <em>Setter Param Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSetterParamType()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SETTER_PARAM_TYPE_EDEFAULT = null;
+    /**
+     * The default value of the '{@link #getSetterParamType() <em>Setter Param Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getSetterParamType()
+     * @generated
+     * @ordered
+     */
+    protected static final String SETTER_PARAM_TYPE_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getSetterParamType() <em>Setter Param Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSetterParamType()
-	 * @generated
-	 * @ordered
-	 */
-	protected String setterParamType = SETTER_PARAM_TYPE_EDEFAULT;
+    /**
+     * The cached value of the '{@link #getSetterParamType() <em>Setter Param Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getSetterParamType()
+     * @generated
+     * @ordered
+     */
+    protected String setterParamType = SETTER_PARAM_TYPE_EDEFAULT;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ContractInputMappingImpl() {
-		super();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ContractInputMappingImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ProcessPackage.Literals.CONTRACT_INPUT_MAPPING;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected EClass eStaticClass() {
+        return ProcessPackage.Literals.CONTRACT_INPUT_MAPPING;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Data getData() {
-		if (data != null && data.eIsProxy()) {
-			InternalEObject oldData = (InternalEObject)data;
-			data = (Data)eResolveProxy(oldData);
-			if (data != oldData) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ProcessPackage.CONTRACT_INPUT_MAPPING__DATA, oldData, data));
-			}
-		}
-		return data;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Data getData() {
+        if (data != null && data.eIsProxy()) {
+            InternalEObject oldData = (InternalEObject)data;
+            data = (Data)eResolveProxy(oldData);
+            if (data != oldData) {
+                if (eNotificationRequired())
+                    eNotify(new ENotificationImpl(this, Notification.RESOLVE, ProcessPackage.CONTRACT_INPUT_MAPPING__DATA, oldData, data));
+            }
+        }
+        return data;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Data basicGetData() {
-		return data;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public Data basicGetData() {
+        return data;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setData(Data newData) {
-		Data oldData = data;
-		data = newData;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.CONTRACT_INPUT_MAPPING__DATA, oldData, data));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setData(Data newData) {
+        Data oldData = data;
+        data = newData;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.CONTRACT_INPUT_MAPPING__DATA, oldData, data));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getSetterName() {
-		return setterName;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getSetterName() {
+        return setterName;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setSetterName(String newSetterName) {
-		String oldSetterName = setterName;
-		setterName = newSetterName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_NAME, oldSetterName, setterName));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setSetterName(String newSetterName) {
+        String oldSetterName = setterName;
+        setterName = newSetterName;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_NAME, oldSetterName, setterName));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getSetterParamType() {
-		return setterParamType;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getSetterParamType() {
+        return setterParamType;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setSetterParamType(String newSetterParamType) {
-		String oldSetterParamType = setterParamType;
-		setterParamType = newSetterParamType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_PARAM_TYPE, oldSetterParamType, setterParamType));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setSetterParamType(String newSetterParamType) {
+        String oldSetterParamType = setterParamType;
+        setterParamType = newSetterParamType;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_PARAM_TYPE, oldSetterParamType, setterParamType));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__DATA:
-				if (resolve) return getData();
-				return basicGetData();
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_NAME:
-				return getSetterName();
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_PARAM_TYPE:
-				return getSetterParamType();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__DATA:
+                if (resolve) return getData();
+                return basicGetData();
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_NAME:
+                return getSetterName();
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_PARAM_TYPE:
+                return getSetterParamType();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__DATA:
-				setData((Data)newValue);
-				return;
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_NAME:
-				setSetterName((String)newValue);
-				return;
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_PARAM_TYPE:
-				setSetterParamType((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__DATA:
+                setData((Data)newValue);
+                return;
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_NAME:
+                setSetterName((String)newValue);
+                return;
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_PARAM_TYPE:
+                setSetterParamType((String)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__DATA:
-				setData((Data)null);
-				return;
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_NAME:
-				setSetterName(SETTER_NAME_EDEFAULT);
-				return;
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_PARAM_TYPE:
-				setSetterParamType(SETTER_PARAM_TYPE_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__DATA:
+                setData((Data)null);
+                return;
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_NAME:
+                setSetterName(SETTER_NAME_EDEFAULT);
+                return;
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_PARAM_TYPE:
+                setSetterParamType(SETTER_PARAM_TYPE_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__DATA:
-				return data != null;
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_NAME:
-				return SETTER_NAME_EDEFAULT == null ? setterName != null : !SETTER_NAME_EDEFAULT.equals(setterName);
-			case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_PARAM_TYPE:
-				return SETTER_PARAM_TYPE_EDEFAULT == null ? setterParamType != null : !SETTER_PARAM_TYPE_EDEFAULT.equals(setterParamType);
-		}
-		return super.eIsSet(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__DATA:
+                return data != null;
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_NAME:
+                return SETTER_NAME_EDEFAULT == null ? setterName != null : !SETTER_NAME_EDEFAULT.equals(setterName);
+            case ProcessPackage.CONTRACT_INPUT_MAPPING__SETTER_PARAM_TYPE:
+                return SETTER_PARAM_TYPE_EDEFAULT == null ? setterParamType != null : !SETTER_PARAM_TYPE_EDEFAULT.equals(setterParamType);
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString() {
+        if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (setterName: "); //$NON-NLS-1$
-		result.append(setterName);
-		result.append(", setterParamType: "); //$NON-NLS-1$
-		result.append(setterParamType);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuilder result = new StringBuilder(super.toString());
+        result.append(" (setterName: "); //$NON-NLS-1$
+        result.append(setterName);
+        result.append(", setterParamType: "); //$NON-NLS-1$
+        result.append(setterParamType);
+        result.append(')');
+        return result.toString();
+    }
 
 } //ContractInputMappingImpl

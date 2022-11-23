@@ -23,7 +23,7 @@ import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.Map;
 
-import org.bonitasoft.bpm.model.edit.custom.process.CustomContractInputItemProvider;
+import org.bonitasoft.bpm.model.edit.process.CustomContractInputItemProvider;
 import org.bonitasoft.bpm.model.process.Contract;
 import org.bonitasoft.bpm.model.process.ContractInput;
 import org.bonitasoft.bpm.model.process.ContractInputType;

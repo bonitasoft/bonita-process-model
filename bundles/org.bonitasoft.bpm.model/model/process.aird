@@ -11,6 +11,8 @@
     <semanticResources>kpi.ecore</semanticResources>
     <semanticResources>form.ecore</semanticResources>
     <semanticResources>simulation.ecore</semanticResources>
+    <semanticResources>decision.ecore</semanticResources>
+    <semanticResources>transitions.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_kDCU4FuOEe2AZcbC3ZYEsw">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Generation']"/>
     </ownedViews>

@@ -43,162 +43,162 @@ import org.bonitasoft.bpm.model.expression.TableExpression;
  * @generated
  */
 public interface Message extends Element {
-	/**
-	 * Returns the value of the '<em><b>Throw Event</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Throw Event</em>' attribute.
-	 * @see #setThrowEvent(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_ThrowEvent()
-	 * @model default="" required="true"
-	 * @generated
-	 */
-	String getThrowEvent();
+    /**
+     * Returns the value of the '<em><b>Throw Event</b></em>' attribute.
+     * The default value is <code>""</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Throw Event</em>' attribute.
+     * @see #setThrowEvent(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_ThrowEvent()
+     * @model default="" required="true"
+     * @generated
+     */
+    String getThrowEvent();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getThrowEvent <em>Throw Event</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Throw Event</em>' attribute.
-	 * @see #getThrowEvent()
-	 * @generated
-	 */
-	void setThrowEvent(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getThrowEvent <em>Throw Event</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Throw Event</em>' attribute.
+     * @see #getThrowEvent()
+     * @generated
+     */
+    void setThrowEvent(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Ttl</b></em>' attribute.
-	 * The default value is <code>"31104000000"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Ttl</em>' attribute.
-	 * @see #setTtl(String)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_Ttl()
-	 * @model default="31104000000"
-	 * @generated
-	 */
-	String getTtl();
+    /**
+     * Returns the value of the '<em><b>Ttl</b></em>' attribute.
+     * The default value is <code>"31104000000"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Ttl</em>' attribute.
+     * @see #setTtl(String)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_Ttl()
+     * @model default="31104000000"
+     * @generated
+     */
+    String getTtl();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getTtl <em>Ttl</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Ttl</em>' attribute.
-	 * @see #getTtl()
-	 * @generated
-	 */
-	void setTtl(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getTtl <em>Ttl</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Ttl</em>' attribute.
+     * @see #getTtl()
+     * @generated
+     */
+    void setTtl(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Correlation</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Correlation</em>' containment reference.
-	 * @see #setCorrelation(Correlation)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_Correlation()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	Correlation getCorrelation();
+    /**
+     * Returns the value of the '<em><b>Correlation</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Correlation</em>' containment reference.
+     * @see #setCorrelation(Correlation)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_Correlation()
+     * @model containment="true" required="true"
+     * @generated
+     */
+    Correlation getCorrelation();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getCorrelation <em>Correlation</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Correlation</em>' containment reference.
-	 * @see #getCorrelation()
-	 * @generated
-	 */
-	void setCorrelation(Correlation value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getCorrelation <em>Correlation</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Correlation</em>' containment reference.
+     * @see #getCorrelation()
+     * @generated
+     */
+    void setCorrelation(Correlation value);
 
-	/**
-	 * Returns the value of the '<em><b>Source</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.ThrowMessageEvent#getEvents <em>Events</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' container reference.
-	 * @see #setSource(ThrowMessageEvent)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_Source()
-	 * @see org.bonitasoft.bpm.model.process.ThrowMessageEvent#getEvents
-	 * @model opposite="events" transient="false"
-	 * @generated
-	 */
-	ThrowMessageEvent getSource();
+    /**
+     * Returns the value of the '<em><b>Source</b></em>' container reference.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.ThrowMessageEvent#getEvents <em>Events</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Source</em>' container reference.
+     * @see #setSource(ThrowMessageEvent)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_Source()
+     * @see org.bonitasoft.bpm.model.process.ThrowMessageEvent#getEvents
+     * @model opposite="events" transient="false"
+     * @generated
+     */
+    ThrowMessageEvent getSource();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getSource <em>Source</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' container reference.
-	 * @see #getSource()
-	 * @generated
-	 */
-	void setSource(ThrowMessageEvent value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getSource <em>Source</em>}' container reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Source</em>' container reference.
+     * @see #getSource()
+     * @generated
+     */
+    void setSource(ThrowMessageEvent value);
 
-	/**
-	 * Returns the value of the '<em><b>Target Process Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target Process Expression</em>' containment reference.
-	 * @see #setTargetProcessExpression(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_TargetProcessExpression()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getTargetProcessExpression();
+    /**
+     * Returns the value of the '<em><b>Target Process Expression</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Target Process Expression</em>' containment reference.
+     * @see #setTargetProcessExpression(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_TargetProcessExpression()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getTargetProcessExpression();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getTargetProcessExpression <em>Target Process Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target Process Expression</em>' containment reference.
-	 * @see #getTargetProcessExpression()
-	 * @generated
-	 */
-	void setTargetProcessExpression(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getTargetProcessExpression <em>Target Process Expression</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Target Process Expression</em>' containment reference.
+     * @see #getTargetProcessExpression()
+     * @generated
+     */
+    void setTargetProcessExpression(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Target Element Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target Element Expression</em>' containment reference.
-	 * @see #setTargetElementExpression(Expression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_TargetElementExpression()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getTargetElementExpression();
+    /**
+     * Returns the value of the '<em><b>Target Element Expression</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Target Element Expression</em>' containment reference.
+     * @see #setTargetElementExpression(Expression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_TargetElementExpression()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getTargetElementExpression();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getTargetElementExpression <em>Target Element Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target Element Expression</em>' containment reference.
-	 * @see #getTargetElementExpression()
-	 * @generated
-	 */
-	void setTargetElementExpression(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getTargetElementExpression <em>Target Element Expression</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Target Element Expression</em>' containment reference.
+     * @see #getTargetElementExpression()
+     * @generated
+     */
+    void setTargetElementExpression(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Message Content</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Message Content</em>' containment reference.
-	 * @see #setMessageContent(TableExpression)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_MessageContent()
-	 * @model containment="true" required="true"
-	 * @generated
-	 */
-	TableExpression getMessageContent();
+    /**
+     * Returns the value of the '<em><b>Message Content</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Message Content</em>' containment reference.
+     * @see #setMessageContent(TableExpression)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessage_MessageContent()
+     * @model containment="true" required="true"
+     * @generated
+     */
+    TableExpression getMessageContent();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getMessageContent <em>Message Content</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Message Content</em>' containment reference.
-	 * @see #getMessageContent()
-	 * @generated
-	 */
-	void setMessageContent(TableExpression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.Message#getMessageContent <em>Message Content</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Message Content</em>' containment reference.
+     * @see #getMessageContent()
+     * @generated
+     */
+    void setMessageContent(TableExpression value);
 
 } // Message

@@ -43,140 +43,140 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Validator extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Validator Class</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The qualified name of the validator class which need to extend IFormFieldValidator or IFormPageValidator.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Validator Class</em>' attribute.
-	 * @see #setValidatorClass(String)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_ValidatorClass()
-	 * @model
-	 * @generated
-	 */
-	String getValidatorClass();
+    /**
+     * Returns the value of the '<em><b>Validator Class</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * <!-- begin-model-doc -->
+     * The qualified name of the validator class which need to extend IFormFieldValidator or IFormPageValidator.
+     * <!-- end-model-doc -->
+     * @return the value of the '<em>Validator Class</em>' attribute.
+     * @see #setValidatorClass(String)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_ValidatorClass()
+     * @model
+     * @generated
+     */
+    String getValidatorClass();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#getValidatorClass <em>Validator Class</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Validator Class</em>' attribute.
-	 * @see #getValidatorClass()
-	 * @generated
-	 */
-	void setValidatorClass(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#getValidatorClass <em>Validator Class</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Validator Class</em>' attribute.
+     * @see #getValidatorClass()
+     * @generated
+     */
+    void setValidatorClass(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Html Class</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Html Class</em>' attribute.
-	 * @see #setHtmlClass(String)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_HtmlClass()
-	 * @model
-	 * @generated
-	 */
-	String getHtmlClass();
+    /**
+     * Returns the value of the '<em><b>Html Class</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Html Class</em>' attribute.
+     * @see #setHtmlClass(String)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_HtmlClass()
+     * @model
+     * @generated
+     */
+    String getHtmlClass();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#getHtmlClass <em>Html Class</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Html Class</em>' attribute.
-	 * @see #getHtmlClass()
-	 * @generated
-	 */
-	void setHtmlClass(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#getHtmlClass <em>Html Class</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Html Class</em>' attribute.
+     * @see #getHtmlClass()
+     * @generated
+     */
+    void setHtmlClass(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_Name()
-	 * @model
-	 * @generated
-	 */
-	String getName();
+    /**
+     * Returns the value of the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Name</em>' attribute.
+     * @see #setName(String)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_Name()
+     * @model
+     * @generated
+     */
+    String getName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#getName <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Name</em>' attribute.
+     * @see #getName()
+     * @generated
+     */
+    void setName(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Below Field</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Below Field</em>' attribute.
-	 * @see #setBelowField(boolean)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_BelowField()
-	 * @model default="true"
-	 * @generated
-	 */
-	boolean isBelowField();
+    /**
+     * Returns the value of the '<em><b>Below Field</b></em>' attribute.
+     * The default value is <code>"true"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Below Field</em>' attribute.
+     * @see #setBelowField(boolean)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_BelowField()
+     * @model default="true"
+     * @generated
+     */
+    boolean isBelowField();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#isBelowField <em>Below Field</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Below Field</em>' attribute.
-	 * @see #isBelowField()
-	 * @generated
-	 */
-	void setBelowField(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#isBelowField <em>Below Field</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Below Field</em>' attribute.
+     * @see #isBelowField()
+     * @generated
+     */
+    void setBelowField(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Parameter</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameter</em>' containment reference.
-	 * @see #setParameter(Expression)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_Parameter()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getParameter();
+    /**
+     * Returns the value of the '<em><b>Parameter</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Parameter</em>' containment reference.
+     * @see #setParameter(Expression)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_Parameter()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getParameter();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#getParameter <em>Parameter</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parameter</em>' containment reference.
-	 * @see #getParameter()
-	 * @generated
-	 */
-	void setParameter(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#getParameter <em>Parameter</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Parameter</em>' containment reference.
+     * @see #getParameter()
+     * @generated
+     */
+    void setParameter(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Display Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Display Name</em>' containment reference.
-	 * @see #setDisplayName(Expression)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_DisplayName()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDisplayName();
+    /**
+     * Returns the value of the '<em><b>Display Name</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Display Name</em>' containment reference.
+     * @see #setDisplayName(Expression)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getValidator_DisplayName()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDisplayName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#getDisplayName <em>Display Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Display Name</em>' containment reference.
-	 * @see #getDisplayName()
-	 * @generated
-	 */
-	void setDisplayName(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.Validator#getDisplayName <em>Display Name</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Display Name</em>' containment reference.
+     * @see #getDisplayName()
+     * @generated
+     */
+    void setDisplayName(Expression value);
 
 } // Validator

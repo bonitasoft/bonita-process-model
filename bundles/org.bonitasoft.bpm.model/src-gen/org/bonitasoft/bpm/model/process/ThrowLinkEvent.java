@@ -35,28 +35,28 @@ package org.bonitasoft.bpm.model.process;
  * @generated
  */
 public interface ThrowLinkEvent extends LinkEvent {
-	/**
-	 * Returns the value of the '<em><b>To</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.CatchLinkEvent#getFrom <em>From</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>To</em>' reference.
-	 * @see #setTo(CatchLinkEvent)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getThrowLinkEvent_To()
-	 * @see org.bonitasoft.bpm.model.process.CatchLinkEvent#getFrom
-	 * @model opposite="from"
-	 * @generated
-	 */
-	CatchLinkEvent getTo();
+    /**
+     * Returns the value of the '<em><b>To</b></em>' reference.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.CatchLinkEvent#getFrom <em>From</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>To</em>' reference.
+     * @see #setTo(CatchLinkEvent)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getThrowLinkEvent_To()
+     * @see org.bonitasoft.bpm.model.process.CatchLinkEvent#getFrom
+     * @model opposite="from"
+     * @generated
+     */
+    CatchLinkEvent getTo();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.ThrowLinkEvent#getTo <em>To</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>To</em>' reference.
-	 * @see #getTo()
-	 * @generated
-	 */
-	void setTo(CatchLinkEvent value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.ThrowLinkEvent#getTo <em>To</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>To</em>' reference.
+     * @see #getTo()
+     * @generated
+     */
+    void setTo(CatchLinkEvent value);
 
 } // ThrowLinkEvent

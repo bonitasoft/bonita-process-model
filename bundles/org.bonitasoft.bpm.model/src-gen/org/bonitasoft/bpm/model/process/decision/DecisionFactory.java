@@ -28,39 +28,39 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface DecisionFactory extends EFactory {
-	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	DecisionFactory eINSTANCE = org.bonitasoft.bpm.model.process.decision.impl.DecisionFactoryImpl.init();
+    /**
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    DecisionFactory eINSTANCE = org.bonitasoft.bpm.model.process.decision.impl.DecisionFactoryImpl.init();
 
-	/**
-	 * Returns a new object of class '<em>Table</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Table</em>'.
-	 * @generated
-	 */
-	DecisionTable createDecisionTable();
+    /**
+     * Returns a new object of class '<em>Table</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Table</em>'.
+     * @generated
+     */
+    DecisionTable createDecisionTable();
 
-	/**
-	 * Returns a new object of class '<em>Table Line</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Table Line</em>'.
-	 * @generated
-	 */
-	DecisionTableLine createDecisionTableLine();
+    /**
+     * Returns a new object of class '<em>Table Line</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Table Line</em>'.
+     * @generated
+     */
+    DecisionTableLine createDecisionTableLine();
 
-	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
-	DecisionPackage getDecisionPackage();
+    /**
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the package supported by this factory.
+     * @generated
+     */
+    DecisionPackage getDecisionPackage();
 
 } //DecisionFactory

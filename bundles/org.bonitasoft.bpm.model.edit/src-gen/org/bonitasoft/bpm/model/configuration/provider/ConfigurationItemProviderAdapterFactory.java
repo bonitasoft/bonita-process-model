@@ -47,254 +47,254 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * @generated
  */
 public class ConfigurationItemProviderAdapterFactory extends ConfigurationAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier {
-	/**
-	 * This keeps track of the root adapter factory that delegates to this adapter factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ComposedAdapterFactory parentAdapterFactory;
+    /**
+     * This keeps track of the root adapter factory that delegates to this adapter factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ComposedAdapterFactory parentAdapterFactory;
 
-	/**
-	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected IChangeNotifier changeNotifier = new ChangeNotifier();
+    /**
+     * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
-	/**
-	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Collection<Object> supportedTypes = new ArrayList<Object>();
+    /**
+     * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
-	/**
-	 * This constructs an instance.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ConfigurationItemProviderAdapterFactory() {
-		supportedTypes.add(IEditingDomainItemProvider.class);
-		supportedTypes.add(IStructuredItemContentProvider.class);
-		supportedTypes.add(ITreeItemContentProvider.class);
-		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);
-	}
+    /**
+     * This constructs an instance.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ConfigurationItemProviderAdapterFactory() {
+        supportedTypes.add(IEditingDomainItemProvider.class);
+        supportedTypes.add(IStructuredItemContentProvider.class);
+        supportedTypes.add(ITreeItemContentProvider.class);
+        supportedTypes.add(IItemLabelProvider.class);
+        supportedTypes.add(IItemPropertySource.class);
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.configuration.Configuration} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ConfigurationItemProvider configurationItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.configuration.Configuration} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ConfigurationItemProvider configurationItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.configuration.Configuration}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createConfigurationAdapter() {
-		if (configurationItemProvider == null) {
-			configurationItemProvider = new ConfigurationItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.configuration.Configuration}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createConfigurationAdapter() {
+        if (configurationItemProvider == null) {
+            configurationItemProvider = new ConfigurationItemProvider(this);
+        }
 
-		return configurationItemProvider;
-	}
+        return configurationItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.configuration.Fragment} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FragmentItemProvider fragmentItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.configuration.Fragment} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected FragmentItemProvider fragmentItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.configuration.Fragment}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFragmentAdapter() {
-		if (fragmentItemProvider == null) {
-			fragmentItemProvider = new FragmentItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.configuration.Fragment}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createFragmentAdapter() {
+        if (fragmentItemProvider == null) {
+            fragmentItemProvider = new FragmentItemProvider(this);
+        }
 
-		return fragmentItemProvider;
-	}
+        return fragmentItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.configuration.DefinitionMapping} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected DefinitionMappingItemProvider definitionMappingItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.configuration.DefinitionMapping} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected DefinitionMappingItemProvider definitionMappingItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.configuration.DefinitionMapping}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createDefinitionMappingAdapter() {
-		if (definitionMappingItemProvider == null) {
-			definitionMappingItemProvider = new DefinitionMappingItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.configuration.DefinitionMapping}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createDefinitionMappingAdapter() {
+        if (definitionMappingItemProvider == null) {
+            definitionMappingItemProvider = new DefinitionMappingItemProvider(this);
+        }
 
-		return definitionMappingItemProvider;
-	}
+        return definitionMappingItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.configuration.FragmentContainer} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected FragmentContainerItemProvider fragmentContainerItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.configuration.FragmentContainer} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected FragmentContainerItemProvider fragmentContainerItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.configuration.FragmentContainer}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createFragmentContainerAdapter() {
-		if (fragmentContainerItemProvider == null) {
-			fragmentContainerItemProvider = new FragmentContainerItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.configuration.FragmentContainer}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createFragmentContainerAdapter() {
+        if (fragmentContainerItemProvider == null) {
+            fragmentContainerItemProvider = new FragmentContainerItemProvider(this);
+        }
 
-		return fragmentContainerItemProvider;
-	}
+        return fragmentContainerItemProvider;
+    }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.configuration.Resource} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ResourceItemProvider resourceItemProvider;
+    /**
+     * This keeps track of the one adapter used for all {@link org.bonitasoft.bpm.model.configuration.Resource} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ResourceItemProvider resourceItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.bonitasoft.bpm.model.configuration.Resource}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createResourceAdapter() {
-		if (resourceItemProvider == null) {
-			resourceItemProvider = new ResourceItemProvider(this);
-		}
+    /**
+     * This creates an adapter for a {@link org.bonitasoft.bpm.model.configuration.Resource}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createResourceAdapter() {
+        if (resourceItemProvider == null) {
+            resourceItemProvider = new ResourceItemProvider(this);
+        }
 
-		return resourceItemProvider;
-	}
+        return resourceItemProvider;
+    }
 
-	/**
-	 * This returns the root adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-	}
+    /**
+     * This returns the root adapter factory that contains this factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public ComposeableAdapterFactory getRootAdapterFactory() {
+        return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+    }
 
-	/**
-	 * This sets the composed adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-		this.parentAdapterFactory = parentAdapterFactory;
-	}
+    /**
+     * This sets the composed adapter factory that contains this factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
+        this.parentAdapterFactory = parentAdapterFactory;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isFactoryForType(Object type) {
-		return supportedTypes.contains(type) || super.isFactoryForType(type);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public boolean isFactoryForType(Object type) {
+        return supportedTypes.contains(type) || super.isFactoryForType(type);
+    }
 
-	/**
-	 * This implementation substitutes the factory itself as the key for the adapter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter adapt(Notifier notifier, Object type) {
-		return super.adapt(notifier, this);
-	}
+    /**
+     * This implementation substitutes the factory itself as the key for the adapter.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter adapt(Notifier notifier, Object type) {
+        return super.adapt(notifier, this);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
-			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
-				return adapter;
-			}
-		}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object adapt(Object object, Object type) {
+        if (isFactoryForType(type)) {
+            Object adapter = super.adapt(object, type);
+            if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
+                return adapter;
+            }
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	/**
-	 * This adds a listener.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void addListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.addListener(notifyChangedListener);
-	}
+    /**
+     * This adds a listener.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void addListener(INotifyChangedListener notifyChangedListener) {
+        changeNotifier.addListener(notifyChangedListener);
+    }
 
-	/**
-	 * This removes a listener.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void removeListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.removeListener(notifyChangedListener);
-	}
+    /**
+     * This removes a listener.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void removeListener(INotifyChangedListener notifyChangedListener) {
+        changeNotifier.removeListener(notifyChangedListener);
+    }
 
-	/**
-	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void fireNotifyChanged(Notification notification) {
-		changeNotifier.fireNotifyChanged(notification);
+    /**
+     * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void fireNotifyChanged(Notification notification) {
+        changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
-			parentAdapterFactory.fireNotifyChanged(notification);
-		}
-	}
+        if (parentAdapterFactory != null) {
+            parentAdapterFactory.fireNotifyChanged(notification);
+        }
+    }
 
 }

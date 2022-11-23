@@ -54,240 +54,240 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Configuration extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Name()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getName();
+    /**
+     * Returns the value of the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Name</em>' attribute.
+     * @see #setName(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Name()
+     * @model required="true"
+     * @generated
+     */
+    String getName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getName <em>Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Name</em>' attribute.
+     * @see #getName()
+     * @generated
+     */
+    void setName(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Description</em>' attribute.
-	 * @see #setDescription(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Description()
-	 * @model
-	 * @generated
-	 */
-	String getDescription();
+    /**
+     * Returns the value of the '<em><b>Description</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Description</em>' attribute.
+     * @see #setDescription(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Description()
+     * @model
+     * @generated
+     */
+    String getDescription();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getDescription <em>Description</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Description</em>' attribute.
-	 * @see #getDescription()
-	 * @generated
-	 */
-	void setDescription(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getDescription <em>Description</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Description</em>' attribute.
+     * @see #getDescription()
+     * @generated
+     */
+    void setDescription(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Actor Mappings</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Actor Mappings</em>' containment reference.
-	 * @see #setActorMappings(ActorMappingsType)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_ActorMappings()
-	 * @model containment="true"
-	 * @generated
-	 */
-	ActorMappingsType getActorMappings();
+    /**
+     * Returns the value of the '<em><b>Actor Mappings</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Actor Mappings</em>' containment reference.
+     * @see #setActorMappings(ActorMappingsType)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_ActorMappings()
+     * @model containment="true"
+     * @generated
+     */
+    ActorMappingsType getActorMappings();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getActorMappings <em>Actor Mappings</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Actor Mappings</em>' containment reference.
-	 * @see #getActorMappings()
-	 * @generated
-	 */
-	void setActorMappings(ActorMappingsType value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getActorMappings <em>Actor Mappings</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Actor Mappings</em>' containment reference.
+     * @see #getActorMappings()
+     * @generated
+     */
+    void setActorMappings(ActorMappingsType value);
 
-	/**
-	 * Returns the value of the '<em><b>Anonymous User Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Anonymous User Name</em>' attribute.
-	 * @see #setAnonymousUserName(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_AnonymousUserName()
-	 * @model
-	 * @generated
-	 */
-	String getAnonymousUserName();
+    /**
+     * Returns the value of the '<em><b>Anonymous User Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Anonymous User Name</em>' attribute.
+     * @see #setAnonymousUserName(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_AnonymousUserName()
+     * @model
+     * @generated
+     */
+    String getAnonymousUserName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getAnonymousUserName <em>Anonymous User Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Anonymous User Name</em>' attribute.
-	 * @see #getAnonymousUserName()
-	 * @generated
-	 */
-	void setAnonymousUserName(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getAnonymousUserName <em>Anonymous User Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Anonymous User Name</em>' attribute.
+     * @see #getAnonymousUserName()
+     * @generated
+     */
+    void setAnonymousUserName(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Anonymous Password</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Anonymous Password</em>' attribute.
-	 * @see #setAnonymousPassword(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_AnonymousPassword()
-	 * @model
-	 * @generated
-	 */
-	String getAnonymousPassword();
+    /**
+     * Returns the value of the '<em><b>Anonymous Password</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Anonymous Password</em>' attribute.
+     * @see #setAnonymousPassword(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_AnonymousPassword()
+     * @model
+     * @generated
+     */
+    String getAnonymousPassword();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getAnonymousPassword <em>Anonymous Password</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Anonymous Password</em>' attribute.
-	 * @see #getAnonymousPassword()
-	 * @generated
-	 */
-	void setAnonymousPassword(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getAnonymousPassword <em>Anonymous Password</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Anonymous Password</em>' attribute.
+     * @see #getAnonymousPassword()
+     * @generated
+     */
+    void setAnonymousPassword(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Definition Mappings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.configuration.DefinitionMapping}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Definition Mappings</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_DefinitionMappings()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<DefinitionMapping> getDefinitionMappings();
+    /**
+     * Returns the value of the '<em><b>Definition Mappings</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.configuration.DefinitionMapping}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Definition Mappings</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_DefinitionMappings()
+     * @model containment="true"
+     * @generated
+     */
+    EList<DefinitionMapping> getDefinitionMappings();
 
-	/**
-	 * Returns the value of the '<em><b>Process Dependencies</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.configuration.FragmentContainer}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Process Dependencies</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_ProcessDependencies()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<FragmentContainer> getProcessDependencies();
+    /**
+     * Returns the value of the '<em><b>Process Dependencies</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.configuration.FragmentContainer}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Process Dependencies</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_ProcessDependencies()
+     * @model containment="true"
+     * @generated
+     */
+    EList<FragmentContainer> getProcessDependencies();
 
-	/**
-	 * Returns the value of the '<em><b>Application Dependencies</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.configuration.FragmentContainer}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Application Dependencies</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_ApplicationDependencies()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<FragmentContainer> getApplicationDependencies();
+    /**
+     * Returns the value of the '<em><b>Application Dependencies</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.configuration.FragmentContainer}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Application Dependencies</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_ApplicationDependencies()
+     * @model containment="true"
+     * @generated
+     */
+    EList<FragmentContainer> getApplicationDependencies();
 
-	/**
-	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.parameter.Parameter}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Parameters()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Parameter> getParameters();
+    /**
+     * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.parameter.Parameter}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Parameters</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Parameters()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Parameter> getParameters();
 
-	/**
-	 * Returns the value of the '<em><b>Version</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Version</em>' attribute.
-	 * @see #setVersion(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Version()
-	 * @model
-	 * @generated
-	 */
-	String getVersion();
+    /**
+     * Returns the value of the '<em><b>Version</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Version</em>' attribute.
+     * @see #setVersion(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Version()
+     * @model
+     * @generated
+     */
+    String getVersion();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getVersion <em>Version</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Version</em>' attribute.
-	 * @see #getVersion()
-	 * @generated
-	 */
-	void setVersion(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getVersion <em>Version</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Version</em>' attribute.
+     * @see #getVersion()
+     * @generated
+     */
+    void setVersion(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Username</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Username</em>' attribute.
-	 * @see #setUsername(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Username()
-	 * @model
-	 * @generated
-	 */
-	String getUsername();
+    /**
+     * Returns the value of the '<em><b>Username</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Username</em>' attribute.
+     * @see #setUsername(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Username()
+     * @model
+     * @generated
+     */
+    String getUsername();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getUsername <em>Username</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Username</em>' attribute.
-	 * @see #getUsername()
-	 * @generated
-	 */
-	void setUsername(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getUsername <em>Username</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Username</em>' attribute.
+     * @see #getUsername()
+     * @generated
+     */
+    void setUsername(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Password</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Password</em>' attribute.
-	 * @see #setPassword(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Password()
-	 * @model
-	 * @generated
-	 */
-	String getPassword();
+    /**
+     * Returns the value of the '<em><b>Password</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Password</em>' attribute.
+     * @see #setPassword(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_Password()
+     * @model
+     * @generated
+     */
+    String getPassword();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getPassword <em>Password</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Password</em>' attribute.
-	 * @see #getPassword()
-	 * @generated
-	 */
-	void setPassword(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Configuration#getPassword <em>Password</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Password</em>' attribute.
+     * @see #getPassword()
+     * @generated
+     */
+    void setPassword(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Additional Resources</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.configuration.Resource}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Additional Resources</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_AdditionalResources()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Resource> getAdditionalResources();
+    /**
+     * Returns the value of the '<em><b>Additional Resources</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.configuration.Resource}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Additional Resources</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_AdditionalResources()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Resource> getAdditionalResources();
 
 } // Configuration

@@ -42,158 +42,158 @@ import org.bonitasoft.bpm.model.expression.Expression;
  * @generated
  */
 public interface DatabaseKPIDefinition extends AbstractKPIDefinition {
-	/**
-	 * Returns the value of the '<em><b>Default Driverclass Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Driverclass Name</em>' containment reference.
-	 * @see #setDefaultDriverclassName(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultDriverclassName()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDefaultDriverclassName();
+    /**
+     * Returns the value of the '<em><b>Default Driverclass Name</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default Driverclass Name</em>' containment reference.
+     * @see #setDefaultDriverclassName(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultDriverclassName()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDefaultDriverclassName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultDriverclassName <em>Default Driverclass Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Driverclass Name</em>' containment reference.
-	 * @see #getDefaultDriverclassName()
-	 * @generated
-	 */
-	void setDefaultDriverclassName(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultDriverclassName <em>Default Driverclass Name</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default Driverclass Name</em>' containment reference.
+     * @see #getDefaultDriverclassName()
+     * @generated
+     */
+    void setDefaultDriverclassName(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Default Jdbc Url</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Jdbc Url</em>' containment reference.
-	 * @see #setDefaultJdbcUrl(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultJdbcUrl()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDefaultJdbcUrl();
+    /**
+     * Returns the value of the '<em><b>Default Jdbc Url</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default Jdbc Url</em>' containment reference.
+     * @see #setDefaultJdbcUrl(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultJdbcUrl()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDefaultJdbcUrl();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultJdbcUrl <em>Default Jdbc Url</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Jdbc Url</em>' containment reference.
-	 * @see #getDefaultJdbcUrl()
-	 * @generated
-	 */
-	void setDefaultJdbcUrl(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultJdbcUrl <em>Default Jdbc Url</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default Jdbc Url</em>' containment reference.
+     * @see #getDefaultJdbcUrl()
+     * @generated
+     */
+    void setDefaultJdbcUrl(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Default User</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default User</em>' containment reference.
-	 * @see #setDefaultUser(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultUser()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDefaultUser();
+    /**
+     * Returns the value of the '<em><b>Default User</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default User</em>' containment reference.
+     * @see #setDefaultUser(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultUser()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDefaultUser();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultUser <em>Default User</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default User</em>' containment reference.
-	 * @see #getDefaultUser()
-	 * @generated
-	 */
-	void setDefaultUser(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultUser <em>Default User</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default User</em>' containment reference.
+     * @see #getDefaultUser()
+     * @generated
+     */
+    void setDefaultUser(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Default Password</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Password</em>' containment reference.
-	 * @see #setDefaultPassword(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultPassword()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDefaultPassword();
+    /**
+     * Returns the value of the '<em><b>Default Password</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default Password</em>' containment reference.
+     * @see #setDefaultPassword(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultPassword()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDefaultPassword();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultPassword <em>Default Password</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Password</em>' containment reference.
-	 * @see #getDefaultPassword()
-	 * @generated
-	 */
-	void setDefaultPassword(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultPassword <em>Default Password</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default Password</em>' containment reference.
+     * @see #getDefaultPassword()
+     * @generated
+     */
+    void setDefaultPassword(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Default JNDI Url</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default JNDI Url</em>' containment reference.
-	 * @see #setDefaultJNDIUrl(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultJNDIUrl()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDefaultJNDIUrl();
+    /**
+     * Returns the value of the '<em><b>Default JNDI Url</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default JNDI Url</em>' containment reference.
+     * @see #setDefaultJNDIUrl(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultJNDIUrl()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDefaultJNDIUrl();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultJNDIUrl <em>Default JNDI Url</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default JNDI Url</em>' containment reference.
-	 * @see #getDefaultJNDIUrl()
-	 * @generated
-	 */
-	void setDefaultJNDIUrl(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultJNDIUrl <em>Default JNDI Url</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default JNDI Url</em>' containment reference.
+     * @see #getDefaultJNDIUrl()
+     * @generated
+     */
+    void setDefaultJNDIUrl(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Default DB Name</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default DB Name</em>' containment reference.
-	 * @see #setDefaultDBName(Expression)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultDBName()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getDefaultDBName();
+    /**
+     * Returns the value of the '<em><b>Default DB Name</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default DB Name</em>' containment reference.
+     * @see #setDefaultDBName(Expression)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultDBName()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getDefaultDBName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultDBName <em>Default DB Name</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default DB Name</em>' containment reference.
-	 * @see #getDefaultDBName()
-	 * @generated
-	 */
-	void setDefaultDBName(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultDBName <em>Default DB Name</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default DB Name</em>' containment reference.
+     * @see #getDefaultDBName()
+     * @generated
+     */
+    void setDefaultDBName(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Default Table Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Table Name</em>' attribute.
-	 * @see #setDefaultTableName(String)
-	 * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultTableName()
-	 * @model
-	 * @generated
-	 */
-	String getDefaultTableName();
+    /**
+     * Returns the value of the '<em><b>Default Table Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default Table Name</em>' attribute.
+     * @see #setDefaultTableName(String)
+     * @see org.bonitasoft.bpm.model.kpi.KpiPackage#getDatabaseKPIDefinition_DefaultTableName()
+     * @model
+     * @generated
+     */
+    String getDefaultTableName();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultTableName <em>Default Table Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Table Name</em>' attribute.
-	 * @see #getDefaultTableName()
-	 * @generated
-	 */
-	void setDefaultTableName(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.kpi.DatabaseKPIDefinition#getDefaultTableName <em>Default Table Name</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default Table Name</em>' attribute.
+     * @see #getDefaultTableName()
+     * @generated
+     */
+    void setDefaultTableName(String value);
 
 } // DatabaseKPIDefinition

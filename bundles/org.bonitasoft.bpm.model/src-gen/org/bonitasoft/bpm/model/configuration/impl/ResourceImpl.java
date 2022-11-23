@@ -42,195 +42,195 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class ResourceImpl extends EObjectImpl implements Resource {
-	/**
-	 * The default value of the '{@link #getBarPath() <em>Bar Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBarPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String BAR_PATH_EDEFAULT = null;
+    /**
+     * The default value of the '{@link #getBarPath() <em>Bar Path</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getBarPath()
+     * @generated
+     * @ordered
+     */
+    protected static final String BAR_PATH_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getBarPath() <em>Bar Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBarPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected String barPath = BAR_PATH_EDEFAULT;
+    /**
+     * The cached value of the '{@link #getBarPath() <em>Bar Path</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getBarPath()
+     * @generated
+     * @ordered
+     */
+    protected String barPath = BAR_PATH_EDEFAULT;
 
-	/**
-	 * The default value of the '{@link #getProjectPath() <em>Project Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProjectPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String PROJECT_PATH_EDEFAULT = null;
+    /**
+     * The default value of the '{@link #getProjectPath() <em>Project Path</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getProjectPath()
+     * @generated
+     * @ordered
+     */
+    protected static final String PROJECT_PATH_EDEFAULT = null;
 
-	/**
-	 * The cached value of the '{@link #getProjectPath() <em>Project Path</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProjectPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected String projectPath = PROJECT_PATH_EDEFAULT;
+    /**
+     * The cached value of the '{@link #getProjectPath() <em>Project Path</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getProjectPath()
+     * @generated
+     * @ordered
+     */
+    protected String projectPath = PROJECT_PATH_EDEFAULT;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ResourceImpl() {
-		super();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ResourceImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ConfigurationPackage.Literals.RESOURCE;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected EClass eStaticClass() {
+        return ConfigurationPackage.Literals.RESOURCE;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getBarPath() {
-		return barPath;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getBarPath() {
+        return barPath;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setBarPath(String newBarPath) {
-		String oldBarPath = barPath;
-		barPath = newBarPath;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConfigurationPackage.RESOURCE__BAR_PATH, oldBarPath, barPath));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setBarPath(String newBarPath) {
+        String oldBarPath = barPath;
+        barPath = newBarPath;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ConfigurationPackage.RESOURCE__BAR_PATH, oldBarPath, barPath));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getProjectPath() {
-		return projectPath;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String getProjectPath() {
+        return projectPath;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setProjectPath(String newProjectPath) {
-		String oldProjectPath = projectPath;
-		projectPath = newProjectPath;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ConfigurationPackage.RESOURCE__PROJECT_PATH, oldProjectPath, projectPath));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setProjectPath(String newProjectPath) {
+        String oldProjectPath = projectPath;
+        projectPath = newProjectPath;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ConfigurationPackage.RESOURCE__PROJECT_PATH, oldProjectPath, projectPath));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ConfigurationPackage.RESOURCE__BAR_PATH:
-				return getBarPath();
-			case ConfigurationPackage.RESOURCE__PROJECT_PATH:
-				return getProjectPath();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case ConfigurationPackage.RESOURCE__BAR_PATH:
+                return getBarPath();
+            case ConfigurationPackage.RESOURCE__PROJECT_PATH:
+                return getProjectPath();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ConfigurationPackage.RESOURCE__BAR_PATH:
-				setBarPath((String)newValue);
-				return;
-			case ConfigurationPackage.RESOURCE__PROJECT_PATH:
-				setProjectPath((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case ConfigurationPackage.RESOURCE__BAR_PATH:
+                setBarPath((String)newValue);
+                return;
+            case ConfigurationPackage.RESOURCE__PROJECT_PATH:
+                setProjectPath((String)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ConfigurationPackage.RESOURCE__BAR_PATH:
-				setBarPath(BAR_PATH_EDEFAULT);
-				return;
-			case ConfigurationPackage.RESOURCE__PROJECT_PATH:
-				setProjectPath(PROJECT_PATH_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case ConfigurationPackage.RESOURCE__BAR_PATH:
+                setBarPath(BAR_PATH_EDEFAULT);
+                return;
+            case ConfigurationPackage.RESOURCE__PROJECT_PATH:
+                setProjectPath(PROJECT_PATH_EDEFAULT);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ConfigurationPackage.RESOURCE__BAR_PATH:
-				return BAR_PATH_EDEFAULT == null ? barPath != null : !BAR_PATH_EDEFAULT.equals(barPath);
-			case ConfigurationPackage.RESOURCE__PROJECT_PATH:
-				return PROJECT_PATH_EDEFAULT == null ? projectPath != null : !PROJECT_PATH_EDEFAULT.equals(projectPath);
-		}
-		return super.eIsSet(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case ConfigurationPackage.RESOURCE__BAR_PATH:
+                return BAR_PATH_EDEFAULT == null ? barPath != null : !BAR_PATH_EDEFAULT.equals(barPath);
+            case ConfigurationPackage.RESOURCE__PROJECT_PATH:
+                return PROJECT_PATH_EDEFAULT == null ? projectPath != null : !PROJECT_PATH_EDEFAULT.equals(projectPath);
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString() {
+        if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (barPath: "); //$NON-NLS-1$
-		result.append(barPath);
-		result.append(", projectPath: "); //$NON-NLS-1$
-		result.append(projectPath);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuilder result = new StringBuilder(super.toString());
+        result.append(" (barPath: "); //$NON-NLS-1$
+        result.append(barPath);
+        result.append(", projectPath: "); //$NON-NLS-1$
+        result.append(projectPath);
+        result.append(')');
+        return result.toString();
+    }
 
 } //ResourceImpl

@@ -39,93 +39,93 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface Fragment extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Key</em>' attribute.
-	 * @see #setKey(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getFragment_Key()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getKey();
+    /**
+     * Returns the value of the '<em><b>Key</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Key</em>' attribute.
+     * @see #setKey(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getFragment_Key()
+     * @model required="true"
+     * @generated
+     */
+    String getKey();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Fragment#getKey <em>Key</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Key</em>' attribute.
-	 * @see #getKey()
-	 * @generated
-	 */
-	void setKey(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Fragment#getKey <em>Key</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Key</em>' attribute.
+     * @see #getKey()
+     * @generated
+     */
+    void setKey(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getFragment_Value()
-	 * @model
-	 * @generated
-	 */
-	String getValue();
+    /**
+     * Returns the value of the '<em><b>Value</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Value</em>' attribute.
+     * @see #setValue(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getFragment_Value()
+     * @model
+     * @generated
+     */
+    String getValue();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Fragment#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
-	 * @generated
-	 */
-	void setValue(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Fragment#getValue <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Value</em>' attribute.
+     * @see #getValue()
+     * @generated
+     */
+    void setValue(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Exported</b></em>' attribute.
-	 * The default value is <code>"true"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Exported</em>' attribute.
-	 * @see #setExported(boolean)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getFragment_Exported()
-	 * @model default="true"
-	 * @generated
-	 */
-	boolean isExported();
+    /**
+     * Returns the value of the '<em><b>Exported</b></em>' attribute.
+     * The default value is <code>"true"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Exported</em>' attribute.
+     * @see #setExported(boolean)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getFragment_Exported()
+     * @model default="true"
+     * @generated
+     */
+    boolean isExported();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Fragment#isExported <em>Exported</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Exported</em>' attribute.
-	 * @see #isExported()
-	 * @generated
-	 */
-	void setExported(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Fragment#isExported <em>Exported</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Exported</em>' attribute.
+     * @see #isExported()
+     * @generated
+     */
+    void setExported(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see #setType(String)
-	 * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getFragment_Type()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getType();
+    /**
+     * Returns the value of the '<em><b>Type</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Type</em>' attribute.
+     * @see #setType(String)
+     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getFragment_Type()
+     * @model required="true"
+     * @generated
+     */
+    String getType();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Fragment#getType <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' attribute.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.configuration.Fragment#getType <em>Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Type</em>' attribute.
+     * @see #getType()
+     * @generated
+     */
+    void setType(String value);
 
 } // Fragment

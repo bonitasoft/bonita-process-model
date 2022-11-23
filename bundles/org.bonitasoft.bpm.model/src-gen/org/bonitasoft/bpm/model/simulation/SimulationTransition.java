@@ -41,94 +41,94 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface SimulationTransition extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Probability</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Probability</em>' attribute.
-	 * @see #setProbability(double)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationTransition_Probability()
-	 * @model default="1" required="true"
-	 * @generated
-	 */
-	double getProbability();
+    /**
+     * Returns the value of the '<em><b>Probability</b></em>' attribute.
+     * The default value is <code>"1"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Probability</em>' attribute.
+     * @see #setProbability(double)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationTransition_Probability()
+     * @model default="1" required="true"
+     * @generated
+     */
+    double getProbability();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationTransition#getProbability <em>Probability</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Probability</em>' attribute.
-	 * @see #getProbability()
-	 * @generated
-	 */
-	void setProbability(double value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationTransition#getProbability <em>Probability</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Probability</em>' attribute.
+     * @see #getProbability()
+     * @generated
+     */
+    void setProbability(double value);
 
-	/**
-	 * Returns the value of the '<em><b>Data Based</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Based</em>' attribute.
-	 * @see #setDataBased(boolean)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationTransition_DataBased()
-	 * @model
-	 * @generated
-	 */
-	boolean isDataBased();
+    /**
+     * Returns the value of the '<em><b>Data Based</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Data Based</em>' attribute.
+     * @see #setDataBased(boolean)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationTransition_DataBased()
+     * @model
+     * @generated
+     */
+    boolean isDataBased();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationTransition#isDataBased <em>Data Based</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Data Based</em>' attribute.
-	 * @see #isDataBased()
-	 * @generated
-	 */
-	void setDataBased(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationTransition#isDataBased <em>Data Based</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Data Based</em>' attribute.
+     * @see #isDataBased()
+     * @generated
+     */
+    void setDataBased(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Use Expression</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Use Expression</em>' attribute.
-	 * @see #setUseExpression(boolean)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationTransition_UseExpression()
-	 * @model default="false"
-	 * @generated
-	 */
-	boolean isUseExpression();
+    /**
+     * Returns the value of the '<em><b>Use Expression</b></em>' attribute.
+     * The default value is <code>"false"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Use Expression</em>' attribute.
+     * @see #setUseExpression(boolean)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationTransition_UseExpression()
+     * @model default="false"
+     * @generated
+     */
+    boolean isUseExpression();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationTransition#isUseExpression <em>Use Expression</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Use Expression</em>' attribute.
-	 * @see #isUseExpression()
-	 * @generated
-	 */
-	void setUseExpression(boolean value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationTransition#isUseExpression <em>Use Expression</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Use Expression</em>' attribute.
+     * @see #isUseExpression()
+     * @generated
+     */
+    void setUseExpression(boolean value);
 
-	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(Expression)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationTransition_Expression()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getExpression();
+    /**
+     * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Expression</em>' containment reference.
+     * @see #setExpression(Expression)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationTransition_Expression()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getExpression();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationTransition#getExpression <em>Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' containment reference.
-	 * @see #getExpression()
-	 * @generated
-	 */
-	void setExpression(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationTransition#getExpression <em>Expression</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Expression</em>' containment reference.
+     * @see #getExpression()
+     * @generated
+     */
+    void setExpression(Expression value);
 
 } // SimulationTransition

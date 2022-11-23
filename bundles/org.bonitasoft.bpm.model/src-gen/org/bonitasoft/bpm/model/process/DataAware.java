@@ -38,16 +38,16 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface DataAware extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Data</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.Data}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getDataAware_Data()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Data> getData();
+    /**
+     * Returns the value of the '<em><b>Data</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.Data}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Data</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getDataAware_Data()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Data> getData();
 
 } // DataAware

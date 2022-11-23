@@ -59,8 +59,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
-        <maven.compiler.source>${java.version}</maven.compiler.source>
-        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.compiler.release>${java.version}</maven.compiler.release>
     </properties>
     
     <profiles>

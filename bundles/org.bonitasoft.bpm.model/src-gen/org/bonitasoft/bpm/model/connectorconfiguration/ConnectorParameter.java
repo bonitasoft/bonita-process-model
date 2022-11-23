@@ -39,48 +39,48 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface ConnectorParameter extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Key</em>' attribute.
-	 * @see #setKey(String)
-	 * @see org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage#getConnectorParameter_Key()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getKey();
+    /**
+     * Returns the value of the '<em><b>Key</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Key</em>' attribute.
+     * @see #setKey(String)
+     * @see org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage#getConnectorParameter_Key()
+     * @model required="true"
+     * @generated
+     */
+    String getKey();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.connectorconfiguration.ConnectorParameter#getKey <em>Key</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Key</em>' attribute.
-	 * @see #getKey()
-	 * @generated
-	 */
-	void setKey(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.connectorconfiguration.ConnectorParameter#getKey <em>Key</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Key</em>' attribute.
+     * @see #getKey()
+     * @generated
+     */
+    void setKey(String value);
 
-	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(AbstractExpression)
-	 * @see org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage#getConnectorParameter_Expression()
-	 * @model containment="true"
-	 * @generated
-	 */
-	AbstractExpression getExpression();
+    /**
+     * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Expression</em>' containment reference.
+     * @see #setExpression(AbstractExpression)
+     * @see org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage#getConnectorParameter_Expression()
+     * @model containment="true"
+     * @generated
+     */
+    AbstractExpression getExpression();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.connectorconfiguration.ConnectorParameter#getExpression <em>Expression</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' containment reference.
-	 * @see #getExpression()
-	 * @generated
-	 */
-	void setExpression(AbstractExpression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.connectorconfiguration.ConnectorParameter#getExpression <em>Expression</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Expression</em>' containment reference.
+     * @see #getExpression()
+     * @generated
+     */
+    void setExpression(AbstractExpression value);
 
 } // ConnectorParameter

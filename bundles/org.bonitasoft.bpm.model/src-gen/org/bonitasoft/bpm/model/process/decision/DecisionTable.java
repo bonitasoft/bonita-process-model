@@ -39,38 +39,38 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface DecisionTable extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Lines</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.decision.DecisionTableLine}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Lines</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.decision.DecisionPackage#getDecisionTable_Lines()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<DecisionTableLine> getLines();
+    /**
+     * Returns the value of the '<em><b>Lines</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.decision.DecisionTableLine}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Lines</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.decision.DecisionPackage#getDecisionTable_Lines()
+     * @model containment="true"
+     * @generated
+     */
+    EList<DecisionTableLine> getLines();
 
-	/**
-	 * Returns the value of the '<em><b>Default Action</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Action</em>' containment reference.
-	 * @see #setDefaultAction(DecisionTableAction)
-	 * @see org.bonitasoft.bpm.model.process.decision.DecisionPackage#getDecisionTable_DefaultAction()
-	 * @model containment="true"
-	 * @generated
-	 */
-	DecisionTableAction getDefaultAction();
+    /**
+     * Returns the value of the '<em><b>Default Action</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Default Action</em>' containment reference.
+     * @see #setDefaultAction(DecisionTableAction)
+     * @see org.bonitasoft.bpm.model.process.decision.DecisionPackage#getDecisionTable_DefaultAction()
+     * @model containment="true"
+     * @generated
+     */
+    DecisionTableAction getDefaultAction();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.decision.DecisionTable#getDefaultAction <em>Default Action</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default Action</em>' containment reference.
-	 * @see #getDefaultAction()
-	 * @generated
-	 */
-	void setDefaultAction(DecisionTableAction value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.decision.DecisionTable#getDefaultAction <em>Default Action</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Default Action</em>' containment reference.
+     * @see #getDefaultAction()
+     * @generated
+     */
+    void setDefaultAction(DecisionTableAction value);
 
 } // DecisionTable

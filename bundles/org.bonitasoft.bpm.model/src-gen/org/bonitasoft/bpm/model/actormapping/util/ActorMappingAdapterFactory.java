@@ -35,227 +35,227 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public class ActorMappingAdapterFactory extends AdapterFactoryImpl {
-	/**
-	 * The cached model package.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected static ActorMappingPackage modelPackage;
+    /**
+     * The cached model package.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected static ActorMappingPackage modelPackage;
 
-	/**
-	 * Creates an instance of the adapter factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ActorMappingAdapterFactory() {
-		if (modelPackage == null) {
-			modelPackage = ActorMappingPackage.eINSTANCE;
-		}
-	}
+    /**
+     * Creates an instance of the adapter factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public ActorMappingAdapterFactory() {
+        if (modelPackage == null) {
+            modelPackage = ActorMappingPackage.eINSTANCE;
+        }
+    }
 
-	/**
-	 * Returns whether this factory is applicable for the type of the object.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
-	 * <!-- end-user-doc -->
-	 * @return whether this factory is applicable for the type of the object.
-	 * @generated
-	 */
-	@Override
-	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage) {
-			return true;
-		}
-		if (object instanceof EObject) {
-			return ((EObject)object).eClass().getEPackage() == modelPackage;
-		}
-		return false;
-	}
+    /**
+     * Returns whether this factory is applicable for the type of the object.
+     * <!-- begin-user-doc -->
+     * This implementation returns <code>true</code> if the object is either the model's package or is an instance object of the model.
+     * <!-- end-user-doc -->
+     * @return whether this factory is applicable for the type of the object.
+     * @generated
+     */
+    @Override
+    public boolean isFactoryForType(Object object) {
+        if (object == modelPackage) {
+            return true;
+        }
+        if (object instanceof EObject) {
+            return ((EObject)object).eClass().getEPackage() == modelPackage;
+        }
+        return false;
+    }
 
-	/**
-	 * The switch that delegates to the <code>createXXX</code> methods.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ActorMappingSwitch<Adapter> modelSwitch =
-		new ActorMappingSwitch<Adapter>() {
-			@Override
-			public Adapter caseActorMapping(ActorMapping object) {
-				return createActorMappingAdapter();
-			}
-			@Override
-			public Adapter caseActorMappingsType(ActorMappingsType object) {
-				return createActorMappingsTypeAdapter();
-			}
-			@Override
-			public Adapter caseDocumentRoot(DocumentRoot object) {
-				return createDocumentRootAdapter();
-			}
-			@Override
-			public Adapter caseGroups(Groups object) {
-				return createGroupsAdapter();
-			}
-			@Override
-			public Adapter caseMembership(Membership object) {
-				return createMembershipAdapter();
-			}
-			@Override
-			public Adapter caseMembershipType(MembershipType object) {
-				return createMembershipTypeAdapter();
-			}
-			@Override
-			public Adapter caseRoles(Roles object) {
-				return createRolesAdapter();
-			}
-			@Override
-			public Adapter caseUsers(Users object) {
-				return createUsersAdapter();
-			}
-			@Override
-			public Adapter defaultCase(EObject object) {
-				return createEObjectAdapter();
-			}
-		};
+    /**
+     * The switch that delegates to the <code>createXXX</code> methods.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ActorMappingSwitch<Adapter> modelSwitch =
+        new ActorMappingSwitch<Adapter>() {
+            @Override
+            public Adapter caseActorMapping(ActorMapping object) {
+                return createActorMappingAdapter();
+            }
+            @Override
+            public Adapter caseActorMappingsType(ActorMappingsType object) {
+                return createActorMappingsTypeAdapter();
+            }
+            @Override
+            public Adapter caseDocumentRoot(DocumentRoot object) {
+                return createDocumentRootAdapter();
+            }
+            @Override
+            public Adapter caseGroups(Groups object) {
+                return createGroupsAdapter();
+            }
+            @Override
+            public Adapter caseMembership(Membership object) {
+                return createMembershipAdapter();
+            }
+            @Override
+            public Adapter caseMembershipType(MembershipType object) {
+                return createMembershipTypeAdapter();
+            }
+            @Override
+            public Adapter caseRoles(Roles object) {
+                return createRolesAdapter();
+            }
+            @Override
+            public Adapter caseUsers(Users object) {
+                return createUsersAdapter();
+            }
+            @Override
+            public Adapter defaultCase(EObject object) {
+                return createEObjectAdapter();
+            }
+        };
 
-	/**
-	 * Creates an adapter for the <code>target</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param target the object to adapt.
-	 * @return the adapter for the <code>target</code>.
-	 * @generated
-	 */
-	@Override
-	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject)target);
-	}
+    /**
+     * Creates an adapter for the <code>target</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param target the object to adapt.
+     * @return the adapter for the <code>target</code>.
+     * @generated
+     */
+    @Override
+    public Adapter createAdapter(Notifier target) {
+        return modelSwitch.doSwitch((EObject)target);
+    }
 
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.ActorMapping <em>Actor Mapping</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.actormapping.ActorMapping
-	 * @generated
-	 */
-	public Adapter createActorMappingAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.ActorMapping <em>Actor Mapping</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.actormapping.ActorMapping
+     * @generated
+     */
+    public Adapter createActorMappingAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.ActorMappingsType <em>Actor Mappings Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.actormapping.ActorMappingsType
-	 * @generated
-	 */
-	public Adapter createActorMappingsTypeAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.ActorMappingsType <em>Actor Mappings Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.actormapping.ActorMappingsType
+     * @generated
+     */
+    public Adapter createActorMappingsTypeAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.DocumentRoot <em>Document Root</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.actormapping.DocumentRoot
-	 * @generated
-	 */
-	public Adapter createDocumentRootAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.DocumentRoot <em>Document Root</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.actormapping.DocumentRoot
+     * @generated
+     */
+    public Adapter createDocumentRootAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.Groups <em>Groups</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.actormapping.Groups
-	 * @generated
-	 */
-	public Adapter createGroupsAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.Groups <em>Groups</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.actormapping.Groups
+     * @generated
+     */
+    public Adapter createGroupsAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.Membership <em>Membership</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.actormapping.Membership
-	 * @generated
-	 */
-	public Adapter createMembershipAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.Membership <em>Membership</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.actormapping.Membership
+     * @generated
+     */
+    public Adapter createMembershipAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.MembershipType <em>Membership Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.actormapping.MembershipType
-	 * @generated
-	 */
-	public Adapter createMembershipTypeAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.MembershipType <em>Membership Type</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.actormapping.MembershipType
+     * @generated
+     */
+    public Adapter createMembershipTypeAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.Roles <em>Roles</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.actormapping.Roles
-	 * @generated
-	 */
-	public Adapter createRolesAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.Roles <em>Roles</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.actormapping.Roles
+     * @generated
+     */
+    public Adapter createRolesAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.Users <em>Users</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bonitasoft.bpm.model.actormapping.Users
-	 * @generated
-	 */
-	public Adapter createUsersAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for an object of class '{@link org.bonitasoft.bpm.model.actormapping.Users <em>Users</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see org.bonitasoft.bpm.model.actormapping.Users
+     * @generated
+     */
+    public Adapter createUsersAdapter() {
+        return null;
+    }
 
-	/**
-	 * Creates a new adapter for the default case.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @generated
-	 */
-	public Adapter createEObjectAdapter() {
-		return null;
-	}
+    /**
+     * Creates a new adapter for the default case.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @generated
+     */
+    public Adapter createEObjectAdapter() {
+        return null;
+    }
 
 } //ActorMappingAdapterFactory

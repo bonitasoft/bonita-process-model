@@ -17,7 +17,8 @@ package org.bonitasoft.bpm.model.edit.custom.process;
 
 import static org.junit.Assert.assertTrue;
 
-import org.bonitasoft.bpm.model.edit.custom.i18n.Messages;
+import org.bonitasoft.bpm.model.edit.i18n.Messages;
+import org.bonitasoft.bpm.model.edit.process.CustomFormMappingItemProvider;
 import org.bonitasoft.bpm.model.expression.Expression;
 import org.bonitasoft.bpm.model.expression.ExpressionFactory;
 import org.bonitasoft.bpm.model.process.FormMapping;

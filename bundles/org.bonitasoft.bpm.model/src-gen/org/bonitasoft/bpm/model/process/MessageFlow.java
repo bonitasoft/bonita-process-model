@@ -36,52 +36,52 @@ package org.bonitasoft.bpm.model.process;
  * @generated
  */
 public interface MessageFlow extends Element {
-	/**
-	 * Returns the value of the '<em><b>Target</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.AbstractCatchMessageEvent#getIncomingMessag <em>Incoming Messag</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target</em>' reference.
-	 * @see #setTarget(AbstractCatchMessageEvent)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessageFlow_Target()
-	 * @see org.bonitasoft.bpm.model.process.AbstractCatchMessageEvent#getIncomingMessag
-	 * @model opposite="incomingMessag" required="true"
-	 * @generated
-	 */
-	AbstractCatchMessageEvent getTarget();
+    /**
+     * Returns the value of the '<em><b>Target</b></em>' reference.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.AbstractCatchMessageEvent#getIncomingMessag <em>Incoming Messag</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Target</em>' reference.
+     * @see #setTarget(AbstractCatchMessageEvent)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessageFlow_Target()
+     * @see org.bonitasoft.bpm.model.process.AbstractCatchMessageEvent#getIncomingMessag
+     * @model opposite="incomingMessag" required="true"
+     * @generated
+     */
+    AbstractCatchMessageEvent getTarget();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.MessageFlow#getTarget <em>Target</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target</em>' reference.
-	 * @see #getTarget()
-	 * @generated
-	 */
-	void setTarget(AbstractCatchMessageEvent value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.MessageFlow#getTarget <em>Target</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Target</em>' reference.
+     * @see #getTarget()
+     * @generated
+     */
+    void setTarget(AbstractCatchMessageEvent value);
 
-	/**
-	 * Returns the value of the '<em><b>Source</b></em>' reference.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.ThrowMessageEvent#getOutgoingMessages <em>Outgoing Messages</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Source</em>' reference.
-	 * @see #setSource(ThrowMessageEvent)
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessageFlow_Source()
-	 * @see org.bonitasoft.bpm.model.process.ThrowMessageEvent#getOutgoingMessages
-	 * @model opposite="outgoingMessages" required="true"
-	 * @generated
-	 */
-	ThrowMessageEvent getSource();
+    /**
+     * Returns the value of the '<em><b>Source</b></em>' reference.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.ThrowMessageEvent#getOutgoingMessages <em>Outgoing Messages</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Source</em>' reference.
+     * @see #setSource(ThrowMessageEvent)
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMessageFlow_Source()
+     * @see org.bonitasoft.bpm.model.process.ThrowMessageEvent#getOutgoingMessages
+     * @model opposite="outgoingMessages" required="true"
+     * @generated
+     */
+    ThrowMessageEvent getSource();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.process.MessageFlow#getSource <em>Source</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Source</em>' reference.
-	 * @see #getSource()
-	 * @generated
-	 */
-	void setSource(ThrowMessageEvent value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.MessageFlow#getSource <em>Source</em>}' reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Source</em>' reference.
+     * @see #getSource()
+     * @generated
+     */
+    void setSource(ThrowMessageEvent value);
 
 } // MessageFlow

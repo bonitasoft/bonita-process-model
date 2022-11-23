@@ -37,48 +37,48 @@ import org.bonitasoft.bpm.model.expression.Expression;
  * @generated
  */
 public interface MandatoryFieldsCustomization extends CSSCustomizable {
-	/**
-	 * Returns the value of the '<em><b>Mandatory Symbol</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mandatory Symbol</em>' containment reference.
-	 * @see #setMandatorySymbol(Expression)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getMandatoryFieldsCustomization_MandatorySymbol()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getMandatorySymbol();
+    /**
+     * Returns the value of the '<em><b>Mandatory Symbol</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Mandatory Symbol</em>' containment reference.
+     * @see #setMandatorySymbol(Expression)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getMandatoryFieldsCustomization_MandatorySymbol()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getMandatorySymbol();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.MandatoryFieldsCustomization#getMandatorySymbol <em>Mandatory Symbol</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mandatory Symbol</em>' containment reference.
-	 * @see #getMandatorySymbol()
-	 * @generated
-	 */
-	void setMandatorySymbol(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.MandatoryFieldsCustomization#getMandatorySymbol <em>Mandatory Symbol</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Mandatory Symbol</em>' containment reference.
+     * @see #getMandatorySymbol()
+     * @generated
+     */
+    void setMandatorySymbol(Expression value);
 
-	/**
-	 * Returns the value of the '<em><b>Mandatory Label</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mandatory Label</em>' containment reference.
-	 * @see #setMandatoryLabel(Expression)
-	 * @see org.bonitasoft.bpm.model.form.FormPackage#getMandatoryFieldsCustomization_MandatoryLabel()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getMandatoryLabel();
+    /**
+     * Returns the value of the '<em><b>Mandatory Label</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Mandatory Label</em>' containment reference.
+     * @see #setMandatoryLabel(Expression)
+     * @see org.bonitasoft.bpm.model.form.FormPackage#getMandatoryFieldsCustomization_MandatoryLabel()
+     * @model containment="true"
+     * @generated
+     */
+    Expression getMandatoryLabel();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.form.MandatoryFieldsCustomization#getMandatoryLabel <em>Mandatory Label</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mandatory Label</em>' containment reference.
-	 * @see #getMandatoryLabel()
-	 * @generated
-	 */
-	void setMandatoryLabel(Expression value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.form.MandatoryFieldsCustomization#getMandatoryLabel <em>Mandatory Label</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Mandatory Label</em>' containment reference.
+     * @see #getMandatoryLabel()
+     * @generated
+     */
+    void setMandatoryLabel(Expression value);
 
 } // MandatoryFieldsCustomization

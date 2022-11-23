@@ -47,219 +47,219 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
  * @generated
  */
 public class CorrelationImpl extends EObjectImpl implements Correlation {
-	/**
-	 * The default value of the '{@link #getCorrelationType() <em>Correlation Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCorrelationType()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final CorrelationTypeActive CORRELATION_TYPE_EDEFAULT = CorrelationTypeActive.INACTIVE;
+    /**
+     * The default value of the '{@link #getCorrelationType() <em>Correlation Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getCorrelationType()
+     * @generated
+     * @ordered
+     */
+    protected static final CorrelationTypeActive CORRELATION_TYPE_EDEFAULT = CorrelationTypeActive.INACTIVE;
 
-	/**
-	 * The cached value of the '{@link #getCorrelationType() <em>Correlation Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCorrelationType()
-	 * @generated
-	 * @ordered
-	 */
-	protected CorrelationTypeActive correlationType = CORRELATION_TYPE_EDEFAULT;
+    /**
+     * The cached value of the '{@link #getCorrelationType() <em>Correlation Type</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getCorrelationType()
+     * @generated
+     * @ordered
+     */
+    protected CorrelationTypeActive correlationType = CORRELATION_TYPE_EDEFAULT;
 
-	/**
-	 * The cached value of the '{@link #getCorrelationAssociation() <em>Correlation Association</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCorrelationAssociation()
-	 * @generated
-	 * @ordered
-	 */
-	protected TableExpression correlationAssociation;
+    /**
+     * The cached value of the '{@link #getCorrelationAssociation() <em>Correlation Association</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getCorrelationAssociation()
+     * @generated
+     * @ordered
+     */
+    protected TableExpression correlationAssociation;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected CorrelationImpl() {
-		super();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected CorrelationImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ProcessPackage.Literals.CORRELATION;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected EClass eStaticClass() {
+        return ProcessPackage.Literals.CORRELATION;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public CorrelationTypeActive getCorrelationType() {
-		return correlationType;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public CorrelationTypeActive getCorrelationType() {
+        return correlationType;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setCorrelationType(CorrelationTypeActive newCorrelationType) {
-		CorrelationTypeActive oldCorrelationType = correlationType;
-		correlationType = newCorrelationType == null ? CORRELATION_TYPE_EDEFAULT : newCorrelationType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.CORRELATION__CORRELATION_TYPE, oldCorrelationType, correlationType));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setCorrelationType(CorrelationTypeActive newCorrelationType) {
+        CorrelationTypeActive oldCorrelationType = correlationType;
+        correlationType = newCorrelationType == null ? CORRELATION_TYPE_EDEFAULT : newCorrelationType;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.CORRELATION__CORRELATION_TYPE, oldCorrelationType, correlationType));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public TableExpression getCorrelationAssociation() {
-		return correlationAssociation;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public TableExpression getCorrelationAssociation() {
+        return correlationAssociation;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetCorrelationAssociation(TableExpression newCorrelationAssociation, NotificationChain msgs) {
-		TableExpression oldCorrelationAssociation = correlationAssociation;
-		correlationAssociation = newCorrelationAssociation;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION, oldCorrelationAssociation, newCorrelationAssociation);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public NotificationChain basicSetCorrelationAssociation(TableExpression newCorrelationAssociation, NotificationChain msgs) {
+        TableExpression oldCorrelationAssociation = correlationAssociation;
+        correlationAssociation = newCorrelationAssociation;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION, oldCorrelationAssociation, newCorrelationAssociation);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
+        }
+        return msgs;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setCorrelationAssociation(TableExpression newCorrelationAssociation) {
-		if (newCorrelationAssociation != correlationAssociation) {
-			NotificationChain msgs = null;
-			if (correlationAssociation != null)
-				msgs = ((InternalEObject)correlationAssociation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION, null, msgs);
-			if (newCorrelationAssociation != null)
-				msgs = ((InternalEObject)newCorrelationAssociation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION, null, msgs);
-			msgs = basicSetCorrelationAssociation(newCorrelationAssociation, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION, newCorrelationAssociation, newCorrelationAssociation));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setCorrelationAssociation(TableExpression newCorrelationAssociation) {
+        if (newCorrelationAssociation != correlationAssociation) {
+            NotificationChain msgs = null;
+            if (correlationAssociation != null)
+                msgs = ((InternalEObject)correlationAssociation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION, null, msgs);
+            if (newCorrelationAssociation != null)
+                msgs = ((InternalEObject)newCorrelationAssociation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION, null, msgs);
+            msgs = basicSetCorrelationAssociation(newCorrelationAssociation, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION, newCorrelationAssociation, newCorrelationAssociation));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION:
-				return basicSetCorrelationAssociation(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+        switch (featureID) {
+            case ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION:
+                return basicSetCorrelationAssociation(null, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ProcessPackage.CORRELATION__CORRELATION_TYPE:
-				return getCorrelationType();
-			case ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION:
-				return getCorrelationAssociation();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case ProcessPackage.CORRELATION__CORRELATION_TYPE:
+                return getCorrelationType();
+            case ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION:
+                return getCorrelationAssociation();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ProcessPackage.CORRELATION__CORRELATION_TYPE:
-				setCorrelationType((CorrelationTypeActive)newValue);
-				return;
-			case ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION:
-				setCorrelationAssociation((TableExpression)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case ProcessPackage.CORRELATION__CORRELATION_TYPE:
+                setCorrelationType((CorrelationTypeActive)newValue);
+                return;
+            case ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION:
+                setCorrelationAssociation((TableExpression)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ProcessPackage.CORRELATION__CORRELATION_TYPE:
-				setCorrelationType(CORRELATION_TYPE_EDEFAULT);
-				return;
-			case ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION:
-				setCorrelationAssociation((TableExpression)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case ProcessPackage.CORRELATION__CORRELATION_TYPE:
+                setCorrelationType(CORRELATION_TYPE_EDEFAULT);
+                return;
+            case ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION:
+                setCorrelationAssociation((TableExpression)null);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ProcessPackage.CORRELATION__CORRELATION_TYPE:
-				return correlationType != CORRELATION_TYPE_EDEFAULT;
-			case ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION:
-				return correlationAssociation != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case ProcessPackage.CORRELATION__CORRELATION_TYPE:
+                return correlationType != CORRELATION_TYPE_EDEFAULT;
+            case ProcessPackage.CORRELATION__CORRELATION_ASSOCIATION:
+                return correlationAssociation != null;
+        }
+        return super.eIsSet(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public String toString() {
+        if (eIsProxy()) return super.toString();
 
-		StringBuilder result = new StringBuilder(super.toString());
-		result.append(" (correlationType: "); //$NON-NLS-1$
-		result.append(correlationType);
-		result.append(')');
-		return result.toString();
-	}
+        StringBuilder result = new StringBuilder(super.toString());
+        result.append(" (correlationType: "); //$NON-NLS-1$
+        result.append(correlationType);
+        result.append(')');
+        return result.toString();
+    }
 
 } //CorrelationImpl

@@ -28,156 +28,156 @@ import org.eclipse.emf.ecore.EFactory;
  * @generated
  */
 public interface SimulationFactory extends EFactory {
-	/**
-	 * The singleton instance of the factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	SimulationFactory eINSTANCE = org.bonitasoft.bpm.model.simulation.impl.SimulationFactoryImpl.init();
+    /**
+     * The singleton instance of the factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    SimulationFactory eINSTANCE = org.bonitasoft.bpm.model.simulation.impl.SimulationFactoryImpl.init();
 
-	/**
-	 * Returns a new object of class '<em>Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Element</em>'.
-	 * @generated
-	 */
-	SimulationElement createSimulationElement();
+    /**
+     * Returns a new object of class '<em>Element</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Element</em>'.
+     * @generated
+     */
+    SimulationElement createSimulationElement();
 
-	/**
-	 * Returns a new object of class '<em>Transition</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Transition</em>'.
-	 * @generated
-	 */
-	SimulationTransition createSimulationTransition();
+    /**
+     * Returns a new object of class '<em>Transition</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Transition</em>'.
+     * @generated
+     */
+    SimulationTransition createSimulationTransition();
 
-	/**
-	 * Returns a new object of class '<em>Resource Usage</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Resource Usage</em>'.
-	 * @generated
-	 */
-	ResourceUsage createResourceUsage();
+    /**
+     * Returns a new object of class '<em>Resource Usage</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Resource Usage</em>'.
+     * @generated
+     */
+    ResourceUsage createResourceUsage();
 
-	/**
-	 * Returns a new object of class '<em>Injection Period</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Injection Period</em>'.
-	 * @generated
-	 */
-	InjectionPeriod createInjectionPeriod();
+    /**
+     * Returns a new object of class '<em>Injection Period</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Injection Period</em>'.
+     * @generated
+     */
+    InjectionPeriod createInjectionPeriod();
 
-	/**
-	 * Returns a new object of class '<em>Boolean</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean</em>'.
-	 * @generated
-	 */
-	SimulationBoolean createSimulationBoolean();
+    /**
+     * Returns a new object of class '<em>Boolean</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Boolean</em>'.
+     * @generated
+     */
+    SimulationBoolean createSimulationBoolean();
 
-	/**
-	 * Returns a new object of class '<em>Number Data</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Number Data</em>'.
-	 * @generated
-	 */
-	SimulationNumberData createSimulationNumberData();
+    /**
+     * Returns a new object of class '<em>Number Data</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Number Data</em>'.
+     * @generated
+     */
+    SimulationNumberData createSimulationNumberData();
 
-	/**
-	 * Returns a new object of class '<em>Literal Data</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Literal Data</em>'.
-	 * @generated
-	 */
-	SimulationLiteralData createSimulationLiteralData();
+    /**
+     * Returns a new object of class '<em>Literal Data</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Literal Data</em>'.
+     * @generated
+     */
+    SimulationLiteralData createSimulationLiteralData();
 
-	/**
-	 * Returns a new object of class '<em>Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Literal</em>'.
-	 * @generated
-	 */
-	SimulationLiteral createSimulationLiteral();
+    /**
+     * Returns a new object of class '<em>Literal</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Literal</em>'.
+     * @generated
+     */
+    SimulationLiteral createSimulationLiteral();
 
-	/**
-	 * Returns a new object of class '<em>Number Range</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Number Range</em>'.
-	 * @generated
-	 */
-	SimulationNumberRange createSimulationNumberRange();
+    /**
+     * Returns a new object of class '<em>Number Range</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Number Range</em>'.
+     * @generated
+     */
+    SimulationNumberRange createSimulationNumberRange();
 
-	/**
-	 * Returns a new object of class '<em>Data Change</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Change</em>'.
-	 * @generated
-	 */
-	DataChange createDataChange();
+    /**
+     * Returns a new object of class '<em>Data Change</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Data Change</em>'.
+     * @generated
+     */
+    DataChange createDataChange();
 
-	/**
-	 * Returns a new object of class '<em>Calendar</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Calendar</em>'.
-	 * @generated
-	 */
-	SimulationCalendar createSimulationCalendar();
+    /**
+     * Returns a new object of class '<em>Calendar</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Calendar</em>'.
+     * @generated
+     */
+    SimulationCalendar createSimulationCalendar();
 
-	/**
-	 * Returns a new object of class '<em>Day Period</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Day Period</em>'.
-	 * @generated
-	 */
-	DayPeriod createDayPeriod();
+    /**
+     * Returns a new object of class '<em>Day Period</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Day Period</em>'.
+     * @generated
+     */
+    DayPeriod createDayPeriod();
 
-	/**
-	 * Returns a new object of class '<em>Model Version</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Model Version</em>'.
-	 * @generated
-	 */
-	ModelVersion createModelVersion();
+    /**
+     * Returns a new object of class '<em>Model Version</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Model Version</em>'.
+     * @generated
+     */
+    ModelVersion createModelVersion();
 
-	/**
-	 * Returns a new object of class '<em>Load Profile</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Load Profile</em>'.
-	 * @generated
-	 */
-	LoadProfile createLoadProfile();
+    /**
+     * Returns a new object of class '<em>Load Profile</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Load Profile</em>'.
+     * @generated
+     */
+    LoadProfile createLoadProfile();
 
-	/**
-	 * Returns a new object of class '<em>Resource</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Resource</em>'.
-	 * @generated
-	 */
-	Resource createResource();
+    /**
+     * Returns a new object of class '<em>Resource</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Resource</em>'.
+     * @generated
+     */
+    Resource createResource();
 
-	/**
-	 * Returns the package supported by this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the package supported by this factory.
-	 * @generated
-	 */
-	SimulationPackage getSimulationPackage();
+    /**
+     * Returns the package supported by this factory.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the package supported by this factory.
+     * @generated
+     */
+    SimulationPackage getSimulationPackage();
 
 } //SimulationFactory

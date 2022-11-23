@@ -37,50 +37,50 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface SimulationLiteral extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Probability</b></em>' attribute.
-	 * The default value is <code>"1"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Probability</em>' attribute.
-	 * @see #setProbability(double)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationLiteral_Probability()
-	 * @model default="1" required="true"
-	 * @generated
-	 */
-	double getProbability();
+    /**
+     * Returns the value of the '<em><b>Probability</b></em>' attribute.
+     * The default value is <code>"1"</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Probability</em>' attribute.
+     * @see #setProbability(double)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationLiteral_Probability()
+     * @model default="1" required="true"
+     * @generated
+     */
+    double getProbability();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationLiteral#getProbability <em>Probability</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Probability</em>' attribute.
-	 * @see #getProbability()
-	 * @generated
-	 */
-	void setProbability(double value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationLiteral#getProbability <em>Probability</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Probability</em>' attribute.
+     * @see #getProbability()
+     * @generated
+     */
+    void setProbability(double value);
 
-	/**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * The default value is <code>""</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(String)
-	 * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationLiteral_Value()
-	 * @model default="" required="true"
-	 * @generated
-	 */
-	String getValue();
+    /**
+     * Returns the value of the '<em><b>Value</b></em>' attribute.
+     * The default value is <code>""</code>.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Value</em>' attribute.
+     * @see #setValue(String)
+     * @see org.bonitasoft.bpm.model.simulation.SimulationPackage#getSimulationLiteral_Value()
+     * @model default="" required="true"
+     * @generated
+     */
+    String getValue();
 
-	/**
-	 * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationLiteral#getValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #getValue()
-	 * @generated
-	 */
-	void setValue(String value);
+    /**
+     * Sets the value of the '{@link org.bonitasoft.bpm.model.simulation.SimulationLiteral#getValue <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Value</em>' attribute.
+     * @see #getValue()
+     * @generated
+     */
+    void setValue(String value);
 
 } // SimulationLiteral

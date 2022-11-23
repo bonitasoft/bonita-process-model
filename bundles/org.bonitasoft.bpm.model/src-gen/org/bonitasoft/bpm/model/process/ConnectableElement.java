@@ -39,28 +39,28 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ConnectableElement extends Element, DataAware {
-	/**
-	 * Returns the value of the '<em><b>Connectors</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.Connector}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Connectors</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getConnectableElement_Connectors()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Connector> getConnectors();
+    /**
+     * Returns the value of the '<em><b>Connectors</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.Connector}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Connectors</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getConnectableElement_Connectors()
+     * @model containment="true"
+     * @generated
+     */
+    EList<Connector> getConnectors();
 
-	/**
-	 * Returns the value of the '<em><b>Kpis</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.kpi.AbstractKPIBinding}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Kpis</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getConnectableElement_Kpis()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<AbstractKPIBinding> getKpis();
+    /**
+     * Returns the value of the '<em><b>Kpis</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.kpi.AbstractKPIBinding}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Kpis</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getConnectableElement_Kpis()
+     * @model containment="true"
+     * @generated
+     */
+    EList<AbstractKPIBinding> getKpis();
 
 } // ConnectableElement

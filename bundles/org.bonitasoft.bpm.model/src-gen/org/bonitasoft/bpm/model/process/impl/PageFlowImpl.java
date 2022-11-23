@@ -43,150 +43,150 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * @generated
  */
 public class PageFlowImpl extends ConnectableElementImpl implements PageFlow {
-	/**
-	 * The cached value of the '{@link #getFormMapping() <em>Form Mapping</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getFormMapping()
-	 * @generated
-	 * @ordered
-	 */
-	protected FormMapping formMapping;
+    /**
+     * The cached value of the '{@link #getFormMapping() <em>Form Mapping</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getFormMapping()
+     * @generated
+     * @ordered
+     */
+    protected FormMapping formMapping;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected PageFlowImpl() {
-		super();
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected PageFlowImpl() {
+        super();
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return ProcessPackage.Literals.PAGE_FLOW;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    protected EClass eStaticClass() {
+        return ProcessPackage.Literals.PAGE_FLOW;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public FormMapping getFormMapping() {
-		return formMapping;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public FormMapping getFormMapping() {
+        return formMapping;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetFormMapping(FormMapping newFormMapping, NotificationChain msgs) {
-		FormMapping oldFormMapping = formMapping;
-		formMapping = newFormMapping;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ProcessPackage.PAGE_FLOW__FORM_MAPPING, oldFormMapping, newFormMapping);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public NotificationChain basicSetFormMapping(FormMapping newFormMapping, NotificationChain msgs) {
+        FormMapping oldFormMapping = formMapping;
+        formMapping = newFormMapping;
+        if (eNotificationRequired()) {
+            ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, ProcessPackage.PAGE_FLOW__FORM_MAPPING, oldFormMapping, newFormMapping);
+            if (msgs == null) msgs = notification; else msgs.add(notification);
+        }
+        return msgs;
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setFormMapping(FormMapping newFormMapping) {
-		if (newFormMapping != formMapping) {
-			NotificationChain msgs = null;
-			if (formMapping != null)
-				msgs = ((InternalEObject)formMapping).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ProcessPackage.PAGE_FLOW__FORM_MAPPING, null, msgs);
-			if (newFormMapping != null)
-				msgs = ((InternalEObject)newFormMapping).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ProcessPackage.PAGE_FLOW__FORM_MAPPING, null, msgs);
-			msgs = basicSetFormMapping(newFormMapping, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.PAGE_FLOW__FORM_MAPPING, newFormMapping, newFormMapping));
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void setFormMapping(FormMapping newFormMapping) {
+        if (newFormMapping != formMapping) {
+            NotificationChain msgs = null;
+            if (formMapping != null)
+                msgs = ((InternalEObject)formMapping).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - ProcessPackage.PAGE_FLOW__FORM_MAPPING, null, msgs);
+            if (newFormMapping != null)
+                msgs = ((InternalEObject)newFormMapping).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - ProcessPackage.PAGE_FLOW__FORM_MAPPING, null, msgs);
+            msgs = basicSetFormMapping(newFormMapping, msgs);
+            if (msgs != null) msgs.dispatch();
+        }
+        else if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.PAGE_FLOW__FORM_MAPPING, newFormMapping, newFormMapping));
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case ProcessPackage.PAGE_FLOW__FORM_MAPPING:
-				return basicSetFormMapping(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+        switch (featureID) {
+            case ProcessPackage.PAGE_FLOW__FORM_MAPPING:
+                return basicSetFormMapping(null, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case ProcessPackage.PAGE_FLOW__FORM_MAPPING:
-				return getFormMapping();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Object eGet(int featureID, boolean resolve, boolean coreType) {
+        switch (featureID) {
+            case ProcessPackage.PAGE_FLOW__FORM_MAPPING:
+                return getFormMapping();
+        }
+        return super.eGet(featureID, resolve, coreType);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case ProcessPackage.PAGE_FLOW__FORM_MAPPING:
-				setFormMapping((FormMapping)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eSet(int featureID, Object newValue) {
+        switch (featureID) {
+            case ProcessPackage.PAGE_FLOW__FORM_MAPPING:
+                setFormMapping((FormMapping)newValue);
+                return;
+        }
+        super.eSet(featureID, newValue);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case ProcessPackage.PAGE_FLOW__FORM_MAPPING:
-				setFormMapping((FormMapping)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public void eUnset(int featureID) {
+        switch (featureID) {
+            case ProcessPackage.PAGE_FLOW__FORM_MAPPING:
+                setFormMapping((FormMapping)null);
+                return;
+        }
+        super.eUnset(featureID);
+    }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case ProcessPackage.PAGE_FLOW__FORM_MAPPING:
-				return formMapping != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public boolean eIsSet(int featureID) {
+        switch (featureID) {
+            case ProcessPackage.PAGE_FLOW__FORM_MAPPING:
+                return formMapping != null;
+        }
+        return super.eIsSet(featureID);
+    }
 
 } //PageFlowImpl

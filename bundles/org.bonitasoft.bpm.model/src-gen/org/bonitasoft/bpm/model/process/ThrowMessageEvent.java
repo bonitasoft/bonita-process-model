@@ -37,32 +37,32 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ThrowMessageEvent extends MessageEvent {
-	/**
-	 * Returns the value of the '<em><b>Events</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.Message}.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.Message#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Events</em>' containment reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getThrowMessageEvent_Events()
-	 * @see org.bonitasoft.bpm.model.process.Message#getSource
-	 * @model opposite="source" containment="true"
-	 * @generated
-	 */
-	EList<Message> getEvents();
+    /**
+     * Returns the value of the '<em><b>Events</b></em>' containment reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.Message}.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.Message#getSource <em>Source</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Events</em>' containment reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getThrowMessageEvent_Events()
+     * @see org.bonitasoft.bpm.model.process.Message#getSource
+     * @model opposite="source" containment="true"
+     * @generated
+     */
+    EList<Message> getEvents();
 
-	/**
-	 * Returns the value of the '<em><b>Outgoing Messages</b></em>' reference list.
-	 * The list contents are of type {@link org.bonitasoft.bpm.model.process.MessageFlow}.
-	 * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.MessageFlow#getSource <em>Source</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Outgoing Messages</em>' reference list.
-	 * @see org.bonitasoft.bpm.model.process.ProcessPackage#getThrowMessageEvent_OutgoingMessages()
-	 * @see org.bonitasoft.bpm.model.process.MessageFlow#getSource
-	 * @model opposite="source"
-	 * @generated
-	 */
-	EList<MessageFlow> getOutgoingMessages();
+    /**
+     * Returns the value of the '<em><b>Outgoing Messages</b></em>' reference list.
+     * The list contents are of type {@link org.bonitasoft.bpm.model.process.MessageFlow}.
+     * It is bidirectional and its opposite is '{@link org.bonitasoft.bpm.model.process.MessageFlow#getSource <em>Source</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Outgoing Messages</em>' reference list.
+     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getThrowMessageEvent_OutgoingMessages()
+     * @see org.bonitasoft.bpm.model.process.MessageFlow#getSource
+     * @model opposite="source"
+     * @generated
+     */
+    EList<MessageFlow> getOutgoingMessages();
 
 } // ThrowMessageEvent
