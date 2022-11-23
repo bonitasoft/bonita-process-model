@@ -22,10 +22,10 @@
 <plugin>
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
-      <!-- @generated process -->
+      <!-- @generated NOT process use CustomActorMappingItemProviderAdapterFactory -->
       <factory
             uri="http://www.bonitasoft.org/ns/actormapping/6.0"
-            class="org.bonitasoft.bpm.model.actormapping.provider.ActorMappingItemProviderAdapterFactory"
+            class="org.bonitasoft.bpm.model.edit.custom.actormapping.CustomActorMappingItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -100,10 +100,10 @@
    </extension>
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
-      <!-- @generated process -->
+      <!-- @generated NOT process use CustomProcessItemProviderAdapterFactory -->
       <factory
             uri="http://www.bonitasoft.org/ns/bpm/process"
-            class="org.bonitasoft.bpm.model.process.provider.ProcessItemProviderAdapterFactory"
+            class="org.bonitasoft.bpm.model.edit.custom.process.CustomProcessItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -113,10 +113,10 @@
    </extension>
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
-      <!-- @generated NOT process -->
+      <!-- @generated NOT process use CustomDecisionItemProviderAdapterFactory -->
       <factory
             uri="http://www.bonitasoft.org/ns/bpm/process/decision"
-            class="org.bonitasoft.bpm.model.process.decision.provider.DecisionItemProviderAdapterFactory"
+            class="org.bonitasoft.bpm.model.edit.custom.decision.CustomDecisionItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -126,7 +126,7 @@
    </extension>
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
-      <!-- @generated NOT process -->
+      <!-- @generated process -->
       <factory
             uri="http://www.bonitasoft.org/ns/bpm/process/decision/transitions"
             class="org.bonitasoft.bpm.model.process.decision.transitions.provider.TransitionsItemProviderAdapterFactory"

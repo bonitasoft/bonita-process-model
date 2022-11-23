@@ -28,6 +28,8 @@ import org.bonitasoft.bpm.model.form.FormPackage;
 import org.bonitasoft.bpm.model.kpi.KpiPackage;
 import org.bonitasoft.bpm.model.parameter.ParameterPackage;
 import org.bonitasoft.bpm.model.process.ProcessPackage;
+import org.bonitasoft.bpm.model.process.decision.DecisionPackage;
+import org.bonitasoft.bpm.model.process.decision.transitions.TransitionsPackage;
 import org.bonitasoft.bpm.model.process.util.ProcessResourceFactoryImpl;
 import org.bonitasoft.bpm.model.simulation.SimulationPackage;
 import org.bonitasoft.bpm.model.util.internal.ProcContentHandler;
@@ -72,6 +74,8 @@ public final class ModelLoader {
         }
         // register EPackages
         EPackage.Registry.INSTANCE.put(ProcessPackage.eNS_URI, ProcessPackage.eINSTANCE);
+        EPackage.Registry.INSTANCE.put(DecisionPackage.eNS_URI, DecisionPackage.eINSTANCE);
+        EPackage.Registry.INSTANCE.put(TransitionsPackage.eNS_URI, TransitionsPackage.eINSTANCE);
         EPackage.Registry.INSTANCE.put(ActorMappingPackage.eNS_URI, ActorMappingPackage.eINSTANCE);
         EPackage.Registry.INSTANCE.put(ConfigurationPackage.eNS_URI, ConfigurationPackage.eINSTANCE);
         EPackage.Registry.INSTANCE.put(ConnectorConfigurationPackage.eNS_URI, ConnectorConfigurationPackage.eINSTANCE);
