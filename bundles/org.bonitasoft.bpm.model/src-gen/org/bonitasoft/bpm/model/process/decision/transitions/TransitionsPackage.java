@@ -54,7 +54,7 @@ public interface TransitionsPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_URI = "http://www.bonitasoft.org/ns/bpm/transitions"; //$NON-NLS-1$
+    String eNS_URI = "http://www.bonitasoft.org/ns/bpm/process/decision/transitions"; //$NON-NLS-1$
 
     /**
      * The package namespace name.

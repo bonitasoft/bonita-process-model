@@ -52,7 +52,7 @@ public interface DecisionPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_URI = "http://www.bonitasoft.org/ns/bpm/decision"; //$NON-NLS-1$
+    String eNS_URI = "http://www.bonitasoft.org/ns/bpm/process/decision"; //$NON-NLS-1$
 
     /**
      * The package namespace name.

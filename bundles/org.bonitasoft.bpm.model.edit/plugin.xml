@@ -37,6 +37,19 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <!-- @generated process -->
       <factory
+            uri="http://www.bonitasoft.org/ns/actormapping/6.0"
+            class="org.bonitasoft.bpm.model.actormapping.provider.ActorMappingItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated process -->
+      <factory
             uri="http://www.bonitasoft.org/ns/bpm/configuration"
             class="org.bonitasoft.bpm.model.configuration.provider.ConfigurationItemProviderAdapterFactory"
             supportedTypes=
@@ -91,6 +104,19 @@
       <factory
             uri="http://www.bonitasoft.org/ns/bpm/parameter"
             class="org.bonitasoft.bpm.model.parameter.provider.ParameterItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated process -->
+      <factory
+            uri="http://www.bonitasoft.org/ns/bpm/process"
+            class="org.bonitasoft.bpm.model.process.provider.ProcessItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -156,6 +182,19 @@
       <factory
             uri="http://www.bonitasoft.org/ns/bpm/process/simulation"
             class="org.bonitasoft.bpm.model.simulation.provider.SimulationItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated process -->
+      <factory
+            uri="http://www.bonitasoft.org/ns/bpm/process/decision"
+            class="org.bonitasoft.bpm.model.process.decision.provider.DecisionItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider
