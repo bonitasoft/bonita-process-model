@@ -39,17 +39,18 @@ A console should appear and after a while, the build will be done. You can found
 ```
 mvn install
 ```
+This will install all the Bonita Process Domain Logic artifacts and also a maven archetype process-reader-archetype.
 
-## process-reader-archetype
+## How to use this project into your own work ?
+To make it more easy for you, this project contains a maven archetype, which allows to setup a project reading a Bonita Business Process Model file.  
 
-This project contains a maven archetype, which allows to easily setup a project reading a Bonita Business Process Model file.  
+### The maven archetype : process-reader-archetype
 This setups a classic maven project that uses:
 * [org.bonitasoft.bpm.model] (https://github.com/bonitasoft/bonita-process-model) for knowing the Bonita Process Domain Logic
 * [org.eclipse.emf.ecore](https://www.eclipse.org/emf) to manipulate and load the model
 * A sample .proc Business Process Model file
 
-### How to use the archetype
-
+#### How to use the archetype
 ```
 mvn archetype:generate \
     -DarchetypeGroupId=org.bonitasoft.archetypes \
@@ -61,8 +62,7 @@ mvn archetype:generate \
     -DdisplayName="My Custom Process Reader" 
 ```
 
-### Optional archetype parameters
-
+#### Optional archetype parameters
 
 | Parameter         | Required   | Default value                     | Description             |
 | ------------------|------------|-----------------------------------|-------------------------|
@@ -70,4 +70,15 @@ mvn archetype:generate \
 | -Ddescription     | __false__  |     Describe your project here    | Description of the project|
 | -Dwrapper         | __false__  | true                              | If set to true, project will setup a [maven wrapper](https://github.com/takari/maven-wrapper)|
 
-## Tutorial : creating a new project and using the bonita-process-model
+### Tutorial : displaying the content of a simple process
+This tutorial will help you to read the content of a process file from the Bonita Studio and to display the content (tasks, events, transitions... ). 
+The code itself is already present in your newly project created.
+
+#### The business process model file 
+In the resources folder of your newly created project, you should have a MyDiagram-1.0.proc file. 
+This file is a Business Process Model File coming from Bonita Studio. It's a very simple process containing 4 tasks and a simple flow.
+
+#### Launching the application with App.java
+The App.java contain a main method which can be used to launch this application like a java application. It does the following things:
+* Loading the process file : It will load the process file by using the ModelLoader class present in org.bonitasoft.bpm.model. This loading is very important : it will allow you to manipulate the content of the process itself through emf. 
+* Displaying the content loaded in html : The ModelDisplayer present in the project created can show you how to display in an html page the content of the process file. It can be used as a way to better understand how emf and the model logic work. 
