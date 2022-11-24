@@ -195,6 +195,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                     <artifactId>tycho-packaging-plugin</artifactId>
                     <version>${tycho.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-surefire-plugin</artifactId>
+                    <version>${tycho.version}</version>
+                </plugin>
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>flatten-maven-plugin</artifactId>
@@ -340,6 +345,14 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
 					</execution>
                 </executions>
             </plugin>
+            <!-- Configuraiton for test plugins/fragments -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-surefire-plugin</artifactId>
+                <configuration>
+                    <useUIHarness>true</useUIHarness>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -348,7 +361,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         <module>releng/target-platform</module>
         <module>bundles/</module>
         <module>features/</module>
-        <!--<module>tests/</module>-->
+        <module>tests/</module>
         <module>sites/</module>
     </modules>
     
