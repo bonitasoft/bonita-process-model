@@ -15,10 +15,6 @@
 package org.bonitasoft.bpm.model.util;
 
 import java.net.URL;
-import java.util.Optional;
-import java.util.function.BiPredicate;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 import org.bonitasoft.bpm.model.actormapping.ActorMappingPackage;
 import org.bonitasoft.bpm.model.configuration.ConfigurationPackage;
@@ -31,6 +27,8 @@ import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.process.decision.DecisionPackage;
 import org.bonitasoft.bpm.model.process.decision.transitions.TransitionsPackage;
 import org.bonitasoft.bpm.model.process.util.ProcessResourceFactoryImpl;
+import org.bonitasoft.bpm.model.process.util.ProcessResourceImpl;
+import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.bpm.model.simulation.SimulationPackage;
 import org.bonitasoft.bpm.model.util.internal.ProcContentHandler;
 import org.eclipse.emf.common.util.URI;
@@ -68,7 +66,7 @@ public final class ModelLoader {
      * Initializes everything to work without extension points.
      */
     private ModelLoader() {
-        if (isOSGi()) {
+        if (EnvironmentUtil.isOSGi()) {
             // nothing to initialize. Extensions take care of it.
             return;
         }
@@ -92,31 +90,6 @@ public final class ModelLoader {
     }
 
     /**
-     * Test whether class is loaded in an OSGi context
-     * 
-     * @return true when loaded in OSGi
-     */
-    private boolean isOSGi() {
-        // test whether class is instanceof org.osgi.framework.BundleReference interface without loading the interface
-        Predicate<Class<?>> isOSGiBundleRef = c -> {
-            @SuppressWarnings({ "unchecked", "rawtypes" })
-            BiPredicate<BiPredicate, Class<?>> isOSGiBundleRefHelper = (bipredicate, clazz) -> {
-                return
-                // test whether class is itself the interface
-                clazz.getName().equals("org.osgi.framework.BundleReference") ||
-                // or it has an interface which matches (recursively)
-                        Stream.of(clazz.getInterfaces()).anyMatch(i -> bipredicate.test(bipredicate, i)) ||
-                // or its superclass matches (recursively)
-                        clazz.getSuperclass() != null && bipredicate.test(bipredicate, clazz.getSuperclass());
-            };
-            return isOSGiBundleRefHelper.test(isOSGiBundleRefHelper, c);
-        };
-        Optional<Class<? extends ClassLoader>> classLoaderClass = Optional.ofNullable(getClass().getClassLoader())
-                .map(ClassLoader::getClass);
-        return classLoaderClass.filter(isOSGiBundleRef).isPresent();
-    }
-
-    /**
      * Load a model from a file URL
      * 
      * @param fileUrl the URL pointing to a file
@@ -135,6 +108,8 @@ public final class ModelLoader {
      */
     public Resource loadModel(URI modelUri) {
         ResourceSetImpl rset = new ResourceSetImpl();
+        // try and migrate file during loading
+        rset.getLoadOptions().put(ProcessResourceImpl.OPTION_MIGRATION_POLICY, MigrationPolicy.ALWAYS_MIGRATE_POLICY);
         Resource model = rset.getResource(modelUri, true);
         return model;
     }

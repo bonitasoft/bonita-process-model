@@ -44,5 +44,8 @@ Export-Package: org.bonitasoft.bpm.model.actormapping,
  org.bonitasoft.bpm.model.util
 Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.eclipse.emf.ecore.xmi;visibility:=reexport
+ org.eclipse.emf.ecore.xmi;visibility:=reexport,
+ org.eclipse.emf.edapt.migration,
+ org.eclipse.emf.edapt.history,
+ org.eclipse.m2e.maven.runtime
 Bundle-ActivationPolicy: lazy

@@ -22,7 +22,7 @@ You can activate and switch the target platform in the Eclipse Preferences. Sele
 
 The Tycho build uses the `platform.target` file. However, in addition, we use a `remote_platform.target` that keeps the reference to the actual p2 update sites. In order to ensure reliability of our builds, we mirror the required content of those update sites and publish it to `https://update-site.bonitasoft.com/p2/<eclipse_version>/`.
 
-During the development phase, you can update the `remote_platform.target` and the `platform.target` to be in sync and pointing to the actual p2 update sites. The mirror is build and published before the RC version.
+During the development phase, you can update the `remote_platform.target` and the `target-platform.target` to be in sync and pointing to the actual p2 update sites. The mirror is build and published before the RC version.
 
 When possible, do not explicitly set the plugins/features version. It eases the update process. Often eclipse update sites are already versioned (eg: __https://download.eclipse.org/releases/2022-06__, __https://download.eclipse.org/technology/swtbot/releases/4.0.0/__...).
 
@@ -32,7 +32,7 @@ You may use the `target-platform-validation-plugin` to validate the target platf
 
 [source, shell]
 ----
-./mvnw -f platform/pom.xml validate -Pvalidate
+./mvnw -f releng/target-platform/pom.xml validate -Pvalidate
 ----
 
 == Build the mirror
@@ -41,26 +41,26 @@ Once ready and stable for the release, the target platform can be mirrored using
 
 [source, shell]
 ----
-./mvnw -f platform/pom.xml groovy:execute@configure-mirror-plugin
+./mvnw -f releng/target-platform/pom.xml groovy:execute@configure-mirror-plugin
 ----
 This execution will update the configuration of the `tycho-p2-extras-plugin` to synch the `mirror` goal with the content of the `remote_platform.target`
 
 [source, shell]
 ----
-./mvnw -f platform/pom.xml package -Pmirror-tp
+./mvnw -f releng/target-platform/pom.xml package -Pmirror-tp
 ----
 Runs the `mirror` goal. This can take a while as it downloads all the required plugins and features.
 
-The result can be found as an archive in `platform/target/studio-target-platform-<version>.zip`.
+The result can be found as an archive in `releng/target-platform/target/bpm-target-platform-<version>.zip`.
 
 == Use the mirror
 
-Update the `target.platform` to use the mirror.
+Update the `target-platform.target` to use the mirror.
 
 [source, shell]
 ----
-./mvnw -f platform/pom.xml groovy:execute@generate-mirror-tp -Dmirror.target.filename=platform.target -Dmirror.location=https://update-site.bonitasoft.com/p2/<eclipse_version>/
+./mvnw -f releng/target-platform/pom.xml groovy:execute@generate-mirror-tp -Dmirror.target.filename=target-platform.target -Dmirror.location=https://update-site.bonitasoft.com/p2/<eclipse_version>/
 ----
-Updates the `platform.target` to point to the mirror location.
+Updates the `target-platform.target` to point to the mirror location.
 
-NOTE: Do not set `-Dmirror.location` to use the locally generated mirror (in `platform/target/repository`)
+NOTE: Do not set `-Dmirror.location` to use the locally generated mirror (in `releng/target-platform/target/repository`)
