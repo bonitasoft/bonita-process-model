@@ -350,7 +350,8 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho-surefire-plugin</artifactId>
                 <configuration>
-                    <useUIHarness>true</useUIHarness>
+                    <!-- No UI test for this component -->
+                    <useUIHarness>false</useUIHarness>
                 </configuration>
             </plugin>
         </plugins>
