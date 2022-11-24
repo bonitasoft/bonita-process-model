@@ -4,7 +4,7 @@ Bundle-Name: Custom Model Tests Fragment
 Bundle-SymbolicName: org.bonitasoft.bpm.model.edit.tests
 Bundle-Version: 8.0.0.qualifier
 Bundle-Vendor: Bonitasoft S.A.
-Fragment-Host: org.bonitasoft.bpm.model.edit;bundle-version="8.0.0.qualifier"
+Fragment-Host: org.bonitasoft.bpm.model.edit;bundle-version="8.0.0"
 Automatic-Module-Name: org.bonitasoft.studio.model.edit.custom.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.junit
