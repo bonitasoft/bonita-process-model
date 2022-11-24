@@ -15088,7 +15088,7 @@
         <changes xsi:type="history:Set" xmi:id="_bOjNQmmAEe250rNvz8LzNw" featureName="name" dataValue="decision">
           <element href="decision.ecore#/"/>
         </changes>
-        <changes xsi:type="history:Set" xmi:id="_bOjNQ2mAEe250rNvz8LzNw" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/bpm/decision">
+        <changes xsi:type="history:Set" xmi:id="_bOjNQ2mAEe250rNvz8LzNw" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/bpm/process/decision">
           <element href="decision.ecore#/"/>
         </changes>
         <changes xsi:type="history:Set" xmi:id="_bOjNRGmAEe250rNvz8LzNw" featureName="nsPrefix" dataValue="decision">
@@ -15205,7 +15205,7 @@
         <changes xsi:type="history:Set" xmi:id="_jbKz8mmBEe250rNvz8LzNw" featureName="name" dataValue="transitions">
           <element href="transitions.ecore#/"/>
         </changes>
-        <changes xsi:type="history:Set" xmi:id="_jbKz82mBEe250rNvz8LzNw" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/bpm/transitions">
+        <changes xsi:type="history:Set" xmi:id="_jbKz82mBEe250rNvz8LzNw" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/bpm/process/decision/transitions">
           <element href="transitions.ecore#/"/>
         </changes>
         <changes xsi:type="history:Set" xmi:id="_jbKz9GmBEe250rNvz8LzNw" featureName="nsPrefix" dataValue="transitions">

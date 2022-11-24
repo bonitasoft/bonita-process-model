@@ -1,1 +1,1 @@
-verify
+verify --no-snapshot-updates --no-transfer-progress

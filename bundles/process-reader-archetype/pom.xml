@@ -19,6 +19,22 @@
   <!-- Use the root project's website -->
   <url>https://github.com/bonitasoft/bonita-project-maven-plugin</url>
 
+  <dependencies>
+    <!-- Artifacts from reactor are required for testing the project built from archetype -->
+    <dependency>
+      <groupId>org.bonitasoft.bpm</groupId>
+      <artifactId>org.bonitasoft.bpm.model</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.bonitasoft.bpm</groupId>
+      <artifactId>org.bonitasoft.bpm.model.edit</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
   <build>
     <extensions>
       <extension>
@@ -47,6 +63,7 @@
                   <emf-ecore-version>${emf-ecore.version}</emf-ecore-version>
                   <emf-common-version>${emf-common.version}</emf-common-version>
                   <emf-xmi-version>${emf-xmi.version}</emf-xmi-version>
+                  <emf-edit-version>${emf-edit.version}</emf-edit-version>
                   <maven-clean-version>${maven-clean-plugin.version}</maven-clean-version>
                   <maven-resources-version>${maven-resources-plugin.version}</maven-resources-version>
                   <maven-compiler-version>${maven-compiler-plugin.version}</maven-compiler-version>
@@ -59,6 +76,34 @@
               </configuration>
             </execution>
           </executions>
+        </plugin>
+        <!-- Ensure the model and model.edit plugins are installed in a dedicated repository
+             before the archetype generated project is tested.
+             For this purpose, the plugins are in this module's test dependencies -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-invoker-plugin</artifactId>
+          <version>${maven-invoker-plugin.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>install</goal>
+              </goals>
+              <configuration>
+                <localRepositoryPath>${project.build.directory}/repoForArchetypeTest</localRepositoryPath>
+                <useLocalRepository>true</useLocalRepository>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <!-- Make sure the archetype generated project's tests are run on the same repository
+             where the model and model.edit plugins were installed -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-archetype-plugin</artifactId>
+          <configuration>
+            <localRepositoryPath>${project.build.directory}/repoForArchetypeTest</localRepositoryPath>
+          </configuration>
         </plugin>
     </plugins>
   </build>
