@@ -80,5 +80,9 @@ This file is a Business Process Model File coming from Bonita Studio. It's a ver
 
 #### Launching the application with App.java
 The App.java contain a main method which can be used to launch this application like a java application. It does the following things:
-* Loading the process file : It will load the process file by using the ModelLoader class present in org.bonitasoft.bpm.model. This loading is very important : it will allow you to manipulate the content of the process itself through emf. 
-* Displaying the content loaded in html : The ModelDisplayer present in the project created can show you how to display in an html page the content of the process file. It can be used as a way to better understand how emf and the model logic work. 
+* **Loading the process file:** It will load the process file by using the ModelLoader class present in org.bonitasoft.bpm.model. This loading is very important : it will allow you to manipulate the content of the process itself through emf. 
+* **Displaying the content loaded in html:** The ModelDisplayer present in the project created can show you how to display in an html page the content of the process file. It can be used as a way to better understand how emf and the model logic work. 
+
+### EMF Resources Knowledge
+- Emf official eclipse documentation: https://www.eclipse.org/modeling/emf/docs/
+- A tutorial describing the usage of Eclipse EMF:  https://www.vogella.com/tutorials/EclipseEMF/article.html
