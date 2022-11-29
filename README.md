@@ -66,23 +66,31 @@ mvn archetype:generate \
 
 | Parameter         | Required   | Default value                     | Description             |
 | ------------------|------------|-----------------------------------|-------------------------|
+| -DarchetypeGroupId| __true__   | org.bonitasoft.archetypes         | Group id of the archetype    |
+| -DarchetypeArtifactId| __true__| process-reader-archetype          | Artifact id of the archetype |
+| -DarchetypeVersion| __false__  | Latest release version (8.0.0)    | Version id of the archetype  |
+| -DgroupId         | __true__   |                                   | Group id of the project      |
+| -DartifactId      | __true__   |                                   | Artifact id of the project   |
+| -Dversion         | __true__   | suggested and asked interactively | Version of the project, recommanded to use 0.0.1-SNAPSHOT |
+| -DdisplayName     | __false__  | suggested and asked interactively | Name of the project displayed|
 | -Dpackage         | __false__  | suggested and asked interactively | Name of the root java package|
-| -Ddescription     | __false__  |     Describe your project here    | Description of the project|
+| -Ddescription     | __false__  |     Describe your project here    | Description of the project   |
 | -Dwrapper         | __false__  | true                              | If set to true, project will setup a [maven wrapper](https://github.com/takari/maven-wrapper)|
 
-### Tutorial : displaying the content of a simple process
+
+## Tutorial : displaying the content of a simple process
 This tutorial will help you to read the content of a process file from the Bonita Studio and to display the content (tasks, events, transitions... ). 
 The code itself is already present in your newly project created.
 
-#### The business process model file 
+### The business process model file 
 In the resources folder of your newly created project, you should have a MyDiagram-1.0.proc file. 
 This file is a Business Process Model File coming from Bonita Studio. It's a very simple process containing 4 tasks and a simple flow.
 
-#### Launching the application with App.java
+### Launching the application with App.java
 The App.java contain a main method which can be used to launch this application like a java application. It does the following things:
 * **Loading the process file:** It will load the process file by using the ModelLoader class present in org.bonitasoft.bpm.model. This loading is very important : it will allow you to manipulate the content of the process itself through emf. 
 * **Displaying the content loaded in html:** The ModelDisplayer present in the project created can show you how to display in an html page the content of the process file. It can be used as a way to better understand how emf and the model logic work. 
 
-### EMF Resources Knowledge
+## EMF Resources Knowledge
 - Emf official eclipse documentation: https://www.eclipse.org/modeling/emf/docs/
 - A tutorial describing the usage of Eclipse EMF:  https://www.vogella.com/tutorials/EclipseEMF/article.html
