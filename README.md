@@ -62,21 +62,36 @@ mvn archetype:generate \
     -DdisplayName="My Custom Process Reader" 
 ```
 
-#### Optional archetype parameters
+#### Archetype parameters
 
-| Parameter         | Required   | Default value                     | Description             |
-| ------------------|------------|-----------------------------------|-------------------------|
-| -DarchetypeGroupId| __true__   | org.bonitasoft.archetypes         | Group id of the archetype    |
-| -DarchetypeArtifactId| __true__| process-reader-archetype          | Artifact id of the archetype |
-| -DarchetypeVersion| __false__  | Latest release version (8.0.0)    | Version id of the archetype  |
-| -DgroupId         | __true__   |                                   | Group id of the project      |
-| -DartifactId      | __true__   |                                   | Artifact id of the project   |
-| -Dversion         | __true__   | suggested and asked interactively | Version of the project, recommanded to use 0.0.1-SNAPSHOT |
-| -DdisplayName     | __false__  | suggested and asked interactively | Name of the project displayed|
-| -Dpackage         | __false__  | suggested and asked interactively | Name of the root java package|
-| -Ddescription     | __false__  |     Describe your project here    | Description of the project   |
-| -Dwrapper         | __false__  | true                              | If set to true, project will setup a [maven wrapper](https://github.com/takari/maven-wrapper)|
+| Parameter                      | Required   | Default value                      | Description                  |
+| -------------------------------|------------|------------------------------------|------------------------------|
+| -DarchetypeGroupId             | __true__   | __org.bonitasoft.archetypes__      | Group id of the archetype    |
+| -DarchetypeArtifactId          | __true__   | __process-reader-archetype__       | Artifact id of the archetype (must be fixed to the given value) |
+| -DarchetypeVersion             | __false__  | Latest release version (8.0.0)     | Version id of the archetype  |
+| -DgroupId                      | __true__   |                                    | Group id of the project      |
+| -DartifactId                   | __true__   |                                    | Artifact id of the project   |
+| -Dversion                      | __true__   | suggested and asked interactively  | Version of the project, suggested to use 0.0.1-SNAPSHOT |
+| -Dpackage                      | __false__  | suggested and asked interactively  | Name of the root java package|
+| -DdisplayName                  | __false__  | suggested and asked interactively  | Name of the project displayed|
+| -Ddescription                  | __false__  |     Describe your project here     | Description of the project   |
+| -Dwrapper                      | __false__  | true                               | If set to true, project will setup a [maven wrapper](https://github.com/takari/maven-wrapper)|
+| -Djava-version                 | __false__  | Same as in the main module __\*__  | Version of Java used by the project. |
+| -Dbonita-process-model-version | __false__  | Same as in the main module __\*__  | Version of the bonita-process-model used. |
+| -Demf-ecore-version            | __false__  | Same as in the main module __\*__  | Version of EMF Core module used by the project. |
+| -Demf-common-version           | __false__  | Same as in the main module __\*__  | Version of EMF Common module used by the project. |
+| -Demf-xmi-version              | __false__  | Same as in the main module __\*__  | Version of EMF Ecore XMI module used by the project. |
+| -Demf-edit-version             | __false__  | Same as in the main module __\*__  | Version of EMF Edit module used by the project. |
+| -Dmaven-artifact-version       | __false__  | Same as in the main module __\*__  | Version of maven-artifact module used by the project. |
+| -Dmaven-clean-version          | __false__  | Same as in the main module __\*__  | Version of maven-clean-plugin module used by the project. |
+| -Dmaven-resources-version      | __false__  | Same as in the main module __\*__  | Version of maven-resources-plugin module used by the project. |
+| -Dmaven-compiler-version       | __false__  | Same as in the main module __\*__  | Version of maven-compiler-plugin module used by the project. |
+| -Dmaven-surefire-version       | __false__  | Same as in the main module __\*__  | Version of maven-surefire-plugin module used by the project. |
+| -Dmaven-jar-version            | __false__  | Same as in the main module __\*__  | Version of maven-jar-plugin module used by the project. |
+| -Dmaven-install-version        | __false__  | Same as in the main module __\*__  | Version of maven-install-plugin module used by the project. |
+| -Dmaven-deploy-version          | __false__  | Same as in the main module __\*__  | Version of maven-deploy-plugin module used by the project. |
 
+__\* *These parameters are used to fix some versions. It is recommended not to use them and let the default values be used to ensure compatibility.*__
 
 ## Tutorial : displaying the content of a simple process
 This tutorial will help you to read the content of a process file from the Bonita Studio and to display the content (tasks, events, transitions... ). 
