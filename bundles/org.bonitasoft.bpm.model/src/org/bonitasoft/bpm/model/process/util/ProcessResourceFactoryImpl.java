@@ -70,7 +70,9 @@ public class ProcessResourceFactoryImpl extends ResourceFactoryImpl {
                 XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE,
                 XMIResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE,
                 XMIResource.OPTION_SKIP_ESCAPE_URI, Boolean.FALSE,
-                XMIResource.OPTION_ENCODING, DEFAULT_ENCODING));
+                XMIResource.OPTION_ENCODING, DEFAULT_ENCODING,
+                // use extended metadata, or failure of AnyType for notation will fail
+                XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE));
     }
 
     /**

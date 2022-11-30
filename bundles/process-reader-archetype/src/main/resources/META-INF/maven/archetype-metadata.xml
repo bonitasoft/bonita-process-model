@@ -30,6 +30,9 @@
     <requiredProperty key="emf-edit-version">
       <defaultValue>2.17.0</defaultValue>
     </requiredProperty>
+    <requiredProperty key="maven-artifact-version">
+      <defaultValue>3.8.6</defaultValue>
+    </requiredProperty>
     <requiredProperty key="maven-clean-version">
       <defaultValue>3.2.0</defaultValue>
     </requiredProperty>

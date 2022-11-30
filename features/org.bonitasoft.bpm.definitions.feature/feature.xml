@@ -5,16 +5,46 @@
       version="8.0.0.qualifier"
       provider-name="BonitaSoft S.A.">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="https://github.com/bonitasoft/bonita-process-model">
+      Contains the Bonita Process Domain Logic.
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright url="https://www.bonitasoft.com/">
+Copyright (C) 2022 BonitaSoft S.A.
+BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="http://www.gnu.org/licenses/gpl-2.0.html">
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 2.0 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
    </license>
+
+   <requires>
+      <import feature="org.eclipse.emf.edapt.runtime.feature" version="1.4.1.202002140949"/>
+   </requires>
+
+   <plugin
+         id="org.bonitasoft.bpm.model"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.bonitasoft.bpm.model.edit"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>

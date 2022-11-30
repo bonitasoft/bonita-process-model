@@ -27,9 +27,13 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.ContentHandler;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMap.Entry;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.emf.edapt.internal.common.ResourceUtils;
@@ -42,6 +46,7 @@ import org.eclipse.emf.edapt.spi.history.Release;
 import org.eclipse.emf.edapt.spi.migration.AttributeSlot;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.Model;
+import org.eclipse.emf.edapt.spi.migration.ModelResource;
 import org.eclipse.emf.edapt.spi.migration.Slot;
 
 /**
@@ -64,7 +69,7 @@ public class SingleResourceMigrator extends Migrator {
     }
 
     public SingleResourceMigrator() throws MigrationException {
-        super(URI.createPlatformPluginURI(HistoryUtils.getMigrationHistoryPath(), true),
+        super(HistoryUtils.getMigrationHistoryURI(),
                 new ClassLoaderFacade(SingleResourceMigrator.class.getClassLoader()));
     }
 
@@ -109,6 +114,42 @@ public class SingleResourceMigrator extends Migrator {
             return null;
         }
         final MaterializingBackwardConverter converter = new MaterializingBackwardConverter() {
+
+            /*
+             * (non-Javadoc)
+             * @see org.eclipse.emf.edapt.internal.migration.internal.BackwardConverter#initResources(org.eclipse.emf.edapt.spi.migration.Model)
+             */
+            @Override
+            protected ResourceSet initResources(Model model) {
+                // like super, but also use the content type recognition to use ProcessResource and its options.
+                final ResourceSet resourceSet = new ResourceSetImpl() {
+
+                    /*
+                     * (non-Javadoc)
+                     * @see org.eclipse.emf.ecore.resource.impl.ResourceSetImpl#createResource(org.eclipse.emf.common.util.URI)
+                     */
+                    @Override
+                    public Resource createResource(URI uri) {
+                        return createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+                    }
+                };
+                ResourceUtils.register(model.getMetamodel().getEPackages(),
+                        resourceSet.getPackageRegistry());
+                for (final ModelResource modelResource : model.getResources()) {
+                    final Resource resource = resourceSet.createResource(modelResource
+                            .getUri());
+                    if (resource instanceof XMLResource) {
+                        final XMLResource xmlResource = (XMLResource) resource;
+                        if (modelResource.getEncoding() != null) {
+                            xmlResource.setEncoding(modelResource.getEncoding());
+                        }
+                    }
+                    for (final Instance element : modelResource.getRootInstances()) {
+                        resource.getContents().add(resolve(element));
+                    }
+                }
+                return resourceSet;
+            }
 
             /*
              * (non-Javadoc)

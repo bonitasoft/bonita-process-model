@@ -96,7 +96,7 @@ public final class ModelLoader {
      * @return resource with loaded model
      */
     public Resource loadModel(URL fileUrl) {
-        return loadModel(URI.createFileURI(fileUrl.getPath()));
+        return loadModel(URI.createURI(fileUrl.toExternalForm()));
 
     }
 
