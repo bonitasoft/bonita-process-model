@@ -17,14 +17,17 @@ package org.bonitasoft.bpm.model.process.util.migration;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.bonitasoft.bpm.model.process.ProcessPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.edapt.spi.history.History;
+import org.eclipse.emf.edapt.spi.history.HistoryPackage;
+import org.eclipse.emf.edapt.spi.history.Release;
 import org.junit.Test;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
 
 /**
  * This test ensures the model version is consistent with the model version.
- * 
- * @author Vincent Hemery
  */
 public class VersionsSyncTest {
 
@@ -39,6 +42,18 @@ public class VersionsSyncTest {
         Version componentVersion = FrameworkUtil.getBundle(ProcessPackage.class).getVersion();
         // and ensure the model version matches the major digit
         assertThat(intVersion).isEqualTo(componentVersion.getMajor());
+    }
+
+    @Test
+    public void shouldHistoryLastReleaseHaveNoNameNorDate() throws Exception {
+        // make sure History metamodel is loaded first
+        HistoryPackage.eINSTANCE.getHistory();
+        // now get versions from history
+        Resource historyResource = new ResourceSetImpl().getResource(HistoryUtils.getMigrationHistoryURI(), true);
+        History history = (History) historyResource.getContents().get(0);
+        final Release release = history.getLastRelease();
+        assertThat(release.getLabel()).isNull();
+        assertThat(release.getDate()).isNull();
     }
 
 }

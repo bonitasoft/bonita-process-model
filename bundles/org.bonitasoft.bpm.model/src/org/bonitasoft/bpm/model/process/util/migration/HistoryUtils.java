@@ -14,6 +14,7 @@
  */
 package org.bonitasoft.bpm.model.process.util.migration;
 
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -21,16 +22,22 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.bonitasoft.bpm.model.process.ProcessPackage;
+import org.bonitasoft.bpm.model.util.EnvironmentUtil;
+import org.bonitasoft.bpm.model.util.internal.ProcContentHandler;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.emf.edapt.spi.history.History;
 import org.eclipse.emf.edapt.spi.history.HistoryPackage;
 import org.eclipse.emf.edapt.spi.history.Release;
+import org.eclipse.emf.edapt.spi.history.util.HistoryResourceFactoryImpl;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.MigrationPackage;
 import org.eclipse.emf.edapt.spi.migration.util.MigrationValidator;
@@ -40,16 +47,41 @@ import org.eclipse.emf.edapt.spi.migration.util.MigrationValidator;
  */
 public class HistoryUtils {
 
-    /** path to Edapt history file */
-    private static final String MIGRATION_HISTORY_PATH = "/org.bonitasoft.bpm.model/model/process.history";
+    /** The plugin prefix for a platform plugin URI */
+    private static final String PLUGIN_URI_PREFIX = "/org.bonitasoft.bpm.model/";
+
+    /** path to Edapt history file within the plugin */
+    private static final String MIGRATION_HISTORY_PATH = "model/process.history";
 
     /**
-     * Get path to migration history file
+     * Get URI to migration history file
      * 
-     * @return path to history file
+     * @return URI to history file
      */
-    static String getMigrationHistoryPath() {
-        return MIGRATION_HISTORY_PATH;
+    static URI getMigrationHistoryURI() {
+        if (EnvironmentUtil.isOSGi()) {
+            // use a simple platform plugin URI
+            return URI.createPlatformPluginURI(PLUGIN_URI_PREFIX + MIGRATION_HISTORY_PATH, false);
+        } else {
+            // get path in jar file for maven
+            URL url = ProcessPackage.class.getClassLoader().getResource(MIGRATION_HISTORY_PATH);
+            return URI.createURI(url.toExternalForm());
+        }
+    }
+
+    static {
+        // make sure History metamodel is loaded first, even in maven env
+        HistoryPackage.eINSTANCE.getHistory();
+        if (!EnvironmentUtil.isOSGi()) {
+            // register EPackages
+            EPackage.Registry.INSTANCE.put(HistoryPackage.eNS_URI, HistoryPackage.eINSTANCE);
+            // register the content handler (which may be overridden e.g. by extension mapping)
+            ContentHandler.Registry.INSTANCE.put(ContentHandler.Registry.VERY_LOW_PRIORITY, new ProcContentHandler());
+            // register the resource factory
+            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+                    HistoryPackage.eNS_PREFIX, new HistoryResourceFactoryImpl());
+        }
+        // else, nothing to initialize. Extensions take care of it.
     }
 
     /** The current model version (latest release) */
@@ -60,8 +92,7 @@ public class HistoryUtils {
         // make sure History metamodel is loaded first, even in maven env
         HistoryPackage.eINSTANCE.getHistory();
         // now get versions from history
-        Resource historyResource = new ResourceSetImpl()
-                .getResource(URI.createPlatformPluginURI(getMigrationHistoryPath(), false), true);
+        Resource historyResource = new ResourceSetImpl().getResource(getMigrationHistoryURI(), true);
         History history = (History) historyResource.getContents().get(0);
         CURRENT_MODEL_VERSION = history.getLatestRelease().getLabel();
         List<String> knownVersions = history.getReleases().stream().map(Release::getLabel).collect(Collectors.toList());
