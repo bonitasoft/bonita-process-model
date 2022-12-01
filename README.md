@@ -22,23 +22,35 @@ However, as an exception to the GNU General Public License, programs generated b
 Modules created by using the archetype are not to be considered as derivative work and can be licensed however it pleases their authors.
 
 ## Prerequisites
+For building the code in this repository : Java [JDK 17+]
 
-Java 11
+For using the libraries released : Java [JDK 11+]
 
 ## How to build
 
-TODO
+### With Eclipse
+Different launch configurations exists in this repository. Build Bonita Process Model.launch can be used to compile and build the model java classes. 
 
-## process-reader-archetype
+In your Eclipse IDE, right click on the launch file, Run as => Build Bonita Process Model. 
 
-This project contains a maven archetype, which allows to easily setup a project reading a Bonita Business Process Model file.  
+A console should appear and after a while, the build will be done. You can found the jar in the target folder of each bundle project. 
+
+### With Maven
+```
+mvn install
+```
+This will install all the Bonita Process Domain Logic artifacts and also a maven archetype process-reader-archetype.
+
+## How to use this project into your own work ?
+To make it more easy for you, this project contains a maven archetype, which allows to setup a project reading a Bonita Business Process Model file.  
+
+### The maven archetype : process-reader-archetype
 This setups a classic maven project that uses:
 * [org.bonitasoft.bpm.model] (https://github.com/bonitasoft/bonita-process-model) for knowing the Bonita Process Domain Logic
 * [org.eclipse.emf.ecore](https://www.eclipse.org/emf) to manipulate and load the model
 * A sample .proc Business Process Model file
 
-### How to use the archetype
-
+#### How to use the archetype
 ```
 mvn archetype:generate \
     -DarchetypeGroupId=org.bonitasoft.archetypes \
@@ -50,11 +62,50 @@ mvn archetype:generate \
     -DdisplayName="My Custom Process Reader" 
 ```
 
-### Optional archetype parameters
+#### Archetype parameters
 
+| Parameter                      | Required   | Default value                      | Description                  |
+| -------------------------------|------------|------------------------------------|------------------------------|
+| -DarchetypeGroupId             | __true__   | __org.bonitasoft.archetypes__      | Group id of the archetype    |
+| -DarchetypeArtifactId          | __true__   | __process-reader-archetype__       | Artifact id of the archetype (must be fixed to the given value) |
+| -DarchetypeVersion             | __false__  | Latest release version (8.0.0)     | Version id of the archetype  |
+| -DgroupId                      | __true__   |                                    | Group id of the project      |
+| -DartifactId                   | __true__   |                                    | Artifact id of the project   |
+| -Dversion                      | __true__   | suggested and asked interactively  | Version of the project, suggested to use 0.0.1-SNAPSHOT |
+| -Dpackage                      | __false__  | suggested and asked interactively  | Name of the root java package|
+| -DdisplayName                  | __false__  | suggested and asked interactively  | Name of the project displayed|
+| -Ddescription                  | __false__  |     Describe your project here     | Description of the project   |
+| -Dwrapper                      | __false__  | true                               | If set to true, project will setup a [maven wrapper](https://github.com/takari/maven-wrapper)|
+| -Djava-version                 | __false__  | Same as in the main module __\*__  | Version of Java used by the project. |
+| -Dbonita-process-model-version | __false__  | Same as in the main module __\*__  | Version of the bonita-process-model used. |
+| -Demf-ecore-version            | __false__  | Same as in the main module __\*__  | Version of EMF Core module used by the project. |
+| -Demf-common-version           | __false__  | Same as in the main module __\*__  | Version of EMF Common module used by the project. |
+| -Demf-xmi-version              | __false__  | Same as in the main module __\*__  | Version of EMF Ecore XMI module used by the project. |
+| -Demf-edit-version             | __false__  | Same as in the main module __\*__  | Version of EMF Edit module used by the project. |
+| -Dmaven-artifact-version       | __false__  | Same as in the main module __\*__  | Version of maven-artifact module used by the project. |
+| -Dmaven-clean-version          | __false__  | Same as in the main module __\*__  | Version of maven-clean-plugin module used by the project. |
+| -Dmaven-resources-version      | __false__  | Same as in the main module __\*__  | Version of maven-resources-plugin module used by the project. |
+| -Dmaven-compiler-version       | __false__  | Same as in the main module __\*__  | Version of maven-compiler-plugin module used by the project. |
+| -Dmaven-surefire-version       | __false__  | Same as in the main module __\*__  | Version of maven-surefire-plugin module used by the project. |
+| -Dmaven-jar-version            | __false__  | Same as in the main module __\*__  | Version of maven-jar-plugin module used by the project. |
+| -Dmaven-install-version        | __false__  | Same as in the main module __\*__  | Version of maven-install-plugin module used by the project. |
+| -Dmaven-deploy-version          | __false__  | Same as in the main module __\*__  | Version of maven-deploy-plugin module used by the project. |
 
-| Parameter         | Required   | Default value                     | Description             |
-| ------------------|------------|-----------------------------------|-------------------------|
-| -Dpackage         | __false__  | suggested and asked interactively | Name of the root java package|
-| -Ddescription     | __false__  |     Describe your project here    | Description of the project|
-| -Dwrapper         | __false__  | true                              | If set to true, project will setup a [maven wrapper](https://github.com/takari/maven-wrapper)|
+__\* *These parameters are used to fix some versions. It is recommended not to use them and let the default values be used to ensure compatibility.*__
+
+## Tutorial : displaying the content of a simple process
+This tutorial will help you to read the content of a process file from the Bonita Studio and to display the content (tasks, events, transitions... ). 
+The code itself is already present in your newly project created.
+
+### The business process model file 
+In the resources folder of your newly created project, you should have a MyDiagram-1.0.proc file. 
+This file is a Business Process Model File coming from Bonita Studio. It's a very simple process containing 4 tasks and a simple flow.
+
+### Launching the application with App.java
+The App.java contain a main method which can be used to launch this application like a java application. It does the following things:
+* **Loading the process file:** It will load the process file by using the ModelLoader class present in org.bonitasoft.bpm.model. This loading is very important : it will allow you to manipulate the content of the process itself through emf. 
+* **Displaying the content loaded in html:** The ModelDisplayer present in the project created can show you how to display in an html page the content of the process file. It can be used as a way to better understand how emf and the model logic work. 
+
+## EMF Resources Knowledge
+- Emf official eclipse documentation: https://www.eclipse.org/modeling/emf/docs/
+- A tutorial describing the usage of Eclipse EMF:  https://www.vogella.com/tutorials/EclipseEMF/article.html
