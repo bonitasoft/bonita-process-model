@@ -17,7 +17,7 @@
   <name>Archetype - Bonita Business Process Model Reader</name>
 
   <!-- Use the root project's website -->
-  <url>https://github.com/bonitasoft/bonita-project-maven-plugin</url>
+  <url>https://github.com/bonitasoft/bonita-process-model</url>
 
   <dependencies>
     <!-- Artifacts from reactor are required for testing the project built from archetype -->
