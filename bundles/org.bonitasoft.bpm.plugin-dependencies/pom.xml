@@ -19,7 +19,7 @@
     </repositories>-->
 
   <!-- Use the root project's website -->
-  <url>https://github.com/bonitasoft/bonita-project-maven-plugin</url>
+  <url>https://github.com/bonitasoft/bonita-process-model</url>
   
   <build>
     <plugins>
