@@ -37,7 +37,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
 
     <properties>
         <cyclonedx.version>2.7.2</cyclonedx.version>
-        <tycho.version>3.0.0</tycho.version>
+        <tycho.version>3.0.3</tycho.version>
         <emf-ecore.version>2.27.0</emf-ecore.version>
     	<emf-common.version>2.25.0</emf-common.version>
     	<emf-xmi.version>2.16.0</emf-xmi.version>
