@@ -8,3 +8,4 @@ Require-Bundle: org.eclipse.emf.edapt.common,
  org.eclipse.emf.edapt.migration
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
+Automatic-Module-Name: org.bonitasoft.bpm.plugin-dependencies

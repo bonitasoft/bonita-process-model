@@ -23,11 +23,13 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.bonitasoft.bpm.model.process.ProcessPackage;
+import org.bonitasoft.bpm.model.process.util.migration.internal.CustomMigrationFactoryImpl;
 import org.bonitasoft.bpm.model.util.EnvironmentUtil;
 import org.bonitasoft.bpm.model.util.internal.ProcContentHandler;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.ContentHandler;
@@ -80,6 +82,19 @@ public class HistoryUtils {
             // register the resource factory
             Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
                     HistoryPackage.eNS_PREFIX, new HistoryResourceFactoryImpl());
+
+            // also register CustomMigrationFactoryImpl with Bonita Patch for Notation model
+            // instead of org.eclipse.emf.ecore.factory_override extension
+            EPackage.Registry.INSTANCE.put(MigrationPackage.eNS_URI, new EPackage.Descriptor() {
+
+                public EPackage getEPackage() {
+                    return null;
+                }
+
+                public EFactory getEFactory() {
+                    return new CustomMigrationFactoryImpl();
+                }
+            });
         }
         // else, nothing to initialize. Extensions take care of it.
     }
@@ -89,8 +104,6 @@ public class HistoryUtils {
     /** A predicate to test whether a version exists in history */
     public static final Predicate<String> IS_KNOWN_VERSION;
     static {
-        // make sure History metamodel is loaded first, even in maven env
-        HistoryPackage.eINSTANCE.getHistory();
         // now get versions from history
         Resource historyResource = new ResourceSetImpl().getResource(getMigrationHistoryURI(), true);
         History history = (History) historyResource.getContents().get(0);

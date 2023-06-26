@@ -10599,7 +10599,7 @@
     </changes>
   </releases>
   <releases xmi:id="_15B6B2nREeaTLbmqFFisdA" date="2012-12-11T11:58:53.422+0100" label="6.0.0-Beta">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15B6CGnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.kpi.KPlDatabaseNameToUrlMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15B6CGnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.kpi.KPlDatabaseNameToUrlMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15B6CWnREeaTLbmqFFisdA">
         <changes xsi:type="history:Delete" xmi:id="_15B6CmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
           <target href="kpi.ecore#//DatabaseKPIBinding"/>
@@ -10614,7 +10614,7 @@
         </operation>
       </changes>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15ChBGnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.searchIndex.SearchIndexMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15ChBGnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.searchIndex.SearchIndexMigration">
       <changes xsi:type="history:CompositeChange" xmi:id="_15ChBWnREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15ChBmnREeaTLbmqFFisdA" referenceName="eClassifiers">
           <target href="process.ecore#/"/>
@@ -10715,8 +10715,8 @@
         </parameters>
       </operation>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15DIFWnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.form.FixedReturnTypeExpressionMigration"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15DIFmnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.decision.DecisionTableMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15DIFWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.FixedReturnTypeExpressionMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15DIFmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.decision.DecisionTableMigration">
       <changes xsi:type="history:CompositeChange" xmi:id="_15DIF2nREeaTLbmqFFisdA">
         <changes xsi:type="history:Set" xmi:id="_15DIGGnREeaTLbmqFFisdA" element="_15DILGnREeaTLbmqFFisdA" featureName="derived" dataValue="true" oldDataValue="false"/>
         <changes xsi:type="history:Set" xmi:id="_15DIGWnREeaTLbmqFFisdA" element="_15DILGnREeaTLbmqFFisdA" featureName="derived" dataValue="false" oldDataValue="true"/>
@@ -10778,7 +10778,7 @@
         <element href="form.ecore#//Widget/returnTypeModifier"/>
       </changes>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15DvJGnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.form.LabelPositionMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15DvJGnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.LabelPositionMigration">
       <changes xsi:type="history:Set" xmi:id="_15DvJWnREeaTLbmqFFisdA" featureName="defaultValueLiteral" dataValue="Up" oldDataValue="0">
         <element href="form.ecore#//Widget/labelPosition"/>
       </changes>
@@ -10870,7 +10870,7 @@
         </parameters>
       </operation>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15EWO2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.subprocessevent.SubprocessEventMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15EWO2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.subprocessevent.SubprocessEventMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15EWPGnREeaTLbmqFFisdA">
         <changes xsi:type="history:Remove" xmi:id="_15EWPWnREeaTLbmqFFisdA" featureName="eSuperTypes">
           <element href="process.ecore#//SubProcessEvent"/>
@@ -10910,10 +10910,10 @@
     </changes>
   </releases>
   <releases xmi:id="_15EWSmnREeaTLbmqFFisdA" date="2013-04-15T10:10:08.354+0200" label="6.0.0-ga-002">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15EWS2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.expression.PatternExpressionMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15EWS2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.expression.PatternExpressionMigration"/>
   </releases>
   <releases xmi:id="_15E9QGnREeaTLbmqFFisdA" date="2013-04-22T11:30:12.379+0200" label="6.0.0-ga-003">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15E9QWnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.UpdateConfigurationId">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15E9QWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.UpdateConfigurationId">
       <changes xsi:type="history:OperationChange" xmi:id="_15E9QmnREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15E9Q2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
           <target href="process.ecore#//MainProcess"/>
@@ -10952,7 +10952,7 @@
         </operation>
       </changes>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15E9T2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.DeadlineToNonInterruptingEventMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15E9T2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.DeadlineToNonInterruptingEventMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15E9UGnREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15E9UWnREeaTLbmqFFisdA" referenceName="eClassifiers">
           <target href="process.ecore#/"/>
@@ -10993,7 +10993,7 @@
     </changes>
   </releases>
   <releases xmi:id="_15E9XWnREeaTLbmqFFisdA" date="2013-04-30T18:37:32.795+0200" label="6.0.0-ga-004">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15E9XmnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.form.FileWidgetActionMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15E9XmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.FileWidgetActionMigration"/>
     <changes xsi:type="history:OperationChange" xmi:id="_15E9X2nREeaTLbmqFFisdA">
       <changes xsi:type="history:Create" xmi:id="_15E9YGnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
         <target href="process.ecore#//SequenceFlow"/>
@@ -11039,7 +11039,7 @@
     </changes>
   </releases>
   <releases xmi:id="_15FkUGnREeaTLbmqFFisdA" date="2013-05-17T10:17:14.066+0200" label="6.0.0-ga-005">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15FkUWnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.FormConnectorEventMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15FkUWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.FormConnectorEventMigration"/>
     <changes xsi:type="history:OperationChange" xmi:id="_PO6H8BsCEeifUtXPilm_3g">
       <changes xsi:type="history:Create" xmi:id="_PO6H8RsCEeifUtXPilm_3g" referenceName="eStructuralFeatures">
         <target href="configuration.ecore#//Configuration"/>
@@ -11140,11 +11140,11 @@
     </changes>
   </releases>
   <releases xmi:id="_15FkUmnREeaTLbmqFFisdA" date="2013-06-11T11:45:39.611+0200" label="6.0.1-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15FkU2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.timer.StartTimerConditionCustomMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15FkU2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.timer.StartTimerConditionCustomMigration"/>
   </releases>
   <releases xmi:id="_15FkVGnREeaTLbmqFFisdA" date="2013-10-29T12:36:39.611+0100" label="6.1.1-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15FkVWnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.startmessageevent.StartMessageEventMigration"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15FkVmnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.ConnectorIgnoreErrorMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15FkVWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.startmessageevent.StartMessageEventMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15FkVmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.ConnectorIgnoreErrorMigration">
       <changes xsi:type="history:CompositeChange" xmi:id="_15FkV2nREeaTLbmqFFisdA">
         <changes xsi:type="history:Set" xmi:id="_15FkWGnREeaTLbmqFFisdA" featureName="defaultValueLiteral" dataValue="false" oldDataValue="true">
           <element href="process.ecore#//Connector/ignoreErrors"/>
@@ -11153,8 +11153,8 @@
     </changes>
   </releases>
   <releases xmi:id="_15FkWWnREeaTLbmqFFisdA" date="2014-02-17T16:36:39.611+0100" label="6.2.4-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15FkWmnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.DependenciesCopyCustomMigration"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15FkW2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.InterpreterCustomMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15FkWmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.DependenciesCopyCustomMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15FkW2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.InterpreterCustomMigration"/>
   </releases>
   <releases xmi:id="_15FkXGnREeaTLbmqFFisdA" date="2014-02-23T16:36:39.611+0100" label="6.3.0-001">
     <changes xsi:type="history:OperationChange" xmi:id="_15FkXWnREeaTLbmqFFisdA">
@@ -11333,7 +11333,7 @@
         </parameters>
       </operation>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15GLemnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.BusinessObjectTypeCustomMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15GLemnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.BusinessObjectTypeCustomMigration"/>
     <changes xsi:type="history:CompositeChange" xmi:id="_15GLe2nREeaTLbmqFFisdA">
       <changes xsi:type="history:Delete" xmi:id="_15GLfGnREeaTLbmqFFisdA" referenceName="eOperations">
         <target href="form.ecore#//Widget"/>
@@ -11437,7 +11437,7 @@
     </changes>
   </releases>
   <releases xmi:id="_15GykGnREeaTLbmqFFisdA" date="2014-03-31T13:36:39.611+0200" label="6.3.0-002">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15GykWnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.form.GroupIteratorMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15GykWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.GroupIteratorMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15GykmnREeaTLbmqFFisdA">
         <changes xsi:type="history:Delete" xmi:id="_15Gyk2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
           <target href="form.ecore#//Group"/>
@@ -11576,23 +11576,23 @@
     </changes>
   </releases>
   <releases xmi:id="_15HZpWnREeaTLbmqFFisdA" date="2014-05-12T13:36:39.611+0200" label="6.3.1-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15HZpmnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.expression.CleanReferenceMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15HZpmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.expression.CleanReferenceMigration"/>
   </releases>
   <releases xmi:id="_15HZp2nREeaTLbmqFFisdA" date="2014-06-05T13:36:39.611+0200" label="6.3.2-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15HZqGnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.SalesforceConnectorVersionCustomMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15HZqGnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.SalesforceConnectorVersionCustomMigration"/>
   </releases>
   <releases xmi:id="_15HZqWnREeaTLbmqFFisdA" date="2014-07-02T11:48:39.611+0200" label="6.3.3-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15HZqmnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateCMISConnectorVersionCustomMigration"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15HZq2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateAlfrescoMigrationConnectorVersionTo110"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15HZqmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateCMISConnectorVersionCustomMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15HZq2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateAlfrescoMigrationConnectorVersionTo110"/>
   </releases>
   <releases xmi:id="_15HZrGnREeaTLbmqFFisdA" date="2014-08-06T11:48:39.611+0200" label="6.3.4-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15HZrWnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateAlfrescoMigrationConnectorVersionTo113"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15HZrWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateAlfrescoMigrationConnectorVersionTo113"/>
   </releases>
   <releases xmi:id="_15HZrmnREeaTLbmqFFisdA" date="2014-10-21T15:45:32.712+0200" label="6.3.8-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15HZr2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateTalendConnectorVersionTo101"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15HZr2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateTalendConnectorVersionTo101"/>
   </releases>
   <releases xmi:id="_15IAkGnREeaTLbmqFFisdA" date="2014-07-22T11:48:39.611+0200" label="6.4.0-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15IAkWnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.multiinstance.MultiInstanceCustomMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15IAkWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.multiinstance.MultiInstanceCustomMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15IAkmnREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15IAk2nREeaTLbmqFFisdA" referenceName="eClassifiers">
           <target href="process.ecore#/"/>
@@ -12209,7 +12209,7 @@
     </changes>
   </releases>
   <releases xmi:id="_15LD4mnREeaTLbmqFFisdA" date="2014-09-24T11:48:39.611+0200" label="6.4.0-002">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15LD42nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.document.DocumentTypeMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15LD42nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.document.DocumentTypeMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15LD5GnREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15LD5WnREeaTLbmqFFisdA" referenceName="eClassifiers">
           <target href="process.ecore#/"/>
@@ -12369,11 +12369,11 @@
         </changes>
       </changes>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15LrBWnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.document.DocumentDefaultReturnTypeModifierMigration"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15LrBmnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.form.FileWidgetDocumentMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15LrBWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.document.DocumentDefaultReturnTypeModifierMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15LrBmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.FileWidgetDocumentMigration"/>
   </releases>
   <releases xmi:id="_15LrB2nREeaTLbmqFFisdA" date="2014-10-23T11:45:10.092+0200" label="6.4.0-003">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15LrCGnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.InitializeConnectorConfigurationModelVersion">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15LrCGnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.InitializeConnectorConfigurationModelVersion">
       <changes xsi:type="history:OperationChange" xmi:id="_15LrCWnREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15LrCmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
           <target href="connector-configuration.ecore#//ConnectorConfiguration"/>
@@ -12476,13 +12476,13 @@
       <element href="form.ecore#//FileWidget/downloadType"/>
       <referenceValue href="form.ecore#//FileWidgetDownloadType"/>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15MSD2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.form.FileWidgetResourceMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15MSD2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.FileWidgetResourceMigration"/>
   </releases>
   <releases xmi:id="_15MSEGnREeaTLbmqFFisdA" date="2014-11-04T10:45:10.092+0100" label="6.4.0-005">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15MSEWnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateGroovyConnectorVersionTo101"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15MSEWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateGroovyConnectorVersionTo101"/>
   </releases>
   <releases xmi:id="_15MSEmnREeaTLbmqFFisdA" date="2015-01-30T14:49:24.161+0100" label="6.5.0-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15MSE2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.multiinstance.CallActivityInputMappingCustomMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15MSE2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.multiinstance.CallActivityInputMappingCustomMigration">
       <changes xsi:type="history:Set" xmi:id="_15MSFGnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false">
         <element href="process.ecore#//InputMapping/processSource"/>
       </changes>
@@ -12494,7 +12494,7 @@
     </changes>
   </releases>
   <releases xmi:id="_15MSFmnREeaTLbmqFFisdA" date="2015-02-27T14:49:24.161+0100" label="7.0.0-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15MSF2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.contract.CreateContractCustomMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15MSF2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.contract.CreateContractCustomMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15MSGGnREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15MSGWnREeaTLbmqFFisdA" referenceName="eClassifiers">
           <target href="process.ecore#/"/>
@@ -13361,7 +13361,7 @@
         </operation>
       </changes>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15P8imnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.form.FormMappingCustomMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15P8imnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.FormMappingCustomMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15P8i2nREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15P8jGnREeaTLbmqFFisdA" referenceName="eClassifiers">
           <target href="process.ecore#/"/>
@@ -13741,7 +13741,7 @@
         <referenceValue href="process.ecore#//ContractContainer"/>
       </changes>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15RxsmnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.contract.CreatePoolContractCustomMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15RxsmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.contract.CreatePoolContractCustomMigration"/>
   </releases>
   <releases xmi:id="_15Rxs2nREeaTLbmqFFisdA" date="2015-04-29T09:36:01.782+0200" label="7.0.0-003">
     <changes xsi:type="history:Create" xmi:id="_15SYoGnREeaTLbmqFFisdA" referenceName="eLiterals">
@@ -13899,7 +13899,7 @@
         </parameters>
       </operation>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15S_wmnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.callactivity.DefaultCallActivityDefaultMapping"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15S_wmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.callactivity.DefaultCallActivityDefaultMapping"/>
     <changes xsi:type="history:CompositeChange" xmi:id="_15S_w2nREeaTLbmqFFisdA">
       <changes xsi:type="history:Set" xmi:id="_15S_xGnREeaTLbmqFFisdA" featureName="defaultValueLiteral" dataValue="ContractInput" oldDataValue="">
         <element href="process.ecore#//InputMapping/assignationType"/>
@@ -13945,7 +13945,7 @@
     </changes>
   </releases>
   <releases xmi:id="_15S_0WnREeaTLbmqFFisdA" date="2015-06-11T10:33:11.824+0200" label="7.0.1-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15S_0mnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.form.ShapeFillColorCustomMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15S_0mnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.ShapeFillColorCustomMigration"/>
   </releases>
   <releases xmi:id="_15S_02nREeaTLbmqFFisdA" date="2015-07-27T11:43:27.494+0200" label="7.1.0-001">
     <changes xsi:type="history:CompositeChange" xmi:id="_15S_1GnREeaTLbmqFFisdA">
@@ -13965,11 +13965,11 @@
     </changes>
   </releases>
   <releases xmi:id="_15Tmw2nREeaTLbmqFFisdA" date="2015-10-15T11:43:27.494+0200" label="7.2.0-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15TmxGnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateGroovyConnectorVersionTo102"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15TmxWnREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateTransactionalGroovyConnectorVersionTo101"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15TmxGnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateGroovyConnectorVersionTo102"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15TmxWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateTransactionalGroovyConnectorVersionTo101"/>
   </releases>
   <releases xmi:id="_15TmxmnREeaTLbmqFFisdA" date="2016-01-25T10:43:27.494+0100" label="7.2.0-002">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15Tmx2nREeaTLbmqFFisdA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateDocumentConverterTo102"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_15Tmx2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateDocumentConverterTo102"/>
   </releases>
   <releases xmi:id="_8P208GnYEeaTLbmqFFisdA" date="2016-08-24T11:43:27.494+0200" label="7.4.0-001">
     <changes xsi:type="history:CompositeChange" xmi:id="_ATVRcGnZEeaTLbmqFFisdA">
@@ -13992,7 +13992,7 @@
     </changes>
   </releases>
   <releases xmi:id="_fgoZ4IChEeaCgs3tERkvbw" date="2016-09-22T11:43:27.494+0200" label="7.4.0-002">
-    <changes xsi:type="history:MigrationChange" xmi:id="_bbJyQIChEeaCgs3tERkvbw" migration="org.bonitasoft.studio.migration.custom.migration.ExpectedDurationMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_bbJyQIChEeaCgs3tERkvbw" migration="org.bonitasoft.bpm.migration.custom.migration.ExpectedDurationMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_jhhR4ICgEeaCgs3tERkvbw">
         <changes xsi:type="history:Delete" xmi:id="_jhhR4YCgEeaCgs3tERkvbw" referenceName="eStructuralFeatures">
           <target href="process.ecore#//Activity"/>
@@ -14050,13 +14050,13 @@
     </changes>
   </releases>
   <releases xmi:id="_sj1AgIoPEeaSVcTFVrb5Fw" date="2016-09-22T11:43:27.494+0200" label="7.4.0-003">
-    <changes xsi:type="history:MigrationChange" xmi:id="_sj1AgYoPEeaSVcTFVrb5Fw" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateAlfrescoConnectorDefinitionsMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_sj1AgYoPEeaSVcTFVrb5Fw" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateAlfrescoConnectorDefinitionsMigration"/>
   </releases>
   <releases xmi:id="_V5DkcKwLEeaAKfvw_yYhbg" date="2016-11-16T10:43:27.494+0100" label="7.4.0-004">
-    <changes xsi:type="history:MigrationChange" xmi:id="_V5DkcawLEeaAKfvw_yYhbg" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateRestConnectorVersionTo100"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_V5DkcawLEeaAKfvw_yYhbg" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateRestConnectorVersionTo100"/>
   </releases>
   <releases xmi:id="_NyHXsO3kEeafiZdzQoO6tA" date="2017-02-08T10:43:27.494+0100" label="7.5.0-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_NyHXse3kEeafiZdzQoO6tA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateWebServiceConnectorVersionTo101"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_NyHXse3kEeafiZdzQoO6tA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateWebServiceConnectorVersionTo101"/>
   </releases>
   <releases xmi:id="_ubOl0P8lEeatdrlOd6ysSQ" date="2017-03-02T10:43:27.494+0100" label="7.5.0-002">
     <changes xsi:type="history:CompositeChange" xmi:id="_0PfDcP8lEeatdrlOd6ysSQ">
@@ -14112,10 +14112,10 @@
     </changes>
   </releases>
   <releases xmi:id="_zVbFAEzvEee-aqxzWrdt2g" date="2017-06-09T11:43:27.494+0200" label="7.5.2-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_2bs5cEzvEee-aqxzWrdt2g" migration="org.bonitasoft.studio.migration.custom.migration.DependenciesCopyCustomMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_2bs5cEzvEee-aqxzWrdt2g" migration="org.bonitasoft.bpm.migration.custom.migration.DependenciesCopyCustomMigration"/>
   </releases>
   <releases xmi:id="_bSK0MDoTEeeGMZ8Q55whqg" date="2017-05-16T11:43:27.494+0200" label="7.6.0-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_gCo5kDoTEeeGMZ8Q55whqg" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateSQLServerConnectorVersionTo121"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_gCo5kDoTEeeGMZ8Q55whqg" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateSQLServerConnectorVersionTo121"/>
   </releases>
   <releases xmi:id="_n02LoJI5EeeX94p4It-lew" date="2017-09-05T11:43:27.494+0200" label="7.6.0-002">
     <changes xsi:type="history:OperationChange" xmi:id="_ljhpQJI5EeeX94p4It-lew">
@@ -14157,7 +14157,7 @@
     </changes>
   </releases>
   <releases xmi:id="_kNwSIH6nEeimZt3VsFYQiw" date="2018-07-03T11:43:27.494+0200" label="7.8.0-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_iPxegH7TEeikGNUjluDuqA" migration="org.bonitasoft.studio.migration.custom.migration.Removev6FromCustomMigration">
+    <changes xsi:type="history:MigrationChange" xmi:id="_iPxegH7TEeikGNUjluDuqA" migration="org.bonitasoft.bpm.migration.custom.migration.Removev6FromCustomMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_q37EEH6nEeimZt3VsFYQiw">
         <changes xsi:type="history:Remove" xmi:id="_q37EEX6nEeimZt3VsFYQiw" featureName="eSuperTypes" referenceValue="_aDbAwX7WEeikGNUjluDuqA">
           <element href="process.ecore#//AbstractProcess"/>
@@ -14726,11 +14726,11 @@
     </changes>
   </releases>
   <releases xmi:id="_z5RnUKwvEeiFZ5S8g2gj5Q" date="2018-08-30T11:43:27.494+0200" label="7.8.0-002">
-    <changes xsi:type="history:MigrationChange" xmi:id="_z5RnUawvEeiFZ5S8g2gj5Q" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateRestConnectorVersionTo106"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_z5RnUawvEeiFZ5S8g2gj5Q" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateRestConnectorVersionTo106"/>
   </releases>
   <releases xmi:id="_7NF0QDj6Eem-ZO25_WoPnQ" date="2019-02-25T10:43:27.494+0100" label="7.8.3-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_7NF0QTj6Eem-ZO25_WoPnQ" migration="org.bonitasoft.studio.migration.custom.migration.UpdateConfigurationId"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_fYe2YHNSEeqin5n0SIS5Ng" migration="org.bonitasoft.studio.migration.custom.migration.UpdatePoolSize"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_7NF0QTj6Eem-ZO25_WoPnQ" migration="org.bonitasoft.bpm.migration.custom.migration.UpdateConfigurationId"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_fYe2YHNSEeqin5n0SIS5Ng" migration="org.bonitasoft.bpm.migration.custom.migration.UpdatePoolSize"/>
   </releases>
   <releases xmi:id="_lGPssDBZEemIIINmMdyzoA" date="2019-02-14T10:43:27.494+0100" label="7.9.0-001">
     <changes xsi:type="history:OperationChange" xmi:id="_p10aMDBZEemIIINmMdyzoA">
@@ -14826,10 +14826,10 @@
     </changes>
   </releases>
   <releases xmi:id="_2CaBgIFbEembYuBMnmqjaw" date="2019-05-26T11:43:27.494+0200" label="7.10.0-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_7V1C8IFbEembYuBMnmqjaw" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateEmailConnectorVersionTo110"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_7V1C8IFbEembYuBMnmqjaw" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateEmailConnectorVersionTo110"/>
   </releases>
   <releases xmi:id="_FsWCcCAbEeq2WMeBvv36kg" date="2019-12-16T23:00:00.000+0100" label="7.11.0-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_J5IzACAbEeq2WMeBvv36kg" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateWebServiceConnectorVersionTo110"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_J5IzACAbEeq2WMeBvv36kg" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateWebServiceConnectorVersionTo110"/>
   </releases>
   <releases xmi:id="_jkp6QCCwEeqHc6LaArd-Iw" date="2019-12-17T23:00:00.000+0100" label="7.11.0-002">
     <changes xsi:type="history:OperationChange" xmi:id="_QV5J4CCxEeqdOP_YgmJ3VQ">
@@ -14877,7 +14877,7 @@
     </changes>
   </releases>
   <releases xmi:id="_DOHucEy7EeqbB9WjuS2FJA" date="2020-01-31T09:23:27.494+0100" label="7.11.0-003">
-    <changes xsi:type="history:MigrationChange" xmi:id="_DOHucUy7EeqbB9WjuS2FJA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateUIPathConnectorTo20"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_DOHucUy7EeqbB9WjuS2FJA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateUIPathConnectorTo20"/>
   </releases>
   <releases xmi:id="_ndaLIEy7EeqbB9WjuS2FJA" date="2020-02-11T09:23:27.494+0100" label="7.11.0-004">
     <changes xsi:type="history:OperationChange" xmi:id="_KwQDIEy7EeqbB9WjuS2FJA">
@@ -15166,24 +15166,24 @@
     </changes>
   </releases>
   <releases xmi:id="_ULmOgLX-Eeq4FY7VcpLJTw" date="2020-06-23T11:25:27.494+0200" label="7.11.1-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_bGouALX-Eeq4FY7VcpLJTw" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateLDAPConnectorVersionTo110"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_bGouALX-Eeq4FY7VcpLJTw" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateLDAPConnectorVersionTo110"/>
   </releases>
   <releases xmi:id="_WB_cUPyzEeqbNf3UDvWEaw" date="2020-09-22T11:25:27.494+0200" label="7.12.0-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_WCADYPyzEeqbNf3UDvWEaw" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateInitiatorActorFilterDefinition"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_8BYSwPy1EeqbNf3UDvWEaw" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateInitiatorManagerActorFilterDefinition"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_-cvh8Py1EeqbNf3UDvWEaw" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateUserManagerActorFilterDefinition"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_AHJOQPy2EeqbNf3UDvWEaw" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateSingleUserActorFilterDefinition"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_BlCvoPy2EeqbNf3UDvWEaw" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateCustomUserInfoActorFilterDefinition"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_ENYq4Py2EeqbNf3UDvWEaw" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateSameTaskActorFilterDefinition"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_WCADYPyzEeqbNf3UDvWEaw" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateInitiatorActorFilterDefinition"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_8BYSwPy1EeqbNf3UDvWEaw" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateInitiatorManagerActorFilterDefinition"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_-cvh8Py1EeqbNf3UDvWEaw" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateUserManagerActorFilterDefinition"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_AHJOQPy2EeqbNf3UDvWEaw" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateSingleUserActorFilterDefinition"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_BlCvoPy2EeqbNf3UDvWEaw" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateCustomUserInfoActorFilterDefinition"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_ENYq4Py2EeqbNf3UDvWEaw" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateSameTaskActorFilterDefinition"/>
   </releases>
   <releases xmi:id="_cF18cATHEeucZo-Urx5qXw" date="2020-10-02T11:25:27.494+0200" label="7.12.0-002">
-    <changes xsi:type="history:MigrationChange" xmi:id="_cF18dgTHEeucZo-Urx5qXw" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateGoogleCalendarDefinitionTo110"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_cF18dgTHEeucZo-Urx5qXw" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateGoogleCalendarDefinitionTo110"/>
   </releases>
   <releases xmi:id="_By8VUAo2Eeuyz_cP-Eh7FA" date="2020-10-09T11:25:27.494+0200" label="7.12.0-003">
-    <changes xsi:type="history:MigrationChange" xmi:id="_By8VUQo2Eeuyz_cP-Eh7FA" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateEmailConnectorVersionTo120"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_By8VUQo2Eeuyz_cP-Eh7FA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateEmailConnectorVersionTo120"/>
   </releases>
   <releases xmi:id="_JE4CPo2IhfYz_Ev-OD6UY" date="2021-02-09T10:25:27.494+0100" label="7.12.0-004">
-    <changes xsi:type="history:MigrationChange" xmi:id="_JE4CPo2IhfYz_Ev-OD6UY" migration="org.bonitasoft.studio.migration.custom.migration.connector.UpdateDeprecatedGroovyConnector"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_JE4CPo2IhfYz_Ev-OD6UY" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateDeprecatedGroovyConnector"/>
   </releases>
   <releases xmi:id="_tt2RcE8LEeq0LYHRol2p7w" date="2022-11-08T10:29:00.661+0100" label="8">
     <changes xsi:type="history:Set" xmi:id="_bX8esF6cEe2-2NKBMlb2Tw" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/bpm/process" oldDataValue="http://www.bonitasoft.org/ns/studio/process">

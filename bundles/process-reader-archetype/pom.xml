@@ -35,6 +35,12 @@
     </dependency>
     <dependency>
       <groupId>org.bonitasoft.bpm</groupId>
+      <artifactId>org.bonitasoft.bpm.migration</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.bonitasoft.bpm</groupId>
       <artifactId>org.bonitasoft.bpm.model.edit</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
