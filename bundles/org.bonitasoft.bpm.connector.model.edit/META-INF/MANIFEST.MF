@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.bonitasoft.bpm.connector.model.edit;singleton:=true
+Automatic-Module-Name: org.bonitasoft.bpm.connector.model.edit
+Bundle-Version: 8.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: org.bonitasoft.bpm.connector.model.definition.provider.ConnectorEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Export-Package: org.bonitasoft.bpm.connector.model.definition.provider,
+ org.bonitasoft.bpm.connector.model.implementation.provider
+Require-Bundle: org.eclipse.core.runtime,
+ org.bonitasoft.bpm.connector.model;visibility:=reexport,
+ org.eclipse.emf.edit;visibility:=reexport
+Bundle-ActivationPolicy: lazy

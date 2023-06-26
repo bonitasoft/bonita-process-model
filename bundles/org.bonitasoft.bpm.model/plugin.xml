@@ -152,5 +152,13 @@
             contentTypeIdentifier="bonita-process-model">
       </parser>
    </extension>
+   <extension
+         point="org.eclipse.emf.ecore.factory_override">
+      <!-- @generated NOT register CustomMigrationFactoryImpl with Bonita Patch for Notation model -->
+      <factory
+            class="org.bonitasoft.bpm.model.process.util.migration.internal.CustomMigrationFactoryImpl"
+            uri="http://www.eclipse.org/emf/edapt/migration/0.3">
+      </factory>
+   </extension>
 
 </plugin>

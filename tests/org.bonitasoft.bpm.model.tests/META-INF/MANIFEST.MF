@@ -8,4 +8,6 @@ Fragment-Host: org.bonitasoft.bpm.model;bundle-version="8.0.0"
 Automatic-Module-Name: org.bonitasoft.bpm.model.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.junit,
- assertj-core
+ assertj-core,
+ wrapped.org.bonitasoft.engine.bonita-common;bundle-version="9.0.0",
+ wrapped.org.bonitasoft.engine.bonita-process-definition-model;bundle-version="9.0.0"

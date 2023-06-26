@@ -3,5 +3,18 @@
    <feature id="org.bonitasoft.bpm.definitions.feature">
       <category name="Bonita Business Process Model"/>
    </feature>
+   <feature id="org.bonitasoft.bonita2bpmn.feature">
+      <category name="Bonita Business Process Model"/>
+   </feature>
+   <feature id="org.bonitasoft.bpm.connector.feature">
+      <category name="Bonita Business Process Model"/>
+   </feature>
+   <feature id="org.bonitasoft.bpm.model.feature">
+      <category name="Bonita Business Process Model"/>
+   </feature>
+   <feature id="org.bonitasoft.bpm.tests.feature">
+      <category name="Developer Resources"/>
+   </feature>
    <category-def name="Bonita Business Process Model" label="Contains the Bonita Process Domain Logic."/>
+   <category-def name="Developer Resources" label="Test resource for developers"/>
 </site>

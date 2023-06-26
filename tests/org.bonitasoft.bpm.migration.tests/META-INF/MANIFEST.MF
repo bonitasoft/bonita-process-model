@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Process Model Migration Tests Fragment
+Bundle-SymbolicName: org.bonitasoft.bpm.migration.tests
+Bundle-Version: 8.0.0.qualifier
+Bundle-Vendor: Bonitasoft S.A.
+Fragment-Host: org.bonitasoft.bpm.migration;bundle-version="8.0.0"
+Automatic-Module-Name: org.bonitasoft.studio.migration.tests
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.junit,
+ assertj-core,
+ org.mockito.mockito-core,
+ net.bytebuddy.byte-buddy,
+ org.objenesis,
+ org.bonitasoft.bpm.model.tests-utils
