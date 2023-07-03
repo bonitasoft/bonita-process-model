@@ -8,7 +8,7 @@ Automatic-Module-Name: org.bonitasoft.bpm.model.tests.utils
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.bonitasoft.bpm.model,
  assertj-core,
- org.mockito.mockito-core
+ net.bytebuddy.byte-buddy
 Export-Package: org.bonitasoft.bpm.model.configuration.builders,
  org.bonitasoft.bpm.model.connectorconfiguration.builders,
  org.bonitasoft.bpm.model.expression.assertions,

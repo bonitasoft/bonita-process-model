@@ -14,7 +14,7 @@
  */
 package org.bonitasoft.bpm.model.process.builders;
 
-import static org.assertj.core.util.Lists.newArrayList;
+import java.util.Arrays;
 
 import org.bonitasoft.bpm.model.Buildable;
 import org.bonitasoft.bpm.model.process.ContractConstraint;
@@ -51,7 +51,7 @@ public class ContractConstraintBuilder implements Buildable<ContractConstraint> 
     }
 
     public ContractConstraintBuilder havingInput(final String... inputNames) {
-        contractConstraint.getInputNames().addAll(newArrayList(inputNames));
+        contractConstraint.getInputNames().addAll(Arrays.asList(inputNames));
         return this;
     }
 
