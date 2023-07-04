@@ -223,7 +223,7 @@ public class BonitaToBPMNExporter {
     private final FormalExpressionFunctionFactory formalExpressionTransformerFactory = new FormalExpressionFunctionFactory();
     private IModelSearch modelSearch;
     private Supplier<List<ConnectorDefinition>> connectorDefContextProvider;
-    private Supplier<File> connectorXSLProvider;
+    private ConnectorTransformationXSLProvider connectorXSLProvider;
     private MultiStatus status;
     private Map<LinkEvent, TLinkEventDefinition> linkEvents = new HashMap<>();
     private Set<String> messagesReferences = new HashSet<>();
@@ -236,7 +236,7 @@ public class BonitaToBPMNExporter {
             IModelSearch modelSearch,
             Supplier<List<ConnectorDefinition>> connectorDefContextProvider,
             final File destFile,
-            Supplier<File> connectorXSLProvider,
+            ConnectorTransformationXSLProvider connectorXSLProvider,
             String currentVersion) {
         this.modelSearch = modelSearch;
         this.connectorDefContextProvider = connectorDefContextProvider;
@@ -535,7 +535,7 @@ public class BonitaToBPMNExporter {
             throws IOException, TransformerException {
         if (xslTemplate == null) {
             final TransformerFactory transFact = TransformerFactory.newInstance();
-            final File xsltFileoriginal = connectorXSLProvider.get();
+            final File xsltFileoriginal = connectorXSLProvider.getConnectorXSLFile();
             final Source xsltSource = new StreamSource(xsltFileoriginal);
             xslTemplate = transFact.newTemplates(xsltSource);
         }

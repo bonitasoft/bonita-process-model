@@ -22,6 +22,12 @@ import org.eclipse.core.runtime.FileLocator;
 
 public interface ConnectorTransformationXSLProvider {
 
+    /**
+     * A default instance which can be used as is
+     */
+    public static final ConnectorTransformationXSLProvider DEFAULT = new ConnectorTransformationXSLProvider() {
+    };
+
     static final String CONNECTOR_XSL_FILE_PATH = "transfo/genConnectorsXSD.xsl";
 
     default File getConnectorXSLFile() throws IOException {
