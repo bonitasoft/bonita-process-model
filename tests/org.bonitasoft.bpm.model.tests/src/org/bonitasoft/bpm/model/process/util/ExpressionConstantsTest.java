@@ -17,7 +17,6 @@ package org.bonitasoft.bpm.model.process.util;
 import static org.junit.Assert.assertEquals;
 
 import org.bonitasoft.bpm.model.util.ExpressionConstants;
-import org.bonitasoft.engine.bpm.document.DocumentValue;
 import org.bonitasoft.engine.expression.ExpressionInterpreter;
 import org.bonitasoft.engine.expression.ExpressionType;
 import org.bonitasoft.engine.operation.LeftOperand;
@@ -59,7 +58,6 @@ public class ExpressionConstantsTest {
         assertEquals(OperatorType.DELETION.name(), ExpressionConstants.DELETION_OPERATOR);
         assertEquals(OperatorType.XPATH_UPDATE_QUERY.name(), ExpressionConstants.XPATH_UPDATE_OPERATOR);
         assertEquals(ExpressionInterpreter.GROOVY.name(), ExpressionConstants.GROOVY);
-        assertEquals(DocumentValue.class.getName(), ExpressionConstants.DOCUMENT_VALUE_RETURN_TYPE);
         assertEquals(LeftOperand.TYPE_DATA, ExpressionConstants.LEFT_OPERAND_DATA);
         assertEquals(LeftOperand.TYPE_SEARCH_INDEX, ExpressionConstants.LEFT_OPERAND_SEARCH_INDEX);
         assertEquals(LeftOperand.TYPE_DOCUMENT, ExpressionConstants.LEFT_OPERAND_DOCUMENT);

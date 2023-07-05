@@ -315,9 +315,9 @@
                                         
                     <groupId>org.bonitasoft.engine</groupId>
                                         
-                    <artifactId>bonita-common</artifactId>
+                    <artifactId>bonita-business-archive</artifactId>
                                         
-                    <version>9.0-SNAPSHOT</version>
+                    <version>1.0.0-SNAPSHOT</version>
                                         
                     <type>jar</type>
                                     
