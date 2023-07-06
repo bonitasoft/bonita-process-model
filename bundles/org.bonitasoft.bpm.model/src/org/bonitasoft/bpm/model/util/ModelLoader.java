@@ -110,8 +110,7 @@ public final class ModelLoader {
         ResourceSetImpl rset = new ResourceSetImpl();
         // try and migrate file during loading
         rset.getLoadOptions().put(ProcessResourceImpl.OPTION_MIGRATION_POLICY, MigrationPolicy.ALWAYS_MIGRATE_POLICY);
-        Resource model = rset.getResource(modelUri, true);
-        return model;
+        return rset.getResource(modelUri, true);
     }
 
 }
