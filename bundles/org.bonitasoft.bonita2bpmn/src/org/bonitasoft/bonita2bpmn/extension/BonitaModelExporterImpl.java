@@ -19,6 +19,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.bonitasoft.bpm.model.process.Activity;
@@ -30,11 +31,13 @@ import org.bonitasoft.bpm.model.process.MainProcess;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.SubProcessEvent;
 import org.bonitasoft.bpm.model.process.TextAnnotation;
+import org.bonitasoft.bpm.model.util.EnvironmentUtil;
 import org.bonitasoft.bpm.model.util.IModelSearch;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.gmf.runtime.notation.Bounds;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
@@ -53,6 +56,14 @@ public class BonitaModelExporterImpl implements IBonitaModelExporter {
 
     public BonitaModelExporterImpl(Resource resource, IModelSearch modelSearch) {
         this.resource = requireNonNull(resource);
+        if (!resource.isLoaded()) {
+            throw new IllegalStateException("Resource must be loaded first before export.");
+        } else if (!EnvironmentUtil.isOSGi() && getDiagramOpt().isEmpty() && resource.getContents().stream()
+                .filter(AnyType.class::isInstance).findAny().isPresent()) {
+            throw new IllegalStateException(
+                    "The GMF Notation package was not registered before model was loaded.\n" +
+                            "Execute 'EPackage.Registry.INSTANCE.put(NotationPackage.eNS_URI, NotationPackage.eINSTANCE);' before loading the model with org.bonitasoft.bpm.model.util.ModelLoader.");
+        }
         this.modelSearch = modelSearch;
     }
 
@@ -71,12 +82,15 @@ public class BonitaModelExporterImpl implements IBonitaModelExporter {
     }
 
     public Diagram getDiagram() {
+        return getDiagramOpt().orElseThrow(
+                () -> new IllegalStateException(String.format("No Diagram found in resource %s", resource)));
+    }
+
+    private Optional<Diagram> getDiagramOpt() {
         return resource.getContents().stream()
                 .filter(Diagram.class::isInstance)
                 .map(Diagram.class::cast)
-                .findFirst()
-                .orElseThrow(
-                        () -> new IllegalStateException(String.format("No Diagram found in resource %s", resource)));
+                .findFirst();
     }
 
     /*
