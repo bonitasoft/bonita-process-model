@@ -40,6 +40,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
 
     <properties>
         <cyclonedx.version>2.7.9</cyclonedx.version>
+        <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
         <tycho.version>3.0.3</tycho.version>
         <emf-ecore.version>2.27.0</emf-ecore.version>
     	<emf-common.version>2.25.0</emf-common.version>
@@ -64,6 +65,14 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
         <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
+        
+		<!-- Sonar -->
+		<sonar.projectKey>${sonar.organization}_bonita-artifacts-model</sonar.projectKey>
+		<sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
+		<sonar.organization>bonitasoft</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../coverage-report/target/site/jacoco-aggregate/jacoco.xml,
+		        ${project.basedir}/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
@@ -227,6 +236,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                     <artifactId>cyclonedx-maven-plugin</artifactId>
                     <version>${cyclonedx.version}</version>
                 </plugin>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>${sonar-maven-plugin.version}</version>
+				</plugin>
                 <plugin>
                     <artifactId>maven-archetype-plugin</artifactId>
                     <version>${archetype-packaging.version}</version>
