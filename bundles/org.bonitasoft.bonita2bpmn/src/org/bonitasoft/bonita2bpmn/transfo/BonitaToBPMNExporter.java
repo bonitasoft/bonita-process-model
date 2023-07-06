@@ -116,10 +116,8 @@ import org.bonitasoft.bpm.model.process.XMLData;
 import org.bonitasoft.bpm.model.process.XMLType;
 import org.bonitasoft.bpm.model.process.XORGateway;
 import org.bonitasoft.bpm.model.process.util.DataUtil;
-import org.bonitasoft.bpm.model.util.EnvironmentUtil;
 import org.bonitasoft.bpm.model.util.ExpressionConstants;
 import org.bonitasoft.bpm.model.util.IModelSearch;
-import org.bonitasoft.bpm.model.util.ModelLoader;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
 import org.eclipse.core.runtime.Status;
@@ -127,7 +125,6 @@ import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -136,7 +133,6 @@ import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.ElementHandlerImpl;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.omg.spec.bpmn.di.BPMNEdge;
 import org.omg.spec.bpmn.di.BPMNPlane;
 import org.omg.spec.bpmn.di.BPMNShape;
@@ -231,16 +227,6 @@ public class BonitaToBPMNExporter {
     private MultiStatus status;
     private Map<LinkEvent, TLinkEventDefinition> linkEvents = new HashMap<>();
     private Set<String> messagesReferences = new HashSet<>();
-
-    static {
-        if (!EnvironmentUtil.isOSGi()) {
-            // do required registrations
-            ModelLoader.getInstance();
-            // register GMF EPackage
-            EPackage.Registry.INSTANCE.put(NotationPackage.eNS_URI, NotationPackage.eINSTANCE);
-        }
-        // otherwise, nothing to initialize. Extensions take care of it.
-    }
 
     public BonitaToBPMNExporter() {
         errors.add("Forms and other resources are not exported.");
