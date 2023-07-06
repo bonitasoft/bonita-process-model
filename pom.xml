@@ -63,8 +63,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
         <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
-        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
+        <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
+        <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
         
 		<!-- Sonar -->
 		<sonar.projectKey>${sonar.organization}_bonita-artifacts-model</sonar.projectKey>
