@@ -75,11 +75,6 @@ mvn archetype:generate \
 | -Dwrapper                      | __false__  | true                               | If set to true, project will setup a [maven wrapper](https://github.com/takari/maven-wrapper)|
 | -Djava-version                 | __false__  | Same as in the main module __\*__  | Version of Java used by the project. |
 | -Dbonita-process-model-version | __false__  | Same as in the main module __\*__  | Version of the bonita-process-model used. |
-| -Demf-ecore-version            | __false__  | Same as in the main module __\*__  | Version of EMF Core module used by the project. |
-| -Demf-common-version           | __false__  | Same as in the main module __\*__  | Version of EMF Common module used by the project. |
-| -Demf-xmi-version              | __false__  | Same as in the main module __\*__  | Version of EMF Ecore XMI module used by the project. |
-| -Demf-edit-version             | __false__  | Same as in the main module __\*__  | Version of EMF Edit module used by the project. |
-| -Dmaven-artifact-version       | __false__  | Same as in the main module __\*__  | Version of maven-artifact module used by the project. |
 | -Dmaven-clean-version          | __false__  | Same as in the main module __\*__  | Version of maven-clean-plugin module used by the project. |
 | -Dmaven-resources-version      | __false__  | Same as in the main module __\*__  | Version of maven-resources-plugin module used by the project. |
 | -Dmaven-compiler-version       | __false__  | Same as in the main module __\*__  | Version of maven-compiler-plugin module used by the project. |
@@ -89,6 +84,8 @@ mvn archetype:generate \
 | -Dmaven-deploy-version          | __false__  | Same as in the main module __\*__  | Version of maven-deploy-plugin module used by the project. |
 
 __\* *These parameters are used to fix some versions. It is recommended not to use them and let the default values be used to ensure compatibility.*__
+
+The versions of dependent modules are taken recursively by org.bonitasoft.bpm modules, so you can not choose them. This concerns EMF Core, EMF Common, EMF Ecore XMI, EMF Edit and maven-artifact modules.
 
 ## Tutorial : displaying the content of a simple process
 This tutorial will help you to read the content of a process file from the Bonita Studio and to display the content (tasks, events, transitions... ). 

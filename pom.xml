@@ -34,6 +34,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         <name>BonitaSoft S.A.</name>
         <url>https://www.bonitasoft.com/</url>
     </organization>
+    
+    <!-- Use the root project's website -->
+    <url>https://github.com/bonitasoft/bonita-process-model</url>
 
     <properties>
         <cyclonedx.version>2.7.9</cyclonedx.version>
@@ -345,6 +348,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
 						</goals>
 					</execution>
                 </executions>
+                <configuration>
+                    <flattenMode>oss</flattenMode>
+                </configuration>
             </plugin>
             <!-- Configuraiton for test plugins/fragments -->
             <plugin>
