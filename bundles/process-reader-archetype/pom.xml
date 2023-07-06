@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.bonitasoft.bpm</groupId>
@@ -9,13 +7,10 @@
     <version>8.0.0-SNAPSHOT</version>
     <relativePath>../.polyglot.pom.tycho</relativePath>
   </parent>
-
   <groupId>org.bonitasoft.archetypes</groupId>
   <artifactId>process-reader-archetype</artifactId>
   <packaging>maven-archetype</packaging>
-
   <name>Archetype - Bonita Business Process Model Reader</name>
-
   <dependencies>
     <!-- Artifacts from reactor are required for testing the project built from archetype -->
     <dependency>
@@ -37,8 +32,66 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
-
   <build>
+    <plugins>
+      <!-- Patch archetype-metadata.xml and archetype.properties files to reference correct versions  -->
+      <plugin>
+        <groupId>org.codehaus.gmaven</groupId>
+        <artifactId>groovy-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>report-versions-to-archetype</id>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <phase>process-resources</phase>
+            <configuration>
+              <defaults>
+                <src.dir>${project.basedir}/src</src.dir>
+                <java-version>${java.version}</java-version>
+                <bonita-process-model-version>${project.version}</bonita-process-model-version>
+                <maven-clean-version>${maven-clean-plugin.version}</maven-clean-version>
+                <maven-resources-version>${maven-resources-plugin.version}</maven-resources-version>
+                <maven-compiler-version>${maven-compiler-plugin.version}</maven-compiler-version>
+                <maven-surefire-version>${maven-surefire-plugin.version}</maven-surefire-version>
+                <maven-jar-version>${maven-jar-plugin.version}</maven-jar-version>
+                <maven-install-version>${maven-install-plugin.version}</maven-install-version>
+                <maven-deploy-version>${maven-deploy-plugin.version}</maven-deploy-version>
+              </defaults>
+              <source>${project.basedir}/report-versions-to-archetype.groovy</source>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Ensure the model and model.edit plugins are installed in a dedicated repository
+             before the archetype generated project is tested.
+             For this purpose, the plugins are in this module's test dependencies -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-invoker-plugin</artifactId>
+        <version>${maven-invoker-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>install</goal>
+            </goals>
+            <configuration>
+              <localRepositoryPath>${project.build.directory}/repoForArchetypeTest</localRepositoryPath>
+              <useLocalRepository>true</useLocalRepository>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- Make sure the archetype generated project's tests are run on the same repository
+             where the model and model.edit plugins were installed -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-archetype-plugin</artifactId>
+        <configuration>
+          <localRepositoryPath>${project.build.directory}/repoForArchetypeTest</localRepositoryPath>
+        </configuration>
+      </plugin>
+    </plugins>
     <extensions>
       <extension>
         <groupId>org.apache.maven.archetype</groupId>
@@ -46,64 +99,5 @@
         <version>${archetype-packaging.version}</version>
       </extension>
     </extensions>
-    <plugins>
-        <!-- Patch archetype-metadata.xml and archetype.properties files to reference correct versions  -->
-        <plugin>
-          <groupId>org.codehaus.gmaven</groupId>
-          <artifactId>groovy-maven-plugin</artifactId>
-          <executions>
-            <execution>
-              <id>report-versions-to-archetype</id>
-              <phase>process-resources</phase>
-              <goals>
-                <goal>execute</goal>
-              </goals>
-              <configuration>
-                <defaults>
-                  <src.dir>${project.basedir}/src</src.dir>
-                  <java-version>${java.version}</java-version>
-                  <bonita-process-model-version>${project.version}</bonita-process-model-version>
-                  <maven-clean-version>${maven-clean-plugin.version}</maven-clean-version>
-                  <maven-resources-version>${maven-resources-plugin.version}</maven-resources-version>
-                  <maven-compiler-version>${maven-compiler-plugin.version}</maven-compiler-version>
-                  <maven-surefire-version>${maven-surefire-plugin.version}</maven-surefire-version>
-                  <maven-jar-version>${maven-jar-plugin.version}</maven-jar-version>
-                  <maven-install-version>${maven-install-plugin.version}</maven-install-version>
-                  <maven-deploy-version>${maven-deploy-plugin.version}</maven-deploy-version>
-                </defaults>
-                <source>${project.basedir}/report-versions-to-archetype.groovy</source>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-        <!-- Ensure the model and model.edit plugins are installed in a dedicated repository
-             before the archetype generated project is tested.
-             For this purpose, the plugins are in this module's test dependencies -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-invoker-plugin</artifactId>
-          <version>${maven-invoker-plugin.version}</version>
-          <executions>
-            <execution>
-              <goals>
-                <goal>install</goal>
-              </goals>
-              <configuration>
-                <localRepositoryPath>${project.build.directory}/repoForArchetypeTest</localRepositoryPath>
-                <useLocalRepository>true</useLocalRepository>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-        <!-- Make sure the archetype generated project's tests are run on the same repository
-             where the model and model.edit plugins were installed -->
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-archetype-plugin</artifactId>
-          <configuration>
-            <localRepositoryPath>${project.build.directory}/repoForArchetypeTest</localRepositoryPath>
-          </configuration>
-        </plugin>
-    </plugins>
   </build>
 </project>

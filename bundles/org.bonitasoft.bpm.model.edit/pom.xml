@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
@@ -6,11 +7,9 @@
     <version>8.0.0-SNAPSHOT</version>
     <relativePath>../.polyglot.pom.tycho</relativePath>
   </parent>
-  
   <artifactId>org.bonitasoft.bpm.model.edit</artifactId>
-  <name>Process Model</name>
   <packaging>eclipse-plugin</packaging>
-
+  <name>Process Model</name>
   <dependencies>
     <!-- Bonita Process Model -->
     <dependency>
@@ -19,10 +18,9 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
-        <groupId>org.eclipse.emf</groupId>
-        <artifactId>org.eclipse.emf.edit</artifactId>
-        <version>${emf-edit.version}</version>
+      <groupId>org.eclipse.emf</groupId>
+      <artifactId>org.eclipse.emf.edit</artifactId>
+      <version>${emf-edit.version}</version>
     </dependency>
   </dependencies>
-  
 </project>
