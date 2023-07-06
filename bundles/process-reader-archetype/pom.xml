@@ -16,17 +16,8 @@
 
   <name>Archetype - Bonita Business Process Model Reader</name>
 
-  <!-- Use the root project's website -->
-  <url>https://github.com/bonitasoft/bonita-process-model</url>
-
   <dependencies>
     <!-- Artifacts from reactor are required for testing the project built from archetype -->
-    <dependency>
-      <groupId>org.bonitasoft.bpm</groupId>
-      <artifactId>org.bonitasoft.bpm.plugin-dependencies</artifactId>
-      <version>${project.version}</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.bonitasoft.bpm</groupId>
       <artifactId>org.bonitasoft.bpm.model</artifactId>
@@ -72,11 +63,6 @@
                   <src.dir>${project.basedir}/src</src.dir>
                   <java-version>${java.version}</java-version>
                   <bonita-process-model-version>${project.version}</bonita-process-model-version>
-                  <emf-ecore-version>${emf-ecore.version}</emf-ecore-version>
-                  <emf-common-version>${emf-common.version}</emf-common-version>
-                  <emf-xmi-version>${emf-xmi.version}</emf-xmi-version>
-                  <emf-edit-version>${emf-edit.version}</emf-edit-version>
-                  <maven-artifact-version>${maven-artifact.version}</maven-artifact-version>
                   <maven-clean-version>${maven-clean-plugin.version}</maven-clean-version>
                   <maven-resources-version>${maven-resources-plugin.version}</maven-resources-version>
                   <maven-compiler-version>${maven-compiler-plugin.version}</maven-compiler-version>

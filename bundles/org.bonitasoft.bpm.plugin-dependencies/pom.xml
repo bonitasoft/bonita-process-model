@@ -10,16 +10,14 @@
   <artifactId>org.bonitasoft.bpm.plugin-dependencies</artifactId>
   <name>Process Model Plugin Dependencies</name>
   <packaging>eclipse-plugin</packaging>
-    <!--<repositories>
-        <repository>
-            <id>helios</id>
-            <layout>p2</layout>
-            <url>http://download.eclipse.org/releases/helios</url>
-        </repository>
-    </repositories>-->
 
-  <!-- Use the root project's website -->
-  <url>https://github.com/bonitasoft/bonita-process-model</url>
+  <dependencies>
+    <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-artifact</artifactId>
+        <version>${maven-artifact.version}</version>
+    </dependency>
+  </dependencies>
   
   <build>
     <plugins>
