@@ -191,8 +191,6 @@ public class SingleResourceMigrator extends Migrator {
                             if (Entry.class.isAssignableFrom(sourceFeature.getEType().getInstanceClass())) {
                                 FeatureMap objectFeatureMap = (FeatureMap) eObject.eGet(targetFeature);
                                 UpdatingList valuesMap = element.get(sourceFeature);
-                                Map<EStructuralFeature, Object> map = new HashMap<EStructuralFeature, Object>(
-                                        valuesMap.size());
                                 for (Object v : valuesMap) {
                                     Entry e = (Entry) v;
                                     objectFeatureMap.add(e.getEStructuralFeature(), e.getValue());

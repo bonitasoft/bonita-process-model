@@ -59,7 +59,7 @@ public class BonitaModelExporterImpl implements IBonitaModelExporter {
         if (!resource.isLoaded()) {
             throw new IllegalStateException("Resource must be loaded first before export.");
         } else if (!EnvironmentUtil.isOSGi() && getDiagramOpt().isEmpty() && resource.getContents().stream()
-                .filter(AnyType.class::isInstance).findAny().isPresent()) {
+                .anyMatch(AnyType.class::isInstance)) {
             throw new IllegalStateException(
                     "The GMF Notation package was not registered before model was loaded.\n" +
                             "Execute 'EPackage.Registry.INSTANCE.put(NotationPackage.eNS_URI, NotationPackage.eINSTANCE);' before loading the model with org.bonitasoft.bpm.model.util.ModelLoader.");

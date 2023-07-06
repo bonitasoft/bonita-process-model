@@ -42,7 +42,7 @@ public class ModelSearch implements IModelSearch {
      */
     @Override
     public <T> List<T> getAllItemsOfType(EObject parent, Class<T> type) {
-        final List<T> res = new ArrayList<T>();
+        final List<T> res = new ArrayList<>();
         addAllElementOfContainer(parent, res, type);
         return res;
     }
@@ -111,10 +111,9 @@ public class ModelSearch implements IModelSearch {
         EObject currentElement = element;
         boolean processFound = false;
         while (!processFound && currentElement != null) {
-            if (currentElement instanceof SequenceFlow) {
-                if (((SequenceFlow) currentElement).getSource() instanceof DataAware) {
-                    data.addAll(((DataAware) ((SequenceFlow) currentElement).getSource()).getData());
-                }
+            if (currentElement instanceof SequenceFlow 
+                    && ((SequenceFlow) currentElement).getSource() instanceof DataAware) {
+                data.addAll(((DataAware) ((SequenceFlow) currentElement).getSource()).getData());
             }
             if (currentElement instanceof DataAware) {
                 data.addAll(((DataAware) currentElement).getData());
