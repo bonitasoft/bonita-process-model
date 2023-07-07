@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2014 BonitaSoft S.A.
+/** 
+ * Copyright (C) 2014 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,10 +31,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-
 /**
  * @author Romain Bioteau
- *
  */
 @RunWith(MockitoJUnitRunner.class)
 public class FormalExpressionFunctionFactoryTest {
@@ -60,17 +58,20 @@ public class FormalExpressionFunctionFactoryTest {
 
     @Test
     public void should_create_FormalExpressionTransformer() throws Exception {
-        assertThat(formalExpressionTransformerFactory.newFormalExpressionFunction(null, ExpressionConstants.PARAMETER_TYPE,
-                null)).hasSameClassAs(
-                new FormalExpressionFunction());
+        assertThat(
+                formalExpressionTransformerFactory.newFormalExpressionFunction(null, ExpressionConstants.PARAMETER_TYPE,
+                        null))
+                .hasSameClassAs(
+                        new FormalExpressionFunction());
     }
 
     @Test
     public void should_create_ScriptFormalExpressionTransformer() throws Exception {
         assertThat(
-                formalExpressionTransformerFactory.newFormalExpressionFunction(null, ExpressionConstants.SCRIPT_TYPE, null))
-                        .hasSameClassAs(
-                new ScriptFormalExpressionFunction());
+                formalExpressionTransformerFactory.newFormalExpressionFunction(null, ExpressionConstants.SCRIPT_TYPE,
+                        null))
+                .hasSameClassAs(
+                        new ScriptFormalExpressionFunction());
     }
 
     @Test

@@ -1,14 +1,16 @@
-/**
+/** 
  * Copyright (C) 2015 Bonitasoft S.A.
- * Bonitasoft, 32 rue Gustave Eiffel - 38000 Grenoble
+ * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2.0 of the License, or
  * (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -58,7 +60,8 @@ public class FormMappingAssert extends AbstractAssert<FormMappingAssert, FormMap
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> targetForm to be:\n  <%s>\n but was:\n  <%s>", actual, targetForm, actual.getTargetForm());
+        final String errorMessage = format("\nExpected <%s> targetForm to be:\n  <%s>\n but was:\n  <%s>", actual,
+                targetForm, actual.getTargetForm());
 
         // check
         if (!actual.getTargetForm().equals(targetForm)) {
@@ -81,7 +84,8 @@ public class FormMappingAssert extends AbstractAssert<FormMappingAssert, FormMap
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> type to be:\n  <%s>\n but was:\n  <%s>", actual, type, actual.getType());
+        final String errorMessage = format("\nExpected <%s> type to be:\n  <%s>\n but was:\n  <%s>", actual, type,
+                actual.getType());
 
         // check
         if (!actual.getType().equals(type)) {
@@ -104,7 +108,8 @@ public class FormMappingAssert extends AbstractAssert<FormMappingAssert, FormMap
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> url to be:\n  <%s>\n but was:\n  <%s>", actual, url, actual.getUrl());
+        final String errorMessage = format("\nExpected <%s> url to be:\n  <%s>\n but was:\n  <%s>", actual, url,
+                actual.getUrl());
 
         // check
         if (!actual.getUrl().equals(url)) {

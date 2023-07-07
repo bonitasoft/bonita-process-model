@@ -1,14 +1,16 @@
-/**
+/** 
  * Copyright (C) 2015 Bonitasoft S.A.
- * Bonitasoft, 32 rue Gustave Eiffel - 38000 Grenoble
+ * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2.0 of the License, or
  * (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -92,7 +94,8 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have actors but had :\n  <%s>", actual, actual.getActors());
+        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have actors but had :\n  <%s>", actual,
+                actual.getActors());
 
         // check
         if (!actual.getActors().isEmpty()) {
@@ -115,7 +118,8 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> author to be:\n  <%s>\n but was:\n  <%s>", actual, author, actual.getAuthor());
+        final String errorMessage = format("\nExpected <%s> author to be:\n  <%s>\n but was:\n  <%s>", actual, author,
+                actual.getAuthor());
 
         // check
         if (!actual.getAuthor().equals(author)) {
@@ -166,7 +170,8 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have categories but had :\n  <%s>", actual, actual.getCategories());
+        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have categories but had :\n  <%s>", actual,
+                actual.getCategories());
 
         // check
         if (!actual.getCategories().isEmpty()) {
@@ -217,7 +222,8 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have configurations but had :\n  <%s>", actual, actual.getConfigurations());
+        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have configurations but had :\n  <%s>", actual,
+                actual.getConfigurations());
 
         // check
         if (!actual.getConfigurations().isEmpty()) {
@@ -268,7 +274,8 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have connections but had :\n  <%s>", actual, actual.getConnections());
+        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have connections but had :\n  <%s>", actual,
+                actual.getConnections());
 
         // check
         if (!actual.getConnections().isEmpty()) {
@@ -291,7 +298,8 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> creationDate to be:\n  <%s>\n but was:\n  <%s>", actual, creationDate, actual.getCreationDate());
+        final String errorMessage = format("\nExpected <%s> creationDate to be:\n  <%s>\n but was:\n  <%s>", actual,
+                creationDate, actual.getCreationDate());
 
         // check
         if (!actual.getCreationDate().equals(creationDate)) {
@@ -342,7 +350,8 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have datatypes but had :\n  <%s>", actual, actual.getDatatypes());
+        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have datatypes but had :\n  <%s>", actual,
+                actual.getDatatypes());
 
         // check
         if (!actual.getDatatypes().isEmpty()) {
@@ -365,7 +374,8 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> modificationDate to be:\n  <%s>\n but was:\n  <%s>", actual, modificationDate,
+        final String errorMessage = format("\nExpected <%s> modificationDate to be:\n  <%s>\n but was:\n  <%s>", actual,
+                modificationDate,
                 actual.getModificationDate());
 
         // check
@@ -417,7 +427,8 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have parameters but had :\n  <%s>", actual, actual.getParameters());
+        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have parameters but had :\n  <%s>", actual,
+                actual.getParameters());
 
         // check
         if (!actual.getParameters().isEmpty()) {
@@ -440,7 +451,8 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> version to be:\n  <%s>\n but was:\n  <%s>", actual, version, actual.getVersion());
+        final String errorMessage = format("\nExpected <%s> version to be:\n  <%s>\n but was:\n  <%s>", actual, version,
+                actual.getVersion());
 
         // check
         if (!actual.getVersion().equals(version)) {

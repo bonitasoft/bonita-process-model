@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" child.project.url.inherit.append.path="false" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.bonitasoft.bpm</groupId>
   <artifactId>bonita-process-model</artifactId>
@@ -42,7 +42,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <module>tests/</module>
     <module>sites/</module>
   </modules>
-  <scm>
+  <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
     <connection>scm:git:https://github.com/bonitasoft/bonita-process-model.git</connection>
     <developerConnection>scm:git:https://github.com/bonitasoft/bonita-process-model.git</developerConnection>
     <tag>HEAD</tag>
@@ -85,8 +85,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
     <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
     <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
-    <maven-javadoc-plugin.version>3.5.0</maven-javadoc-plugin.version>
-    <maven-source-plugin.version>3.3.0</maven-source-plugin.version>
+    <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
     <!-- Spotless resources location -->
     <eclipse.formatter.file>formatter.xml</eclipse.formatter.file>
     <eclipse.importorder.file>eclipse.importorder</eclipse.importorder.file>
@@ -138,6 +137,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
           <version>${tycho.version}</version>
         </plugin>
         <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-source-plugin</artifactId>
+          <version>${tycho.version}</version>
+        </plugin>
+        <plugin>
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>flatten-maven-plugin</artifactId>
           <version>${flatten-maven-plugin.version}</version>
@@ -174,6 +178,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
           <version>${maven-clean-plugin.version}</version>
         </plugin>
         <plugin>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>${maven-assembly-plugin.version}</version>
+        </plugin>
+        <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>${maven-resources-plugin.version}</version>
         </plugin>
@@ -198,14 +206,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
           <version>${maven-deploy-plugin.version}</version>
         </plugin>
         <plugin>
-          <artifactId>maven-javadoc-plugin</artifactId>
-          <version>${maven-javadoc-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-source-plugin</artifactId>
-          <version>${maven-source-plugin.version}</version>
-        </plugin>
-        <plugin>
           <groupId>org.sonatype.plugins</groupId>
           <artifactId>nexus-staging-maven-plugin</artifactId>
           <version>${nexus-staging-maven-plugin.version}</version>
@@ -216,6 +216,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
             <keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure>
             <serverId>ossrh</serverId>
             <nexusUrl>https://oss.sonatype.org</nexusUrl>
+            <skipNexusStagingDeployMojo>${maven.deploy.skip}</skipNexusStagingDeployMojo>
           </configuration>
         </plugin>
         <plugin>
@@ -244,6 +245,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
               </sortPom>
             </pom>
             <java>
+              <includes>
+                <include>src/**/*.java</include>
+              </includes>
               <eclipse>
                 <file>${eclipse.formatter.file}</file>
               </eclipse>
@@ -262,6 +266,18 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>com.diffplug.spotless</groupId>
+        <artifactId>spotless-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>check</goal>
+            </goals>
+            <phase>validate</phase>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.cyclonedx</groupId>
         <artifactId>cyclonedx-maven-plugin</artifactId>
@@ -357,31 +373,20 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-source-plugin</artifactId>
         <executions>
           <execution>
             <id>attach-sources</id>
             <goals>
-              <goal>jar-no-fork</goal>
+              <goal>plugin-source</goal>
             </goals>
           </execution>
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-javadoc-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>attach-javadocs</id>
-            <goals>
-              <goal>jar</goal>
-            </goals>
-            <configuration>
-              <failOnError>false</failOnError>
-            </configuration>
-          </execution>
-        </executions>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
       </plugin>
       <!-- Configuration for test plugins/fragments -->
       <plugin>
@@ -398,7 +403,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <profile>
       <id>release</id>
       <properties>
-        <maven.javadoc.skip>false</maven.javadoc.skip>
+        <maven.source.skip>false</maven.source.skip>
       </properties>
       <build>
         <plugins>
@@ -445,6 +450,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
       </activation>
       <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.source.skip>true</maven.source.skip>
       </properties>
     </profile>
     <!-- do not deploy features -->
@@ -457,6 +463,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
       </activation>
       <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.source.skip>true</maven.source.skip>
       </properties>
     </profile>
     <!-- do not deploy test bundles -->
@@ -469,6 +476,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
       </activation>
       <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.source.skip>true</maven.source.skip>
       </properties>
     </profile>
     <!-- do not deploy target definitions -->
@@ -481,6 +489,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
       </activation>
       <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.source.skip>true</maven.source.skip>
       </properties>
     </profile>
     <!-- Deploy update sites on maven
@@ -494,6 +503,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
       </activation>
       <properties>
         <maven.deploy.skip>false</maven.deploy.skip>
+        <maven.source.skip>true</maven.source.skip>
       </properties>
       <build>
         <plugins>

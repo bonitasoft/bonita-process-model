@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2014 BonitaSoft S.A.
+/** 
+ * Copyright (C) 2014 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,9 +20,8 @@ import org.bonitasoft.bpm.model.process.DataType;
 
 /**
  * @author Romain Bioteau
- *
  */
-public abstract class DataTypeBuilder<T extends DataType, B extends DataTypeBuilder<T, B>> extends ElementBuilder<T, B> {
-
+public abstract class DataTypeBuilder<T extends DataType, B extends DataTypeBuilder<T, B>>
+        extends ElementBuilder<T, B> {
 
 }

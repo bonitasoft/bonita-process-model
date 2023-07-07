@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2014 BonitaSoft S.A.
+/** 
+ * Copyright (C) 2014 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@ import org.bonitasoft.bpm.model.process.ProcessFactory;
 
 /**
  * @author Romain Bioteau
- *
  */
 public class ActorBuilder extends ElementBuilder<Actor, ActorBuilder> {
 
@@ -43,7 +42,5 @@ public class ActorBuilder extends ElementBuilder<Actor, ActorBuilder> {
     protected Actor newInstance() {
         return ProcessFactory.eINSTANCE.createActor();
     }
-
-
 
 }

@@ -1,14 +1,16 @@
-/**
- * Copyright (C) 2014 BonitaSoft S.A.
+/** 
+ * Copyright (C) 2014 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2.0 of the License, or
  * (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -43,11 +45,13 @@ public class LegacyTimerExpressionGeneratorTest {
     public void should_isCycle_return_false() throws Exception {
         assertThat(LegacyTimerExpressionGenerator
                 .isCycle(StartTimerEventBuilder.aStartTimerEvent().withScriptType(StartTimerScriptType.CONSTANT)
-                        .build())).isFalse();
+                        .build()))
+                .isFalse();
         assertThat(
                 LegacyTimerExpressionGenerator
                         .isCycle(StartTimerEventBuilder.aStartTimerEvent().withScriptType(StartTimerScriptType.GROOVY)
-                                .build())).isFalse();
+                                .build()))
+                .isFalse();
     }
 
     @Test
@@ -55,35 +59,43 @@ public class LegacyTimerExpressionGeneratorTest {
         assertThat(
                 LegacyTimerExpressionGenerator
                         .isCycle(StartTimerEventBuilder.aStartTimerEvent().withScriptType(StartTimerScriptType.DAILY)
-                                .build())).isTrue();
+                                .build()))
+                .isTrue();
         assertThat(
                 LegacyTimerExpressionGenerator
                         .isCycle(StartTimerEventBuilder.aStartTimerEvent().withScriptType(StartTimerScriptType.HOURLY)
-                                .build())).isTrue();
+                                .build()))
+                .isTrue();
         assertThat(
                 LegacyTimerExpressionGenerator
                         .isCycle(StartTimerEventBuilder.aStartTimerEvent().withScriptType(StartTimerScriptType.MINUTELY)
-                                .build())).isTrue();
+                                .build()))
+                .isTrue();
         assertThat(
                 LegacyTimerExpressionGenerator
                         .isCycle(StartTimerEventBuilder.aStartTimerEvent().withScriptType(StartTimerScriptType.MONTHLY)
-                                .build())).isTrue();
+                                .build()))
+                .isTrue();
         assertThat(
                 LegacyTimerExpressionGenerator.isCycle(StartTimerEventBuilder.aStartTimerEvent()
                         .withScriptType(StartTimerScriptType.YEARLY_DAY_OF_MONTH)
-                        .build())).isTrue();
+                        .build()))
+                .isTrue();
         assertThat(
                 LegacyTimerExpressionGenerator.isCycle(StartTimerEventBuilder.aStartTimerEvent()
                         .withScriptType(StartTimerScriptType.YEARLY_DAY_OF_YEAR)
-                        .build())).isTrue();
+                        .build()))
+                .isTrue();
         assertThat(
                 LegacyTimerExpressionGenerator.isCycle(StartTimerEventBuilder.aStartTimerEvent()
                         .withScriptType(StartTimerScriptType.MONTHLY_DAY_NUMBER)
-                        .build())).isTrue();
+                        .build()))
+                .isTrue();
         assertThat(
                 LegacyTimerExpressionGenerator.isCycle(StartTimerEventBuilder.aStartTimerEvent()
                         .withScriptType(StartTimerScriptType.MONTHLY_DAY_OF_WEEK)
-                        .build())).isTrue();
+                        .build()))
+                .isTrue();
     }
 
     @Test(expected = IllegalArgumentException.class)

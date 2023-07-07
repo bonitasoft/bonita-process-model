@@ -1,14 +1,16 @@
-/**
+/** 
  * Copyright (C) 2015 Bonitasoft S.A.
- * Bonitasoft, 32 rue Gustave Eiffel - 38000 Grenoble
+ * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2.0 of the License, or
  * (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -59,7 +61,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> cardinalityExpression to be:\n  <%s>\n but was:\n  <%s>", actual, cardinalityExpression,
+        final String errorMessage = format("\nExpected <%s> cardinalityExpression to be:\n  <%s>\n but was:\n  <%s>",
+                actual, cardinalityExpression,
                 actual.getCardinalityExpression());
 
         // check
@@ -84,7 +87,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> collectionDataToMultiInstantiate to be:\n  <%s>\n but was:\n  <%s>", actual,
+        final String errorMessage = format(
+                "\nExpected <%s> collectionDataToMultiInstantiate to be:\n  <%s>\n but was:\n  <%s>", actual,
                 collectionDataToMultiInstantiate, actual.getCollectionDataToMultiInstantiate());
 
         // check
@@ -108,7 +112,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> completionCondition to be:\n  <%s>\n but was:\n  <%s>", actual, completionCondition,
+        final String errorMessage = format("\nExpected <%s> completionCondition to be:\n  <%s>\n but was:\n  <%s>",
+                actual, completionCondition,
                 actual.getCompletionCondition());
 
         // check
@@ -132,7 +137,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> iteratorExpression to be:\n  <%s>\n but was:\n  <%s>", actual, iteratorExpression,
+        final String errorMessage = format("\nExpected <%s> iteratorExpression to be:\n  <%s>\n but was:\n  <%s>",
+                actual, iteratorExpression,
                 actual.getIteratorExpression());
 
         // check
@@ -157,7 +163,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> listDataContainingOutputResults to be:\n  <%s>\n but was:\n  <%s>", actual,
+        final String errorMessage = format(
+                "\nExpected <%s> listDataContainingOutputResults to be:\n  <%s>\n but was:\n  <%s>", actual,
                 listDataContainingOutputResults, actual.getListDataContainingOutputResults());
 
         // check
@@ -181,7 +188,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> loopCondition to be:\n  <%s>\n but was:\n  <%s>", actual, loopCondition, actual.getLoopCondition());
+        final String errorMessage = format("\nExpected <%s> loopCondition to be:\n  <%s>\n but was:\n  <%s>", actual,
+                loopCondition, actual.getLoopCondition());
 
         // check
         if (!actual.getLoopCondition().equals(loopCondition)) {
@@ -204,7 +212,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> loopMaximum to be:\n  <%s>\n but was:\n  <%s>", actual, loopMaximum, actual.getLoopMaximum());
+        final String errorMessage = format("\nExpected <%s> loopMaximum to be:\n  <%s>\n but was:\n  <%s>", actual,
+                loopMaximum, actual.getLoopMaximum());
 
         // check
         if (!actual.getLoopMaximum().equals(loopMaximum)) {
@@ -227,7 +236,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> outputData to be:\n  <%s>\n but was:\n  <%s>", actual, outputData, actual.getOutputData());
+        final String errorMessage = format("\nExpected <%s> outputData to be:\n  <%s>\n but was:\n  <%s>", actual,
+                outputData, actual.getOutputData());
 
         // check
         if (!actual.getOutputData().equals(outputData)) {
@@ -294,7 +304,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> testBefore to be:\n  <%s>\n but was:\n  <%s>", actual, testBefore, actual.getTestBefore());
+        final String errorMessage = format("\nExpected <%s> testBefore to be:\n  <%s>\n but was:\n  <%s>", actual,
+                testBefore, actual.getTestBefore());
 
         // check
         if (!actual.getTestBefore().equals(testBefore)) {
@@ -317,7 +328,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> type to be:\n  <%s>\n but was:\n  <%s>", actual, type, actual.getType());
+        final String errorMessage = format("\nExpected <%s> type to be:\n  <%s>\n but was:\n  <%s>", actual, type,
+                actual.getType());
 
         // check
         if (!actual.getType().equals(type)) {
@@ -339,7 +351,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("Expected actual MultiInstantiable to be useCardinality but was not.", actual);
+        final String errorMessage = format("Expected actual MultiInstantiable to be useCardinality but was not.",
+                actual);
 
         // check
         if (!actual.isUseCardinality()) {
@@ -361,7 +374,8 @@ public class MultiInstantiableAssert extends AbstractAssert<MultiInstantiableAss
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("Expected actual MultiInstantiable not to be useCardinality but was.", actual);
+        final String errorMessage = format("Expected actual MultiInstantiable not to be useCardinality but was.",
+                actual);
 
         // check
         if (actual.isUseCardinality()) {
