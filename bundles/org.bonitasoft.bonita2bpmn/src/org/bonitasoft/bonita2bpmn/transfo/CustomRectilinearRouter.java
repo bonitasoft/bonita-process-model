@@ -1,14 +1,16 @@
-/**
+/** 
  * Copyright (C) 2018 Bonitasoft S.A.
- * Bonitasoft, 32 rue Gustave Eiffel - 38000 Grenoble
+ * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2.0 of the License, or
  * (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -156,8 +158,9 @@ public class CustomRectilinearRouter extends ObliqueRouter {
             }
             int firstSegmentOrientation = line.getFirstPoint().x == line.getPoint(1).x ? PositionConstants.VERTICAL
                     : PositionConstants.HORIZONTAL;
-            if (getOutisePointOffRectanglePosition(line.getPoint(1), source) != getAnchorLocationBasedOnSegmentOrientation(
-                    line.getFirstPoint(), source, firstSegmentOrientation)) {
+            if (getOutisePointOffRectanglePosition(line.getPoint(1),
+                    source) != getAnchorLocationBasedOnSegmentOrientation(
+                            line.getFirstPoint(), source, firstSegmentOrientation)) {
                 return false;
             }
         }
@@ -417,7 +420,8 @@ public class CustomRectilinearRouter extends ObliqueRouter {
     private int getOffShapeDirection(int anchorRelativeLocation) {
         if (anchorRelativeLocation == PositionConstants.EAST || anchorRelativeLocation == PositionConstants.WEST) {
             return PositionConstants.HORIZONTAL;
-        } else if (anchorRelativeLocation == PositionConstants.NORTH || anchorRelativeLocation == PositionConstants.SOUTH) {
+        } else if (anchorRelativeLocation == PositionConstants.NORTH
+                || anchorRelativeLocation == PositionConstants.SOUTH) {
             return PositionConstants.VERTICAL;
         }
         return PositionConstants.NONE;
@@ -490,8 +494,9 @@ public class CustomRectilinearRouter extends ObliqueRouter {
                 line.insertPoint(anchorLocation, 0);
             }
             if (conn.getTargetAnchor() instanceof OrthogonalConnectionAnchor) {
-                line.addPoint(OrthogonalRouterUtilities.getOrthogonalLineSegToAnchorLoc(conn, conn.getTargetAnchor(), end)
-                        .getOrigin());
+                line.addPoint(
+                        OrthogonalRouterUtilities.getOrthogonalLineSegToAnchorLoc(conn, conn.getTargetAnchor(), end)
+                                .getOrigin());
             } else {
                 /*
                  * If anchor is not supporting orthogonal connections we'll use the oblique connection
@@ -598,7 +603,8 @@ public class CustomRectilinearRouter extends ObliqueRouter {
      * @param segmentOrientation orinetation of the segment coming out from the anchor point
      * @return geographic position of the anchor point relative to the rectangle
      */
-    private int getAnchorLocationBasedOnSegmentOrientation(Point anchorPoint, Rectangle rectangle, int segmentOrientation) {
+    private int getAnchorLocationBasedOnSegmentOrientation(Point anchorPoint, Rectangle rectangle,
+            int segmentOrientation) {
         if (segmentOrientation == PositionConstants.VERTICAL) {
             if (Math.abs(anchorPoint.y - rectangle.y) < Math.abs(anchorPoint.y - rectangle.y - rectangle.height)) {
                 return PositionConstants.NORTH;

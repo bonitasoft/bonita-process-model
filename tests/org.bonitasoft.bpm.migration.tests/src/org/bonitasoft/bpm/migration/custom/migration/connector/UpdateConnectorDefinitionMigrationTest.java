@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2014 BonitaSoft S.A.
+/** 
+ * Copyright (C) 2014 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -34,10 +34,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-
 /**
  * @author Romain Bioteau
- *
  */
 @RunWith(MockitoJUnitRunner.class)
 public class UpdateConnectorDefinitionMigrationTest {
@@ -69,15 +67,15 @@ public class UpdateConnectorDefinitionMigrationTest {
     public void should_migrateAfter_update_definitionVersion_in_connector() throws Exception {
         //Given
         doCallRealMethod().when(updateConnectorVersionMigration).migrateAfter(model, metamodel);
-        final EList<Instance> connectorInstanceList = connectorInstanceList("id1","id2");
+        final EList<Instance> connectorInstanceList = connectorInstanceList("id1", "id2");
         final Instance oldConnectorInstance = aConnectorInstance("id1", "0.9");
         connectorInstanceList.add(oldConnectorInstance);
         when(model.getAllInstances("process.Connector")).thenReturn(connectorInstanceList);
-        when(model.getAllInstances("connectorconfiguration.ConnectorConfiguration")).thenReturn(new BasicEList<Instance>());
+        when(model.getAllInstances("connectorconfiguration.ConnectorConfiguration"))
+                .thenReturn(new BasicEList<Instance>());
         when(updateConnectorVersionMigration.shouldUpdateVersion("id1")).thenReturn(true);
         when(updateConnectorVersionMigration.getOldDefinitionVersion()).thenReturn("1.0");
         when(updateConnectorVersionMigration.getNewDefinitionVersion()).thenReturn("2.0");
-
 
         //When
         updateConnectorVersionMigration.migrateAfter(model, metamodel);
@@ -87,7 +85,8 @@ public class UpdateConnectorDefinitionMigrationTest {
         final Instance id2Connector = connectorInstanceList.get(1);
         verify(id1Connector).set(UpdateConnectorDefinitionMigration.DEFINITION_VERSION_FEATURE_NAME, "2.0");
         verify(id2Connector, never()).set(UpdateConnectorDefinitionMigration.DEFINITION_VERSION_FEATURE_NAME, "2.0");
-        verify(oldConnectorInstance, never()).set(UpdateConnectorDefinitionMigration.DEFINITION_VERSION_FEATURE_NAME, "2.0");
+        verify(oldConnectorInstance, never()).set(UpdateConnectorDefinitionMigration.DEFINITION_VERSION_FEATURE_NAME,
+                "2.0");
     }
 
     @Test
@@ -97,7 +96,8 @@ public class UpdateConnectorDefinitionMigrationTest {
         final EList<Instance> connectorConfigInstanceList = connectorConfiguratiobInstanceList("id1", "id2");
         final Instance oldConnectorConfInstance = aConnectorConfigurationInstance("id1", "0.9");
         connectorConfigInstanceList.add(oldConnectorConfInstance);
-        when(model.getAllInstances("connectorconfiguration.ConnectorConfiguration")).thenReturn(connectorConfigInstanceList);
+        when(model.getAllInstances("connectorconfiguration.ConnectorConfiguration"))
+                .thenReturn(connectorConfigInstanceList);
         when(model.getAllInstances("process.Connector")).thenReturn(new BasicEList<Instance>());
         when(updateConnectorVersionMigration.shouldUpdateVersion("id1")).thenReturn(true);
         when(updateConnectorVersionMigration.getOldDefinitionVersion()).thenReturn("1.0");
@@ -140,7 +140,8 @@ public class UpdateConnectorDefinitionMigrationTest {
     private Instance aConnectorInstance(final String definitionId, final String definitionVersion) {
         final Instance instance = mock(Instance.class);
         when(instance.get(UpdateConnectorDefinitionMigration.DEFINITION_ID_FEATURE_NAME)).thenReturn(definitionId);
-        when(instance.get(UpdateConnectorDefinitionMigration.DEFINITION_VERSION_FEATURE_NAME)).thenReturn(definitionVersion);
+        when(instance.get(UpdateConnectorDefinitionMigration.DEFINITION_VERSION_FEATURE_NAME))
+                .thenReturn(definitionVersion);
         return instance;
     }
 }

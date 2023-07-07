@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2014 BonitaSoft S.A.
+/** 
+ * Copyright (C) 2014 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,10 +26,8 @@ import org.junit.Test;
 import org.omg.spec.bpmn.model.DocumentRoot;
 import org.omg.spec.bpmn.model.ModelFactory;
 
-
 /**
  * @author Romain Bioteau
- *
  */
 public class XMLNamespaceResolverTest {
 
@@ -64,11 +62,13 @@ public class XMLNamespaceResolverTest {
 
         assertThat(xmlNamespaceResolver.resolveNamespacePrefix(
                 anXMLData()
-                        .build())).isEqualTo("n0");
+                        .build()))
+                .isEqualTo("n0");
 
         assertThat(xmlNamespaceResolver.resolveNamespacePrefix(
                 anXMLData()
-                        .build())).isEqualTo("n1");
+                        .build()))
+                .isEqualTo("n1");
     }
 
     @Test
@@ -78,7 +78,8 @@ public class XMLNamespaceResolverTest {
         assertThat(xmlNamespaceResolver.resolveNamespacePrefix(
                 anXMLData()
                         .withNamespace("http://www.myNS.com")
-                        .build())).isEqualTo("aPrefix");
+                        .build()))
+                .isEqualTo("aPrefix");
     }
 
 }

@@ -1,14 +1,16 @@
-/**
+/** 
  * Copyright (C) 2015 Bonitasoft S.A.
- * Bonitasoft, 32 rue Gustave Eiffel - 38000 Grenoble
+ * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2.0 of the License, or
  * (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -59,7 +61,8 @@ public class ContractInputAssert extends AbstractAssert<ContractInputAssert, Con
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> description to be:\n  <%s>\n but was:\n  <%s>", actual, description, actual.getDescription());
+        final String errorMessage = format("\nExpected <%s> description to be:\n  <%s>\n but was:\n  <%s>", actual,
+                description, actual.getDescription());
 
         // check
         if (!actual.getDescription().equals(description)) {
@@ -110,7 +113,8 @@ public class ContractInputAssert extends AbstractAssert<ContractInputAssert, Con
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have inputs but had :\n  <%s>", actual, actual.getInputs());
+        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have inputs but had :\n  <%s>", actual,
+                actual.getInputs());
 
         // check
         if (!actual.getInputs().isEmpty()) {
@@ -133,7 +137,8 @@ public class ContractInputAssert extends AbstractAssert<ContractInputAssert, Con
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> mapping to be:\n  <%s>\n but was:\n  <%s>", actual, mapping, actual.getMapping());
+        final String errorMessage = format("\nExpected <%s> mapping to be:\n  <%s>\n but was:\n  <%s>", actual, mapping,
+                actual.getMapping());
 
         // check
         if (!actual.getMapping().equals(mapping)) {
@@ -200,7 +205,8 @@ public class ContractInputAssert extends AbstractAssert<ContractInputAssert, Con
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> name to be:\n  <%s>\n but was:\n  <%s>", actual, name, actual.getName());
+        final String errorMessage = format("\nExpected <%s> name to be:\n  <%s>\n but was:\n  <%s>", actual, name,
+                actual.getName());
 
         // check
         if (!actual.getName().equals(name)) {
@@ -223,7 +229,8 @@ public class ContractInputAssert extends AbstractAssert<ContractInputAssert, Con
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> type to be:\n  <%s>\n but was:\n  <%s>", actual, type, actual.getType());
+        final String errorMessage = format("\nExpected <%s> type to be:\n  <%s>\n but was:\n  <%s>", actual, type,
+                actual.getType());
 
         // check
         if (!actual.getType().equals(type)) {

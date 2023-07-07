@@ -1,14 +1,16 @@
-/**
+/** 
  * Copyright (C) 2015 Bonitasoft S.A.
- * Bonitasoft, 32 rue Gustave Eiffel - 38000 Grenoble
+ * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2.0 of the License, or
  * (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -42,7 +44,8 @@ public class CustomContractInputItemProviderTest {
                 new ProcessItemProviderAdapterFactory());
 
         final ContractInput contractInput = ProcessFactory.eINSTANCE.createContractInput();
-        final String label = itemProvider.getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
+        final String label = itemProvider
+                .getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
@@ -56,7 +59,8 @@ public class CustomContractInputItemProviderTest {
 
         final ContractInput contractInput = ProcessFactory.eINSTANCE.createContractInput();
         contractInput.setType(ContractInputType.INTEGER);
-        final String label = itemProvider.getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
+        final String label = itemProvider
+                .getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
@@ -70,7 +74,8 @@ public class CustomContractInputItemProviderTest {
 
         final ContractInput contractInput = ProcessFactory.eINSTANCE.createContractInput();
         contractInput.setType(ContractInputType.BOOLEAN);
-        final String label = itemProvider.getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
+        final String label = itemProvider
+                .getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
@@ -84,7 +89,8 @@ public class CustomContractInputItemProviderTest {
 
         final ContractInput contractInput = ProcessFactory.eINSTANCE.createContractInput();
         contractInput.setType(ContractInputType.DECIMAL);
-        final String label = itemProvider.getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
+        final String label = itemProvider
+                .getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
@@ -98,7 +104,8 @@ public class CustomContractInputItemProviderTest {
 
         final ContractInput contractInput = ProcessFactory.eINSTANCE.createContractInput();
         contractInput.setType(ContractInputType.LOCALDATE);
-        final String label = itemProvider.getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
+        final String label = itemProvider
+                .getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
@@ -112,7 +119,8 @@ public class CustomContractInputItemProviderTest {
 
         final ContractInput contractInput = ProcessFactory.eINSTANCE.createContractInput();
         contractInput.setType(ContractInputType.LOCALDATETIME);
-        final String label = itemProvider.getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
+        final String label = itemProvider
+                .getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
@@ -126,7 +134,8 @@ public class CustomContractInputItemProviderTest {
 
         final ContractInput contractInput = ProcessFactory.eINSTANCE.createContractInput();
         contractInput.setType(ContractInputType.OFFSETDATETIME);
-        final String label = itemProvider.getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
+        final String label = itemProvider
+                .getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
@@ -140,7 +149,8 @@ public class CustomContractInputItemProviderTest {
 
         final ContractInput contractInput = ProcessFactory.eINSTANCE.createContractInput();
         contractInput.setType(ContractInputType.FILE);
-        final String label = itemProvider.getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
+        final String label = itemProvider
+                .getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
@@ -154,7 +164,8 @@ public class CustomContractInputItemProviderTest {
 
         final ContractInput contractInput = ProcessFactory.eINSTANCE.createContractInput();
         contractInput.setType(ContractInputType.COMPLEX);
-        final String label = itemProvider.getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
+        final String label = itemProvider
+                .getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
@@ -170,7 +181,7 @@ public class CustomContractInputItemProviderTest {
         final Contract contract = ProcessFactory.eINSTANCE.createContract();
         final Task task = ProcessFactory.eINSTANCE.createTask();
         task.setContract(contract);
-        
+
         final Collection<ContractInputType> choiceOfValues = (Collection<ContractInputType>) itemProvider
                 .getPropertyDescriptor(contractInput, ProcessPackage.Literals.CONTRACT_INPUT__TYPE)
                 .getChoiceOfValues(contract);
@@ -182,7 +193,7 @@ public class CustomContractInputItemProviderTest {
     public void should_haveLONG_type_if_contract_is_on_a_Pool() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
-        
+
         final ContractInput contractInput = ProcessFactory.eINSTANCE.createContractInput();
         final Contract contract = ProcessFactory.eINSTANCE.createContract();
         final Pool pool = ProcessFactory.eINSTANCE.createPool();

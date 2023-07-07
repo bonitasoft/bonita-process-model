@@ -19,25 +19,25 @@
       <defaultValue>8.0.0-SNAPSHOT</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-clean-version">
-      <defaultValue>3.2.0</defaultValue>
+      <defaultValue>3.3.1</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-resources-version">
-      <defaultValue>3.3.0</defaultValue>
+      <defaultValue>3.3.1</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-compiler-version">
       <defaultValue>3.10.1</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-surefire-version">
-      <defaultValue>2.22.2</defaultValue>
+      <defaultValue>3.1.2</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-jar-version">
       <defaultValue>3.3.0</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-install-version">
-      <defaultValue>3.0.1</defaultValue>
+      <defaultValue>3.1.1</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-deploy-version">
-      <defaultValue>3.0.0</defaultValue>
+      <defaultValue>3.1.1</defaultValue>
     </requiredProperty>
   </requiredProperties>
   

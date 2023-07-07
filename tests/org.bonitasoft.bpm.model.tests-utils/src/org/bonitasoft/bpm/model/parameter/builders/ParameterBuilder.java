@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2014 BonitaSoft S.A.
+/** 
+ * Copyright (C) 2014 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,24 +22,22 @@ import org.bonitasoft.bpm.model.parameter.ParameterFactory;
 
 /**
  * @author Romain Bioteau
- *
  */
-public class ParameterBuilder implements Buildable<Parameter>{
-
+public class ParameterBuilder implements Buildable<Parameter> {
 
     public static ParameterBuilder aParameter() {
         return new ParameterBuilder();
     }
-    
-    public static ParameterBuilder aStringParameter(String name,String value) {
+
+    public static ParameterBuilder aStringParameter(String name, String value) {
         return new ParameterBuilder().withName(name).withValue(value).withType(String.class.getName());
     }
-    
-    public static ParameterBuilder aBooleanParameter(String name,boolean value) {
+
+    public static ParameterBuilder aBooleanParameter(String name, boolean value) {
         return new ParameterBuilder().withName(name).withValue(String.valueOf(value)).withType(Boolean.class.getName());
     }
-    
-    public static ParameterBuilder anIntegerParameter(String name,int value) {
+
+    public static ParameterBuilder anIntegerParameter(String name, int value) {
         return new ParameterBuilder().withName(name).withValue(String.valueOf(value)).withType(Integer.class.getName());
     }
 

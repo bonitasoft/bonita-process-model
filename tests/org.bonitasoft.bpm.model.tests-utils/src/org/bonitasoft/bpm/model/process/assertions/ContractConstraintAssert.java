@@ -1,14 +1,16 @@
-/**
+/** 
  * Copyright (C) 2015 Bonitasoft S.A.
- * Bonitasoft, 32 rue Gustave Eiffel - 38000 Grenoble
+ * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2.0 of the License, or
  * (at your option) any later version.
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -57,7 +59,8 @@ public class ContractConstraintAssert extends AbstractAssert<ContractConstraintA
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMsg = format("\nExpected <%s> errorMessage to be:\n  <%s>\n but was:\n  <%s>", actual, errorMessage, actual.getErrorMessage());
+        final String errorMsg = format("\nExpected <%s> errorMessage to be:\n  <%s>\n but was:\n  <%s>", actual,
+                errorMessage, actual.getErrorMessage());
 
         // check
         if (!actual.getErrorMessage().equals(errorMessage)) {
@@ -80,7 +83,8 @@ public class ContractConstraintAssert extends AbstractAssert<ContractConstraintA
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> expression to be:\n  <%s>\n but was:\n  <%s>", actual, expression, actual.getExpression());
+        final String errorMessage = format("\nExpected <%s> expression to be:\n  <%s>\n but was:\n  <%s>", actual,
+                expression, actual.getExpression());
 
         // check
         if (!actual.getExpression().equals(expression)) {
@@ -131,7 +135,8 @@ public class ContractConstraintAssert extends AbstractAssert<ContractConstraintA
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have inputNames but had :\n  <%s>", actual, actual.getInputNames());
+        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have inputNames but had :\n  <%s>", actual,
+                actual.getInputNames());
 
         // check
         if (!actual.getInputNames().isEmpty()) {
@@ -154,7 +159,8 @@ public class ContractConstraintAssert extends AbstractAssert<ContractConstraintA
         isNotNull();
 
         // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> name to be:\n  <%s>\n but was:\n  <%s>", actual, name, actual.getName());
+        final String errorMessage = format("\nExpected <%s> name to be:\n  <%s>\n but was:\n  <%s>", actual, name,
+                actual.getName());
 
         // check
         if (!actual.getName().equals(name)) {
