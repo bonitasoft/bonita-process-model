@@ -1,5 +1,5 @@
-/**
- * Copyright (C) 2014 BonitaSoft S.A.
+/** 
+ * Copyright (C) 2014 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,11 +16,8 @@
  */
 package org.bonitasoft.bpm.migration.custom.migration.contract;
 
-
-
 /**
  * @author Romain Bioteau
- *
  */
 public class CreateContractCustomMigration extends AbstractCreateContractCustomMigration {
 
