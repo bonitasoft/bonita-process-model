@@ -88,9 +88,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
     <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
     <!-- Spotless resources location -->
-    <eclipse.formatter.file>formatter.xml</eclipse.formatter.file>
-    <eclipse.importorder.file>eclipse.importorder</eclipse.importorder.file>
-    <header.file>header.txt</header.file>
+    <eclipse.formatter.file>${maven.multiModuleProjectDirectory}/formatter.xml</eclipse.formatter.file>
+    <eclipse.importorder.file>${maven.multiModuleProjectDirectory}/eclipse.importorder</eclipse.importorder.file>
+    <header.file>${maven.multiModuleProjectDirectory}/header.txt</header.file>
     <!-- Sonar -->
     <sonar.projectKey>${sonar.organization}_bonita-process-model</sonar.projectKey>
     <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
