@@ -31,7 +31,6 @@
               <excludes>META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA</excludes>
               <excludeTransitive>true</excludeTransitive>
               <excludeArtifactIds>org.eclipse.emf.ecore,org.eclipse.emf.ecore.xmi,org.eclipse.emf.common,org.eclipse.core.runtime,org.eclipse.equinox.app,org.eclipse.equinox.common,org.eclipse.equinox.preferences,org.eclipse.equinox.registry,org.eclipse.osgi,org.osgi.service.prefs,org.osgi.service.log,org.osgi.service.application</excludeArtifactIds>
-              --&gt;
               <excludeGroupIds>junit,org.mockito,org.hamcrest,org.eclipse.equinox</excludeGroupIds>
               <outputDirectory>${project.build.directory}/dependency</outputDirectory>
               <overWriteReleases>false</overWriteReleases>

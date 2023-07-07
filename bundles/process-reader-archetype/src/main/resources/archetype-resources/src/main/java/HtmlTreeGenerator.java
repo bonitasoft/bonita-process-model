@@ -31,7 +31,9 @@ public class HtmlTreeGenerator {
 
     /** Prefix for HTML tree */
     private static final String HTML_TREE_PREFIX = String.join(App.LINE_SEPARATOR,
-            "<html>",
+            "<!DOCTYPE html>",
+            "<html lang=\"en\">",
+            "<head><title>Some relevant title</title></head>",
             "<script>",
             "!function(e,t){\"object\"==typeof exports&&\"undefined\"!=typeof module?module.exports=t():\"function\"==typeof define&&define.amd?define(t):(e=e||self).listree=t()}(this,(function(){\"use strict\";return function(){const e=document.getElementsByClassName(\"listree-submenu-heading\");Array.from(e).forEach((function(e){e.classList.add(\"collapsed\"),e.nextElementSibling.style.display=\"none\",e.addEventListener(\"click\",(function(t){t.preventDefault();const n=t.target.nextElementSibling;\"none\"==n.style.display?(e.classList.remove(\"collapsed\"),e.classList.add(\"expanded\"),n.style.display=\"block\"):(e.classList.remove(\"expanded\"),e.classList.add(\"collapsed\"),n.style.display=\"none\"),t.stopPropagation()}))}))}}));",
             "</script>",
@@ -115,7 +117,8 @@ public class HtmlTreeGenerator {
                     "<li>",
                     // display icon and label
                     "<div class=\"listree-submenu-heading\">",
-                    "<img src='data:image/" + extension + ";base64," + Base64.getEncoder().encodeToString(imageBytes)
+                    "<img alt=\"*\" src='data:image/" + extension + ";base64,"
+                            + Base64.getEncoder().encodeToString(imageBytes)
                             + "'>",
                     label + "</div>",
                     // open list for children
@@ -127,7 +130,8 @@ public class HtmlTreeGenerator {
                     "<li>",
                     // display icon and label
                     "<div>",
-                    "<img src='data:image/" + extension + ";base64," + Base64.getEncoder().encodeToString(imageBytes)
+                    "<img alt=\"*\" src='data:image/" + extension + ";base64,"
+                            + Base64.getEncoder().encodeToString(imageBytes)
                             + "'>",
                     label + "</div>",
                     // end list item

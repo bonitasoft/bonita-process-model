@@ -1,16 +1,14 @@
-/** 
+/**
  * Copyright (C) 2010-2012 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2.0 of the License, or
  * (at your option) any later version.
- *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
- *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,7 +22,6 @@ import java.math.BigInteger;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -284,7 +281,12 @@ public class BonitaToBPMNExporter {
         resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put(".bpmn",
                 new ModelResourceFactoryImpl());
         if (destFile.exists()) {
-            destFile.delete();
+            try {
+                Files.delete(destFile.toPath());
+            } catch (IOException e) {
+                status = createErrorStatus(e);
+                return;
+            }
         }
         Resource resource = new org.omg.spec.bpmn.di.util.DiResourceFactoryImpl()
                 .createResource(URI.createFileURI(destFile.getAbsolutePath()));
@@ -493,14 +495,14 @@ public class BonitaToBPMNExporter {
         final Map<String, String> options = new HashMap<>();
         options.put(XMLResource.OPTION_ENCODING, "UTF-8");
         options.put(XMLResource.OPTION_XML_VERSION, "1.0");
-        Path tmpFile = Files.createTempFile(definition.getId(), ".def");
+        File tmpFile = File.createTempFile(definition.getId(), ".def", new File("/2bpmnExport"));
         org.bonitasoft.bpm.connector.model.definition.DocumentRoot root = (org.bonitasoft.bpm.connector.model.definition.DocumentRoot) definition
                 .eResource().getContents().get(0);
         root.getXMLNSPrefixMap().clear();
-        try (OutputStream os = Files.newOutputStream(tmpFile)) {
+        try (OutputStream os = Files.newOutputStream(tmpFile.toPath())) {
             definition.eResource().save(os, options);
         }
-        return tmpFile.toFile();
+        return tmpFile;
     }
 
     private void addConnectorDefInXsdIfNotYetIncluded(final File connectorDefFile) {
@@ -1252,7 +1254,9 @@ public class BonitaToBPMNExporter {
             setCommonAttributes(child, bpmnActivity);
             res = bpmnActivity;
         }
-        setCommonAttributes(child, res);
+        if (res != null) {
+            setCommonAttributes(child, res);
+        }
         return res;
     }
 
