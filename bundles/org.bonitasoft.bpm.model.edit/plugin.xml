@@ -25,7 +25,7 @@
       <!-- @generated NOT process use CustomActorMappingItemProviderAdapterFactory -->
       <factory
             uri="http://www.bonitasoft.org/ns/actormapping/6.0"
-            class="org.bonitasoft.bpm.model.edit.custom.actormapping.CustomActorMappingItemProviderAdapterFactory"
+            class="org.bonitasoft.bpm.model.edit.actormapping.CustomActorMappingItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -129,7 +129,7 @@
       <!-- @generated NOT process use CustomProcessItemProviderAdapterFactory -->
       <factory
             uri="http://www.bonitasoft.org/ns/bpm/process"
-            class="org.bonitasoft.bpm.model.edit.custom.process.CustomProcessItemProviderAdapterFactory"
+            class="org.bonitasoft.bpm.model.edit.process.CustomProcessItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider
@@ -142,7 +142,7 @@
       <!-- @generated NOT process use CustomDecisionItemProviderAdapterFactory -->
       <factory
             uri="http://www.bonitasoft.org/ns/bpm/process/decision"
-            class="org.bonitasoft.bpm.model.edit.custom.decision.CustomDecisionItemProviderAdapterFactory"
+            class="org.bonitasoft.bpm.model.edit.decision.CustomDecisionItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
                org.eclipse.emf.edit.provider.IStructuredItemContentProvider

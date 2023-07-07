@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.edit.custom.process;
+package org.bonitasoft.bpm.model.edit.process;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -25,7 +25,6 @@ import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.Map;
 
-import org.bonitasoft.bpm.model.edit.process.CustomContractInputItemProvider;
 import org.bonitasoft.bpm.model.process.Contract;
 import org.bonitasoft.bpm.model.process.ContractInput;
 import org.bonitasoft.bpm.model.process.ContractInputType;
