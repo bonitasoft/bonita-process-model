@@ -37,9 +37,7 @@
             <configuration>
               <excludes>META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA</excludes>
               <excludeTransitive>true</excludeTransitive>
-              <!--<includeArtifactIds>org.eclipse.emf.edapt.migration,org.eclipse.emf.edapt.history,org.eclipse.emf.edapt.common,org.eclipse.emf.edapt.declaration,org.eclipse.ocl.common,org.eclipse.ocl.ecore,org.eclipse.ocl,org.eclipse.core.runtime,org.eclipse.equinox.common,org.eclipse.equinox.registry,org.eclipse.osgi</includeArtifactIds>-->
               <excludeArtifactIds>org.eclipse.emf.ecore,org.eclipse.emf.ecore.xmi,org.eclipse.emf.common,org.osgi.service.prefs</excludeArtifactIds>
-              --&gt;
               <excludeGroupIds>junit,org.mockito,org.hamcrest</excludeGroupIds>
               <outputDirectory>${project.build.directory}/dependency</outputDirectory>
               <overWriteReleases>false</overWriteReleases>
