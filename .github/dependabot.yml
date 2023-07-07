@@ -9,6 +9,7 @@ updates:
   # Maintain dependencies for GitHub Actions
   - package-ecosystem: "github-actions"
     directory: "/"
+    target-branch: develop
     schedule:
       interval: "daily"
     commit-message:
@@ -18,7 +19,7 @@ updates:
   # Maintain dependencies for maven
   - package-ecosystem: "maven" 
     directory: "/" 
-    target-branch: master
+    target-branch: develop
     schedule:
       interval: "daily"
     commit-message:
