@@ -9,7 +9,8 @@ Bundle-RequiredExecutionEnvironment: JavaSE-11
 Require-Bundle: org.bonitasoft.bpm.model,
  assertj-core,
  net.bytebuddy.byte-buddy
-Export-Package: org.bonitasoft.bpm.model.configuration.builders,
+Export-Package: org.bonitasoft.bpm.model,
+ org.bonitasoft.bpm.model.configuration.builders,
  org.bonitasoft.bpm.model.connectorconfiguration.builders,
  org.bonitasoft.bpm.model.expression.assertions,
  org.bonitasoft.bpm.model.expression.builders,
