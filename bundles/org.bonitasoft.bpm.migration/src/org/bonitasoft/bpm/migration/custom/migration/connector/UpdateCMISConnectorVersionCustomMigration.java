@@ -15,6 +15,7 @@
 package org.bonitasoft.bpm.migration.custom.migration.connector;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.bonitasoft.bpm.migration.utils.StringToExpressionConverter;
 import org.bonitasoft.bpm.model.util.ExpressionConstants;
@@ -65,7 +66,9 @@ public class UpdateCMISConnectorVersionCustomMigration extends CustomMigration {
                                                 NAVIGATION_SERVICE_WSDL));
                             }
                             final Instance urlExpression = getURLExpression(connectorConfigInstance);
-                            model.delete(urlExpression);
+                            if (urlExpression != null) {
+                                model.delete(urlExpression);
+                            }
                         }
                     }
                     if (defId.equals("cmis-downloaddocument")) {
@@ -78,16 +81,18 @@ public class UpdateCMISConnectorVersionCustomMigration extends CustomMigration {
 
     private boolean isSupportedURLExpression(final Instance connectorConfigInstance) {
         final Instance urlExpression = getURLExpression(connectorConfigInstance);
-        return isConstantExpression(urlExpression) || isVariableExpression(urlExpression);
+        return urlExpression != null && (isConstantExpression(urlExpression) || isVariableExpression(urlExpression));
     }
 
     private Instance createURLValueExpression(final Model model, final Instance connectorConfigInstance,
             final String wsdlPath) {
         final Instance urlExpression = getURLExpression(connectorConfigInstance);
-        if (isConstantExpression(urlExpression)) {
-            return transformConstantExpression(model, wsdlPath, urlExpression);
-        } else if (isVariableExpression(urlExpression)) {
-            return transformVariableExpression(model, wsdlPath, urlExpression);
+        if (urlExpression != null) {
+            if (isConstantExpression(urlExpression)) {
+                return transformConstantExpression(model, wsdlPath, urlExpression);
+            } else if (isVariableExpression(urlExpression)) {
+                return transformVariableExpression(model, wsdlPath, urlExpression);
+            }
         }
         return null;
     }
@@ -139,8 +144,8 @@ public class UpdateCMISConnectorVersionCustomMigration extends CustomMigration {
 
     private Instance getURLExpression(final Instance connectorConfigInstance) {
         final Instance urlParameter = getConnectorParameter("url", connectorConfigInstance);
-        final Instance urlExpression = urlParameter.get("expression");
-        return urlExpression;
+        final Optional<Instance> urlExpression = Optional.ofNullable(urlParameter).map(p -> p.get("expression"));
+        return urlExpression.orElse(null);
     }
 
     private void addServiceURL(final Instance connectorConfigInstance, final Model model, final String newInputName,

@@ -96,7 +96,7 @@ public class MigrationHelper {
     private MigrationHelper(Resource resource, InputStreamSupplier streamSupplier) {
         helpedResource = resource;
         // parse the resource for nsURI and model version
-        parseForInformation(resource, streamSupplier);
+        parseForInformation(streamSupplier);
         // try and compare the model version with the current version
         modelVersionStatus = compareModelVersions(resource.getURI().lastSegment());
         // init the migrator
@@ -141,12 +141,18 @@ public class MigrationHelper {
      * @throws ParserConfigurationException the exception which occurred during parsing
      */
     private MigrationHelper orThrowParseException() throws IOException, SAXException, ParserConfigurationException {
-        if (storedParseException.filter(IOException.class::isInstance).isPresent()) {
-            throw storedParseException.map(IOException.class::cast).get();
-        } else if (storedParseException.filter(SAXException.class::isInstance).isPresent()) {
-            throw storedParseException.map(SAXException.class::cast).get();
-        } else if (storedParseException.filter(ParserConfigurationException.class::isInstance).isPresent()) {
-            throw storedParseException.map(ParserConfigurationException.class::cast).get();
+        Optional<IOException> io = storedParseException.filter(IOException.class::isInstance)
+                .map(IOException.class::cast);
+        Optional<SAXException> sax = storedParseException.filter(SAXException.class::isInstance)
+                .map(SAXException.class::cast);
+        Optional<ParserConfigurationException> conf = storedParseException
+                .filter(ParserConfigurationException.class::isInstance).map(ParserConfigurationException.class::cast);
+        if (io.isPresent()) {
+            throw io.get();
+        } else if (sax.isPresent()) {
+            throw sax.get();
+        } else if (conf.isPresent()) {
+            throw conf.get();
         } else {
             return this;
         }
@@ -155,10 +161,9 @@ public class MigrationHelper {
     /**
      * Parse the resource for information relative to namespace and model version
      * 
-     * @param resource the decorated EMF resource
      * @param streamSupplier supplies a stream with the resource content for information parsing
      */
-    private void parseForInformation(Resource resource, InputStreamSupplier streamSupplier) {
+    private void parseForInformation(InputStreamSupplier streamSupplier) {
         try (InputStream newStream = streamSupplier.get();) {
             /*
              * Now, get namespace URI and model version.
@@ -172,15 +177,28 @@ public class MigrationHelper {
             XMLReader reader = parserFactory.newSAXParser().getXMLReader();
 
             reader.setContentHandler(contentHandler);
-            try {
-                informationHandler = contentHandler;
-                reader.parse(new InputSource(newStream));
-            } catch (final SAXException e) {
-                // loading should fail immediately after reading relevant information
-            }
+            doParseForInformation(newStream, contentHandler, reader);
         } catch (IOException | SAXException | ParserConfigurationException exception) {
             // store the exception, and throw it when trying to get the instance
             storedParseException = Optional.of(exception);
+        }
+    }
+
+    /**
+     * Do parse the resource for information relative to namespace and model version
+     * 
+     * @param newStream stream with the resource content for information parsing
+     * @param contentHandler migation content handler
+     * @param reader SAX XML reader
+     * @throws IOException reading exception
+     */
+    private void doParseForInformation(InputStream newStream, final ContentHandler contentHandler, XMLReader reader)
+            throws IOException {
+        try {
+            informationHandler = contentHandler;
+            reader.parse(new InputSource(newStream));
+        } catch (final SAXException e) {
+            // loading should fail immediately after reading relevant information
         }
     }
 
@@ -197,14 +215,13 @@ public class MigrationHelper {
         @Override
         public void startElement(String uri, String localName, String qName,
                 Attributes attributes) throws SAXException {
-            if (!ExtendedMetaData.XMI_URI.equals(uri) && !ExtendedMetaData.XML_SCHEMA_URI.equals(uri)) {
-                // element should be "process:MainProcess" but namespace prefix may enventually change
-                if (qName.endsWith(":" + ProcessPackage.Literals.MAIN_PROCESS.getName())) {
-                    nsURI = uri;
-                    modelVersion = attributes
-                            .getValue(ProcessPackage.Literals.MAIN_PROCESS__BONITA_MODEL_VERSION.getName());
-                    throw new SAXException();
-                }
+            if (!ExtendedMetaData.XMI_URI.equals(uri) && !ExtendedMetaData.XML_SCHEMA_URI.equals(uri) &&
+            // element should be "process:MainProcess" but namespace prefix may enventually change
+                    qName.endsWith(":" + ProcessPackage.Literals.MAIN_PROCESS.getName())) {
+                nsURI = uri;
+                modelVersion = attributes
+                        .getValue(ProcessPackage.Literals.MAIN_PROCESS__BONITA_MODEL_VERSION.getName());
+                throw new SAXException();
             }
         }
     }
@@ -306,22 +323,22 @@ public class MigrationHelper {
             if (desiredResult.doMigrate()) {
                 String modelVersion = getModelVersion();
                 String nsUri = getNsURI();
-                Migrator migrator = getMigrator(nsUri);
-                Optional<Release> release = migrator.getReleases().stream()
+                Migrator actualMigrator = getMigrator(nsUri);
+                Optional<Release> release = actualMigrator.getReleases().stream()
                         .filter(r -> r.getLabel().equals(modelVersion)).findFirst();
                 if (release.filter(r -> !r.isLastRelease()).isPresent()) {
-                    migrator.setLevel(ValidationLevel.RELEASE);
+                    actualMigrator.setLevel(ValidationLevel.RELEASE);
                     Map<String, Object> loadOptions = new HashMap<>();
                     loadOptions.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
                     try {
                         if (desiredResult.doEraseResource()) {
                             // migrate and update the file
-                            migrator.migrateAndSave(Collections.singletonList(uri),
+                            actualMigrator.migrateAndSave(Collections.singletonList(uri),
                                     release.get(), null, new NullProgressMonitor(), loadOptions);
                             return MigrationResult.HARD_MIGRATION;
                         } else {
                             // migrate virtually only
-                            ResourceSet resourceSet = migrator.migrateAndLoad(Collections.singletonList(uri),
+                            ResourceSet resourceSet = actualMigrator.migrateAndLoad(Collections.singletonList(uri),
                                     release.get(),
                                     null, new NullProgressMonitor());
                             EList<EObject> contents = resourceSet.getResources().get(0).getContents();

@@ -14,7 +14,7 @@
  */
 package org.bonitasoft.bpm.model.process.util.migration;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import org.bonitasoft.bpm.model.util.ModelLoader;
 import org.eclipse.emf.common.util.URI;
@@ -41,11 +41,11 @@ public class ProcessMigrationTest {
     public void testModelMigration_7_12_0() throws Exception {
         // load both models
         Resource oldModel = ModelLoader.getInstance().loadModel(PROC_7_12_0_MODEL_URI);
-        assertThat(oldModel.isLoaded()).isTrue();
+        assertTrue(oldModel.isLoaded());
         Resource latestModel = ModelLoader.getInstance().loadModel(PROC_8_MODEL_URI);
-        assertThat(oldModel.isLoaded()).isTrue();
+        assertTrue(oldModel.isLoaded());
 
         // and test that content is similar
-        assertThat(EcoreUtil.equals(oldModel.getContents().get(0), latestModel.getContents().get(0))).isTrue();
+        assertTrue(EcoreUtil.equals(oldModel.getContents().get(0), latestModel.getContents().get(0)));
     }
 }

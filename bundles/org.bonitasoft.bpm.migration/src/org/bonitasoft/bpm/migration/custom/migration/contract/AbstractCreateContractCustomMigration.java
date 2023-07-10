@@ -22,7 +22,7 @@ import org.eclipse.emf.edapt.spi.migration.Model;
 
 public abstract class AbstractCreateContractCustomMigration extends CustomMigration {
 
-    public AbstractCreateContractCustomMigration() {
+    protected AbstractCreateContractCustomMigration() {
         super();
     }
 

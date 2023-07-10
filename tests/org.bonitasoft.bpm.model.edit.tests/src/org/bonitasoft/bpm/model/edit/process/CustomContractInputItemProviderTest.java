@@ -14,6 +14,7 @@
  */
 package org.bonitasoft.bpm.model.edit.process;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -106,7 +107,7 @@ public class CustomContractInputItemProviderTest {
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
-        assertTrue(label.equals(String.format("DATE ONLY - %s", LocalDate.class.getName())));
+        assertEquals(String.format("DATE ONLY - %s", LocalDate.class.getName()), label);
     }
 
     @Test
@@ -121,7 +122,7 @@ public class CustomContractInputItemProviderTest {
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
-        assertTrue(label.equals(String.format("DATE-TIME (NO TIME ZONE) - %s", LocalDateTime.class.getName())));
+        assertEquals(String.format("DATE-TIME (NO TIME ZONE) - %s", LocalDateTime.class.getName()), label);
     }
 
     @Test
@@ -136,7 +137,7 @@ public class CustomContractInputItemProviderTest {
                 .getLabelProvider(contractInput)
                 .getText(contractInput.getType());
 
-        assertTrue(label.equals(String.format("DATE-TIME (TIME ZONE) - %s", OffsetDateTime.class.getName())));
+        assertEquals(String.format("DATE-TIME (TIME ZONE) - %s", OffsetDateTime.class.getName()), label);
     }
 
     @Test
