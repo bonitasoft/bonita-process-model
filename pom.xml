@@ -477,12 +477,15 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
       <id>skip-deploy-eclipse-test</id>
       <activation>
         <file>
-          <exists>no_deploy.txt</exists>
+          <exists>is_eclipse-test-plugin.txt</exists>
         </file>
       </activation>
       <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <maven.source.skip>true</maven.source.skip>
+        <!-- Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=397015 -->
+        <sonar.sources></sonar.sources>
+        <sonar.tests>src</sonar.tests>
       </properties>
     </profile>
     <!-- do not deploy target definitions -->
