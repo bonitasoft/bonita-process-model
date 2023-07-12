@@ -31,11 +31,13 @@ import org.junit.Test;
 public class ExpressionConstantsTest {
 
     /**
-     * Test that values in {@link ExpressionConstants} are still in sync with runtime definition
+     * Test that values in {@link ExpressionConstants} are still in sync with runtime definition.
+     * java:S3415 is deactivated here as we actually want to test the constant values.
      * 
      * @throws Exception
      */
     @Test
+    @SuppressWarnings("java:S3415")
     public void testExpressionConstantsAreSyncWithRuntime() throws Exception {
         assertEquals(ExpressionType.TYPE_CONSTANT.name(), ExpressionConstants.CONSTANT_TYPE);
         assertEquals(ExpressionType.TYPE_CONDITION.name(), ExpressionConstants.CONDITION_TYPE);

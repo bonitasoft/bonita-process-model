@@ -70,7 +70,7 @@ public class ModelSearch implements IModelSearch {
         while (result != null && !type.isAssignableFrom(result.getClass())) {
             result = result.eContainer();
         }
-        return type.isAssignableFrom(result.getClass()) ? (T) result : null;
+        return result != null && type.isAssignableFrom(result.getClass()) ? (T) result : null;
     }
 
     private static <T> void addAllElementOfContainer(final EObject parent, final List<T> res,

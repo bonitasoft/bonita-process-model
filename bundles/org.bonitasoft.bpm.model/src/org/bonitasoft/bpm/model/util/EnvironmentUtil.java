@@ -39,18 +39,16 @@ public class EnvironmentUtil {
      * @return true when loaded in OSGi
      */
     public static boolean isOSGi() {
-        // test whether class is instanceof org.osgi.framework.BundleReference interface without loading the interface
+        // test whether class is instanceof org.osgi.framework.BundleReference interface without loading the interface (hence, ignore java:S1872 here)
         Predicate<Class<?>> isOSGiBundleRef = c -> {
-            @SuppressWarnings({ "unchecked", "rawtypes" })
-            BiPredicate<BiPredicate, Class<?>> isOSGiBundleRefHelper = (bipredicate, clazz) -> {
-                return
-                // test whether class is itself the interface
-                clazz.getName().equals("org.osgi.framework.BundleReference") ||
-                // or it has an interface which matches (recursively)
-                        Stream.of(clazz.getInterfaces()).anyMatch(i -> bipredicate.test(bipredicate, i)) ||
-                // or its superclass matches (recursively)
-                        clazz.getSuperclass() != null && bipredicate.test(bipredicate, clazz.getSuperclass());
-            };
+            @SuppressWarnings({ "unchecked", "rawtypes", "java:S1872" })
+            BiPredicate<BiPredicate, Class<?>> isOSGiBundleRefHelper = (bipredicate, clazz) ->
+            // test whether class is itself the interface
+            clazz.getName().equals("org.osgi.framework.BundleReference") ||
+            // or it has an interface which matches (recursively)
+                    Stream.of(clazz.getInterfaces()).anyMatch(i -> bipredicate.test(bipredicate, i)) ||
+            // or its superclass matches (recursively)
+                    clazz.getSuperclass() != null && bipredicate.test(bipredicate, clazz.getSuperclass());
             return isOSGiBundleRefHelper.test(isOSGiBundleRefHelper, c);
         };
         Optional<Class<? extends ClassLoader>> classLoaderClass = Optional

@@ -14,7 +14,7 @@
  */
 package org.bonitasoft.bpm.model.edit.process;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import org.bonitasoft.bpm.model.edit.i18n.Messages;
 import org.bonitasoft.bpm.model.expression.Expression;
@@ -55,7 +55,7 @@ public class CustomFormMappingItemProviderTest {
         final String text = customFormMappingItemProvider.getText(internalFormMapping);
 
         //The
-        assertTrue(text.equals("Form Mapping INTERNAL"));
+        assertEquals("Form Mapping INTERNAL", text);
     }
 
     @Test
@@ -69,7 +69,7 @@ public class CustomFormMappingItemProviderTest {
         final String text = customFormMappingItemProvider.getText(urlFormMapping);
 
         //Then
-        assertTrue(text.equals(Messages.bind(Messages.urlFormMapping, "http://www.myUrl.com")));
+        assertEquals(Messages.bind(Messages.urlFormMapping, "http://www.myUrl.com"), text);
     }
 
     @Test
@@ -85,7 +85,7 @@ public class CustomFormMappingItemProviderTest {
         final String text = customFormMappingItemProvider.getText(pool.getOverviewFormMapping());
 
         //Then
-        assertTrue(text.equals(Messages.bind(Messages.overviewUrlFormMapping, "http://www.myUrl.com")));
+        assertEquals(Messages.bind(Messages.overviewUrlFormMapping, "http://www.myUrl.com"), text);
     }
 
 }

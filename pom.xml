@@ -96,7 +96,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
     <sonar.organization>bonitasoft</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.exclusions>./src-gen/**/*</sonar.exclusions>
+    <sonar.exclusions>src-gen/**/*</sonar.exclusions>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>11</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
@@ -477,12 +477,15 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
       <id>skip-deploy-eclipse-test</id>
       <activation>
         <file>
-          <exists>no_deploy.txt</exists>
+          <exists>is_eclipse-test-plugin.txt</exists>
         </file>
       </activation>
       <properties>
         <maven.deploy.skip>true</maven.deploy.skip>
         <maven.source.skip>true</maven.source.skip>
+        <!-- Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=397015 -->
+        <sonar.sources></sonar.sources>
+        <sonar.tests>src</sonar.tests>
       </properties>
     </profile>
     <!-- do not deploy target definitions -->
