@@ -42,9 +42,6 @@
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <parser
-            type="di"
-            class="org.omg.spec.bpmn.di.util.DiResourceFactoryImpl"/>
-      <parser
             class="org.omg.spec.bpmn.di.util.DiResourceFactoryImpl"
             type="bpmn">
       </parser>
