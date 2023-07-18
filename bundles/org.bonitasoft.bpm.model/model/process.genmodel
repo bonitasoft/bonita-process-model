@@ -412,7 +412,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//Element/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//Element/textAnnotationAttachment"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="process.ecore#//Event"/>
+    <genClasses ecoreClass="process.ecore#//Event"/>
     <genClasses ecoreClass="process.ecore#//EndErrorEvent"/>
     <genClasses ecoreClass="process.ecore#//EndEvent"/>
     <genClasses ecoreClass="process.ecore#//EndMessageEvent"/>
