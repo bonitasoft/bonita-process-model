@@ -47,7 +47,7 @@ public interface MigrationPolicy {
      * @param isReadOnly whether opened model is read-only
      * @return how we wish to migrate the model
      */
-    abstract public MigrationResult decideMigration(IStatus versionComparisonStatus, String fileName,
+    public abstract MigrationResult decideMigration(IStatus versionComparisonStatus, String fileName,
             boolean isReadOnly);
 
 }

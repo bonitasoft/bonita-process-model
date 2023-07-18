@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.WeakHashMap;
+import java.util.function.BiPredicate;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParserFactory;
@@ -29,6 +30,7 @@ import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
 import org.bonitasoft.bpm.model.process.Messages;
 import org.bonitasoft.bpm.model.process.ProcessPackage;
+import org.bonitasoft.bpm.model.process.util.ProcessResourceImpl;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
@@ -56,6 +58,16 @@ import org.xml.sax.helpers.DefaultHandler;
  * A helper for EMF resources, which helps in performing the model migration with Edapt.
  */
 public class MigrationHelper {
+
+    /**
+     * This option allows to specify a policy for model file migration, for {@link Resource} implementations supporting it.
+     * Corresponding value must be a <code>BiPredicate<IStatus, String></code>.
+     * 
+     * @see MigrationPolicy#ALWAYS_MIGRATE_POLICY
+     * @see MigrationPolicy#NEVER_MIGRATE_POLICY
+     * @see ProcessResourceImpl#setMigrationPolicy(BiPredicate)
+     */
+    public static final String OPTION_MIGRATION_POLICY = "MIGRATION_POLICY";//$NON-NLS-1$
 
     /** All helper instances */
     private static final Map<Resource, MigrationHelper> INSTANCES = new WeakHashMap<>();
