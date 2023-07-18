@@ -76,6 +76,15 @@ public class ProcessResourceImpl extends XMIResourceImpl {
 
     /*
      * (non-Javadoc)
+     * @see org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl#useUUIDs()
+     */
+    @Override
+    protected boolean useUUIDs() {
+        return true;
+    }
+
+    /*
+     * (non-Javadoc)
      * @see org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl#doLoad(java.io.InputStream, java.util.Map)
      */
     @Override
