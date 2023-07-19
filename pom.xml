@@ -114,6 +114,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     </repository>
   </repositories>
   <build>
+    <testResources>
+      <testResource>
+        <directory>resources</directory>
+      </testResource>
+    </testResources>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -502,7 +507,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
       </properties>
     </profile>
     <!-- Deploy update sites on maven
-             Update site will be available e.g. on mvn:org.bonitasoft.bpm:org.bonitasoft.bpm.eclipse-repository:8.0.0-SNAPSHOT:zip -->
+             Update site will be available e.g. on mvn:org.bonitasoft.bpm:org.bonitasoft.bpm.eclipse-repository:${project.version}:zip -->
     <profile>
       <id>deploy-eclipse-updatesite-on-maven</id>
       <activation>

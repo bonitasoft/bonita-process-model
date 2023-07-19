@@ -1,0 +1,222 @@
+{
+  "designerVersion" : "1.10.18",
+  "previousDesignerVersion" : "1.7.4",
+  "id" : "a8854959-e45a-4d34-81ac-e3f125b7a658",
+  "name" : "MyInstanciationForm",
+  "lastUpdate" : 1582283477630,
+  "rows" : [
+    [
+      {
+        "type" : "component",
+        "dimension" : {
+          "xs" : 12,
+          "sm" : 12,
+          "md" : 12,
+          "lg" : 12
+        },
+        "propertyValues" : {
+          "cssClasses" : {
+            "type" : "constant",
+            "value" : ""
+          },
+          "hidden" : {
+            "type" : "constant",
+            "value" : false
+          },
+          "readOnly" : {
+            "type" : "constant",
+            "value" : false
+          },
+          "required" : {
+            "type" : "constant",
+            "value" : false
+          },
+          "minLength" : {
+            "type" : "constant",
+            "value" : ""
+          },
+          "maxLength" : {
+            "type" : "constant",
+            "value" : ""
+          },
+          "labelHidden" : {
+            "type" : "constant",
+            "value" : false
+          },
+          "label" : {
+            "type" : "interpolation",
+            "value" : "Default label"
+          },
+          "labelPosition" : {
+            "type" : "constant",
+            "value" : "top"
+          },
+          "labelWidth" : {
+            "type" : "constant",
+            "value" : 4
+          },
+          "value" : {
+            "type" : "variable"
+          }
+        },
+        "reference" : "d93c8c34-1c21-41fc-a39d-0b3ce64adada",
+        "hasValidationError" : false,
+        "id" : "pbTextarea"
+      }
+    ],
+    [
+      {
+        "type" : "formContainer",
+        "dimension" : {
+          "xs" : 12
+        },
+        "propertyValues" : { },
+        "reference" : "ba9d740f-4d0b-489c-808b-6710d305d52b",
+        "hasValidationError" : false,
+        "id" : "pbFormContainer",
+        "container" : {
+          "type" : "container",
+          "dimension" : {
+            "xs" : 12
+          },
+          "propertyValues" : { },
+          "reference" : "9ac7f2af-a126-4e12-b74d-41983cd585df",
+          "hasValidationError" : false,
+          "id" : "pbContainer",
+          "rows" : [
+            [
+              {
+                "type" : "component",
+                "dimension" : {
+                  "sm" : 12,
+                  "md" : 12,
+                  "lg" : 12,
+                  "xs" : 12
+                },
+                "propertyValues" : {
+                  "removeItem" : {
+                    "type" : "variable"
+                  },
+                  "alignment" : {
+                    "type" : "constant",
+                    "value" : "center"
+                  },
+                  "isDisplayed" : {
+                    "type" : "constant",
+                    "value" : true
+                  },
+                  "targetUrlOnSuccess" : {
+                    "type" : "interpolation",
+                    "value" : "/bonita"
+                  },
+                  "class" : {
+                    "type" : "constant",
+                    "value" : "org.bonitasoft.web.designer.experimental.parametrizedWidget.ButtonWidget"
+                  },
+                  "label" : {
+                    "type" : "constant",
+                    "value" : "Submit"
+                  },
+                  "collectionPosition" : {
+                    "type" : "constant"
+                  },
+                  "buttonStyle" : {
+                    "type" : "constant",
+                    "value" : "primary"
+                  },
+                  "dimension" : {
+                    "type" : "constant",
+                    "value" : 12
+                  },
+                  "valueToAdd" : {
+                    "type" : "expression"
+                  },
+                  "collectionToModify" : {
+                    "type" : "variable"
+                  },
+                  "widgetId" : {
+                    "type" : "constant",
+                    "value" : "pbButton"
+                  },
+                  "labelHidden" : {
+                    "type" : "constant",
+                    "value" : false
+                  },
+                  "action" : {
+                    "type" : "constant",
+                    "value" : "Start process"
+                  },
+                  "dataToSend" : {
+                    "type" : "expression",
+                    "value" : "formOutput"
+                  },
+                  "readonly" : {
+                    "type" : "constant",
+                    "value" : false
+                  },
+                  "disabled" : {
+                    "type" : "expression",
+                    "value" : "$form.$invalid"
+                  },
+                  "cssClasses" : {
+                    "type" : "constant",
+                    "value" : ""
+                  }
+                },
+                "reference" : "5d8f8270-f68c-44c0-837a-b372063c20a5",
+                "hasValidationError" : false,
+                "id" : "pbButton"
+              }
+            ]
+          ]
+        }
+      }
+    ]
+  ],
+  "assets" : [
+    {
+      "id" : "103a011e-b914-48e5-ad6e-f5cab740dcd1",
+      "name" : "localization.json",
+      "type" : "json",
+      "order" : 0,
+      "external" : false
+    },
+    {
+      "id" : "ddc96d47-e34f-4824-87d5-7b9f8ff4a8e2",
+      "name" : "ui-bootstrap-tpls-0.13.0.min.js",
+      "type" : "js",
+      "order" : 2,
+      "external" : false
+    },
+    {
+      "id" : "6b8bc0d8-efe1-4526-aeff-1695767d3775",
+      "name" : "style.css",
+      "type" : "css",
+      "order" : 1,
+      "external" : false
+    }
+  ],
+  "inactiveAssets" : [ ],
+  "variables" : {
+    "formInput" : {
+      "type" : "json",
+      "value" : [
+        "{ }"
+      ],
+      "exposed" : false
+    },
+    "formOutput" : {
+      "type" : "expression",
+      "value" : [
+        "return {",
+        "",
+        "};"
+      ],
+      "exposed" : false
+    }
+  },
+  "hasValidationError" : false,
+  "uuid" : "a8854959-e45a-4d34-81ac-e3f125b7a658",
+  "type" : "form",
+  "description" : "Page generated with Bonita UI designer"
+}
