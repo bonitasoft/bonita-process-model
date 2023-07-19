@@ -18,7 +18,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
+import org.bonitasoft.bpm.migration.custom.migration.NotationPackageLoader;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.edapt.migration.CustomMigration;
 import org.eclipse.emf.edapt.migration.MigrationException;
 import org.eclipse.emf.edapt.spi.migration.Instance;
@@ -59,10 +62,13 @@ public class SubprocessEventMigration extends CustomMigration {
                 process.add("elements", element);
                 final Instance copy = element;
                 copy.setUuid(element.getUuid());
-                for (final Instance view : model.getAllInstances("notation.View")) {
-                    final Instance elem = view.get("element");
-                    if (elem != null && elem.getUuid().equals(element.getUuid())) {
-                        elementsMapping.put(element.getUuid(), view);
+                Optional<EClass> viewEC = NotationPackageLoader.getInstance().getView();
+                if (viewEC.isPresent()) {
+                    for (final Instance view : model.getAllInstances(viewEC.get())) {
+                        final Instance elem = view.get("element");
+                        if (elem != null && elem.getUuid().equals(element.getUuid())) {
+                            elementsMapping.put(element.getUuid(), view);
+                        }
                     }
                 }
                 elementsByUUID.put(element.getUuid(), copy);

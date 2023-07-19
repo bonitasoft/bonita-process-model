@@ -14,6 +14,9 @@
  */
 package org.bonitasoft.bpm.migration.custom.migration;
 
+import java.util.Optional;
+
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.edapt.migration.CustomMigration;
 import org.eclipse.emf.edapt.migration.MigrationException;
 import org.eclipse.emf.edapt.spi.migration.Instance;
@@ -31,11 +34,14 @@ public class UpdatePoolSize extends CustomMigration {
     @Override
     public void migrateAfter(final Model model, final Metamodel metamodel)
             throws MigrationException {
-        for (final Instance node : model.getAllInstances("notation.Node")) {
-            if (node.get("type").equals(POOL_VISUAL_ID)
-                    && node.get("layoutConstraint") != null
-                    && (Integer) ((Instance) node.get("layoutConstraint")).get("width") == 0) {
-                ((Instance) node.get("layoutConstraint")).set("width", DEFAULT_WIDTH);
+        Optional<EClass> nodeEC = NotationPackageLoader.getInstance().getNode();
+        if (nodeEC.isPresent()) {
+            for (final Instance node : model.getAllInstances(nodeEC.get())) {
+                if (node.get("type").equals(POOL_VISUAL_ID)
+                        && node.get("layoutConstraint") != null
+                        && (Integer) ((Instance) node.get("layoutConstraint")).get("width") == 0) {
+                    ((Instance) node.get("layoutConstraint")).set("width", DEFAULT_WIDTH);
+                }
             }
         }
     }

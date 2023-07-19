@@ -60,6 +60,9 @@ public class MigratingXMLResource extends XMLResourceImpl {
      */
     public MigratingXMLResource(URI uri) {
         super(uri);
+        // init default load/save options to avoid null map being taken
+        getDefaultLoadOptions();
+        getDefaultSaveOptions();
     }
 
     /**

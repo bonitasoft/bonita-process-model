@@ -28,6 +28,8 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.apache.maven.artifact.versioning.ArtifactVersion;
 import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
+import org.bonitasoft.bpm.model.configuration.ConfigurationPackage;
+import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage;
 import org.bonitasoft.bpm.model.process.Messages;
 import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.process.util.ProcessResourceImpl;
@@ -217,6 +219,11 @@ public class MigrationHelper {
     /** Content handler for extraction of namespace URI and model version using SAX. */
     private static class ContentHandler extends DefaultHandler {
 
+        /**
+         * The first and default model version from which we migrate in absence of information
+         */
+        private static final String VERY_FIRST_VERSION = "6.0.0-Alpha";
+
         /** Namespace URI. */
         private String nsURI;
 
@@ -227,14 +234,39 @@ public class MigrationHelper {
         @Override
         public void startElement(String uri, String localName, String qName,
                 Attributes attributes) throws SAXException {
-            if (!ExtendedMetaData.XMI_URI.equals(uri) && !ExtendedMetaData.XML_SCHEMA_URI.equals(uri) &&
-            // element should be "process:MainProcess" but namespace prefix may enventually change
-                    qName.endsWith(":" + ProcessPackage.Literals.MAIN_PROCESS.getName())) {
+            if (!ExtendedMetaData.XMI_URI.equals(uri) && !ExtendedMetaData.XML_SCHEMA_URI.equals(uri)) {
                 nsURI = uri;
-                modelVersion = attributes
-                        .getValue(ProcessPackage.Literals.MAIN_PROCESS__BONITA_MODEL_VERSION.getName());
+                // element should be "process:MainProcess", "process:Configuration" or "process:Connector Configuration" but namespace prefix may enventually change
+                if (qName.endsWith(":" + ProcessPackage.Literals.MAIN_PROCESS.getName())) {
+                    String modelVersionAtt = attributes
+                            .getValue(ProcessPackage.Literals.MAIN_PROCESS__BONITA_MODEL_VERSION.getName());
+                    setModelVersion(modelVersionAtt);
+                } else if (qName.endsWith(":" + ConfigurationPackage.Literals.CONFIGURATION.getName())) {
+                    String modelVersionAtt = attributes
+                            .getValue(ConfigurationPackage.Literals.CONFIGURATION__VERSION.getName());
+                    setModelVersion(modelVersionAtt);
+                } else if (qName
+                        .endsWith(":" + ConnectorConfigurationPackage.Literals.CONNECTOR_CONFIGURATION.getName())) {
+                    String modelVersionAtt = attributes.getValue(
+                            ConnectorConfigurationPackage.Literals.CONNECTOR_CONFIGURATION__MODEL_VERSION.getName());
+                    setModelVersion(modelVersionAtt);
+                }
                 throw new SAXException();
             }
+        }
+
+        /**
+         * Set the model version from the attribute
+         * 
+         * @param modelVersionAtt the attribute value set in model element
+         */
+        private void setModelVersion(String modelVersionAtt) {
+            /*
+             * If version is not filled, take value before version appeared.
+             * There's also this weird case where version is like 6.0.0 but means alpha
+             */
+            modelVersion = Optional.ofNullable(modelVersionAtt).filter(v -> !VERY_FIRST_VERSION.startsWith(v))
+                    .orElse(VERY_FIRST_VERSION);
         }
     }
 
