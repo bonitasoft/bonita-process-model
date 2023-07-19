@@ -106,7 +106,10 @@ public class SingleResourceMigrator extends Migrator {
         }
         // else, class loader is the same for this jar and the migration jar
         ClassLoader classLoader = SingleResourceMigrator.class.getClassLoader();
-        if (classLoader.getDefinedPackage("org.bonitasoft.bpm.migration.custom.migration") == null) {
+        try {
+            classLoader.loadClass(
+                    "org.bonitasoft.bpm.migration.custom.migration.BusinessObjectTypeCustomMigration");
+        } catch (ClassNotFoundException e) {
             // migration lib not found, restrict and just use this plugin
             EcorePlugin.INSTANCE.log("Library org.bonitasoft.bpm.migration not found for migration");
         }
