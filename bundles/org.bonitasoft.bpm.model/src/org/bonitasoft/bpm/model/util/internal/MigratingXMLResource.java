@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2022 Bonitasoft S.A.
+ * Copyright (C) 2023 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.process.util;
+package org.bonitasoft.bpm.model.util.internal;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,16 +28,14 @@ import org.bonitasoft.bpm.model.process.util.migration.MigrationResult;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.emf.edapt.migration.MigrationException;
 import org.xml.sax.SAXException;
 
 /**
- * The <b>Resource</b> associated with the package.
- * 
- * @see org.bonitasoft.bpm.model.process.util.ProcessResourceFactoryImpl
+ * An XML resource which handles the migration with {@link MigrationHelper}
  */
-public class ProcessResourceImpl extends XMIResourceImpl {
+public class MigratingXMLResource extends XMLResourceImpl {
 
     /**
      * This option allows to specify a policy for model file migration.
@@ -60,8 +58,11 @@ public class ProcessResourceImpl extends XMIResourceImpl {
      * 
      * @param uri the URI of the new resource.
      */
-    public ProcessResourceImpl(URI uri) {
+    public MigratingXMLResource(URI uri) {
         super(uri);
+        // init default load/save options to avoid null map being taken
+        getDefaultLoadOptions();
+        getDefaultSaveOptions();
     }
 
     /**
@@ -72,15 +73,6 @@ public class ProcessResourceImpl extends XMIResourceImpl {
      */
     public void setMigrationPolicy(MigrationPolicy migrationPolicy) {
         this.migrationPolicy = migrationPolicy;
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl#useUUIDs()
-     */
-    @Override
-    protected boolean useUUIDs() {
-        return true;
     }
 
     /*
@@ -154,4 +146,4 @@ public class ProcessResourceImpl extends XMIResourceImpl {
         return MigrationResult.NO_MIGRATION;
     }
 
-} //ProcessResourceImpl
+}

@@ -22,7 +22,9 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.bonitasoft.bpm.model.util.EnvironmentUtil;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -37,6 +39,8 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.eclipse.emf.edapt.internal.common.ResourceUtils;
+import org.eclipse.emf.edapt.internal.migration.execution.IClassLoader;
+import org.eclipse.emf.edapt.internal.migration.execution.internal.BundleClassLoader;
 import org.eclipse.emf.edapt.internal.migration.execution.internal.ClassLoaderFacade;
 import org.eclipse.emf.edapt.internal.migration.impl.UpdatingList;
 import org.eclipse.emf.edapt.internal.migration.internal.MaterializingBackwardConverter;
@@ -48,6 +52,7 @@ import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.Model;
 import org.eclipse.emf.edapt.spi.migration.ModelResource;
 import org.eclipse.emf.edapt.spi.migration.Slot;
+import org.osgi.framework.Bundle;
 
 /**
  * Migrator for a single process resource
@@ -70,7 +75,29 @@ public class SingleResourceMigrator extends Migrator {
 
     public SingleResourceMigrator() throws MigrationException {
         super(HistoryUtils.getMigrationHistoryURI(),
-                new ClassLoaderFacade(SingleResourceMigrator.class.getClassLoader()));
+                getMigrationClassLoader());
+    }
+
+    /**
+     * Get the migration plugin class loader
+     * 
+     * @return class loader with access to migration classes
+     */
+    private static IClassLoader getMigrationClassLoader() {
+        if (EnvironmentUtil.isOSGi()) {
+            // load from the migration OSGi bundle
+            Bundle bundle = Platform.getBundle("org.bonitasoft.bpm.migration");//$NON-NLS-1$
+            if (bundle != null) {
+                return new BundleClassLoader(bundle);
+            }
+        }
+        // else, class loader is the same for this jar and the migration jar
+        ClassLoader classLoader = SingleResourceMigrator.class.getClassLoader();
+        if (classLoader.getDefinedPackage("org.bonitasoft.bpm.migration.custom.migration") == null) {
+            // migration lib not found, restrict and just use this plugin
+            EcorePlugin.INSTANCE.log("Library org.bonitasoft.bpm.migration not found for migration");
+        }
+        return new ClassLoaderFacade(classLoader);
     }
 
     /*
