@@ -120,7 +120,7 @@ public class DuplicatingInputStream extends BufferedInputStream {
      * @return an estimation of available bits
      * @exception IOException if this input stream has been closed by invoking its {@link #close()} method, or an I/O error occurs.
      */
-    private int getAvailableForCopy(ByteArrayInputStream streamOnBuffer) throws IOException {
+    private synchronized int getAvailableForCopy(ByteArrayInputStream streamOnBuffer) throws IOException {
         /*
          * It's hard to know how much of the buffer or original stream has been consumed.
          * So we'll make simple under-estimations.
@@ -141,7 +141,7 @@ public class DuplicatingInputStream extends BufferedInputStream {
      * @return size of buffer not assigned
      * @throws IOException when buffer has been nullified / stream was closed
      */
-    private int getBufferPortionNotToRead() throws IOException {
+    private synchronized int getBufferPortionNotToRead() throws IOException {
         return Optional.ofNullable(buf).orElseThrow(IOException::new).length - pos;
     }
 
@@ -150,7 +150,7 @@ public class DuplicatingInputStream extends BufferedInputStream {
      * @return
      * @throws IOException
      */
-    private int readForCopy(final ByteArrayInputStream streamOnBuffer) throws IOException {
+    private synchronized int readForCopy(final ByteArrayInputStream streamOnBuffer) throws IOException {
         // read on buffer while we can
         if (streamOnBuffer.available() > getBufferPortionNotToRead()) {
             return streamOnBuffer.read();
@@ -158,7 +158,10 @@ public class DuplicatingInputStream extends BufferedInputStream {
             // buffer consumed, start consuming the real stuff
             if (streamOnBuffer.available() > 0) {
                 // but do not consume it again later from buffer
-                assert streamOnBuffer.skip(1) == 1;
+                long skip1 = streamOnBuffer.skip(1);
+                if (skip1 != 1L) {
+                    throw new IOException();
+                }
             }
             return read();
         }
