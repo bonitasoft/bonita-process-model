@@ -33,6 +33,117 @@ import java.util.Optional;
 public class DuplicatingInputStream extends BufferedInputStream {
 
     /**
+     * A copy input stream
+     */
+    private class InputStreamCopy extends InputStream {
+
+        /** The input stream working on buffer */
+        private final ByteArrayInputStream streamOnBuffer;
+        /** <code>true</code> when this is the master copy */
+        private boolean isMaster;
+
+        /**
+         * Default Constructor.
+         * 
+         * @param streamOnBuffer input stream working on buffer
+         * @param isMaster <code>true</code> when this is the master copy
+         */
+        private InputStreamCopy(ByteArrayInputStream streamOnBuffer, boolean isMaster) {
+            this.streamOnBuffer = streamOnBuffer;
+            this.isMaster = isMaster;
+        }
+
+        @Override
+        public int available() throws IOException {
+            synchronized (DuplicatingInputStream.this) {
+                /*
+                 * It's hard to know how much of the buffer or original stream has been consumed.
+                 * So we'll make simple under-estimations.
+                 */
+                int notConsumed = DuplicatingInputStream.this.available();
+                if (notConsumed > 0) {
+                    // at least this amount is not consumed
+                    return notConsumed;
+                } else {
+                    // everything should have been buffered, let's see how much of the filled buffer is left
+                    return streamOnBuffer.available() - getBufferPortionNotToRead();
+                }
+            }
+        }
+
+        @Override
+        public int read() throws IOException {
+            synchronized (DuplicatingInputStream.this) {
+                // read on buffer while we can
+                if (streamOnBuffer.available() > getBufferPortionNotToRead()) {
+                    return streamOnBuffer.read();
+                } else {
+                    // buffer consumed, start consuming the real stuff
+                    if (streamOnBuffer.available() > 0) {
+                        // but do not consume it again later from buffer
+                        long skip1 = streamOnBuffer.skip(1);
+                        if (skip1 != 1L) {
+                            throw new IOException();
+                        }
+                    }
+                    return DuplicatingInputStream.this.read();
+                }
+            }
+        }
+
+        @Override
+        public int read(byte[] b, int off, int len) throws IOException {
+            synchronized (DuplicatingInputStream.this) {
+                // read on buffer while we can
+                int readableOnBuffer = streamOnBuffer.available() - getBufferPortionNotToRead();
+                if (len == 0) {
+                    return 0;
+                } else if (readableOnBuffer >= len) {
+                    return streamOnBuffer.read(b, off, len);
+                } else {
+                    final int readOnBuffer;
+                    final int toReadOnStream;
+                    if (readableOnBuffer > 0) {
+                        readOnBuffer = streamOnBuffer.read(b, off, len);
+                        toReadOnStream = len - readOnBuffer;
+                    } else {
+                        readOnBuffer = 0;
+                        toReadOnStream = len;
+                    }
+                    // buffer consumed, start consuming the real stuff
+                    if (streamOnBuffer.available() > 0) {
+                        // but do not consume it again later from buffer
+                        long skipN = streamOnBuffer.skip(toReadOnStream);
+                        if (skipN > toReadOnStream) {
+                            throw new IOException();
+                        }
+                    }
+                    return readOnBuffer + DuplicatingInputStream.this.read(b, readOnBuffer + off, toReadOnStream);
+                }
+            }
+        }
+
+        @Override
+        public void close() throws IOException {
+            streamOnBuffer.close();
+            // do not close the real stuff, unless this is the master copy
+            if (isMaster) {
+                DuplicatingInputStream.this.close();
+            }
+        }
+
+        /**
+         * Get the size of the buffer portion which must not be read because it has not been filled this this stream.
+         * 
+         * @return size of buffer not assigned
+         * @throws IOException when buffer has been nullified / stream was closed
+         */
+        private int getBufferPortionNotToRead() throws IOException {
+            return Optional.ofNullable(buf).orElseThrow(IOException::new).length - pos;
+        }
+    }
+
+    /**
      * Creates a <code>DuplicatingInputStream</code> and saves its argument, the input stream <code>in</code>, for later use. An internal buffer array is
      * created and stored in <code>buf</code>.
      *
@@ -64,24 +175,7 @@ public class DuplicatingInputStream extends BufferedInputStream {
      */
     public InputStream getNonClosingStreamCopy() {
         final ByteArrayInputStream streamOnBuffer = new ByteArrayInputStream(buf);
-        return new InputStream() {
-
-            @Override
-            public int available() throws IOException {
-                return getAvailableForCopy(streamOnBuffer);
-            }
-
-            @Override
-            public int read() throws IOException {
-                return readForCopy(streamOnBuffer);
-            }
-
-            @Override
-            public void close() throws IOException {
-                streamOnBuffer.close();
-                // do not close the real stuff
-            }
-        };
+        return new InputStreamCopy(streamOnBuffer, false);
     }
 
     /**
@@ -92,79 +186,7 @@ public class DuplicatingInputStream extends BufferedInputStream {
      */
     public InputStream getClosingMasterStreamCopy() {
         final ByteArrayInputStream streamOnBuffer = new ByteArrayInputStream(buf);
-        return new InputStream() {
-
-            @Override
-            public int available() throws IOException {
-                return getAvailableForCopy(streamOnBuffer);
-            }
-
-            @Override
-            public int read() throws IOException {
-                return readForCopy(streamOnBuffer);
-            }
-
-            @Override
-            public void close() throws IOException {
-                streamOnBuffer.close();
-                // and close the real stuff
-                DuplicatingInputStream.this.close();
-            }
-        };
-    }
-
-    /**
-     * Get the result for available method for an input stream copy
-     * 
-     * @param streamOnBuffer the buffer's input stream which the copy relies on
-     * @return an estimation of available bits
-     * @exception IOException if this input stream has been closed by invoking its {@link #close()} method, or an I/O error occurs.
-     */
-    private synchronized int getAvailableForCopy(ByteArrayInputStream streamOnBuffer) throws IOException {
-        /*
-         * It's hard to know how much of the buffer or original stream has been consumed.
-         * So we'll make simple under-estimations.
-         */
-        int notConsumed = DuplicatingInputStream.this.available();
-        if (notConsumed > 0) {
-            // at least this amount is not consumed
-            return notConsumed;
-        } else {
-            // everything should have been buffered, let's see how much of the filled buffer is left
-            return streamOnBuffer.available() - getBufferPortionNotToRead();
-        }
-    }
-
-    /**
-     * Get the size of the buffer portion which must not be read because it has not been filled this this stream.
-     * 
-     * @return size of buffer not assigned
-     * @throws IOException when buffer has been nullified / stream was closed
-     */
-    private synchronized int getBufferPortionNotToRead() throws IOException {
-        return Optional.ofNullable(buf).orElseThrow(IOException::new).length - pos;
-    }
-
-    /**
-     * @param streamOnBuffer
-     * @return
-     * @throws IOException
-     */
-    private synchronized int readForCopy(final ByteArrayInputStream streamOnBuffer) throws IOException {
-        // read on buffer while we can
-        if (streamOnBuffer.available() > getBufferPortionNotToRead()) {
-            return streamOnBuffer.read();
-        } else {
-            // buffer consumed, start consuming the real stuff
-            if (streamOnBuffer.available() > 0) {
-                // but do not consume it again later from buffer
-                long skip1 = streamOnBuffer.skip(1);
-                if (skip1 != 1L) {
-                    throw new IOException();
-                }
-            }
-            return read();
-        }
+        return new InputStreamCopy(streamOnBuffer, true);
     }
 
 }

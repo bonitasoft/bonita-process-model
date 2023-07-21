@@ -52,7 +52,6 @@ public class DuplicatingInputStreamTest {
                 assertEquals('c', copy.read());
             }
             // create a 3rd copy read simultaneously with master
-
             try (InputStream copy = tested.getNonClosingStreamCopy()) {
                 try (InputStream master = tested.getClosingMasterStreamCopy()) {
                     assertEquals('a', master.read());
@@ -67,6 +66,35 @@ public class DuplicatingInputStreamTest {
                     master.skip(20);
                     assertEquals('z', master.read());
                     assertEquals(0, master.available());
+                }
+                // copy should no longer be able to read, because master has closed
+                assertThrows(IOException.class, copy::read);
+            }
+        }
+    }
+
+    @Test
+    public void testDuplicatedStreamArrayReading() throws IOException {
+        // create original input stream
+        String azString = IntStream.rangeClosed('a', 'z').mapToObj(c -> Character.valueOf((char) c).toString())
+                .collect(Collectors.joining());
+        assertEquals(26, azString.length());
+        ByteArrayInputStream in = new ByteArrayInputStream(azString.getBytes());
+        // test duplication
+        try (DuplicatingInputStream tested = new DuplicatingInputStream(in)) {
+            // create a copy read simultaneously with master
+            try (InputStream copy = tested.getNonClosingStreamCopy()) {
+                try (InputStream master = tested.getClosingMasterStreamCopy()) {
+                    // read with array
+                    byte[] arr = new byte[5];
+                    assertEquals(2, master.read(arr, 0, 2));
+                    assertEquals("ab", new String(arr, 0, 2));
+                    assertEquals(3, copy.read(arr, 0, 3));
+                    assertEquals("abc", new String(arr, 0, 3));
+                    assertEquals(3, master.read(arr, 2, 3));
+                    assertEquals("abcde", new String(arr, 0, 5));
+                    assertEquals(2, copy.read(arr, 3, 2));
+                    assertEquals("abcde", new String(arr, 0, 5));
                 }
                 // copy should no longer be able to read, because master has closed
                 assertThrows(IOException.class, copy::read);
