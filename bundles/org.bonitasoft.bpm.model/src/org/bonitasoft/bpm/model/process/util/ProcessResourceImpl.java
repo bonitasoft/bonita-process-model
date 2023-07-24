@@ -98,24 +98,29 @@ public class ProcessResourceImpl extends XMIResourceImpl {
             }
         }
         // migrate if needed
-        InputStreamSupplier streamSupplier;
-        InputStream streamForSuper;
         if (getURIConverter().exists(uri, options)) {
             // easier to just reopen the resource when we need it
-            streamForSuper = inputStream;
-            streamSupplier = () -> getURIConverter().createInputStream(uri, options);
+            InputStreamSupplier streamSupplier = () -> getURIConverter().createInputStream(uri, options);
+            MigrationResult result = checkMigration(streamSupplier, options);
+            if (!MigrationResult.SOFT_MIGRATION.equals(result)) {
+                // then load (or reload) the model
+                super.doLoad(inputStream, options);
+            }
+            // else, resource has already been updated
         } else {
             // probably a virtual resource, we must duplicate the stream...
-            DuplicatingInputStream buffered = new DuplicatingInputStream(inputStream);
-            streamForSuper = buffered.getClosingMasterStreamCopy();
-            streamSupplier = buffered::getNonClosingStreamCopy;
+            try (DuplicatingInputStream buffered = new DuplicatingInputStream(inputStream);) {
+                InputStreamSupplier streamSupplier = buffered::getNonClosingStreamCopy;
+                MigrationResult result = checkMigration(streamSupplier, options);
+                if (!MigrationResult.SOFT_MIGRATION.equals(result)) {
+                    // then load (or reload) the model
+                    try (InputStream streamForSuper = buffered.getClosingMasterStreamCopy();) {
+                        super.doLoad(streamForSuper, options);
+                    }
+                }
+                // else, resource has already been updated
+            }
         }
-        MigrationResult result = checkMigration(streamSupplier, options);
-        if (!MigrationResult.SOFT_MIGRATION.equals(result)) {
-            // then load (or reload) the model
-            super.doLoad(streamForSuper, options);
-        }
-        // else, resource has already been updated
     }
 
     /**
