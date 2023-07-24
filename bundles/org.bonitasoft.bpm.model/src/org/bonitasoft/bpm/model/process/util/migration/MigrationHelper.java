@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.WeakHashMap;
 import java.util.function.BiPredicate;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -36,6 +35,9 @@ import org.bonitasoft.bpm.model.process.util.ProcessResourceImpl;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
@@ -59,7 +61,7 @@ import org.xml.sax.helpers.DefaultHandler;
 /**
  * A helper for EMF resources, which helps in performing the model migration with Edapt.
  */
-public class MigrationHelper {
+public class MigrationHelper extends AdapterImpl {
 
     /**
      * This option allows to specify a policy for model file migration, for {@link Resource} implementations supporting it.
@@ -71,8 +73,10 @@ public class MigrationHelper {
      */
     public static final String OPTION_MIGRATION_POLICY = "MIGRATION_POLICY";//$NON-NLS-1$
 
-    /** All helper instances */
-    private static final Map<Resource, MigrationHelper> INSTANCES = new WeakHashMap<>();
+    /** Removes unloaded resources */
+    private static final AdapterImpl UNLOAD_LISTENER = new AdapterImpl() {
+
+    };
 
     /**
      * Get a helper for migration
@@ -86,12 +90,21 @@ public class MigrationHelper {
      */
     public static MigrationHelper getHelper(Resource emfResource, InputStreamSupplier streamSupplier)
             throws IOException, SAXException, ParserConfigurationException {
-        return INSTANCES.computeIfAbsent(emfResource, r -> new MigrationHelper(r, streamSupplier))
+        /*
+         * We could store instances in WeakHashMap<Resource, MigrationHelper> and remove them when resource is unloaded.
+         * But it happens that resources are not always unloaded (which is bad).
+         * So instead, we'll just store the helper as EAdapter to let it be deleted with the resource.
+         */
+        return emfResource.eAdapters().stream().filter(MigrationHelper.class::isInstance)
+                .map(MigrationHelper.class::cast).findFirst().orElseGet(
+                        () -> {
+                            var helper = new MigrationHelper(emfResource, streamSupplier);
+                            emfResource.eAdapters().add(helper);
+                            return helper;
+                        })
                 .orThrowParseException();
     }
 
-    /** The resource this helper works with */
-    private Resource helpedResource;
     /** Edapt migrator */
     private Migrator migrator;
     /** The eventual exception thrown during the resource parsing */
@@ -108,13 +121,48 @@ public class MigrationHelper {
      * @param streamSupplier supplies a stream with the resource content for information parsing
      */
     private MigrationHelper(Resource resource, InputStreamSupplier streamSupplier) {
-        helpedResource = resource;
         // parse the resource for nsURI and model version
         parseForInformation(streamSupplier);
         // try and compare the model version with the current version
         modelVersionStatus = compareModelVersions(resource.getURI().lastSegment());
         // init the migrator
         initializeMigrator(resource);
+        // remember to remove the migrator when the resource is disposed, or we will keep a reference to it forever
+        resource.eAdapters().add(UNLOAD_LISTENER);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.eclipse.emf.common.notify.impl.AdapterImpl#notifyChanged(org.eclipse.emf.common.notify.Notification)
+     */
+    @Override
+    public void notifyChanged(Notification msg) {
+        if (msg.getFeatureID(Resource.class) == Resource.RESOURCE__IS_LOADED && !msg.getNewBooleanValue()) {
+            // resource has been unloaded, forget about it
+            Resource resource = (Resource) msg.getNotifier();
+            resource.eAdapters().remove(this);
+        }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.eclipse.emf.common.notify.impl.AdapterImpl#setTarget(org.eclipse.emf.common.notify.Notifier)
+     */
+    @Override
+    public void setTarget(Notifier newTarget) {
+        if (target != null || !(newTarget instanceof Resource)) {
+            throw new IllegalArgumentException();
+        }
+        super.setTarget(newTarget);
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see org.eclipse.emf.common.notify.impl.AdapterImpl#getTarget()
+     */
+    @Override
+    public Resource getTarget() {
+        return (Resource) super.getTarget();
     }
 
     /**
@@ -357,8 +405,8 @@ public class MigrationHelper {
     public MigrationResult tryAndMigrate(MigrationPolicy migrationPolicy) throws MigrationException {
         if (modelVersionStatus.getSeverity() == IStatus.WARNING) {
             // test whether read model is read-only
-            URI uri = helpedResource.getURI();
-            boolean isReadOnly = Boolean.TRUE.equals(helpedResource.getResourceSet().getURIConverter()
+            URI uri = getTarget().getURI();
+            boolean isReadOnly = Boolean.TRUE.equals(getTarget().getResourceSet().getURIConverter()
                     .getAttributes(uri, Map.of(URIConverter.ATTRIBUTE_READ_ONLY, true))
                     .get(URIConverter.ATTRIBUTE_READ_ONLY));
             String name = uri.lastSegment();
@@ -386,8 +434,8 @@ public class MigrationHelper {
                                     release.get(),
                                     null, new NullProgressMonitor());
                             EList<EObject> contents = resourceSet.getResources().get(0).getContents();
-                            helpedResource.getContents().clear();
-                            helpedResource.getContents().addAll(contents);
+                            getTarget().getContents().clear();
+                            getTarget().getContents().addAll(contents);
                             return MigrationResult.SOFT_MIGRATION;
                         }
                     } catch (RuntimeException e) {
