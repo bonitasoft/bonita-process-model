@@ -89,23 +89,40 @@ public class MigratingXMLResource extends XMLResourceImpl {
             }
         }
         // migrate if needed
-        MigrationResult result = checkMigration(options);
-        if (!MigrationResult.SOFT_MIGRATION.equals(result)) {
-            // then load (or reload) the model
-            super.doLoad(inputStream, options);
+        if (getURIConverter().exists(uri, options)) {
+            // easier to just reopen the resource when we need it
+            InputStreamSupplier streamSupplier = () -> getURIConverter().createInputStream(uri, options);
+            MigrationResult result = checkMigration(streamSupplier, options);
+            if (!MigrationResult.SOFT_MIGRATION.equals(result)) {
+                // then load (or reload) the model
+                super.doLoad(inputStream, options);
+            }
+            // else, resource has already been updated
+        } else {
+            // probably a virtual resource, we must duplicate the stream...
+            try (DuplicatingInputStream buffered = new DuplicatingInputStream(inputStream);) {
+                InputStreamSupplier streamSupplier = buffered::getNonClosingStreamCopy;
+                MigrationResult result = checkMigration(streamSupplier, options);
+                if (!MigrationResult.SOFT_MIGRATION.equals(result)) {
+                    // then load (or reload) the model
+                    try (InputStream streamForSuper = buffered.getClosingMasterStreamCopy();) {
+                        super.doLoad(streamForSuper, options);
+                    }
+                }
+                // else, resource has already been updated
+            }
         }
-        // else, resource has already been updated
     }
 
     /**
      * Check whether a migration is needed and perform it when necessary.
      * 
+     * @param streamSupplier supplies a stream with the resource content for eventual information parsing
      * @param options the loading options
      * @return how the model has actually been migrated
      * @throws IOException exception accessing the resource content
      */
-    protected MigrationResult checkMigration(Map<?, ?> options) throws IOException {
-        InputStreamSupplier streamSupplier = () -> getURIConverter().createInputStream(uri, options);
+    protected MigrationResult checkMigration(InputStreamSupplier streamSupplier, Map<?, ?> options) throws IOException {
         try {
             MigrationHelper migration = MigrationHelper.getHelper(this, streamSupplier);
             if (migration.getModelVersionStatus().getSeverity() == IStatus.WARNING) {
