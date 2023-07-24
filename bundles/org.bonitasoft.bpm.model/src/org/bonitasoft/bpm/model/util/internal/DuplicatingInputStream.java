@@ -128,35 +128,51 @@ public class DuplicatingInputStream extends BufferedInputStream {
                      * buffer won't get filled and this will break duplication.
                      * Keep length small enough.
                      */
-                    int readFromStream = 0;
-                    int stillToRead = toReadOnStream;
-                    while (stillToRead > 0) {
-                        int justRead;
-                        if (stillToRead >= DuplicatingInputStream.this.buf.length) {
-                            // only read a page
-                            int pageToRead = DuplicatingInputStream.this.buf.length - 1;
-                            justRead = DuplicatingInputStream.this.read(b, readOnBuffer + off, pageToRead);
-                        } else {
-                            justRead = DuplicatingInputStream.this.read(b, readOnBuffer + off, toReadOnStream);
-                        }
-                        stillToRead -= justRead;
-                        if (justRead < 0) {
-                            // end of stream
-                            stillToRead = 0;
-                            if (readOnBuffer == 0 && readFromStream == 0) {
-                                readFromStream = -1;
-                            }
-                        } else {
-                            readFromStream += justRead;
-                            updateBufferPosition();
-                        }
-                    }
+                    int readFromStream = paginatedReadArrayFromStream(b, off, readOnBuffer, toReadOnStream);
                     res = readOnBuffer + readFromStream;
                 }
                 // update buffer position which we will not loose
                 updateBufferPosition();
                 return res;
             }
+        }
+
+        /**
+         * Read array of bytes from stream with pagination
+         * 
+         * @param b destination buffer.
+         * @param off offset at which to start storing bytes.
+         * @param readOnBuffer number of bytes already read on buffer
+         * @param toReadOnStream maximum number of bytes to read on stream
+         * @return number of bytes read on stream or <code>-1</code> if the end of the stream has been reached
+         * @exception IOException if this input stream has been closed by invoking its {@link #close()} method, or an I/O error occurs.
+         */
+        private int paginatedReadArrayFromStream(byte[] b, int off, final int readOnBuffer, final int toReadOnStream)
+                throws IOException {
+            int readFromStream = 0;
+            int stillToRead = toReadOnStream;
+            while (stillToRead > 0) {
+                int justRead;
+                if (stillToRead >= DuplicatingInputStream.this.buf.length) {
+                    // only read a page
+                    int pageToRead = DuplicatingInputStream.this.buf.length - 1;
+                    justRead = DuplicatingInputStream.this.read(b, readOnBuffer + off, pageToRead);
+                } else {
+                    justRead = DuplicatingInputStream.this.read(b, readOnBuffer + off, toReadOnStream);
+                }
+                stillToRead -= justRead;
+                if (justRead < 0) {
+                    // end of stream
+                    stillToRead = 0;
+                    if (readOnBuffer == 0 && readFromStream == 0) {
+                        readFromStream = -1;
+                    }
+                } else {
+                    readFromStream += justRead;
+                    updateBufferPosition();
+                }
+            }
+            return readFromStream;
         }
 
         @Override
