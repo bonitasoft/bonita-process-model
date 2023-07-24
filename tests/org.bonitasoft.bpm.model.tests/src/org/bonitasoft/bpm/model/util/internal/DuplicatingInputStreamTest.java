@@ -102,4 +102,26 @@ public class DuplicatingInputStreamTest {
         }
     }
 
+    @Test
+    public void testDuplicatedStreamFullReading() throws IOException {
+        // create original input stream
+        String azString = IntStream.rangeClosed('a', 'z').mapToObj(c -> Character.valueOf((char) c).toString())
+                .collect(Collectors.joining());
+        assertEquals(26, azString.length());
+        ByteArrayInputStream in = new ByteArrayInputStream(azString.getBytes());
+        // test duplication
+        try (DuplicatingInputStream tested = new DuplicatingInputStream(in)) {
+            // create a copy read simultaneously with master
+            try (InputStream copy = tested.getNonClosingStreamCopy()) {
+                try (InputStream master = tested.getClosingMasterStreamCopy()) {
+                    // read all bytes from the copy and from master
+                    assertEquals(azString, new String(copy.readAllBytes()));
+                    assertEquals(azString, new String(master.readAllBytes()));
+                }
+                // copy should no longer be able to read, because master has closed
+                assertThrows(IOException.class, copy::read);
+            }
+        }
+    }
+
 }

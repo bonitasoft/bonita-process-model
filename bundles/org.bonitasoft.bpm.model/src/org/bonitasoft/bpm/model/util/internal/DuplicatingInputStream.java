@@ -75,8 +75,9 @@ public class DuplicatingInputStream extends BufferedInputStream {
         public int read() throws IOException {
             synchronized (DuplicatingInputStream.this) {
                 // read on buffer while we can
+                int res;
                 if (streamOnBuffer.available() > getBufferPortionNotToRead()) {
-                    return streamOnBuffer.read();
+                    res = streamOnBuffer.read();
                 } else {
                     // buffer consumed, start consuming the real stuff
                     if (streamOnBuffer.available() > 0) {
@@ -86,8 +87,11 @@ public class DuplicatingInputStream extends BufferedInputStream {
                             throw new IOException();
                         }
                     }
-                    return DuplicatingInputStream.this.read();
+                    res = DuplicatingInputStream.this.read();
                 }
+                // update buffer position which we will not loose
+                updateBufferPosition();
+                return res;
             }
         }
 
@@ -96,15 +100,16 @@ public class DuplicatingInputStream extends BufferedInputStream {
             synchronized (DuplicatingInputStream.this) {
                 // read on buffer while we can
                 int readableOnBuffer = streamOnBuffer.available() - getBufferPortionNotToRead();
+                int res;
                 if (len == 0) {
-                    return 0;
+                    res = 0;
                 } else if (readableOnBuffer >= len) {
-                    return streamOnBuffer.read(b, off, len);
+                    res = streamOnBuffer.read(b, off, len);
                 } else {
                     final int readOnBuffer;
                     final int toReadOnStream;
                     if (readableOnBuffer > 0) {
-                        readOnBuffer = streamOnBuffer.read(b, off, len);
+                        readOnBuffer = streamOnBuffer.read(b, off, Math.min(len, readableOnBuffer));
                         toReadOnStream = len - readOnBuffer;
                     } else {
                         readOnBuffer = 0;
@@ -118,8 +123,39 @@ public class DuplicatingInputStream extends BufferedInputStream {
                             throw new IOException();
                         }
                     }
-                    return readOnBuffer + DuplicatingInputStream.this.read(b, readOnBuffer + off, toReadOnStream);
+                    /*
+                     * If the requested length is at least as large as the buffer,
+                     * buffer won't get filled and this will break duplication.
+                     * Keep length small enough.
+                     */
+                    int readFromStream = 0;
+                    int stillToRead = toReadOnStream;
+                    while (stillToRead > 0) {
+                        int justRead;
+                        if (stillToRead >= DuplicatingInputStream.this.buf.length) {
+                            // only read a page
+                            int pageToRead = DuplicatingInputStream.this.buf.length - 1;
+                            justRead = DuplicatingInputStream.this.read(b, readOnBuffer + off, pageToRead);
+                        } else {
+                            justRead = DuplicatingInputStream.this.read(b, readOnBuffer + off, toReadOnStream);
+                        }
+                        stillToRead -= justRead;
+                        if (justRead < 0) {
+                            // end of stream
+                            stillToRead = 0;
+                            if (readOnBuffer == 0 && readFromStream == 0) {
+                                readFromStream = -1;
+                            }
+                        } else {
+                            readFromStream += justRead;
+                            updateBufferPosition();
+                        }
+                    }
+                    res = readOnBuffer + readFromStream;
                 }
+                // update buffer position which we will not loose
+                updateBufferPosition();
+                return res;
             }
         }
 
@@ -133,15 +169,27 @@ public class DuplicatingInputStream extends BufferedInputStream {
         }
 
         /**
+         * Update buffer position, but do not loose it when stream reaches end
+         */
+        private void updateBufferPosition() {
+            if (DuplicatingInputStream.this.pos != 0) {
+                bufferPosition = DuplicatingInputStream.this.pos;
+            }
+        }
+
+        /**
          * Get the size of the buffer portion which must not be read because it has not been filled this this stream.
          * 
          * @return size of buffer not assigned
          * @throws IOException when buffer has been nullified / stream was closed
          */
         private int getBufferPortionNotToRead() throws IOException {
-            return Optional.ofNullable(buf).orElseThrow(IOException::new).length - pos;
+            return Optional.ofNullable(buf).orElseThrow(IOException::new).length - bufferPosition;
         }
     }
+
+    /** The current position in buffer, not thrown away at ending */
+    private int bufferPosition = 0;
 
     /**
      * Creates a <code>DuplicatingInputStream</code> and saves its argument, the input stream <code>in</code>, for later use. An internal buffer array is
