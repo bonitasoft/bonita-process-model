@@ -22,13 +22,14 @@ jobs:
 
       - name: Build with Sonarcloud
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         if: ${{ env.SONAR_TOKEN != '' }}
         run: ./mvnw -B -ntp verify sonar:sonar
         
       - name: Build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         if: ${{ env.SONAR_TOKEN == '' }}
         run: ./mvnw -B -ntp verify
