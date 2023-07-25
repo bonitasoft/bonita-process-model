@@ -93,6 +93,9 @@ public class CustomJavaObjectDataItemProvider extends JavaObjectDataItemProvider
      * @return the java project when there is one
      */
     private Optional<IJavaProject> getJavaProjectIfPossible(Resource eResource) {
+        if (eResource == null) {
+            return Optional.empty();
+        }
         URI uri = eResource.getResourceSet().getURIConverter().normalize(eResource.getURI());
         if (uri.isFile()) {
             String fileString = uri.toFileString();
