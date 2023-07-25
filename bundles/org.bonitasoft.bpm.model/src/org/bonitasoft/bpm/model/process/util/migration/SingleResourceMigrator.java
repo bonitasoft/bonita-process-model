@@ -62,6 +62,8 @@ public class SingleResourceMigrator extends Migrator {
     /** The migrate super method */
     private static Method migrateMethod;
 
+    private static SingleResourceMigrator instance;
+
     static {
         // give access to private migrate method
         try {
@@ -73,7 +75,18 @@ public class SingleResourceMigrator extends Migrator {
         }
     }
 
-    public SingleResourceMigrator() throws MigrationException {
+    public static SingleResourceMigrator getInstance() {
+        if (instance == null) {
+            try {
+                instance = new SingleResourceMigrator();
+            } catch (MigrationException e) {
+                throw new IllegalArgumentException();
+            }
+        }
+        return instance;
+    }
+
+    private SingleResourceMigrator() throws MigrationException {
         super(HistoryUtils.getMigrationHistoryURI(),
                 getMigrationClassLoader());
     }

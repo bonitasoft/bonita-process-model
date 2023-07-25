@@ -40,7 +40,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -100,8 +99,6 @@ public class MigrationHelper extends AdapterImpl {
                 .orThrowParseException();
     }
 
-    /** Edapt migrator */
-    private Migrator migrator;
     /** The eventual exception thrown during the resource parsing */
     private Optional<? extends Exception> storedParseException = Optional.empty();
     /** The content handler holding information about original resource */
@@ -120,8 +117,6 @@ public class MigrationHelper extends AdapterImpl {
         parseForInformation(streamSupplier);
         // try and compare the model version with the current version
         modelVersionStatus = compareModelVersions(resource.getURI().lastSegment());
-        // init the migrator
-        initializeMigrator(resource);
     }
 
     /*
@@ -313,45 +308,12 @@ public class MigrationHelper extends AdapterImpl {
     }
 
     /**
-     * Initialize the Edapt migrator
-     * 
-     * @param resource the decorated EMF resource
-     */
-    private void initializeMigrator(Resource resource) {
-        try {
-            migrator = new SingleResourceMigrator();
-        } catch (final MigrationException e) {
-            final String location = resource.getURI() == null ? null : resource.getURI().toString();
-            class DiagnosticWrappedException extends WrappedException implements Resource.Diagnostic {
-
-                private static final long serialVersionUID = 1L;
-
-                public DiagnosticWrappedException(Exception exception) {
-                    super(exception);
-                }
-
-                public String getLocation() {
-                    return location;
-                }
-
-                public int getColumn() {
-                    return 0;
-                }
-
-                public int getLine() {
-                    return 0;
-                }
-            }
-            resource.getErrors().add(new DiagnosticWrappedException(e));
-        }
-    }
-
-    /**
      * Get the Edapt migrator
      * 
      * @return the migrator
      */
     public Migrator getMigrator(final String nsURI) {
+        var migrator = SingleResourceMigrator.getInstance();
         if (!migrator.getNsURIs().contains(nsURI)) {
             return MigratorRegistry.getInstance().getMigrator(nsURI);
         }

@@ -18,6 +18,7 @@ import java.net.URL;
 
 import org.bonitasoft.bpm.model.actormapping.ActorMappingPackage;
 import org.bonitasoft.bpm.model.configuration.ConfigurationPackage;
+import org.bonitasoft.bpm.model.configuration.util.ConfigurationResourceFactoryImpl;
 import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage;
 import org.bonitasoft.bpm.model.expression.ExpressionPackage;
 import org.bonitasoft.bpm.model.form.FormPackage;
@@ -30,6 +31,7 @@ import org.bonitasoft.bpm.model.process.util.ProcessResourceFactoryImpl;
 import org.bonitasoft.bpm.model.process.util.ProcessResourceImpl;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.bpm.model.simulation.SimulationPackage;
+import org.bonitasoft.bpm.model.util.internal.ConfigurationContentHandler;
 import org.bonitasoft.bpm.model.util.internal.ProcContentHandler;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage;
@@ -84,9 +86,13 @@ public final class ModelLoader {
         EPackage.Registry.INSTANCE.put(SimulationPackage.eNS_URI, SimulationPackage.eINSTANCE);
         // register the content handler (which may be overridden e.g. by extension mapping)
         ContentHandler.Registry.INSTANCE.put(ContentHandler.Registry.VERY_LOW_PRIORITY, new ProcContentHandler());
+        ContentHandler.Registry.INSTANCE.put(ContentHandler.Registry.VERY_LOW_PRIORITY,
+                new ConfigurationContentHandler());
         // register the resource factory
         Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().put(
                 ProcessResourceFactoryImpl.CONTENT_TYPE, new ProcessResourceFactoryImpl());
+        Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().put(
+                ConfigurationResourceFactoryImpl.CONTENT_TYPE, new ConfigurationResourceFactoryImpl());
     }
 
     /**
