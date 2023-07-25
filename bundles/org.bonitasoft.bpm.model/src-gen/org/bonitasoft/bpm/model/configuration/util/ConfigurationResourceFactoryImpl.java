@@ -24,33 +24,21 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 
 /**
- * <!-- begin-user-doc -->
- * The <b>Resource Factory</b> associated with the package.
- * <!-- end-user-doc -->
- * @see org.bonitasoft.bpm.model.configuration.util.ConfigurationResourceImpl
- * @generated
+ * 
+ * @generated NOT add content-type
  */
 public class ConfigurationResourceFactoryImpl extends ResourceFactoryImpl {
-    /**
-     * Creates an instance of the resource factory.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
+  
+    /** The content type for files containing a bonita process configuration model */
+    public static final String CONTENT_TYPE = "process-configuration-model";
+
     public ConfigurationResourceFactoryImpl() {
         super();
     }
 
-    /**
-     * Creates an instance of the resource.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
     @Override
     public Resource createResource(URI uri) {
-        Resource result = new ConfigurationResourceImpl(uri);
-        return result;
+    	return new ConfigurationResourceImpl(uri);
     }
 
 } //ConfigurationResourceFactoryImpl
