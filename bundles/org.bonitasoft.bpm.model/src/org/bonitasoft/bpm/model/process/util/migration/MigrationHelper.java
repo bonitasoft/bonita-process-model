@@ -150,7 +150,8 @@ public class MigrationHelper extends AdapterImpl {
      */
     @Override
     public void setTarget(Notifier newTarget) {
-        if (target != null || !(newTarget instanceof Resource)) {
+        // check that target was not set and that new target is a Resource
+        if (newTarget != null && (target != null || !(newTarget instanceof Resource))) {
             throw new IllegalArgumentException();
         }
         super.setTarget(newTarget);
