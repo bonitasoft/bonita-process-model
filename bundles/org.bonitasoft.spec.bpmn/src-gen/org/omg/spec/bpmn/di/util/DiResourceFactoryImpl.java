@@ -15,17 +15,15 @@
 package org.omg.spec.bpmn.di.util;
 
 import org.eclipse.emf.common.util.URI;
-
 import org.eclipse.emf.ecore.resource.Resource;
-
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
-
 import org.eclipse.emf.ecore.xmi.XMLResource;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Resource Factory</b> associated with the package.
  * <!-- end-user-doc -->
+ * 
  * @see org.omg.spec.bpmn.di.util.DiResourceImpl
  * @generated
  */
@@ -35,6 +33,7 @@ public class DiResourceFactoryImpl extends ResourceFactoryImpl {
      * Creates an instance of the resource factory.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * 
      * @generated
      */
     public DiResourceFactoryImpl() {
@@ -45,7 +44,8 @@ public class DiResourceFactoryImpl extends ResourceFactoryImpl {
      * Creates an instance of the resource.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @generated
+     * 
+     * @generated NOT Ignore Unknown Feature
      */
     @Override
     public Resource createResource(URI uri) {
@@ -59,6 +59,10 @@ public class DiResourceFactoryImpl extends ResourceFactoryImpl {
         result.getDefaultSaveOptions().put(XMLResource.OPTION_USE_ENCODED_ATTRIBUTE_STYLE, Boolean.TRUE);
 
         result.getDefaultLoadOptions().put(XMLResource.OPTION_USE_LEXICAL_HANDLER, Boolean.TRUE);
+
+        //Ignore Unknown Feature
+        result.getDefaultLoadOptions().put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
+
         return result;
     }
 

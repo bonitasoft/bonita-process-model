@@ -73,11 +73,6 @@ public class MigrationHelper extends AdapterImpl {
      */
     public static final String OPTION_MIGRATION_POLICY = "MIGRATION_POLICY";//$NON-NLS-1$
 
-    /** Removes unloaded resources */
-    private static final AdapterImpl UNLOAD_LISTENER = new AdapterImpl() {
-
-    };
-
     /**
      * Get a helper for migration
      * 
@@ -127,8 +122,6 @@ public class MigrationHelper extends AdapterImpl {
         modelVersionStatus = compareModelVersions(resource.getURI().lastSegment());
         // init the migrator
         initializeMigrator(resource);
-        // remember to remove the migrator when the resource is disposed, or we will keep a reference to it forever
-        resource.eAdapters().add(UNLOAD_LISTENER);
     }
 
     /*
