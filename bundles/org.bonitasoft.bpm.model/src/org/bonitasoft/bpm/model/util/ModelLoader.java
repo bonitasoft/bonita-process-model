@@ -96,26 +96,49 @@ public final class ModelLoader {
     }
 
     /**
-     * Load a model from a file URL
+     * Load a model from a file URL (always migrating)
      * 
      * @param fileUrl the URL pointing to a file
      * @return resource with loaded model
      */
     public Resource loadModel(URL fileUrl) {
-        return loadModel(URI.createURI(fileUrl.toExternalForm()));
+        return loadModel(URI.createURI(fileUrl.toExternalForm()), MigrationPolicy.ALWAYS_MIGRATE_POLICY);
 
+    }
+
+    /**
+     * Load a model from a file URL
+     * 
+     * @param fileUrl the URL pointing to a file
+     * @param migrationPolicy a policy for model file migration
+     * @return resource with loaded model
+     */
+    public Resource loadModel(URL fileUrl, MigrationPolicy migrationPolicy) {
+        return loadModel(URI.createURI(fileUrl.toExternalForm()), migrationPolicy);
+
+    }
+
+    /**
+     * Load a model from an EMF URI (always migrating)
+     * 
+     * @param modelUri the EMF model URI
+     * @return resource with loaded model
+     */
+    public Resource loadModel(URI modelUri) {
+        return loadModel(modelUri, MigrationPolicy.ALWAYS_MIGRATE_POLICY);
     }
 
     /**
      * Load a model from an EMF URI
      * 
      * @param modelUri the EMF model URI
+     * @param migrationPolicy a policy for model file migration
      * @return resource with loaded model
      */
-    public Resource loadModel(URI modelUri) {
+    public Resource loadModel(URI modelUri, MigrationPolicy migrationPolicy) {
         ResourceSetImpl rset = new ResourceSetImpl();
         // try and migrate file during loading
-        rset.getLoadOptions().put(ProcessResourceImpl.OPTION_MIGRATION_POLICY, MigrationPolicy.ALWAYS_MIGRATE_POLICY);
+        rset.getLoadOptions().put(ProcessResourceImpl.OPTION_MIGRATION_POLICY, migrationPolicy);
         return rset.getResource(modelUri, true);
     }
 

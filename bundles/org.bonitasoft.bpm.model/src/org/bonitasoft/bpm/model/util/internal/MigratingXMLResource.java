@@ -39,7 +39,7 @@ public class MigratingXMLResource extends XMLResourceImpl {
 
     /**
      * This option allows to specify a policy for model file migration.
-     * Corresponding value must be a <code>BiPredicate<IStatus, String></code>.
+     * Corresponding value must be a {@link MigrationPolicy}.
      * 
      * @see MigrationPolicy#ALWAYS_MIGRATE_POLICY
      * @see MigrationPolicy#NEVER_MIGRATE_POLICY
