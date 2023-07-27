@@ -67,7 +67,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <emf-common.version>2.25.0</emf-common.version>
     <emf-xmi.version>2.16.0</emf-xmi.version>
     <emf-edit.version>2.17.0</emf-edit.version>
-    <maven-artifact.version>3.8.6</maven-artifact.version>
+    <maven-artifact.version>3.9.3</maven-artifact.version>
     <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
     <maven-invoker-plugin.version>3.3.0</maven-invoker-plugin.version>
     <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>

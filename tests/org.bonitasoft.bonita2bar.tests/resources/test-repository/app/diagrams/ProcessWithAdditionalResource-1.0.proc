@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:decision="http://www.bonitasoft.org/ns/bpm/process/decision" xmlns:expression="http://www.bonitasoft.org/ns/bpm/expression" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:process="http://www.bonitasoft.org/ns/bpm/process" xsi:schemaLocation="http://www.bonitasoft.org/ns/bpm/process/decision http://www.bonitasoft.org/ns/bpm/process#//decision">
-  <process:MainProcess xmi:id="_UaQvQFSbEeqg8vw5EVpt4Q" name="ProcessWithAdditionalResource" author="Romain" bonitaVersion="9.0.0" bonitaModelVersion="8" configId="ACED000574002F50726F63657373576974684164646974696F6E616C5265736F75726365372E31312E302D303035372E31312E307370">
+  <process:MainProcess xmi:id="_UaQvQFSbEeqg8vw5EVpt4Q" name="ProcessWithAdditionalResource" bonitaModelVersion="8">
     <elements xmi:type="process:Pool" xmi:id="_UaQvQVSbEeqg8vw5EVpt4Q" name="ProcessWithAdditionalResource">
       <elements xmi:type="process:Lane" xmi:id="_UaQvQlSbEeqg8vw5EVpt4Q" name="Employee lane" actor="_UaQvW1SbEeqg8vw5EVpt4Q">
         <elements xmi:type="process:StartEvent" xmi:id="_UaQvQ1SbEeqg8vw5EVpt4Q" name="Start1" outgoing="_UaQvWFSbEeqg8vw5EVpt4Q">
