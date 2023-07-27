@@ -14,6 +14,8 @@
  */
 package org.bonitasoft.bpm.model.process.util.migration;
 
+import org.bonitasoft.bpm.model.configuration.ConfigurationPackage;
+import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage;
 import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edapt.migration.CustomMigration;
@@ -36,10 +38,19 @@ public class UpgradeModelVersionAttributeMigration extends CustomMigration {
     public void migrateAfter(Model model, Metamodel metamodel) throws MigrationException {
         EList<Instance> mainProcesses = model
                 .getAllInstances(ProcessPackage.eNS_PREFIX + "." + ProcessPackage.Literals.MAIN_PROCESS.getName());
-        mainProcesses.forEach(mp -> {
-            mp.set(ProcessPackage.Literals.MAIN_PROCESS__BONITA_MODEL_VERSION.getName(),
-                    HistoryUtils.CURRENT_MODEL_VERSION);
-        });
+        mainProcesses.forEach(mp -> mp.set(ProcessPackage.Literals.MAIN_PROCESS__BONITA_MODEL_VERSION.getName(),
+                HistoryUtils.CURRENT_MODEL_VERSION));
+
+        EList<Instance> connConfigs = model.getAllInstances(ConnectorConfigurationPackage.eNS_PREFIX + "."
+                + ConnectorConfigurationPackage.Literals.CONNECTOR_CONFIGURATION.getName());
+        connConfigs.forEach(
+                c -> c.set(ConnectorConfigurationPackage.Literals.CONNECTOR_CONFIGURATION__MODEL_VERSION.getName(),
+                        HistoryUtils.CURRENT_MODEL_VERSION));
+
+        EList<Instance> configs = model.getAllInstances(
+                ConfigurationPackage.eNS_PREFIX + "." + ConfigurationPackage.Literals.CONFIGURATION.getName());
+        configs.forEach(c -> c.set(ConfigurationPackage.Literals.CONFIGURATION__VERSION.getName(),
+                HistoryUtils.CURRENT_MODEL_VERSION));
     }
 
 }

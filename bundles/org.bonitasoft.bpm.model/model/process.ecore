@@ -15,7 +15,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="AbstractProcess" abstract="true" eSuperTypes="#//Container #//PageFlow #//RecapFlow">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="1.0"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="author" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="creationDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modificationDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="datatypes" upperBound="-1"
@@ -327,8 +326,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="LinkEvent" eSuperTypes="#//Event"/>
   <eClassifiers xsi:type="ecore:EClass" name="LongType" eSuperTypes="#//DataType"/>
   <eClassifiers xsi:type="ecore:EClass" name="MainProcess" eSuperTypes="#//AbstractProcess">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bonitaVersion" lowerBound="1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="bonitaModelVersion" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="5.0"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="includedEntries" upperBound="-1"
@@ -339,7 +336,6 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="enableValidation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="configId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//Element">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="throwEvent" lowerBound="1"

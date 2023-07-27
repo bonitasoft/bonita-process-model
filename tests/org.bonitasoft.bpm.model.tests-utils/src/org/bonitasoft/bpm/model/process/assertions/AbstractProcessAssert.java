@@ -82,53 +82,6 @@ public class AbstractProcessAssert extends AbstractAssert<AbstractProcessAssert,
     }
 
     /**
-     * Verifies that the actual AbstractProcess has no actors.
-     * 
-     * @return this assertion object.
-     * @throws AssertionError if the actual AbstractProcess's actors is not empty.
-     */
-    public AbstractProcessAssert hasNoActors() {
-        // check that actual AbstractProcess we want to make assertions on is not null.
-        isNotNull();
-
-        // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected :\n  <%s>\nnot to have actors but had :\n  <%s>", actual,
-                actual.getActors());
-
-        // check
-        if (!actual.getActors().isEmpty()) {
-            throw new AssertionError(errorMessage);
-        }
-
-        // return the current assertion for method chaining
-        return this;
-    }
-
-    /**
-     * Verifies that the actual AbstractProcess's author is equal to the given one.
-     * 
-     * @param author the given author to compare the actual AbstractProcess's author to.
-     * @return this assertion object.
-     * @throws AssertionError - if the actual AbstractProcess's author is not equal to the given one.
-     */
-    public AbstractProcessAssert hasAuthor(final String author) {
-        // check that actual AbstractProcess we want to make assertions on is not null.
-        isNotNull();
-
-        // we overrides the default error message with a more explicit one
-        final String errorMessage = format("\nExpected <%s> author to be:\n  <%s>\n but was:\n  <%s>", actual, author,
-                actual.getAuthor());
-
-        // check
-        if (!actual.getAuthor().equals(author)) {
-            throw new AssertionError(errorMessage);
-        }
-
-        // return the current assertion for method chaining
-        return this;
-    }
-
-    /**
      * Verifies that the actual AbstractProcess's categories contains the given String elements.
      * 
      * @param categories the given elements that should be contained in actual AbstractProcess's categories.

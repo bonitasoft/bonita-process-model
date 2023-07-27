@@ -63,36 +63,12 @@ public class MainProcessItemProvider extends AbstractProcessItemProvider {
         if (itemPropertyDescriptors == null) {
             super.getPropertyDescriptors(object);
 
-            addBonitaVersionPropertyDescriptor(object);
             addBonitaModelVersionPropertyDescriptor(object);
             addIncludedEntriesPropertyDescriptor(object);
             addGeneratedLibsPropertyDescriptor(object);
             addEnableValidationPropertyDescriptor(object);
-            addConfigIdPropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
-    }
-
-    /**
-     * This adds a property descriptor for the Bonita Version feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected void addBonitaVersionPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_MainProcess_bonitaVersion_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_MainProcess_bonitaVersion_feature", "_UI_MainProcess_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 ProcessPackage.Literals.MAIN_PROCESS__BONITA_VERSION,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
     }
 
     /**
@@ -184,28 +160,6 @@ public class MainProcessItemProvider extends AbstractProcessItemProvider {
     }
 
     /**
-     * This adds a property descriptor for the Config Id feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected void addConfigIdPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_MainProcess_configId_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_MainProcess_configId_feature", "_UI_MainProcess_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 ProcessPackage.Literals.MAIN_PROCESS__CONFIG_ID,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
-
-    /**
      * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
      * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
      * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -273,12 +227,10 @@ public class MainProcessItemProvider extends AbstractProcessItemProvider {
         updateChildren(notification);
 
         switch (notification.getFeatureID(MainProcess.class)) {
-            case ProcessPackage.MAIN_PROCESS__BONITA_VERSION:
             case ProcessPackage.MAIN_PROCESS__BONITA_MODEL_VERSION:
             case ProcessPackage.MAIN_PROCESS__INCLUDED_ENTRIES:
             case ProcessPackage.MAIN_PROCESS__GENERATED_LIBS:
             case ProcessPackage.MAIN_PROCESS__ENABLE_VALIDATION:
-            case ProcessPackage.MAIN_PROCESS__CONFIG_ID:
                 fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
                 return;
             case ProcessPackage.MAIN_PROCESS__MESSAGE_CONNECTIONS:

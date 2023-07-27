@@ -68,7 +68,6 @@ public class AbstractProcessItemProvider extends ContainerItemProvider {
             super.getPropertyDescriptors(object);
 
             addVersionPropertyDescriptor(object);
-            addAuthorPropertyDescriptor(object);
             addCreationDatePropertyDescriptor(object);
             addModificationDatePropertyDescriptor(object);
             addCategoriesPropertyDescriptor(object);
@@ -91,28 +90,6 @@ public class AbstractProcessItemProvider extends ContainerItemProvider {
                  getString("_UI_AbstractProcess_version_feature"), //$NON-NLS-1$
                  getString("_UI_PropertyDescriptor_description", "_UI_AbstractProcess_version_feature", "_UI_AbstractProcess_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
                  ProcessPackage.Literals.ABSTRACT_PROCESS__VERSION,
-                 true,
-                 false,
-                 false,
-                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-                 null,
-                 null));
-    }
-
-    /**
-     * This adds a property descriptor for the Author feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected void addAuthorPropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_AbstractProcess_author_feature"), //$NON-NLS-1$
-                 getString("_UI_PropertyDescriptor_description", "_UI_AbstractProcess_author_feature", "_UI_AbstractProcess_type"), //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-                 ProcessPackage.Literals.ABSTRACT_PROCESS__AUTHOR,
                  true,
                  false,
                  false,
@@ -275,7 +252,6 @@ public class AbstractProcessItemProvider extends ContainerItemProvider {
 
         switch (notification.getFeatureID(AbstractProcess.class)) {
             case ProcessPackage.ABSTRACT_PROCESS__VERSION:
-            case ProcessPackage.ABSTRACT_PROCESS__AUTHOR:
             case ProcessPackage.ABSTRACT_PROCESS__CREATION_DATE:
             case ProcessPackage.ABSTRACT_PROCESS__MODIFICATION_DATE:
             case ProcessPackage.ABSTRACT_PROCESS__CATEGORIES:
