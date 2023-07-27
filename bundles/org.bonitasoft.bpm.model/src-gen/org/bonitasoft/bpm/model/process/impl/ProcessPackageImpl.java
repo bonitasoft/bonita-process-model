@@ -1158,7 +1158,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      * @generated
      */
     @Override
-    public EAttribute getAbstractProcess_Author() {
+    public EAttribute getAbstractProcess_CreationDate() {
         return (EAttribute)abstractProcessEClass.getEStructuralFeatures().get(1);
     }
 
@@ -1168,7 +1168,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      * @generated
      */
     @Override
-    public EAttribute getAbstractProcess_CreationDate() {
+    public EAttribute getAbstractProcess_ModificationDate() {
         return (EAttribute)abstractProcessEClass.getEStructuralFeatures().get(2);
     }
 
@@ -1178,18 +1178,8 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      * @generated
      */
     @Override
-    public EAttribute getAbstractProcess_ModificationDate() {
-        return (EAttribute)abstractProcessEClass.getEStructuralFeatures().get(3);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public EReference getAbstractProcess_Datatypes() {
-        return (EReference)abstractProcessEClass.getEStructuralFeatures().get(4);
+        return (EReference)abstractProcessEClass.getEStructuralFeatures().get(3);
     }
 
     /**
@@ -1199,7 +1189,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      */
     @Override
     public EReference getAbstractProcess_Connections() {
-        return (EReference)abstractProcessEClass.getEStructuralFeatures().get(5);
+        return (EReference)abstractProcessEClass.getEStructuralFeatures().get(4);
     }
 
     /**
@@ -1209,7 +1199,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      */
     @Override
     public EAttribute getAbstractProcess_Categories() {
-        return (EAttribute)abstractProcessEClass.getEStructuralFeatures().get(6);
+        return (EAttribute)abstractProcessEClass.getEStructuralFeatures().get(5);
     }
 
     /**
@@ -1219,7 +1209,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      */
     @Override
     public EReference getAbstractProcess_Actors() {
-        return (EReference)abstractProcessEClass.getEStructuralFeatures().get(7);
+        return (EReference)abstractProcessEClass.getEStructuralFeatures().get(6);
     }
 
     /**
@@ -1229,7 +1219,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      */
     @Override
     public EReference getAbstractProcess_Configurations() {
-        return (EReference)abstractProcessEClass.getEStructuralFeatures().get(8);
+        return (EReference)abstractProcessEClass.getEStructuralFeatures().get(7);
     }
 
     /**
@@ -1239,7 +1229,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      */
     @Override
     public EReference getAbstractProcess_Parameters() {
-        return (EReference)abstractProcessEClass.getEStructuralFeatures().get(9);
+        return (EReference)abstractProcessEClass.getEStructuralFeatures().get(8);
     }
 
     /**
@@ -2678,7 +2668,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      * @generated
      */
     @Override
-    public EAttribute getMainProcess_BonitaVersion() {
+    public EAttribute getMainProcess_BonitaModelVersion() {
         return (EAttribute)mainProcessEClass.getEStructuralFeatures().get(0);
     }
 
@@ -2688,7 +2678,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      * @generated
      */
     @Override
-    public EAttribute getMainProcess_BonitaModelVersion() {
+    public EAttribute getMainProcess_IncludedEntries() {
         return (EAttribute)mainProcessEClass.getEStructuralFeatures().get(1);
     }
 
@@ -2698,18 +2688,8 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      * @generated
      */
     @Override
-    public EAttribute getMainProcess_IncludedEntries() {
-        return (EAttribute)mainProcessEClass.getEStructuralFeatures().get(2);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public EReference getMainProcess_MessageConnections() {
-        return (EReference)mainProcessEClass.getEStructuralFeatures().get(3);
+        return (EReference)mainProcessEClass.getEStructuralFeatures().get(2);
     }
 
     /**
@@ -2719,7 +2699,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      */
     @Override
     public EAttribute getMainProcess_GeneratedLibs() {
-        return (EAttribute)mainProcessEClass.getEStructuralFeatures().get(4);
+        return (EAttribute)mainProcessEClass.getEStructuralFeatures().get(3);
     }
 
     /**
@@ -2729,17 +2709,7 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
      */
     @Override
     public EAttribute getMainProcess_EnableValidation() {
-        return (EAttribute)mainProcessEClass.getEStructuralFeatures().get(5);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public EAttribute getMainProcess_ConfigId() {
-        return (EAttribute)mainProcessEClass.getEStructuralFeatures().get(6);
+        return (EAttribute)mainProcessEClass.getEStructuralFeatures().get(4);
     }
 
     /**
@@ -3861,7 +3831,6 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
 
         abstractProcessEClass = createEClass(ABSTRACT_PROCESS);
         createEAttribute(abstractProcessEClass, ABSTRACT_PROCESS__VERSION);
-        createEAttribute(abstractProcessEClass, ABSTRACT_PROCESS__AUTHOR);
         createEAttribute(abstractProcessEClass, ABSTRACT_PROCESS__CREATION_DATE);
         createEAttribute(abstractProcessEClass, ABSTRACT_PROCESS__MODIFICATION_DATE);
         createEReference(abstractProcessEClass, ABSTRACT_PROCESS__DATATYPES);
@@ -4076,13 +4045,11 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
         longTypeEClass = createEClass(LONG_TYPE);
 
         mainProcessEClass = createEClass(MAIN_PROCESS);
-        createEAttribute(mainProcessEClass, MAIN_PROCESS__BONITA_VERSION);
         createEAttribute(mainProcessEClass, MAIN_PROCESS__BONITA_MODEL_VERSION);
         createEAttribute(mainProcessEClass, MAIN_PROCESS__INCLUDED_ENTRIES);
         createEReference(mainProcessEClass, MAIN_PROCESS__MESSAGE_CONNECTIONS);
         createEAttribute(mainProcessEClass, MAIN_PROCESS__GENERATED_LIBS);
         createEAttribute(mainProcessEClass, MAIN_PROCESS__ENABLE_VALIDATION);
-        createEAttribute(mainProcessEClass, MAIN_PROCESS__CONFIG_ID);
 
         messageEClass = createEClass(MESSAGE);
         createEAttribute(messageEClass, MESSAGE__THROW_EVENT);
@@ -4397,7 +4364,6 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
 
         initEClass(abstractProcessEClass, AbstractProcess.class, "AbstractProcess", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
         initEAttribute(getAbstractProcess_Version(), ecorePackage.getEString(), "version", "1.0", 0, 1, AbstractProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-        initEAttribute(getAbstractProcess_Author(), ecorePackage.getEString(), "author", null, 0, 1, AbstractProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEAttribute(getAbstractProcess_CreationDate(), ecorePackage.getEDate(), "creationDate", null, 0, 1, AbstractProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEAttribute(getAbstractProcess_ModificationDate(), ecorePackage.getEDate(), "modificationDate", null, 0, 1, AbstractProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEReference(getAbstractProcess_Datatypes(), this.getDataType(), null, "datatypes", null, 0, -1, AbstractProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
@@ -4614,13 +4580,11 @@ public class ProcessPackageImpl extends EPackageImpl implements ProcessPackage {
         initEClass(longTypeEClass, LongType.class, "LongType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
 
         initEClass(mainProcessEClass, MainProcess.class, "MainProcess", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
-        initEAttribute(getMainProcess_BonitaVersion(), ecorePackage.getEString(), "bonitaVersion", "", 1, 1, MainProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
         initEAttribute(getMainProcess_BonitaModelVersion(), ecorePackage.getEString(), "bonitaModelVersion", "5.0", 0, 1, MainProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
         initEAttribute(getMainProcess_IncludedEntries(), ecorePackage.getEString(), "includedEntries", null, 0, -1, MainProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEReference(getMainProcess_MessageConnections(), this.getMessageFlow(), null, "messageConnections", null, 0, -1, MainProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEAttribute(getMainProcess_GeneratedLibs(), ecorePackage.getEString(), "generatedLibs", null, 0, -1, MainProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEAttribute(getMainProcess_EnableValidation(), ecorePackage.getEBoolean(), "enableValidation", "true", 0, 1, MainProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$
-        initEAttribute(getMainProcess_ConfigId(), ecorePackage.getEJavaObject(), "configId", null, 0, 1, MainProcess.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
 
         initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS); //$NON-NLS-1$
         initEAttribute(getMessage_ThrowEvent(), ecorePackage.getEString(), "throwEvent", "", 1, 1, Message.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$ //$NON-NLS-2$

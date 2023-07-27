@@ -68,7 +68,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.AbstractProcessImpl#getFormMapping <em>Form Mapping</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.AbstractProcessImpl#getOverviewFormMapping <em>Overview Form Mapping</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.AbstractProcessImpl#getVersion <em>Version</em>}</li>
- *   <li>{@link org.bonitasoft.bpm.model.process.impl.AbstractProcessImpl#getAuthor <em>Author</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.AbstractProcessImpl#getCreationDate <em>Creation Date</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.AbstractProcessImpl#getModificationDate <em>Modification Date</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.AbstractProcessImpl#getDatatypes <em>Datatypes</em>}</li>
@@ -151,26 +150,6 @@ public abstract class AbstractProcessImpl extends ContainerImpl implements Abstr
      * @ordered
      */
     protected String version = VERSION_EDEFAULT;
-
-    /**
-     * The default value of the '{@link #getAuthor() <em>Author</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAuthor()
-     * @generated
-     * @ordered
-     */
-    protected static final String AUTHOR_EDEFAULT = null;
-
-    /**
-     * The cached value of the '{@link #getAuthor() <em>Author</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getAuthor()
-     * @generated
-     * @ordered
-     */
-    protected String author = AUTHOR_EDEFAULT;
 
     /**
      * The default value of the '{@link #getCreationDate() <em>Creation Date</em>}' attribute.
@@ -449,29 +428,6 @@ public abstract class AbstractProcessImpl extends ContainerImpl implements Abstr
      * @generated
      */
     @Override
-    public String getAuthor() {
-        return author;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public void setAuthor(String newAuthor) {
-        String oldAuthor = author;
-        author = newAuthor;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.ABSTRACT_PROCESS__AUTHOR, oldAuthor, author));
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public Date getCreationDate() {
         return creationDate;
     }
@@ -642,8 +598,6 @@ public abstract class AbstractProcessImpl extends ContainerImpl implements Abstr
                 return getOverviewFormMapping();
             case ProcessPackage.ABSTRACT_PROCESS__VERSION:
                 return getVersion();
-            case ProcessPackage.ABSTRACT_PROCESS__AUTHOR:
-                return getAuthor();
             case ProcessPackage.ABSTRACT_PROCESS__CREATION_DATE:
                 return getCreationDate();
             case ProcessPackage.ABSTRACT_PROCESS__MODIFICATION_DATE:
@@ -693,9 +647,6 @@ public abstract class AbstractProcessImpl extends ContainerImpl implements Abstr
                 return;
             case ProcessPackage.ABSTRACT_PROCESS__VERSION:
                 setVersion((String)newValue);
-                return;
-            case ProcessPackage.ABSTRACT_PROCESS__AUTHOR:
-                setAuthor((String)newValue);
                 return;
             case ProcessPackage.ABSTRACT_PROCESS__CREATION_DATE:
                 setCreationDate((Date)newValue);
@@ -757,9 +708,6 @@ public abstract class AbstractProcessImpl extends ContainerImpl implements Abstr
             case ProcessPackage.ABSTRACT_PROCESS__VERSION:
                 setVersion(VERSION_EDEFAULT);
                 return;
-            case ProcessPackage.ABSTRACT_PROCESS__AUTHOR:
-                setAuthor(AUTHOR_EDEFAULT);
-                return;
             case ProcessPackage.ABSTRACT_PROCESS__CREATION_DATE:
                 setCreationDate(CREATION_DATE_EDEFAULT);
                 return;
@@ -808,8 +756,6 @@ public abstract class AbstractProcessImpl extends ContainerImpl implements Abstr
                 return overviewFormMapping != null;
             case ProcessPackage.ABSTRACT_PROCESS__VERSION:
                 return VERSION_EDEFAULT == null ? version != null : !VERSION_EDEFAULT.equals(version);
-            case ProcessPackage.ABSTRACT_PROCESS__AUTHOR:
-                return AUTHOR_EDEFAULT == null ? author != null : !AUTHOR_EDEFAULT.equals(author);
             case ProcessPackage.ABSTRACT_PROCESS__CREATION_DATE:
                 return CREATION_DATE_EDEFAULT == null ? creationDate != null : !CREATION_DATE_EDEFAULT.equals(creationDate);
             case ProcessPackage.ABSTRACT_PROCESS__MODIFICATION_DATE:
@@ -922,8 +868,6 @@ public abstract class AbstractProcessImpl extends ContainerImpl implements Abstr
         StringBuilder result = new StringBuilder(super.toString());
         result.append(" (version: "); //$NON-NLS-1$
         result.append(version);
-        result.append(", author: "); //$NON-NLS-1$
-        result.append(author);
         result.append(", creationDate: "); //$NON-NLS-1$
         result.append(creationDate);
         result.append(", modificationDate: "); //$NON-NLS-1$

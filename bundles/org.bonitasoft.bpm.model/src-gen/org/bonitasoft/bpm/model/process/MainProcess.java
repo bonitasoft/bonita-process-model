@@ -28,13 +28,11 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.bonitasoft.bpm.model.process.MainProcess#getBonitaVersion <em>Bonita Version</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.MainProcess#getBonitaModelVersion <em>Bonita Model Version</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.MainProcess#getIncludedEntries <em>Included Entries</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.MainProcess#getMessageConnections <em>Message Connections</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.MainProcess#getGeneratedLibs <em>Generated Libs</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.MainProcess#isEnableValidation <em>Enable Validation</em>}</li>
- *   <li>{@link org.bonitasoft.bpm.model.process.MainProcess#getConfigId <em>Config Id</em>}</li>
  * </ul>
  *
  * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMainProcess()
@@ -42,29 +40,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface MainProcess extends AbstractProcess {
-    /**
-     * Returns the value of the '<em><b>Bonita Version</b></em>' attribute.
-     * The default value is <code>""</code>.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Bonita Version</em>' attribute.
-     * @see #setBonitaVersion(String)
-     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMainProcess_BonitaVersion()
-     * @model default="" required="true"
-     * @generated
-     */
-    String getBonitaVersion();
-
-    /**
-     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.MainProcess#getBonitaVersion <em>Bonita Version</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Bonita Version</em>' attribute.
-     * @see #getBonitaVersion()
-     * @generated
-     */
-    void setBonitaVersion(String value);
-
     /**
      * Returns the value of the '<em><b>Bonita Model Version</b></em>' attribute.
      * The default value is <code>"5.0"</code>.
@@ -146,27 +121,5 @@ public interface MainProcess extends AbstractProcess {
      * @generated
      */
     void setEnableValidation(boolean value);
-
-    /**
-     * Returns the value of the '<em><b>Config Id</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Config Id</em>' attribute.
-     * @see #setConfigId(Object)
-     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getMainProcess_ConfigId()
-     * @model
-     * @generated
-     */
-    Object getConfigId();
-
-    /**
-     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.MainProcess#getConfigId <em>Config Id</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Config Id</em>' attribute.
-     * @see #getConfigId()
-     * @generated
-     */
-    void setConfigId(Object value);
 
 } // MainProcess

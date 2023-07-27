@@ -35,7 +35,6 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  * <ul>
  *   <li>{@link org.bonitasoft.bpm.model.process.AbstractProcess#getVersion <em>Version</em>}</li>
- *   <li>{@link org.bonitasoft.bpm.model.process.AbstractProcess#getAuthor <em>Author</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.AbstractProcess#getCreationDate <em>Creation Date</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.AbstractProcess#getModificationDate <em>Modification Date</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.AbstractProcess#getDatatypes <em>Datatypes</em>}</li>
@@ -73,28 +72,6 @@ public interface AbstractProcess extends Container, PageFlow, RecapFlow {
      * @generated
      */
     void setVersion(String value);
-
-    /**
-     * Returns the value of the '<em><b>Author</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Author</em>' attribute.
-     * @see #setAuthor(String)
-     * @see org.bonitasoft.bpm.model.process.ProcessPackage#getAbstractProcess_Author()
-     * @model
-     * @generated
-     */
-    String getAuthor();
-
-    /**
-     * Sets the value of the '{@link org.bonitasoft.bpm.model.process.AbstractProcess#getAuthor <em>Author</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @param value the new value of the '<em>Author</em>' attribute.
-     * @see #getAuthor()
-     * @generated
-     */
-    void setAuthor(String value);
 
     /**
      * Returns the value of the '<em><b>Creation Date</b></em>' attribute.
