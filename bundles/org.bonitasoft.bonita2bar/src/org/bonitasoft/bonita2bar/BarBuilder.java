@@ -54,14 +54,18 @@ public class BarBuilder {
 
     private ParametersConfiguration parametersConfiguration;
 
+    private Path workdir;
+
     BarBuilder(ProcessRegistry processRegistry,
             Path localConfiguration,
             ParametersConfiguration parametersConfiguration,
-            String environment) {
+            String environment,
+            Path workdir) {
         this.processRegistry = processRegistry;
         this.localConfiguration = localConfiguration;
         this.parametersConfiguration = parametersConfiguration;
         this.environment = environment;
+        this.workdir = workdir;
     }
 
     /**
@@ -71,7 +75,7 @@ public class BarBuilder {
      * @throws BuildBarException
      */
     public BuildResult buildAll() throws BuildBarException {
-        var result = new BuildResult(environment, parametersConfiguration);
+        var result = new BuildResult(environment, parametersConfiguration, workdir);
         for (AbstractProcess process : processRegistry.getProcesses()) {
             if (process instanceof Pool) {
                 buildBar((Pool) process, result);
@@ -90,7 +94,7 @@ public class BarBuilder {
      * @throws {@link IllegalArgumentException} when the given process name and version are not found in the {@link ProcessRegistry}
      */
     public BuildResult build(String name, String version) throws BuildBarException {
-        var result = new BuildResult(environment, parametersConfiguration);
+        var result = new BuildResult(environment, parametersConfiguration, workdir);
         var process = processRegistry.getProcess(name, version).orElseThrow(() -> new IllegalArgumentException(
                 String.format("No process found in registry for %s (%s)", name, version)));
         buildBar(process, result);
@@ -105,7 +109,7 @@ public class BarBuilder {
      * @throws BuildBarException
      */
     public BuildResult build(Pool process) throws BuildBarException {
-        var result = new BuildResult(environment, parametersConfiguration);
+        var result = new BuildResult(environment, parametersConfiguration, workdir);
         buildBar(process, result);
         return result;
     }

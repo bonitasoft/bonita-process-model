@@ -46,22 +46,25 @@ public class BarBuilderFactory {
         var processRegistry = config.getProcessRegistry();
         var dependencyReport = config.getDependencyReport();
         var classpathResolver = config.getClasspathResolver();
+        var workingDirectory = config.getWorkingDirectory();
 
         var barBuilder = new BarBuilder(processRegistry,
                 sourceProvider.getLocalConfiguration(),
                 parametersConfiguration,
-                config.getEnvironment());
+                config.getEnvironment(),
+                workingDirectory);
         barBuilder.register(new ParameterArtifactProvider(parametersConfiguration));
         barBuilder.register(new ActorMappingArtifactProvider());
         barBuilder.register(new ProcessDefinitionArtifactProvider(config.getProcessRegistry()));
         barBuilder.register(new JarArtifactProvider(classpathResolver));
         barBuilder.register(new FormMappingArtifactProvider(sourceProvider.getForms(), config.getFormBuilder(),
                 config.allowEmptyFormMapping()));
-        barBuilder.register(new BPMN2ArtifactProvider(processRegistry, config.getWorkingDirectory()));
+
+        barBuilder.register(new BPMN2ArtifactProvider(processRegistry, workingDirectory));
         barBuilder.register(new DocumentArtifactProvider(sourceProvider.getAttachments()));
         barBuilder.register(
                 new CustomGroovyArtifactProvider(sourceProvider.getGroovySource(), classpathResolver,
-                        config.getWorkingDirectory()));
+                        workingDirectory));
         barBuilder.register(new ConnectorImplementationArtifactProvider(classpathResolver,
                 new ConnectorImplementationProvider(dependencyReport), FragmentTypes.CONNECTOR));
         barBuilder.register(new ConnectorImplementationArtifactProvider(classpathResolver,

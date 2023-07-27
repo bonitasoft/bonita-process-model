@@ -42,9 +42,12 @@ public class BuildResult {
     private ParametersConfiguration parametersConfiguration;
     private String environment;
 
-    public BuildResult(String environment, ParametersConfiguration parametersConfiguration) {
+    private Path workdir;
+
+    public BuildResult(String environment, ParametersConfiguration parametersConfiguration, Path workdir) {
         this.environment = environment;
         this.parametersConfiguration = parametersConfiguration;
+        this.workdir = workdir;
     }
 
     public void addBusinessArchive(BusinessArchive businessArchive) {
@@ -70,21 +73,26 @@ public class BuildResult {
     }
 
     public void writeBonitaConfigurationTo(Path bonitaConfigurationFile) throws IOException {
-        var wordir = Files.createTempDirectory("bconf");
+        var configurationTmpFolder = workdir.resolve("bconf");
+        if (Files.exists(bonitaConfigurationFile)) {
+            deleteDir(bonitaConfigurationFile);
+        }
+        Files.createDirectory(configurationTmpFolder);
         try {
             for (final EnvironmentConfiguration configuration : configurations) {
-                writeConfiguration(wordir, configuration);
+                writeConfiguration(configurationTmpFolder, configuration);
             }
-            if (Files.exists(wordir.resolve(environment)) && wordir.resolve(environment).toFile().list().length > 0) {
+            var envFolder = configurationTmpFolder.resolve(environment);
+            if (Files.exists(envFolder) && envFolder.toFile().list().length > 0) {
                 LOGGER.info("Writing Bonita configuration file for {} environment to {}", environment,
                         bonitaConfigurationFile);
-                new ConfigurationArchiveBuilder().withEnv(wordir.resolve(environment))
+                new ConfigurationArchiveBuilder().withEnv(envFolder)
                         .withParametersConfiguration(parametersConfiguration).create(bonitaConfigurationFile);
             } else {
                 LOGGER.warn("No configuration found for {} environment.", environment);
             }
         } finally {
-            deleteDir(wordir);
+            deleteDir(configurationTmpFolder);
         }
     }
 
