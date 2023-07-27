@@ -16,6 +16,7 @@ package org.bonitasoft.bpm.model.connectorconfiguration.util;
 
 import org.bonitasoft.bpm.model.util.internal.MigratingXMLResource;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +32,6 @@ public class ConnectorConfigurationResourceImpl extends MigratingXMLResource {
      * Creates an instance of the resource.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * 
      * @param uri the URI of the new resource.
      * @generated
      */

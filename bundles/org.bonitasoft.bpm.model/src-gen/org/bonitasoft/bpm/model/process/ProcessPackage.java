@@ -401,22 +401,13 @@ public interface ProcessPackage extends EPackage {
     int ABSTRACT_PROCESS__VERSION = CONTAINER_FEATURE_COUNT + 5;
 
     /**
-     * The feature id for the '<em><b>Author</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int ABSTRACT_PROCESS__AUTHOR = CONTAINER_FEATURE_COUNT + 6;
-
-    /**
      * The feature id for the '<em><b>Creation Date</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int ABSTRACT_PROCESS__CREATION_DATE = CONTAINER_FEATURE_COUNT + 7;
+    int ABSTRACT_PROCESS__CREATION_DATE = CONTAINER_FEATURE_COUNT + 6;
 
     /**
      * The feature id for the '<em><b>Modification Date</b></em>' attribute.
@@ -425,7 +416,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int ABSTRACT_PROCESS__MODIFICATION_DATE = CONTAINER_FEATURE_COUNT + 8;
+    int ABSTRACT_PROCESS__MODIFICATION_DATE = CONTAINER_FEATURE_COUNT + 7;
 
     /**
      * The feature id for the '<em><b>Datatypes</b></em>' containment reference list.
@@ -434,7 +425,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int ABSTRACT_PROCESS__DATATYPES = CONTAINER_FEATURE_COUNT + 9;
+    int ABSTRACT_PROCESS__DATATYPES = CONTAINER_FEATURE_COUNT + 8;
 
     /**
      * The feature id for the '<em><b>Connections</b></em>' containment reference list.
@@ -443,7 +434,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int ABSTRACT_PROCESS__CONNECTIONS = CONTAINER_FEATURE_COUNT + 10;
+    int ABSTRACT_PROCESS__CONNECTIONS = CONTAINER_FEATURE_COUNT + 9;
 
     /**
      * The feature id for the '<em><b>Categories</b></em>' attribute list.
@@ -452,7 +443,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int ABSTRACT_PROCESS__CATEGORIES = CONTAINER_FEATURE_COUNT + 11;
+    int ABSTRACT_PROCESS__CATEGORIES = CONTAINER_FEATURE_COUNT + 10;
 
     /**
      * The feature id for the '<em><b>Actors</b></em>' containment reference list.
@@ -461,7 +452,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int ABSTRACT_PROCESS__ACTORS = CONTAINER_FEATURE_COUNT + 12;
+    int ABSTRACT_PROCESS__ACTORS = CONTAINER_FEATURE_COUNT + 11;
 
     /**
      * The feature id for the '<em><b>Configurations</b></em>' containment reference list.
@@ -470,7 +461,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int ABSTRACT_PROCESS__CONFIGURATIONS = CONTAINER_FEATURE_COUNT + 13;
+    int ABSTRACT_PROCESS__CONFIGURATIONS = CONTAINER_FEATURE_COUNT + 12;
 
     /**
      * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -479,7 +470,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int ABSTRACT_PROCESS__PARAMETERS = CONTAINER_FEATURE_COUNT + 14;
+    int ABSTRACT_PROCESS__PARAMETERS = CONTAINER_FEATURE_COUNT + 13;
 
     /**
      * The number of structural features of the '<em>Abstract Process</em>' class.
@@ -488,7 +479,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int ABSTRACT_PROCESS_FEATURE_COUNT = CONTAINER_FEATURE_COUNT + 15;
+    int ABSTRACT_PROCESS_FEATURE_COUNT = CONTAINER_FEATURE_COUNT + 14;
 
     /**
      * The meta object id for the '{@link org.bonitasoft.bpm.model.process.AbstractTimerEvent <em>Abstract Timer Event</em>}' class.
@@ -5913,15 +5904,6 @@ public interface ProcessPackage extends EPackage {
     int MAIN_PROCESS__VERSION = ABSTRACT_PROCESS__VERSION;
 
     /**
-     * The feature id for the '<em><b>Author</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int MAIN_PROCESS__AUTHOR = ABSTRACT_PROCESS__AUTHOR;
-
-    /**
      * The feature id for the '<em><b>Creation Date</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -5994,22 +5976,13 @@ public interface ProcessPackage extends EPackage {
     int MAIN_PROCESS__PARAMETERS = ABSTRACT_PROCESS__PARAMETERS;
 
     /**
-     * The feature id for the '<em><b>Bonita Version</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int MAIN_PROCESS__BONITA_VERSION = ABSTRACT_PROCESS_FEATURE_COUNT + 0;
-
-    /**
      * The feature id for the '<em><b>Bonita Model Version</b></em>' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int MAIN_PROCESS__BONITA_MODEL_VERSION = ABSTRACT_PROCESS_FEATURE_COUNT + 1;
+    int MAIN_PROCESS__BONITA_MODEL_VERSION = ABSTRACT_PROCESS_FEATURE_COUNT + 0;
 
     /**
      * The feature id for the '<em><b>Included Entries</b></em>' attribute list.
@@ -6018,7 +5991,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int MAIN_PROCESS__INCLUDED_ENTRIES = ABSTRACT_PROCESS_FEATURE_COUNT + 2;
+    int MAIN_PROCESS__INCLUDED_ENTRIES = ABSTRACT_PROCESS_FEATURE_COUNT + 1;
 
     /**
      * The feature id for the '<em><b>Message Connections</b></em>' containment reference list.
@@ -6027,7 +6000,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int MAIN_PROCESS__MESSAGE_CONNECTIONS = ABSTRACT_PROCESS_FEATURE_COUNT + 3;
+    int MAIN_PROCESS__MESSAGE_CONNECTIONS = ABSTRACT_PROCESS_FEATURE_COUNT + 2;
 
     /**
      * The feature id for the '<em><b>Generated Libs</b></em>' attribute list.
@@ -6036,7 +6009,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int MAIN_PROCESS__GENERATED_LIBS = ABSTRACT_PROCESS_FEATURE_COUNT + 4;
+    int MAIN_PROCESS__GENERATED_LIBS = ABSTRACT_PROCESS_FEATURE_COUNT + 3;
 
     /**
      * The feature id for the '<em><b>Enable Validation</b></em>' attribute.
@@ -6045,16 +6018,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int MAIN_PROCESS__ENABLE_VALIDATION = ABSTRACT_PROCESS_FEATURE_COUNT + 5;
-
-    /**
-     * The feature id for the '<em><b>Config Id</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int MAIN_PROCESS__CONFIG_ID = ABSTRACT_PROCESS_FEATURE_COUNT + 6;
+    int MAIN_PROCESS__ENABLE_VALIDATION = ABSTRACT_PROCESS_FEATURE_COUNT + 4;
 
     /**
      * The number of structural features of the '<em>Main Process</em>' class.
@@ -6063,7 +6027,7 @@ public interface ProcessPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int MAIN_PROCESS_FEATURE_COUNT = ABSTRACT_PROCESS_FEATURE_COUNT + 7;
+    int MAIN_PROCESS_FEATURE_COUNT = ABSTRACT_PROCESS_FEATURE_COUNT + 5;
 
     /**
      * The meta object id for the '{@link org.bonitasoft.bpm.model.process.impl.MessageImpl <em>Message</em>}' class.
@@ -6675,15 +6639,6 @@ public interface ProcessPackage extends EPackage {
      * @ordered
      */
     int POOL__VERSION = ABSTRACT_PROCESS__VERSION;
-
-    /**
-     * The feature id for the '<em><b>Author</b></em>' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int POOL__AUTHOR = ABSTRACT_PROCESS__AUTHOR;
 
     /**
      * The feature id for the '<em><b>Creation Date</b></em>' attribute.
@@ -9810,17 +9765,6 @@ public interface ProcessPackage extends EPackage {
     EAttribute getAbstractProcess_Version();
 
     /**
-     * Returns the meta object for the attribute '{@link org.bonitasoft.bpm.model.process.AbstractProcess#getAuthor <em>Author</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Author</em>'.
-     * @see org.bonitasoft.bpm.model.process.AbstractProcess#getAuthor()
-     * @see #getAbstractProcess()
-     * @generated
-     */
-    EAttribute getAbstractProcess_Author();
-
-    /**
      * Returns the meta object for the attribute '{@link org.bonitasoft.bpm.model.process.AbstractProcess#getCreationDate <em>Creation Date</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -11419,17 +11363,6 @@ public interface ProcessPackage extends EPackage {
     EClass getMainProcess();
 
     /**
-     * Returns the meta object for the attribute '{@link org.bonitasoft.bpm.model.process.MainProcess#getBonitaVersion <em>Bonita Version</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Bonita Version</em>'.
-     * @see org.bonitasoft.bpm.model.process.MainProcess#getBonitaVersion()
-     * @see #getMainProcess()
-     * @generated
-     */
-    EAttribute getMainProcess_BonitaVersion();
-
-    /**
      * Returns the meta object for the attribute '{@link org.bonitasoft.bpm.model.process.MainProcess#getBonitaModelVersion <em>Bonita Model Version</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -11483,17 +11416,6 @@ public interface ProcessPackage extends EPackage {
      * @generated
      */
     EAttribute getMainProcess_EnableValidation();
-
-    /**
-     * Returns the meta object for the attribute '{@link org.bonitasoft.bpm.model.process.MainProcess#getConfigId <em>Config Id</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the attribute '<em>Config Id</em>'.
-     * @see org.bonitasoft.bpm.model.process.MainProcess#getConfigId()
-     * @see #getMainProcess()
-     * @generated
-     */
-    EAttribute getMainProcess_ConfigId();
 
     /**
      * Returns the meta object for class '{@link org.bonitasoft.bpm.model.process.Message <em>Message</em>}'.
@@ -12728,14 +12650,6 @@ public interface ProcessPackage extends EPackage {
          * @generated
          */
         EAttribute ABSTRACT_PROCESS__VERSION = eINSTANCE.getAbstractProcess_Version();
-
-        /**
-         * The meta object literal for the '<em><b>Author</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute ABSTRACT_PROCESS__AUTHOR = eINSTANCE.getAbstractProcess_Author();
 
         /**
          * The meta object literal for the '<em><b>Creation Date</b></em>' attribute feature.
@@ -14072,14 +13986,6 @@ public interface ProcessPackage extends EPackage {
         EClass MAIN_PROCESS = eINSTANCE.getMainProcess();
 
         /**
-         * The meta object literal for the '<em><b>Bonita Version</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute MAIN_PROCESS__BONITA_VERSION = eINSTANCE.getMainProcess_BonitaVersion();
-
-        /**
          * The meta object literal for the '<em><b>Bonita Model Version</b></em>' attribute feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -14118,14 +14024,6 @@ public interface ProcessPackage extends EPackage {
          * @generated
          */
         EAttribute MAIN_PROCESS__ENABLE_VALIDATION = eINSTANCE.getMainProcess_EnableValidation();
-
-        /**
-         * The meta object literal for the '<em><b>Config Id</b></em>' attribute feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EAttribute MAIN_PROCESS__CONFIG_ID = eINSTANCE.getMainProcess_ConfigId();
 
         /**
          * The meta object literal for the '{@link org.bonitasoft.bpm.model.process.impl.MessageImpl <em>Message</em>}' class.

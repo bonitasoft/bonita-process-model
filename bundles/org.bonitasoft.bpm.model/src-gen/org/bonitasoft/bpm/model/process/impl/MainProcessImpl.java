@@ -45,38 +45,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.bonitasoft.bpm.model.process.impl.MainProcessImpl#getBonitaVersion <em>Bonita Version</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.MainProcessImpl#getBonitaModelVersion <em>Bonita Model Version</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.MainProcessImpl#getIncludedEntries <em>Included Entries</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.MainProcessImpl#getMessageConnections <em>Message Connections</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.MainProcessImpl#getGeneratedLibs <em>Generated Libs</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.process.impl.MainProcessImpl#isEnableValidation <em>Enable Validation</em>}</li>
- *   <li>{@link org.bonitasoft.bpm.model.process.impl.MainProcessImpl#getConfigId <em>Config Id</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class MainProcessImpl extends AbstractProcessImpl implements MainProcess {
-    /**
-     * The default value of the '{@link #getBonitaVersion() <em>Bonita Version</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getBonitaVersion()
-     * @generated
-     * @ordered
-     */
-    protected static final String BONITA_VERSION_EDEFAULT = ""; //$NON-NLS-1$
-
-    /**
-     * The cached value of the '{@link #getBonitaVersion() <em>Bonita Version</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getBonitaVersion()
-     * @generated
-     * @ordered
-     */
-    protected String bonitaVersion = BONITA_VERSION_EDEFAULT;
-
     /**
      * The default value of the '{@link #getBonitaModelVersion() <em>Bonita Model Version</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -148,26 +126,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
     protected boolean enableValidation = ENABLE_VALIDATION_EDEFAULT;
 
     /**
-     * The default value of the '{@link #getConfigId() <em>Config Id</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getConfigId()
-     * @generated
-     * @ordered
-     */
-    protected static final Object CONFIG_ID_EDEFAULT = null;
-
-    /**
-     * The cached value of the '{@link #getConfigId() <em>Config Id</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getConfigId()
-     * @generated
-     * @ordered
-     */
-    protected Object configId = CONFIG_ID_EDEFAULT;
-
-    /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -184,29 +142,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
     @Override
     protected EClass eStaticClass() {
         return ProcessPackage.Literals.MAIN_PROCESS;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public String getBonitaVersion() {
-        return bonitaVersion;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public void setBonitaVersion(String newBonitaVersion) {
-        String oldBonitaVersion = bonitaVersion;
-        bonitaVersion = newBonitaVersion;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.MAIN_PROCESS__BONITA_VERSION, oldBonitaVersion, bonitaVersion));
     }
 
     /**
@@ -300,29 +235,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
      * @generated
      */
     @Override
-    public Object getConfigId() {
-        return configId;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public void setConfigId(Object newConfigId) {
-        Object oldConfigId = configId;
-        configId = newConfigId;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, ProcessPackage.MAIN_PROCESS__CONFIG_ID, oldConfigId, configId));
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
         switch (featureID) {
             case ProcessPackage.MAIN_PROCESS__MESSAGE_CONNECTIONS:
@@ -339,8 +251,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case ProcessPackage.MAIN_PROCESS__BONITA_VERSION:
-                return getBonitaVersion();
             case ProcessPackage.MAIN_PROCESS__BONITA_MODEL_VERSION:
                 return getBonitaModelVersion();
             case ProcessPackage.MAIN_PROCESS__INCLUDED_ENTRIES:
@@ -351,8 +261,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
                 return getGeneratedLibs();
             case ProcessPackage.MAIN_PROCESS__ENABLE_VALIDATION:
                 return isEnableValidation();
-            case ProcessPackage.MAIN_PROCESS__CONFIG_ID:
-                return getConfigId();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -366,9 +274,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case ProcessPackage.MAIN_PROCESS__BONITA_VERSION:
-                setBonitaVersion((String)newValue);
-                return;
             case ProcessPackage.MAIN_PROCESS__BONITA_MODEL_VERSION:
                 setBonitaModelVersion((String)newValue);
                 return;
@@ -387,9 +292,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
             case ProcessPackage.MAIN_PROCESS__ENABLE_VALIDATION:
                 setEnableValidation((Boolean)newValue);
                 return;
-            case ProcessPackage.MAIN_PROCESS__CONFIG_ID:
-                setConfigId(newValue);
-                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -402,9 +304,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case ProcessPackage.MAIN_PROCESS__BONITA_VERSION:
-                setBonitaVersion(BONITA_VERSION_EDEFAULT);
-                return;
             case ProcessPackage.MAIN_PROCESS__BONITA_MODEL_VERSION:
                 setBonitaModelVersion(BONITA_MODEL_VERSION_EDEFAULT);
                 return;
@@ -420,9 +319,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
             case ProcessPackage.MAIN_PROCESS__ENABLE_VALIDATION:
                 setEnableValidation(ENABLE_VALIDATION_EDEFAULT);
                 return;
-            case ProcessPackage.MAIN_PROCESS__CONFIG_ID:
-                setConfigId(CONFIG_ID_EDEFAULT);
-                return;
         }
         super.eUnset(featureID);
     }
@@ -435,8 +331,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case ProcessPackage.MAIN_PROCESS__BONITA_VERSION:
-                return BONITA_VERSION_EDEFAULT == null ? bonitaVersion != null : !BONITA_VERSION_EDEFAULT.equals(bonitaVersion);
             case ProcessPackage.MAIN_PROCESS__BONITA_MODEL_VERSION:
                 return BONITA_MODEL_VERSION_EDEFAULT == null ? bonitaModelVersion != null : !BONITA_MODEL_VERSION_EDEFAULT.equals(bonitaModelVersion);
             case ProcessPackage.MAIN_PROCESS__INCLUDED_ENTRIES:
@@ -447,8 +341,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
                 return generatedLibs != null && !generatedLibs.isEmpty();
             case ProcessPackage.MAIN_PROCESS__ENABLE_VALIDATION:
                 return enableValidation != ENABLE_VALIDATION_EDEFAULT;
-            case ProcessPackage.MAIN_PROCESS__CONFIG_ID:
-                return CONFIG_ID_EDEFAULT == null ? configId != null : !CONFIG_ID_EDEFAULT.equals(configId);
         }
         return super.eIsSet(featureID);
     }
@@ -463,9 +355,7 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
         if (eIsProxy()) return super.toString();
 
         StringBuilder result = new StringBuilder(super.toString());
-        result.append(" (bonitaVersion: "); //$NON-NLS-1$
-        result.append(bonitaVersion);
-        result.append(", bonitaModelVersion: "); //$NON-NLS-1$
+        result.append(" (bonitaModelVersion: "); //$NON-NLS-1$
         result.append(bonitaModelVersion);
         result.append(", includedEntries: "); //$NON-NLS-1$
         result.append(includedEntries);
@@ -473,8 +363,6 @@ public class MainProcessImpl extends AbstractProcessImpl implements MainProcess 
         result.append(generatedLibs);
         result.append(", enableValidation: "); //$NON-NLS-1$
         result.append(enableValidation);
-        result.append(", configId: "); //$NON-NLS-1$
-        result.append(configId);
         result.append(')');
         return result.toString();
     }

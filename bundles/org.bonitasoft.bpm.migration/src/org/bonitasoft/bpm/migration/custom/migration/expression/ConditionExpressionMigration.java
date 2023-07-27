@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Bonitasoft S.A.
+ * Copyright (C) 2023 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,9 +12,10 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.migration.custom.migration;
+package org.bonitasoft.bpm.migration.custom.migration.expression;
 
-import org.bonitasoft.bpm.model.process.util.migration.HistoryUtils;
+import org.bonitasoft.bpm.model.util.ExpressionConstants;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edapt.migration.CustomMigration;
 import org.eclipse.emf.edapt.migration.MigrationException;
 import org.eclipse.emf.edapt.spi.migration.Instance;
@@ -22,17 +23,23 @@ import org.eclipse.emf.edapt.spi.migration.Metamodel;
 import org.eclipse.emf.edapt.spi.migration.Model;
 
 /**
- * @author Romain Bioteau
+ * @author Vincent Hemery
  */
-public class UpdateConfigurationId extends CustomMigration {
+public class ConditionExpressionMigration extends CustomMigration {
 
     @Override
-    public void migrateAfter(final Model model, final Metamodel metamodel)
+    public void migrateAfter(Model model, Metamodel metamodel)
             throws MigrationException {
-        for (final Instance mainProc : model.getAllInstances("process.MainProcess")) {
-            mainProc.set("bonitaModelVersion", HistoryUtils.CURRENT_MODEL_VERSION);
-            mainProc.set("configId", null);
+        for (final Instance expression : model.getAllInstances("expression.Expression")) {
+            if (ExpressionConstants.CONDITION_TYPE.equals(expression.get("type"))) {
+                EStructuralFeature contentFeat = expression.getEClass().getEStructuralFeature("content");
+                if (expression.isSet(contentFeat)) {
+                    expression.set("type", ExpressionConstants.SCRIPT_TYPE);
+                    expression.set("interpreter", ExpressionConstants.GROOVY);
+                } else {
+                    expression.set("type", ExpressionConstants.CONSTANT_TYPE);
+                }
+            }
         }
     }
-
 }

@@ -6463,14 +6463,10 @@
           <referenceValue href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         </changes>
       </changes>
-      <changes xsi:type="history:Create" xmi:id="_14qtnmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
+      <changes xsi:type="history:Create" xmi:id="_14qtnmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures" element="_uuAJoixOEe68VI8bFfHDew">
         <target href="process.ecore#//AbstractProcess"/>
-        <element href="process.ecore#//AbstractProcess/author"/>
-        <changes xsi:type="history:Set" xmi:id="_14qtn2nREeaTLbmqFFisdA" featureName="name" dataValue="author">
-          <element href="process.ecore#//AbstractProcess/author"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14qtoGnREeaTLbmqFFisdA" featureName="eType">
-          <element href="process.ecore#//AbstractProcess/author"/>
+        <changes xsi:type="history:Set" xmi:id="_14qtn2nREeaTLbmqFFisdA" element="_uuAJoixOEe68VI8bFfHDew" featureName="name" dataValue="author"/>
+        <changes xsi:type="history:Set" xmi:id="_14qtoGnREeaTLbmqFFisdA" element="_uuAJoixOEe68VI8bFfHDew" featureName="eType">
           <referenceValue href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         </changes>
       </changes>
@@ -6579,20 +6575,12 @@
           <referenceValue href="process.ecore#//AbstractProcess"/>
         </changes>
       </changes>
-      <changes xsi:type="history:Create" xmi:id="_14rUsmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
+      <changes xsi:type="history:Create" xmi:id="_14rUsmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures" element="_zY9c4ixOEe68VI8bFfHDew">
         <target href="process.ecore#//MainProcess"/>
-        <element href="process.ecore#//MainProcess/bonitaVersion"/>
-        <changes xsi:type="history:Set" xmi:id="_14rUs2nREeaTLbmqFFisdA" featureName="name" dataValue="bonitaVersion">
-          <element href="process.ecore#//MainProcess/bonitaVersion"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14rUtGnREeaTLbmqFFisdA" featureName="lowerBound" dataValue="1" oldDataValue="0">
-          <element href="process.ecore#//MainProcess/bonitaVersion"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14rUtWnREeaTLbmqFFisdA" featureName="defaultValueLiteral" dataValue="">
-          <element href="process.ecore#//MainProcess/bonitaVersion"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_14rUtmnREeaTLbmqFFisdA" featureName="eType">
-          <element href="process.ecore#//MainProcess/bonitaVersion"/>
+        <changes xsi:type="history:Set" xmi:id="_14rUs2nREeaTLbmqFFisdA" element="_zY9c4ixOEe68VI8bFfHDew" featureName="name" dataValue="bonitaVersion"/>
+        <changes xsi:type="history:Set" xmi:id="_14rUtGnREeaTLbmqFFisdA" element="_zY9c4ixOEe68VI8bFfHDew" featureName="lowerBound" dataValue="1" oldDataValue="0"/>
+        <changes xsi:type="history:Set" xmi:id="_14rUtWnREeaTLbmqFFisdA" element="_zY9c4ixOEe68VI8bFfHDew" featureName="defaultValueLiteral" dataValue=""/>
+        <changes xsi:type="history:Set" xmi:id="_14rUtmnREeaTLbmqFFisdA" element="_zY9c4ixOEe68VI8bFfHDew" featureName="eType">
           <referenceValue href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
         </changes>
       </changes>
@@ -10913,16 +10901,12 @@
     <changes xsi:type="history:MigrationChange" xmi:id="_15EWS2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.expression.PatternExpressionMigration"/>
   </releases>
   <releases xmi:id="_15E9QGnREeaTLbmqFFisdA" date="2013-04-22T11:30:12.379+0200" label="6.0.0-ga-003">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15E9QWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.UpdateConfigurationId">
+    <changes xsi:type="history:MigrationChange" xmi:id="_15E9QWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.model.process.util.migration.UpgradeModelVersionAttributeMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15E9QmnREeaTLbmqFFisdA">
-        <changes xsi:type="history:Create" xmi:id="_15E9Q2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
+        <changes xsi:type="history:Create" xmi:id="_15E9Q2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures" element="_yc75gixOEe68VI8bFfHDew">
           <target href="process.ecore#//MainProcess"/>
-          <element href="process.ecore#//MainProcess/configId"/>
-          <changes xsi:type="history:Set" xmi:id="_15E9RGnREeaTLbmqFFisdA" featureName="name" dataValue="configId">
-            <element href="process.ecore#//MainProcess/configId"/>
-          </changes>
-          <changes xsi:type="history:Set" xmi:id="_15E9RWnREeaTLbmqFFisdA" featureName="eType">
-            <element href="process.ecore#//MainProcess/configId"/>
+          <changes xsi:type="history:Set" xmi:id="_15E9RGnREeaTLbmqFFisdA" element="_yc75gixOEe68VI8bFfHDew" featureName="name" dataValue="configId"/>
+          <changes xsi:type="history:Set" xmi:id="_15E9RWnREeaTLbmqFFisdA" element="_yc75gixOEe68VI8bFfHDew" featureName="eType">
             <referenceValue href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
           </changes>
         </changes>
@@ -14729,7 +14713,7 @@
     <changes xsi:type="history:MigrationChange" xmi:id="_z5RnUawvEeiFZ5S8g2gj5Q" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateRestConnectorVersionTo106"/>
   </releases>
   <releases xmi:id="_7NF0QDj6Eem-ZO25_WoPnQ" date="2019-02-25T10:43:27.494+0100" label="7.8.3-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_7NF0QTj6Eem-ZO25_WoPnQ" migration="org.bonitasoft.bpm.migration.custom.migration.UpdateConfigurationId"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_7NF0QTj6Eem-ZO25_WoPnQ" migration="org.bonitasoft.bpm.model.process.util.migration.UpgradeModelVersionAttributeMigration"/>
     <changes xsi:type="history:MigrationChange" xmi:id="_fYe2YHNSEeqin5n0SIS5Ng" migration="org.bonitasoft.bpm.migration.custom.migration.UpdatePoolSize"/>
   </releases>
   <releases xmi:id="_lGPssDBZEemIIINmMdyzoA" date="2019-02-14T10:43:27.494+0100" label="7.9.0-001">
@@ -15230,6 +15214,48 @@
       <target href="process.ecore#/"/>
       <element xsi:type="ecore:EPackage" xmi:id="_BdkWsW8LEe2Gisyj-XM1Fw" name="decision" nsURI="http://www.bonitasoft.org/ns/studio/process/decision" nsPrefix="decision"/>
     </changes>
+    <changes xsi:type="history:OperationChange" xmi:id="_uuAJoCxOEe68VI8bFfHDew">
+      <changes xsi:type="history:Delete" xmi:id="_uuAJoSxOEe68VI8bFfHDew" referenceName="eStructuralFeatures">
+        <target href="process.ecore#//AbstractProcess"/>
+        <element xsi:type="ecore:EAttribute" xmi:id="_uuAJoixOEe68VI8bFfHDew" name="author">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </element>
+      </changes>
+      <operation xmi:id="_uuAJpCxOEe68VI8bFfHDew" name="deleteFeature2">
+        <parameters xmi:id="_uuAJpSxOEe68VI8bFfHDew" name="feature">
+          <referenceValue xmi:id="_uuAJpixOEe68VI8bFfHDew" element="_uuAJoixOEe68VI8bFfHDew"/>
+        </parameters>
+      </operation>
+    </changes>
+    <changes xsi:type="history:OperationChange" xmi:id="_yc75gCxOEe68VI8bFfHDew">
+      <changes xsi:type="history:Delete" xmi:id="_yc75gSxOEe68VI8bFfHDew" referenceName="eStructuralFeatures">
+        <target href="process.ecore#//MainProcess"/>
+        <element xsi:type="ecore:EAttribute" xmi:id="_yc75gixOEe68VI8bFfHDew" name="configId">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+        </element>
+      </changes>
+      <operation xmi:id="_yc75hCxOEe68VI8bFfHDew" name="deleteFeature2">
+        <parameters xmi:id="_yc75hSxOEe68VI8bFfHDew" name="feature">
+          <referenceValue xmi:id="_yc75hixOEe68VI8bFfHDew" element="_yc75gixOEe68VI8bFfHDew"/>
+        </parameters>
+      </operation>
+    </changes>
+    <changes xsi:type="history:OperationChange" xmi:id="_zY9c4CxOEe68VI8bFfHDew">
+      <changes xsi:type="history:Delete" xmi:id="_zY9c4SxOEe68VI8bFfHDew" referenceName="eStructuralFeatures">
+        <target href="process.ecore#//MainProcess"/>
+        <element xsi:type="ecore:EAttribute" xmi:id="_zY9c4ixOEe68VI8bFfHDew" name="bonitaVersion" lowerBound="1" defaultValueLiteral="">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </element>
+      </changes>
+      <operation xmi:id="_zY9c5CxOEe68VI8bFfHDew" name="deleteFeature2">
+        <parameters xmi:id="_zY9c5SxOEe68VI8bFfHDew" name="feature">
+          <referenceValue xmi:id="_zY9c5ixOEe68VI8bFfHDew" element="_zY9c4ixOEe68VI8bFfHDew"/>
+        </parameters>
+      </operation>
+    </changes>
+    <changes xsi:type="history:MigrationChange" xmi:id="_3gd3ECxJEe68VI8bFfHDew" migration="org.bonitasoft.bpm.migration.custom.migration.connectorconfiguration.UIPathConnectorDefinitionMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_7kAlACxJEe68VI8bFfHDew" migration="org.bonitasoft.bpm.migration.custom.migration.expression.ConditionExpressionMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_76wRECxJEe68VI8bFfHDew" migration="org.bonitasoft.bpm.migration.custom.migration.expression.JavaGetterExpressionMigration"/>
     <changes xsi:type="history:MigrationChange" xmi:id="_3R2iEG81Ee2Gisyj-XM1Fw" migration="org.bonitasoft.bpm.model.process.util.migration.UpgradeModelVersionAttributeMigration"/>
   </releases>
   <releases xmi:id="_xyMngF9HEe24H9qpSeta3A"/>
