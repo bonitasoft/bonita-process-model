@@ -19,9 +19,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Stream;
 
+import org.bonitasoft.bonita2bar.configuration.ConfigurationArchiveBuilder;
 import org.bonitasoft.bonita2bar.configuration.EnvironmentConfiguration;
+import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
 import org.bonitasoft.engine.bpm.bar.BusinessArchive;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveFactory;
 import org.bonitasoft.engine.bpm.process.DesignProcessDefinition;
@@ -34,6 +38,14 @@ public class BuildResult {
 
     private List<BusinessArchive> businessArchives = new ArrayList<>();
     private List<EnvironmentConfiguration> configurations = new ArrayList<>();
+
+    private ParametersConfiguration parametersConfiguration;
+    private String environment;
+
+    public BuildResult(String environment, ParametersConfiguration parametersConfiguration) {
+        this.environment = environment;
+        this.parametersConfiguration = parametersConfiguration;
+    }
 
     public void addBusinessArchive(BusinessArchive businessArchive) {
         businessArchives.add(businessArchive);
@@ -51,12 +63,28 @@ public class BuildResult {
         return configurations;
     }
 
-    public void writeTo(Path barOutputFolder, Path configurationOutputFolder) throws IOException {
+    public void writeBusinessArchivesTo(Path barOutputFolder) throws IOException {
         for (final BusinessArchive archive : businessArchives) {
             writeBar(barOutputFolder, archive);
         }
-        for (final EnvironmentConfiguration configuration : configurations) {
-            writeConfiguration(configurationOutputFolder, configuration);
+    }
+
+    public void writeBonitaConfigurationTo(Path bonitaConfigurationFile) throws IOException {
+        var wordir = Files.createTempDirectory("bconf");
+        try {
+            for (final EnvironmentConfiguration configuration : configurations) {
+                writeConfiguration(wordir, configuration);
+            }
+            if (Files.exists(wordir.resolve(environment)) && wordir.resolve(environment).toFile().list().length > 0) {
+                LOGGER.info("Writing Bonita configuration file for {} environment to {}", environment,
+                        bonitaConfigurationFile);
+                new ConfigurationArchiveBuilder().withEnv(wordir.resolve(environment))
+                        .withParametersConfiguration(parametersConfiguration).create(bonitaConfigurationFile);
+            } else {
+                LOGGER.warn("No configuration found for {} environment.", environment);
+            }
+        } finally {
+            deleteDir(wordir);
         }
     }
 
@@ -83,5 +111,11 @@ public class BuildResult {
             Files.createDirectories(targetFolder);
         }
         configuration.writeParameters(targetFolder);
+    }
+
+    private static void deleteDir(Path directory) throws IOException {
+        try (Stream<Path> pathStream = Files.walk(directory)) {
+            pathStream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
+        }
     }
 }

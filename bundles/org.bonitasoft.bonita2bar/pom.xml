@@ -70,4 +70,12 @@
       <version>3.26.0</version>
     </dependency>
   </dependencies>
+  <build>
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>resources</directory>
+      </resource>
+    </resources>
+  </build>
 </project>

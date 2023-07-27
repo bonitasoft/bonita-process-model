@@ -22,11 +22,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.jar.Attributes;
-import java.util.jar.JarFile;
-import java.util.jar.Manifest;
+import java.util.Properties;
 
 import org.bonitasoft.bonita2bar.configuration.EnvironmentConfigurationBuilder;
+import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.configuration.ConfigurationFactory;
 import org.bonitasoft.bpm.model.process.AbstractProcess;
@@ -53,9 +52,15 @@ public class BarBuilder {
 
     private ProcessRegistry processRegistry;
 
-    BarBuilder(ProcessRegistry processRegistry, Path localConfiguration, String environment) {
+    private ParametersConfiguration parametersConfiguration;
+
+    BarBuilder(ProcessRegistry processRegistry,
+            Path localConfiguration,
+            ParametersConfiguration parametersConfiguration,
+            String environment) {
         this.processRegistry = processRegistry;
         this.localConfiguration = localConfiguration;
+        this.parametersConfiguration = parametersConfiguration;
         this.environment = environment;
     }
 
@@ -66,7 +71,7 @@ public class BarBuilder {
      * @throws BuildBarException
      */
     public BuildResult buildAll() throws BuildBarException {
-        var result = new BuildResult();
+        var result = new BuildResult(environment, parametersConfiguration);
         for (AbstractProcess process : processRegistry.getProcesses()) {
             if (process instanceof Pool) {
                 buildBar((Pool) process, result);
@@ -85,7 +90,7 @@ public class BarBuilder {
      * @throws {@link IllegalArgumentException} when the given process name and version are not found in the {@link ProcessRegistry}
      */
     public BuildResult build(String name, String version) throws BuildBarException {
-        var result = new BuildResult();
+        var result = new BuildResult(environment, parametersConfiguration);
         var process = processRegistry.getProcess(name, version).orElseThrow(() -> new IllegalArgumentException(
                 String.format("No process found in registry for %s (%s)", name, version)));
         buildBar(process, result);
@@ -100,7 +105,7 @@ public class BarBuilder {
      * @throws BuildBarException
      */
     public BuildResult build(Pool process) throws BuildBarException {
-        var result = new BuildResult();
+        var result = new BuildResult(environment, parametersConfiguration);
         buildBar(process, result);
         return result;
     }
@@ -179,11 +184,11 @@ public class BarBuilder {
     }
 
     public static String builderVersion() {
-        URL url = Thread.currentThread().getContextClassLoader().getResource(JarFile.MANIFEST_NAME);
+        URL url = BarBuilder.class.getResource("/info.properties");
         try (var is = url.openStream()) {
-            Manifest manifest = new Manifest(is);
-            Attributes mainAttribs = manifest.getMainAttributes();
-            return mainAttribs.getValue("Bundle-Version");
+            var info = new Properties();
+            info.load(is);
+            return info.getProperty("version");
         } catch (Exception e) {
             // Silently ignore wrong manifests on classpath?
         }

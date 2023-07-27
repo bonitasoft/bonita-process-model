@@ -47,7 +47,9 @@ public class BarBuilderFactory {
         var dependencyReport = config.getDependencyReport();
         var classpathResolver = config.getClasspathResolver();
 
-        var barBuilder = new BarBuilder(processRegistry, sourceProvider.getLocalConfiguration(),
+        var barBuilder = new BarBuilder(processRegistry,
+                sourceProvider.getLocalConfiguration(),
+                parametersConfiguration,
                 config.getEnvironment());
         barBuilder.register(new ParameterArtifactProvider(parametersConfiguration));
         barBuilder.register(new ActorMappingArtifactProvider());

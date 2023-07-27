@@ -14,13 +14,10 @@
  */
 package org.bonitasoft.bonita2bar.configuration;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 
 import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
 
@@ -41,10 +38,7 @@ public class ParametersConfigurationMapper {
         return mapper.readValue(configurationFile, ParametersConfiguration.class);
     }
 
-    public void writeToFile(ParametersConfiguration configuration, Path to) throws IOException {
-        byte[] content = mapper.writeValueAsBytes(configuration);
-        try (InputStream is = new ByteArrayInputStream(content)) {
-            Files.copy(is, to, StandardCopyOption.REPLACE_EXISTING);
-        }
+    public void writeToFile(ParametersConfiguration configuration, Path configurationFile) throws IOException {
+        mapper.writeValue(configurationFile.toFile(), configuration);
     }
 }

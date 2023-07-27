@@ -23,6 +23,7 @@ import static org.mockito.Mockito.mock;
 import java.io.File;
 import java.net.URLDecoder;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Optional;
 
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
@@ -33,6 +34,7 @@ import org.bonitasoft.plugin.analyze.report.model.DependencyReport;
 import org.eclipse.core.runtime.FileLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
 import org.mockito.Mockito;
 
 class BarBuilderTest {
@@ -59,23 +61,20 @@ class BarBuilderTest {
     }
 
     @Test
-    void should_build_bar_for_process() throws Exception {
+    void should_build_bar_for_process(@TempDir Path tmpFolder) throws Exception {
         var result = barBuilder.build("SimpleProcessWithParameters", "1.0");
 
         assertThat(result.getBusinessArchives()).hasSize(1);
         assertThat(result.getConfigurations()).hasSize(1);
 
-        var barOutput = Files.createTempDirectory("bars");
-        var configurationOutput = Files.createTempDirectory("configs");
+        var barOutput = Files.createDirectory(tmpFolder.resolve("bars"));
 
-        result.writeTo(barOutput, configurationOutput);
+        result.writeBusinessArchivesTo(barOutput);
+        var bonitaConfigurationFile = tmpFolder.resolve("test-repository.bconf");
+        result.writeBonitaConfigurationTo(bonitaConfigurationFile);
 
         assertThat(barOutput.resolve("SimpleProcessWithParameters--1.0.bar")).exists();
-        assertThat(configurationOutput
-                .resolve("Local")
-                .resolve("SimpleProcessWithParameters")
-                .resolve("1.0")
-                .resolve("parameters.properties")).exists();
+        assertThat(bonitaConfigurationFile).exists();
     }
 
     @Test

@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.nio.file.Path;
+import java.util.Objects;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
@@ -64,10 +65,36 @@ class BarBuilderIT {
 
         var result = barBuilder.buildAll();
         var barOutputFolder = projectRoot.resolve("target").resolve("processes");
-        var configurationOutputFolder = projectRoot.resolve("target").resolve("configurations");
-        result.writeTo(barOutputFolder, configurationOutputFolder);
+        result.writeBusinessArchivesTo(barOutputFolder);
+        var bonitaConfigurationFile = projectRoot.resolve("target").resolve("test-repository.bconf");
+        result.writeBonitaConfigurationTo(bonitaConfigurationFile);
 
         assertThat(result.getBusinessArchives()).hasSize(12);
+        assertThat(bonitaConfigurationFile).exists();
+        assertThat(barOutputFolder)
+                .exists()
+                .isDirectoryContaining(bar -> Objects.equals(bar.getFileName().toString(), "ChildProcess--1.0.bar"))
+                .isDirectoryContaining(bar -> Objects.equals(bar.getFileName().toString(), "ParentProcess--1.0.bar"))
+                .isDirectoryContaining(
+                        bar -> Objects.equals(bar.getFileName().toString(), "ProcessWithAdditionalResource--1.0.bar"))
+                .isDirectoryContaining(
+                        bar -> Objects.equals(bar.getFileName().toString(), "ProcessWithConnectors--1.0.bar"))
+                .isDirectoryContaining(
+                        bar -> Objects.equals(bar.getFileName().toString(), "PoolWithDecisionTable--1.0.bar"))
+                .isDirectoryContaining(
+                        bar -> Objects.equals(bar.getFileName().toString(), "ProcessWithComparisonExpression--1.0.bar"))
+                .isDirectoryContaining(
+                        bar -> Objects.equals(bar.getFileName().toString(), "ProcessWithCustonGroovyDep--1.0.bar"))
+                .isDirectoryContaining(
+                        bar -> Objects.equals(bar.getFileName().toString(), "ProcessWithDocument--1.0.bar"))
+                .isDirectoryContaining(
+                        bar -> Objects.equals(bar.getFileName().toString(), "ProcessWithGroovyConnector--1.0.bar"))
+                .isDirectoryContaining(
+                        bar -> Objects.equals(bar.getFileName().toString(), "ProcessWithv7Forms--1.0.bar"))
+                .isDirectoryContaining(
+                        bar -> Objects.equals(bar.getFileName().toString(), "SimpleProcessWithContract--1.0.bar"))
+                .isDirectoryContaining(
+                        bar -> Objects.equals(bar.getFileName().toString(), "SimpleProcessWithParameters--1.0.bar"));
     }
 
     private UiDesignerProperties uidWorkspaceProperties(Path projectRoot, Path uidWorkdir) {

@@ -20,8 +20,8 @@
     <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
     <!-- Test -->
     <junit.version>5.9.3</junit.version>
-    <assertj-core.version>3.22.0</assertj-core.version>
-    <logback.version>1.2.10</logback.version>
+    <assertj-core.version>3.24.2</assertj-core.version>
+    <logback.version>1.2.12</logback.version>
   </properties>
   <dependencyManagement>
     <dependencies>
