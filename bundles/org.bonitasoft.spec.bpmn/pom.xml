@@ -11,6 +11,6 @@
   <packaging>eclipse-plugin</packaging>
   <name>BPMN 2.0 EMF metamodel</name>
   <properties>
-	  <sonar.sources></sonar.sources>
+    <sonar.sources></sonar.sources>
   </properties>
 </project>
