@@ -10901,7 +10901,6 @@
     <changes xsi:type="history:MigrationChange" xmi:id="_15EWS2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.expression.PatternExpressionMigration"/>
   </releases>
   <releases xmi:id="_15E9QGnREeaTLbmqFFisdA" date="2013-04-22T11:30:12.379+0200" label="6.0.0-ga-003">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15E9QWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.model.process.util.migration.UpgradeModelVersionAttributeMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15E9QmnREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15E9Q2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures" element="_yc75gixOEe68VI8bFfHDew">
           <target href="process.ecore#//MainProcess"/>
@@ -10935,7 +10934,6 @@
           </parameters>
         </operation>
       </changes>
-    </changes>
     <changes xsi:type="history:MigrationChange" xmi:id="_15E9T2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.DeadlineToNonInterruptingEventMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15E9UGnREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15E9UWnREeaTLbmqFFisdA" referenceName="eClassifiers">
@@ -14713,7 +14711,6 @@
     <changes xsi:type="history:MigrationChange" xmi:id="_z5RnUawvEeiFZ5S8g2gj5Q" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateRestConnectorVersionTo106"/>
   </releases>
   <releases xmi:id="_7NF0QDj6Eem-ZO25_WoPnQ" date="2019-02-25T10:43:27.494+0100" label="7.8.3-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_7NF0QTj6Eem-ZO25_WoPnQ" migration="org.bonitasoft.bpm.model.process.util.migration.UpgradeModelVersionAttributeMigration"/>
     <changes xsi:type="history:MigrationChange" xmi:id="_fYe2YHNSEeqin5n0SIS5Ng" migration="org.bonitasoft.bpm.migration.custom.migration.UpdatePoolSize"/>
   </releases>
   <releases xmi:id="_lGPssDBZEemIIINmMdyzoA" date="2019-02-14T10:43:27.494+0100" label="7.9.0-001">
