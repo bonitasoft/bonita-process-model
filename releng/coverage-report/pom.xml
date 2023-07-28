@@ -12,14 +12,10 @@
   <name>Bonita Process Model Coverage Report</name>
   <properties>
     <maven.deploy.skip>true</maven.deploy.skip>
+    <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/releng/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
   </properties>
   <dependencies>
     <!-- We have to repeat every tested bundle here (▰˘︹˘▰) -->
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>org.bonitasoft.bonita2bar</artifactId>
-      <version>${project.version}</version>
-    </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>org.bonitasoft.bonita2bar</artifactId>
@@ -81,9 +77,14 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
+        <configuration>
+          <formats>
+            <format>XML</format>
+          </formats>
+        </configuration>
         <executions>
           <execution>
-            <id>report-aggregate</id>
+            <id>jacoco-report</id>
             <goals>
               <goal>report-aggregate</goal>
             </goals>
@@ -93,17 +94,4 @@
       </plugin>
     </plugins>
   </build>
-  <reporting>
-    <outputDirectory>${maven.multiModuleProjectDirectory}/target/site/jacoco</outputDirectory>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>${maven-surefire.version}</version>
-        <configuration>
-          <argLine>${surefireArgLine}</argLine>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
 </project>
