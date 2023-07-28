@@ -30,7 +30,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         if: ${{ env.SONAR_TOKEN != '' }}
-        run: ./mvnw -B -ntp verify sonar:sonar
+        run: ./mvnw -B -ntp verify sonar:sonar -Pjacoco
         
       - name: Build
         env:
