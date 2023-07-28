@@ -23,7 +23,17 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>org.bonitasoft.bonita2bar.tests</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>org.bonitasoft.bonita2bpmn</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>org.bonitasoft.bonita2bpmn.tests</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
@@ -43,7 +53,17 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
+      <artifactId>org.bonitasoft.bpm.migration.tests</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
       <artifactId>org.bonitasoft.bpm.model</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>org.bonitasoft.bpm.model.tests</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
@@ -53,22 +73,12 @@
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>org.bonitasoft.bpm.plugin-dependencies</artifactId>
+      <artifactId>org.bonitasoft.bpm.model.edit.tests</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>org.bonitasoft.gmf.plugin-dependencies</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>org.bonitasoft.spec.bpmn</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.bonitasoft.archetypes</groupId>
-      <artifactId>process-reader-archetype</artifactId>
+      <artifactId>standalone-tests</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
@@ -77,11 +87,6 @@
       <plugin>
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
-        <configuration>
-          <formats>
-            <format>XML</format>
-          </formats>
-        </configuration>
         <executions>
           <execution>
             <id>jacoco-report</id>

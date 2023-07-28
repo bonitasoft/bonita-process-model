@@ -99,14 +99,12 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <sonar.organization>bonitasoft</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.exclusions>src-gen/**/*</sonar.exclusions>
-    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.sources>src</sonar.sources>
     <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/releng/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <!-- <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths> -->
     <!-- <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/releng/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths> -->
-    <jacoco.destFile>${maven.multiModuleProjectDirectory}/target/jacoco.exec</jacoco.destFile>
-    <sonar.jacoco.reportPath>${jacoco.destFile}</sonar.jacoco.reportPath>
+    <!--    <jacoco.destFile>${maven.multiModuleProjectDirectory}/target/jacoco.exec</jacoco.destFile>-->
+    <!--    <sonar.jacoco.reportPath>${jacoco.destFile}</sonar.jacoco.reportPath>-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>11</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
@@ -425,6 +423,16 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
       </plugin>
+      <!-- Configuration for test plugins/fragments -->
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-surefire-plugin</artifactId>
+        <configuration>
+          <!-- No UI test for this component -->
+          <useUIThread>false</useUIThread>
+          <useUIHarness>false</useUIHarness>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <profiles>
@@ -492,56 +500,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         </file>
       </activation>
       <properties>
-        <maven.deploy.skip>true</maven.deploy.skip>
-        <maven.source.skip>true</maven.source.skip>
-        <!-- Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=397015 -->
         <sonar.sources></sonar.sources>
         <sonar.tests>src</sonar.tests>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.source.skip>true</maven.source.skip>
       </properties>
-      <build>
-        <pluginManagement>
-          <plugins>
-            <plugin>
-              <groupId>org.jacoco</groupId>
-              <artifactId>jacoco-maven-plugin</artifactId>
-              <configuration>
-                <formats>
-                  <format>XML</format>
-                </formats>
-              </configuration>
-              <executions>
-                <execution>
-                  <id>jacoco-report</id>
-                  <goals>
-                    <goal>report</goal>
-                  </goals>
-                  <phase>verify</phase>
-                </execution>
-              </executions>
-            </plugin>
-          </plugins>
-        </pluginManagement>
-        <plugins>
-          <!-- Configuration for test plugins/fragments -->
-          <plugin>
-            <groupId>org.eclipse.tycho</groupId>
-            <artifactId>tycho-surefire-plugin</artifactId>
-            <configuration>
-              <!-- No UI test for this component -->
-              <useUIThread>false</useUIThread>
-              <useUIHarness>false</useUIHarness>
-              <argLine>${tycho.testArgLine} -DbuildingWithTycho=true</argLine>
-            </configuration>
-          </plugin>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <argLine>${tycho.testArgLine} -DbuildingWithTycho=true</argLine>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
     </profile>
     <!-- do not deploy target definitions -->
     <profile>
@@ -599,20 +562,35 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
             <groupId>org.jacoco</groupId>
             <artifactId>jacoco-maven-plugin</artifactId>
             <configuration>
-              <append>true</append>
+              <skip>${skipTests}</skip>
             </configuration>
             <executions>
               <execution>
+                <id>prepare-agent</id>
                 <goals>
                   <goal>prepare-agent</goal>
                 </goals>
                 <configuration>
-                  <skip>${skipTests}</skip>
-                  <append>true</append>
-                  <destFile>${jacoco.destFile}</destFile>
+                  <propertyName>jacocoAgentArgs</propertyName>
+                </configuration>
+              </execution>
+              <execution>
+                <id>prepare-agent-integration</id>
+                <goals>
+                  <goal>prepare-agent-integration</goal>
+                </goals>
+                <configuration>
+                  <propertyName>jacocoItAgentArgs</propertyName>
                 </configuration>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>tycho-surefire-plugin</artifactId>
+            <configuration>
+              <argLine>${jacocoAgentArgs}</argLine>
+            </configuration>
           </plugin>
         </plugins>
       </build>
