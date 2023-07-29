@@ -10,6 +10,9 @@
   <artifactId>org.bonitasoft.bonita2bar</artifactId>
   <packaging>eclipse-plugin</packaging>
   <name>Export Bonita Process Model to Business Archive</name>
+  <properties>
+	  <sonar.sources>src</sonar.sources>
+  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>

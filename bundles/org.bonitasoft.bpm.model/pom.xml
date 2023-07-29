@@ -10,6 +10,9 @@
   <artifactId>org.bonitasoft.bpm.model</artifactId>
   <packaging>eclipse-plugin</packaging>
   <name>Process Model</name>
+  <properties>
+	  <sonar.sources>src</sonar.sources>
+  </properties>
   <dependencies>
     <!-- Bonita Process Model -->
     <dependency>
