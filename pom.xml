@@ -239,7 +239,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
             <keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure>
             <serverId>ossrh</serverId>
             <nexusUrl>https://oss.sonatype.org</nexusUrl>
-            <skipNexusStagingDeployMojo>${maven.deploy.skip}</skipNexusStagingDeployMojo>
+            <skipStaging>${maven.deploy.skip}</skipStaging>
           </configuration>
         </plugin>
         <plugin>
