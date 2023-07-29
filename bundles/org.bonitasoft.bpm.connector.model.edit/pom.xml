@@ -10,6 +10,9 @@
   <artifactId>org.bonitasoft.bpm.connector.model.edit</artifactId>
   <packaging>eclipse-plugin</packaging>
   <name>Bonita Connector Model Edit</name>
+  <properties>
+    <maven.deploy.skip>false</maven.deploy.skip>
+  </properties>
   <build>
     <plugins>
       <plugin>

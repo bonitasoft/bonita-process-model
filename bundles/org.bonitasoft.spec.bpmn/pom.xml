@@ -10,6 +10,9 @@
   <artifactId>org.bonitasoft.spec.bpmn</artifactId>
   <packaging>eclipse-plugin</packaging>
   <name>BPMN Spec Model</name>
+  <properties>
+    <maven.deploy.skip>false</maven.deploy.skip>
+  </properties>
   <build>
     <plugins>
       <plugin>

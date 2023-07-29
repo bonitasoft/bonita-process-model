@@ -12,6 +12,7 @@
   <name>Export Bonita Process Model to Business Archive</name>
   <properties>
     <sonar.sources>src</sonar.sources>
+    <maven.deploy.skip>false</maven.deploy.skip>
   </properties>
   <dependencyManagement>
     <dependencies>

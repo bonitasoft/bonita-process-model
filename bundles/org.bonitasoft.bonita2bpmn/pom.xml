@@ -12,6 +12,7 @@
   <name>Export Bonita Process Model to BPMN 2.0</name>
   <properties>
     <sonar.sources>src</sonar.sources>
+    <maven.deploy.skip>false</maven.deploy.skip>
   </properties>
   <dependencies>
     <!-- Bonita Process Model -->

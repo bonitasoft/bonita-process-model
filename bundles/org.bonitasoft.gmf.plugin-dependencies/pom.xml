@@ -10,6 +10,9 @@
   <artifactId>org.bonitasoft.gmf.plugin-dependencies</artifactId>
   <packaging>eclipse-plugin</packaging>
   <name>GMF dependencies for BPMN 2.0 transformations</name>
+  <properties>
+    <maven.deploy.skip>false</maven.deploy.skip>
+  </properties>
   <build>
     <plugins>
       <plugin>

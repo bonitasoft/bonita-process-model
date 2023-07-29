@@ -12,6 +12,7 @@
   <name>Bonita Model Migration</name>
   <properties>
     <sonar.sources>src</sonar.sources>
+    <maven.deploy.skip>false</maven.deploy.skip>
   </properties>
   <build>
     <plugins>

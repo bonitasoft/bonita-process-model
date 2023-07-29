@@ -12,6 +12,7 @@
   <name>Process Model Edit</name>
   <properties>
     <sonar.sources>src</sonar.sources>
+    <maven.deploy.skip>false</maven.deploy.skip>
   </properties>
   <dependencies>
     <!-- Bonita Process Model -->

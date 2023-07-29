@@ -11,6 +11,9 @@
   <artifactId>process-reader-archetype</artifactId>
   <packaging>maven-archetype</packaging>
   <name>Archetype - Bonita Business Process Model Reader</name>
+  <properties>
+    <maven.deploy.skip>false</maven.deploy.skip>
+  </properties>
   <dependencies>
     <!-- Artifacts from reactor are required for testing the project built from archetype -->
     <dependency>

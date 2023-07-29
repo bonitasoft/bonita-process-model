@@ -10,6 +10,9 @@
   <artifactId>org.bonitasoft.bpm.plugin-dependencies</artifactId>
   <packaging>eclipse-plugin</packaging>
   <name>Process Model Plugin Dependencies</name>
+  <properties>
+    <maven.deploy.skip>false</maven.deploy.skip>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>org.apache.maven</groupId>

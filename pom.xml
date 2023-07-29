@@ -101,13 +101,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <sonar.exclusions>src-gen/**/*</sonar.exclusions>
     <sonar.sources></sonar.sources>
     <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/releng/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    <!-- <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths> -->
-    <!-- <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/releng/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths> -->
-    <!--    <jacoco.destFile>${maven.multiModuleProjectDirectory}/target/jacoco.exec</jacoco.destFile>-->
-    <!--    <sonar.jacoco.reportPath>${jacoco.destFile}</sonar.jacoco.reportPath>-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>11</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
+    <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
   <repositories>
     <repository>
