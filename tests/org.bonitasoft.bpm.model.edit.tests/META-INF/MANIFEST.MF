@@ -7,4 +7,5 @@ Bundle-Vendor: Bonitasoft S.A.
 Fragment-Host: org.bonitasoft.bpm.model.edit;bundle-version="8.0.0"
 Automatic-Module-Name: org.bonitasoft.bpm.model.edit.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Require-Bundle: junit-jupiter-api
+Require-Bundle: junit-jupiter-api,
+ assertj-core

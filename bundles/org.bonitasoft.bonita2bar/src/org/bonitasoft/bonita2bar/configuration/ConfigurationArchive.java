@@ -15,14 +15,10 @@
 package org.bonitasoft.bonita2bar.configuration;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Properties;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.bonitasoft.bonita2bar.BarBuilder;
 import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
 
 public class ConfigurationArchive {
@@ -43,28 +39,6 @@ public class ConfigurationArchive {
                                 ParametersConfigurationMapper.DEFAULT_PARAMETERS_FILE));
             }
             return mapper.read(zipFile.getInputStream(entry));
-        }
-    }
-
-    public void create(File envFolder, ParametersConfiguration parametersConfiguration) throws IOException {
-        addArchiveManifest(envFolder);
-        addParametersConfigurationFile(envFolder, parametersConfiguration);
-        ZipUtil.zip(envFolder.toPath(), configurationFile.toPath());
-    }
-
-    private void addParametersConfigurationFile(File envFolder, ParametersConfiguration parametersConfiguration)
-            throws IOException {
-        mapper.writeToFile(parametersConfiguration,
-                envFolder.toPath().resolve(ParametersConfigurationMapper.DEFAULT_PARAMETERS_FILE));
-    }
-
-    private void addArchiveManifest(File envFolder) throws IOException {
-        File manifestFile = new File(envFolder, "MANIFEST");
-        Properties props = new Properties();
-        props.put("builder.version", BarBuilder.builderVersion());
-        props.put("target.environment", envFolder.getName());
-        try (OutputStream out = new FileOutputStream(manifestFile)) {
-            props.store(out, null);
         }
     }
 
