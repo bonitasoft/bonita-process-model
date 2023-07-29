@@ -419,10 +419,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.sonatype.plugins</groupId>
-        <artifactId>nexus-staging-maven-plugin</artifactId>
-      </plugin>
       <!-- Configuration for test plugins/fragments -->
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
@@ -547,6 +543,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                 <phase>prepare-package</phase>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
           </plugin>
         </plugins>
       </build>
