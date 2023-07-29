@@ -51,11 +51,12 @@ class CreatePoolContractCustomMigrationTest {
         final BasicEList<Instance> uniquePoolEList = new BasicEList<Instance>();
         uniquePoolEList.add(originalPoolInstance);
         when(model.getAllInstances("process.Pool")).thenReturn(uniquePoolEList);
-        when(model.newInstance("process.Contract")).thenReturn(newContractInstance);
+
     }
 
     @Test
     void should_migrateAfter_add_an_empty_contract_to_a_pool() throws Exception {
+    	when(model.newInstance("process.Contract")).thenReturn(newContractInstance);
         customMigration.migrateAfter(model, metamodel);
         verify(originalPoolInstance).set("contract", newContractInstance);
     }

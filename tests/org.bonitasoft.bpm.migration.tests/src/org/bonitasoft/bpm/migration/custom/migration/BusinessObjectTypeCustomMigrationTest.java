@@ -55,13 +55,14 @@ class BusinessObjectTypeCustomMigrationTest {
         final EList<Instance> diagramList = new BasicEList<Instance>();
         diagramList.add(diagramInstance);
         when(model.getAllInstances("process.MainProcess")).thenReturn(diagramList);
-        when(model.newInstance("process.BusinessObjectType")).thenReturn(businessDataTypeInstance);
+
         final EList<Instance> emptyDatatypesList = new BasicEList<Instance>();
         when(diagramInstance.get("datatypes")).thenReturn(emptyDatatypesList);
     }
 
     @Test
     void should_migrateAfter_Add_the_businessObjectType_InDiagram_IfNotExists() throws Exception {
+        when(model.newInstance("process.BusinessObjectType")).thenReturn(businessDataTypeInstance);
         migrationUnderTest.migrateAfter(model, metamodel);
         verify(model).newInstance("process.BusinessObjectType");
         verify(businessDataTypeInstance).set("name", BusinessObjectTypeCustomMigration.BUSINESS_OBJECT_DATA_TYPE_NAME);

@@ -51,11 +51,12 @@ class CreateContractCustomMigrationTest {
         final BasicEList<Instance> uniqueTaskEList = new BasicEList<Instance>();
         uniqueTaskEList.add(originalTaskInstance);
         when(model.getAllInstances("process.Task")).thenReturn(uniqueTaskEList);
-        when(model.newInstance("process.Contract")).thenReturn(newContractInstance);
+
     }
 
     @Test
     void should_migrateAfter_add_an_empty_contract_to_a_task() throws Exception {
+    	when(model.newInstance("process.Contract")).thenReturn(newContractInstance);
         customMigration.migrateAfter(model, metamodel);
         verify(originalTaskInstance).set("contract", newContractInstance);
     }

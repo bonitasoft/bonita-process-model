@@ -19,6 +19,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.withSettings;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
@@ -29,6 +30,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
 
 @ExtendWith(MockitoExtension.class)
 class UpdateConnectorDefinitionMigrationTest {
@@ -110,14 +112,14 @@ class UpdateConnectorDefinitionMigrationTest {
     }
 
     private Instance aConnectorConfigurationInstance(final String definitionId, final String definitionVersion) {
-        final Instance instance = mock(Instance.class);
+        final Instance instance = mock(Instance.class, withSettings().strictness(Strictness.LENIENT));
         when(instance.get(UpdateConnectorDefinitionMigration.DEFINITION_ID_FEATURE_NAME)).thenReturn(definitionId);
         when(instance.get(UpdateConnectorDefinitionMigration.VERSION_FEATURE_NAME)).thenReturn(definitionVersion);
         return instance;
     }
 
     private Instance aConnectorInstance(final String definitionId, final String definitionVersion) {
-        final Instance instance = mock(Instance.class);
+        final Instance instance = mock(Instance.class, withSettings().strictness(Strictness.LENIENT));
         when(instance.get(UpdateConnectorDefinitionMigration.DEFINITION_ID_FEATURE_NAME)).thenReturn(definitionId);
         when(instance.get(UpdateConnectorDefinitionMigration.DEFINITION_VERSION_FEATURE_NAME))
                 .thenReturn(definitionVersion);
