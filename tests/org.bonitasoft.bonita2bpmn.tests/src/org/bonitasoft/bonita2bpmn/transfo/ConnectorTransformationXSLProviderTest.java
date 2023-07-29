@@ -15,19 +15,16 @@
 package org.bonitasoft.bonita2bpmn.transfo;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
 import org.assertj.core.util.Files;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-/**
- * @author Vincent Hemery
- */
-public class ConnectorTransformationXSLProviderTest {
+class ConnectorTransformationXSLProviderTest {
 
     /**
      * Test the default implementation of ConnectorTransformationXSLProvider in an OSGi environment
@@ -35,7 +32,7 @@ public class ConnectorTransformationXSLProviderTest {
      * @throws IOException
      */
     @Test
-    public void testDefaultInOsgi() throws IOException {
+    void testDefaultInOsgi() throws IOException {
         var instance = ConnectorTransformationXSLProvider.DEFAULT;
         File file = instance.getConnectorXSLFile();
         assertTrue(file.exists());

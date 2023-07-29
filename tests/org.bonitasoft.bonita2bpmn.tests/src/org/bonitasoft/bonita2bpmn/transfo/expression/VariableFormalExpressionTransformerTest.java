@@ -21,6 +21,7 @@ import static org.bonitasoft.bpm.model.process.builders.ActivityBuilder.anActivi
 import static org.bonitasoft.bpm.model.process.builders.DataBuilder.aData;
 import static org.bonitasoft.bpm.model.process.builders.PoolBuilder.aPool;
 import static org.bonitasoft.bpm.model.process.builders.StringDataTypeBuilder.aStringDataType;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import java.util.Collections;
@@ -32,20 +33,17 @@ import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.util.ExpressionConstants;
 import org.bonitasoft.bpm.model.util.IModelSearch;
 import org.bonitasoft.bpm.model.util.ModelSearch;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.omg.spec.bpmn.model.ModelFactory;
 import org.omg.spec.bpmn.model.TFormalExpression;
 import org.omg.spec.bpmn.model.TItemDefinition;
 
-/**
- * @author Romain Bioteau
- */
-@RunWith(MockitoJUnitRunner.class)
-public class VariableFormalExpressionTransformerTest {
+@ExtendWith(MockitoExtension.class)
+class VariableFormalExpressionTransformerTest {
 
     @Mock
     private DataScope dataScope;
@@ -54,28 +52,28 @@ public class VariableFormalExpressionTransformerTest {
 
     private IModelSearch modelSearch = new ModelSearch(Collections::emptyList);
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         variableFormalExpressionTransformer = new VariableFormalExpressionTransformer(dataScope, modelSearch);
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void should_transform_throw_an_IllegalArgumentException_if_expressionType_is_invalid() throws Exception {
-        variableFormalExpressionTransformer
-                .apply(anExpression().withExpressionType(ExpressionConstants.PARAMETER_TYPE).build());
-    }
+    @Test
+    void should_transform_throw_an_IllegalArgumentException_if_expressionType_is_invalid() throws Exception {
+        var expression = anExpression().withExpressionType(ExpressionConstants.PARAMETER_TYPE).build();
 
-    @Test(expected = IllegalArgumentException.class)
-    public void should_transform_throw_an_IllegalArgumentException_for_missing_referenced_element() throws Exception {
-        variableFormalExpressionTransformer
-                .apply(anExpression().withExpressionType(ExpressionConstants.VARIABLE_TYPE).build());
+        assertThrows(IllegalArgumentException.class, () -> variableFormalExpressionTransformer
+                .apply(expression));
     }
 
     @Test
-    public void should_transform_a_variable_expression_into_TFormalExpression() throws Exception {
+    void should_transform_throw_an_IllegalArgumentException_for_missing_referenced_element() throws Exception {
+        var expression = anExpression().withExpressionType(ExpressionConstants.VARIABLE_TYPE).build();
+
+        assertThrows(IllegalArgumentException.class, () -> variableFormalExpressionTransformer.apply(expression));
+    }
+
+    @Test
+    void should_transform_a_variable_expression_into_TFormalExpression() throws Exception {
         final Data data = aData().withName("name").build();
         final Expression expression = anExpression()
                 .withExpressionType(ExpressionConstants.VARIABLE_TYPE)
@@ -102,7 +100,7 @@ public class VariableFormalExpressionTransformerTest {
     }
 
     @Test
-    public void should_transform_a_variable_expression_into_TFormalExpression_for_transient_data() throws Exception {
+    void should_transform_a_variable_expression_into_TFormalExpression_for_transient_data() throws Exception {
         final Data data = aData().withName("name").isTransient().build();
         final Expression expression = anExpression()
                 .withExpressionType(ExpressionConstants.VARIABLE_TYPE)
