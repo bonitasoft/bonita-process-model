@@ -854,17 +854,15 @@ public class BonitaToBPMNExporter {
                     if (edge != null) {
                         bpmnPlane.getDiagramElement().add(edge);
                     }
-                    if (bonitaFlow.isIsDefault()) {
-                        if (bonitaFlow instanceof SequenceFlow) {
-                            if (source instanceof TInclusiveGateway) {
-                                ((TInclusiveGateway) source).setDefault(bpmnFlow.getId());
-                            } else if (source instanceof TExclusiveGateway) {
-                                ((TExclusiveGateway) source).setDefault(bpmnFlow.getId());
-                            } else if (source instanceof TComplexGateway) {
-                                ((TComplexGateway) source).setDefault(bpmnFlow.getId());
-                            } else if (source instanceof TActivity) {
-                                ((TActivity) source).setDefault(bpmnFlow.getId());
-                            }
+                    if (bonitaFlow.isIsDefault() && bonitaFlow instanceof SequenceFlow) {
+                        if (source instanceof TInclusiveGateway) {
+                            ((TInclusiveGateway) source).setDefault(bpmnFlow.getId());
+                        } else if (source instanceof TExclusiveGateway) {
+                            ((TExclusiveGateway) source).setDefault(bpmnFlow.getId());
+                        } else if (source instanceof TComplexGateway) {
+                            ((TComplexGateway) source).setDefault(bpmnFlow.getId());
+                        } else if (source instanceof TActivity) {
+                            ((TActivity) source).setDefault(bpmnFlow.getId());
                         }
                     }
                 }

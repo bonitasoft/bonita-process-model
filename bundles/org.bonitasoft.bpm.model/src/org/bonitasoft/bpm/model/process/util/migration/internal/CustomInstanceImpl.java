@@ -36,55 +36,47 @@ public class CustomInstanceImpl extends InstanceImpl {
                 this.add(feature, value);
             }
         } else {
-            //Bonita Patch for Notation model
-            if (newValue instanceof List<?> && feature.getEType() != null
-                    && feature.getEType().getInstanceClass() != null
-                    && Collection.class.isAssignableFrom(feature.getEType().getInstanceClass())) {
-                final Object oldValue = this.get(feature);
-                if (oldValue != newValue) {
-                    if (isSet(feature) && oldValue != null) {
-                        this.remove(feature, oldValue);
-                    }
-                    if (newValue != null) {
-                        this.add(feature, newValue);
-                    }
-                }
-            } else if (newValue instanceof List<?> && feature.getEType() != null
-                    && feature.getEType().isInstance(EcorePackage.Literals.EJAVA_OBJECT)) {
-                final Object oldValue = this.get(feature);
-                if (oldValue != newValue) {
-                    if (isSet(feature) && oldValue != null) {
-                        this.remove(feature, oldValue);
-                    }
-                    if (newValue != null) {
-                        this.add(feature, newValue);
-                    }
-                }
-            } else if (newValue instanceof List<?> && feature.getEType() != null
-                    && feature.getEType() instanceof EEnum) {
-                final Object oldValue = this.get(feature);
-                if (oldValue != newValue) {
-                    if (isSet(feature) && oldValue != null) {
-                        this.remove(feature, oldValue);
-                    }
-                    if (newValue != null) {
-                        this.add(feature, newValue);
-                    }
-                }
-            } else {
-                if (newValue instanceof List<?>) {
-                    throw new IllegalArgumentException("Single value expected, but list found"); //$NON-NLS-1$
-                }
-                final Object oldValue = this.get(feature);
-                if (oldValue != newValue || feature.isUnsettable()) {
-                    if (isSet(feature) && oldValue != null) {
-                        this.remove(feature, oldValue);
-                    }
-                    if (newValue != null || feature.isUnsettable()) {
-                        this.add(feature, newValue);
-                    }
-                }
+            addSingleValue(feature, newValue);
+        }
+    }
+
+    private void addSingleValue(EStructuralFeature feature, Object newValue) {
+        //Bonita Patch for Notation model
+        if (newValue instanceof List<?> && feature.getEType() != null
+                && feature.getEType().getInstanceClass() != null
+                && Collection.class.isAssignableFrom(feature.getEType().getInstanceClass())) {
+            addNewValue(feature, newValue);
+        } else if (newValue instanceof List<?> && feature.getEType() != null
+                && (feature.getEType().isInstance(EcorePackage.Literals.EJAVA_OBJECT)
+                        || feature.getEType() instanceof EEnum)) {
+            addNewValue(feature, newValue);
+        } else {
+            addValue(feature, newValue);
+        }
+    }
+
+    private void addValue(EStructuralFeature feature, Object newValue) {
+        if (newValue instanceof List<?>) {
+            throw new IllegalArgumentException("Single value expected, but list found"); //$NON-NLS-1$
+        }
+        final Object oldValue = this.get(feature);
+        if (oldValue != newValue || feature.isUnsettable()) {
+            if (isSet(feature) && oldValue != null) {
+                this.remove(feature, oldValue);
             }
+            if (newValue != null || feature.isUnsettable()) {
+                this.add(feature, newValue);
+            }
+        }
+    }
+
+    private void addNewValue(EStructuralFeature feature, Object newValue) {
+        final Object oldValue = this.get(feature);
+        if (oldValue != newValue) {
+            if (isSet(feature) && oldValue != null) {
+                this.remove(feature, oldValue);
+            }
+            this.add(feature, newValue);
         }
     }
 
