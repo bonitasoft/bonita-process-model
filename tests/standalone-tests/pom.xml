@@ -22,7 +22,7 @@
     <junit.version>5.9.3</junit.version>
     <assertj-core.version>3.24.2</assertj-core.version>
     <logback.version>1.2.12</logback.version>
-	<sonar.tests>src/test/java</sonar.tests>
+    <sonar.tests>src/test/java</sonar.tests>
   </properties>
   <dependencyManagement>
     <dependencies>

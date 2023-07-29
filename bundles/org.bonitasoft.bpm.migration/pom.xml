@@ -11,6 +11,6 @@
   <packaging>eclipse-plugin</packaging>
   <name>Bonita Model Migration</name>
   <properties>
-	  <sonar.sources>src</sonar.sources>
+    <sonar.sources>src</sonar.sources>
   </properties>
 </project>
