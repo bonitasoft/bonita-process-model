@@ -31,9 +31,9 @@ import org.omg.spec.bpmn.model.TFormalExpression;
  */
 public class FormalExpressionFunction implements Function<Expression, TFormalExpression> {
 
-	private static final String XPATH_LANGUAGE_NS = "http://www.w3.org/1999/XPath";
-	public static final String JAVA_XMLNS = "java";
-	
+    static final String XPATH_LANGUAGE_NS = "http://www.w3.org/1999/XPath";
+    public static final String JAVA_XMLNS = "java";
+
     protected QName newQName(final String nsPrefix, final String typeRef) {
         return QName.valueOf(nsPrefix + ":" + typeRef);
     }

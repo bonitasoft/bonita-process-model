@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bonita2bpmn.tests.transfo;
+package org.bonitasoft.bonita2bpmn.transfo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 
 import org.assertj.core.util.Files;
-import org.bonitasoft.bonita2bpmn.transfo.ConnectorTransformationXSLProvider;
 import org.junit.Test;
 
 /**

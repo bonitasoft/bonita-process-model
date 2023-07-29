@@ -12,15 +12,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bonita2bpmn.tests.transfo.expression;
+package org.bonitasoft.bonita2bpmn.transfo.expression;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bonitasoft.bpm.model.expression.builders.ExpressionBuilder.anExpression;
 
 import javax.xml.namespace.QName;
 
-import org.bonitasoft.bonita2bpmn.transfo.BPMNConstants;
-import org.bonitasoft.bonita2bpmn.transfo.expression.FormalExpressionFunction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -64,7 +62,7 @@ public class FormalExpressionFunctionTest {
         assertThat(formalExpression).isNotNull();
         assertThat(formalExpression.getId()).isNotEmpty();
         assertThat(formalExpression.getEvaluatesToTypeRef()).isEqualTo(QName.valueOf("java:java.lang.String"));
-        assertThat(formalExpression.getLanguage()).isEqualTo(BPMNConstants.XPATH_LANGUAGE_NS);
+        assertThat(formalExpression.getLanguage()).isEqualTo(FormalExpressionFunction.XPATH_LANGUAGE_NS);
         assertThat(formalExpression.getMixed().getValue(0)).isEqualTo("some content");
     }
 

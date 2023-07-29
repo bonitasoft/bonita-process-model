@@ -12,12 +12,11 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bonita2bpmn.tests.transfo.data;
+package org.bonitasoft.bonita2bpmn.transfo.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bonitasoft.bpm.model.process.builders.XMLDataBuilder.anXMLData;
 
-import org.bonitasoft.bonita2bpmn.transfo.data.XMLNamespaceResolver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

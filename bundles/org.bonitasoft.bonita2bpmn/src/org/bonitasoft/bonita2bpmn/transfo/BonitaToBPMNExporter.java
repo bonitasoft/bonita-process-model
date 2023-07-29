@@ -206,7 +206,7 @@ import org.omg.spec.dd.dc.Bounds;
 public class BonitaToBPMNExporter {
 
     private static final String EVENTDEF_PREFIX = "eventdef-";
-	private static final String DEFAULT_DATE_FORMAT = "yyyy/MM/dd/HH/mm/ss";
+    private static final String DEFAULT_DATE_FORMAT = "yyyy/MM/dd/HH/mm/ss";
     private static final String DISPLAY_DATE_FORMAT = "yyyy/MM/dd HH:mm:ss";
     private static final String XMLNS_HTTP_BONITASOFT_COM_BONITA_CONNECTOR_DEFINITION = "bonitaConnector";
     private static final String JAVA_XMLNS = "java";

@@ -12,14 +12,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bonita2bpmn.tests.transfo.expression;
+package org.bonitasoft.bonita2bpmn.transfo.expression;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bonitasoft.bpm.model.expression.builders.ExpressionBuilder.anExpression;
 
 import javax.xml.namespace.QName;
 
-import org.bonitasoft.bonita2bpmn.transfo.expression.ScriptFormalExpressionFunction;
 import org.bonitasoft.bpm.model.util.ExpressionConstants;
 import org.junit.After;
 import org.junit.Before;

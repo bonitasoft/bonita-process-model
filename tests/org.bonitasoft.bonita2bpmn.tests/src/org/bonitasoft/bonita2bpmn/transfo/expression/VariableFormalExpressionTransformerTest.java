@@ -12,7 +12,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bonita2bpmn.tests.transfo.expression;
+package org.bonitasoft.bonita2bpmn.transfo.expression;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bonitasoft.bpm.model.expression.builders.ExpressionBuilder.anExpression;
@@ -25,9 +25,7 @@ import static org.mockito.Mockito.when;
 
 import java.util.Collections;
 
-import org.bonitasoft.bonita2bpmn.transfo.BPMNConstants;
 import org.bonitasoft.bonita2bpmn.transfo.data.DataScope;
-import org.bonitasoft.bonita2bpmn.transfo.expression.VariableFormalExpressionTransformer;
 import org.bonitasoft.bpm.model.expression.Expression;
 import org.bonitasoft.bpm.model.process.Data;
 import org.bonitasoft.bpm.model.process.Pool;
@@ -99,7 +97,7 @@ public class VariableFormalExpressionTransformerTest {
 
         assertThat(tFormalExpression).isNotNull();
         assertThat(tFormalExpression.getId()).isNotNull();
-        assertThat(tFormalExpression.getLanguage()).isEqualTo(BPMNConstants.XPATH_LANGUAGE_NS);
+        assertThat(tFormalExpression.getLanguage()).isEqualTo(FormalExpressionFunction.XPATH_LANGUAGE_NS);
         assertThat(tFormalExpression.getMixed().get(0).getValue()).isEqualTo("getDataObject('name')");
     }
 
@@ -127,7 +125,7 @@ public class VariableFormalExpressionTransformerTest {
 
         assertThat(tFormalExpression).isNotNull();
         assertThat(tFormalExpression.getId()).isNotNull();
-        assertThat(tFormalExpression.getLanguage()).isEqualTo(BPMNConstants.XPATH_LANGUAGE_NS);
+        assertThat(tFormalExpression.getLanguage()).isEqualTo(FormalExpressionFunction.XPATH_LANGUAGE_NS);
         assertThat(tFormalExpression.getMixed().get(0).getValue()).isEqualTo("getActivityProperty('process','name')");
     }
 }

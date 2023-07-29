@@ -58,7 +58,7 @@ public class CustomAnchor extends SlidableAnchor {
                     ownReference.setPreciseX(preciseOrthoReference.preciseX());
                     orientation = PositionConstants.VERTICAL;
                     break;
-               default:
+                default:
                     throw new IllegalArgumentException(String.format("Position %s not supported", side));
             }
         } else if (preciseOrthoReference.preciseX >= bounds.preciseX

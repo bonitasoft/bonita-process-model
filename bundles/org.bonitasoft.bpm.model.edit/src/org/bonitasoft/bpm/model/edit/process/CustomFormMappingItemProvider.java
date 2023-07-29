@@ -37,7 +37,7 @@ public class CustomFormMappingItemProvider extends FormMappingItemProvider {
             case URL:
                 final String url = mapping.getUrl();
                 return isOverview(mapping) ? NLS.bind(Messages.overviewUrlFormMapping, url)
-                        :  NLS.bind(Messages.urlFormMapping, url);
+                        : NLS.bind(Messages.urlFormMapping, url);
             case INTERNAL:
             default:
                 return super.getText(object);

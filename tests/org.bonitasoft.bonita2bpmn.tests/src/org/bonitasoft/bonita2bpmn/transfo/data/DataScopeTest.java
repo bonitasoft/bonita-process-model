@@ -12,15 +12,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bonita2bpmn.tests.transfo.data;
+package org.bonitasoft.bonita2bpmn.transfo.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bonitasoft.bpm.model.process.builders.DataBuilder.aData;
 import static org.bonitasoft.bpm.model.process.builders.PoolBuilder.aPool;
 import static org.mockito.Mockito.when;
 
-import org.bonitasoft.bonita2bpmn.transfo.data.DataScope;
-import org.bonitasoft.bonita2bpmn.transfo.data.ItemDefinitionFunction;
 import org.bonitasoft.bpm.model.process.Data;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.ProcessFactory;
