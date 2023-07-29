@@ -40,7 +40,7 @@ public class CustomActorMappingItemProvider extends ActorMappingItemProvider {
 
     @Override
     public Collection<?> getElements(Object object) {
-        List<Object> result = new ArrayList<Object>();
+        List<Object> result = new ArrayList<>();
         if (object instanceof ActorMapping) {
             result.add(((ActorMapping) object).getGroups());
             result.add(((ActorMapping) object).getRoles());

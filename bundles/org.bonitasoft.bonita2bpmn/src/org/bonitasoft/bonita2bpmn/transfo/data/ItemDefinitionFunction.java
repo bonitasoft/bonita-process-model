@@ -20,7 +20,7 @@ import java.util.function.Function;
 
 import javax.xml.namespace.QName;
 
-import org.bonitasoft.bonita2bpmn.transfo.BPMNConstants;
+import org.bonitasoft.bonita2bpmn.transfo.expression.FormalExpressionFunction;
 import org.bonitasoft.bpm.model.process.Data;
 import org.bonitasoft.bpm.model.process.XMLData;
 import org.bonitasoft.bpm.model.process.util.DataUtil;
@@ -34,7 +34,7 @@ import org.omg.spec.bpmn.model.TItemDefinition;
 /**
  * @author Romain Bioteau
  */
-public class ItemDefinitionFunction implements Function<Data, TItemDefinition>, BPMNConstants {
+public class ItemDefinitionFunction implements Function<Data, TItemDefinition> {
 
     private final TDefinitions bpmnDefinitions;
     private final XMLNamespaceResolver xmlNamespaceResolver;
@@ -70,7 +70,7 @@ public class ItemDefinitionFunction implements Function<Data, TItemDefinition>, 
             return QName.valueOf(xmlnsDataType + ":" + xmlData.getType());
         }
         final String qualifiedClassName = DataUtil.getTechnicalTypeFor(data);
-        return QName.valueOf(JAVA_XMLNS + ":" + qualifiedClassName);
+        return QName.valueOf(FormalExpressionFunction.JAVA_XMLNS + ":" + qualifiedClassName);
     }
 
 }

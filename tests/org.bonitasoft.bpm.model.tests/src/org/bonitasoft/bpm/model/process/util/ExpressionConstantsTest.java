@@ -14,21 +14,21 @@
  */
 package org.bonitasoft.bpm.model.process.util;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.bonitasoft.bpm.model.util.ExpressionConstants;
 import org.bonitasoft.engine.expression.ExpressionInterpreter;
 import org.bonitasoft.engine.expression.ExpressionType;
 import org.bonitasoft.engine.operation.LeftOperand;
 import org.bonitasoft.engine.operation.OperatorType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test that values in {@link ExpressionConstants} are still in sync with runtime definition
  * 
  * @author Vincent Hemery
  */
-public class ExpressionConstantsTest {
+class ExpressionConstantsTest {
 
     /**
      * Test that values in {@link ExpressionConstants} are still in sync with runtime definition.
@@ -38,7 +38,7 @@ public class ExpressionConstantsTest {
      */
     @Test
     @SuppressWarnings("java:S3415")
-    public void testExpressionConstantsAreSyncWithRuntime() throws Exception {
+    void testExpressionConstantsAreSyncWithRuntime() throws Exception {
         assertEquals(ExpressionType.TYPE_CONSTANT.name(), ExpressionConstants.CONSTANT_TYPE);
         assertEquals(ExpressionType.TYPE_CONDITION.name(), ExpressionConstants.CONDITION_TYPE);
         assertEquals(ExpressionType.TYPE_READ_ONLY_SCRIPT.name(), ExpressionConstants.SCRIPT_TYPE);

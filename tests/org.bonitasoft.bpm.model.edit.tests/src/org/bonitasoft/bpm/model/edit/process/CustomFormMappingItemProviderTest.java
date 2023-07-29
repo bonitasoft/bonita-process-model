@@ -14,7 +14,7 @@
  */
 package org.bonitasoft.bpm.model.edit.process;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.bonitasoft.bpm.model.edit.i18n.Messages;
 import org.bonitasoft.bpm.model.expression.Expression;
@@ -24,26 +24,20 @@ import org.bonitasoft.bpm.model.process.FormMappingType;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.ProcessFactory;
 import org.bonitasoft.bpm.model.process.provider.ProcessItemProviderAdapterFactory;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-/**
- * @author Romain Bioteau
- */
-public class CustomFormMappingItemProviderTest {
+class CustomFormMappingItemProviderTest {
 
     private CustomFormMappingItemProvider customFormMappingItemProvider;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         customFormMappingItemProvider = new CustomFormMappingItemProvider(new ProcessItemProviderAdapterFactory());
     }
 
-    @Test
-    public void should_display_internal_mode_form_mapping() throws Exception {
+    @org.junit.jupiter.api.Test
+    void should_display_internal_mode_form_mapping() throws Exception {
         //Given
         final Expression expression = ExpressionFactory.eINSTANCE.createExpression();
         expression.setName("Step1 form");
@@ -59,7 +53,7 @@ public class CustomFormMappingItemProviderTest {
     }
 
     @Test
-    public void should_display_url_for_url_form_mapping() throws Exception {
+    void should_display_url_for_url_form_mapping() throws Exception {
         //Given
         final FormMapping urlFormMapping = ProcessFactory.eINSTANCE.createFormMapping();
         urlFormMapping.setType(FormMappingType.URL);
@@ -73,7 +67,7 @@ public class CustomFormMappingItemProviderTest {
     }
 
     @Test
-    public void should_display_when_url_form_mapping_is_for_overview() throws Exception {
+    void should_display_when_url_form_mapping_is_for_overview() throws Exception {
         //Given
         final Pool pool = ProcessFactory.eINSTANCE.createPool();
         final FormMapping overviewFormMapping = ProcessFactory.eINSTANCE.createFormMapping();

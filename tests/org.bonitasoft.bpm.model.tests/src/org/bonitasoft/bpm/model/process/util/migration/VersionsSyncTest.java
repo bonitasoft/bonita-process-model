@@ -22,17 +22,17 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.edapt.spi.history.History;
 import org.eclipse.emf.edapt.spi.history.HistoryPackage;
 import org.eclipse.emf.edapt.spi.history.Release;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.Version;
 
 /**
  * This test ensures the model version is consistent with the model version.
  */
-public class VersionsSyncTest {
+class VersionsSyncTest {
 
     @Test
-    public void testModelVersionAgainstComponent() throws Exception {
+    void testModelVersionAgainstComponent() throws Exception {
         // get model version from history
         String modelVersion = HistoryUtils.CURRENT_MODEL_VERSION;
         // model version must be just the major ! No minor allowed.
@@ -45,7 +45,7 @@ public class VersionsSyncTest {
     }
 
     @Test
-    public void shouldHistoryLastReleaseHaveNoNameNorDate() throws Exception {
+    void shouldHistoryLastReleaseHaveNoNameNorDate() throws Exception {
         // make sure History metamodel is loaded first
         HistoryPackage.eINSTANCE.getHistory();
         // now get versions from history

@@ -14,20 +14,20 @@
  */
 package org.bonitasoft.bpm.model.process.util.migration;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.bonitasoft.bpm.model.util.ModelLoader;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests migration of a process model from an older model version
  * 
  * @author Vincent Hemery
  */
-public class ProcessMigrationTest {
+class ProcessMigrationTest {
 
     /** Prefix for model URI strings */
     private static final String PREFIX = "/org.bonitasoft.bpm.model.tests/resources/";
@@ -38,7 +38,7 @@ public class ProcessMigrationTest {
     private static final URI PROC_8_MODEL_URI = URI.createPlatformPluginURI(PREFIX + "MyDiagram-8.proc", false);
 
     @Test
-    public void testModelMigration_7_12_0() throws Exception {
+    void testModelMigration_7_12_0() throws Exception {
         // load both models
         Resource oldModel = ModelLoader.getInstance().loadModel(PROC_7_12_0_MODEL_URI);
         assertTrue(oldModel.isLoaded());

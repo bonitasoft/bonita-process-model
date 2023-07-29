@@ -19,24 +19,21 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.withSettings;
 
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.Metamodel;
 import org.eclipse.emf.edapt.spi.migration.Model;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.quality.Strictness;
 
-/**
- * @author Romain Bioteau
- */
-@RunWith(MockitoJUnitRunner.class)
-public class UpdateConnectorDefinitionMigrationTest {
+@ExtendWith(MockitoExtension.class)
+class UpdateConnectorDefinitionMigrationTest {
 
     @Mock
     private Model model;
@@ -47,22 +44,8 @@ public class UpdateConnectorDefinitionMigrationTest {
     @Mock
     private UpdateConnectorDefinitionMigration updateConnectorVersionMigration;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-    }
-
     @Test
-    public void should_migrateAfter_update_definitionVersion_in_connector() throws Exception {
+    void should_migrateAfter_update_definitionVersion_in_connector() throws Exception {
         //Given
         doCallRealMethod().when(updateConnectorVersionMigration).migrateAfter(model, metamodel);
         final EList<Instance> connectorInstanceList = connectorInstanceList("id1", "id2");
@@ -88,7 +71,7 @@ public class UpdateConnectorDefinitionMigrationTest {
     }
 
     @Test
-    public void should_migrateAfter_update_version_in_connector_configuration() throws Exception {
+    void should_migrateAfter_update_version_in_connector_configuration() throws Exception {
         //Given
         doCallRealMethod().when(updateConnectorVersionMigration).migrateAfter(model, metamodel);
         final EList<Instance> connectorConfigInstanceList = connectorConfiguratiobInstanceList("id1", "id2");
@@ -129,14 +112,14 @@ public class UpdateConnectorDefinitionMigrationTest {
     }
 
     private Instance aConnectorConfigurationInstance(final String definitionId, final String definitionVersion) {
-        final Instance instance = mock(Instance.class);
+        final Instance instance = mock(Instance.class, withSettings().strictness(Strictness.LENIENT));
         when(instance.get(UpdateConnectorDefinitionMigration.DEFINITION_ID_FEATURE_NAME)).thenReturn(definitionId);
         when(instance.get(UpdateConnectorDefinitionMigration.VERSION_FEATURE_NAME)).thenReturn(definitionVersion);
         return instance;
     }
 
     private Instance aConnectorInstance(final String definitionId, final String definitionVersion) {
-        final Instance instance = mock(Instance.class);
+        final Instance instance = mock(Instance.class, withSettings().strictness(Strictness.LENIENT));
         when(instance.get(UpdateConnectorDefinitionMigration.DEFINITION_ID_FEATURE_NAME)).thenReturn(definitionId);
         when(instance.get(UpdateConnectorDefinitionMigration.DEFINITION_VERSION_FEATURE_NAME))
                 .thenReturn(definitionVersion);

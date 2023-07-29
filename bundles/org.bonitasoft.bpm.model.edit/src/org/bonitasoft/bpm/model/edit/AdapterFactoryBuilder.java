@@ -40,12 +40,6 @@ import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory
 public class AdapterFactoryBuilder {
 
     /**
-     * Default Constructor.
-     */
-    public AdapterFactoryBuilder() {
-    }
-
-    /**
      * Create a complete adapter factory, ready to use.
      * 
      * @return composed adapter factory

@@ -149,6 +149,7 @@ public class SingleResourceMigrator extends Migrator {
      *        Progress monitor
      * @return The model in a {@link ResourceSet}
      */
+    @Override
     public ResourceSet migrateAndLoad(List<URI> modelURIs,
             Release sourceRelease, Release targetRelease,
             IProgressMonitor monitor) throws MigrationException {
@@ -156,94 +157,7 @@ public class SingleResourceMigrator extends Migrator {
         if (model == null) {
             return null;
         }
-        final MaterializingBackwardConverter converter = new MaterializingBackwardConverter() {
-
-            /*
-             * (non-Javadoc)
-             * @see org.eclipse.emf.edapt.internal.migration.internal.BackwardConverter#initResources(org.eclipse.emf.edapt.spi.migration.Model)
-             */
-            @Override
-            protected ResourceSet initResources(Model model) {
-                // like super, but also use the content type recognition to use ProcessResource and its options.
-                final ResourceSet resourceSet = new ResourceSetImpl() {
-
-                    /*
-                     * (non-Javadoc)
-                     * @see org.eclipse.emf.ecore.resource.impl.ResourceSetImpl#createResource(org.eclipse.emf.common.util.URI)
-                     */
-                    @Override
-                    public Resource createResource(URI uri) {
-                        return createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
-                    }
-                };
-                ResourceUtils.register(model.getMetamodel().getEPackages(),
-                        resourceSet.getPackageRegistry());
-                for (final ModelResource modelResource : model.getResources()) {
-                    final Resource resource = resourceSet.createResource(modelResource
-                            .getUri());
-                    if (resource instanceof XMLResource) {
-                        final XMLResource xmlResource = (XMLResource) resource;
-                        if (modelResource.getEncoding() != null) {
-                            xmlResource.setEncoding(modelResource.getEncoding());
-                        }
-                    }
-                    for (final Instance element : modelResource.getRootInstances()) {
-                        resource.getContents().add(resolve(element));
-                    }
-                }
-                return resourceSet;
-            }
-
-            /*
-             * (non-Javadoc)
-             * @see org.eclipse.emf.edapt.internal.migration.internal.MaterializingBackwardConverter#resolveEClass(org.eclipse.emf.ecore.EClass)
-             */
-            @Override
-            protected EClass resolveEClass(EClass eClass) {
-                // support unknown EClasses without registered package
-                if (!eClass.getESuperTypes().contains(XMLTypePackage.Literals.ANY_TYPE)) {
-                    return super.resolveEClass(eClass);
-                } else {
-                    // this is a generated unknown type, skip resolution
-                    return eClass;
-                }
-            }
-
-            /*
-             * (non-Javadoc)
-             * @see org.eclipse.emf.edapt.internal.migration.internal.BackwardConverter#initProperties(org.eclipse.emf.edapt.spi.migration.Instance)
-             */
-            @Override
-            protected void initProperties(Instance element) {
-                Optional<EClass> instanceEClass = Optional.of(element).map(Instance::getEClass)
-                        .filter(Objects::nonNull);
-                if (instanceEClass.filter(ec -> !ec.getESuperTypes().contains(XMLTypePackage.Literals.ANY_TYPE))
-                        .isPresent()) {
-                    super.initProperties(element);
-                } else {
-                    // this is a generated unknown type, copy properties as FeatureMap
-                    final AnyType eObject = (AnyType) resolve(element);
-                    for (final Slot slot : element.getSlots()) {
-                        final EStructuralFeature sourceFeature = slot.getEFeature();
-                        final EStructuralFeature targetFeature = resolveFeature(sourceFeature);
-                        if (ignore(sourceFeature)) {
-                            continue;
-                        }
-                        if (slot instanceof AttributeSlot) {
-                            // either "mixed" or "any" or "anyAttribute"
-                            if (Entry.class.isAssignableFrom(sourceFeature.getEType().getInstanceClass())) {
-                                FeatureMap objectFeatureMap = (FeatureMap) eObject.eGet(targetFeature);
-                                UpdatingList valuesMap = element.get(sourceFeature);
-                                for (Object v : valuesMap) {
-                                    Entry e = (Entry) v;
-                                    objectFeatureMap.add(e.getEStructuralFeature(), e.getValue());
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        };
+        final MaterializingBackwardConverter converter = new CustomMaterializingBackwardConverter();
         return converter.convert(model);
     }
 
@@ -268,6 +182,93 @@ public class SingleResourceMigrator extends Migrator {
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             EcorePlugin.INSTANCE.log(e);
             return null;
+        }
+    }
+
+    static class CustomMaterializingBackwardConverter extends MaterializingBackwardConverter {
+
+        /*
+         * (non-Javadoc)
+         * @see org.eclipse.emf.edapt.internal.migration.internal.BackwardConverter#initResources(org.eclipse.emf.edapt.spi.migration.Model)
+         */
+        @Override
+        protected ResourceSet initResources(Model model) {
+            // like super, but also use the content type recognition to use ProcessResource and its options.
+            final ResourceSet resourceSet = new ResourceSetImpl() {
+
+                /*
+                 * (non-Javadoc)
+                 * @see org.eclipse.emf.ecore.resource.impl.ResourceSetImpl#createResource(org.eclipse.emf.common.util.URI)
+                 */
+                @Override
+                public Resource createResource(URI uri) {
+                    return createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+                }
+            };
+            ResourceUtils.register(model.getMetamodel().getEPackages(),
+                    resourceSet.getPackageRegistry());
+            for (final ModelResource modelResource : model.getResources()) {
+                final Resource resource = resourceSet.createResource(modelResource
+                        .getUri());
+                if (resource instanceof XMLResource) {
+                    final XMLResource xmlResource = (XMLResource) resource;
+                    if (modelResource.getEncoding() != null) {
+                        xmlResource.setEncoding(modelResource.getEncoding());
+                    }
+                }
+                for (final Instance element : modelResource.getRootInstances()) {
+                    resource.getContents().add(resolve(element));
+                }
+            }
+            return resourceSet;
+        }
+
+        /*
+         * (non-Javadoc)
+         * @see org.eclipse.emf.edapt.internal.migration.internal.MaterializingBackwardConverter#resolveEClass(org.eclipse.emf.ecore.EClass)
+         */
+        @Override
+        protected EClass resolveEClass(EClass eClass) {
+            // support unknown EClasses without registered package
+            if (!eClass.getESuperTypes().contains(XMLTypePackage.Literals.ANY_TYPE)) {
+                return super.resolveEClass(eClass);
+            } else {
+                // this is a generated unknown type, skip resolution
+                return eClass;
+            }
+        }
+
+        /*
+         * (non-Javadoc)
+         * @see org.eclipse.emf.edapt.internal.migration.internal.BackwardConverter#initProperties(org.eclipse.emf.edapt.spi.migration.Instance)
+         */
+        @Override
+        protected void initProperties(Instance element) {
+            Optional<EClass> instanceEClass = Optional.of(element).map(Instance::getEClass)
+                    .filter(Objects::nonNull);
+            if (instanceEClass.filter(ec -> !ec.getESuperTypes().contains(XMLTypePackage.Literals.ANY_TYPE))
+                    .isPresent()) {
+                super.initProperties(element);
+            } else {
+                // this is a generated unknown type, copy properties as FeatureMap
+                final AnyType eObject = (AnyType) resolve(element);
+                for (final Slot slot : element.getSlots()) {
+                    final EStructuralFeature sourceFeature = slot.getEFeature();
+                    final EStructuralFeature targetFeature = resolveFeature(sourceFeature);
+                    if (ignore(sourceFeature)) {
+                        continue;
+                    }
+                    if (slot instanceof AttributeSlot
+                            && Entry.class.isAssignableFrom(sourceFeature.getEType().getInstanceClass())) {
+                        FeatureMap objectFeatureMap = (FeatureMap) eObject.eGet(targetFeature);
+                        UpdatingList<?> valuesMap = element.get(sourceFeature);
+                        for (Object v : valuesMap) {
+                            Entry e = (Entry) v;
+                            objectFeatureMap.add(e.getEStructuralFeature(), e.getValue());
+                        }
+                    }
+                }
+            }
         }
     }
 }

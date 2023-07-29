@@ -55,6 +55,10 @@ public class HistoryUtils {
     /** path to Edapt history file within the plugin */
     private static final String MIGRATION_HISTORY_PATH = "model/process.history";
 
+    private HistoryUtils() {
+        // private constructor
+    }
+
     /**
      * Get URI to migration history file
      * 

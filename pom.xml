@@ -41,6 +41,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <module>features/</module>
     <module>tests/</module>
     <module>sites/</module>
+    <module>releng/coverage-report</module>
   </modules>
   <scm child.scm.connection.inherit.append.path="false" child.scm.developerConnection.inherit.append.path="false" child.scm.url.inherit.append.path="false">
     <connection>scm:git:https://github.com/bonitasoft/bonita-process-model.git</connection>
@@ -62,6 +63,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
   <properties>
     <cyclonedx.version>2.7.9</cyclonedx.version>
     <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+    <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
     <tycho.version>4.0.0</tycho.version>
     <emf-ecore.version>2.27.0</emf-ecore.version>
     <emf-common.version>2.25.0</emf-common.version>
@@ -97,6 +99,12 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <sonar.organization>bonitasoft</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.exclusions>src-gen/**/*</sonar.exclusions>
+    <sonar.sources></sonar.sources>
+    <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/releng/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    <!-- <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths> -->
+    <!-- <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/releng/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths> -->
+    <!--    <jacoco.destFile>${maven.multiModuleProjectDirectory}/target/jacoco.exec</jacoco.destFile>-->
+    <!--    <sonar.jacoco.reportPath>${jacoco.destFile}</sonar.jacoco.reportPath>-->
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.version>11</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
@@ -179,6 +187,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
           <version>${sonar-maven-plugin.version}</version>
         </plugin>
         <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco-maven-plugin.version}</version>
+        </plugin>
+        <plugin>
           <artifactId>maven-archetype-plugin</artifactId>
           <version>${archetype-packaging.version}</version>
         </plugin>
@@ -226,7 +239,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
             <keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure>
             <serverId>ossrh</serverId>
             <nexusUrl>https://oss.sonatype.org</nexusUrl>
-            <skipNexusStagingDeployMojo>${maven.deploy.skip}</skipNexusStagingDeployMojo>
+            <skipStaging>${maven.deploy.skip}</skipStaging>
           </configuration>
         </plugin>
         <plugin>
@@ -416,6 +429,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         <artifactId>tycho-surefire-plugin</artifactId>
         <configuration>
           <!-- No UI test for this component -->
+          <useUIThread>false</useUIThread>
           <useUIHarness>false</useUIHarness>
         </configuration>
       </plugin>
@@ -486,11 +500,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         </file>
       </activation>
       <properties>
-        <maven.deploy.skip>true</maven.deploy.skip>
-        <maven.source.skip>true</maven.source.skip>
-        <!-- Workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=397015 -->
         <sonar.sources></sonar.sources>
         <sonar.tests>src</sonar.tests>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.source.skip>true</maven.source.skip>
       </properties>
     </profile>
     <!-- do not deploy target definitions -->
@@ -534,6 +547,50 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                 <phase>prepare-package</phase>
               </execution>
             </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>jacoco</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <configuration>
+              <skip>${skipTests}</skip>
+            </configuration>
+            <executions>
+              <execution>
+                <id>prepare-agent</id>
+                <goals>
+                  <goal>prepare-agent</goal>
+                </goals>
+                <configuration>
+                  <propertyName>jacocoAgentArgs</propertyName>
+                </configuration>
+              </execution>
+              <execution>
+                <id>prepare-agent-integration</id>
+                <goals>
+                  <goal>prepare-agent-integration</goal>
+                </goals>
+                <configuration>
+                  <propertyName>jacocoItAgentArgs</propertyName>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>tycho-surefire-plugin</artifactId>
+            <configuration>
+              <argLine>${jacocoAgentArgs}</argLine>
+            </configuration>
           </plugin>
         </plugins>
       </build>

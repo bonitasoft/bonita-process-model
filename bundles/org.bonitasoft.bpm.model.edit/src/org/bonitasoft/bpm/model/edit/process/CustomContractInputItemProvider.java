@@ -125,10 +125,7 @@ public class CustomContractInputItemProvider
                         while (!(current instanceof Contract)) {
                             current = current.eContainer();
                         }
-                        if (current != null) {
-                            current = current.eContainer();
-                        }
-                        return current;
+                        return current.eContainer();
                     }
                 });
     }

@@ -14,9 +14,9 @@
  */
 package org.bonitasoft.bpm.model.edit.process;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,12 +32,12 @@ import org.bonitasoft.bpm.model.process.ProcessFactory;
 import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.process.Task;
 import org.bonitasoft.bpm.model.process.provider.ProcessItemProviderAdapterFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class CustomContractInputItemProviderTest {
+class CustomContractInputItemProviderTest {
 
     @Test
-    public void should_display_string_type_next_to_TEXT_contract_type() throws Exception {
+    void should_display_string_type_next_to_TEXT_contract_type() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 
@@ -51,7 +51,7 @@ public class CustomContractInputItemProviderTest {
     }
 
     @Test
-    public void should_display_integer_type_next_to_INTEGER_contract_type() throws Exception {
+    void should_display_integer_type_next_to_INTEGER_contract_type() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 
@@ -66,7 +66,7 @@ public class CustomContractInputItemProviderTest {
     }
 
     @Test
-    public void should_display_boolean_type_next_to_BOOLEAN_contract_type() throws Exception {
+    void should_display_boolean_type_next_to_BOOLEAN_contract_type() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 
@@ -81,7 +81,7 @@ public class CustomContractInputItemProviderTest {
     }
 
     @Test
-    public void should_display_double_type_next_to_DECIMAL_contract_type() throws Exception {
+    void should_display_double_type_next_to_DECIMAL_contract_type() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 
@@ -96,7 +96,7 @@ public class CustomContractInputItemProviderTest {
     }
 
     @Test
-    public void should_display_date_only_for_LOCALDATE_contract_type() throws Exception {
+    void should_display_date_only_for_LOCALDATE_contract_type() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 
@@ -111,7 +111,7 @@ public class CustomContractInputItemProviderTest {
     }
 
     @Test
-    public void should_display_date_and_time_for_LOCALDATETIME_contract_type() throws Exception {
+    void should_display_date_and_time_for_LOCALDATETIME_contract_type() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 
@@ -126,7 +126,7 @@ public class CustomContractInputItemProviderTest {
     }
 
     @Test
-    public void should_display_date_and_time_for_OFFSETDATETIME_contract_type() throws Exception {
+    void should_display_date_and_time_for_OFFSETDATETIME_contract_type() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 
@@ -141,7 +141,7 @@ public class CustomContractInputItemProviderTest {
     }
 
     @Test
-    public void should_display_FileInputType_type_next_to_FILE_contract_type() throws Exception {
+    void should_display_FileInputType_type_next_to_FILE_contract_type() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 
@@ -156,7 +156,7 @@ public class CustomContractInputItemProviderTest {
     }
 
     @Test
-    public void should_display_Map_type_next_to_COMPLEX_contract_type() throws Exception {
+    void should_display_Map_type_next_to_COMPLEX_contract_type() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 
@@ -171,7 +171,7 @@ public class CustomContractInputItemProviderTest {
     }
 
     @Test
-    public void should_remove_LONG_type_if_contract_is_on_a_Task() throws Exception {
+    void should_remove_LONG_type_if_contract_is_on_a_Task() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 
@@ -188,7 +188,7 @@ public class CustomContractInputItemProviderTest {
     }
 
     @Test
-    public void should_haveLONG_type_if_contract_is_on_a_Pool() throws Exception {
+    void should_haveLONG_type_if_contract_is_on_a_Pool() throws Exception {
         final CustomContractInputItemProvider itemProvider = new CustomContractInputItemProvider(
                 new ProcessItemProviderAdapterFactory());
 

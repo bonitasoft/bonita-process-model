@@ -12,22 +12,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bonita2bpmn.tests.transfo.data;
+package org.bonitasoft.bonita2bpmn.transfo.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bonitasoft.bpm.model.process.builders.XMLDataBuilder.anXMLData;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-import org.bonitasoft.bonita2bpmn.transfo.data.XMLNamespaceResolver;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.omg.spec.bpmn.model.DocumentRoot;
 import org.omg.spec.bpmn.model.ModelFactory;
 
-/**
- * @author Romain Bioteau
- */
-public class XMLNamespaceResolverTest {
+class XMLNamespaceResolverTest {
 
     private DocumentRoot documentRoot;
     private XMLNamespaceResolver xmlNamespaceResolver;
@@ -35,26 +31,19 @@ public class XMLNamespaceResolverTest {
     /**
      * @throws java.lang.Exception
      */
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setup() throws Exception {
         documentRoot = ModelFactory.eINSTANCE.createDocumentRoot();
         xmlNamespaceResolver = new XMLNamespaceResolver(documentRoot);
     }
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void should_resolveNamespace_throw_NullPointerException_for_null_argument() throws Exception {
-        xmlNamespaceResolver.resolveNamespacePrefix(null);
+    @Test
+    void should_resolveNamespace_throw_NullPointerException_for_null_argument() throws Exception {
+        assertThrowsExactly(NullPointerException.class, () -> xmlNamespaceResolver.resolveNamespacePrefix(null));
     }
 
     @Test
-    public void should_resolveNamespace_create_default_namespaces() throws Exception {
+    void should_resolveNamespace_create_default_namespaces() throws Exception {
         documentRoot.getXMLNSPrefixMap().put("aNullPrefix", null);
         documentRoot.getXMLNSPrefixMap().put("aPrefix", "http://www.myNS.com");
 
@@ -70,7 +59,7 @@ public class XMLNamespaceResolverTest {
     }
 
     @Test
-    public void should_resolveNamespace_retrieved_namespace_from_registry() throws Exception {
+    void should_resolveNamespace_retrieved_namespace_from_registry() throws Exception {
         documentRoot.getXMLNSPrefixMap().put("aPrefix", "http://www.myNS.com");
 
         assertThat(xmlNamespaceResolver.resolveNamespacePrefix(

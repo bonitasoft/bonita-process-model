@@ -26,14 +26,14 @@ import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.MigrationFactory;
 import org.eclipse.emf.edapt.spi.migration.Model;
 import org.eclipse.emf.edapt.spi.migration.Type;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author Romain Bioteau
  */
-public class CallActivityInputMappingCustomMigrationTest {
+class CallActivityInputMappingCustomMigrationTest {
 
     private CallActivityInputMappingCustomMigration callActivityInputMappingCustomMigration;
     private Instance inputMapping1;
@@ -42,8 +42,8 @@ public class CallActivityInputMappingCustomMigrationTest {
     /**
      * @throws java.lang.Exception
      */
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         callActivityInputMappingCustomMigration = new CallActivityInputMappingCustomMigration();
 
         final Model model = aModel();
@@ -60,16 +60,13 @@ public class CallActivityInputMappingCustomMigrationTest {
                 .build();
     }
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
+    @AfterEach
+    void tearDown() throws Exception {
         clearModel();
     }
 
     @Test
-    public void should_migrateBefore_stores_data_instances_from_processSource_of_InputMappings() throws Exception {
+    void should_migrateBefore_stores_data_instances_from_processSource_of_InputMappings() throws Exception {
         final Model model = aModel();
 
         callActivityInputMappingCustomMigration.migrateBefore(model, model.getMetamodel());
@@ -79,7 +76,7 @@ public class CallActivityInputMappingCustomMigrationTest {
     }
 
     @Test
-    public void should_migrateAfter_convert_data_instances_to_expression_in_processSource_of_InputMappings()
+    void should_migrateAfter_convert_data_instances_to_expression_in_processSource_of_InputMappings()
             throws Exception {
         final Model model = aModel();
 

@@ -28,10 +28,10 @@ public class ScriptFormalExpressionFunction extends FormalExpressionFunction {
     /**
      * The expected and only supported expression type.
      */
-    private static String EXPRESSION_TYPE = ExpressionConstants.SCRIPT_TYPE;
+    private static final String EXPRESSION_TYPE = ExpressionConstants.SCRIPT_TYPE;
 
     /** Test a String expression type value against the supported type */
-    public static Predicate<String> IS_SUPPORTED_TYPE = EXPRESSION_TYPE::equals;
+    public static final Predicate<String> IS_SUPPORTED_TYPE = EXPRESSION_TYPE::equals;
 
     @Override
     public TFormalExpression apply(final Expression bonitaExpression) {

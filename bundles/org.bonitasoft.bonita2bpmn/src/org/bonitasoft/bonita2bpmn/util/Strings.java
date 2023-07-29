@@ -21,6 +21,10 @@ import java.util.regex.Pattern;
 
 public class Strings {
 
+    private Strings() {
+        // private constructor
+    }
+
     private static final Pattern NONLATIN = Pattern.compile("[^\\w-]");
     private static final Pattern WHITESPACE = Pattern.compile("[\\s]");
     private static final Pattern EDGESDHASHES = Pattern.compile("(^-)|(-$)");

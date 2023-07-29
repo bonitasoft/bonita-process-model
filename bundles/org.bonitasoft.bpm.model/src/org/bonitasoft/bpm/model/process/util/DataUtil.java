@@ -32,6 +32,10 @@ import org.bonitasoft.bpm.model.process.XMLType;
 
 public class DataUtil {
 
+    private DataUtil() {
+        // private constructor
+    }
+
     public static String getTechnicalTypeFor(Data data) {
         DataType type = data.getDataType();
         if (data.isMultiple()) {

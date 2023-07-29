@@ -22,14 +22,14 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.Metamodel;
 import org.eclipse.emf.edapt.spi.migration.Model;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
-public class CreatePoolContractCustomMigrationTest {
+@ExtendWith(MockitoExtension.class)
+class CreatePoolContractCustomMigrationTest {
 
     private AbstractCreateContractCustomMigration customMigration;
 
@@ -45,23 +45,24 @@ public class CreatePoolContractCustomMigrationTest {
     @Mock
     private Instance newContractInstance, existingContractInstance;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         customMigration = new CreatePoolContractCustomMigration();
         final BasicEList<Instance> uniquePoolEList = new BasicEList<Instance>();
         uniquePoolEList.add(originalPoolInstance);
         when(model.getAllInstances("process.Pool")).thenReturn(uniquePoolEList);
-        when(model.newInstance("process.Contract")).thenReturn(newContractInstance);
+
     }
 
     @Test
-    public void should_migrateAfter_add_an_empty_contract_to_a_pool() throws Exception {
+    void should_migrateAfter_add_an_empty_contract_to_a_pool() throws Exception {
+    	when(model.newInstance("process.Contract")).thenReturn(newContractInstance);
         customMigration.migrateAfter(model, metamodel);
         verify(originalPoolInstance).set("contract", newContractInstance);
     }
 
     @Test
-    public void should_migrateAfter_NOTadd_an_empty_contract_to_a_pool() throws Exception {
+    void should_migrateAfter_NOTadd_an_empty_contract_to_a_pool() throws Exception {
         when(originalPoolInstance.get("contract")).thenReturn(existingContractInstance);
         customMigration.migrateAfter(model, metamodel);
         verify(model, never()).newInstance("process.Contract");

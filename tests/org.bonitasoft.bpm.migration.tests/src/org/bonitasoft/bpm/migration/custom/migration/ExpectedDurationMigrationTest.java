@@ -26,13 +26,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.impl.MetamodelImpl;
 import org.eclipse.emf.edapt.spi.migration.impl.ModelImpl;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ExpectedDurationMigrationTest {
+@ExtendWith(MockitoExtension.class)
+class ExpectedDurationMigrationTest {
 
     @Mock
     private ModelImpl model;
@@ -41,7 +41,7 @@ public class ExpectedDurationMigrationTest {
     private MetamodelImpl metamodel;
 
     @Test
-    public void should_store_duration_value_before_migration() throws Exception {
+    void should_store_duration_value_before_migration() throws Exception {
         ExpectedDurationMigration migration = new ExpectedDurationMigration();
         final EList<Instance> taskList = new BasicEList<Instance>();
         Instance instance = mock(Instance.class);
@@ -55,7 +55,7 @@ public class ExpectedDurationMigrationTest {
     }
 
     @Test
-    public void should_convert_duration_into_expression_after_migration() throws Exception {
+    void should_convert_duration_into_expression_after_migration() throws Exception {
         Instance expressionInstance = mock(Instance.class);
         when(model.newInstance(anyString())).thenReturn(expressionInstance);
         ExpectedDurationMigration migration = new ExpectedDurationMigration();

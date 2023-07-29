@@ -12,49 +12,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bonita2bpmn.tests.transfo.expression;
+package org.bonitasoft.bonita2bpmn.transfo.expression;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bonitasoft.bpm.model.expression.builders.ExpressionBuilder.anExpression;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.xml.namespace.QName;
 
-import org.bonitasoft.bonita2bpmn.transfo.BPMNConstants;
-import org.bonitasoft.bonita2bpmn.transfo.expression.FormalExpressionFunction;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.omg.spec.bpmn.model.TFormalExpression;
 
-/**
- * @author Romain Bioteau
- */
-public class FormalExpressionFunctionTest {
+class FormalExpressionFunctionTest {
 
     private FormalExpressionFunction formalExpressionTransformer;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setup() throws Exception {
         formalExpressionTransformer = new FormalExpressionFunction();
     }
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-    }
-
-    @Test(expected = NullPointerException.class)
-    public void should_transform_throw_a_NullPointerException() throws Exception {
-        formalExpressionTransformer.apply(null);
+    @Test
+    void should_transform_throw_a_NullPointerException() throws Exception {
+        assertThrows(NullPointerException.class, () -> formalExpressionTransformer.apply(null));
     }
 
     @Test
-    public void should_transform_a_expression_into_a_TFormalExpression() throws Exception {
+    void should_transform_a_expression_into_a_TFormalExpression() throws Exception {
         final TFormalExpression formalExpression = formalExpressionTransformer.apply(
                 anExpression()
                         .withContent("some content")
@@ -64,7 +49,7 @@ public class FormalExpressionFunctionTest {
         assertThat(formalExpression).isNotNull();
         assertThat(formalExpression.getId()).isNotEmpty();
         assertThat(formalExpression.getEvaluatesToTypeRef()).isEqualTo(QName.valueOf("java:java.lang.String"));
-        assertThat(formalExpression.getLanguage()).isEqualTo(BPMNConstants.XPATH_LANGUAGE_NS);
+        assertThat(formalExpression.getLanguage()).isEqualTo(FormalExpressionFunction.XPATH_LANGUAGE_NS);
         assertThat(formalExpression.getMixed().getValue(0)).isEqualTo("some content");
     }
 

@@ -12,49 +12,37 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bonita2bpmn.tests.transfo.expression;
+package org.bonitasoft.bonita2bpmn.transfo.expression;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bonitasoft.bpm.model.expression.builders.ExpressionBuilder.anExpression;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import javax.xml.namespace.QName;
 
-import org.bonitasoft.bonita2bpmn.transfo.expression.ScriptFormalExpressionFunction;
 import org.bonitasoft.bpm.model.util.ExpressionConstants;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.omg.spec.bpmn.model.TFormalExpression;
 
-/**
- * @author Romain Bioteau
- */
-public class ScriptFormalExpressionFunctionTest {
+class ScriptFormalExpressionFunctionTest {
 
     private ScriptFormalExpressionFunction scriptFormalExpressionTransformer;
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         scriptFormalExpressionTransformer = new ScriptFormalExpressionFunction();
     }
 
-    /**
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-    }
+    @Test
+    void should_transform_throw_an_IllegalArgumentException_if_invalid_expression_type() throws Exception {
+        var expression = anExpression().build();
 
-    @Test(expected = IllegalArgumentException.class)
-    public void should_transform_throw_an_IllegalArgumentException_if_invalid_expression_type() throws Exception {
-        scriptFormalExpressionTransformer.apply(anExpression().build());
+        assertThrows(IllegalArgumentException.class, () -> scriptFormalExpressionTransformer.apply(expression));
     }
 
     @Test
-    public void should_transform_a_script_expression_into_a_TFormalExpression() throws Exception {
+    void should_transform_a_script_expression_into_a_TFormalExpression() throws Exception {
         final TFormalExpression tFormalExpression = scriptFormalExpressionTransformer.apply(anExpression()
                 .withExpressionType(ExpressionConstants.SCRIPT_TYPE).withInterpreter("Scala")
                 .withContent("1 > 2").withReturnType(Boolean.class.getName()).build());
@@ -67,7 +55,7 @@ public class ScriptFormalExpressionFunctionTest {
     }
 
     @Test
-    public void should_transform_a_script_expression_into_a_TFormalExpression_with_null_language_for_Groovy_interpreter()
+    void should_transform_a_script_expression_into_a_TFormalExpression_with_null_language_for_Groovy_interpreter()
             throws Exception {
         final TFormalExpression tFormalExpression = scriptFormalExpressionTransformer.apply(anExpression()
                 .withExpressionType(ExpressionConstants.SCRIPT_TYPE).withInterpreter(ExpressionConstants.GROOVY)

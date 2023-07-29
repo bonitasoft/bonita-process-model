@@ -12,31 +12,27 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bonita2bpmn.tests.transfo.data;
+package org.bonitasoft.bonita2bpmn.transfo.data;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.bonitasoft.bpm.model.process.builders.DataBuilder.aData;
 import static org.bonitasoft.bpm.model.process.builders.PoolBuilder.aPool;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
-import org.bonitasoft.bonita2bpmn.transfo.data.DataScope;
-import org.bonitasoft.bonita2bpmn.transfo.data.ItemDefinitionFunction;
 import org.bonitasoft.bpm.model.process.Data;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.ProcessFactory;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.omg.spec.bpmn.model.ModelFactory;
 import org.omg.spec.bpmn.model.TItemDefinition;
 
-/**
- * @author Romain Bioteau
- */
-@RunWith(MockitoJUnitRunner.class)
-public class DataScopeTest {
+@ExtendWith(MockitoExtension.class)
+class DataScopeTest {
 
     private DataScope dataScope;
     @Mock
@@ -45,8 +41,8 @@ public class DataScopeTest {
     private Data data;
     private Pool pool;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         dataScope = new DataScope(itemDefinitionTransformer);
 
         ProcessFactory.eINSTANCE.createPool();
@@ -54,27 +50,31 @@ public class DataScopeTest {
         pool = aPool().havingData(aData()).build();
         data = pool.getData().get(0);
 
-        itemDefinition = ModelFactory.eINSTANCE.createTItemDefinition();
-        when(itemDefinitionTransformer.apply(data)).thenReturn(itemDefinition);
-
     }
 
     @Test
-    public void should_get_a_TItemDefinition_for_a_given_data() throws Exception {
+    void should_get_a_TItemDefinition_for_a_given_data() throws Exception {
+        itemDefinition = ModelFactory.eINSTANCE.createTItemDefinition();
+        when(itemDefinitionTransformer.apply(data)).thenReturn(itemDefinition);
+
         dataScope.initializeContext(pool);
 
         assertThat(dataScope.get(data)).isEqualTo(itemDefinition);
     }
 
     @Test
-    public void should_get_null_if_no_item_exists_for_a_given_data() throws Exception {
+    void should_get_null_if_no_item_exists_for_a_given_data() throws Exception {
+        itemDefinition = ModelFactory.eINSTANCE.createTItemDefinition();
+        when(itemDefinitionTransformer.apply(data)).thenReturn(itemDefinition);
+
         dataScope.initializeContext(pool);
 
         assertThat(dataScope.get(aData().build())).isNull();
     }
 
-    @Test(expected = NullPointerException.class)
-    public void should_get_throw_a_NullPointerException_if_scope_is_not_initialized() throws Exception {
-        dataScope.get(aData().build());
+    @Test
+    void should_get_throw_a_NullPointerException_if_scope_is_not_initialized() throws Exception {
+        var data = aData().build();
+        assertThrows(NullPointerException.class, () -> dataScope.get(data));
     }
 }

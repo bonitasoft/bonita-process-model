@@ -22,6 +22,7 @@
     <junit.version>5.9.3</junit.version>
     <assertj-core.version>3.24.2</assertj-core.version>
     <logback.version>1.2.12</logback.version>
+    <sonar.tests>src/test/java</sonar.tests>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -103,4 +104,22 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <profile>
+      <id>jacoco</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-failsafe-plugin</artifactId>
+            <configuration>
+              <argLine>${jacocoItAgentArgs}</argLine>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

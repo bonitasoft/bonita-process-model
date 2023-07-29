@@ -24,14 +24,14 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.Metamodel;
 import org.eclipse.emf.edapt.spi.migration.Model;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
-public class DefaultCallActivityDefaultMappingTest {
+@ExtendWith(MockitoExtension.class)
+class DefaultCallActivityDefaultMappingTest {
 
     private DefaultCallActivityDefaultMapping customMigration;
 
@@ -50,8 +50,8 @@ public class DefaultCallActivityDefaultMappingTest {
     @Mock
     private Instance inputMappingInstance;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         final BasicEList<Instance> inputMappingsEList = new BasicEList<Instance>();
         inputMappingsEList.add(inputMappingInstance);
         when(model.getAllInstances("process.InputMapping")).thenReturn(inputMappingsEList);
@@ -60,7 +60,7 @@ public class DefaultCallActivityDefaultMappingTest {
     }
 
     @Test
-    public void testMigrateAfter() throws Exception {
+    void testMigrateAfter() throws Exception {
         customMigration = new DefaultCallActivityDefaultMapping();
         customMigration.migrateAfter(model, metamodel);
         verify(inputMappingInstance).set(ProcessPackage.Literals.INPUT_MAPPING__ASSIGNATION_TYPE.getName(),
