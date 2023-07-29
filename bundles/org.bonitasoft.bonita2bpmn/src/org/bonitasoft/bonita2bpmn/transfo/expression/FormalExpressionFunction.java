@@ -20,7 +20,6 @@ import java.util.function.Function;
 
 import javax.xml.namespace.QName;
 
-import org.bonitasoft.bonita2bpmn.transfo.BPMNConstants;
 import org.bonitasoft.bpm.model.expression.Expression;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
@@ -30,8 +29,11 @@ import org.omg.spec.bpmn.model.TFormalExpression;
 /**
  * @author Romain Bioteau
  */
-public class FormalExpressionFunction implements Function<Expression, TFormalExpression>, BPMNConstants {
+public class FormalExpressionFunction implements Function<Expression, TFormalExpression> {
 
+	private static final String XPATH_LANGUAGE_NS = "http://www.w3.org/1999/XPath";
+	public static final String JAVA_XMLNS = "java";
+	
     protected QName newQName(final String nsPrefix, final String typeRef) {
         return QName.valueOf(nsPrefix + ":" + typeRef);
     }

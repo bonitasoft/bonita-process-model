@@ -39,7 +39,6 @@ public class CustomAnchor extends SlidableAnchor {
     @Override
     public Point getOrthogonalLocation(Point orthoReference) {
         PrecisionPoint ownReference = new PrecisionPoint(getReferencePoint());
-        //      PrecisionRectangle bounds = new PrecisionRectangle(getBox());
         PrecisionRectangle bounds = new PrecisionRectangle(
                 CustomRectilinearRouter.getAnchorableFigureBounds(getOwner()));
         getOwner().translateToAbsolute(bounds);
@@ -51,14 +50,16 @@ public class CustomAnchor extends SlidableAnchor {
             switch (side) {
                 case PositionConstants.LEFT:
                 case PositionConstants.RIGHT:
-                    ownReference.preciseY = preciseOrthoReference.preciseY();
+                    ownReference.setPreciseY(preciseOrthoReference.preciseY());
                     orientation = PositionConstants.HORIZONTAL;
                     break;
                 case PositionConstants.TOP:
                 case PositionConstants.BOTTOM:
-                    ownReference.preciseX = preciseOrthoReference.preciseX();
+                    ownReference.setPreciseX(preciseOrthoReference.preciseX());
                     orientation = PositionConstants.VERTICAL;
                     break;
+               default:
+                    throw new IllegalArgumentException(String.format("Position %s not supported", side));
             }
         } else if (preciseOrthoReference.preciseX >= bounds.preciseX
                 && preciseOrthoReference.preciseX <= bounds.preciseX + bounds.preciseWidth) {
@@ -106,7 +107,6 @@ public class CustomAnchor extends SlidableAnchor {
         }
         currentDiff = Math.abs(r.preciseY() - p.preciseY());
         if (currentDiff < diff) {
-            diff = currentDiff;
             side = PositionConstants.TOP;
         }
         return side;

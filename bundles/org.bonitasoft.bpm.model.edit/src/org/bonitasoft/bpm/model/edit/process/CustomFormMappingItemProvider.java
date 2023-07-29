@@ -19,6 +19,7 @@ import org.bonitasoft.bpm.model.process.FormMapping;
 import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.process.provider.FormMappingItemProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
+import org.eclipse.osgi.util.NLS;
 
 /**
  * @author Romain Bioteau
@@ -35,8 +36,8 @@ public class CustomFormMappingItemProvider extends FormMappingItemProvider {
         switch (mapping.getType()) {
             case URL:
                 final String url = mapping.getUrl();
-                return isOverview(mapping) ? Messages.bind(Messages.overviewUrlFormMapping, url)
-                        : Messages.bind(Messages.urlFormMapping, url);
+                return isOverview(mapping) ? NLS.bind(Messages.overviewUrlFormMapping, url)
+                        :  NLS.bind(Messages.urlFormMapping, url);
             case INTERNAL:
             default:
                 return super.getText(object);

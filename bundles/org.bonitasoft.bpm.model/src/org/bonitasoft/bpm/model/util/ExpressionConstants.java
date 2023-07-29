@@ -19,97 +19,74 @@ package org.bonitasoft.bpm.model.util;
  * 
  * @author Romain Bioteau
  */
-public interface ExpressionConstants {
+public final class ExpressionConstants {
 
-    /*
-     * constants in type attribute of expressions
-     */
-    String CONSTANT_TYPE = "TYPE_CONSTANT";
+	private ExpressionConstants() {
+		// private constructor
+	}
 
-    String CONDITION_TYPE = "TYPE_CONDITION";
+	/*
+	 * constants in type attribute of expressions
+	 */
+	public static final String CONSTANT_TYPE = "TYPE_CONSTANT";
+	public static final String CONDITION_TYPE = "TYPE_CONDITION";
+	public static final String SCRIPT_TYPE = "TYPE_READ_ONLY_SCRIPT";
+	public static final String VARIABLE_TYPE = "TYPE_VARIABLE";
+	public static final String TRANSIENT_VARIABLE_TYPE = "TYPE_TRANSIENT_VARIABLE";
+	public static final String PARAMETER_TYPE = "TYPE_PARAMETER";
+	public static final String ENGINE_CONSTANT_TYPE = "TYPE_ENGINE_CONSTANT";
+	public static final String CONNECTOR_OUTPUT_TYPE = "CONNECTOR_OUTPUT_TYPE";
+	public static final String MESSAGE_ID_TYPE = "MESSAGE_ID_TYPE";
+	public static final String SEARCH_INDEX_TYPE = "SEARCH_INDEX_TYPE";
+	public static final String BUSINESS_DATA_TYPE = "TYPE_BUSINESS_DATA";
+	public static final String CONTRACT_INPUT_TYPE = "TYPE_CONTRACT_INPUT";
+	public static final String CONNECTOR_TYPE = "CONNECTOR_TYPE";
+	public static final String XPATH_TYPE = "TYPE_XPATH_READ";
+	public static final String JAVA_TYPE = "TYPE_JAVA_METHOD_CALL";
+	public static final String DOCUMENT_LIST_TYPE = "TYPE_DOCUMENT_LIST";
+	public static final String ASSIGNMENT_OPERATOR = "ASSIGNMENT";
+	public static final String JAVA_METHOD_OPERATOR = "JAVA_METHOD";
+	public static final String DELETION_OPERATOR = "DELETION";
+	public static final String XPATH_UPDATE_OPERATOR = "XPATH_UPDATE_QUERY";
+	public static final String GROOVY = "GROOVY";
+	public static final String DOCUMENT_TYPE = "TYPE_DOCUMENT";
+	public static final String PATTERN_TYPE = "TYPE_PATTERN";
+	public static final String SET_DOCUMENT_OPERATOR = "DOCUMENT_CREATE_UPDATE";
+	public static final String SET_LIST_DOCUMENT_OPERATOR = "DOCUMENT_LIST_SET";
+	public static final String VARIABLE_TYPE_FOR_FORM_OUPUT = "VARIABLE_TYPE_FOR_FORM_OUPUT";
+	public static final String DOCUMENT_VALUE_RETURN_TYPE = "org.bonitasoft.engine.bpm.document.DocumentValue";
+	public static final String DOCUMENT_REF_TYPE = "DOCUMENT_REF_TYPE";
+	public static final String ALL_TYPES = "ALL_TYPES";
+	public static final String MULTIINSTANCE_ITERATOR_TYPE = "MULTIINSTANCE_ITERATOR_TYPE";
+	public static final String QUERY_TYPE = "TYPE_QUERY_BUSINESS_DATA";
+	public static final String DAO_TYPE = "TYPE_BUSINESS_OBJECT_DAO";
 
-    String SCRIPT_TYPE = "TYPE_READ_ONLY_SCRIPT";
+	// left operand types:
+	public static final String LEFT_OPERAND_DATA = "DATA";
+	public static final String LEFT_OPERAND_SEARCH_INDEX = "SEARCH_INDEX";
+	public static final String LEFT_OPERAND_DOCUMENT = "DOCUMENT";
+	public static final String LEFT_OPERAND_DOCUMENT_LIST = "DOCUMENT_LIST";
+	public static final String LEFT_OPERAND_EXTERNAL_DATA = "EXTERNAL_DATA";
+	public static final String LEFT_OPERAND_TRANSIENT_DATA = "TRANSIENT_DATA";
+	public static final String LEFT_OPERAND_BUSINESS_DATA = "BUSINESS_DATA";
 
-    String VARIABLE_TYPE = "TYPE_VARIABLE";
+	/*
+	 * It is an assignment to a left operand that is a a business data (business
+	 * data do not exists exists)
+	 */
+	public static final String CREATE_BUSINESS_DATA_OPERATOR = "CREATE_BUSINESS_DATA";
 
-    String TRANSIENT_VARIABLE_TYPE = "TYPE_TRANSIENT_VARIABLE";
+	/*
+	 * It is an java operation to a left operand that is a a business data
+	 */
+	public static final String BUSINESS_DATA_JAVA_SETTER_OPERATOR = "BUSINESS_DATA_JAVA_SETTER";
 
-    String PARAMETER_TYPE = "TYPE_PARAMETER";
+	/*
+	 * It is an assignment to a left operand that is a a business data (business
+	 * data already exists)
+	 */
+	public static final String ATTACH_EXISTING_BUSINESS_DATA = "ATTACH_EXISTING_BUSINESS_DATA";
 
-    String ENGINE_CONSTANT_TYPE = "TYPE_ENGINE_CONSTANT";
-
-    String CONNECTOR_OUTPUT_TYPE = "CONNECTOR_OUTPUT_TYPE";
-
-    String MESSAGE_ID_TYPE = "MESSAGE_ID_TYPE";
-
-    String SEARCH_INDEX_TYPE = "SEARCH_INDEX_TYPE";
-
-    String BUSINESS_DATA_TYPE = "TYPE_BUSINESS_DATA";
-
-    String CONTRACT_INPUT_TYPE = "TYPE_CONTRACT_INPUT";
-
-    String CONNECTOR_TYPE = "CONNECTOR_TYPE";
-
-    String XPATH_TYPE = "TYPE_XPATH_READ";
-
-    String JAVA_TYPE = "TYPE_JAVA_METHOD_CALL";
-    String DOCUMENT_LIST_TYPE = "TYPE_DOCUMENT_LIST";
-
-    String ASSIGNMENT_OPERATOR = "ASSIGNMENT";
-
-    String JAVA_METHOD_OPERATOR = "JAVA_METHOD";
-
-    String DELETION_OPERATOR = "DELETION";
-
-    String XPATH_UPDATE_OPERATOR = "XPATH_UPDATE_QUERY";
-
-    String GROOVY = "GROOVY";
-
-    String DOCUMENT_TYPE = "TYPE_DOCUMENT";
-
-    String PATTERN_TYPE = "TYPE_PATTERN";
-
-    String SET_DOCUMENT_OPERATOR = "DOCUMENT_CREATE_UPDATE";
-    String SET_LIST_DOCUMENT_OPERATOR = "DOCUMENT_LIST_SET";
-
-    String VARIABLE_TYPE_FOR_FORM_OUPUT = "VARIABLE_TYPE_FOR_FORM_OUPUT";
-
-    String DOCUMENT_VALUE_RETURN_TYPE = "org.bonitasoft.engine.bpm.document.DocumentValue";
-
-    String DOCUMENT_REF_TYPE = "DOCUMENT_REF_TYPE";
-
-    String ALL_TYPES = "ALL_TYPES";
-
-    String MULTIINSTANCE_ITERATOR_TYPE = "MULTIINSTANCE_ITERATOR_TYPE";
-
-    String QUERY_TYPE = "TYPE_QUERY_BUSINESS_DATA";
-
-    String DAO_TYPE = "TYPE_BUSINESS_OBJECT_DAO";
-
-    // left operand types:
-    String LEFT_OPERAND_DATA = "DATA";
-    String LEFT_OPERAND_SEARCH_INDEX = "SEARCH_INDEX";
-    String LEFT_OPERAND_DOCUMENT = "DOCUMENT";
-    String LEFT_OPERAND_DOCUMENT_LIST = "DOCUMENT_LIST";
-    String LEFT_OPERAND_EXTERNAL_DATA = "EXTERNAL_DATA";
-    String LEFT_OPERAND_TRANSIENT_DATA = "TRANSIENT_DATA";
-    String LEFT_OPERAND_BUSINESS_DATA = "BUSINESS_DATA";
-
-    /*
-     * It is an assignment to a left operand that is a a business data (business data do not exists exists)
-     */
-    String CREATE_BUSINESS_DATA_OPERATOR = "CREATE_BUSINESS_DATA";
-
-    /*
-     * It is an java operation to a left operand that is a a business data
-     */
-    String BUSINESS_DATA_JAVA_SETTER_OPERATOR = "BUSINESS_DATA_JAVA_SETTER";
-
-    /*
-     * It is an assignment to a left operand that is a a business data (business data already exists)
-     */
-    String ATTACH_EXISTING_BUSINESS_DATA = "ATTACH_EXISTING_BUSINESS_DATA";
-
-    String FORM_REFERENCE_TYPE = "FORM_REFERENCE_TYPE";
+	public static final String FORM_REFERENCE_TYPE = "FORM_REFERENCE_TYPE";
 
 }

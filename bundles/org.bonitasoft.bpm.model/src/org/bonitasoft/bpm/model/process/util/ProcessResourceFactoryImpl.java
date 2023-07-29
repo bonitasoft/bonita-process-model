@@ -56,7 +56,7 @@ public class ProcessResourceFactoryImpl extends ResourceFactoryImpl {
         loadOptions = new HashMap<>(resource.getDefaultLoadOptions());
         // and complete with extra options
         loadOptions.putAll(Map.of(
-                XMIResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE,
+        		XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE,
                 // record unknown features, especially for notation package which we may not know
                 XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE,
                 XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE));
@@ -64,13 +64,13 @@ public class ProcessResourceFactoryImpl extends ResourceFactoryImpl {
         saveOptions = new HashMap<>(resource.getDefaultSaveOptions());
         // and complete with extra options
         saveOptions.putAll(Map.of(
-                XMIResource.OPTION_DECLARE_XML, Boolean.TRUE,
-                XMIResource.OPTION_PROCESS_DANGLING_HREF, XMIResource.OPTION_PROCESS_DANGLING_HREF_DISCARD,
-                XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE,
+        		XMLResource.OPTION_DECLARE_XML, Boolean.TRUE,
+        		XMLResource.OPTION_PROCESS_DANGLING_HREF, XMIResource.OPTION_PROCESS_DANGLING_HREF_DISCARD,
+        		XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE,
                 XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE,
-                XMIResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE,
-                XMIResource.OPTION_SKIP_ESCAPE_URI, Boolean.FALSE,
-                XMIResource.OPTION_ENCODING, DEFAULT_ENCODING,
+                XMLResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE,
+                XMLResource.OPTION_SKIP_ESCAPE_URI, Boolean.FALSE,
+                XMLResource.OPTION_ENCODING, DEFAULT_ENCODING,
                 // use extended metadata, or failure of AnyType for notation will fail
                 XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE));
     }

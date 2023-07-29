@@ -205,7 +205,8 @@ import org.omg.spec.dd.dc.Bounds;
 @Creatable
 public class BonitaToBPMNExporter {
 
-    private static final String DEFAULT_DATE_FORMAT = "yyyy/MM/dd/HH/mm/ss";
+    private static final String EVENTDEF_PREFIX = "eventdef-";
+	private static final String DEFAULT_DATE_FORMAT = "yyyy/MM/dd/HH/mm/ss";
     private static final String DISPLAY_DATE_FORMAT = "yyyy/MM/dd HH:mm:ss";
     private static final String XMLNS_HTTP_BONITASOFT_COM_BONITA_CONNECTOR_DEFINITION = "bonitaConnector";
     private static final String JAVA_XMLNS = "java";
@@ -228,6 +229,7 @@ public class BonitaToBPMNExporter {
     private MultiStatus status;
     private Map<LinkEvent, TLinkEventDefinition> linkEvents = new HashMap<>();
     private Set<String> messagesReferences = new HashSet<>();
+    private Templates xslTemplate;
 
     public BonitaToBPMNExporter() {
         errors.add("Forms and other resources are not exported.");
@@ -537,8 +539,6 @@ public class BonitaToBPMNExporter {
     private String generateConnectorOutputItemDef(final String connectorDefId) {
         return connectorDefId + "ConnectorOutput";
     }
-
-    private static Templates xslTemplate = null;
 
     private void generateXSDForConnector(Path connectorToTransformWC)
             throws IOException, TransformerException {
@@ -1007,7 +1007,7 @@ public class BonitaToBPMNExporter {
                 setCommonAttributes(boundaryEvent, bpmnBoundary);
                 if (boundaryEvent instanceof IntermediateErrorCatchEvent) {
                     final TErrorEventDefinition errorventDef = ModelFactory.eINSTANCE.createTErrorEventDefinition();
-                    errorventDef.setId("eventdef-" + boundaryEvent.getName() + EcoreUtil.generateUUID());
+                    errorventDef.setId(EVENTDEF_PREFIX + boundaryEvent.getName() + EcoreUtil.generateUUID());
                     final String errorCode = ((IntermediateErrorCatchEvent) boundaryEvent).getErrorCode();
                     if (errorCode != null && errorCode.length() != 0) {
                         errorventDef.setErrorRef(QName.valueOf(errorCode));
@@ -1015,7 +1015,7 @@ public class BonitaToBPMNExporter {
                     bpmnBoundary.getEventDefinition().add(errorventDef);
                 } else if (boundaryEvent instanceof BoundarySignalEvent) {
                     final TSignalEventDefinition eventDef = ModelFactory.eINSTANCE.createTSignalEventDefinition();
-                    eventDef.setId("eventdef-" + boundaryEvent.getName() + EcoreUtil.generateUUID());
+                    eventDef.setId(EVENTDEF_PREFIX + boundaryEvent.getName() + EcoreUtil.generateUUID());
                     final TSignal tSignal = getOrCreateTSignal((SignalEvent) boundaryEvent);
                     if (tSignal != null) {
                         eventDef.setSignalRef(QName.valueOf(tSignal.getId()));
@@ -1440,7 +1440,7 @@ public class BonitaToBPMNExporter {
                 eventDef.setTimeCycle(expression);
             }
         }
-        eventDef.setId("eventdef-" + Strings.slugify(bonitaEvent.getName()));
+        eventDef.setId(EVENTDEF_PREFIX + Strings.slugify(bonitaEvent.getName()));
         return eventDef;
     }
 
