@@ -61,13 +61,13 @@ public class CustomAnchor extends SlidableAnchor {
                 default:
                     throw new IllegalArgumentException(String.format("Position %s not supported", side));
             }
-        } else if (preciseOrthoReference.preciseX >= bounds.preciseX
-                && preciseOrthoReference.preciseX <= bounds.preciseX + bounds.preciseWidth) {
-            ownReference.preciseX = preciseOrthoReference.preciseX;
+        } else if (preciseOrthoReference.preciseX() >= bounds.preciseX()
+                && preciseOrthoReference.preciseX() <= bounds.preciseX() + bounds.preciseWidth()) {
+            ownReference.setPreciseX(preciseOrthoReference.preciseX());
             orientation = PositionConstants.VERTICAL;
-        } else if (preciseOrthoReference.preciseY >= bounds.preciseY
-                && preciseOrthoReference.preciseY <= bounds.preciseY + bounds.preciseHeight) {
-            ownReference.preciseY = preciseOrthoReference.preciseY;
+        } else if (preciseOrthoReference.preciseY() >= bounds.preciseY()
+                && preciseOrthoReference.preciseY() <= bounds.preciseY() + bounds.preciseHeight()) {
+            ownReference.setPreciseY(preciseOrthoReference.preciseY());
             orientation = PositionConstants.HORIZONTAL;
         }
         ownReference.updateInts();
@@ -81,9 +81,9 @@ public class CustomAnchor extends SlidableAnchor {
         if (orientation != PositionConstants.NONE) {
             PrecisionPoint loc = new PrecisionPoint(location);
             if (orientation == PositionConstants.VERTICAL) {
-                loc.preciseX = preciseOrthoReference.preciseX;
+                loc.setPreciseX(preciseOrthoReference.preciseX());
             } else {
-                loc.preciseY = preciseOrthoReference.preciseY;
+                loc.setPreciseY(preciseOrthoReference.preciseY());
             }
             loc.updateInts();
             location = loc;

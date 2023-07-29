@@ -16,10 +16,15 @@ package org.bonitasoft.bonita2bpmn.transfo;
 
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
+import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.gmf.runtime.draw2d.ui.geometry.LineSeg;
 import org.eclipse.gmf.runtime.draw2d.ui.geometry.PointListUtilities;
 
 public class LabelHelper {
+
+    private LabelHelper() {
+        // private constructor
+    }
 
     public static Point calculatePointRelativeToPointOnLine(PointList ptLst, Point ptOnLine, Point offset) {
         // Calculate slope of line
@@ -50,12 +55,10 @@ public class LabelHelper {
                     double slope = segment.slope();
                     double theta = Math.atan(slope);
                     Point normalizedOffset = new Point(offset);
-                    Point calculatedOffset = new Point();
                     if (segment.getOrigin().x > segment.getTerminus().x) {
                         normalizedOffset = offset.getCopy().scale(-1, -1);
                     }
-
-                    calculatedOffset = new Point(normalizedOffset.x
+                    var calculatedOffset = new PrecisionPoint(normalizedOffset.x
                             * Math.cos(theta)
                             - normalizedOffset.y
                                     * Math.sin(theta),

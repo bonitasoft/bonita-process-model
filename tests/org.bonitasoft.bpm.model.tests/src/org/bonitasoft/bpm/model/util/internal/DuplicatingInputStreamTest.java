@@ -14,8 +14,8 @@
  */
 package org.bonitasoft.bpm.model.util.internal;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -23,15 +23,15 @@ import java.io.InputStream;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test duplicated stream reading
  */
-public class DuplicatingInputStreamTest {
+class DuplicatingInputStreamTest {
 
     @Test
-    public void testDuplicatedStreamReading() throws IOException {
+    void testDuplicatedStreamReading() throws IOException {
         // create original input stream
         String azString = IntStream.rangeClosed('a', 'z').mapToObj(c -> Character.valueOf((char) c).toString())
                 .collect(Collectors.joining());
@@ -74,7 +74,7 @@ public class DuplicatingInputStreamTest {
     }
 
     @Test
-    public void testDuplicatedStreamArrayReading() throws IOException {
+    void testDuplicatedStreamArrayReading() throws IOException {
         // create original input stream
         String azString = IntStream.rangeClosed('a', 'z').mapToObj(c -> Character.valueOf((char) c).toString())
                 .collect(Collectors.joining());
@@ -103,7 +103,7 @@ public class DuplicatingInputStreamTest {
     }
 
     @Test
-    public void testDuplicatedStreamFullReading() throws IOException {
+    void testDuplicatedStreamFullReading() throws IOException {
         // create original input stream
         String azString = IntStream.rangeClosed('a', 'z').mapToObj(c -> Character.valueOf((char) c).toString())
                 .collect(Collectors.joining());

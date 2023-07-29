@@ -261,17 +261,13 @@ public class BPMNShapeFactory {
     }
 
     private BPMNLabelStyle getLabelStyle(final Font font) {
-        final Comparator<Font> fontComparator = new Comparator<Font>() {
-
-            @Override
-            public int compare(final Font font1, final Font font2) {
-                for (final EStructuralFeature f : DcPackage.Literals.FONT.getEStructuralFeatures()) {
-                    if (!font1.eGet(f).equals(font2.eGet(f))) {
-                        return 1;
-                    }
+        final Comparator<Font> fontComparator = (font1, font2) -> {
+            for (final EStructuralFeature f : DcPackage.Literals.FONT.getEStructuralFeatures()) {
+                if (!font1.eGet(f).equals(font2.eGet(f))) {
+                    return 1;
                 }
-                return 0;
             }
+            return 0;
         };
         for (final BPMNLabelStyle style : bpmnDiagram.getBPMNLabelStyle()) {
             if (fontComparator.compare(style.getFont(), font) == 0) {
@@ -400,7 +396,7 @@ public class BPMNShapeFactory {
         List<org.eclipse.draw2d.RelativeBendpoint> figureConstraint = new ArrayList<>();
 
         for (int i = 0; i < pointList.size(); i++) {
-            RelativeBendpoint relativeBendpoint = (RelativeBendpoint) pointList.get(i);
+            RelativeBendpoint relativeBendpoint = pointList.get(i);
             Anchor sourceAnchor = bonitaEdge.getSourceAnchor();
             if (sourceAnchor instanceof IdentityAnchor) {
                 var referencePoint = BaseSlidableAnchor.parseTerminalString(((IdentityAnchor) sourceAnchor).getId());

@@ -9,6 +9,6 @@ Import-Package: org.bonitasoft.engine.expression,
  org.bonitasoft.engine.operation
 Automatic-Module-Name: org.bonitasoft.bpm.model.tests
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Require-Bundle: org.junit,
- assertj-core,
- org.bonitasoft.bpm.migration
+Require-Bundle: assertj-core,
+ org.bonitasoft.bpm.migration,
+ junit-jupiter-api

@@ -22,8 +22,8 @@ import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
-import org.eclipse.draw2d.geometry.Ray;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.draw2d.geometry.Vector;
 import org.eclipse.gmf.runtime.common.core.util.StringStatics;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.BaseSlidableAnchor;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.IOvalAnchorableFigure;
@@ -101,14 +101,12 @@ public class CustomRectilinearRouter extends ObliqueRouter {
          * Normalize polyline to eliminate extra segments. (This makes 3 segments collapsing into
          * one, while line segments are moved)
          */
-        if (!skipNormalization) {
-            if (PointListUtilities.normalizeSegments(newLine, tolerance.width)) {
-                /*
-                 * Normalization can make our polyline not rectilinear. Hence, we need to normalize
-                 * segments of polyline to straight line tolerance.
-                 */
-                normalizeToStraightLineTolerance(newLine, tolerance.width);
-            }
+        if (!skipNormalization && PointListUtilities.normalizeSegments(newLine, tolerance.width)) {
+            /*
+             * Normalization can make our polyline not rectilinear. Hence, we need to normalize
+             * segments of polyline to straight line tolerance.
+             */
+            normalizeToStraightLineTolerance(newLine, tolerance.width);
         }
 
         /*
@@ -117,8 +115,9 @@ public class CustomRectilinearRouter extends ObliqueRouter {
          * is too short we'll remove one of the points
          */
         if (newLine.size() == 2) {
-            Ray middleSeg = new Ray(newLine.getFirstPoint(), newLine.getLastPoint());
-            if (middleSeg.length() <= tolerance.width) {
+            var middleSeg = new Vector(new PrecisionPoint(newLine.getFirstPoint()),
+                    new PrecisionPoint(newLine.getLastPoint()));
+            if (middleSeg.getLength() <= tolerance.width) {
                 newLine.removePoint(0);
             }
         }
@@ -277,7 +276,7 @@ public class CustomRectilinearRouter extends ObliqueRouter {
              */
             if (Math.abs(lastRemovedFromSource.x - lastRemovedFromTarget.x) < toleranceValue) {
                 // Vertical
-                if (source.preciseY < target.preciseY) {
+                if (source.preciseY() < target.preciseY()) {
                     newLine.addPoint(lastRemovedFromSource.x, (source
                             .getBottom().y + target.getTop().y) / 2);
                 } else {
@@ -286,7 +285,7 @@ public class CustomRectilinearRouter extends ObliqueRouter {
                 }
             } else if (Math.abs(lastRemovedFromSource.y - lastRemovedFromTarget.y) < toleranceValue) {
                 // Horizontal
-                if (source.preciseX < target.preciseX) {
+                if (source.preciseX() < target.preciseX()) {
                     newLine.addPoint(
                             (source.getRight().x + target.getLeft().x) / 2,
                             lastRemovedFromSource.y);
@@ -310,18 +309,18 @@ public class CustomRectilinearRouter extends ObliqueRouter {
                     newLine.addPoint((lastRemovedFromSource.x + lastRemovedFromTarget.x) / 2,
                             (lastRemovedFromSource.y + lastRemovedFromTarget.y) / 2);
                 } else {
-                    double startX = Math.max(source.preciseX, target.preciseX);
-                    double endX = Math.min(source.preciseX
-                            + source.preciseWidth,
-                            target.preciseX
-                                    + target.preciseWidth);
-                    double startY = Math.max(source.preciseY, target.preciseY);
-                    double endY = Math.min(source.preciseY
-                            + source.preciseHeight,
-                            target.preciseY
-                                    + target.preciseHeight);
+                    double startX = Math.max(source.preciseX(), target.preciseX());
+                    double endX = Math.min(source.preciseX()
+                            + source.preciseWidth(),
+                            target.preciseX()
+                                    + target.preciseWidth());
+                    double startY = Math.max(source.preciseY(), target.preciseY());
+                    double endY = Math.min(source.preciseY()
+                            + source.preciseHeight(),
+                            target.preciseY()
+                                    + target.preciseHeight());
                     if (startX < endX) {
-                        if (source.preciseY < target.preciseY) {
+                        if (source.preciseY() < target.preciseY()) {
                             newLine.addPoint((int) Math
                                     .round((startX + endX) / 2.0),
                                     (source
@@ -333,7 +332,7 @@ public class CustomRectilinearRouter extends ObliqueRouter {
                                             .getTop().y + target.getBottom().y) / 2);
                         }
                     } else if (startY < endY) {
-                        if (source.preciseX < target.preciseX) {
+                        if (source.preciseX() < target.preciseX()) {
                             newLine.addPoint((source.getRight().x + target
                                     .getLeft().x) / 2, (int) Math
                                             .round((startY + endY) / 2.0));
@@ -377,7 +376,6 @@ public class CustomRectilinearRouter extends ObliqueRouter {
 
         tempCriteria = Math.abs(anchorPoint.x - rect.x - rect.width);
         if (tempCriteria < criteriaValue) {
-            criteriaValue = tempCriteria;
             position = PositionConstants.EAST;
         }
 
@@ -430,6 +428,7 @@ public class CustomRectilinearRouter extends ObliqueRouter {
      * @see org.eclipse.gmf.runtime.draw2d.ui.internal.routers.ObliqueRouter#resetEndPointsToEdge(org.eclipse.draw2d.Connection,
      * org.eclipse.draw2d.geometry.PointList)
      */
+    @Override
     protected void resetEndPointsToEdge(Connection conn, PointList line) {
         if (isReorienting(conn)) {
             /*
@@ -443,10 +442,10 @@ public class CustomRectilinearRouter extends ObliqueRouter {
         }
         PrecisionRectangle source = sourceBoundsRelativeToConnection(conn);
         PrecisionRectangle target = targetBoundsRelativeToConnection(conn);
-        int offSourceDirection = PositionConstants.NONE;
-        int offTargetDirection = PositionConstants.NONE;
-        int sourceAnchorRelativeLocation = PositionConstants.NONE;
-        int targetAnchorRelativeLocation = PositionConstants.NONE;
+        int offSourceDirection;
+        int offTargetDirection;
+        int sourceAnchorRelativeLocation;
+        int targetAnchorRelativeLocation;
         if (line.size() == 0) {
             /*
              * If there are no valid bend points, we'll use the oblique connection anchor points

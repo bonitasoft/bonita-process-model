@@ -22,14 +22,14 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.Metamodel;
 import org.eclipse.emf.edapt.spi.migration.Model;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
-public class CreateContractCustomMigrationTest {
+@ExtendWith(MockitoExtension.class)
+class CreateContractCustomMigrationTest {
 
     private AbstractCreateContractCustomMigration customMigration;
 
@@ -45,8 +45,8 @@ public class CreateContractCustomMigrationTest {
     @Mock
     private Instance newContractInstance, existingContractInstance;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         customMigration = new CreateContractCustomMigration();
         final BasicEList<Instance> uniqueTaskEList = new BasicEList<Instance>();
         uniqueTaskEList.add(originalTaskInstance);
@@ -55,13 +55,13 @@ public class CreateContractCustomMigrationTest {
     }
 
     @Test
-    public void should_migrateAfter_add_an_empty_contract_to_a_task() throws Exception {
+    void should_migrateAfter_add_an_empty_contract_to_a_task() throws Exception {
         customMigration.migrateAfter(model, metamodel);
         verify(originalTaskInstance).set("contract", newContractInstance);
     }
 
     @Test
-    public void should_migrateAfter_NOTadd_an_empty_contract_to_a_task() throws Exception {
+    void should_migrateAfter_NOTadd_an_empty_contract_to_a_task() throws Exception {
         when(originalTaskInstance.get("contract")).thenReturn(existingContractInstance);
         customMigration.migrateAfter(model, metamodel);
         verify(model, never()).newInstance("process.Contract");

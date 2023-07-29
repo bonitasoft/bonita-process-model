@@ -15,7 +15,7 @@
 package org.bonitasoft.bpm.model.process.util.migration;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.net.URL;
@@ -27,15 +27,15 @@ import org.eclipse.emf.edapt.internal.common.ResourceUtils;
 import org.eclipse.emf.edapt.spi.history.History;
 import org.eclipse.emf.edapt.spi.history.HistoryPackage;
 import org.eclipse.emf.edapt.spi.history.Release;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class ModelHistoryTest {
+class ModelHistoryTest {
 
     private History history;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         final URL resource = Platform.getBundle("org.bonitasoft.bpm.model").getResource("model/process.history");
         if (resource == null) {
             fail("Cannot find process.histroy resource in rg.bonitasoft.bpm.model bundle.");
@@ -46,14 +46,14 @@ public class ModelHistoryTest {
     }
 
     @Test
-    public void should_history_last_release_has_no_name_and_date() throws Exception {
+    void should_history_last_release_has_no_name_and_date() throws Exception {
         final Release release = history.getLastRelease();
         assertThat(release.getLabel()).isNull();
         assertThat(release.getDate()).isNull();
     }
 
     @Test
-    public void should_history_latest_release_label_equals_current_model_version() throws Exception {
+    void should_history_latest_release_label_equals_current_model_version() throws Exception {
         final Release release = history.getLatestRelease();
         assertThat(release.getLabel()).isEqualTo(HistoryUtils.CURRENT_MODEL_VERSION);
     }

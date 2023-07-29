@@ -42,10 +42,10 @@ public class VariableFormalExpressionTransformer extends FormalExpressionFunctio
     /**
      * The expected and only supported expression type.
      */
-    private static String EXPRESSION_TYPE = ExpressionConstants.VARIABLE_TYPE;
+    private static final String EXPRESSION_TYPE = ExpressionConstants.VARIABLE_TYPE;
 
     /** Test a String expression type value against the supported type */
-    public static Predicate<String> IS_SUPPORTED_TYPE = EXPRESSION_TYPE::equals;
+    public static final Predicate<String> IS_SUPPORTED_TYPE = EXPRESSION_TYPE::equals;
     private final DataScope dataScope;
     private IModelSearch modelSearch;
 
@@ -84,10 +84,10 @@ public class VariableFormalExpressionTransformer extends FormalExpressionFunctio
         if (bonitaData.isTransient()) {
             return createContentForTransientData(bpmnData, bonitaData, expressionContent);
         }
-        return createContentForData(bpmnData, bonitaData, expressionContent);
+        return createContentForData(bpmnData, expressionContent);
     }
 
-    private String createContentForData(final TItemDefinition bpmnData, final Data bonitaData,
+    private String createContentForData(final TItemDefinition bpmnData,
             final String expressionContent) {
         return String.format(DATA_OBJECT_PATTERN, bpmnData != null ? bpmnData.getId() : expressionContent);
     }

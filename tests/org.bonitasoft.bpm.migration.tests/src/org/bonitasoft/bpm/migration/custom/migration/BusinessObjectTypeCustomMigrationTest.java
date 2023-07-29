@@ -23,14 +23,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.impl.MetamodelImpl;
 import org.eclipse.emf.edapt.spi.migration.impl.ModelImpl;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@RunWith(MockitoJUnitRunner.class)
-public class BusinessObjectTypeCustomMigrationTest {
+@ExtendWith(MockitoExtension.class)
+class BusinessObjectTypeCustomMigrationTest {
 
     private BusinessObjectTypeCustomMigration migrationUnderTest;
 
@@ -49,8 +49,8 @@ public class BusinessObjectTypeCustomMigrationTest {
     /**
      * @throws java.lang.Exception
      */
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         migrationUnderTest = new BusinessObjectTypeCustomMigration();
         final EList<Instance> diagramList = new BasicEList<Instance>();
         diagramList.add(diagramInstance);
@@ -61,7 +61,7 @@ public class BusinessObjectTypeCustomMigrationTest {
     }
 
     @Test
-    public void should_migrateAfter_Add_the_businessObjectType_InDiagram_IfNotExists() throws Exception {
+    void should_migrateAfter_Add_the_businessObjectType_InDiagram_IfNotExists() throws Exception {
         migrationUnderTest.migrateAfter(model, metamodel);
         verify(model).newInstance("process.BusinessObjectType");
         verify(businessDataTypeInstance).set("name", BusinessObjectTypeCustomMigration.BUSINESS_OBJECT_DATA_TYPE_NAME);
@@ -69,7 +69,7 @@ public class BusinessObjectTypeCustomMigrationTest {
     }
 
     @Test
-    public void should_migrateAfter_NOT_Add_the_businessObjectType_InDiagram_IfNotExists() throws Exception {
+    void should_migrateAfter_NOT_Add_the_businessObjectType_InDiagram_IfNotExists() throws Exception {
         final EList<Instance> datatypesList = new BasicEList<Instance>();
         when(businessDataTypeInstance.instanceOf("process.BusinessObjectType")).thenReturn(true);
         datatypesList.add(businessDataTypeInstance);

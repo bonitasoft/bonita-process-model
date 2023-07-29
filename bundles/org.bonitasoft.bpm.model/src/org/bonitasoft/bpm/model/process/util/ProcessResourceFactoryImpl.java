@@ -65,7 +65,7 @@ public class ProcessResourceFactoryImpl extends ResourceFactoryImpl {
         // and complete with extra options
         saveOptions.putAll(Map.of(
                 XMLResource.OPTION_DECLARE_XML, Boolean.TRUE,
-                XMLResource.OPTION_PROCESS_DANGLING_HREF, XMIResource.OPTION_PROCESS_DANGLING_HREF_DISCARD,
+                XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD,
                 XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE,
                 XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE,
                 XMLResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE,
