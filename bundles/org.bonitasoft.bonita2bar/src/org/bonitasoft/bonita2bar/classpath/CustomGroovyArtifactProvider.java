@@ -157,9 +157,10 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
 
     private List<URL> selectDependencies() throws IOException {
         return classpathResolver.listFiles().stream().filter(file -> file.getName().endsWith(".jar"))
-                .peek(file -> LOGGER.debug("{} added to compilation classpath", file.getName())).map(File::toURI)
+                .map(File::toURI)
                 .map(uri -> {
                     try {
+                        LOGGER.debug("{} added to compilation classpath", uri);
                         return uri.toURL();
                     } catch (MalformedURLException e) {
                         throw new IllegalStateException(e);

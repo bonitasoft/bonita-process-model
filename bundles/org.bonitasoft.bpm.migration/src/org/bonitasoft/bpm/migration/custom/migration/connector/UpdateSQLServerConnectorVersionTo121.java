@@ -17,24 +17,24 @@ package org.bonitasoft.bpm.migration.custom.migration.connector;
 /**
  * @author Romain Bioteau
  */
-public class UpdateSQLServerConnectorVersionTo121 extends UpdateConnectorDefinitionMigration {
+public class UpdateSQLServerConnectorVersionTo121 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String SQLSERVER_2008_DEFINITION_ID = "database-mssqlserver2008";
     private static final String SQLSERVER_2012_DEFINITION_ID = "database-mssqlserver2012";
     private static final String SQLSERVER_DEFINITION_ID = "database-mssqlserver";
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "1.2.1";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.0.0";
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return defId.equals(SQLSERVER_2008_DEFINITION_ID) || defId.equals(SQLSERVER_2012_DEFINITION_ID);
     }
 
@@ -43,7 +43,7 @@ public class UpdateSQLServerConnectorVersionTo121 extends UpdateConnectorDefinit
      * @see org.bonitasoft.bpm.migration.custom.migration.connector.UpdateConnectorDefinitionMigration#shouldUpdateId(java.lang.String)
      */
     @Override
-    protected boolean shouldUpdateId(String defId) {
+    public boolean shouldUpdateId(String defId) {
         return defId.equals(SQLSERVER_2008_DEFINITION_ID) || defId.equals(SQLSERVER_2012_DEFINITION_ID);
     }
 
@@ -52,7 +52,7 @@ public class UpdateSQLServerConnectorVersionTo121 extends UpdateConnectorDefinit
      * @see org.bonitasoft.bpm.migration.custom.migration.connector.UpdateConnectorDefinitionMigration#getNewDefinitionId()
      */
     @Override
-    protected String getNewDefinitionId() {
+    public String getNewDefinitionId() {
         return SQLSERVER_DEFINITION_ID;
     }
 }

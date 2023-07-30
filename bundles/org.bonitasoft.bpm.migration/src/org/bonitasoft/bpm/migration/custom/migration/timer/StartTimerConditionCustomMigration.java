@@ -18,6 +18,7 @@ import java.util.Date;
 
 import org.bonitasoft.bpm.migration.utils.LegacyTimerExpressionGenerator;
 import org.bonitasoft.bpm.model.process.ProcessFactory;
+import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.process.StartTimerEvent;
 import org.bonitasoft.bpm.model.process.StartTimerScriptType;
 import org.bonitasoft.bpm.model.util.ExpressionConstants;
@@ -33,66 +34,58 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class StartTimerConditionCustomMigration extends CustomMigration {
 
-    private LegacyTimerExpressionGenerator timerExpressionGenerator;
-
     @Override
     public void migrateAfter(final Model model, final Metamodel metamodel)
             throws MigrationException {
         for (final Instance startTimer : model.getAllInstances("process.StartTimerEvent")) {
             final EEnumLiteral scriptType = startTimer.get("scriptType");
-            final Date from = startTimer.get("from");
-            final Date at = startTimer.get("at");
-            final int month = startTimer.get("month");
-            final int day = startTimer.get("day");
-            final int hours = startTimer.get("hours");
-            final int dayNumber = startTimer.get("dayNumber");
-            final int minutes = startTimer.get("minutes");
-            final int seconds = startTimer.get("seconds");
             final StartTimerEvent event = ProcessFactory.eINSTANCE.createStartTimerEvent();
-            event.setAt(at);
-            event.setFrom(from);
-            event.setMonth(month);
-            event.setDay(day);
-            event.setHours(hours);
-            event.setDayNumber(dayNumber);
-            event.setMinutes(minutes);
-            event.setSeconds(seconds);
-            StartTimerScriptType type = null;
-            for (final StartTimerScriptType t : StartTimerScriptType.values()) {
-                if (t.getLiteral().equals(scriptType.getLiteral())) {
-                    type = t;
-                }
-            }
-            event.setScriptType(type);
+            event.setAt(startTimer.get("at"));
+            event.setFrom(startTimer.get("from"));
+            event.setMonth(startTimer.get("month"));
+            event.setDay(startTimer.get("day"));
+            event.setHours(startTimer.get("hours"));
+            event.setDayNumber(startTimer.get("dayNumber"));
+            event.setMinutes(startTimer.get("minutes"));
+            event.setSeconds(startTimer.get("seconds"));
+            event.setScriptType(StartTimerScriptType.valueOf(scriptType.getLiteral()));
             if (LegacyTimerExpressionGenerator.isCycle(event)) {
-                timerExpressionGenerator = new LegacyTimerExpressionGenerator();
-                final String cron = timerExpressionGenerator.getTimerExpressionContent(event);
-                if (cron != null) {
-                    Instance condition = startTimer.get("condition");
-                    if (condition != null) {
-                        model.delete(condition);
-                    }
-                    condition = model.newInstance("expression.Expression");
-                    condition.set("name", cron);
-                    condition.set("content", cron);
-                    condition.set("returnType", String.class.getName());
-                    condition.set("type", ExpressionConstants.CONSTANT_TYPE);
-                    startTimer.set("condition", condition);
-                }
-            } else if (type == StartTimerScriptType.CONSTANT && at != null) {
-                Instance condition = startTimer.get("condition");
-                if (condition != null) {
-                    model.delete(condition);
-                }
-                condition = model.newInstance("expression.Expression");
-                condition.set("name", "fixedDate");
-                condition.set("content", LegacyTimerExpressionGenerator.generateConstant(at));
-                condition.set("returnType", Date.class.getName());
-                condition.set("type", ExpressionConstants.SCRIPT_TYPE);
-                condition.set("interpreter", ExpressionConstants.GROOVY);
-                startTimer.set("condition", condition);
+                migrateCycleCondition(model, startTimer, event);
+            } else if (event.getScriptType() == StartTimerScriptType.CONSTANT && event.getAt() != null) {
+                migrateConstantCondition(model, startTimer);
             }
+        }
+    }
 
+    private void migrateConstantCondition(final Model model, final Instance startTimer) {
+        Instance condition = startTimer.get("condition");
+        if (condition != null) {
+            model.delete(condition);
+        }
+        condition = model.newInstance("expression.Expression");
+        condition.set("name", "fixedDate");
+        condition.set("content", LegacyTimerExpressionGenerator.generateConstant(startTimer.get("at")));
+        condition.set("returnType", Date.class.getName());
+        condition.set("type", ExpressionConstants.SCRIPT_TYPE);
+        condition.set("interpreter", ExpressionConstants.GROOVY);
+        startTimer.set("condition", condition);
+    }
+
+    private void migrateCycleCondition(final Model model, final Instance startTimer, final StartTimerEvent event) {
+        var timerExpressionGenerator = new LegacyTimerExpressionGenerator();
+        final String cron = timerExpressionGenerator.getTimerExpressionContent(event);
+        if (cron != null) {
+            Instance condition = startTimer.get(ProcessPackage.Literals.ABSTRACT_TIMER_EVENT__CONDITION.getName());
+            if (condition != null) {
+                model.delete(condition);
+            }
+            condition = model.newInstance("expression.Expression");
+            condition.set("name", cron);
+            condition.set("content", cron);
+            condition.set("returnType", String.class.getName());
+            condition.set("type", ExpressionConstants.CONSTANT_TYPE);
+
+            startTimer.set(ProcessPackage.Literals.ABSTRACT_TIMER_EVENT__CONDITION.getName(), condition);
         }
     }
 

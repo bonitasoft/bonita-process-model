@@ -39,14 +39,14 @@ public class Removev6FromCustomMigration extends CustomMigration {
     @Override
     public void migrateBefore(Model model, Metamodel metamodel) throws MigrationException {
         for (final Instance absractProcess : model.getAllInstances("process.AbstractProcess")) {
-            store(absractProcess, model);
+            store(absractProcess);
         }
         for (final Instance flowElement : model.getAllInstances("process.FlowElement")) {
-            store(flowElement, model);
+            store(flowElement);
         }
     }
 
-    private void store(final Instance instance, Model model) {
+    private void store(final Instance instance) {
         names.put(instance.getUuid(), instance.get("name"));
         documentations.put(instance.getUuid(), instance.get("documentation"));
         List<Instance> attachments = instance.get("textAnnotationAttachment");

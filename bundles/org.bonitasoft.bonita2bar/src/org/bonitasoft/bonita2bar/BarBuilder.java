@@ -118,7 +118,7 @@ public class BarBuilder {
         LOGGER.info("Building {} ({})...", process.getName(), process.getVersion());
         Optional<Configuration> configuration;
         try {
-            configuration = getConfiguration(process, localConfiguration, environment);
+            configuration = getConfiguration(process);
         } catch (IOException e) {
             throw new BuildBarException("Failed to load local configuration", e);
         }
@@ -152,7 +152,7 @@ public class BarBuilder {
         return new BusinessArchiveBuilder().createNewBusinessArchive();
     }
 
-    static Optional<Configuration> getConfiguration(Pool process, Path localConfiguration, String environment)
+    Optional<Configuration> getConfiguration(Pool process)
             throws IOException {
         final String uuid = getEObjectID(process);
         if ("Local".equals(environment) || environment == null) {// Use local environment
@@ -161,7 +161,8 @@ public class BarBuilder {
             if (!confFile.exists()) {
                 return Optional.empty();
             }
-            var resource = ModelLoader.getInstance().loadModel(URI.createFileURI(confFile.getAbsolutePath()));
+            var resource = ModelLoader.getInstance().loadModel(URI.createFileURI(confFile.getAbsolutePath()),
+                    processRegistry.getMigrationPolicy());
             if (resource.getContents().isEmpty() || !(resource.getContents().get(0) instanceof Configuration)) {
                 throw new IOException(String.format("No Configuration found in file %s", confFile.getAbsolutePath()));
             }

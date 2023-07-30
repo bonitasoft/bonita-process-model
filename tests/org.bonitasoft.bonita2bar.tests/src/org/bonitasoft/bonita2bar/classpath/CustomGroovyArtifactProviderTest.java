@@ -27,6 +27,7 @@ import org.bonitasoft.bonita2bar.SourcePathProvider;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.configuration.Configuration;
+import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.bpm.model.util.ModelLoader;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.eclipse.core.runtime.FileLocator;
@@ -65,7 +66,8 @@ class CustomGroovyArtifactProviderTest {
                 SourcePathProvider.of(projectRoot).getGroovySource(), ClasspathResolver.of(classpathFile),
                 outputFolder);
         BusinessArchiveBuilder builder = new BusinessArchiveBuilder().createNewBusinessArchive();
-        var registry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"));
+        var registry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
+                MigrationPolicy.NEVER_MIGRATE_POLICY);
 
         File confFolder = projectRoot.resolve("app").resolve("process_configurations").toFile();
         var configurationResource = ModelLoader.getInstance()

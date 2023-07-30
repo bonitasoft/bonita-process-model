@@ -20,6 +20,7 @@ import java.io.File;
 import java.net.URLDecoder;
 
 import org.bonitasoft.bonita2bar.ProcessRegistry;
+import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.bonitasoft.engine.bpm.flownode.impl.internal.FlowElementContainerDefinitionImpl;
 import org.bonitasoft.engine.bpm.process.impl.internal.DesignProcessDefinitionImpl;
@@ -39,7 +40,8 @@ class BPMN2ArtifactProviderTest {
         File repoRoot = new File(URLDecoder.decode(
                 FileLocator.toFileURL(BPMN2ArtifactProvider.class.getResource("/test-repository/")).getFile(),
                 "UTF-8"));
-        processRegistry = ProcessRegistry.of(repoRoot.toPath().resolve("app").resolve("diagrams"));
+        processRegistry = ProcessRegistry.of(repoRoot.toPath().resolve("app").resolve("diagrams"),
+                MigrationPolicy.NEVER_MIGRATE_POLICY);
         bpmn2ArtifactProvider = new BPMN2ArtifactProvider(processRegistry,
                 repoRoot.toPath().resolve("target"));
         businessArchiveBuilder = new BusinessArchiveBuilder().createNewBusinessArchive();

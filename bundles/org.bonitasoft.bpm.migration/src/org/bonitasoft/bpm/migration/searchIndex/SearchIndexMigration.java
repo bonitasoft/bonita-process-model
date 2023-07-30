@@ -27,7 +27,7 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class SearchIndexMigration extends CustomMigration {
 
-    private final int MAX = 5;
+    private static final int MAX = 5;
 
     @Override
     public void migrateAfter(final Model model, final Metamodel metamodel)

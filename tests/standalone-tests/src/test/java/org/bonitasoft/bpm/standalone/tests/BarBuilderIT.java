@@ -28,6 +28,7 @@ import org.bonitasoft.bonita2bar.ProcessRegistry;
 import org.bonitasoft.bonita2bar.SourcePathProvider;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
+import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.web.designer.ArtifactBuilderFactory;
 import org.bonitasoft.web.designer.config.UiDesignerProperties;
 import org.bonitasoft.web.designer.config.UiDesignerPropertiesBuilder;
@@ -59,7 +60,8 @@ class BarBuilderIT {
                 .workingDirectory(tmpDir.resolve("workdir"))
                 .classpathResolver(ClasspathResolver.of(MavenUtil.buildClasspath(projectRoot, mvnExecutable)))
                 .dependencyReport(MavenUtil.loadReport(MavenUtil.analyze(projectRoot, mvnExecutable)))
-                .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams")))
+                .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
+                        MigrationPolicy.ALWAYS_MIGRATE_POLICY))
                 .sourcePathProvider(SourcePathProvider.of(projectRoot))
                 .build());
 
@@ -95,6 +97,37 @@ class BarBuilderIT {
                         bar -> Objects.equals(bar.getFileName().toString(), "SimpleProcessWithContract--1.0.bar"))
                 .isDirectoryContaining(
                         bar -> Objects.equals(bar.getFileName().toString(), "SimpleProcessWithParameters--1.0.bar"));
+    }
+
+    @Test
+    void buildBusinessArchivesWithMigration(@TempDir Path tmpDir) throws Exception {
+        var projectRoot = tmpDir.resolve("test-respository");
+        FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/test-repository").getFile()).getAbsolutePath(),
+                projectRoot.toFile().getAbsolutePath());
+        var mvnExecutable = SystemUtils.IS_OS_WINDOWS ? "mvn.cmd" : "mvn";
+        var artifactBuilder = new ArtifactBuilderFactory(uidWorkspaceProperties(projectRoot, tmpDir.resolve("uid")))
+                .create();
+
+        var barBuilder = BarBuilderFactory.create(BuildConfig.builder()
+                .environment("Local")
+                .formBuilder(formId -> {
+                    try {
+                        return artifactBuilder.buildPage(formId);
+                    } catch (ExportException | ModelException e) {
+                        throw new RuntimeException(e);
+                    }
+                })
+                .workingDirectory(tmpDir.resolve("workdir"))
+                .classpathResolver(ClasspathResolver.of(MavenUtil.buildClasspath(projectRoot, mvnExecutable)))
+                .dependencyReport(MavenUtil.loadReport(MavenUtil.analyze(projectRoot, mvnExecutable)))
+                .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
+                        MigrationPolicy.ALWAYS_MIGRATE_POLICY))
+                .sourcePathProvider(SourcePathProvider.of(projectRoot))
+                .build());
+
+        var result = barBuilder.build("ProcessWithAdditionalResource", "1.0");
+
+        assertThat(result.getBusinessArchives()).hasSize(1);
     }
 
     private UiDesignerProperties uidWorkspaceProperties(Path projectRoot, Path uidWorkdir) {

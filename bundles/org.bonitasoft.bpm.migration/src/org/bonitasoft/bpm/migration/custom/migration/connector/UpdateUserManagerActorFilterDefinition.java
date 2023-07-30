@@ -14,18 +14,18 @@
  */
 package org.bonitasoft.bpm.migration.custom.migration.connector;
 
-public class UpdateUserManagerActorFilterDefinition extends UpdateConnectorDefinitionMigration {
+public class UpdateUserManagerActorFilterDefinition extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String OLD_DEFINITION_ID = "user-manager";
     private static final String NEW_DEFINITION_ID = "bonita-actorfilter-user-manager";
 
     @Override
-    protected String getNewDefinitionId() {
+    public String getNewDefinitionId() {
         return NEW_DEFINITION_ID;
     }
 
     @Override
-    protected boolean shouldUpdateId(String defId) {
+    public boolean shouldUpdateId(String defId) {
         return OLD_DEFINITION_ID.equals(defId);
     }
 

@@ -14,26 +14,26 @@
  */
 package org.bonitasoft.bpm.migration.custom.migration.connector;
 
-public class UpdateUIPathConnectorTo20 extends UpdateConnectorDefinitionMigration {
+public class UpdateUIPathConnectorTo20 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String UIPATH_CONNECTOR_START_JOB_DEF = "uipath-startjob";
     private static final String UIPATH_CONNECTOR_ADD_QUEUE_DEF = "uipath-add-queueItem";
     private static final String UIPATH_CONNECTOR_GET_JOB_DEF = "uipath-getjob";
 
     @Override
-    protected boolean shouldUpdateVersion(String defId) {
+    public boolean shouldUpdateVersion(String defId) {
         return UIPATH_CONNECTOR_ADD_QUEUE_DEF.equals(defId)
                 || UIPATH_CONNECTOR_GET_JOB_DEF.equals(defId)
                 || UIPATH_CONNECTOR_START_JOB_DEF.equals(defId);
     }
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "2.0.0";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.0.0";
     }
 

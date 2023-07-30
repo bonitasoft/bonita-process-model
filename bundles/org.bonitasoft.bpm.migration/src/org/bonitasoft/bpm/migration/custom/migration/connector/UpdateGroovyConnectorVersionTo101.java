@@ -17,22 +17,22 @@ package org.bonitasoft.bpm.migration.custom.migration.connector;
 /**
  * @author Romain Bioteau
  */
-public class UpdateGroovyConnectorVersionTo101 extends UpdateConnectorDefinitionMigration {
+public class UpdateGroovyConnectorVersionTo101 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String GROOVY_DEF_ID = "scripting-groovy";
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "1.0.1";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.0.0";
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return defId.equals(GROOVY_DEF_ID);
     }
 }

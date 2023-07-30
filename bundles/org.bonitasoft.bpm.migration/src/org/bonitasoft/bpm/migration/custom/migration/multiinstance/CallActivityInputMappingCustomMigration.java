@@ -20,6 +20,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.bonitasoft.bpm.migration.utils.StringToExpressionConverter;
+import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.util.ExpressionConstants;
 import org.eclipse.emf.edapt.migration.CustomMigration;
 import org.eclipse.emf.edapt.migration.MigrationException;
@@ -32,14 +33,15 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class CallActivityInputMappingCustomMigration extends CustomMigration {
 
-    private final Map<String, Instance> dataInstances = new HashMap<String, Instance>();
+    private final Map<String, Instance> dataInstances = new HashMap<>();
 
     @Override
     public void migrateBefore(final Model model, final Metamodel metamodel) throws MigrationException {
         final Iterable<Instance> instancesWithProcessSource = model.getAllInstances("process.InputMapping").stream()
                 .filter(withProcessSource()).collect(Collectors.toList());
         for (final Instance instance : instancesWithProcessSource) {
-            dataInstances.put(instance.getUuid(), ((Instance) instance.get("processSource")).copy());
+            dataInstances.put(instance.getUuid(),
+                    ((Instance) instance.get(ProcessPackage.Literals.INPUT_MAPPING__PROCESS_SOURCE.getName())).copy());
         }
     }
 

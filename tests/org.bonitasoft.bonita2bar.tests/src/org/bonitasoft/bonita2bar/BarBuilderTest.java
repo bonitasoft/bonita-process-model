@@ -29,6 +29,7 @@ import java.util.Optional;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.configuration.ConfigurationArchive;
 import org.bonitasoft.bpm.model.configuration.Configuration;
+import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.bonitasoft.engine.bpm.bar.InvalidBusinessArchiveFormatException;
 import org.bonitasoft.plugin.analyze.report.model.DependencyReport;
@@ -49,7 +50,8 @@ class BarBuilderTest {
         var repoRoot = new File(URLDecoder.decode(
                 FileLocator.toFileURL(BarBuilderTest.class.getResource("/test-repository")).getFile(), "UTF-8"));
 
-        processRegistry = ProcessRegistry.of(repoRoot.toPath().resolve("app").resolve("diagrams"));
+        processRegistry = ProcessRegistry.of(repoRoot.toPath().resolve("app").resolve("diagrams"),
+                MigrationPolicy.NEVER_MIGRATE_POLICY);
         sourcePathProvider = SourcePathProvider.of(repoRoot.toPath());
         barBuilder = BarBuilderFactory
                 .create(BuildConfig.builder().environment("Local").dependencyReport(new DependencyReport())
@@ -98,8 +100,7 @@ class BarBuilderTest {
     void should_retieve_local_configuration_for_a_pool() throws Exception {
         var process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0").orElseThrow();
 
-        final Optional<Configuration> configuration = BarBuilder.getConfiguration(process,
-                sourcePathProvider.getLocalConfiguration(), null);
+        final Optional<Configuration> configuration = barBuilder.getConfiguration(process);
 
         assertThat(configuration).isPresent();
     }

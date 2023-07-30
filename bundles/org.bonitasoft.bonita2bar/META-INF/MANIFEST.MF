@@ -58,3 +58,13 @@ Import-Package: org.bonitasoft.engine,
  org.bonitasoft.engine.xml.parser,
  org.bonitasoft.plugin.analyze.report.model,
  org.slf4j;version="1.7.30"
+Export-Package: org.bonitasoft.bonita2bar,
+ org.bonitasoft.bonita2bar.actor,
+ org.bonitasoft.bonita2bar.classpath,
+ org.bonitasoft.bonita2bar.configuration,
+ org.bonitasoft.bonita2bar.configuration.model,
+ org.bonitasoft.bonita2bar.form,
+ org.bonitasoft.bonita2bar.process,
+ org.bonitasoft.bonita2bar.process.builder,
+ org.bonitasoft.bonita2bar.process.expression,
+ org.bonitasoft.bonita2bar.resources

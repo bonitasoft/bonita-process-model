@@ -21,23 +21,23 @@ import org.bonitasoft.bpm.model.util.ExpressionConstants;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.Model;
 
-public class UpdateLDAPConnectorVersionTo110 extends UpdateConnectorDefinitionMigration {
+public class UpdateLDAPConnectorVersionTo110 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String DEFAULT_PAGE_SIZE = "500";
     private static final String LDAP_CONNECTOR_DEFINITION = "ldap";
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "1.1.0";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.0.0";
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return LDAP_CONNECTOR_DEFINITION.equals(defId);
     }
 

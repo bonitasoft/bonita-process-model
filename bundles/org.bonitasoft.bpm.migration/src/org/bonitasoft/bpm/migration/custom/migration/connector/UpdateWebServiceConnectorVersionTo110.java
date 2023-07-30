@@ -17,22 +17,22 @@ package org.bonitasoft.bpm.migration.custom.migration.connector;
 /**
  * @author Romain Bioteau
  */
-public class UpdateWebServiceConnectorVersionTo110 extends UpdateConnectorDefinitionMigration {
+public class UpdateWebServiceConnectorVersionTo110 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String WEB_SERVICE_CONNECTOR_DEFINITION = "webservice";
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "1.1.0";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.0.1";
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return WEB_SERVICE_CONNECTOR_DEFINITION.equals(defId);
     }
 }

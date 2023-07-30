@@ -20,7 +20,7 @@ import java.util.Objects;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.Model;
 
-public class UpdateDeprecatedGroovyConnector extends UpdateConnectorDefinitionMigration {
+public class UpdateDeprecatedGroovyConnector extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String DEPRECATED_GROOVY_DEF_ID = "scripting-groovy";
     private static final String DEPRECATED_GROOVY_DEF_VERSION = "1.0.2";
@@ -28,30 +28,28 @@ public class UpdateDeprecatedGroovyConnector extends UpdateConnectorDefinitionMi
     private static final String CURRENT_GROOVY_DEF_ID = "scripting-groovy-script";
     private static final String CURRENT_GROOVY_DEF_VERSION = "1.0.1";
 
-    private String oldContentValue;
-
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return CURRENT_GROOVY_DEF_VERSION;
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return DEPRECATED_GROOVY_DEF_VERSION;
     }
 
     @Override
-    protected String getNewDefinitionId() {
+    public String getNewDefinitionId() {
         return CURRENT_GROOVY_DEF_ID;
     }
 
     @Override
-    protected boolean shouldUpdateVersion(String defId) {
+    public boolean shouldUpdateVersion(String defId) {
         return Objects.equals(defId, DEPRECATED_GROOVY_DEF_ID);
     }
 
     @Override
-    protected boolean shouldUpdateId(String defId) {
+    public boolean shouldUpdateId(String defId) {
         return Objects.equals(defId, DEPRECATED_GROOVY_DEF_ID);
     }
 

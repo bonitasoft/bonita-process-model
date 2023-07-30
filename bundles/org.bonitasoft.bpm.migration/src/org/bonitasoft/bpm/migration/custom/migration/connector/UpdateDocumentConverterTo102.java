@@ -19,22 +19,22 @@ import java.util.Objects;
 /**
  * @author Romain Bioteau
  */
-public class UpdateDocumentConverterTo102 extends UpdateConnectorDefinitionMigration {
+public class UpdateDocumentConverterTo102 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String DOCUEMENT_CONVERTER_DEF_ID = "document-converter";
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "1.0.2";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.0.1";
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return Objects.equals(defId, DOCUEMENT_CONVERTER_DEF_ID);
     }
 }

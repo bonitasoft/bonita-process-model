@@ -22,6 +22,7 @@ import org.eclipse.emf.edapt.spi.migration.Model;
 
 public class UpdateAlfrescoConnectorDefinitionsMigration extends CustomMigration {
 
+    private static final String VERSION_2_0_0 = "2.0.0";
     protected static final String VERSION_FEATURE_NAME = "version";
     protected static final String DEFINITION_VERSION_FEATURE_NAME = "definitionVersion";
     protected static final String DEFINITION_ID_FEATURE_NAME = "definitionId";
@@ -31,32 +32,32 @@ public class UpdateAlfrescoConnectorDefinitionsMigration extends CustomMigration
         for (final Instance connectorInstance : model.getAllInstances("process.Connector")) {
             final String defId = connectorInstance.get(DEFINITION_ID_FEATURE_NAME);
             if (isCreateFolderByPathDef(defId)) {
-                updateConnector(connectorInstance, "AlfrescoCreateFolderByPath", "2.0.0");
+                updateConnector(connectorInstance, "AlfrescoCreateFolderByPath", VERSION_2_0_0);
             }
             if (isDeleteFolderByPathDef(defId)) {
-                updateConnector(connectorInstance, "AlfrescoDeleteFileByPath", "2.0.0");
+                updateConnector(connectorInstance, "AlfrescoDeleteFileByPath", VERSION_2_0_0);
             }
             if (isDeleteDeleteItemByIdDef(defId)) {
-                updateConnector(connectorInstance, "AlfrescoDeleteItemById", "2.0.0");
+                updateConnector(connectorInstance, "AlfrescoDeleteItemById", VERSION_2_0_0);
             }
             if (isUploadFileByPathDef(defId)) {
-                updateConnector(connectorInstance, "AlfrescoUploadFileByPath", "2.0.0");
+                updateConnector(connectorInstance, "AlfrescoUploadFileByPath", VERSION_2_0_0);
             }
         }
         for (final Instance connectorInstance : model
                 .getAllInstances("connectorconfiguration.ConnectorConfiguration")) {
             final String defId = connectorInstance.get(DEFINITION_ID_FEATURE_NAME);
             if (isCreateFolderByPathDef(defId)) {
-                updateConfig(connectorInstance, "AlfrescoCreateFolderByPath", "2.0.0");
+                updateConfig(connectorInstance, "AlfrescoCreateFolderByPath", VERSION_2_0_0);
             }
             if (isDeleteFolderByPathDef(defId)) {
-                updateConfig(connectorInstance, "AlfrescoDeleteFileByPath", "2.0.0");
+                updateConfig(connectorInstance, "AlfrescoDeleteFileByPath", VERSION_2_0_0);
             }
             if (isDeleteDeleteItemByIdDef(defId)) {
-                updateConfig(connectorInstance, "AlfrescoDeleteItemById", "2.0.0");
+                updateConfig(connectorInstance, "AlfrescoDeleteItemById", VERSION_2_0_0);
             }
             if (isUploadFileByPathDef(defId)) {
-                updateConfig(connectorInstance, "AlfrescoUploadFileByPath", "2.0.0");
+                updateConfig(connectorInstance, "AlfrescoUploadFileByPath", VERSION_2_0_0);
             }
         }
     }

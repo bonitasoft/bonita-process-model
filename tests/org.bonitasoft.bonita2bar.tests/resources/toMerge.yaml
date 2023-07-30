@@ -1,0 +1,47 @@
+processes:
+  - name: "New Vacation Request"
+    version: 1.4.1
+    parameters:
+      - name: calendarCalendarId
+        value: 456
+        type: Integer
+        description: tutu
+      - name: calendarApplicationName
+        value: my-super-app
+        type: String
+        description: titi
+  - name: "Initiate Vacation Available"
+    version: 1.4.1
+    parameters:
+      - name: uniqName1
+        value: toto
+        type: String
+        description: ...
+      - name: shouldConnect
+        value: true
+        type: Boolean
+      - name: amount
+        value: 12.4
+        type: Decimal
+  - name: "SimpleProcessWithParameters"
+    version: "1.0"
+    parameters:
+      - name: "port"
+        value: 9090
+        type: "Integer"
+      - name: "password"
+        type: "String"
+        value: "Some53cr3t"
+global_parameters:
+  - name: uniqName1
+    value: "456"
+    type: Integer
+    description: tutu
+  - name: uniqName2
+    value: my-super-app
+    type: String
+    description: titi
+  - name: host
+    value: mydomain.com
+    type: String
+    description: Production domain

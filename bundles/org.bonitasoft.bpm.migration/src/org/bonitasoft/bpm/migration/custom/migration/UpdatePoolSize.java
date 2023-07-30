@@ -28,6 +28,7 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class UpdatePoolSize extends CustomMigration {
 
+    private static final String LAYOUT_CONSTRAINT = "layoutConstraint";
     private static final String POOL_VISUAL_ID = "2007";
     private static final int DEFAULT_WIDTH = 975;
 
@@ -38,9 +39,9 @@ public class UpdatePoolSize extends CustomMigration {
         if (nodeEC.isPresent()) {
             for (final Instance node : model.getAllInstances(nodeEC.get())) {
                 if (node.get("type").equals(POOL_VISUAL_ID)
-                        && node.get("layoutConstraint") != null
-                        && (Integer) ((Instance) node.get("layoutConstraint")).get("width") == 0) {
-                    ((Instance) node.get("layoutConstraint")).set("width", DEFAULT_WIDTH);
+                        && node.get(LAYOUT_CONSTRAINT) != null
+                        && (Integer) ((Instance) node.get(LAYOUT_CONSTRAINT)).get("width") == 0) {
+                    ((Instance) node.get(LAYOUT_CONSTRAINT)).set("width", DEFAULT_WIDTH);
                 }
             }
         }

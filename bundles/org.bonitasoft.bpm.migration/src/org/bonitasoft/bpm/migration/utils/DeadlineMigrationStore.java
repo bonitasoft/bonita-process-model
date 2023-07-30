@@ -26,12 +26,16 @@ import org.eclipse.emf.edapt.spi.migration.Instance;
  */
 public class DeadlineMigrationStore {
 
-    private static Map<String, List<DeadlineStore>> deadlines = new HashMap<String, List<DeadlineStore>>();
+    private static Map<String, List<DeadlineStore>> deadlines = new HashMap<>();
+
+    private DeadlineMigrationStore() {
+        // private constructor
+    }
 
     public static void addDeadline(final String taskUUID, final Instance deadline) {
         List<DeadlineStore> deadlineList = deadlines.get(taskUUID);
         if (deadlineList == null) {
-            deadlineList = new ArrayList<DeadlineStore>();
+            deadlineList = new ArrayList<>();
         }
         deadlineList.add(new DeadlineStore((String) ((Instance) deadline.get("connector")).get("name"),
                 (String) deadline.get("condition")));

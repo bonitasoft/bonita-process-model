@@ -27,14 +27,14 @@ import org.eclipse.emf.edapt.spi.migration.Model;
 
 public class ExpectedDurationMigration extends CustomMigration {
 
-    protected Map<String, String> taskDurations = new HashMap<String, String>();
+    protected Map<String, String> taskDurations = new HashMap<>();
 
     @Override
     public void migrateBefore(Model model, Metamodel metamodel) throws MigrationException {
         for (Instance task : model.getAllInstances("process.Task")) {
             String duration = task.get("duration");
             if (duration != null) {
-                taskDurations.put(task.getUuid(), (String) duration);
+                taskDurations.put(task.getUuid(), duration);
             }
         }
     }

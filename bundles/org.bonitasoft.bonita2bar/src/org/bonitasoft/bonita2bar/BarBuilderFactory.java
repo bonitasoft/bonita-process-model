@@ -84,21 +84,15 @@ public class BarBuilderFactory {
         private SourcePathProvider sourcePathProvider;
         private ClasspathResolver classpathResolver;
 
-        BuildConfig(String environment, boolean allowEmptyFormMapping,
-                Path workingDirectory,
-                DependencyReport dependencyReport,
-                FormBuilder formBuilder,
-                ProcessRegistry processRegistry,
-                SourcePathProvider sourcePathProvider,
-                ClasspathResolver classpathResolver) {
-            this.environment = environment;
-            this.allowEmptyFormMapping = allowEmptyFormMapping;
-            this.workingDirectory = workingDirectory;
-            this.dependencyReport = dependencyReport;
-            this.formBuilder = formBuilder;
-            this.processRegistry = processRegistry;
-            this.sourcePathProvider = sourcePathProvider;
-            this.classpathResolver = classpathResolver;
+        private BuildConfig(BuildConfigBuilder builder) {
+            this.environment = builder.environment;
+            this.allowEmptyFormMapping = builder.allowEmptyFormMapping;
+            this.workingDirectory = builder.workingDirectory;
+            this.dependencyReport = builder.dependencyReport;
+            this.formBuilder = builder.formBuilder;
+            this.processRegistry = builder.processRegistry;
+            this.sourcePathProvider = builder.sourcePathProvider;
+            this.classpathResolver = builder.classpathResolver;
         }
 
         public String getEnvironment() {
@@ -154,13 +148,12 @@ public class BarBuilderFactory {
             private SourcePathProvider sourcePathProvider;
             private ClasspathResolver classpathResolver;
 
-            BuildConfigBuilder() {
+            private BuildConfigBuilder() {
 
             }
 
             public BuildConfig build() {
-                return new BuildConfig(environment, allowEmptyFormMapping, workingDirectory, dependencyReport,
-                        formBuilder, processRegistry, sourcePathProvider, classpathResolver);
+                return new BuildConfig(this);
             }
 
             public BuildConfigBuilder environment(String environment) {

@@ -17,22 +17,22 @@ package org.bonitasoft.bpm.migration.custom.migration.connector;
 /**
  * @author Romain Bioteau
  */
-public class UpdateTalendConnectorVersionTo101 extends UpdateConnectorDefinitionMigration {
+public class UpdateTalendConnectorVersionTo101 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String TALEND_JOB_DEFINITION_ID = "talend-job-launcher";
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "1.0.1";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.0.0";
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return defId.equals(TALEND_JOB_DEFINITION_ID);
     }
 }
