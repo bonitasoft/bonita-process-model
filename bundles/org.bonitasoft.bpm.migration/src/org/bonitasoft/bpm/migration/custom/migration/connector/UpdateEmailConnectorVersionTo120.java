@@ -22,22 +22,22 @@ import org.bonitasoft.bpm.model.util.ExpressionConstants;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.Model;
 
-public class UpdateEmailConnectorVersionTo120 extends UpdateConnectorDefinitionMigration {
+public class UpdateEmailConnectorVersionTo120 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String EMAIL_CONNECTOR_DEFINITION = "email";
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "1.2.0";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.1.0";
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return Objects.equals(EMAIL_CONNECTOR_DEFINITION, defId);
     }
 

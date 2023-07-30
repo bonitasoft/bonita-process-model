@@ -31,7 +31,7 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class DocumentTypeMigration extends CustomMigration {
 
-    private final Map<String, Integer> list = new HashMap<String, Integer>();
+    private final Map<String, Integer> list = new HashMap<>();
 
     @Override
     public void migrateBefore(final Model model, final Metamodel metamodel) throws MigrationException {
@@ -43,12 +43,9 @@ public class DocumentTypeMigration extends CustomMigration {
     }
 
     private Integer retrieveNewDocumentType(final Instance inst) {
-        final Boolean isDocumentInternal = (Boolean) inst.get("isInternal");
-        if (isDocumentInternal) {
-            return retriveNewDocumentTypeForOldInternalType(inst);
-        } else {
-            return retrieveNewDocumentTypeForOldExternalType(inst);
-        }
+        var isDocumentInternal = (boolean) inst.get("isInternal");
+        return isDocumentInternal ? retriveNewDocumentTypeForOldInternalType(inst)
+                : retrieveNewDocumentTypeForOldExternalType(inst);
     }
 
     private Integer retrieveNewDocumentTypeForOldExternalType(final Instance inst) {

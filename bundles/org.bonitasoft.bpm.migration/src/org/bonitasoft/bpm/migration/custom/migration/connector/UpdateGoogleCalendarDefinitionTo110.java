@@ -23,7 +23,7 @@ import org.bonitasoft.bpm.model.util.ExpressionConstants;
 import org.eclipse.emf.edapt.spi.migration.Instance;
 import org.eclipse.emf.edapt.spi.migration.Model;
 
-public class UpdateGoogleCalendarDefinitionTo110 extends UpdateConnectorDefinitionMigration {
+public class UpdateGoogleCalendarDefinitionTo110 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final Set<String> GOOGLE_CALENDAR_DEFINITIONS = new HashSet<>();
     static {
@@ -35,17 +35,17 @@ public class UpdateGoogleCalendarDefinitionTo110 extends UpdateConnectorDefiniti
     }
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "1.1.0";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.0.0";
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return GOOGLE_CALENDAR_DEFINITIONS.contains(defId);
     }
 

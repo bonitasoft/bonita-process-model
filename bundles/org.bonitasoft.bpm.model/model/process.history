@@ -10703,7 +10703,6 @@
         </parameters>
       </operation>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15DIFWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.FixedReturnTypeExpressionMigration"/>
     <changes xsi:type="history:MigrationChange" xmi:id="_15DIFmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.decision.DecisionTableMigration">
       <changes xsi:type="history:CompositeChange" xmi:id="_15DIF2nREeaTLbmqFFisdA">
         <changes xsi:type="history:Set" xmi:id="_15DIGGnREeaTLbmqFFisdA" element="_15DILGnREeaTLbmqFFisdA" featureName="derived" dataValue="true" oldDataValue="false"/>
@@ -10766,11 +10765,9 @@
         <element href="form.ecore#//Widget/returnTypeModifier"/>
       </changes>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15DvJGnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.LabelPositionMigration">
       <changes xsi:type="history:Set" xmi:id="_15DvJWnREeaTLbmqFFisdA" featureName="defaultValueLiteral" dataValue="Up" oldDataValue="0">
         <element href="form.ecore#//Widget/labelPosition"/>
       </changes>
-    </changes>
     <changes xsi:type="history:CompositeChange" xmi:id="_15DvJmnREeaTLbmqFFisdA">
       <changes xsi:type="history:Set" xmi:id="_15DvJ2nREeaTLbmqFFisdA" featureName="lowerBound" dataValue="0" oldDataValue="1">
         <element href="ActorMapping.ecore#//Users/user"/>
@@ -10975,7 +10972,6 @@
     </changes>
   </releases>
   <releases xmi:id="_15E9XWnREeaTLbmqFFisdA" date="2013-04-30T18:37:32.795+0200" label="6.0.0-ga-004">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15E9XmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.FileWidgetActionMigration"/>
     <changes xsi:type="history:OperationChange" xmi:id="_15E9X2nREeaTLbmqFFisdA">
       <changes xsi:type="history:Create" xmi:id="_15E9YGnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
         <target href="process.ecore#//SequenceFlow"/>
@@ -11021,7 +11017,6 @@
     </changes>
   </releases>
   <releases xmi:id="_15FkUGnREeaTLbmqFFisdA" date="2013-05-17T10:17:14.066+0200" label="6.0.0-ga-005">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15FkUWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.FormConnectorEventMigration"/>
     <changes xsi:type="history:OperationChange" xmi:id="_PO6H8BsCEeifUtXPilm_3g">
       <changes xsi:type="history:Create" xmi:id="_PO6H8RsCEeifUtXPilm_3g" referenceName="eStructuralFeatures">
         <target href="configuration.ecore#//Configuration"/>
@@ -11419,7 +11414,6 @@
     </changes>
   </releases>
   <releases xmi:id="_15GykGnREeaTLbmqFFisdA" date="2014-03-31T13:36:39.611+0200" label="6.3.0-002">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15GykWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.GroupIteratorMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15GykmnREeaTLbmqFFisdA">
         <changes xsi:type="history:Delete" xmi:id="_15Gyk2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
           <target href="form.ecore#//Group"/>
@@ -11555,7 +11549,6 @@
           <parameters xmi:id="_15HZpGnREeaTLbmqFFisdA" name="opposite"/>
         </operation>
       </changes>
-    </changes>
   </releases>
   <releases xmi:id="_15HZpWnREeaTLbmqFFisdA" date="2014-05-12T13:36:39.611+0200" label="6.3.1-001">
     <changes xsi:type="history:MigrationChange" xmi:id="_15HZpmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.expression.CleanReferenceMigration"/>
@@ -12351,8 +12344,6 @@
         </changes>
       </changes>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15LrBWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.document.DocumentDefaultReturnTypeModifierMigration"/>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15LrBmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.FileWidgetDocumentMigration"/>
   </releases>
   <releases xmi:id="_15LrB2nREeaTLbmqFFisdA" date="2014-10-23T11:45:10.092+0200" label="6.4.0-003">
     <changes xsi:type="history:MigrationChange" xmi:id="_15LrCGnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.InitializeConnectorConfigurationModelVersion">
@@ -12458,7 +12449,6 @@
       <element href="form.ecore#//FileWidget/downloadType"/>
       <referenceValue href="form.ecore#//FileWidgetDownloadType"/>
     </changes>
-    <changes xsi:type="history:MigrationChange" xmi:id="_15MSD2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.FileWidgetResourceMigration"/>
   </releases>
   <releases xmi:id="_15MSEGnREeaTLbmqFFisdA" date="2014-11-04T10:45:10.092+0100" label="6.4.0-005">
     <changes xsi:type="history:MigrationChange" xmi:id="_15MSEWnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.connector.UpdateGroovyConnectorVersionTo101"/>
@@ -13925,9 +13915,6 @@
         <element href="process.ecore#//ContractInput/getJavaType/%http:%2F%2Fwww.eclipse.org%2Femf%2F2002%2FGenModel%/@details.0"/>
       </changes>
     </changes>
-  </releases>
-  <releases xmi:id="_15S_0WnREeaTLbmqFFisdA" date="2015-06-11T10:33:11.824+0200" label="7.0.1-001">
-    <changes xsi:type="history:MigrationChange" xmi:id="_15S_0mnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.form.ShapeFillColorCustomMigration"/>
   </releases>
   <releases xmi:id="_15S_02nREeaTLbmqFFisdA" date="2015-07-27T11:43:27.494+0200" label="7.1.0-001">
     <changes xsi:type="history:CompositeChange" xmi:id="_15S_1GnREeaTLbmqFFisdA">

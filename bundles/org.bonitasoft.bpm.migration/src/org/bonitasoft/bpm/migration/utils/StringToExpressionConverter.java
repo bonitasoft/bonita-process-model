@@ -42,13 +42,13 @@ public class StringToExpressionConverter {
 
     private final Model model;
 
-    private final Map<String, Instance> data = new HashMap<String, Instance>();
+    private final Map<String, Instance> data = new HashMap<>();
 
     private final Map<String, Instance> parameters = new HashMap<>();
 
-    private final Map<String, Instance> widget = new HashMap<String, Instance>();
+    private final Map<String, Instance> widget = new HashMap<>();
 
-    private final Map<String, Instance> documents = new HashMap<String, Instance>();
+    private final Map<String, Instance> documents = new HashMap<>();
 
     private String dataNameToIgnore;
 
@@ -58,10 +58,10 @@ public class StringToExpressionConverter {
         this.model = model;
         initDataWithProcessData(model, container);
         initParameters(model, container);
-        for (final Instance widget : model.getAllInstances("form.Widget")) {
-            if (isInScope(container, widget)) {
-                this.widget.put(FIELD_PREFIX + widget.get("name"),
-                        widget);
+        for (var widgetInstance : model.getAllInstances("form.Widget")) {
+            if (isInScope(container, widgetInstance)) {
+                this.widget.put(FIELD_PREFIX + widgetInstance.get("name"),
+                        widgetInstance);
             }
         }
         for (final Instance document : model
@@ -74,9 +74,9 @@ public class StringToExpressionConverter {
 
     private void initDataWithProcessData(final Model model,
             final Instance container) {
-        for (final Instance data : model.getAllInstances("process.Data")) {
-            if (isInScope(container, data) && data.get("dataType") != null) {
-                this.data.put((String) data.get("name"), data);
+        for (var dataInstance : model.getAllInstances("process.Data")) {
+            if (isInScope(container, dataInstance) && dataInstance.get("dataType") != null) {
+                this.data.put((String) dataInstance.get("name"), dataInstance);
             }
         }
     }
@@ -103,16 +103,16 @@ public class StringToExpressionConverter {
         String expressionScript = groovyScriptInstance.get("exprScript");
         final String setVarScript = groovyScriptInstance.get("setVarScript");
 
-        if (expressionScript == null || expressionScript.trim().isEmpty()) {
-            if (setVarScript != null && !setVarScript.trim().isEmpty()) {
-                final Instance widget = getParentWidget(groovyScriptInstance);
-                String widgetName = setVarScript;
-                if (widget != null) {
-                    widgetName = widget.get("name");
-                }
-                expressionScript = "${" + FIELD_PREFIX
-                        + widgetName + "}";
+        if ((expressionScript == null || expressionScript.trim().isEmpty())
+                && setVarScript != null
+                && !setVarScript.trim().isEmpty()) {
+            var parentWidet = getParentWidget(groovyScriptInstance);
+            String widgetName = setVarScript;
+            if (parentWidet != null) {
+                widgetName = parentWidet.get("name");
             }
+            expressionScript = "${" + FIELD_PREFIX
+                    + widgetName + "}";
         }
 
         return parseOperation(returnType, fixedReturnType, expressionScript,
@@ -139,22 +139,11 @@ public class StringToExpressionConverter {
         String methodCalled = null;
         if (setVarScript != null) {
             String varName = setVarScript;
-            Instance dataInstance = null;
-            for (final String dataName : data.keySet()) {
-                if (varName.equals(dataName)) {
-                    dataInstance = data.get(dataName);
-                    break;
-                }
-            }
+            var dataInstance = data.get(varName);
             if (dataInstance == null && varName.contains("#")) {
                 varName = varName.substring(0, varName.indexOf("#"));
-            }
-            for (final String dataName : data.keySet()) {
-                if (varName.equals(dataName)) {
-                    dataInstance = data.get(dataName);
-                    isJavaSetter = true;
-                    break;
-                }
+                dataInstance = data.get(varName);
+                isJavaSetter = true;
             }
             if (dataInstance != null) {
                 final String dataReturnType = getDataReturnType(dataInstance);
@@ -195,7 +184,7 @@ public class StringToExpressionConverter {
     }
 
     private List<String> getInputTypes(final String returnType) {
-        final List<String> result = new ArrayList<String>();
+        final List<String> result = new ArrayList<>();
         result.add(returnType);
         return result;
     }
@@ -292,7 +281,8 @@ public class StringToExpressionConverter {
 
     public void resolveDocumentDependencies(final Instance expression) {
         final String content = expression.get("content");
-        for (final String documentName : documents.keySet()) {
+        for (var document : documents.entrySet()) {
+            var documentName = document.getKey();
             if (content.contains(documentName)) {
                 final int index = content.indexOf(documentName);
                 final boolean validPrefix = isValidPrefix(content, index);
@@ -317,7 +307,8 @@ public class StringToExpressionConverter {
 
     private void resolvePatternWidgetDependencies(final Instance expression) {
         final String content = expression.get("content");
-        for (final String widgetName : widget.keySet()) {
+        for (var widgetRef : widget.entrySet()) {
+            var widgetName = widgetRef.getKey();
             if (content.contains("${" + widgetName + "}")) {
                 final Instance dependencyInstance = createFormFieldDependencyInstance(widget
                         .get(widgetName));
@@ -328,7 +319,8 @@ public class StringToExpressionConverter {
 
     private void resolvePatternDataDependencies(final Instance expression) {
         final String content = expression.get("content");
-        for (final String dataName : data.keySet()) {
+        for (var dataRef : data.entrySet()) {
+            var dataName = dataRef.getKey();
             if (content.contains("${" + dataName + "}")) {
                 final Instance dependencyInstance = createVariableDependencyInstance(data
                         .get(dataName));
@@ -348,7 +340,8 @@ public class StringToExpressionConverter {
 
     public void resolveWidgetDependencies(final Instance expression) {
         final String content = expression.get("content");
-        for (final String widgetName : widget.keySet()) {
+        for (var widgetRef : widget.entrySet()) {
+            var widgetName = widgetRef.getKey();
             if (content.contains(widgetName)) {
                 final int index = content.indexOf(widgetName);
                 final boolean validPrefix = isValidWidgetPrefix(content, index);
@@ -387,7 +380,8 @@ public class StringToExpressionConverter {
             currentDataName = expression.get("name");
         }
         if (currentDataName != null) {
-            for (final String dataName : data.keySet()) {
+            for (var dataRef : data.entrySet()) {
+                var dataName = dataRef.getKey();
                 if (currentDataName.contains(dataName) && !dataName.equals(dataNameToIgnore)) {
                     final int index = currentDataName.indexOf(dataName);
                     final boolean validPrefix = isValidPrefix(currentDataName, index);
@@ -413,7 +407,8 @@ public class StringToExpressionConverter {
             currentParamName = expression.get("name");
         }
         if (currentParamName != null) {
-            for (final String paramName : parameters.keySet()) {
+            for (var paramRef : parameters.entrySet()) {
+                var paramName = paramRef.getKey();
                 if (currentParamName.contains(paramName)) {
                     final int index = currentParamName.indexOf(paramName);
                     final boolean validPrefix = isValidPrefix(currentParamName, index);
@@ -481,13 +476,13 @@ public class StringToExpressionConverter {
 
     private Instance createFormFieldDependencyInstance(
             final Instance widgetInstance) {
-        final Instance widget = widgetInstance.copy();
+        var widgetCopy = widgetInstance.copy();
         //clean nested content
-        for (final Instance content : widget.getContents()) {
+        for (final Instance content : widgetCopy.getContents()) {
             model.delete(content);
         }
-        widget.set("dependOn", Collections.emptyList());
-        return widget;
+        widgetCopy.set("dependOn", Collections.emptyList());
+        return widgetCopy;
     }
 
     private Instance createVariableDependencyInstance(
@@ -495,8 +490,7 @@ public class StringToExpressionConverter {
         final Instance copy = dataInstance.copy();
         if (copy.instanceOf("process.Data")) {
             final Object defaultValue = copy.get("defaultValue");
-            if (defaultValue != null
-                    && defaultValue instanceof Instance
+            if (defaultValue instanceof Instance
                     && ((Instance) defaultValue)
                             .instanceOf("expression.Expression")) {
                 model.delete((Instance) defaultValue);
@@ -561,7 +555,7 @@ public class StringToExpressionConverter {
     }
 
     public static String getDataReturnType(final Instance data) {
-        if ((Boolean) data.get("multiple")) {
+        if ((boolean) data.get("multiple")) {
             return List.class.getName();
         }
         final Instance dataype = data.get("dataType");

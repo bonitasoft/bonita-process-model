@@ -14,14 +14,14 @@
  */
 package org.bonitasoft.bpm.migration.custom.migration.connector;
 
-public abstract class UpdateAlfrescoMigrationConnectorVersion extends UpdateConnectorDefinitionMigration {
+public abstract class UpdateAlfrescoMigrationConnectorVersion extends AbstractUpdateConnectorDefinitionMigration {
 
-    public UpdateAlfrescoMigrationConnectorVersion() {
+    protected UpdateAlfrescoMigrationConnectorVersion() {
         super();
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return defId.equals("Alfresco34CreateFolderByPath") ||
                 defId.equals("Alfresco34DeleteFileByPath") ||
                 defId.equals("Alfresco34DeleteItemById") ||
@@ -31,11 +31,5 @@ public abstract class UpdateAlfrescoMigrationConnectorVersion extends UpdateConn
                 defId.equals("Alfresco42DeleteItemById") ||
                 defId.equals("Alfresco42UploadFileByPath");
     }
-
-    @Override
-    protected abstract String getNewDefinitionVersion();
-
-    @Override
-    protected abstract String getOldDefinitionVersion();
 
 }

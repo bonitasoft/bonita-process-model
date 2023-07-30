@@ -19,22 +19,22 @@ import java.util.Objects;
 /**
  * @author Romain Bioteau
  */
-public class UpdateTransactionalGroovyConnectorVersionTo101 extends UpdateConnectorDefinitionMigration {
+public class UpdateTransactionalGroovyConnectorVersionTo101 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String GROOVY_DEF_ID = "scripting-groovy-script";
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "1.0.1";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.0.0";
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return Objects.equals(defId, GROOVY_DEF_ID);
     }
 }

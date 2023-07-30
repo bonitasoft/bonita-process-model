@@ -28,13 +28,13 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class MultiInstanceCustomMigration extends CustomMigration {
 
-    private final Map<String, MultiInstanceMigrator> multiInstanceMigrators = new HashMap<String, MultiInstanceMigrator>();
+    private final Map<String, MultiInstanceMigrator> multiInstanceMigrators = new HashMap<>();
 
     @Override
     public void migrateBefore(final Model model, final Metamodel metamodel) throws MigrationException {
         for (final Instance activityInstance : model.getAllInstances("process.Activity")) {
             final MultiInstanceMigrator multiInstanceMigrator = new MultiInstanceMigrator(activityInstance);
-            multiInstanceMigrator.save(model, metamodel);
+            multiInstanceMigrator.save(model);
             multiInstanceMigrators.put(activityInstance.getUuid(), multiInstanceMigrator);
         }
     }
@@ -43,7 +43,7 @@ public class MultiInstanceCustomMigration extends CustomMigration {
     public void migrateAfter(final Model model, final Metamodel metamodel) throws MigrationException {
         for (final Instance activityInstance : model.getAllInstances("process.Activity")) {
             if (multiInstanceMigrators.containsKey(activityInstance.getUuid())) {
-                multiInstanceMigrators.get(activityInstance.getUuid()).migrate(activityInstance, model, metamodel);
+                multiInstanceMigrators.get(activityInstance.getUuid()).migrate(activityInstance, metamodel);
             }
         }
     }

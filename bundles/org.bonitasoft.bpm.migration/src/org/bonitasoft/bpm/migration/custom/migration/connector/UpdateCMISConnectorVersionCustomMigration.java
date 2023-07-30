@@ -45,35 +45,33 @@ public class UpdateCMISConnectorVersionCustomMigration extends CustomMigration {
         for (final Instance connectorInstance : model.getAllInstances("process.Connector")) {
             final String defId = connectorInstance.get("definitionId");
             final String defVersion = connectorInstance.get("definitionVersion");
-            if (isProvidedCMISConnectorDef(defId)) {
-                if (defVersion.equals("1.0.0")) {
-                    connectorInstance.set("definitionVersion", "2.0.1");
-                    final Instance connectorConfigInstance = connectorInstance.get("configuration");
-                    if (connectorConfigInstance != null) {
-                        connectorConfigInstance.set("version", "2.0.1");
-                        if (isWebserviceBinding(connectorConfigInstance)
-                                && isSupportedURLExpression(connectorConfigInstance)) {
-                            addServiceURL(connectorConfigInstance, model, WEBSERVICES_OBJECT_SERVICE,
-                                    createURLValueExpression(model, connectorConfigInstance, OBJECT_SERVICE_WSDL));
-                            addServiceURL(connectorConfigInstance, model, WEBSERVICES_REPOSITORY_SERVICE,
-                                    createURLValueExpression(model, connectorConfigInstance, REPOSITORY_SERVICE_WSDL));
-                            if (defId.equals("cmis-deleteversionofdocument")) {
-                                addServiceURL(connectorConfigInstance, model, WEBSERVICES_VERSIONING_SERVICE,
-                                        createURLValueExpression(model, connectorConfigInstance,
-                                                VERSIONING_SERVICE_WSDL));
-                                addServiceURL(connectorConfigInstance, model, WEBSERVICES_NAVIGATION_SERVICE,
-                                        createURLValueExpression(model, connectorConfigInstance,
-                                                NAVIGATION_SERVICE_WSDL));
-                            }
-                            final Instance urlExpression = getURLExpression(connectorConfigInstance);
-                            if (urlExpression != null) {
-                                model.delete(urlExpression);
-                            }
+            if (isProvidedCMISConnectorDef(defId) && defVersion.equals("1.0.0")) {
+                connectorInstance.set("definitionVersion", "2.0.1");
+                final Instance connectorConfigInstance = connectorInstance.get("configuration");
+                if (connectorConfigInstance != null) {
+                    connectorConfigInstance.set("version", "2.0.1");
+                    if (isWebserviceBinding(connectorConfigInstance)
+                            && isSupportedURLExpression(connectorConfigInstance)) {
+                        addServiceURL(connectorConfigInstance, model, WEBSERVICES_OBJECT_SERVICE,
+                                createURLValueExpression(model, connectorConfigInstance, OBJECT_SERVICE_WSDL));
+                        addServiceURL(connectorConfigInstance, model, WEBSERVICES_REPOSITORY_SERVICE,
+                                createURLValueExpression(model, connectorConfigInstance, REPOSITORY_SERVICE_WSDL));
+                        if (defId.equals("cmis-deleteversionofdocument")) {
+                            addServiceURL(connectorConfigInstance, model, WEBSERVICES_VERSIONING_SERVICE,
+                                    createURLValueExpression(model, connectorConfigInstance,
+                                            VERSIONING_SERVICE_WSDL));
+                            addServiceURL(connectorConfigInstance, model, WEBSERVICES_NAVIGATION_SERVICE,
+                                    createURLValueExpression(model, connectorConfigInstance,
+                                            NAVIGATION_SERVICE_WSDL));
+                        }
+                        final Instance urlExpression = getURLExpression(connectorConfigInstance);
+                        if (urlExpression != null) {
+                            model.delete(urlExpression);
                         }
                     }
-                    if (defId.equals("cmis-downloaddocument")) {
-                        updateConnectorOuputName(connectorInstance);
-                    }
+                }
+                if (defId.equals("cmis-downloaddocument")) {
+                    updateConnectorOuputName(connectorInstance);
                 }
             }
         }
@@ -105,14 +103,14 @@ public class UpdateCMISConnectorVersionCustomMigration extends CustomMigration {
                 String.class.getName(),
                 ExpressionConstants.SCRIPT_TYPE, true);
 
-        final Instance dependency = createExpressionDependencyFrom(model, urlExpression);
+        final Instance dependency = createExpressionDependencyFrom(urlExpression);
         if (dependency != null) {
             scriptExpressionInstance.add("referencedElements", dependency);
         }
         return scriptExpressionInstance;
     }
 
-    private Instance createExpressionDependencyFrom(final Model model, final Instance urlExpression) {
+    private Instance createExpressionDependencyFrom(final Instance urlExpression) {
         final List<Instance> dependencies = urlExpression.get("referencedElements");
         if (!dependencies.isEmpty()) {
             return dependencies.get(0).copy();

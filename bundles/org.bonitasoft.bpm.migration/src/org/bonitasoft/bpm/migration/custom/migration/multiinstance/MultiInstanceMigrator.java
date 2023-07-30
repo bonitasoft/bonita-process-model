@@ -27,6 +27,7 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class MultiInstanceMigrator {
 
+    private static final String MULTI_INSTANTIATION_FEATURE_NAME = "multiInstantiation";
     private final Instance sourceInstance;
     private boolean isLoop;
     private boolean testBefore;
@@ -44,10 +45,9 @@ public class MultiInstanceMigrator {
 
     public MultiInstanceMigrator(final Instance sourceInstance) {
         this.sourceInstance = sourceInstance;
-
     }
 
-    public void save(final Model model, final Metamodel metamodel) {
+    public void save(final Model model) {
         isLoop = isStandardLoop();
         testBefore = isTestBefore();
         useCardinality = useCardinality();
@@ -64,12 +64,11 @@ public class MultiInstanceMigrator {
 
     }
 
-    public void migrate(final Instance targetInstance, final Model model, final Metamodel metamodel) {
+    public void migrate(final Instance targetInstance, final Metamodel metamodel) {
         targetInstance.set("type", getType(metamodel));
         targetInstance.set("testBefore", testBefore);
         targetInstance.set("loopCondition", loopCondition);
         targetInstance.set("loopMaximum", loopMaximum);
-        targetInstance.set("useCardinality", !useCardinality);
         targetInstance.set("useCardinality", useCardinality);
         targetInstance.set("cardinalityExpression", cardinalityExpression);
         targetInstance.set("collectionDataToMultiInstantiate", collectionDataToMultiInstantiate);
@@ -81,7 +80,7 @@ public class MultiInstanceMigrator {
     }
 
     private Instance getOutputList() {
-        final Instance multiInstantiationInstance = sourceInstance.get("multiInstantiation");
+        final Instance multiInstantiationInstance = sourceInstance.get(MULTI_INSTANTIATION_FEATURE_NAME);
         if (multiInstantiationInstance != null) {
             return multiInstantiationInstance.get("listDataContainingOutputResults");
         }
@@ -89,7 +88,7 @@ public class MultiInstanceMigrator {
     }
 
     private Instance getOutputData() {
-        final Instance multiInstantiationInstance = sourceInstance.get("multiInstantiation");
+        final Instance multiInstantiationInstance = sourceInstance.get(MULTI_INSTANTIATION_FEATURE_NAME);
         if (multiInstantiationInstance != null) {
             return multiInstantiationInstance.get("outputData");
         }
@@ -97,7 +96,7 @@ public class MultiInstanceMigrator {
     }
 
     private Instance getInputList() {
-        final Instance multiInstantiationInstance = sourceInstance.get("multiInstantiation");
+        final Instance multiInstantiationInstance = sourceInstance.get(MULTI_INSTANTIATION_FEATURE_NAME);
         if (multiInstantiationInstance != null) {
             return multiInstantiationInstance.get("collectionDataToMultiInstantiate");
         }
@@ -105,15 +104,13 @@ public class MultiInstanceMigrator {
     }
 
     private Instance getIteratorExpression(final Model model) {
-        final Instance multiInstantiationInstance = sourceInstance.get("multiInstantiation");
+        final Instance multiInstantiationInstance = sourceInstance.get(MULTI_INSTANTIATION_FEATURE_NAME);
         if (multiInstantiationInstance != null && multiInstantiationInstance.get("inputData") != null) {
             final Instance dataInstance = multiInstantiationInstance.get("inputData");
             final String dataName = (String) dataInstance.get("name");
-            final Instance iteratorExpression = StringToExpressionConverter.createExpressionInstance(model,
+            return StringToExpressionConverter.createExpressionInstance(model,
                     dataName, dataName, StringToExpressionConverter.getDataReturnType(dataInstance),
                     ExpressionConstants.MULTIINSTANCE_ITERATOR_TYPE, false);
-            // model.delete(dataInstance);
-            return iteratorExpression;
         }
         return StringToExpressionConverter.createExpressionInstance(model, "multiInstanceIterator",
                 "multiInstanceIterator", Object.class.getName(),
@@ -122,7 +119,7 @@ public class MultiInstanceMigrator {
     }
 
     private Instance getCompletionCondition(final Model model) {
-        final Instance multiInstantiationInstance = sourceInstance.get("multiInstantiation");
+        final Instance multiInstantiationInstance = sourceInstance.get(MULTI_INSTANTIATION_FEATURE_NAME);
         Instance expressionInstance = null;
         if (multiInstantiationInstance != null) {
             final Instance originalInstance = multiInstantiationInstance.get("completionCondition");
@@ -139,7 +136,7 @@ public class MultiInstanceMigrator {
     }
 
     private Instance getCardinalityExpression(final Model model) {
-        final Instance multiInstantiationInstance = sourceInstance.get("multiInstantiation");
+        final Instance multiInstantiationInstance = sourceInstance.get(MULTI_INSTANTIATION_FEATURE_NAME);
         Instance expressionInstance = null;
         if (multiInstantiationInstance != null) {
             final Instance originalInstance = multiInstantiationInstance.get("cardinality");
@@ -156,7 +153,7 @@ public class MultiInstanceMigrator {
     }
 
     private boolean useCardinality() {
-        final Instance multiInstantiationInstance = sourceInstance.get("multiInstantiation");
+        final Instance multiInstantiationInstance = sourceInstance.get(MULTI_INSTANTIATION_FEATURE_NAME);
         if (multiInstantiationInstance != null) {
             return multiInstantiationInstance.get("useCardinality");
         }
@@ -203,7 +200,7 @@ public class MultiInstanceMigrator {
     }
 
     private boolean isSequential() {
-        final Instance multiInstantiationInstance = sourceInstance.get("multiInstantiation");
+        final Instance multiInstantiationInstance = sourceInstance.get(MULTI_INSTANTIATION_FEATURE_NAME);
         if (multiInstantiationInstance != null) {
             return multiInstantiationInstance.get("sequential");
         }
@@ -211,7 +208,8 @@ public class MultiInstanceMigrator {
     }
 
     private Boolean isMultiInstantiated() {
-        return (Boolean) sourceInstance.get("isMultiInstance") && sourceInstance.get("multiInstantiation") != null;
+        return (Boolean) sourceInstance.get("isMultiInstance")
+                && sourceInstance.get(MULTI_INSTANTIATION_FEATURE_NAME) != null;
     }
 
     private boolean isSequentialMultiInstantiation() {
@@ -219,8 +217,7 @@ public class MultiInstanceMigrator {
     }
 
     private boolean isStandardLoop() {
-        final Boolean isLoop = sourceInstance.get("isLoop");
-        return isLoop != null && isLoop;
+        return sourceInstance.get("isLoop");
     }
 
 }

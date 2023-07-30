@@ -19,23 +19,23 @@ import java.util.Set;
 /**
  * @author Romain Bioteau
  */
-public class UpdateRestConnectorVersionTo106 extends UpdateConnectorDefinitionMigration {
+public class UpdateRestConnectorVersionTo106 extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final Set<String> REST_CONNECTOR_DEFINITIONS = Set.of("rest-get", "rest-delete", "rest-post",
             "rest-put");
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return "1.1.0";
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return "1.0.0";
     }
 
     @Override
-    protected boolean shouldUpdateVersion(final String defId) {
+    public boolean shouldUpdateVersion(final String defId) {
         return REST_CONNECTOR_DEFINITIONS.contains(defId);
     }
 }

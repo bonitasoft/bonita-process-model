@@ -29,7 +29,7 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class PatternExpressionMigration extends CustomMigration {
 
-    private final Map<String, String> expressions = new HashMap<String, String>();
+    private final Map<String, String> expressions = new HashMap<>();
 
     @Override
     public void migrateBefore(Model model, Metamodel metamodel)
@@ -62,7 +62,7 @@ public class PatternExpressionMigration extends CustomMigration {
      * @return
      */
     private String replaceSpecialCharacter(String content) {
-        return content.replaceAll("&nbsp;", " ");
+        return content.replace("&nbsp;", " ");
     }
 
 }

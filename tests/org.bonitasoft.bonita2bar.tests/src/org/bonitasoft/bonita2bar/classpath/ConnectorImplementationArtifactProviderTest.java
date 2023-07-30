@@ -28,6 +28,7 @@ import org.bonitasoft.bonita2bar.ProcessRegistry;
 import org.bonitasoft.bonita2bar.SourcePathProvider;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
+import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.AfterEach;
@@ -61,7 +62,8 @@ class ConnectorImplementationArtifactProviderTest {
         var classpathFile = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
         var reportFile = MavenUtil.analyze(projectRoot, mvnExecutable);
 
-        var processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"));
+        var processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
+                MigrationPolicy.NEVER_MIGRATE_POLICY);
         var builder = BarBuilderFactory.create(BuildConfig.builder()
                 .environment("customEnv")
                 .dependencyReport(MavenUtil.loadReport(reportFile))

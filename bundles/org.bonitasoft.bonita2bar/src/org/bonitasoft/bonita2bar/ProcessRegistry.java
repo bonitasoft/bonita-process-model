@@ -25,11 +25,10 @@ import java.util.Optional;
 import org.bonitasoft.bpm.model.process.AbstractProcess;
 import org.bonitasoft.bpm.model.process.MainProcess;
 import org.bonitasoft.bpm.model.process.Pool;
+import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.bpm.model.util.EnvironmentUtil;
 import org.bonitasoft.bpm.model.util.ModelLoader;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 
@@ -39,17 +38,24 @@ public interface ProcessRegistry {
 
     Optional<Pool> getProcess(String name, String version);
 
+    MigrationPolicy getMigrationPolicy();
+
     /**
      * {@link ProcessRegistry} factory method.
      * 
-     * @param diagramsFolder The {@link Path} on the filesystem containing proc files
-     * @return A default implementation of {@link ProcessRegistry} that loads all the processes from the proc files found in
-     *         diagramsFolder. Once loaded, the processes are cached in memory.
+     * @param diagramsFolder The {@link Path} on the filesystem containing proc
+     *        files
+     * @param policy the migration policy to use when loading process
+     *        resources
+     * @return A default implementation of {@link ProcessRegistry} that loads all
+     *         the processes from the proc files found in diagramsFolder. Once
+     *         loaded, the processes are cached in memory.
      */
-    static ProcessRegistry of(Path diagramsFolder) {
+    static ProcessRegistry of(Path diagramsFolder, MigrationPolicy policy) {
         return new ProcessRegistry() {
 
             private List<AbstractProcess> processes;
+            private MigrationPolicy migrationPolicy = policy;
 
             @Override
             public List<AbstractProcess> getProcesses() {
@@ -61,14 +67,13 @@ public interface ProcessRegistry {
                     try (var files = Files.walk(diagramsFolder)) {
                         files.filter(file -> file.getFileName().toString().endsWith(".proc")).forEach(procFile -> {
                             var resource = ModelLoader.getInstance()
-                                    .loadModel(URI.createFileURI(procFile.toAbsolutePath().toString()));
-                            final EList<EObject> contents = resource.getContents();
-                            if (resource.getContents().isEmpty()
-                                    || !(resource.getContents().get(0) instanceof MainProcess)) {
-                                throw new IllegalStateException(
-                                        String.format("No MainProcess found in file %s", procFile.toAbsolutePath()));
-                            }
-                            var mainProcess = (MainProcess) contents.get(0);
+                                    .loadModel(URI.createFileURI(procFile.toAbsolutePath().toString()),
+                                            migrationPolicy);
+                            var mainProcess = resource.getContents().stream().filter(MainProcess.class::isInstance)
+                                    .map(MainProcess.class::cast).findFirst()
+                                    .orElseThrow(() -> new IllegalStateException(String
+                                            .format("No MainProcess found in file %s", procFile.toAbsolutePath())));
+
                             mainProcess.getElements().stream().filter(AbstractProcess.class::isInstance)
                                     .map(AbstractProcess.class::cast).forEach(processes::add);
                         });
@@ -84,6 +89,11 @@ public interface ProcessRegistry {
                 return getProcesses().stream().filter(Pool.class::isInstance).map(Pool.class::cast)
                         .filter(process -> Objects.equals(process.getName(), name))
                         .filter(process -> Objects.equals(process.getVersion(), version)).findFirst();
+            }
+
+            @Override
+            public MigrationPolicy getMigrationPolicy() {
+                return migrationPolicy;
             }
         };
     }

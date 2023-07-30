@@ -14,7 +14,6 @@
  */
 package org.bonitasoft.bpm.migration.custom.migration.startmessageevent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.edapt.migration.CustomMigration;
@@ -35,18 +34,21 @@ public class StartMessageEventMigration extends CustomMigration {
             }
             Instance messageFlow = ste.get("incomingMessag");
             if (messageFlow != null) {
-                Instance messageSource = messageFlow.get("source");
-                if (messageSource != null) {
-                    List<Instance> events = new ArrayList<Instance>();
-                    events = messageSource.get("events");
-                    for (Instance event : events) {
-                        Instance catchMessageEventName = event.get("targetElementExpression");
-                        if (catchMessageEventName.get("name").equals(ste.get("name"))) {
-                            Instance correlation = event.get("correlation");
-                            correlation.set("correlationType",
-                                    metamodel.getEEnumLiteral("process.CorrelationTypeActive.INACTIVE"));
-                        }
-                    }
+                migrateMessageSource(metamodel, ste, messageFlow);
+            }
+        }
+    }
+
+    private void migrateMessageSource(Metamodel metamodel, Instance ste, Instance messageFlow) {
+        Instance messageSource = messageFlow.get("source");
+        if (messageSource != null) {
+            List<Instance> events = messageSource.get("events");
+            for (Instance event : events) {
+                Instance catchMessageEventName = event.get("targetElementExpression");
+                if (catchMessageEventName.get("name").equals(ste.get("name"))) {
+                    Instance correlation = event.get("correlation");
+                    correlation.set("correlationType",
+                            metamodel.getEEnumLiteral("process.CorrelationTypeActive.INACTIVE"));
                 }
             }
         }

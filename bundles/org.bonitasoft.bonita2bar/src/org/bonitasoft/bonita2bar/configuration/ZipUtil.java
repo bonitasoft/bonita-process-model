@@ -16,6 +16,9 @@ package org.bonitasoft.bonita2bar.configuration;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -27,6 +30,7 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.function.Predicate;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 public class ZipUtil extends SimpleFileVisitor<Path> implements java.lang.AutoCloseable {
@@ -84,6 +88,44 @@ public class ZipUtil extends SimpleFileVisitor<Path> implements java.lang.AutoCl
     public void close() throws IOException {
         zos.close();
         fos.close();
+    }
+
+    public static Path unzip(File file, Path targetFolder) throws IOException {
+        try (FileInputStream fis = new FileInputStream(file);
+                ZipInputStream zis = new ZipInputStream(new BufferedInputStream(fis));) {
+            ZipEntry entry;
+            while ((entry = zis.getNextEntry()) != null) {
+                unzipEntry(targetFolder, zis, entry);
+            }
+        }
+        return targetFolder;
+    }
+
+    private static void unzipEntry(Path targetDir, ZipInputStream zis, ZipEntry entry)
+            throws IOException {
+        File target = targetDir.toFile().toPath().resolve(entry.getName()).toFile();
+        if (entry.isDirectory()) {
+            if (!target.exists()) {
+                target.mkdirs();
+            }
+        } else {
+            if (!target.exists()) {
+                target.getParentFile().mkdirs();
+                if (!target.createNewFile()) {
+                    throw new IOException("Failed to create file " + target.getAbsolutePath());
+                }
+            }
+
+            try (var fos = new FileOutputStream(target);
+                    var dest = new BufferedOutputStream(fos, BUFFER_SIZE);) {
+                byte[] data = new byte[BUFFER_SIZE];
+                int count;
+                while ((count = zis.read(data, 0, BUFFER_SIZE)) != -1) {
+                    dest.write(data, 0, count);
+                }
+                dest.flush();
+            }
+        }
     }
 
 }

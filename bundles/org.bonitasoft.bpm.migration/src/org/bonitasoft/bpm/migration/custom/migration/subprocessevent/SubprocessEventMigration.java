@@ -33,12 +33,12 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class SubprocessEventMigration extends CustomMigration {
 
-    private final Map<String, List<Instance>> connectionsMap = new HashMap<String, List<Instance>>();
-    private final Map<String, List<Instance>> elementsMap = new HashMap<String, List<Instance>>();
-    private final Map<String, Instance> elementsByUUID = new HashMap<String, Instance>();
-    private final Map<String, Instance> elementsMapping = new HashMap<String, Instance>();
-    private final Map<String, String> subprocNames = new HashMap<String, String>();
-    private final Map<String, String> subprocDescription = new HashMap<String, String>();
+    private final Map<String, List<Instance>> connectionsMap = new HashMap<>();
+    private final Map<String, List<Instance>> elementsMap = new HashMap<>();
+    private final Map<String, Instance> elementsByUUID = new HashMap<>();
+    private final Map<String, Instance> elementsMapping = new HashMap<>();
+    private final Map<String, String> subprocNames = new HashMap<>();
+    private final Map<String, String> subprocDescription = new HashMap<>();
 
     @Override
     public void migrateBefore(final Model model, final Metamodel metamodel)
@@ -56,7 +56,7 @@ public class SubprocessEventMigration extends CustomMigration {
                 process.add("data", data.copy());
             }
 
-            final List<Instance> elements = new ArrayList<Instance>();
+            final List<Instance> elements = new ArrayList<>();
             for (final Instance element : subprocessevent.<List<Instance>> get("elements")) {
                 subprocessevent.remove("elements", element);
                 process.add("elements", element);

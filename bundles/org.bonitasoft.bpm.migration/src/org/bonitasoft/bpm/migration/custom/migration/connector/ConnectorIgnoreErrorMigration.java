@@ -29,7 +29,7 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class ConnectorIgnoreErrorMigration extends CustomMigration {
 
-    private Map<String, Boolean> ignoreValue = new HashMap<String, Boolean>();
+    private Map<String, Boolean> ignoreValue = new HashMap<>();
 
     @Override
     public void migrateBefore(Model model, Metamodel metamodel)

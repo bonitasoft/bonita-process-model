@@ -15,7 +15,6 @@
 package org.bonitasoft.bpm.migration.custom.migration.decision;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +32,7 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class DecisionTableMigration extends CustomMigration {
 
-    Map<String, List<Instance>> map = new HashMap<String, List<Instance>>();
+    Map<String, List<Instance>> map = new HashMap<>();
 
     @Override
     public void migrateBefore(Model model, Metamodel metamodel)
@@ -41,7 +40,7 @@ public class DecisionTableMigration extends CustomMigration {
 
         for (Instance instance : model.getAllInstances("process.decision.DecisionTableLine")) {
 
-            List<Instance> list = new ArrayList<Instance>();
+            List<Instance> list = new ArrayList<>();
 
             List<Instance> listCondition = instance.get("conditions");
             for (Instance condition : listCondition) {
@@ -67,9 +66,7 @@ public class DecisionTableMigration extends CustomMigration {
             throws MigrationException {
         for (Instance instance : model.getAllInstances("process.decision.DecisionTableLine")) {
             List<Instance> listCondition = instance.get("conditions");
-
-            listCondition.addAll((Collection<? extends Instance>) map.get(instance.getUuid()));
-
+            listCondition.addAll(map.get(instance.getUuid()));
         }
     }
 

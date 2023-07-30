@@ -30,13 +30,13 @@ public class CustomMigrationUtil {
     /**
      * Private util constructor
      */
-    public CustomMigrationUtil() {
+    private CustomMigrationUtil() {
         // do nothing
     }
 
     public static Instance deepCopy(Instance instance) {
         // mapping of originals to copies
-        final Map<Instance, Instance> map = new HashMap<Instance, Instance>();
+        final Map<Instance, Instance> map = new HashMap<>();
 
         // copy tree structure
         return copyTree(instance, map);

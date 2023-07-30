@@ -14,7 +14,7 @@
  */
 package org.bonitasoft.bpm.migration.custom.migration.connector;
 
-public class UpdateInitiatorManagerActorFilterDefinition extends UpdateConnectorDefinitionMigration {
+public class UpdateInitiatorManagerActorFilterDefinition extends AbstractUpdateConnectorDefinitionMigration {
 
     private static final String OLD_DEFINITION_ID = "initiator-manager";
     private static final String NEW_DEFINITION_ID = "bonita-actorfilter-initiator-manager";
@@ -22,27 +22,27 @@ public class UpdateInitiatorManagerActorFilterDefinition extends UpdateConnector
     private static final String NEW_VERSION = "1.0";
 
     @Override
-    protected String getNewDefinitionId() {
+    public String getNewDefinitionId() {
         return NEW_DEFINITION_ID;
     }
 
     @Override
-    protected boolean shouldUpdateId(String defId) {
+    public boolean shouldUpdateId(String defId) {
         return OLD_DEFINITION_ID.equals(defId);
     }
 
     @Override
-    protected boolean shouldUpdateVersion(String defId) {
+    public boolean shouldUpdateVersion(String defId) {
         return OLD_DEFINITION_ID.equals(defId);
     }
 
     @Override
-    protected String getOldDefinitionVersion() {
+    public String getOldDefinitionVersion() {
         return OLD_VERSION;
     }
 
     @Override
-    protected String getNewDefinitionVersion() {
+    public String getNewDefinitionVersion() {
         return NEW_VERSION;
     }
 
