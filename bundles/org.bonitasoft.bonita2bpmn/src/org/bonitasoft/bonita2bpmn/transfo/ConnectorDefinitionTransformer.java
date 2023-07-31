@@ -22,12 +22,13 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 import javax.xml.namespace.QName;
 import javax.xml.transform.Result;
@@ -107,7 +108,7 @@ public class ConnectorDefinitionTransformer {
                 });
     }
 
-    private void generateXSDForConnector(Path connectorToTransformWC) throws IOException {
+    private Path generateXSDForConnector(Path connectorToTransformWC, Path xsdFile) throws IOException {
         if (xslTemplate == null) {
             final TransformerFactory transFact = TransformerFactory.newInstance();
             final File xsltFileoriginal = connectorXSLProvider.getConnectorXSLFile();
@@ -125,15 +126,15 @@ public class ConnectorDefinitionTransformer {
         Files.writeString(connectorToTransformWC, content);
 
         final Source xmlSource = new StreamSource(connectorToTransformWC.toFile());
-        final String generatedXsdName = connectorToTransformWC.toFile().getName() + "connectors.xsd";
         if (!Files.exists(connectorDefFolder)) {
             Files.createDirectories(connectorDefFolder);
         }
-        try (final OutputStream stream = Files.newOutputStream(connectorDefFolder.resolve(generatedXsdName))) {
+        try (final OutputStream stream = Files.newOutputStream(xsdFile)) {
             final Result result = new StreamResult(stream);
             final Transformer transformer = xslTemplate.newTransformer();
             transformer.setParameter("indent", true);
             transformer.transform(xmlSource, result);
+            return xsdFile;
         } catch (TransformerException e) {
             throw new IOException(e);
         } finally {
@@ -144,7 +145,7 @@ public class ConnectorDefinitionTransformer {
     private Path createXSDForConnectorDef(final String connectorDefId) throws IOException {
         /* Export the xsd */
         Path tmpDir = Files.createDirectories(Paths.get("2bpmnExport"));
-        Optional<Path> connectorDefFile = connectorDefContextProvider.get().stream()
+        Path connectorDefFile = connectorDefContextProvider.get().stream()
                 .filter(def -> Objects.equals(def.getId(), connectorDefId)).map(def -> {
                     try {
                         return createTmpDefinitionFile(def, tmpDir);
@@ -152,14 +153,17 @@ public class ConnectorDefinitionTransformer {
                         modelRegistry.addError(e.getMessage());
                         return null;
                     }
-                }).filter(Objects::nonNull).findFirst();
-        if (connectorDefFile.isPresent()) {
-            generateXSDForConnector(connectorDefFile.get());
-        } else {
-            modelRegistry.addError("The connector with id " + connectorDefId + " was not found.");
+                }).filter(Objects::nonNull).findFirst().orElse(null);
+        try {
+            if (connectorDefFile != null) {
+                return generateXSDForConnector(connectorDefFile, connectorDefFolder.resolve(connectorDefId + ".xsd"));
+            } else {
+                modelRegistry.addError("The connector with id " + connectorDefId + " was not found.");
+                return null;
+            }
+        } finally {
+            deleteDir(tmpDir);
         }
-        Files.delete(tmpDir);
-        return connectorDefFile.orElse(null);
     }
 
     private Path createTmpDefinitionFile(ConnectorDefinition definition, Path tmpDir) throws IOException {
@@ -167,11 +171,11 @@ public class ConnectorDefinitionTransformer {
         options.put(XMLResource.OPTION_ENCODING, "UTF-8");
         options.put(XMLResource.OPTION_XML_VERSION, "1.0");
         Path tmpFile = Files.createTempFile(tmpDir, definition.getId(), ".def");
-        var docRoot = (org.bonitasoft.bpm.connector.model.definition.DocumentRoot) definition.eResource().getContents()
-                .get(0);
+        var resource = definition.eResource();
+        var docRoot = (org.bonitasoft.bpm.connector.model.definition.DocumentRoot) resource.getContents().get(0);
         docRoot.getXMLNSPrefixMap().clear();
         try (OutputStream os = Files.newOutputStream(tmpFile)) {
-            definition.eResource().save(os, options);
+            resource.save(os, options);
         }
         return tmpFile;
     }
@@ -179,7 +183,8 @@ public class ConnectorDefinitionTransformer {
     private void addConnectorDefInXsdIfNotYetIncluded(Path connectorDefFile) {
         if (connectorDefFile != null) {
             boolean alreadyImported = false;
-            final String locationImport = "connectorDefs/" + connectorDefFile.getFileName() + "connectors.xsd";
+            final String locationImport = connectorDefFolder.getFileName() + "/"
+                    + connectorDefFile.getFileName().toString();
             for (final TImport imported : modelRegistry.getDefinitions().getImport()) {
                 if (imported.getLocation().equals(locationImport)) {
                     alreadyImported = true;
@@ -245,5 +250,11 @@ public class ConnectorDefinitionTransformer {
                     modelRegistry.getDefinitions().getRootElement().add(tMessageInputBonitaConnector);
                     return tMessageInputBonitaConnector;
                 });
+    }
+
+    private static void deleteDir(Path directory) throws IOException {
+        try (Stream<Path> pathStream = Files.walk(directory)) {
+            pathStream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
+        }
     }
 }
