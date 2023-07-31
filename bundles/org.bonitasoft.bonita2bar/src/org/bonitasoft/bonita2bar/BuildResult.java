@@ -126,4 +126,9 @@ public class BuildResult {
             pathStream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
         }
     }
+
+    void add(BuildResult result) {
+        businessArchives.addAll(result.getBusinessArchives());
+        configurations.addAll(result.getConfigurations());
+    }
 }

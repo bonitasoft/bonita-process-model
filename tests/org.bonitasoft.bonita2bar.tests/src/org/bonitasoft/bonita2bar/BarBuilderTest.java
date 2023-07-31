@@ -54,14 +54,14 @@ class BarBuilderTest {
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
         sourcePathProvider = SourcePathProvider.of(repoRoot.toPath());
         barBuilder = BarBuilderFactory
-                .create(BuildConfig.builder().environment("Local").dependencyReport(new DependencyReport())
+                .create(BuildConfig.builder().dependencyReport(new DependencyReport())
                         .formBuilder(id -> new byte[0]).workingDirectory(repoRoot.toPath().resolve("target"))
                         .sourcePathProvider(sourcePathProvider).processRegistry(processRegistry).build());
     }
 
     @Test
     void should_build_bar_for_process(@TempDir Path tmpFolder) throws Exception {
-        var result = barBuilder.build("SimpleProcessWithParameters", "1.0");
+        var result = barBuilder.build("SimpleProcessWithParameters", "1.0", "Local");
 
         assertThat(result.getBusinessArchives()).hasSize(1);
         assertThat(result.getConfigurations()).hasSize(1);
@@ -82,7 +82,8 @@ class BarBuilderTest {
 
     @Test
     void should_throw_an_IllegalArgumentExcpetion_when_process_not_found() throws Exception {
-        assertThatThrownBy(() -> barBuilder.build("Unknown", "1.0")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> barBuilder.build("Unknown", "1.0", "Local"))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -92,7 +93,7 @@ class BarBuilderTest {
         doReturn(builder).when(spyedBuilder).createBusinessArchiveBuilder();
         doThrow(new InvalidBusinessArchiveFormatException("error")).when(builder).done();
 
-        assertThatThrownBy(() -> spyedBuilder.build("SimpleProcessWithParameters", "1.0"))
+        assertThatThrownBy(() -> spyedBuilder.build("SimpleProcessWithParameters", "1.0", "Local"))
                 .isInstanceOf(BuildBarException.class);
     }
 
@@ -100,7 +101,7 @@ class BarBuilderTest {
     void should_retieve_local_configuration_for_a_pool() throws Exception {
         var process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0").orElseThrow();
 
-        final Optional<Configuration> configuration = barBuilder.getConfiguration(process);
+        final Optional<Configuration> configuration = barBuilder.getConfiguration(process, "Local");
 
         assertThat(configuration).isPresent();
     }

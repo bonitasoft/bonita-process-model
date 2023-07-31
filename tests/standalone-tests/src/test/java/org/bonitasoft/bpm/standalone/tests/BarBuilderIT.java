@@ -49,7 +49,6 @@ class BarBuilderIT {
                 .create();
 
         var barBuilder = BarBuilderFactory.create(BuildConfig.builder()
-                .environment("Local")
                 .formBuilder(formId -> {
                     try {
                         return artifactBuilder.buildPage(formId);
@@ -65,7 +64,7 @@ class BarBuilderIT {
                 .sourcePathProvider(SourcePathProvider.of(projectRoot))
                 .build());
 
-        var result = barBuilder.buildAll();
+        var result = barBuilder.buildAll("Local");
         var barOutputFolder = projectRoot.resolve("target").resolve("processes");
         result.writeBusinessArchivesTo(barOutputFolder);
         var bonitaConfigurationFile = projectRoot.resolve("target").resolve("test-repository.bconf");
@@ -109,7 +108,6 @@ class BarBuilderIT {
                 .create();
 
         var barBuilder = BarBuilderFactory.create(BuildConfig.builder()
-                .environment("Local")
                 .formBuilder(formId -> {
                     try {
                         return artifactBuilder.buildPage(formId);
@@ -125,7 +123,7 @@ class BarBuilderIT {
                 .sourcePathProvider(SourcePathProvider.of(projectRoot))
                 .build());
 
-        var result = barBuilder.build("ProcessWithAdditionalResource", "1.0");
+        var result = barBuilder.build("ProcessWithAdditionalResource", "1.0", "Local");
 
         assertThat(result.getBusinessArchives()).hasSize(1);
     }

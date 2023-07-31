@@ -32,43 +32,47 @@ public class LabelHelper {
             // This is a node...
             return ptLst.getFirstPoint().getTranslated(offset);
         } else if (ptLst.size() >= 2) {
-            // This is a edge...
+            // This is an edge...
             int index = PointListUtilities.findNearestLineSegIndexOfPoint(ptLst, ptOnLine);
             if (index < 1) {
                 return ptLst.getFirstPoint().getTranslated(offset);
             }
             LineSeg segment = (LineSeg) PointListUtilities.getLineSegments(ptLst).get(index - 1);
             if (segment != null) {
-                if (segment.isHorizontal()) {
-                    if (segment.getOrigin().x > segment.getTerminus().x) {
-                        return ptOnLine.getTranslated(offset.getNegated());
-                    } else {
-                        return ptOnLine.getTranslated(offset);
-                    }
-                } else if (segment.isVertical()) {
-                    if (segment.getOrigin().y > segment.getTerminus().y) {
-                        return ptOnLine.getTranslated(offset.getCopy().scale(-1, 1).transpose());
-                    } else {
-                        return ptOnLine.getTranslated(offset.getCopy().scale(1, -1).transpose());
-                    }
-                } else {
-                    double slope = segment.slope();
-                    double theta = Math.atan(slope);
-                    Point normalizedOffset = new Point(offset);
-                    if (segment.getOrigin().x > segment.getTerminus().x) {
-                        normalizedOffset = offset.getCopy().scale(-1, -1);
-                    }
-                    var calculatedOffset = new PrecisionPoint(normalizedOffset.x
-                            * Math.cos(theta)
-                            - normalizedOffset.y
-                                    * Math.sin(theta),
-                            normalizedOffset.x * Math.sin(theta)
-                                    + normalizedOffset.y * Math.cos(theta));
-                    return ptOnLine.getTranslated(calculatedOffset);
-                }
+                return calculateFromSegment(ptOnLine, offset, segment);
             }
         }
         return null;
+    }
+
+    private static Point calculateFromSegment(Point ptOnLine, Point offset, LineSeg segment) {
+        if (segment.isHorizontal()) {
+            if (segment.getOrigin().x > segment.getTerminus().x) {
+                return ptOnLine.getTranslated(offset.getNegated());
+            } else {
+                return ptOnLine.getTranslated(offset);
+            }
+        } else if (segment.isVertical()) {
+            if (segment.getOrigin().y > segment.getTerminus().y) {
+                return ptOnLine.getTranslated(offset.getCopy().scale(-1, 1).transpose());
+            } else {
+                return ptOnLine.getTranslated(offset.getCopy().scale(1, -1).transpose());
+            }
+        } else {
+            double slope = segment.slope();
+            double theta = Math.atan(slope);
+            Point normalizedOffset = new Point(offset);
+            if (segment.getOrigin().x > segment.getTerminus().x) {
+                normalizedOffset = offset.getCopy().scale(-1, -1);
+            }
+            var calculatedOffset = new PrecisionPoint(normalizedOffset.x
+                    * Math.cos(theta)
+                    - normalizedOffset.y
+                            * Math.sin(theta),
+                    normalizedOffset.x * Math.sin(theta)
+                            + normalizedOffset.y * Math.cos(theta));
+            return ptOnLine.getTranslated(calculatedOffset);
+        }
     }
 
 }

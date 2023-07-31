@@ -51,7 +51,6 @@ public class BarBuilderFactory {
         var barBuilder = new BarBuilder(processRegistry,
                 sourceProvider.getLocalConfiguration(),
                 parametersConfiguration,
-                config.getEnvironment(),
                 workingDirectory);
         barBuilder.register(new ParameterArtifactProvider(parametersConfiguration));
         barBuilder.register(new ActorMappingArtifactProvider());
@@ -75,7 +74,6 @@ public class BarBuilderFactory {
 
     public static class BuildConfig {
 
-        private String environment;
         private boolean allowEmptyFormMapping;
         private Path workingDirectory;
         private DependencyReport dependencyReport;
@@ -85,7 +83,6 @@ public class BarBuilderFactory {
         private ClasspathResolver classpathResolver;
 
         private BuildConfig(BuildConfigBuilder builder) {
-            this.environment = builder.environment;
             this.allowEmptyFormMapping = builder.allowEmptyFormMapping;
             this.workingDirectory = builder.workingDirectory;
             this.dependencyReport = builder.dependencyReport;
@@ -93,10 +90,6 @@ public class BarBuilderFactory {
             this.processRegistry = builder.processRegistry;
             this.sourcePathProvider = builder.sourcePathProvider;
             this.classpathResolver = builder.classpathResolver;
-        }
-
-        public String getEnvironment() {
-            return environment;
         }
 
         public boolean allowEmptyFormMapping() {
@@ -139,7 +132,6 @@ public class BarBuilderFactory {
 
         public static class BuildConfigBuilder {
 
-            private String environment;
             private boolean allowEmptyFormMapping = true;
             private Path workingDirectory;
             private DependencyReport dependencyReport;
@@ -154,11 +146,6 @@ public class BarBuilderFactory {
 
             public BuildConfig build() {
                 return new BuildConfig(this);
-            }
-
-            public BuildConfigBuilder environment(String environment) {
-                this.environment = environment;
-                return this;
             }
 
             public BuildConfigBuilder allowEmptyFormMapping(boolean allowEmptyFormMapping) {
