@@ -28,7 +28,6 @@ import org.bonitasoft.bonita2bar.configuration.EnvironmentConfigurationBuilder;
 import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.configuration.ConfigurationFactory;
-import org.bonitasoft.bpm.model.process.AbstractProcess;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.util.ModelLoader;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
@@ -46,8 +45,6 @@ public class BarBuilder {
 
     private List<BarArtifactProvider> providers = new ArrayList<>();
 
-    private String environment;
-
     private Path localConfiguration;
 
     private ProcessRegistry processRegistry;
@@ -59,27 +56,24 @@ public class BarBuilder {
     BarBuilder(ProcessRegistry processRegistry,
             Path localConfiguration,
             ParametersConfiguration parametersConfiguration,
-            String environment,
             Path workdir) {
         this.processRegistry = processRegistry;
         this.localConfiguration = localConfiguration;
         this.parametersConfiguration = parametersConfiguration;
-        this.environment = environment;
         this.workdir = workdir;
     }
 
     /**
      * Build all processes found in the {@link ProcessRegistry}
      * 
+     * @param environment The configuration environment name. Local environment is used if null
      * @return a BuildResult
      * @throws BuildBarException
      */
-    public BuildResult buildAll() throws BuildBarException {
+    public BuildResult buildAll(String environment) throws BuildBarException {
         var result = new BuildResult(environment, parametersConfiguration, workdir);
-        for (AbstractProcess process : processRegistry.getProcesses()) {
-            if (process instanceof Pool) {
-                buildBar((Pool) process, result);
-            }
+        for (var process : processRegistry.getProcesses()) {
+            result.add(buildBar(process, environment));
         }
         return result;
     }
@@ -89,36 +83,35 @@ public class BarBuilder {
      * 
      * @param name A process name
      * @param version A process version
+     * @param environment The configuration environment name. Local environment is used if null
      * @return a BuildResult
      * @throws BuildBarException
      * @throws {@link IllegalArgumentException} when the given process name and version are not found in the {@link ProcessRegistry}
      */
-    public BuildResult build(String name, String version) throws BuildBarException {
-        var result = new BuildResult(environment, parametersConfiguration, workdir);
+    public BuildResult build(String name, String version, String environment) throws BuildBarException {
         var process = processRegistry.getProcess(name, version).orElseThrow(() -> new IllegalArgumentException(
                 String.format("No process found in registry for %s (%s)", name, version)));
-        buildBar(process, result);
-        return result;
+        return buildBar(process, environment);
     }
 
     /**
      * Build a process.
      * 
-     * @param process A process name
+     * @param process A process
+     * @param environment The configuration environment name. Local environment is used if null
      * @return a BuildResult
      * @throws BuildBarException
      */
-    public BuildResult build(Pool process) throws BuildBarException {
-        var result = new BuildResult(environment, parametersConfiguration, workdir);
-        buildBar(process, result);
-        return result;
+    public BuildResult build(Pool process, String environment) throws BuildBarException {
+        return buildBar(process, environment);
     }
 
-    private void buildBar(Pool process, BuildResult result) throws BuildBarException {
+    private BuildResult buildBar(Pool process, String environment) throws BuildBarException {
         LOGGER.info("Building {} ({})...", process.getName(), process.getVersion());
+        BuildResult result = new BuildResult(environment, parametersConfiguration, workdir);
         Optional<Configuration> configuration;
         try {
-            configuration = getConfiguration(process);
+            configuration = getConfiguration(process, environment);
         } catch (IOException e) {
             throw new BuildBarException("Failed to load local configuration", e);
         }
@@ -137,6 +130,7 @@ public class BarBuilder {
             }
             result.addBusinessArchive(barBuilder.done());
             result.addConfiguration(confBuilder.done());
+            return result;
         } catch (InvalidBusinessArchiveFormatException e) {
             String errorMessage = String.format("%s-%s build failed", process.getName(), process.getVersion());
             throw new BuildBarException(errorMessage, e);
@@ -152,7 +146,7 @@ public class BarBuilder {
         return new BusinessArchiveBuilder().createNewBusinessArchive();
     }
 
-    Optional<Configuration> getConfiguration(Pool process)
+    Optional<Configuration> getConfiguration(Pool process, String environment)
             throws IOException {
         final String uuid = getEObjectID(process);
         if ("Local".equals(environment) || environment == null) {// Use local environment

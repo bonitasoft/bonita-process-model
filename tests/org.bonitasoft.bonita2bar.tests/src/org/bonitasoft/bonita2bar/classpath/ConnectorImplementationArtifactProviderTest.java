@@ -65,7 +65,6 @@ class ConnectorImplementationArtifactProviderTest {
         var processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
         var builder = BarBuilderFactory.create(BuildConfig.builder()
-                .environment("customEnv")
                 .dependencyReport(MavenUtil.loadReport(reportFile))
                 .formBuilder(id -> new byte[0])
                 .workingDirectory(outputFolder)
@@ -74,7 +73,7 @@ class ConnectorImplementationArtifactProviderTest {
                 .classpathResolver(ClasspathResolver.of(classpathFile))
                 .build());
 
-        var barOutput = builder.build("ProcessWithConnectors", "1.0");
+        var barOutput = builder.build("ProcessWithConnectors", "1.0", "customEnv");
 
         assertThat(barOutput.getBusinessArchives()).hasSize(1);
         var businessArchive = barOutput.getBusinessArchives().get(0);

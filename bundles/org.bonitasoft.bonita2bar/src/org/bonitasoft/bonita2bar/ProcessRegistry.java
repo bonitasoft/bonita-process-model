@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.bonitasoft.bpm.model.process.AbstractProcess;
 import org.bonitasoft.bpm.model.process.MainProcess;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
@@ -34,7 +33,7 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 
 public interface ProcessRegistry {
 
-    List<AbstractProcess> getProcesses();
+    List<Pool> getProcesses();
 
     Optional<Pool> getProcess(String name, String version);
 
@@ -54,11 +53,11 @@ public interface ProcessRegistry {
     static ProcessRegistry of(Path diagramsFolder, MigrationPolicy policy) {
         return new ProcessRegistry() {
 
-            private List<AbstractProcess> processes;
+            private List<Pool> processes;
             private MigrationPolicy migrationPolicy = policy;
 
             @Override
-            public List<AbstractProcess> getProcesses() {
+            public List<Pool> getProcesses() {
                 if (processes == null) {
                     if (!EnvironmentUtil.isOSGi()) {
                         EPackage.Registry.INSTANCE.put(NotationPackage.eNS_URI, NotationPackage.eINSTANCE);
@@ -74,8 +73,8 @@ public interface ProcessRegistry {
                                     .orElseThrow(() -> new IllegalStateException(String
                                             .format("No MainProcess found in file %s", procFile.toAbsolutePath())));
 
-                            mainProcess.getElements().stream().filter(AbstractProcess.class::isInstance)
-                                    .map(AbstractProcess.class::cast).forEach(processes::add);
+                            mainProcess.getElements().stream().filter(Pool.class::isInstance)
+                                    .map(Pool.class::cast).forEach(processes::add);
                         });
                     } catch (IOException e) {
                         throw new IllegalArgumentException(e);

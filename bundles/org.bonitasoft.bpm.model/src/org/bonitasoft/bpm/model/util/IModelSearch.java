@@ -17,8 +17,8 @@ package org.bonitasoft.bpm.model.util;
 import java.util.List;
 import java.util.Optional;
 
-import org.bonitasoft.bpm.model.process.AbstractProcess;
 import org.bonitasoft.bpm.model.process.Data;
+import org.bonitasoft.bpm.model.process.Pool;
 import org.eclipse.emf.ecore.EObject;
 
 public interface IModelSearch {
@@ -29,7 +29,7 @@ public interface IModelSearch {
 
     <T> T getDirectParentOfType(EObject element, Class<T> type);
 
-    Optional<AbstractProcess> findProcess(String name, String version);
+    Optional<Pool> findProcess(String name, String version);
 
     String getEObjectID(EObject element);
 

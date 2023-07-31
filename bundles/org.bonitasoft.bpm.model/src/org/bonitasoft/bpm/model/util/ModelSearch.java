@@ -23,6 +23,7 @@ import java.util.function.Supplier;
 import org.bonitasoft.bpm.model.process.AbstractProcess;
 import org.bonitasoft.bpm.model.process.Data;
 import org.bonitasoft.bpm.model.process.DataAware;
+import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.SequenceFlow;
 import org.bonitasoft.bpm.model.process.SubProcessEvent;
 import org.eclipse.emf.ecore.EObject;
@@ -30,9 +31,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 
 public class ModelSearch implements IModelSearch {
 
-    private Supplier<List<AbstractProcess>> processContextProvider;
+    private Supplier<List<Pool>> processContextProvider;
 
-    public ModelSearch(Supplier<List<AbstractProcess>> processContextProvider) {
+    public ModelSearch(Supplier<List<Pool>> processContextProvider) {
         this.processContextProvider = processContextProvider;
     }
 
@@ -90,8 +91,8 @@ public class ModelSearch implements IModelSearch {
      * @see org.bonitasoft.studio.engine.export.IModelSearch#findProcess(java.lang.String, java.lang.String)
      */
     @Override
-    public Optional<AbstractProcess> findProcess(String name, String version) {
-        List<AbstractProcess> allProcesses = processContextProvider.get();
+    public Optional<Pool> findProcess(String name, String version) {
+        List<Pool> allProcesses = processContextProvider.get();
         if (version == null || version.trim().isEmpty()) {// search the latest version
             return allProcesses.stream()
                     .filter(process -> Objects.equals(process.getName(), name))
