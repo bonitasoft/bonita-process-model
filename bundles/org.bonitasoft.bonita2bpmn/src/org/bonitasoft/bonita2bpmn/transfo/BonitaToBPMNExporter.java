@@ -181,7 +181,6 @@ public class BonitaToBPMNExporter {
                 destFile.toPath().getParent().resolve("connectorDefs"), connectorDefContextProvider,
                 connectorXSLProvider, modelRegistry);
         configureNamespaces();
-        modelRegistry = new ModelRegistry(definitions, dataScope);
         flowElementSwitch = new TFlowElementSwitch(modelSearch, connectorDefinitionTransformer,
                 formalExpressionTransformerFactory, modelRegistry);
 
