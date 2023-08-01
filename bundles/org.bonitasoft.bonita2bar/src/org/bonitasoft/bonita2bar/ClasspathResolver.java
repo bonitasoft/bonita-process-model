@@ -48,7 +48,8 @@ public interface ClasspathResolver {
                     return Collections.emptyList();
                 }
                 String content = new String(Files.readAllBytes(buildClasspathReport.toPath()));
-                return Stream.of(content.split(PATH_SEPARATOR)).map(File::new).filter(File::isFile)
+                return Stream.of(content.split(PATH_SEPARATOR))
+                        .map(File::new)
                         .collect(Collectors.toList());
             }
 

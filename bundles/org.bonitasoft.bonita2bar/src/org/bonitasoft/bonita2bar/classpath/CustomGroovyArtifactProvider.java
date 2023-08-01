@@ -156,7 +156,7 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
     }
 
     private List<URL> selectDependencies() throws IOException {
-        return classpathResolver.listFiles().stream().filter(file -> file.getName().endsWith(".jar"))
+        return classpathResolver.listFiles().stream()
                 .map(File::toURI)
                 .map(uri -> {
                     try {
