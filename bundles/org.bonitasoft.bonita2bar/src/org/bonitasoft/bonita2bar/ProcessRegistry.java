@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import org.bonitasoft.bpm.connector.model.definition.ConnectorDefinitionPackage;
+import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementationPackage;
 import org.bonitasoft.bpm.model.process.MainProcess;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
@@ -61,6 +63,12 @@ public interface ProcessRegistry {
                 if (processes == null) {
                     if (!EnvironmentUtil.isOSGi()) {
                         EPackage.Registry.INSTANCE.put(NotationPackage.eNS_URI, NotationPackage.eINSTANCE);
+                        EPackage.Registry.INSTANCE.put("http://www.bonitasoft.org/ns/connector/definition/6.0",
+                                ConnectorDefinitionPackage.eINSTANCE);
+                        EPackage.Registry.INSTANCE.put(ConnectorDefinitionPackage.eNS_URI,
+                                ConnectorDefinitionPackage.eINSTANCE);
+                        EPackage.Registry.INSTANCE.put(ConnectorImplementationPackage.eNS_URI,
+                                ConnectorImplementationPackage.eINSTANCE);
                     }
                     processes = new ArrayList<>();
                     try (var files = Files.walk(diagramsFolder)) {

@@ -15,6 +15,7 @@
 package org.bonitasoft.bpm.model.process.builders;
 
 import org.bonitasoft.bpm.model.Buildable;
+import org.bonitasoft.bpm.model.configuration.builders.ConfigurationBuilder;
 import org.bonitasoft.bpm.model.parameter.builders.ParameterBuilder;
 import org.bonitasoft.bpm.model.process.Connection;
 import org.bonitasoft.bpm.model.process.Container;
@@ -143,6 +144,15 @@ public class PoolBuilder extends ElementBuilder<Pool, PoolBuilder> {
 
     public PoolBuilder withDisplayName(String displayName) {
         getBuiltInstance().setDisplayName(displayName);
+        return getThis();
+    }
+
+    public PoolBuilder havingConfigurations(final ConfigurationBuilder... configurations) {
+        if (configurations != null) {
+            for (final ConfigurationBuilder configuration : configurations) {
+                getBuiltInstance().getConfigurations().add(configuration.build());
+            }
+        }
         return getThis();
     }
 
