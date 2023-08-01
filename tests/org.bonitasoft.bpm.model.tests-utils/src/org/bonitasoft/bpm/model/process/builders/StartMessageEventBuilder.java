@@ -26,6 +26,11 @@ public class StartMessageEventBuilder extends FlowElementBuilder<StartMessageEve
         return new StartMessageEventBuilder();
     }
 
+    public StartMessageEventBuilder catchingMessage(String message) {
+        getBuiltInstance().setEvent(message);
+        return this;
+    }
+
     @Override
     protected StartMessageEvent newInstance() {
         return ProcessFactory.eINSTANCE.createStartMessageEvent();

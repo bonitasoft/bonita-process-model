@@ -46,9 +46,7 @@ public class BPMN2ArtifactProvider implements BarArtifactProvider {
     }
 
     @Override
-    public void build(BusinessArchiveBuilder builder,
-            Pool process,
-            Configuration configuration)
+    public void build(BusinessArchiveBuilder builder, Pool process, Configuration configuration)
             throws BuildBarException {
         LOGGER.info("Adding BPMN2 model...");
         ModelSearch modelSearch = new ModelSearch(processRegistry::getProcesses);
@@ -58,13 +56,17 @@ public class BPMN2ArtifactProvider implements BarArtifactProvider {
             if (!Files.exists(workingDirectory)) {
                 Files.createDirectories(workingDirectory);
             }
-            destFile = Files
-                    .createTempFile(workingDirectory, "process", ".bpmn");
-            bonitaToBPMNExporter.export(new BonitaModelExporterImpl(process.eResource(), modelSearch), modelSearch,
-                    Collections::emptyList, destFile.toFile(), ConnectorTransformationXSLProvider.DEFAULT,
-                    BarBuilder.builderVersion());
-            builder.addExternalResource(
-                    new BarResource("process.bpmn", Files.readAllBytes(destFile)));
+            destFile = Files.createTempFile(workingDirectory, "process", ".bpmn");
+            var resource = process.eResource();
+            if (resource != null) {
+                bonitaToBPMNExporter.export(new BonitaModelExporterImpl(resource, modelSearch), modelSearch,
+                        Collections::emptyList, destFile.toFile(), ConnectorTransformationXSLProvider.DEFAULT,
+                        BarBuilder.builderVersion());
+                builder.addExternalResource(new BarResource("process.bpmn", Files.readAllBytes(destFile)));
+            } else {
+                LOGGER.warn("Process {} ({}) is not contained in a Resource. BPMN file will not be added to the bar.",
+                        process.getName(), process.getVersion());
+            }
         } catch (IOException e) {
             throw new BuildBarException("Failed to build bpmn2 file", e);
         } finally {
