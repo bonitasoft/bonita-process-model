@@ -52,7 +52,7 @@ public class BarBuilderFactory {
                 sourceProvider.getLocalConfiguration(),
                 parametersConfiguration,
                 workingDirectory);
-        barBuilder.register(new ParameterArtifactProvider(parametersConfiguration));
+        barBuilder.register(new ParameterArtifactProvider(parametersConfiguration, config.includeParameters()));
         barBuilder.register(new ActorMappingArtifactProvider());
         barBuilder.register(new ProcessDefinitionArtifactProvider(config.getProcessRegistry()));
         barBuilder.register(new JarArtifactProvider(classpathResolver));
@@ -75,6 +75,7 @@ public class BarBuilderFactory {
     public static class BuildConfig {
 
         private boolean allowEmptyFormMapping;
+        private boolean includeParameters;
         private Path workingDirectory;
         private DependencyReport dependencyReport;
         private FormBuilder formBuilder;
@@ -84,12 +85,17 @@ public class BarBuilderFactory {
 
         private BuildConfig(BuildConfigBuilder builder) {
             this.allowEmptyFormMapping = builder.allowEmptyFormMapping;
+            this.includeParameters = builder.includeParameters;
             this.workingDirectory = builder.workingDirectory;
             this.dependencyReport = builder.dependencyReport;
             this.formBuilder = builder.formBuilder;
             this.processRegistry = builder.processRegistry;
             this.sourcePathProvider = builder.sourcePathProvider;
             this.classpathResolver = builder.classpathResolver;
+        }
+
+        public boolean includeParameters() {
+            return includeParameters;
         }
 
         public boolean allowEmptyFormMapping() {
@@ -133,6 +139,8 @@ public class BarBuilderFactory {
         public static class BuildConfigBuilder {
 
             private boolean allowEmptyFormMapping = true;
+            /* Studio includes them, la-builder not... */
+            private boolean includeParameters = false;
             private Path workingDirectory;
             private DependencyReport dependencyReport;
             private FormBuilder formBuilder;
@@ -150,6 +158,11 @@ public class BarBuilderFactory {
 
             public BuildConfigBuilder allowEmptyFormMapping(boolean allowEmptyFormMapping) {
                 this.allowEmptyFormMapping = allowEmptyFormMapping;
+                return this;
+            }
+
+            public BuildConfigBuilder includeParameters(boolean includeParameters) {
+                this.includeParameters = includeParameters;
                 return this;
             }
 

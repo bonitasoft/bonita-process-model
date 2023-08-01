@@ -19,12 +19,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
-import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -135,19 +133,12 @@ public class BonitaToBPMNExporter {
     private final Map<Actor, TParticipant> participantMapping = new HashMap<>();
     private BPMNPlane bpmnPlane;
     private TCollaboration collaboration;
-
-    private final Set<TSignal> tSignals = new HashSet<>();
-    private TDefinitions definitions;
     private DocumentRoot root;
     private XMLNamespaceResolver xmlNamespaceResolver;
     private final FormalExpressionFunctionFactory formalExpressionTransformerFactory = new FormalExpressionFunctionFactory();
     private IModelSearch modelSearch;
-
     private MultiStatus status;
-    private Map<LinkEvent, TLinkEventDefinition> linkEvents = new HashMap<>();
-
     private TFlowElementSwitch flowElementSwitch;
-
     private ModelRegistry modelRegistry;
 
     public void export(final IBonitaModelExporter modelExporter, IModelSearch modelSearch,
@@ -158,7 +149,7 @@ public class BonitaToBPMNExporter {
 
         initializeDocumentRoot();
 
-        definitions = ModelFactory.eINSTANCE.createTDefinitions();
+        var definitions = ModelFactory.eINSTANCE.createTDefinitions();
         definitions.setExpressionLanguage("http://groovy.apache.org/");
         collaboration = ModelFactory.eINSTANCE.createTCollaboration();
         setCommonAttributes(mainProcess, collaboration);
@@ -227,11 +218,11 @@ public class BonitaToBPMNExporter {
             var message = ModelFactory.eINSTANCE.createTMessageEventDefinition();
             message.setId(event);
             return message;
-        }).forEach(definitions.getRootElement()::add);
+        }).forEach(modelRegistry.getDefinitions().getRootElement()::add);
     }
 
     private void handleLinkEvents() {
-        for (Entry<LinkEvent, TLinkEventDefinition> entry : linkEvents.entrySet()) {
+        for (Entry<LinkEvent, TLinkEventDefinition> entry : modelRegistry.getLinkEvents().entrySet()) {
             if (entry.getKey() instanceof ThrowLinkEvent) {
                 ThrowLinkEvent throwLink = (ThrowLinkEvent) entry.getKey();
                 var eventDefinition = entry.getValue();
@@ -242,7 +233,7 @@ public class BonitaToBPMNExporter {
                 CatchLinkEvent catchLink = (CatchLinkEvent) entry.getKey();
                 var eventDefinition = entry.getValue();
                 for (final ThrowLinkEvent from : catchLink.getFrom()) {
-                    var sourceEvent = linkEvents.get(from);
+                    var sourceEvent = modelRegistry.getLinkEvents().get(from);
                     eventDefinition.getSource().add(QName.valueOf(sourceEvent.getId()));
                 }
             }
@@ -377,7 +368,7 @@ public class BonitaToBPMNExporter {
     }
 
     private void populateWithSignals(final TDefinitions definitions) {
-        definitions.getRootElement().addAll(tSignals);
+        definitions.getRootElement().addAll(modelRegistry.getSignals());
     }
 
     private void populateWithData(final Pool pool, final TProcess bpmnProcess) {
@@ -458,7 +449,7 @@ public class BonitaToBPMNExporter {
         final TItemDefinition dataItemDefinition = ModelFactory.eINSTANCE.createTItemDefinition();
         setCommonAttributes(bonitaData, dataItemDefinition);
         dataItemDefinition.setStructureRef(getStructureRef(bonitaData));
-        definitions.getRootElement().add(dataItemDefinition);
+        modelRegistry.getDefinitions().getRootElement().add(dataItemDefinition);
         return dataItemDefinition;
     }
 

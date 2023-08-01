@@ -35,15 +35,18 @@ public class ParameterArtifactProvider implements BarArtifactProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ParameterArtifactProvider.class);
     private ParametersConfiguration parametersConfiguration;
+    private boolean addParametersInBar;
 
-    public ParameterArtifactProvider(ParametersConfiguration parametersConfiguration) {
+    public ParameterArtifactProvider(ParametersConfiguration parametersConfiguration, boolean addParametersInBar) {
         this.parametersConfiguration = parametersConfiguration;
+        this.addParametersInBar = addParametersInBar;
     }
 
     @Override
-    public void build(BusinessArchiveBuilder builder, Pool process,
-            Configuration configuration) {
-        // Configuration provider only
+    public void build(BusinessArchiveBuilder builder, Pool process, Configuration configuration) {
+        if (addParametersInBar) {
+            builder.setParameters(getParameterMapFromConfiguration(configuration, process));
+        }
     }
 
     private Map<String, String> getParameterMapFromConfiguration(Configuration configuration, Pool process) {
@@ -51,17 +54,12 @@ public class ParameterArtifactProvider implements BarArtifactProvider {
         if (configuration == null) {
             configuration = ConfigurationFactory.eINSTANCE.createConfiguration();
         }
-        var builder = ProcessConfiguration.builder()
-                .name(process.getName())
-                .version(process.getVersion());
+        var builder = ProcessConfiguration.builder().name(process.getName()).version(process.getVersion());
         List<org.bonitasoft.bonita2bar.configuration.model.Parameter> parameters = new ArrayList<>();
         for (final Parameter defParam : process.getParameters()) {
-            parameters.add(org.bonitasoft.bonita2bar.configuration.model.Parameter.builder()
-                    .name(defParam.getName())
-                    .description(defParam.getDescription())
-                    .type(toSimpleTypeName(defParam.getTypeClassname()))
-                    .value(paramValue(configuration, defParam, defParam.getTypeClassname()))
-                    .build());
+            parameters.add(org.bonitasoft.bonita2bar.configuration.model.Parameter.builder().name(defParam.getName())
+                    .description(defParam.getDescription()).type(toSimpleTypeName(defParam.getTypeClassname()))
+                    .value(paramValue(configuration, defParam, defParam.getTypeClassname())).build());
             result.put(defParam.getName(), valueFromConfiguration(configuration, defParam));
             if (defParam.getDescription() != null) {
                 LOGGER.debug("{} ({}) -- {}", defParam.getName(), defParam.getTypeClassname(),
@@ -84,8 +82,8 @@ public class ParameterArtifactProvider implements BarArtifactProvider {
 
     private String valueFromConfiguration(Configuration configuration, final Parameter p) {
         return configuration.getParameters().stream().filter(param -> Objects.equals(param.getName(), p.getName()))
-                .findFirst()
-                .map(param -> interpretNullValue(param.getValue())) // because Studio always sends "", never null
+                .findFirst().map(param -> interpretNullValue(param.getValue())) // because Studio always sends "", never
+                // null
                 .orElse(null);
     }
 
