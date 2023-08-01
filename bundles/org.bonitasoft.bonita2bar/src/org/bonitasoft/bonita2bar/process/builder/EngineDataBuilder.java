@@ -73,10 +73,6 @@ public class EngineDataBuilder extends ProcessSwitch<DataDefinitionBuilder> {
         return builder;
     }
 
-    public ProcessDefinitionBuilder getProcessBuilder() {
-        return (ProcessDefinitionBuilder) builder;
-    }
-
     @Override
     public DataDefinitionBuilder caseStringType(final StringType type) {
         if (data.isMultiple()) {
@@ -164,10 +160,13 @@ public class EngineDataBuilder extends ProcessSwitch<DataDefinitionBuilder> {
     @Override
     public DataDefinitionBuilder caseBusinessObjectType(final BusinessObjectType object) {
         final BusinessObjectData bod = (BusinessObjectData) getData();
-        final BusinessDataDefinitionBuilder businessDataBuilder = getProcessBuilder().addBusinessData(bod.getName(),
-                bod.getClassName(), getDefaultValueExpression());
-        businessDataBuilder.setMultiple(bod.isMultiple());
-        businessDataBuilder.addDescription(bod.getDocumentation());
+        if (builder instanceof ProcessDefinitionBuilder) {
+            final BusinessDataDefinitionBuilder businessDataBuilder = ((ProcessDefinitionBuilder) builder)
+                    .addBusinessData(bod.getName(),
+                            bod.getClassName(), getDefaultValueExpression());
+            businessDataBuilder.setMultiple(bod.isMultiple());
+            businessDataBuilder.addDescription(bod.getDocumentation());
+        }
         return null;
     }
 }

@@ -40,9 +40,9 @@ class ProcessMigrationTest {
     @Test
     void testModelMigration_7_12_0() throws Exception {
         // load both models
-        Resource oldModel = ModelLoader.getInstance().loadModel(PROC_7_12_0_MODEL_URI);
+        Resource oldModel = ModelLoader.getInstance().enablePartialLoad().loadModel(PROC_7_12_0_MODEL_URI);
         assertTrue(oldModel.isLoaded());
-        Resource latestModel = ModelLoader.getInstance().loadModel(PROC_8_MODEL_URI);
+        Resource latestModel = ModelLoader.getInstance().enablePartialLoad().loadModel(PROC_8_MODEL_URI);
         assertTrue(oldModel.isLoaded());
 
         // and test that content is similar

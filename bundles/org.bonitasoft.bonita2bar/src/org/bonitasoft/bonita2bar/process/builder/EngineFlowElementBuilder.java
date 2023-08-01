@@ -144,11 +144,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
     @Override
     public Activity caseActivity(final Activity activity) {
         final AutomaticTaskDefinitionBuilder taskBuilder = builder.addAutomaticTask(activity.getName());
-        try {
-            handleCommonActivity(activity, taskBuilder);
-        } catch (InvalidExpressionException e) {
-            throw new ProcessBuilderException(e);
-        }
+        handleCommonActivity(activity, taskBuilder);
         return activity;
     }
 
@@ -299,7 +295,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addMessageCorrelation(final AbstractCatchMessageEvent messageEvent,
+    private void addMessageCorrelation(final AbstractCatchMessageEvent messageEvent,
             final CatchMessageEventTriggerDefinitionBuilder triggerBuilder) throws InvalidExpressionException {
         if (messageEvent.getCorrelation() != null) {
             for (final ListExpression row : messageEvent.getCorrelation().getExpressions()) {
@@ -357,7 +353,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addThrowMessageContent(final Message message, final ThrowMessageEventTriggerBuilder triggerBuilder)
+    private void addThrowMessageContent(final Message message, final ThrowMessageEventTriggerBuilder triggerBuilder)
             throws InvalidExpressionException {
         for (final ListExpression row : message.getMessageContent().getExpressions()) {
             final List<org.bonitasoft.bpm.model.expression.Expression> col = row.getExpressions();
@@ -476,7 +472,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         return object;
     }
 
-    protected void exportInputMappingsForCallActivity(final CallActivity callActivity,
+    private void exportInputMappingsForCallActivity(final CallActivity callActivity,
             final CallActivityBuilder activityBuilder) throws InvalidExpressionException {
         for (final InputMapping mapping : callActivity.getInputMappings()) {
             if (InputMappingAssignationType.DATA == mapping.getAssignationType()) {
@@ -525,7 +521,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         activityBuilder.addDataInputOperation(opBuilder.done());
     }
 
-    protected void exportOutputMappingForCallActivities(final CallActivity object,
+    private void exportOutputMappingForCallActivities(final CallActivity object,
             final CallActivityBuilder activityBuilder) throws InvalidExpressionException {
         for (final OutputMapping mapping : object.getOutputMappings()) {
             final OperationBuilder opBuilder = new OperationBuilder();
@@ -586,7 +582,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         return task;
     }
 
-    void addTaskContract(UserTaskDefinitionBuilder taskBuilder, Task task) {
+    private void addTaskContract(UserTaskDefinitionBuilder taskBuilder, Task task) {
         if (task != null && task.getContract() != null) {
             contractBuilder.setEngineBuilder(taskBuilder);
             try {
@@ -597,7 +593,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    void addUserFilterToTask(final UserTaskDefinitionBuilder taskBuilder, final ActorFilter filter)
+    private void addUserFilterToTask(final UserTaskDefinitionBuilder taskBuilder, final ActorFilter filter)
             throws InvalidExpressionException {
         if (filter != null) {
             final UserFilterDefinitionBuilder filterBuilder = taskBuilder.addUserFilter(filter.getName(),
@@ -777,22 +773,25 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         return gateway;
     }
 
-    protected void handleCommonActivity(final Activity activity, final ActivityDefinitionBuilder taskBuilder)
-            throws InvalidExpressionException {
-        addData(taskBuilder, activity);
-        addOperation(taskBuilder, activity);
-        addConnector(taskBuilder, activity);
-        addKPIBinding(taskBuilder, activity);
-        addDisplayTitle(taskBuilder, activity);
-        addDescription(taskBuilder, activity.getDocumentation());
-        addDisplayDescription(taskBuilder, activity);
-        addDisplayDescriptionAfterCompletion(taskBuilder, activity);
-        addMultiInstantiation(taskBuilder, activity);
-        addBoundaryEvents(taskBuilder, activity);
-        addDescription(taskBuilder, activity.getDocumentation());
+    private void handleCommonActivity(final Activity activity, final ActivityDefinitionBuilder taskBuilder) {
+        try {
+            addData(taskBuilder, activity);
+            addOperation(taskBuilder, activity);
+            addConnector(taskBuilder, activity);
+            addKPIBinding(taskBuilder, activity);
+            addDisplayTitle(taskBuilder, activity);
+            addDescription(taskBuilder, activity.getDocumentation());
+            addDisplayDescription(taskBuilder, activity);
+            addDisplayDescriptionAfterCompletion(taskBuilder, activity);
+            addMultiInstantiation(taskBuilder, activity);
+            addBoundaryEvents(taskBuilder, activity);
+            addDescription(taskBuilder, activity.getDocumentation());
+        } catch (InvalidExpressionException e) {
+            throw new ProcessBuilderException(e);
+        }
     }
 
-    protected void addBoundaryEvents(final ActivityDefinitionBuilder taskBuilder, final Activity activity)
+    private void addBoundaryEvents(final ActivityDefinitionBuilder taskBuilder, final Activity activity)
             throws InvalidExpressionException {
         for (final BoundaryEvent boundaryEvent : activity.getBoundaryIntermediateEvents()) {
             final BoundaryEventDefinitionBuilder boundaryEventBuilder = taskBuilder.addBoundaryEvent(
@@ -820,7 +819,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addMultiInstantiation(final ActivityDefinitionBuilder taskBuilder, final Activity activity)
+    private void addMultiInstantiation(final ActivityDefinitionBuilder taskBuilder, final Activity activity)
             throws InvalidExpressionException {
         final MultiInstanceType multiInstanceType = activity.getType();
         switch (multiInstanceType) {
@@ -838,7 +837,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addExpectedDuration(final UserTaskDefinitionBuilder taskBuilder, final Task task)
+    private void addExpectedDuration(final UserTaskDefinitionBuilder taskBuilder, final Task task)
             throws InvalidExpressionException {
         final Expression duration = task.getExpectedDuration();
         if (duration != null && duration.hasContent()) {
@@ -846,7 +845,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addDisplayDescription(final ActivityDefinitionBuilder builder, final FlowElement flowElement)
+    private void addDisplayDescription(final ActivityDefinitionBuilder builder, final FlowElement flowElement)
             throws InvalidExpressionException {
         final org.bonitasoft.engine.expression.Expression exp = EngineExpressionUtil
                 .createExpression(flowElement.getDynamicDescription());
@@ -855,7 +854,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addDisplayDescriptionAfterCompletion(final ActivityDefinitionBuilder builder,
+    private void addDisplayDescriptionAfterCompletion(final ActivityDefinitionBuilder builder,
             final FlowElement flowElement) throws InvalidExpressionException {
         final org.bonitasoft.engine.expression.Expression exp = EngineExpressionUtil
                 .createExpression(flowElement.getStepSummary());
@@ -864,7 +863,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addDisplayTitle(final ActivityDefinitionBuilder builder, final FlowElement flowElement)
+    private void addDisplayTitle(final ActivityDefinitionBuilder builder, final FlowElement flowElement)
             throws InvalidExpressionException {
         final org.bonitasoft.engine.expression.Expression exp = EngineExpressionUtil
                 .createExpression(flowElement.getDynamicLabel());
@@ -873,7 +872,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addDisplayDescription(final GatewayDefinitionBuilder builder, final FlowElement flowElement)
+    private void addDisplayDescription(final GatewayDefinitionBuilder builder, final FlowElement flowElement)
             throws InvalidExpressionException {
         final org.bonitasoft.engine.expression.Expression exp = EngineExpressionUtil
                 .createExpression(flowElement.getDynamicDescription());
@@ -882,7 +881,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addDisplayTitle(final GatewayDefinitionBuilder builder, final FlowElement flowElement)
+    private void addDisplayTitle(final GatewayDefinitionBuilder builder, final FlowElement flowElement)
             throws InvalidExpressionException {
         final org.bonitasoft.engine.expression.Expression exp = EngineExpressionUtil
                 .createExpression(flowElement.getDynamicLabel());
@@ -891,7 +890,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addDisplayDescriptionAfterCompletion(final GatewayDefinitionBuilder builder,
+    private void addDisplayDescriptionAfterCompletion(final GatewayDefinitionBuilder builder,
             final FlowElement flowElement) throws InvalidExpressionException {
         final org.bonitasoft.engine.expression.Expression exp = EngineExpressionUtil
                 .createExpression(flowElement.getStepSummary());
@@ -900,7 +899,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    protected void addOperation(final ActivityDefinitionBuilder builder, final OperationContainer activity)
+    private void addOperation(final ActivityDefinitionBuilder builder, final OperationContainer activity)
             throws InvalidExpressionException {
         for (final Operation operation : activity.getOperations()) {
             if (operation.getLeftOperand() != null && operation.getLeftOperand().hasContent()
@@ -1022,7 +1021,7 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         }
     }
 
-    void addDataForMultiInstanceIterator(final ActivityDefinitionBuilder taskBuilder,
+    private void addDataForMultiInstanceIterator(final ActivityDefinitionBuilder taskBuilder,
             final Expression iteratorExpression, final Data collectionDataToMultiInstantiate) {
         if (collectionDataToMultiInstantiate instanceof BusinessObjectData) {
             taskBuilder.addBusinessData(iteratorExpression.getName(), iteratorExpression.getReturnType());
