@@ -127,7 +127,7 @@ public class BuildResult {
         }
     }
 
-    void add(BuildResult result) {
+    public void add(BuildResult result) {
         businessArchives.addAll(result.getBusinessArchives());
         configurations.addAll(result.getConfigurations());
     }
