@@ -70,9 +70,9 @@ public final class ModelLoader {
         return LazyHolder.INSTANCE;
     }
 
-    private Map<String, Object> defaultLoadOptions = new HashMap<String, Object>();
+    private Map<String, Object> defaultLoadOptions = new HashMap<>();
 
-    private Map<String, Object> defaultSaveOptions = new HashMap<String, Object>();
+    private Map<String, Object> defaultSaveOptions = new HashMap<>();
 
     /**
      * Default Constructor. Initializes everything to work without extension points.

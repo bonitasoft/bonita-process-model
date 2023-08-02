@@ -836,7 +836,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_WWYtMFD5EeyMzrHxYhBewQ" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_2UNU9vM7EeqlDISc4NSc8Q" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_ECZ_cCg8EeyB-cQgGOwcGA" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_OCd0gChPEeyB-cQgGOwcGA" name="rd_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_YS4rYD1LEeyNIfvinvH8gw" name="release_management_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_WWYtMVD5EeyMzrHxYhBewQ" name="debug" value="false" typeClassname="java.lang.Boolean"/>
@@ -892,7 +891,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_Y6rO4VD5EeyMzrHxYhBewQ" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_j8tICBhwEeueVMB3FBAbyw" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_UrvxkDflEeyMqLzHCBbi6g" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_UrvxkTflEeyMqLzHCBbi6g" name="rd_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_LA_8gD4lEey6y4u-WfDtQQ" name="release_management_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_Y6rO4lD5EeyMzrHxYhBewQ" name="debug" value="false" typeClassname="java.lang.Boolean"/>
@@ -948,7 +946,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_XiIHkVD5EeyMzrHxYhBewQ" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_oLpNqBhwEeueVMB3FBAbyw" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_DauI0ChGEeyB-cQgGOwcGA" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_Qu-eEChPEeyB-cQgGOwcGA" name="rd_slack_channel" value="CCQGMR4ES" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_afmakD1LEeyNIfvinvH8gw" name="release_management_slack_channel" value="CJLH0FW6N" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_XiIuoFD5EeyMzrHxYhBewQ" name="debug" value="false" typeClassname="java.lang.Boolean"/>
@@ -1302,7 +1299,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_Z5_8UXLDEeyRabGvsIzGuA" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_90E5OBz6EeqdLcJP8PkZpQ" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_mK-7gDy6EeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_mK-7gTy6EeyNIfvinvH8gw" name="rd_slack_channel" value="CCQGMR4ES" typeClassname="java.lang.String"/>
       </configurations>
       <configurations xmi:type="configuration:Configuration" xmi:id="_-lDDIBz6EeqdLcJP8PkZpQ" name="Qualification" version="7.12.0-004" username="romain.bioteau@bonitasoft.com" password="bpm">
@@ -1348,7 +1344,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_LUajkVQlEeyeqJtMYaaXbw" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_-lDDKBz6EeqdLcJP8PkZpQ" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_WQqS4j4lEey6y4u-WfDtQQ" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_WQqS4z4lEey6y4u-WfDtQQ" name="rd_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
       </configurations>
       <configurations xmi:type="configuration:Configuration" xmi:id="__id0QPM7EeqlDISc4NSc8Q" name="Development" version="7.12.0-004" username="romain.bioteau@bonitasoft.com" password="bpm">
@@ -1394,7 +1389,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_5uwTgVD6EeyMzrHxYhBewQ" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="__id0SPM7EeqlDISc4NSc8Q" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_z2NVYDy6EeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_z2NVYTy6EeyNIfvinvH8gw" name="rd_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
       </configurations>
       <parameters xmi:type="parameter:Parameter" xmi:id="_UsY9sDy6EeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" typeClassname="java.lang.String"/>
@@ -1808,7 +1802,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_5vIG8VD6EeyMzrHxYhBewQ" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" exported="false" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_BATrSPM8EeqlDISc4NSc8Q" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_-MxD0D1aEeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_-MxD0T1aEeyNIfvinvH8gw" name="rd_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
       </configurations>
       <configurations xmi:type="configuration:Configuration" xmi:id="_yXG8EBhwEeueVMB3FBAbyw" name="Production" version="7.12.0-004" username="romain.bioteau@bonitasoft.com" password="bpm">
@@ -1854,7 +1847,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_Z62Q4XLDEeyRabGvsIzGuA" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" exported="false" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_yXG8GBhwEeueVMB3FBAbyw" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_5XrkMD1aEeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_5XrkMT1aEeyNIfvinvH8gw" name="rd_slack_channel" value="CCQGMR4ES" typeClassname="java.lang.String"/>
       </configurations>
       <configurations xmi:type="configuration:Configuration" xmi:id="_ztWWQBhwEeueVMB3FBAbyw" name="Qualification" version="7.12.0-004" username="romain.bioteau@bonitasoft.com" password="bpm">
@@ -1900,7 +1892,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_LWve0VQlEeyeqJtMYaaXbw" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" exported="false" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_ztWWSBhwEeueVMB3FBAbyw" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_eCmlMj4lEey6y4u-WfDtQQ" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_eCmlMz4lEey6y4u-WfDtQQ" name="rd_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
       </configurations>
       <parameters xmi:type="parameter:Parameter" xmi:id="_3LTMMD1aEeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" typeClassname="java.lang.String"/>
@@ -2203,7 +2194,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_5vZzwVD6EeyMzrHxYhBewQ" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_G9bJ-PM8EeqlDISc4NSc8Q" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_kQ_GAD1UEeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_kQ_GAT1UEeyNIfvinvH8gw" name="release_management_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
       </configurations>
       <configurations xmi:type="configuration:Configuration" xmi:id="_1lTWYBhwEeueVMB3FBAbyw" name="Qualification" version="7.12.0-004" username="romain.bioteau@bonitasoft.com" password="bpm">
@@ -2249,7 +2239,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_LYmgAVQlEeyeqJtMYaaXbw" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_1lTWaBhwEeueVMB3FBAbyw" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_gWPbwj4lEey6y4u-WfDtQQ" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_gWPbwz4lEey6y4u-WfDtQQ" name="release_management_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
       </configurations>
       <configurations xmi:type="configuration:Configuration" xmi:id="_2lUo8BhwEeueVMB3FBAbyw" name="Production" version="7.12.0-004" username="romain.bioteau@bonitasoft.com" password="bpm">
@@ -2295,7 +2284,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_Z7nF4XLDEeyRabGvsIzGuA" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_2lUo-BhwEeueVMB3FBAbyw" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_rM2r8D1UEeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_rM2r8T1UEeyNIfvinvH8gw" name="release_management_slack_channel" value="CJLH0FW6N" typeClassname="java.lang.String"/>
       </configurations>
       <parameters xmi:type="parameter:Parameter" xmi:id="_gmg_YD1UEeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" typeClassname="java.lang.String"/>
@@ -2892,7 +2880,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_5vsHoVD6EeyMzrHxYhBewQ" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_rczkSA_cEeuTr4JLY_DqxA" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_MhlKED1XEeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_MhlKET1XEeyNIfvinvH8gw" name="cloud_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_bOspUD1YEeyNIfvinvH8gw" name="rd_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
       </configurations>
@@ -2939,7 +2926,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_Z77O8XLDEeyRabGvsIzGuA" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_4OHLuBhwEeueVMB3FBAbyw" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_IFCGQD1XEeyNIfvinvH8gw" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_IFCGQT1XEeyNIfvinvH8gw" name="cloud_slack_channel" value="CQZLUM7NU" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_YxaukD1YEeyNIfvinvH8gw" name="rd_slack_channel" value="CCQGMR4ES" typeClassname="java.lang.String"/>
       </configurations>
@@ -2986,7 +2972,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_LaZPwVQlEeyeqJtMYaaXbw" key="com/bonita/serenity/SerenityUtil.groovy" value="com/bonita/serenity/SerenityUtil.groovy" type="GROOVY_SCRIPT"/>
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_5e-9uBhwEeueVMB3FBAbyw" id="OTHER"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_ne9x8T4lEey6y4u-WfDtQQ" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_ne9x8j4lEey6y4u-WfDtQQ" name="cloud_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_ne9x8z4lEey6y4u-WfDtQQ" name="rd_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
       </configurations>
@@ -3196,7 +3181,6 @@
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_fgKH1mQCEeyjbuKGmKQWXw" id="OTHER"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_p_xCQNkzEe29mJ6uWuJ4gg" name="rd_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_p_xCQdkzEe29mJ6uWuJ4gg" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
       </configurations>
       <configurations xmi:type="configuration:Configuration" xmi:id="_jieGsGQCEeyjbuKGmKQWXw" name="Production" version="7.12.0-004" username="pablo.alonso@bonitasoft.com" password="bpm">
         <actorMappings xmi:type="actormapping:ActorMappingsType" xmi:id="_jieGvWQCEeyjbuKGmKQWXw">
@@ -3284,7 +3268,6 @@
         </applicationDependencies>
         <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_kr_ThmQCEeyjbuKGmKQWXw" id="OTHER"/>
         <parameters xmi:type="parameter:Parameter" xmi:id="_d7COoNk_Ee24M6W2dlCRwQ" name="rd_slack_channel" value="C02J5M4JMK7" typeClassname="java.lang.String"/>
-        <parameters xmi:type="parameter:Parameter" xmi:id="_d7COodk_Ee24M6W2dlCRwQ" name="slack_bot_user_oauth_access_token" value="xoxb-2541082709-1533723824528-uBEAVao6yO9JWU1N68K40BWM" typeClassname="java.lang.String"/>
       </configurations>
       <parameters xmi:type="parameter:Parameter" xmi:id="_6xIDcNkvEe29mJ6uWuJ4gg" name="rd_slack_channel" typeClassname="java.lang.String"/>
       <parameters xmi:type="parameter:Parameter" xmi:id="_-ugfANkvEe29mJ6uWuJ4gg" name="slack_bot_user_oauth_access_token" typeClassname="java.lang.String"/>
