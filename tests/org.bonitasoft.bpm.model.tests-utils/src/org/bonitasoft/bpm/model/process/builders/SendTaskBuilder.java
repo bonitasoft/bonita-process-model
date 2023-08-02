@@ -14,12 +14,10 @@
  */
 package org.bonitasoft.bpm.model.process.builders;
 
+import org.bonitasoft.bpm.model.process.Message;
 import org.bonitasoft.bpm.model.process.ProcessFactory;
 import org.bonitasoft.bpm.model.process.SendTask;
 
-/**
- * @author Romain Bioteau
- */
 public class SendTaskBuilder extends ActivityBuilder<SendTask, SendTaskBuilder> {
 
     public static SendTaskBuilder aSendTask() {
@@ -29,6 +27,24 @@ public class SendTaskBuilder extends ActivityBuilder<SendTask, SendTaskBuilder> 
     @Override
     protected SendTask newInstance() {
         return ProcessFactory.eINSTANCE.createSendTask();
+    }
+
+    public SendTaskBuilder havingMessages(Message... messages) {
+        if (messages != null) {
+            for (var message : messages) {
+                getBuiltInstance().getEvents().add(message);
+            }
+        }
+        return getThis();
+    }
+
+    public SendTaskBuilder havingMessages(MessageBuilder... messages) {
+        if (messages != null) {
+            for (var message : messages) {
+                getBuiltInstance().getEvents().add(message.build());
+            }
+        }
+        return getThis();
     }
 
 }

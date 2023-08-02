@@ -14,26 +14,27 @@
  */
 package org.bonitasoft.bpm.model.process.builders;
 
+import org.bonitasoft.bpm.model.process.IntermediateThrowSignalEvent;
 import org.bonitasoft.bpm.model.process.ProcessFactory;
-import org.bonitasoft.bpm.model.process.StartSignalEvent;
 
 /**
  * @author Romain Bioteau
  */
-public class StartSignalEventBuilder extends FlowElementBuilder<StartSignalEvent, StartSignalEventBuilder> {
+public class IntermediateThrowSignalEventBuilder
+        extends FlowElementBuilder<IntermediateThrowSignalEvent, IntermediateThrowSignalEventBuilder> {
 
-    public static StartSignalEventBuilder aStartSignalEvent() {
-        return new StartSignalEventBuilder();
+    public static IntermediateThrowSignalEventBuilder anIntermediateThrowSignalEvent() {
+        return new IntermediateThrowSignalEventBuilder();
     }
 
-    public StartSignalEventBuilder withSignalCode(String code) {
+    public IntermediateThrowSignalEventBuilder withSignalCode(String code) {
         getBuiltInstance().setSignalCode(code);
         return this;
     }
 
     @Override
-    protected StartSignalEvent newInstance() {
-        return ProcessFactory.eINSTANCE.createStartSignalEvent();
+    protected IntermediateThrowSignalEvent newInstance() {
+        return ProcessFactory.eINSTANCE.createIntermediateThrowSignalEvent();
     }
 
 }
