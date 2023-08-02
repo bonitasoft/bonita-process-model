@@ -59,7 +59,7 @@ class ConnectorImplementationArtifactProviderTest {
         //given
         var outputFolder = projectRoot.resolve("target");
         var mvnExecutable = Platform.getOS().contains("win") ? "mvn.cmd" : "mvn";
-        var classpathFile = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
+        var classpath = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
         var reportFile = MavenUtil.analyze(projectRoot, mvnExecutable);
 
         var processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
@@ -70,7 +70,7 @@ class ConnectorImplementationArtifactProviderTest {
                 .workingDirectory(outputFolder)
                 .sourcePathProvider(SourcePathProvider.of(projectRoot))
                 .processRegistry(processRegistry)
-                .classpathResolver(ClasspathResolver.of(classpathFile))
+                .classpathResolver(ClasspathResolver.of(classpath))
                 .build());
 
         var barOutput = builder.build("ProcessWithConnectors", "1.0", "customEnv");

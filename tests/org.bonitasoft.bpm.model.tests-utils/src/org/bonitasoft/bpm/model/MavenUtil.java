@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.bonitasoft.plugin.analyze.report.model.DependencyReport;
 
@@ -59,7 +61,8 @@ public class MavenUtil {
         return appModule.resolve("target").resolve("bonita-dependencies.json");
     }
 
-    public static Path buildClasspath(Path projectRoot, String mvnExecutable) throws InterruptedException, IOException {
+    public static List<String> buildClasspath(Path projectRoot, String mvnExecutable)
+            throws InterruptedException, IOException {
         var appModule = projectRoot.resolve("app");
         File pomFile = appModule.resolve("pom.xml").toFile();
         if (!pomFile.isFile()) {
@@ -70,8 +73,7 @@ public class MavenUtil {
         new MavenCommandBuilder(mvnExecutable).directory(appModule.toFile()).addGoal("dependency:build-classpath")
                 .addProperty("mdep.outputFile", classpathFile.toAbsolutePath().toString())
                 .addProperty("mdep.pathSeparator", ";").start().waitFor();
-        return classpathFile;
-
+        return Stream.of(Files.readString(classpathFile).split(";")).collect(Collectors.toList());
     }
 
     static class MavenCommandBuilder {

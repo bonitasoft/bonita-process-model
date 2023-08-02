@@ -62,10 +62,10 @@ class JarArtifactProviderTest {
                 new ProcessDefinitionBuilder().createNewInstance("P", "1").addAutomaticTask("step1").getProcess());
         lib = repositoryFolder.resolve("lib");
         Files.createDirectories(lib);
-        var classpathFile = MavenUtil.buildClasspath(repositoryFolder,
+        var classpath = MavenUtil.buildClasspath(repositoryFolder,
                 Platform.getOS().contains("win") ? "mvn.cmd" : "mvn");
 
-        jarArtifactProvider = new JarArtifactProvider(ClasspathResolver.of(classpathFile));
+        jarArtifactProvider = new JarArtifactProvider(ClasspathResolver.of(classpath));
     }
 
     @Test

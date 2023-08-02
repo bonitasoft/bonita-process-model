@@ -16,13 +16,9 @@ package org.bonitasoft.bonita2bar;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public interface ClasspathResolver {
 
@@ -30,10 +26,8 @@ public interface ClasspathResolver {
 
     public List<File> listFiles() throws IOException;
 
-    static ClasspathResolver of(Path classpathFile) {
+    static ClasspathResolver of(List<String> classpath) {
         return new ClasspathResolver() {
-
-            private static final String PATH_SEPARATOR = ";";
 
             @Override
             public File findJarFile(String fileName) throws IOException {
@@ -43,12 +37,7 @@ public interface ClasspathResolver {
 
             @Override
             public List<File> listFiles() throws IOException {
-                File buildClasspathReport = classpathFile.toFile();
-                if (!buildClasspathReport.isFile()) {
-                    return Collections.emptyList();
-                }
-                String content = new String(Files.readAllBytes(buildClasspathReport.toPath()));
-                return Stream.of(content.split(PATH_SEPARATOR))
+                return classpath.stream()
                         .map(File::new)
                         .collect(Collectors.toList());
             }
