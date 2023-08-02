@@ -19,10 +19,8 @@ import org.bonitasoft.bpm.model.expression.Expression;
 import org.bonitasoft.bpm.model.expression.ExpressionFactory;
 import org.bonitasoft.bpm.model.expression.Operation;
 import org.bonitasoft.bpm.model.process.OperationContainer;
+import org.bonitasoft.bpm.model.util.ExpressionConstants;
 
-/**
- * @author Romain Bioteau
- */
 public class OperationBuilder implements Buildable<Operation> {
 
     private final Operation operation;
@@ -32,7 +30,11 @@ public class OperationBuilder implements Buildable<Operation> {
     }
 
     public static OperationBuilder anOperation() {
-        return new OperationBuilder(ExpressionFactory.eINSTANCE.createOperation());
+        var operation = ExpressionFactory.eINSTANCE.createOperation();
+        var assignment = ExpressionFactory.eINSTANCE.createOperator();
+        assignment.setType(ExpressionConstants.ASSIGNMENT_OPERATOR);
+        operation.setOperator(assignment);
+        return new OperationBuilder(operation);
     }
 
     public OperationBuilder havingLeftOperand(final ExpressionBuilder leftOperand) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2014 Bonitasoft S.A.
+ * Copyright (C) 2015 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,26 +16,27 @@ package org.bonitasoft.bpm.model.process.builders;
 
 import org.bonitasoft.bpm.model.expression.TableExpression;
 import org.bonitasoft.bpm.model.expression.builders.OperationBuilder;
+import org.bonitasoft.bpm.model.process.IntermediateCatchMessageEvent;
 import org.bonitasoft.bpm.model.process.ProcessFactory;
-import org.bonitasoft.bpm.model.process.ReceiveTask;
 
-public class ReceiveTaskBuilder extends ActivityBuilder<ReceiveTask, ReceiveTaskBuilder> {
+public class IntermediateCatchMessageEventBuilder
+        extends FlowElementBuilder<IntermediateCatchMessageEvent, IntermediateCatchMessageEventBuilder> {
 
-    public static ReceiveTaskBuilder aReceiveTask() {
-        return new ReceiveTaskBuilder();
+    public static IntermediateCatchMessageEventBuilder aIntermediateCatchMessageEvent() {
+        return new IntermediateCatchMessageEventBuilder();
     }
 
-    public ReceiveTaskBuilder catchingMessage(String message) {
+    public IntermediateCatchMessageEventBuilder catchingMessage(String message) {
         getBuiltInstance().setEvent(message);
         return this;
     }
 
-    public ReceiveTaskBuilder withCorrelation(TableExpression correlation) {
+    public IntermediateCatchMessageEventBuilder withCorrelation(TableExpression correlation) {
         getBuiltInstance().setCorrelation(correlation);
         return this;
     }
 
-    public ReceiveTaskBuilder havingMessageContentMappings(OperationBuilder... operations) {
+    public IntermediateCatchMessageEventBuilder havingMessageContentMappings(OperationBuilder... operations) {
         if (operations != null) {
             for (var operationBuilder : operations) {
                 getBuiltInstance().getMessageContent().add(operationBuilder.build());
@@ -45,8 +46,8 @@ public class ReceiveTaskBuilder extends ActivityBuilder<ReceiveTask, ReceiveTask
     }
 
     @Override
-    protected ReceiveTask newInstance() {
-        return ProcessFactory.eINSTANCE.createReceiveTask();
+    protected IntermediateCatchMessageEvent newInstance() {
+        return ProcessFactory.eINSTANCE.createIntermediateCatchMessageEvent();
     }
 
 }

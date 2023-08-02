@@ -22,6 +22,7 @@ import static org.bonitasoft.bpm.model.expression.builders.ExpressionBuilder.aCo
 import static org.bonitasoft.bpm.model.expression.builders.ExpressionBuilder.aGroovyScriptExpression;
 import static org.bonitasoft.bpm.model.expression.builders.ExpressionBuilder.aVariableExpression;
 import static org.bonitasoft.bpm.model.expression.builders.ExpressionBuilder.anExpression;
+import static org.bonitasoft.bpm.model.expression.builders.OperationBuilder.anOperation;
 import static org.bonitasoft.bpm.model.process.builders.ActivityBuilder.anActivity;
 import static org.bonitasoft.bpm.model.process.builders.ActorFilterBuilder.anActorFilter;
 import static org.bonitasoft.bpm.model.process.builders.BusinessObjectDataBuilder.aBusinessData;
@@ -29,13 +30,24 @@ import static org.bonitasoft.bpm.model.process.builders.BusinessObjectDataTypeBu
 import static org.bonitasoft.bpm.model.process.builders.CallActivityBuilder.aCallActivity;
 import static org.bonitasoft.bpm.model.process.builders.ContractBuilder.aContract;
 import static org.bonitasoft.bpm.model.process.builders.ContractInputBuilder.aContractInput;
+import static org.bonitasoft.bpm.model.process.builders.CorrelationBuilder.aCorrelation;
 import static org.bonitasoft.bpm.model.process.builders.DataBuilder.aData;
+import static org.bonitasoft.bpm.model.process.builders.EndMessageEventBuilder.anEndMessageEvent;
+import static org.bonitasoft.bpm.model.process.builders.EndSignalEventBuilder.anEndSignalEvent;
 import static org.bonitasoft.bpm.model.process.builders.InputMappingBuilder.anInputMapping;
+import static org.bonitasoft.bpm.model.process.builders.IntermediateCatchMessageEventBuilder.aIntermediateCatchMessageEvent;
+import static org.bonitasoft.bpm.model.process.builders.IntermediateCatchSignalEventBuilder.anIntermediateCatchSignalEvent;
+import static org.bonitasoft.bpm.model.process.builders.IntermediateThrowMessageEventBuilder.aIntermediateThrowMessageEvent;
+import static org.bonitasoft.bpm.model.process.builders.IntermediateThrowSignalEventBuilder.anIntermediateThrowSignalEvent;
 import static org.bonitasoft.bpm.model.process.builders.JavaObjectDataBuilder.aJavaObjectData;
 import static org.bonitasoft.bpm.model.process.builders.MainProcessBuilder.aMainProcess;
+import static org.bonitasoft.bpm.model.process.builders.MessageBuilder.aMessage;
 import static org.bonitasoft.bpm.model.process.builders.PoolBuilder.aPool;
+import static org.bonitasoft.bpm.model.process.builders.ReceiveTaskBuilder.aReceiveTask;
+import static org.bonitasoft.bpm.model.process.builders.SendTaskBuilder.aSendTask;
 import static org.bonitasoft.bpm.model.process.builders.SequenceFlowBuilder.aSequenceFlow;
 import static org.bonitasoft.bpm.model.process.builders.StartMessageEventBuilder.aStartMessageEvent;
+import static org.bonitasoft.bpm.model.process.builders.StartSignalEventBuilder.aStartSignalEvent;
 import static org.bonitasoft.bpm.model.process.builders.StringDataTypeBuilder.aStringDataType;
 import static org.bonitasoft.bpm.model.process.builders.SubProcessEventBuilder.aSubProcessEvent;
 import static org.bonitasoft.bpm.model.process.builders.TaskBuilder.aTask;
@@ -46,9 +58,11 @@ import java.util.List;
 import org.bonitasoft.bpm.model.expression.ExpressionFactory;
 import org.bonitasoft.bpm.model.expression.ListExpression;
 import org.bonitasoft.bpm.model.expression.TableExpression;
+import org.bonitasoft.bpm.model.expression.builders.ExpressionBuilder;
 import org.bonitasoft.bpm.model.process.BoundaryMessageEvent;
 import org.bonitasoft.bpm.model.process.CallActivity;
 import org.bonitasoft.bpm.model.process.ContractInputType;
+import org.bonitasoft.bpm.model.process.CorrelationTypeActive;
 import org.bonitasoft.bpm.model.process.InputMappingAssignationType;
 import org.bonitasoft.bpm.model.process.MultiInstanceType;
 import org.bonitasoft.bpm.model.process.Pool;
@@ -62,7 +76,13 @@ import org.bonitasoft.engine.bpm.contract.Type;
 import org.bonitasoft.engine.bpm.flownode.AutomaticTaskDefinition;
 import org.bonitasoft.engine.bpm.flownode.BoundaryEventDefinition;
 import org.bonitasoft.engine.bpm.flownode.CallActivityDefinition;
+import org.bonitasoft.engine.bpm.flownode.EndEventDefinition;
+import org.bonitasoft.engine.bpm.flownode.IntermediateCatchEventDefinition;
+import org.bonitasoft.engine.bpm.flownode.IntermediateThrowEventDefinition;
 import org.bonitasoft.engine.bpm.flownode.MultiInstanceLoopCharacteristics;
+import org.bonitasoft.engine.bpm.flownode.ReceiveTaskDefinition;
+import org.bonitasoft.engine.bpm.flownode.SendTaskDefinition;
+import org.bonitasoft.engine.bpm.flownode.StartEventDefinition;
 import org.bonitasoft.engine.bpm.flownode.UserTaskDefinition;
 import org.bonitasoft.engine.bpm.process.SubProcessDefinition;
 import org.bonitasoft.engine.bpm.process.impl.ProcessDefinitionBuilder;
@@ -373,4 +393,268 @@ class EngineFlowElementBuilderTest {
         assertThat(((MultiInstanceLoopCharacteristics) loopCharacteristics).getLoopDataInputRef()).isEqualTo("bData");
     }
 
+    @Test
+    void caseSendTaskWithMessage() throws Exception {
+        var activity = aSendTask()
+                .withName("My Activity")
+                .havingMessages(aMessage()
+                        .withName("hello")
+                        .withTargetProcess(aConstantExpression().withContent("Target process").build())
+                        .withTargetFloweLement(aConstantExpression().withContent("Target element").build())
+                        .withContent(dummyCorrelation())
+                        .withCorrelation(aCorrelation().withAssociation(dummyCorrelation()).build()))
+                .build();
+
+        flowElementSwitch.caseSendTask(activity);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getActivity("My Activity"))
+                .isInstanceOf(SendTaskDefinition.class);
+    }
+
+    @Test
+    void caseSendTaskWithNoMessage() throws Exception {
+        var activity = aSendTask().withName("My Activity").build();
+
+        flowElementSwitch.caseSendTask(activity);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getActivity("My Activity"))
+                .isNull();
+    }
+
+    @Test
+    void caseReceiveTaskWithMessage() throws Exception {
+        var activity = aReceiveTask()
+                .withName("My Activity")
+                .catchingMessage("hello")
+                .havingMessageContentMappings(anOperation()
+                        .havingLeftOperand(aVariableExpression().withContent("myVar"))
+                        .havingRightOperand(ExpressionBuilder.anExpression().withContent("dataInMessageContent")))
+                .withCorrelation(dummyCorrelation())
+                .build();
+
+        flowElementSwitch.caseReceiveTask(activity);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getActivity("My Activity"))
+                .isInstanceOf(ReceiveTaskDefinition.class);
+    }
+
+    @Test
+    void caseReceiveTask() throws Exception {
+        var activity = aReceiveTask().withName("My Activity").build();
+
+        flowElementSwitch.caseReceiveTask(activity);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getActivity("My Activity"))
+                .isInstanceOf(ReceiveTaskDefinition.class);
+    }
+
+    @Test
+    void caseIntermediateCatchMessageEvent() throws Exception {
+        var event = aIntermediateCatchMessageEvent()
+                .withName("My event")
+                .catchingMessage("hello")
+                .havingMessageContentMappings(anOperation()
+                        .havingLeftOperand(aVariableExpression().withContent("myVar"))
+                        .havingRightOperand(ExpressionBuilder.anExpression().withContent("dataInMessageContent")))
+                .build();
+
+        flowElementSwitch.caseIntermediateCatchMessageEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(IntermediateCatchEventDefinition.class);
+    }
+
+    @Test
+    void caseIntermediateCatchMessageEventWithoutMessage() throws Exception {
+        var event = aIntermediateCatchMessageEvent()
+                .withName("My event")
+                .build();
+
+        flowElementSwitch.caseIntermediateCatchMessageEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(IntermediateCatchEventDefinition.class);
+    }
+
+    @Test
+    void caseIntermediateThrowMessageEvent() throws Exception {
+        var event = aIntermediateThrowMessageEvent()
+                .withName("My event")
+                .build();
+
+        flowElementSwitch.caseIntermediateThrowMessageEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(IntermediateThrowEventDefinition.class);
+    }
+
+    @Test
+    void caseIntermediateThrowMessageEventWithMessages() throws Exception {
+        var event = aIntermediateThrowMessageEvent()
+                .withName("My event")
+                .havingMessages(aMessage()
+                        .withName("hello")
+                        .withTargetProcess(aConstantExpression().withContent("Target process").build())
+                        .withTargetFloweLement(aConstantExpression().withContent("Target element").build())
+                        .withContent(dummyCorrelation())
+                        .withCorrelation(aCorrelation()
+                                .withType(CorrelationTypeActive.KEYS)
+                                .withAssociation(dummyCorrelation()).build()))
+                .build();
+
+        flowElementSwitch.caseIntermediateThrowMessageEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(IntermediateThrowEventDefinition.class);
+    }
+
+    @Test
+    void caseEndMessageEventWithMessages() throws Exception {
+        var event = anEndMessageEvent()
+                .withName("My event")
+                .havingMessages(aMessage()
+                        .withName("hello")
+                        .withTargetProcess(aConstantExpression().withContent("Target process").build())
+                        .withTargetFloweLement(aConstantExpression().withContent("Target element").build())
+                        .withContent(dummyCorrelation())
+                        .withCorrelation(aCorrelation()
+                                .withType(CorrelationTypeActive.KEYS)
+                                .withAssociation(dummyCorrelation()).build()))
+                .build();
+
+        flowElementSwitch.caseEndMessageEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(EndEventDefinition.class);
+    }
+
+    @Test
+    void caseEndMessageEventWithoutMessages() throws Exception {
+        var event = anEndMessageEvent()
+                .withName("My event")
+                .build();
+
+        flowElementSwitch.caseEndMessageEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(EndEventDefinition.class);
+    }
+
+    @Test
+    void caseStartSignalEvent() throws Exception {
+        var event = aStartSignalEvent()
+                .withName("My event")
+                .build();
+
+        flowElementSwitch.caseStartSignalEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(StartEventDefinition.class);
+    }
+
+    @Test
+    void caseStartSignalEventWithCode() throws Exception {
+        var event = aStartSignalEvent()
+                .withName("My event")
+                .withSignalCode("404")
+                .build();
+
+        flowElementSwitch.caseStartSignalEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(StartEventDefinition.class);
+    }
+
+    @Test
+    void caseEndSignalEvent() throws Exception {
+        var event = anEndSignalEvent()
+                .withName("My event")
+                .build();
+
+        flowElementSwitch.caseEndSignalEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(EndEventDefinition.class);
+    }
+
+    @Test
+    void caseEndSignalEventWithSignalCode() throws Exception {
+        var event = anEndSignalEvent()
+                .withName("My event")
+                .withSignalCode("404")
+                .build();
+
+        flowElementSwitch.caseEndSignalEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(EndEventDefinition.class);
+    }
+
+    @Test
+    void caseIntermediateCatchSignalEvent() throws Exception {
+        var event = anIntermediateCatchSignalEvent()
+                .withName("My event")
+                .build();
+
+        flowElementSwitch.caseIntermediateCatchSignalEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(IntermediateCatchEventDefinition.class);
+    }
+
+    @Test
+    void caseIntermediateCatchSignalEventWithCode() throws Exception {
+        var event = anIntermediateCatchSignalEvent()
+                .withName("My event")
+                .withSignalCode("404")
+                .build();
+
+        flowElementSwitch.caseIntermediateCatchSignalEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(IntermediateCatchEventDefinition.class);
+    }
+
+    @Test
+    void caseIntermediateThrowSignalEvent() throws Exception {
+        var event = anIntermediateThrowSignalEvent()
+                .withName("My event")
+                .build();
+
+        flowElementSwitch.caseIntermediateThrowSignalEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(IntermediateThrowEventDefinition.class);
+    }
+
+    @Test
+    void caseIntermediateThrowSignalEventWithCode() throws Exception {
+        var event = anIntermediateThrowSignalEvent()
+                .withName("My event")
+                .withSignalCode("404")
+                .build();
+
+        flowElementSwitch.caseIntermediateThrowSignalEvent(event);
+
+        var processDefinition = processDefinitionBuilder.done();
+        assertThat(processDefinition.getFlowElementContainer().getFlowNode("My event"))
+                .isInstanceOf(IntermediateThrowEventDefinition.class);
+    }
 }

@@ -14,26 +14,23 @@
  */
 package org.bonitasoft.bpm.model.process.builders;
 
+import org.bonitasoft.bpm.model.process.EndSignalEvent;
 import org.bonitasoft.bpm.model.process.ProcessFactory;
-import org.bonitasoft.bpm.model.process.StartSignalEvent;
 
-/**
- * @author Romain Bioteau
- */
-public class StartSignalEventBuilder extends FlowElementBuilder<StartSignalEvent, StartSignalEventBuilder> {
+public class EndSignalEventBuilder extends FlowElementBuilder<EndSignalEvent, EndSignalEventBuilder> {
 
-    public static StartSignalEventBuilder aStartSignalEvent() {
-        return new StartSignalEventBuilder();
+    public static EndSignalEventBuilder anEndSignalEvent() {
+        return new EndSignalEventBuilder();
     }
 
-    public StartSignalEventBuilder withSignalCode(String code) {
+    public EndSignalEventBuilder withSignalCode(String code) {
         getBuiltInstance().setSignalCode(code);
         return this;
     }
 
     @Override
-    protected StartSignalEvent newInstance() {
-        return ProcessFactory.eINSTANCE.createStartSignalEvent();
+    protected EndSignalEvent newInstance() {
+        return ProcessFactory.eINSTANCE.createEndSignalEvent();
     }
 
 }
