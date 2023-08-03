@@ -61,7 +61,7 @@ class BarBuilderIT {
                 .dependencyReport(MavenUtil.loadReport(MavenUtil.analyze(projectRoot, mvnExecutable)))
                 .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                         MigrationPolicy.ALWAYS_MIGRATE_POLICY))
-                .sourcePathProvider(SourcePathProvider.of(projectRoot))
+                .sourcePathProvider(SourcePathProvider.of(projectRoot.resolve("app")))
                 .build());
 
         var result = barBuilder.buildAll("Local");

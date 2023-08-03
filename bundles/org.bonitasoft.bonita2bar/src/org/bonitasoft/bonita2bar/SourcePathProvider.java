@@ -33,27 +33,27 @@ public interface SourcePathProvider {
 
             @Override
             public Path getResources() {
-                return projectRoot.resolve("app").resolve("src/main/resources");
+                return projectRoot.resolve("src/main/resources");
             }
 
             @Override
             public Path getLocalConfiguration() {
-                return projectRoot.resolve("app").resolve("process_configurations");
+                return projectRoot.resolve("process_configurations");
             }
 
             @Override
             public Path getGroovySource() {
-                return projectRoot.resolve("app").resolve("src-groovy");
+                return projectRoot.resolve("src-groovy");
             }
 
             @Override
             public Path getForms() {
-                return projectRoot.resolve("app").resolve("web_page");
+                return projectRoot.resolve("web_page");
             }
 
             @Override
             public Path getAttachments() {
-                return projectRoot.resolve("app").resolve("attachments");
+                return projectRoot.resolve("attachments");
             }
         };
     }

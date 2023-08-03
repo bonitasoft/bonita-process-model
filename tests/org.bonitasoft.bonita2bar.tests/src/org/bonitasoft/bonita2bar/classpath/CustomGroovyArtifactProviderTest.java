@@ -63,7 +63,7 @@ class CustomGroovyArtifactProviderTest {
         var classpath = MavenUtil.buildClasspath(projectRoot, Platform.getOS().contains("win") ? "mvn.cmd" : "mvn");
 
         CustomGroovyArtifactProvider customGroovyArtifactProvider = new CustomGroovyArtifactProvider(
-                SourcePathProvider.of(projectRoot).getGroovySource(), ClasspathResolver.of(classpath),
+                SourcePathProvider.of(projectRoot.resolve("app")).getGroovySource(), ClasspathResolver.of(classpath),
                 outputFolder);
         BusinessArchiveBuilder builder = new BusinessArchiveBuilder().createNewBusinessArchive();
         var registry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),

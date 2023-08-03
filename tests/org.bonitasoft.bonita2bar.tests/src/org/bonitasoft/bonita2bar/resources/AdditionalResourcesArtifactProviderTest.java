@@ -55,7 +55,7 @@ class AdditionalResourcesArtifactProviderTest {
     void should_export_additional_resource_in_bar() throws Exception {
         //given
         var provider = new AdditionalResourcesArtifactProvider(
-                SourcePathProvider.of(repositoryFolder.toPath()).getResources());
+                SourcePathProvider.of(repositoryFolder.toPath().resolve("app")).getResources());
 
         //when
         provider.build(businessArchiveBuilder, pool, configuration);
@@ -71,7 +71,7 @@ class AdditionalResourcesArtifactProviderTest {
     void should_not_export_empty_additional_resource_in_bar() throws Exception {
         //given
         var provider = new AdditionalResourcesArtifactProvider(
-                SourcePathProvider.of(repositoryFolder.toPath()).getResources());
+                SourcePathProvider.of(repositoryFolder.toPath().resolve("app")).getResources());
 
         //when
         provider.build(businessArchiveBuilder, pool, configuration);

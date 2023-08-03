@@ -68,7 +68,7 @@ class ConnectorImplementationArtifactProviderTest {
                 .dependencyReport(MavenUtil.loadReport(reportFile))
                 .formBuilder(id -> new byte[0])
                 .workingDirectory(outputFolder)
-                .sourcePathProvider(SourcePathProvider.of(projectRoot))
+                .sourcePathProvider(SourcePathProvider.of(projectRoot.resolve("app")))
                 .processRegistry(processRegistry)
                 .classpathResolver(ClasspathResolver.of(classpath))
                 .build());

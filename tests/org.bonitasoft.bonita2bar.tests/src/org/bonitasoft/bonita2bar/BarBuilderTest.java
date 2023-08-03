@@ -52,7 +52,7 @@ class BarBuilderTest {
 
         processRegistry = ProcessRegistry.of(repoRoot.toPath().resolve("app").resolve("diagrams"),
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
-        sourcePathProvider = SourcePathProvider.of(repoRoot.toPath());
+        sourcePathProvider = SourcePathProvider.of(repoRoot.toPath().resolve("app"));
         barBuilder = BarBuilderFactory
                 .create(BuildConfig.builder().dependencyReport(new DependencyReport())
                         .formBuilder(id -> new byte[0]).workingDirectory(repoRoot.toPath().resolve("target"))
