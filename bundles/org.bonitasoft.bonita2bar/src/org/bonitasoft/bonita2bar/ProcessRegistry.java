@@ -14,24 +14,13 @@
  */
 package org.bonitasoft.bonita2bar;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
-import org.bonitasoft.bpm.connector.model.definition.ConnectorDefinitionPackage;
-import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementationPackage;
-import org.bonitasoft.bpm.model.process.MainProcess;
+import org.bonitasoft.bonita2bar.process.ProcessRegistryImpl;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
-import org.bonitasoft.bpm.model.util.EnvironmentUtil;
-import org.bonitasoft.bpm.model.util.ModelLoader;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
 
 public interface ProcessRegistry {
 
@@ -53,56 +42,22 @@ public interface ProcessRegistry {
      *         loaded, the processes are cached in memory.
      */
     static ProcessRegistry of(Path diagramsFolder, MigrationPolicy policy) {
-        return new ProcessRegistry() {
+        return new ProcessRegistryImpl(diagramsFolder, policy);
+    }
 
-            private List<Pool> processes;
-            private MigrationPolicy migrationPolicy = policy;
-
-            @Override
-            public List<Pool> getProcesses() {
-                if (processes == null) {
-                    if (!EnvironmentUtil.isOSGi()) {
-                        EPackage.Registry.INSTANCE.put(NotationPackage.eNS_URI, NotationPackage.eINSTANCE);
-                        EPackage.Registry.INSTANCE.put("http://www.bonitasoft.org/ns/connector/definition/6.0",
-                                ConnectorDefinitionPackage.eINSTANCE);
-                        EPackage.Registry.INSTANCE.put(ConnectorDefinitionPackage.eNS_URI,
-                                ConnectorDefinitionPackage.eINSTANCE);
-                        EPackage.Registry.INSTANCE.put(ConnectorImplementationPackage.eNS_URI,
-                                ConnectorImplementationPackage.eINSTANCE);
-                    }
-                    processes = new ArrayList<>();
-                    try (var files = Files.walk(diagramsFolder)) {
-                        files.filter(file -> file.getFileName().toString().endsWith(".proc")).forEach(procFile -> {
-                            var resource = ModelLoader.getInstance()
-                                    .loadModel(URI.createFileURI(procFile.toAbsolutePath().toString()),
-                                            migrationPolicy);
-                            var mainProcess = resource.getContents().stream().filter(MainProcess.class::isInstance)
-                                    .map(MainProcess.class::cast).findFirst()
-                                    .orElseThrow(() -> new IllegalStateException(String
-                                            .format("No MainProcess found in file %s", procFile.toAbsolutePath())));
-
-                            mainProcess.getElements().stream().filter(Pool.class::isInstance)
-                                    .map(Pool.class::cast).forEach(processes::add);
-                        });
-                    } catch (IOException e) {
-                        throw new IllegalArgumentException(e);
-                    }
-                }
-                return processes;
-            }
-
-            @Override
-            public Optional<Pool> getProcess(String name, String version) {
-                return getProcesses().stream().filter(Pool.class::isInstance).map(Pool.class::cast)
-                        .filter(process -> Objects.equals(process.getName(), name))
-                        .filter(process -> Objects.equals(process.getVersion(), version)).findFirst();
-            }
-
-            @Override
-            public MigrationPolicy getMigrationPolicy() {
-                return migrationPolicy;
-            }
-        };
+    /**
+     * {@link ProcessRegistry} factory method.
+     * 
+     * @param procFiles The list diagram file of this registry
+     *        files
+     * @param policy the migration policy to use when loading process
+     *        resources
+     * @return A default implementation of {@link ProcessRegistry} that loads all
+     *         the processes from the proc files given in parameter. Once
+     *         loaded, the processes are cached in memory.
+     */
+    static ProcessRegistry of(List<Path> procFiles, MigrationPolicy policy) {
+        return new ProcessRegistryImpl(procFiles, policy);
     }
 
 }
