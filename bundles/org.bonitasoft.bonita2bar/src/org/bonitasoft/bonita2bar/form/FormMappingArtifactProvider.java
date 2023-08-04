@@ -44,7 +44,7 @@ public class FormMappingArtifactProvider implements BarArtifactProvider {
         try {
             formMappingBarResourceProvider.addResourcesForConfiguration(builder, process);
         } catch (final Exception e) {
-            throw new BuildBarException("An error occured while adding resources for configuration", e);
+            throw new BuildBarException("An error occurred while adding resources", e);
         }
     }
 

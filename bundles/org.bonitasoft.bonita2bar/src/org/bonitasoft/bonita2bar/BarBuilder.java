@@ -53,6 +53,8 @@ public class BarBuilder {
 
     private Path workdir;
 
+    private BuildResult buildResult;
+
     BarBuilder(ProcessRegistry processRegistry,
             Path localConfiguration,
             ParametersConfiguration parametersConfiguration,
@@ -71,11 +73,11 @@ public class BarBuilder {
      * @throws BuildBarException
      */
     public BuildResult buildAll(String environment) throws BuildBarException {
-        var result = new BuildResult(environment, parametersConfiguration, workdir);
+        buildResult = new BuildResult(environment, parametersConfiguration, workdir);
         for (var process : processRegistry.getProcesses()) {
-            result.add(buildBar(process, environment));
+            buildResult.add(buildBar(process, environment));
         }
-        return result;
+        return buildResult;
     }
 
     /**
@@ -89,9 +91,14 @@ public class BarBuilder {
      * @throws {@link IllegalArgumentException} when the given process name and version are not found in the {@link ProcessRegistry}
      */
     public BuildResult build(String name, String version, String environment) throws BuildBarException {
+        if (buildResult == null) {
+            buildResult = new BuildResult(environment, parametersConfiguration, workdir);
+        }
         var process = processRegistry.getProcess(name, version).orElseThrow(() -> new IllegalArgumentException(
                 String.format("No process found in registry for %s (%s)", name, version)));
-        return buildBar(process, environment);
+        var result = buildBar(process, environment);
+        buildResult.add(result);
+        return result;
     }
 
     /**
@@ -103,12 +110,23 @@ public class BarBuilder {
      * @throws BuildBarException
      */
     public BuildResult build(Pool process, String environment) throws BuildBarException {
-        return buildBar(process, environment);
+        if (buildResult == null) {
+            buildResult = new BuildResult(environment, parametersConfiguration, workdir);
+        }
+        var result = buildBar(process, environment);
+        buildResult.add(result);
+        return result;
+    }
+
+    /**
+     * @return The aggregated {@link BuildResult}s of this {@link BarBuilder}
+     */
+    public BuildResult getBuildResult() {
+        return buildResult;
     }
 
     private BuildResult buildBar(Pool process, String environment) throws BuildBarException {
         LOGGER.info("Building {} ({})...", process.getName(), process.getVersion());
-        BuildResult result = new BuildResult(environment, parametersConfiguration, workdir);
         Optional<Configuration> configuration;
         try {
             configuration = getConfiguration(process, environment);
@@ -128,6 +146,7 @@ public class BarBuilder {
                 provider.build(barBuilder, process, configuration.orElse(defaultConfiguration));
                 provider.configure(confBuilder, configuration.orElse(defaultConfiguration), process);
             }
+            var result = new BuildResult(environment, parametersConfiguration, workdir);
             result.addBusinessArchive(barBuilder.done());
             result.addConfiguration(confBuilder.done());
             return result;
