@@ -44,7 +44,7 @@ public class BuildResult {
 
     private Path workdir;
 
-    public BuildResult(String environment, ParametersConfiguration parametersConfiguration, Path workdir) {
+    BuildResult(String environment, ParametersConfiguration parametersConfiguration, Path workdir) {
         this.environment = environment;
         this.parametersConfiguration = parametersConfiguration;
         this.workdir = workdir;
