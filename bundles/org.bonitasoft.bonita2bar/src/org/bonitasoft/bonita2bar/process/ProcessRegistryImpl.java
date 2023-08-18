@@ -64,7 +64,7 @@ public class ProcessRegistryImpl implements ProcessRegistry {
         if (processes == null) {
             if (!EnvironmentUtil.isOSGi()) {
                 EPackage.Registry.INSTANCE.put(NotationPackage.eNS_URI, NotationPackage.eINSTANCE);
-                EPackage.Registry.INSTANCE.put("http://www.bonitasoft.org/ns/connector/definition/6.0",
+                EPackage.Registry.INSTANCE.put("http://www.bonitasoft.org/ns/connector/definition/6.1",
                         ConnectorDefinitionPackage.eINSTANCE);
                 EPackage.Registry.INSTANCE.put(ConnectorDefinitionPackage.eNS_URI,
                         ConnectorDefinitionPackage.eINSTANCE);
