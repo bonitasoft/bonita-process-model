@@ -40,7 +40,15 @@
             <configuration>
               <excludes>META-INF/*.SF,META-INF/*.DSA,META-INF/*.RSA</excludes>
               <excludeTransitive>true</excludeTransitive>
-              <excludeArtifactIds>org.eclipse.emf.ecore,org.eclipse.emf.ecore.xmi,org.eclipse.emf.common,org.osgi.service.prefs</excludeArtifactIds>
+              <!-- Exclude dependencies already in pom dependencies (exclude recursively the P2 equivalent), and also OCL which we do not really need -->
+              <!-- Do not exclude: org.eclipse.core.runtime and its dependencies, for which we need the correct version not published as maven,
+                   org.eclipse.ocl required by Edapt -->
+              <excludeArtifactIds>org.eclipse.emf.ecore,org.eclipse.emf.ecore.xmi,org.eclipse.emf.common,org.eclipse.core.resources,
+                javax.annotation,javax.inject,org.eclipse.core.runtime.compatibility.auth,
+                org.eclipse.core.expressions,org.eclipse.core.filesystem,org.osgi.service.prefs,org.osgi.service.log,org.osgi.service.application,
+                org.eclipse.m2e.maven.runtime,
+                org.eclipse.ocl.common,org.eclipse.ocl.ecore,lpg.runtime.java</excludeArtifactIds>
+              <!-- Also exclude test plugins -->
               <excludeGroupIds>junit,org.mockito,org.hamcrest</excludeGroupIds>
               <outputDirectory>${project.build.directory}/dependency</outputDirectory>
               <overWriteReleases>false</overWriteReleases>

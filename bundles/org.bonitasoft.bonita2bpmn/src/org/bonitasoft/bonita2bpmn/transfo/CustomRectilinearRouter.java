@@ -24,7 +24,6 @@ import org.eclipse.draw2d.geometry.PrecisionPoint;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.draw2d.geometry.Vector;
-import org.eclipse.gmf.runtime.common.core.util.StringStatics;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.BaseSlidableAnchor;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.IOvalAnchorableFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.IPolygonAnchorableFigure;
@@ -295,12 +294,12 @@ public class CustomRectilinearRouter extends ObliqueRouter {
                             lastRemovedFromSource.y);
                 }
             } else if ((conn.getSourceAnchor() instanceof BaseSlidableAnchor
-                    && StringStatics.BLANK.equals(((BaseSlidableAnchor) conn
+                    && "".equals(((BaseSlidableAnchor) conn
                             .getSourceAnchor()).getTerminal())
                     && (conn
-                            .getTargetAnchor() instanceof BaseSlidableAnchor && StringStatics.BLANK
-                                    .equals(((BaseSlidableAnchor) conn.getTargetAnchor())
-                                            .getTerminal())))) {
+                            .getTargetAnchor() instanceof BaseSlidableAnchor
+                            && "".equals(((BaseSlidableAnchor) conn.getTargetAnchor())
+                                    .getTerminal())))) {
                 /*
                  * This a special case for old diagrams with rectilinear connections routed by
                  * the old router to look good with the new router
