@@ -27,11 +27,6 @@ import org.eclipse.emf.edapt.spi.migration.Model;
  */
 public class JavaGetterExpressionMigration extends CustomMigration {
 
-    /*
-     * (non-Javadoc)
-     * @see org.eclipse.emf.edapt.migration.CustomMigration#migrateAfter(org.eclipse.emf.edapt.spi.migration.Model,
-     * org.eclipse.emf.edapt.spi.migration.Metamodel)
-     */
     @Override
     public void migrateAfter(Model model, Metamodel metamodel) throws MigrationException {
         for (final Instance expression : model.getAllInstances("expression.Expression")) {
@@ -39,7 +34,7 @@ public class JavaGetterExpressionMigration extends CustomMigration {
                 expression.set("type", ExpressionConstants.SCRIPT_TYPE);
                 expression.set("interpreter", ExpressionConstants.GROOVY);
                 EList<Instance> refs = expression.getLinks("referencedElements");
-                if (!refs.isEmpty() && refs.get(0).instanceOf("Element")) {
+                if (!refs.isEmpty() && refs.get(0).instanceOf("process.Element")) {
                     var name = refs.get(0).get("name");
                     String newContent = String.format("%s.%s()", name, expression.get("content"));
                     expression.set("content", newContent);
