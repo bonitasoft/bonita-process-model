@@ -592,5 +592,11 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>offline</id>
+      <properties>
+        <spotless.check.skip>true</spotless.check.skip>
+      </properties>
+    </profile>
   </profiles>
 </project>
