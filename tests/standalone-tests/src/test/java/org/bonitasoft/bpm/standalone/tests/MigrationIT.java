@@ -18,33 +18,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 
-import org.bonitasoft.bpm.connector.model.definition.ConnectorDefinitionPackage;
-import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementationPackage;
+import org.bonitasoft.bpm.connector.model.ConnectorModelRegistration;
 import org.bonitasoft.bpm.model.process.MainProcess;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.util.ModelLoader;
+import org.bonitasoft.bpm.model.util.ModelLoader.Prerequisite;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class MigrationIT {
 
-    @BeforeAll
-    static void registerPackages() {
-        EPackage.Registry.INSTANCE.put(NotationPackage.eNS_URI, NotationPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put("http://www.bonitasoft.org/ns/connector/definition/6.0",
-                ConnectorDefinitionPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(ConnectorDefinitionPackage.eNS_URI,
-                ConnectorDefinitionPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(ConnectorImplementationPackage.eNS_URI,
-                ConnectorImplementationPackage.eINSTANCE);
-    }
-
     @Test
     void migrateConfigurationInProc() throws Exception {
-        var resource = ModelLoader.getInstance()
+        var resource = ModelLoader.create()
+                .withPrerequisite(Prerequisite.fromRunnableWhenNotInOSGi(ConnectorModelRegistration.REGISTER))
+                .withPrerequisite(Prerequisite.fromRunnableWhenNotInOSGi(NotationPackage.eINSTANCE::getNsURI))
                 .loadModel(URI.createFileURI(
                         new File(MigrationIT.class.getResource("/ProcessWithConfigurations-1.0.proc").getFile())
                                 .getAbsolutePath()));

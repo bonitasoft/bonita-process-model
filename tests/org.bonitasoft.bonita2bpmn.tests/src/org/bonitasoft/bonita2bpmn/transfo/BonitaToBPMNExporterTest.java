@@ -55,7 +55,7 @@ class BonitaToBPMNExporterTest {
             "/TestExportToBPMNDiagram_1_0.proc" })
     void exportProcToBpmn(String procResource) throws Exception {
 
-        var resource = ModelLoader.getInstance()
+        var resource = ModelLoader.create()
                 .loadModel(createURI(procResource));
 
         bonitaToBPMNExporter.export(new BonitaModelExporterImpl(resource, modelSearch), modelSearch,

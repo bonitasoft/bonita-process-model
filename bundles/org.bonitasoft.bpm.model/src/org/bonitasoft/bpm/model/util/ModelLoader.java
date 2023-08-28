@@ -15,8 +15,12 @@
 package org.bonitasoft.bpm.model.util;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.bonitasoft.bpm.model.actormapping.ActorMappingPackage;
 import org.bonitasoft.bpm.model.configuration.ConfigurationPackage;
@@ -31,86 +35,162 @@ import org.bonitasoft.bpm.model.process.decision.DecisionPackage;
 import org.bonitasoft.bpm.model.process.decision.transitions.TransitionsPackage;
 import org.bonitasoft.bpm.model.process.util.ProcessResourceFactoryImpl;
 import org.bonitasoft.bpm.model.process.util.ProcessResourceImpl;
+import org.bonitasoft.bpm.model.process.util.migration.HistoryUtils;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.bpm.model.simulation.SimulationPackage;
 import org.bonitasoft.bpm.model.util.internal.ConfigurationContentHandler;
 import org.bonitasoft.bpm.model.util.internal.ProcContentHandler;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 
 /**
- * This singleton is usefull for loading a model in a non-OSGi environment. It
- * ensures everything is correctly configured, without the need of extension
- * points.
+ * This is usefull for loading a model in a non-OSGi environment. It ensures everything is correctly configured, without the need of extension points.
  * 
  * @author Vincent Hemery
  */
 public final class ModelLoader {
 
-    /** Lazy singleton holder */
-    private static class LazyHolder {
+    public abstract static class Prerequisite implements Runnable {
 
-        /** singleton instance */
-        static final ModelLoader INSTANCE = new ModelLoader();
+        private static Map<Runnable, Prerequisite> fromRunnables = new HashMap<>();
+
+        /** whether this has already run */
+        private AtomicBoolean hasRun = new AtomicBoolean(false);
+
+        /*
+         * (non-Javadoc)
+         * @see org.bonitasoft.bpm.model.util.ModelLoader.Prerequisite#run()
+         */
+        @Override
+        public final void run() {
+            // ensure it is run only once.
+            if (!hasRun.getAndSet(true)) {
+                doRun();
+            }
+        }
+
+        /**
+         * Perform the required registrations as prerequisite.
+         */
+        public abstract void doRun();
+
+        /**
+         * Make a prerequisite to execute the runnable object when not in OSGi. Useful to register some EPackages.<br/>
+         * In case a prerequisite was already made from this runnable, the same prerequisite is returned so that we execute it only once.
+         * But you have to make sure you use the same runnable instance, and not a lambda or function pointer.
+         * 
+         * @param runnable runnable object
+         * @return prerequisite
+         */
+        public static Prerequisite fromRunnableWhenNotInOSGi(Runnable runnable) {
+            return fromRunnables.computeIfAbsent(runnable, r -> new Prerequisite() {
+
+                @Override
+                public void doRun() {
+                    if (!EnvironmentUtil.isOSGi()) {
+                        r.run();
+                    }
+                }
+            });
+        }
+
     }
 
-    private static final String DEFAULT_ENCODING = "UTF-8";
+    /**
+     * Creates model loaders, usefull for loading a model in a non-OSGi environment.
+     * 
+     * @author Vincent Hemery
+     */
+    public static class Factory {
+
+        /** Lazy singleton holder */
+        private static class LazyHolder {
+
+            /** singleton instance */
+            static final Factory INSTANCE = new Factory();
+        }
+
+        /**
+         * Default Constructor. Initializes everything to work without extension points.
+         */
+        private Factory() {
+        }
+
+        /**
+         * Get singleton instance
+         * 
+         * @return model loader factory
+         */
+        public static Factory getInstance() {
+            return LazyHolder.INSTANCE;
+        }
+
+        /**
+         * Create a new model loader with default configuration
+         * 
+         * @return model loader
+         */
+        public ModelLoader create() {
+            return new ModelLoader();
+        }
+    }
+
+    private static final Prerequisite[] DEFAULT_PREREQUISITE = new Prerequisite[] {
+            // registration of history is necessary when we migrate a model not using HistoryUtils
+            HistoryUtils.REGISTRATION,
+            Prerequisite.fromRunnableWhenNotInOSGi(() -> {
+                // Factories are registered with plugin extensions, but not without OSGi
+                // register EPackages: registration is done during init, so consulting eINSTANCE is enough
+                ProcessPackage.eINSTANCE.getNsURI();
+                DecisionPackage.eINSTANCE.getNsURI();
+                TransitionsPackage.eINSTANCE.getNsURI();
+                ActorMappingPackage.eINSTANCE.getNsURI();
+                ConfigurationPackage.eINSTANCE.getNsURI();
+                ConnectorConfigurationPackage.eINSTANCE.getNsURI();
+                ExpressionPackage.eINSTANCE.getNsURI();
+                FormPackage.eINSTANCE.getNsURI();
+                KpiPackage.eINSTANCE.getNsURI();
+                ParameterPackage.eINSTANCE.getNsURI();
+                SimulationPackage.eINSTANCE.getNsURI();
+                // register the content handler (which may be overridden e.g. by extension mapping)
+                ContentHandler.Registry.INSTANCE.put(ContentHandler.Registry.VERY_LOW_PRIORITY,
+                        new ProcContentHandler());
+                ContentHandler.Registry.INSTANCE.put(ContentHandler.Registry.VERY_LOW_PRIORITY,
+                        new ConfigurationContentHandler());
+                // register the resource factory
+                Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().put(
+                        ProcessResourceFactoryImpl.CONTENT_TYPE,
+                        new ProcessResourceFactoryImpl());
+                Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap()
+                        .put(ConfigurationResourceFactoryImpl.CONTENT_TYPE, new ConfigurationResourceFactoryImpl());
+            })
+    };
 
     /**
-     * Get singleton instance
+     * Create a new model loader with default configuration
      * 
      * @return model loader
      */
-    public static ModelLoader getInstance() {
-        return LazyHolder.INSTANCE;
+    public static ModelLoader create() {
+        return Factory.getInstance().create();
     }
 
-    private Map<String, Object> defaultLoadOptions = new HashMap<>();
+    private Map<String, Object> loadOptions = new HashMap<>();
 
-    private Map<String, Object> defaultSaveOptions = new HashMap<>();
+    private List<Prerequisite> prerequisites = new ArrayList<>();
 
     /**
-     * Default Constructor. Initializes everything to work without extension points.
+     * Default Constructor.
      */
     private ModelLoader() {
-        defaultLoadOptions.put(XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE);
-        defaultSaveOptions.putAll(Map.of(XMLResource.OPTION_DECLARE_XML, Boolean.TRUE,
-                XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD,
-                XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE, XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE,
-                XMLResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE, XMLResource.OPTION_SKIP_ESCAPE_URI,
-                Boolean.FALSE, XMLResource.OPTION_ENCODING, DEFAULT_ENCODING));
-
-        if (EnvironmentUtil.isOSGi()) {
-            // Factories are registered with plugin extensions
-            return;
-        }
-        // register EPackages
-        EPackage.Registry.INSTANCE.put(ProcessPackage.eNS_URI, ProcessPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(DecisionPackage.eNS_URI, DecisionPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(TransitionsPackage.eNS_URI, TransitionsPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(ActorMappingPackage.eNS_URI, ActorMappingPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(ConfigurationPackage.eNS_URI, ConfigurationPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(ConnectorConfigurationPackage.eNS_URI, ConnectorConfigurationPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(ExpressionPackage.eNS_URI, ExpressionPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(FormPackage.eNS_URI, FormPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(KpiPackage.eNS_URI, KpiPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(ParameterPackage.eNS_URI, ParameterPackage.eINSTANCE);
-        EPackage.Registry.INSTANCE.put(SimulationPackage.eNS_URI, SimulationPackage.eINSTANCE);
-        // register the content handler (which may be overridden e.g. by extension
-        // mapping)
-        ContentHandler.Registry.INSTANCE.put(ContentHandler.Registry.VERY_LOW_PRIORITY, new ProcContentHandler());
-        ContentHandler.Registry.INSTANCE.put(ContentHandler.Registry.VERY_LOW_PRIORITY,
-                new ConfigurationContentHandler());
-        // register the resource factory
-        Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().put(ProcessResourceFactoryImpl.CONTENT_TYPE,
-                new ProcessResourceFactoryImpl());
-        Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap()
-                .put(ConfigurationResourceFactoryImpl.CONTENT_TYPE, new ConfigurationResourceFactoryImpl());
+        // add default prerequisite
+        withPrerequisite(DEFAULT_PREREQUISITE);
+        // initiate migration policy with default
+        withPolicy(MigrationPolicy.ALWAYS_MIGRATE_POLICY);
     }
 
     /**
@@ -120,75 +200,82 @@ public final class ModelLoader {
      * @return resource with loaded model
      */
     public Resource loadModel(URL fileUrl) {
-        return loadModel(URI.createURI(fileUrl.toExternalForm()), MigrationPolicy.ALWAYS_MIGRATE_POLICY);
+        return loadModel(URI.createURI(fileUrl.toExternalForm()));
 
-    }
-
-    /**
-     * Load a model from a file URL
-     * 
-     * @param fileUrl the URL pointing to a file
-     * @param migrationPolicy a policy for model file migration
-     * @return resource with loaded model
-     */
-    public Resource loadModel(URL fileUrl, MigrationPolicy migrationPolicy) {
-        return loadModel(URI.createURI(fileUrl.toExternalForm()), migrationPolicy);
-
-    }
-
-    /**
-     * Load a model from an EMF URI (always migrating)
-     * 
-     * @param modelUri the EMF model URI
-     * @return resource with loaded model
-     */
-    public Resource loadModel(URI modelUri) {
-        return loadModel(modelUri, MigrationPolicy.ALWAYS_MIGRATE_POLICY);
     }
 
     /**
      * Load a model from an EMF URI
      * 
      * @param modelUri the EMF model URI
-     * @param migrationPolicy a policy for model file migration
      * @return resource with loaded model
      */
-    public Resource loadModel(URI modelUri, MigrationPolicy migrationPolicy) {
+    public Resource loadModel(URI modelUri) {
+        // first, make sure prerequisites have been executed
+        prerequisites.forEach(Runnable::run);
         ResourceSetImpl rset = new ResourceSetImpl();
-        // try and migrate file during loading
-        rset.getLoadOptions().put(ProcessResourceImpl.OPTION_MIGRATION_POLICY, migrationPolicy);
-        return rset.getResource(modelUri, true);
+        rset.getLoadOptions().putAll(loadOptions);
+        Resource resource = rset.getResource(modelUri, true);
+        if (resource instanceof XMLResource) {
+            // when loaded with extended metadata, use the same option value for saving... or failure of AnyType for notation will fail
+            Object extendedMetadataOption = loadOptions.get(XMLResource.OPTION_EXTENDED_META_DATA);
+            if (extendedMetadataOption != null) {
+                ((XMLResourceImpl) resource).getDefaultSaveOptions().putIfAbsent(XMLResource.OPTION_EXTENDED_META_DATA,
+                        extendedMetadataOption);
+            }
+        }
+        return resource;
     }
 
     /**
-     * Adds required load options in order to be able to load a .proc resource
-     * even if some packages are missing like the GMF Notation package.
+     * Use the given migration policy when loading the model.<br/>
+     * When not called, default is always migrating.
+     * 
+     * @param migrationPolicy a policy for model file migration
+     * @return this ModelLoader
+     */
+    public ModelLoader withPolicy(MigrationPolicy migrationPolicy) {
+        // try and migrate file during loading
+        loadOptions.put(ProcessResourceImpl.OPTION_MIGRATION_POLICY, migrationPolicy);
+        return this;
+    }
+
+    /**
+     * Ensure the given prerequisites are executed before loading the model.
+     * 
+     * @param prerequisite some prerequisites to execute
+     * @return this ModelLoader
+     */
+    public ModelLoader withPrerequisite(Prerequisite... prerequisite) {
+        prerequisites.addAll(Arrays.asList(prerequisite));
+        return this;
+    }
+
+    /**
+     * Adds required save/load options in order to be able to save/load a .proc resource
+     * even if some packages are missing like the GMF Notation package.<br/>
+     * When not called, disabled by default.
      * 
      * @return this ModelLoader
      */
-    public ModelLoader enablePartialLoad() {
-        defaultLoadOptions.putAll(Map.of(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE,
+    public ModelLoader enablePartial() {
+        // record unknown features, especially for notation package which we may not know
+        loadOptions.putAll(Map.of(
+                XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE,
                 XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE));
         return this;
     }
 
     /**
-     * Adds required save options in order to be able to save a .proc resource
-     * even if some packages are missing like the GMF Notation package.
+     * Remove specific save/load options handling missing packages.<br/>
+     * This restores the default behavior where all packages must be resolved.
      * 
      * @return this ModelLoader
      */
-    public ModelLoader enablePartialSave() {
-        defaultSaveOptions.putAll(Map.of(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE));
+    public ModelLoader disablePartial() {
+        loadOptions.remove(XMLResource.OPTION_EXTENDED_META_DATA);
+        loadOptions.remove(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE);
         return this;
-    }
-
-    public Map<String, Object> getDefaultLoadOptions() {
-        return defaultLoadOptions;
-    }
-
-    public Map<String, Object> getDefaultSaveOptions() {
-        return defaultSaveOptions;
     }
 
 }

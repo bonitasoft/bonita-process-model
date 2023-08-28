@@ -15,11 +15,6 @@
             uri="http://www.bonitasoft.org/ns/connector/definition/6.1"
             class="org.bonitasoft.bpm.connector.model.definition.ConnectorDefinitionPackage"
             genModel="model/connector.genmodel"/>
-      <package
-            class="org.bonitasoft.bpm.connector.model.definition.ConnectorDefinitionPackage"
-            genModel="model/connector.genmodel"
-            uri="http://www.bonitasoft.org/ns/connector/definition/6.0">
-      </package>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">

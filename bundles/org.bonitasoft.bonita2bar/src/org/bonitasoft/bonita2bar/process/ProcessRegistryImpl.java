@@ -25,15 +25,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.bonitasoft.bonita2bar.ProcessRegistry;
-import org.bonitasoft.bpm.connector.model.definition.ConnectorDefinitionPackage;
-import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementationPackage;
+import org.bonitasoft.bpm.connector.model.ConnectorModelRegistration;
 import org.bonitasoft.bpm.model.process.MainProcess;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
-import org.bonitasoft.bpm.model.util.EnvironmentUtil;
 import org.bonitasoft.bpm.model.util.ModelLoader;
+import org.bonitasoft.bpm.model.util.ModelLoader.Prerequisite;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 
 public class ProcessRegistryImpl implements ProcessRegistry {
@@ -62,19 +60,14 @@ public class ProcessRegistryImpl implements ProcessRegistry {
     @Override
     public List<Pool> getProcesses() {
         if (processes == null) {
-            if (!EnvironmentUtil.isOSGi()) {
-                EPackage.Registry.INSTANCE.put(NotationPackage.eNS_URI, NotationPackage.eINSTANCE);
-                EPackage.Registry.INSTANCE.put("http://www.bonitasoft.org/ns/connector/definition/6.0",
-                        ConnectorDefinitionPackage.eINSTANCE);
-                EPackage.Registry.INSTANCE.put(ConnectorDefinitionPackage.eNS_URI,
-                        ConnectorDefinitionPackage.eINSTANCE);
-                EPackage.Registry.INSTANCE.put(ConnectorImplementationPackage.eNS_URI,
-                        ConnectorImplementationPackage.eINSTANCE);
-            }
             processes = new ArrayList<>();
+            ModelLoader modelLoader = ModelLoader.create()
+                    .withPrerequisite(Prerequisite.fromRunnableWhenNotInOSGi(ConnectorModelRegistration.REGISTER))
+                    .withPrerequisite(Prerequisite.fromRunnableWhenNotInOSGi(NotationPackage.eINSTANCE::getNsURI))
+                    .withPolicy(migrationPolicy);
             procFiles.stream().filter(file -> file.getFileName().toString().endsWith(".proc")).forEach(procFile -> {
-                var resource = ModelLoader.getInstance()
-                        .loadModel(URI.createFileURI(procFile.toAbsolutePath().toString()), migrationPolicy);
+                var resource = modelLoader
+                        .loadModel(URI.createFileURI(procFile.toAbsolutePath().toString()));
                 var mainProcess = resource.getContents().stream().filter(MainProcess.class::isInstance)
                         .map(MainProcess.class::cast).findFirst().orElseThrow(() -> new IllegalStateException(
                                 String.format("No MainProcess found in file %s", procFile.toAbsolutePath())));

@@ -16,8 +16,10 @@ package org.bonitasoft.bpm.model.process.util.migration;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiPredicate;
@@ -44,8 +46,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.XMLResource;
+import org.eclipse.emf.edapt.common.IResourceSetFactory;
 import org.eclipse.emf.edapt.internal.migration.execution.ValidationLevel;
 import org.eclipse.emf.edapt.migration.MigrationException;
 import org.eclipse.emf.edapt.migration.execution.Migrator;
@@ -264,8 +268,21 @@ public class MigrationHelper extends AdapterImpl {
         /** Namespace URI. */
         private String nsURI;
 
+        /** All registered namespace URIs by prefix */
+        private List<String> allNsURIs = new ArrayList<>();
+
         /** Model version */
         private String modelVersion;
+
+        /*
+         * (non-Javadoc)
+         * @see org.xml.sax.helpers.DefaultHandler#startPrefixMapping(java.lang.String, java.lang.String)
+         */
+        @Override
+        public void startPrefixMapping(String prefix, String uri) throws SAXException {
+            // register all used namespace URIs
+            allNsURIs.add(uri);
+        }
 
         /** {@inheritDoc} */
         @Override
@@ -308,16 +325,22 @@ public class MigrationHelper extends AdapterImpl {
     }
 
     /**
-     * Get the Edapt migrator
+     * Get the Edapt migrator, with appropriate fixes
      * 
      * @return the migrator
      */
     public Migrator getMigrator(final String nsURI) {
-        var migrator = SingleResourceMigrator.getInstance();
-        if (!migrator.getNsURIs().contains(nsURI)) {
-            return MigratorRegistry.getInstance().getMigrator(nsURI);
+        var singleMigrator = SingleResourceMigrator.getInstance();
+        if (!singleMigrator.getNsURIs().contains(nsURI)) {
+            Migrator registeredMigrator = MigratorRegistry.getInstance().getMigrator(nsURI);
+            if (registeredMigrator != null) {
+                return new LenientResourceMigrator(registeredMigrator);
+            } else {
+                return null;
+            }
+        } else {
+            return singleMigrator;
         }
-        return migrator;
     }
 
     /**
@@ -327,6 +350,15 @@ public class MigrationHelper extends AdapterImpl {
      */
     public String getNsURI() {
         return Optional.ofNullable(informationHandler).map(c -> c.nsURI).orElse(null);
+    }
+
+    /**
+     * Returns all the declared namespace URIs.
+     * 
+     * @return namespace URIs
+     */
+    public List<String> getAllNamespaceUris() {
+        return Optional.ofNullable(informationHandler).map(c -> c.allNsURIs).orElseGet(Collections::emptyList);
     }
 
     /**
@@ -355,10 +387,14 @@ public class MigrationHelper extends AdapterImpl {
      * Try and migrate the model, when the migration policy allows it.
      * 
      * @param migrationPolicy a policy to decide whether to migrate the file, based on the model information
+     * @param defaultLoadOptions the default options for loading the resource
+     * @param defaultSaveOptions the default options for saving the resource
      * @return how the model has actually been migrated
      * @throws MigrationException exception during migration
      */
-    public MigrationResult tryAndMigrate(MigrationPolicy migrationPolicy) throws MigrationException {
+    public MigrationResult tryAndMigrate(MigrationPolicy migrationPolicy, Map<?, ?> defaultLoadOptions,
+            Map<?, ?> defaultSaveOptions)
+            throws MigrationException {
         if (modelVersionStatus.getSeverity() == IStatus.WARNING) {
             // test whether read model is read-only
             URI uri = getTarget().getURI();
@@ -371,36 +407,111 @@ public class MigrationHelper extends AdapterImpl {
             if (desiredResult.doMigrate()) {
                 String modelVersion = getModelVersion();
                 String nsUri = getNsURI();
+                boolean hasActuallyMigrated = false;
+                // main migration
                 Migrator actualMigrator = getMigrator(nsUri);
+                // other namespaces may also contain a migration
+                Map<Release, Migrator> extraMigrators = collectExtraMigrators(actualMigrator);
+                Map<Object, Object> loadOptions = new HashMap<>(defaultLoadOptions);
+                if (!extraMigrators.isEmpty()) {
+                    // the main migration will encounter some old (hence unknown) metamodels, we must be enable partial load
+                    loadOptions.putAll(Map.of(
+                            XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE,
+                            XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE));
+                }
+                // perform main migration
                 Optional<Release> release = actualMigrator.getReleases().stream()
                         .filter(r -> r.getLabel().equals(modelVersion)).findFirst();
                 if (release.filter(r -> !r.isLastRelease()).isPresent()) {
-                    actualMigrator.setLevel(ValidationLevel.RELEASE);
-                    Map<String, Object> loadOptions = new HashMap<>();
-                    loadOptions.put(XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE);
-                    try {
-                        if (desiredResult.doEraseResource()) {
-                            // migrate and update the file
-                            actualMigrator.migrateAndSave(Collections.singletonList(uri),
-                                    release.get(), null, new NullProgressMonitor(), loadOptions);
-                            return MigrationResult.HARD_MIGRATION;
-                        } else {
-                            // migrate virtually only
-                            ResourceSet resourceSet = actualMigrator.migrateAndLoad(Collections.singletonList(uri),
-                                    release.get(),
-                                    null, new NullProgressMonitor());
-                            EList<EObject> contents = resourceSet.getResources().get(0).getContents();
-                            getTarget().getContents().clear();
-                            getTarget().getContents().addAll(contents);
-                            return MigrationResult.SOFT_MIGRATION;
-                        }
-                    } catch (RuntimeException e) {
-                        throw new MigrationException(String.format("Failed to migrate %s", uri), e);
-                    }
+                    hasActuallyMigrated = performMigration(loadOptions, defaultSaveOptions, uri, desiredResult,
+                            actualMigrator, release.get());
+                }
+                // then the extra namespace migrations
+                for (var entry : extraMigrators.entrySet()) {
+                    var currentRelease = entry.getKey();
+                    var extraMigrator = entry.getValue();
+                    hasActuallyMigrated = performMigration(loadOptions, defaultSaveOptions, uri,
+                            desiredResult,
+                            extraMigrator, currentRelease);
+                }
+                if (hasActuallyMigrated) {
+                    return desiredResult;
                 }
             }
         }
         return MigrationResult.NO_MIGRATION;
+    }
+
+    /**
+     * Collect map with migrators from extra namespaces and the corresponding current release.
+     * 
+     * @param mainMigrator the migrator used for main migration
+     * @return map
+     */
+    private Map<Release, Migrator> collectExtraMigrators(Migrator mainMigrator) {
+        String nsUri = getNsURI();
+        List<String> allNamespaceUris = getAllNamespaceUris();
+        Map<Release, Migrator> extraMigrators = new HashMap<>();
+        for (String extraNsUri : allNamespaceUris) {
+            if (!nsUri.equals(extraNsUri)) {
+                Migrator extraMigrator = getMigrator(extraNsUri);
+                if (extraMigrator != null && !mainMigrator.equals(extraMigrator)) {
+                    // perform extra migration (the version is in the nsUri)
+                    Optional<Release> currentRelease = extraMigrator.getReleases().stream()
+                            .filter(r -> extraNsUri.endsWith("/" + r.getLabel())).findFirst();
+                    if (currentRelease.filter(r -> !r.isLastRelease()).isPresent()) {
+                        extraMigrators.put(currentRelease.get(), extraMigrator);
+                    }
+                }
+            }
+        }
+        return extraMigrators;
+    }
+
+    /**
+     * Perform a migration with the migrator
+     * 
+     * @param defaultLoadOptions the default options for loading the resource
+     * @param defaultSaveOptions the default options for saving the resource
+     * @param uri resource uri
+     * @param desiredResult the intended migration result
+     * @param migrator the migrator to use
+     * @param release the source release to migrate from
+     * @return true when migration was successful
+     * @throws MigrationException exception during migration
+     */
+    private boolean performMigration(Map<?, ?> defaultLoadOptions, Map<?, ?> defaultSaveOptions, URI uri,
+            MigrationResult desiredResult, Migrator migrator, Release release) throws MigrationException {
+        migrator.setLevel(ValidationLevel.RELEASE);
+        // handle load and save options
+        IResourceSetFactory rsetFactory = () -> {
+            ResourceSetImpl set = new ResourceSetImpl();
+            set.getLoadOptions().putAll(defaultLoadOptions);
+            set.getLoadOptions().remove(OPTION_MIGRATION_POLICY);
+            return set;
+        };
+        migrator.setResourceSetFactory(rsetFactory);
+        Map<String, Object> saveOptions = new HashMap<>();
+        defaultSaveOptions.forEach((k, v) -> saveOptions.put(k.toString(), v));
+        try {
+            if (desiredResult.doEraseResource()) {
+                // migrate and update the file
+                migrator.migrateAndSave(Collections.singletonList(uri), release, null, new NullProgressMonitor(),
+                        saveOptions);
+            } else {
+                // migrate virtually only
+                ResourceSet resourceSet = migrator.migrateAndLoad(Collections.singletonList(uri), release, null,
+                        new NullProgressMonitor());
+                resourceSet.getLoadOptions().putAll(defaultLoadOptions);
+                resourceSet.getLoadOptions().remove(OPTION_MIGRATION_POLICY);
+                EList<EObject> contents = resourceSet.getResources().get(0).getContents();
+                getTarget().getContents().clear();
+                getTarget().getContents().addAll(contents);
+            }
+            return true;
+        } catch (RuntimeException e) {
+            throw new MigrationException(String.format("Failed to migrate %s", uri), e);
+        }
     }
 
 }

@@ -39,11 +39,16 @@ class ProcessMigrationTest {
 
     @Test
     void testModelMigration_7_12_0() throws Exception {
+        /*
+         * This tests that 7.12 proc model version was migrated to 8
+         * But also that 6.0 connector definition was migrated to 6.1
+         */
         // load both models
-        Resource oldModel = ModelLoader.getInstance().enablePartialLoad().loadModel(PROC_7_12_0_MODEL_URI);
+        ModelLoader loader = ModelLoader.create().enablePartial();
+        Resource oldModel = loader.loadModel(PROC_7_12_0_MODEL_URI);
         assertTrue(oldModel.isLoaded());
-        Resource latestModel = ModelLoader.getInstance().enablePartialLoad().loadModel(PROC_8_MODEL_URI);
-        assertTrue(oldModel.isLoaded());
+        Resource latestModel = loader.loadModel(PROC_8_MODEL_URI);
+        assertTrue(latestModel.isLoaded());
 
         // and test that content is similar
         assertTrue(EcoreUtil.equals(oldModel.getContents().get(0), latestModel.getContents().get(0)));

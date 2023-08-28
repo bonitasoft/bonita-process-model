@@ -176,8 +176,8 @@ public class BarBuilder {
             if (!confFile.exists()) {
                 return Optional.empty();
             }
-            var resource = ModelLoader.getInstance().loadModel(URI.createFileURI(confFile.getAbsolutePath()),
-                    processRegistry.getMigrationPolicy());
+            var resource = ModelLoader.create().withPolicy(processRegistry.getMigrationPolicy())
+                    .loadModel(URI.createFileURI(confFile.getAbsolutePath()));
             if (resource.getContents().isEmpty() || !(resource.getContents().get(0) instanceof Configuration)) {
                 throw new IOException(String.format("No Configuration found in file %s", confFile.getAbsolutePath()));
             }

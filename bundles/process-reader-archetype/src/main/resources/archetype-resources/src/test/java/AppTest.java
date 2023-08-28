@@ -25,11 +25,26 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 
+import org.bonitasoft.bpm.connector.model.ConnectorModelRegistration;
+import org.bonitasoft.bpm.connector.model.definition.ConnectorDefinitionPackage;
+import org.bonitasoft.bpm.connector.model.definition.Output;
+import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementationPackage;
+import org.bonitasoft.bpm.model.expression.Expression;
+import org.bonitasoft.bpm.model.expression.ExpressionPackage;
 import org.bonitasoft.bpm.model.process.MainProcess;
+import org.bonitasoft.bpm.model.process.ProcessPackage;
+import org.bonitasoft.bpm.model.process.ServiceTask;
 import org.bonitasoft.bpm.model.util.ModelLoader;
+import org.bonitasoft.bpm.model.util.ModelLoader.Prerequisite;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.junit.jupiter.api.Test;
 
@@ -56,12 +71,77 @@ public class AppTest {
     @Test
     public void defaultModelIsLoadedCorrectly() {
         // load the model from file URL
-        Resource model = ModelLoader.getInstance().loadModel(MODEL_URL);
+        Resource model = ModelLoader.create().enablePartial().loadModel(MODEL_URL);
         assertThat(model.isLoaded());
         // model is interpreted
         assertThat(model.getContents().get(0)).isInstanceOf(MainProcess.class);
         // diagram is loaded but not interpreted
         assertThat(model.getContents().get(1)).isInstanceOf(AnyType.class);
+    }
+
+    /**
+     * Test that default model is correctly loaded and partially interpreted.
+     */
+    @Test
+    public void defaultModelIsLoadedWithoutDefinitionPackage() {
+        // in case ConnectorDefinitionPackage and ConnectorImplementationPackage where initialized, we need to deregister them
+        Optional<Object> connDef = Optional
+                .ofNullable(EPackage.Registry.INSTANCE.remove(ConnectorDefinitionPackage.eNS_URI));
+        Optional<Object> connImpl = Optional
+                .ofNullable(EPackage.Registry.INSTANCE.remove(ConnectorImplementationPackage.eNS_URI));
+        try {
+            // load the model from file URL
+            Resource model = ModelLoader.create().enablePartial().loadModel(MODEL_URL);
+            assertThat(model.isLoaded());
+            // check that connector definition is not interpreted but available in the logout task
+            EObject lane = model.getContents().get(0).eContents().get(0).eContents().get(0);
+            EObject logoutTask = lane.eContents().get(4);
+            assertThat(logoutTask).isInstanceOf(ServiceTask.class)
+                    .hasFieldOrPropertyWithValue(ProcessPackage.Literals.ELEMENT__NAME.getName(), "AutoLogout");
+            Expression rightOperand = ((ServiceTask) logoutTask).getConnectors().get(0).getOutputs().get(0)
+                    .getRightOperand();
+            EList<EObject> referencedElements = rightOperand.getReferencedElements();
+            // connector definition is not loaded, so referencedElements is not populated, but values are accessible with getEObjectToExtensionMap
+            assertThat(referencedElements).isEmpty();
+            AnyType bodyAsStringEntry = ((XMLResource) model).getEObjectToExtensionMap().get(rightOperand);
+            assertThat(bodyAsStringEntry).isNotNull();
+            FeatureMap featMap = bodyAsStringEntry.getMixed();
+            assertThat(featMap.size()).isEqualTo(1);
+            assertThat(featMap.getEStructuralFeature(0).getName())
+                    .isEqualTo(ExpressionPackage.Literals.EXPRESSION__REFERENCED_ELEMENTS.getName());
+            Object bodyAsString = featMap.getValue(0);
+            assertThat(bodyAsString).isInstanceOf(AnyType.class);
+            assertThat(((AnyType) bodyAsString).eClass().getName())
+                    .isEqualTo(ConnectorDefinitionPackage.Literals.OUTPUT.getName());
+        } finally {
+            // restore entries in the registry (accessing to package initialized it anyway)
+            connDef.ifPresent(p -> EPackage.Registry.INSTANCE.put(ConnectorDefinitionPackage.eNS_URI, p));
+            connImpl.ifPresent(p -> EPackage.Registry.INSTANCE.put(ConnectorImplementationPackage.eNS_URI, connImpl));
+        }
+    }
+
+    /**
+     * Test that default model is correctly loaded and partially interpreted.
+     */
+    @Test
+    public void defaultModelIsLoadedWithDefinitionPackage() {
+        // load the model from file URL
+        Resource model = ModelLoader.create()
+                .withPrerequisite(Prerequisite.fromRunnableWhenNotInOSGi(ConnectorModelRegistration.REGISTER))
+                .enablePartial().loadModel(MODEL_URL);
+        assertThat(model.isLoaded());
+        // check that connector definition is fully interpreted in the logout task
+        EObject lane = model.getContents().get(0).eContents().get(0).eContents().get(0);
+        EObject logoutTask = lane.eContents().get(4);
+        assertThat(logoutTask).isInstanceOf(ServiceTask.class)
+                .hasFieldOrPropertyWithValue(ProcessPackage.Literals.ELEMENT__NAME.getName(), "AutoLogout");
+        EList<EObject> referencedElements = ((ServiceTask) logoutTask).getConnectors().get(0).getOutputs().get(0)
+                .getRightOperand()
+                .getReferencedElements();
+        // connector definition is loaded, so referencedElements is populated
+        assertThat(referencedElements).isNotEmpty();
+        EObject bodyAsString = referencedElements.get(0);
+        assertThat(bodyAsString).isInstanceOf(Output.class);
     }
 
     /**
@@ -112,9 +192,11 @@ public class AppTest {
         File copyFile = File.createTempFile("MyDiagram-7.12-", ".proc");
         Files.copy(pathToMigrate, copyFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         // load both models
-        Resource oldModel = ModelLoader.getInstance().loadModel(copyFile.toURI().toURL());
+        ModelLoader loader = ModelLoader.create().enablePartial()
+                .withPrerequisite(Prerequisite.fromRunnableWhenNotInOSGi(ConnectorModelRegistration.REGISTER));
+        Resource oldModel = loader.loadModel(copyFile.toURI().toURL());
         assertThat(oldModel.isLoaded()).isTrue();
-        Resource latestModel = ModelLoader.getInstance().loadModel(MODEL_URL);
+        Resource latestModel = loader.loadModel(MODEL_URL);
         assertThat(oldModel.isLoaded()).isTrue();
 
         // and test that content is similar
