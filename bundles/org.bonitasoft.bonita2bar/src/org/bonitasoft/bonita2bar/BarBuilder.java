@@ -41,6 +41,8 @@ import org.slf4j.LoggerFactory;
 
 public class BarBuilder {
 
+    private static final String LOCAL_ENVIRONMENT = "local";
+
     private static final Logger LOGGER = LoggerFactory.getLogger(BarBuilder.class);
 
     private List<BarArtifactProvider> providers = new ArrayList<>();
@@ -168,7 +170,7 @@ public class BarBuilder {
     Optional<Configuration> getConfiguration(Pool process, String environment)
             throws IOException {
         final String uuid = getEObjectID(process);
-        if ("Local".equals(environment) || environment == null) {// Use local environment
+        if (LOCAL_ENVIRONMENT.equalsIgnoreCase(environment) || environment == null) {// Use local environment
             final File configurationFolder = localConfiguration.toFile();
             final File confFile = new File(configurationFolder, String.format("%s.conf", uuid));
             if (!confFile.exists()) {
@@ -182,8 +184,13 @@ public class BarBuilder {
             final EList<EObject> contents = resource.getContents();
             return Optional.ofNullable((Configuration) contents.get(0));
         }
-        return process.getConfigurations().stream().filter(conf -> Objects.equals(conf.getName(), environment))
+        return process.getConfigurations().stream()
+                .filter(conf -> Objects.equals(toLowerCase(conf.getName()), toLowerCase(environment)))
                 .findFirst();
+    }
+
+    private String toLowerCase(String name) {
+        return name != null ? name.toLowerCase() : name;
     }
 
     private static String getEObjectID(final EObject eObject) {
