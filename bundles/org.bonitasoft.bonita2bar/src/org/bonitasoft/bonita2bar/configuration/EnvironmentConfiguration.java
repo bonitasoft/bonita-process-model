@@ -57,7 +57,7 @@ public class EnvironmentConfiguration {
             if (parametersFile.exists()) {
                 Files.delete(parametersFile.toPath());
             }
-            LOGGER.info("Writing parameters file in {}", processFolder);
+            LOGGER.debug("Writing parameters file in {}", processFolder);
             Properties properties = new Properties();
             try (FileOutputStream out = new FileOutputStream(parametersFile)) {
                 for (Entry<String, String> entry : parameters.entrySet()) {

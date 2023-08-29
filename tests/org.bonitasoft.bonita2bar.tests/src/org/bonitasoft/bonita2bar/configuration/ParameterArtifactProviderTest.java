@@ -46,6 +46,7 @@ class ParameterArtifactProviderTest {
 
         final EnvironmentConfigurationBuilder builder = mock(EnvironmentConfigurationBuilder.class);
         final Configuration configuration = mock(Configuration.class);
+        when(configuration.getName()).thenReturn("local");
         when(configuration.getParameters())
                 .thenReturn(new BasicEList<>(List.of(parameter("host", "localhost", String.class.getName()),
                         parameter("port", "", Integer.class.getName()))));
