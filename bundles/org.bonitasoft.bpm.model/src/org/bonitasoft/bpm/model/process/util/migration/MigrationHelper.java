@@ -16,6 +16,8 @@ package org.bonitasoft.bpm.model.process.util.migration;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -43,6 +45,7 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -257,6 +260,54 @@ public class MigrationHelper extends AdapterImpl {
         }
     }
 
+    /**
+     * A resource set which reuse content from target resource to load, and do not load from file.
+     * Reading must occur with newly registered metamodels, not to produce AnyType, so we use a piped stream.
+     */
+    private final class ResourceSetLoadingFromTarget extends ResourceSetImpl {
+
+        /**
+         * The save options to use for target
+         */
+        private final Map<?, ?> saveOptions;
+
+        /**
+         * Default Constructor.
+         * 
+         * @param saveOptions
+         */
+        private ResourceSetLoadingFromTarget(Map<?, ?> saveOptions) {
+            this.saveOptions = saveOptions;
+        }
+
+        /*
+         * (non-Javadoc)
+         * @see org.eclipse.emf.ecore.resource.impl.ResourceSetImpl#demandLoad(org.eclipse.emf.ecore.resource.Resource)
+         */
+        @Override
+        protected void demandLoad(Resource resource) throws IOException {
+            if (resource.getURI().equals(getTarget().getURI())) {
+                try (PipedInputStream in = new PipedInputStream();) {
+                    Thread save = new Thread(() -> {
+                        try (PipedOutputStream out = new PipedOutputStream(in);) {
+                            getTarget().save(out, saveOptions);
+                        } catch (IOException e) {
+                            handleDemandLoadException(resource, e);
+                        }
+                    });
+                    save.start();
+                    resource.load(in, getLoadOptions());
+                    // make sure the save thread has ended to avoid a Pipe closed exception (after EOF?)
+                    save.join();
+                } catch (InterruptedException e) {
+                    EcorePlugin.INSTANCE.log(e);
+                }
+            } else {
+                super.demandLoad(resource);
+            }
+        }
+    }
+
     /** Content handler for extraction of namespace URI and model version using SAX. */
     private static class ContentHandler extends DefaultHandler {
 
@@ -424,7 +475,7 @@ public class MigrationHelper extends AdapterImpl {
                         .filter(r -> r.getLabel().equals(modelVersion)).findFirst();
                 if (release.filter(r -> !r.isLastRelease()).isPresent()) {
                     hasActuallyMigrated = performMigration(loadOptions, defaultSaveOptions, uri, desiredResult,
-                            actualMigrator, release.get());
+                            actualMigrator, release.get(), false);
                 }
                 // then the extra namespace migrations
                 for (var entry : extraMigrators.entrySet()) {
@@ -432,7 +483,8 @@ public class MigrationHelper extends AdapterImpl {
                     var extraMigrator = entry.getValue();
                     hasActuallyMigrated = performMigration(loadOptions, defaultSaveOptions, uri,
                             desiredResult,
-                            extraMigrator, currentRelease);
+                            extraMigrator, currentRelease,
+                            hasActuallyMigrated && !desiredResult.doEraseResource());
                 }
                 if (hasActuallyMigrated) {
                     return desiredResult;
@@ -477,22 +529,32 @@ public class MigrationHelper extends AdapterImpl {
      * @param desiredResult the intended migration result
      * @param migrator the migrator to use
      * @param release the source release to migrate from
+     * @param reuseResource true when resource was already partially virtually migrated and we want to reuse it without reloading from file
      * @return true when migration was successful
      * @throws MigrationException exception during migration
      */
     private boolean performMigration(Map<?, ?> defaultLoadOptions, Map<?, ?> defaultSaveOptions, URI uri,
-            MigrationResult desiredResult, Migrator migrator, Release release) throws MigrationException {
+            MigrationResult desiredResult, Migrator migrator, Release release, boolean reuseResource)
+            throws MigrationException {
         migrator.setLevel(ValidationLevel.RELEASE);
         // handle load and save options
+        Map<String, Object> saveOptions = new HashMap<>();
+        defaultSaveOptions.forEach((k, v) -> saveOptions.put(k.toString(), v));
         IResourceSetFactory rsetFactory = () -> {
-            ResourceSetImpl set = new ResourceSetImpl();
+            ResourceSetImpl set;
+            if (reuseResource) {
+                /*
+                 * Also, we want to reuse content from target resource and not load from file.
+                 */
+                set = new ResourceSetLoadingFromTarget(saveOptions);
+            } else {
+                set = new ResourceSetImpl();
+            }
             set.getLoadOptions().putAll(defaultLoadOptions);
             set.getLoadOptions().remove(OPTION_MIGRATION_POLICY);
             return set;
         };
         migrator.setResourceSetFactory(rsetFactory);
-        Map<String, Object> saveOptions = new HashMap<>();
-        defaultSaveOptions.forEach((k, v) -> saveOptions.put(k.toString(), v));
         try {
             if (desiredResult.doEraseResource()) {
                 // migrate and update the file

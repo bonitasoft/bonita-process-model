@@ -22,6 +22,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 import org.bonitasoft.bonita2bpmn.extension.BonitaModelExporterImpl;
+import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.bpm.model.util.IModelSearch;
 import org.bonitasoft.bpm.model.util.ModelLoader;
 import org.bonitasoft.bpm.model.util.ModelSearch;
@@ -55,7 +56,7 @@ class BonitaToBPMNExporterTest {
             "/TestExportToBPMNDiagram_1_0.proc" })
     void exportProcToBpmn(String procResource) throws Exception {
 
-        var resource = ModelLoader.create()
+        var resource = ModelLoader.create().withPolicy(MigrationPolicy.SOFT_MIGRATE_POLICY)
                 .loadModel(createURI(procResource));
 
         bonitaToBPMNExporter.export(new BonitaModelExporterImpl(resource, modelSearch), modelSearch,
