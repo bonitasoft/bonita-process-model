@@ -124,7 +124,8 @@ public class ParameterArtifactProvider implements BarArtifactProvider {
     @Override
     public void configure(EnvironmentConfigurationBuilder builder, Configuration configuration, Pool process) {
         if (configuration != null && !configuration.getParameters().isEmpty()) {
-            LOGGER.info("Adding parameters for '{}' environment...", configuration.getName().toLowerCase());
+            LOGGER.info("Adding parameters for '{}' environment...",
+                    configuration.getName() != null ? configuration.getName().toLowerCase() : null);
         }
         builder.addParameters(getParameterMapFromConfiguration(configuration, process));
     }
