@@ -464,24 +464,27 @@ public class MigrationHelper extends AdapterImpl {
                 // other namespaces may also contain a migration
                 Map<Release, Migrator> extraMigrators = collectExtraMigrators(actualMigrator);
                 Map<Object, Object> loadOptions = new HashMap<>(defaultLoadOptions);
+                Map<String, Object> saveOptions = new HashMap<>();
+                saveOptions.forEach((k, v) -> saveOptions.put(k.toString(), v));
                 if (!extraMigrators.isEmpty()) {
                     // the main migration will encounter some old (hence unknown) metamodels, we must be enable partial load
                     loadOptions.putAll(Map.of(
                             XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE,
                             XMLResource.OPTION_RECORD_UNKNOWN_FEATURE, Boolean.TRUE));
+                    saveOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, Boolean.TRUE);
                 }
                 // perform main migration
                 Optional<Release> release = actualMigrator.getReleases().stream()
                         .filter(r -> r.getLabel().equals(modelVersion)).findFirst();
                 if (release.filter(r -> !r.isLastRelease()).isPresent()) {
-                    hasActuallyMigrated = performMigration(loadOptions, defaultSaveOptions, uri, desiredResult,
+                    hasActuallyMigrated = performMigration(loadOptions, saveOptions, uri, desiredResult,
                             actualMigrator, release.get(), false);
                 }
                 // then the extra namespace migrations
                 for (var entry : extraMigrators.entrySet()) {
                     var currentRelease = entry.getKey();
                     var extraMigrator = entry.getValue();
-                    hasActuallyMigrated = performMigration(loadOptions, defaultSaveOptions, uri,
+                    hasActuallyMigrated = performMigration(loadOptions, saveOptions, uri,
                             desiredResult,
                             extraMigrator, currentRelease,
                             hasActuallyMigrated && !desiredResult.doEraseResource());
@@ -523,8 +526,8 @@ public class MigrationHelper extends AdapterImpl {
     /**
      * Perform a migration with the migrator
      * 
-     * @param defaultLoadOptions the default options for loading the resource
-     * @param defaultSaveOptions the default options for saving the resource
+     * @param loadOptions the options for loading the resource
+     * @param saveOptions the options for saving the resource
      * @param uri resource uri
      * @param desiredResult the intended migration result
      * @param migrator the migrator to use
@@ -533,13 +536,11 @@ public class MigrationHelper extends AdapterImpl {
      * @return true when migration was successful
      * @throws MigrationException exception during migration
      */
-    private boolean performMigration(Map<?, ?> defaultLoadOptions, Map<?, ?> defaultSaveOptions, URI uri,
+    private boolean performMigration(Map<?, ?> loadOptions, Map<String, Object> saveOptions, URI uri,
             MigrationResult desiredResult, Migrator migrator, Release release, boolean reuseResource)
             throws MigrationException {
         migrator.setLevel(ValidationLevel.RELEASE);
         // handle load and save options
-        Map<String, Object> saveOptions = new HashMap<>();
-        defaultSaveOptions.forEach((k, v) -> saveOptions.put(k.toString(), v));
         IResourceSetFactory rsetFactory = () -> {
             ResourceSetImpl set;
             if (reuseResource) {
@@ -550,7 +551,7 @@ public class MigrationHelper extends AdapterImpl {
             } else {
                 set = new ResourceSetImpl();
             }
-            set.getLoadOptions().putAll(defaultLoadOptions);
+            set.getLoadOptions().putAll(loadOptions);
             set.getLoadOptions().remove(OPTION_MIGRATION_POLICY);
             return set;
         };
@@ -564,7 +565,7 @@ public class MigrationHelper extends AdapterImpl {
                 // migrate virtually only
                 ResourceSet resourceSet = migrator.migrateAndLoad(Collections.singletonList(uri), release, null,
                         new NullProgressMonitor());
-                resourceSet.getLoadOptions().putAll(defaultLoadOptions);
+                resourceSet.getLoadOptions().putAll(loadOptions);
                 resourceSet.getLoadOptions().remove(OPTION_MIGRATION_POLICY);
                 EList<EObject> contents = resourceSet.getResources().get(0).getContents();
                 getTarget().getContents().clear();

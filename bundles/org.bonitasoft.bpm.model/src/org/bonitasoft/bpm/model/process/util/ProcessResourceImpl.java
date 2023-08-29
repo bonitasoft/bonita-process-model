@@ -16,11 +16,15 @@ package org.bonitasoft.bpm.model.process.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiPredicate;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.bonitasoft.bpm.model.actormapping.ActorMappingPackage;
 import org.bonitasoft.bpm.model.process.util.migration.InputStreamSupplier;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationHelper;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
@@ -29,6 +33,9 @@ import org.bonitasoft.bpm.model.util.internal.DuplicatingInputStream;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.BasicExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.emf.edapt.migration.MigrationException;
@@ -87,6 +94,66 @@ public class ProcessResourceImpl extends XMIResourceImpl {
 
     /*
      * (non-Javadoc)
+     * @see org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl#doSave(java.io.OutputStream, java.util.Map)
+     */
+    @Override
+    public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
+        Map<Object, Object> overriddenOptions = getOverriddenOptions(options);
+        super.doSave(outputStream, overriddenOptions);
+    }
+
+    /**
+     * Overrides the options to not rely on extended metadata names
+     * 
+     * @param options original options
+     * @return overridden options
+     */
+    private Map<Object, Object> getOverriddenOptions(Map<?, ?> options) {
+        Map<Object, Object> overriddenOptions = new HashMap<>(options);
+        if (Boolean.TRUE.equals(options.get(XMLResource.OPTION_EXTENDED_META_DATA))) {
+            // we are with XMI and do not want to use the XSD-fashioned name...
+            Object extendedMetadataOption = new BasicExtendedMetaData(getResourceSet().getPackageRegistry()) {
+
+                private Optional<EPackageExtendedMetaData> actorMappingExt = Optional.empty();
+
+                /*
+                 * (non-Javadoc)
+                 * @see org.eclipse.emf.ecore.util.BasicExtendedMetaData#getExtendedMetaData(org.eclipse.emf.ecore.EPackage)
+                 */
+                @Override
+                protected EPackageExtendedMetaData getExtendedMetaData(EPackage ePackage) {
+                    String nsURI = ePackage.getNsURI();
+                    if (nsURI != null && nsURI.contains(ActorMappingPackage.eNS_PREFIX)) {
+                        // do not take statically initialized one
+                        if (actorMappingExt.isEmpty()) {
+                            actorMappingExt = Optional.of(createEPackageExtendedMetaData(ePackage));
+                        }
+                        return actorMappingExt.get();
+                    }
+                    return super.getExtendedMetaData(ePackage);
+                }
+
+                /*
+                 * (non-Javadoc)
+                 * @see org.eclipse.emf.ecore.util.BasicExtendedMetaData#getName(org.eclipse.emf.ecore.EClassifier)
+                 */
+                @Override
+                public String getName(EClassifier eClassifier) {
+                    String nsURI = eClassifier.getEPackage().getNsURI();
+                    if (nsURI != null && nsURI.contains(ActorMappingPackage.eNS_PREFIX)
+                            && !"DocumentRoot".equals(eClassifier.getName())) {
+                        return eClassifier.getName();
+                    }
+                    return super.getName(eClassifier);
+                }
+            };
+            overriddenOptions.put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadataOption);
+        }
+        return overriddenOptions;
+    }
+
+    /*
+     * (non-Javadoc)
      * @see org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl#doLoad(java.io.InputStream, java.util.Map)
      */
     @Override
@@ -99,29 +166,30 @@ public class ProcessResourceImpl extends XMIResourceImpl {
             }
         }
         // when loaded with extended metadata, use the same option value for saving... (save may occur during load migration)
-        Object extendedMetadataOption = options.get(XMLResource.OPTION_EXTENDED_META_DATA);
+        Map<Object, Object> overriddenOptions = getOverriddenOptions(options);
+        Object extendedMetadataOption = overriddenOptions.get(XMLResource.OPTION_EXTENDED_META_DATA);
         if (extendedMetadataOption != null) {
-            getDefaultSaveOptions().putIfAbsent(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadataOption);
+            getDefaultSaveOptions().put(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadataOption);
         }
         // migrate if needed
-        if (getURIConverter().exists(uri, options)) {
+        if (getURIConverter().exists(uri, overriddenOptions)) {
             // easier to just reopen the resource when we need it
-            InputStreamSupplier streamSupplier = () -> getURIConverter().createInputStream(uri, options);
-            MigrationResult result = checkMigration(streamSupplier, options);
+            InputStreamSupplier streamSupplier = () -> getURIConverter().createInputStream(uri, overriddenOptions);
+            MigrationResult result = checkMigration(streamSupplier, overriddenOptions);
             if (!MigrationResult.SOFT_MIGRATION.equals(result)) {
                 // then load (or reload) the model
-                super.doLoad(inputStream, options);
+                super.doLoad(inputStream, overriddenOptions);
             }
             // else, resource has already been updated
         } else {
             // probably a virtual resource, we must duplicate the stream...
             try (DuplicatingInputStream buffered = new DuplicatingInputStream(inputStream);) {
                 InputStreamSupplier streamSupplier = buffered::getNonClosingStreamCopy;
-                MigrationResult result = checkMigration(streamSupplier, options);
+                MigrationResult result = checkMigration(streamSupplier, overriddenOptions);
                 if (!MigrationResult.SOFT_MIGRATION.equals(result)) {
                     // then load (or reload) the model
                     try (InputStream streamForSuper = buffered.getClosingMasterStreamCopy();) {
-                        super.doLoad(streamForSuper, options);
+                        super.doLoad(streamForSuper, overriddenOptions);
                     }
                 }
                 // else, resource has already been updated
