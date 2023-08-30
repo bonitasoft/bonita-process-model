@@ -24,16 +24,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.bonitasoft.bonita2bar.configuration.model.Parameter;
 import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
 import org.bonitasoft.bonita2bar.configuration.model.ProcessConfiguration;
+import org.bonitasoft.bpm.model.util.FileUtil;
 import org.bonitasoft.engine.bpm.bar.ParameterContribution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -155,13 +154,7 @@ public class ParametersConfigurationMerger {
 
         Files.deleteIfExists(configurationArchiveFile.toPath());
         ZipUtil.zip(tmpFolder, configurationArchiveFile.toPath());
-        deleteDir(tmpFolder);
-    }
-
-    private static void deleteDir(Path directory) throws IOException {
-        try (Stream<Path> pathStream = Files.walk(directory)) {
-            pathStream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
-        }
+        FileUtil.deleteDir(tmpFolder);
     }
 
 }

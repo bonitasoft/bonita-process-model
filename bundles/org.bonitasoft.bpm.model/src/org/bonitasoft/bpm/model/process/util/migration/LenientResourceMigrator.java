@@ -104,6 +104,10 @@ public class LenientResourceMigrator extends Migrator {
     public void migrateAndSave(List<URI> modelURIs, Release sourceRelease, Release targetRelease,
             IProgressMonitor monitor, Map<String, Object> options) throws MigrationException {
         ResourceSet resourceSet = migrateAndLoad(modelURIs, sourceRelease, targetRelease, monitor);
+        if (resourceSet == null) {
+            throw new MigrationException(modelURIs.get(0), "Migration failed. A prior error should be logged.",
+                    new NullPointerException());
+        }
         try {
             if (resourceSet.getResources().size() > 1) {
                 resourceSet.getResources().removeIf(r -> !modelURIs.contains(r.getURI()));
@@ -134,7 +138,8 @@ public class LenientResourceMigrator extends Migrator {
             IProgressMonitor monitor) throws MigrationException {
         final Model model = doMigrate(modelURIs, sourceRelease, targetRelease, monitor);
         if (model == null) {
-            return null;
+            throw new MigrationException(modelURIs.get(0), "Migration failed. A prior error should be logged.",
+                    new NullPointerException());
         }
         final MaterializingBackwardConverter converter = new CustomMaterializingBackwardConverter();
         return converter.convert(model);

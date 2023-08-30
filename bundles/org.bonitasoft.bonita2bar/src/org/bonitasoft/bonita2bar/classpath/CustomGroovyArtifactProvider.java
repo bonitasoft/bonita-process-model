@@ -23,12 +23,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.bonitasoft.bonita2bar.BarArtifactProvider;
 import org.bonitasoft.bonita2bar.BuildBarException;
@@ -37,6 +35,7 @@ import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.util.EnvironmentUtil;
+import org.bonitasoft.bpm.model.util.FileUtil;
 import org.bonitasoft.bpm.model.util.FragmentTypes;
 import org.bonitasoft.bpm.model.util.IModelSearch;
 import org.bonitasoft.bpm.model.util.ModelSearch;
@@ -86,7 +85,7 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
         var targetClasses = workingDirectory.resolve("groovy-classes");
         if (Files.exists(targetClasses)) {
             try {
-                deleteDir(targetClasses);
+                FileUtil.deleteDir(targetClasses);
             } catch (IOException e) {
                 throw new BuildBarException(String.format("Failed to delete folder %s", targetClasses), e);
             }
@@ -183,11 +182,5 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
                     LOGGER.warn("{} not found with name in src-groovy", groovySourceFile.getName());
                     return null;
                 }).filter(Objects::nonNull).collect(Collectors.toSet());
-    }
-
-    private static void deleteDir(Path directory) throws IOException {
-        try (Stream<Path> pathStream = Files.walk(directory)) {
-            pathStream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
-        }
     }
 }

@@ -18,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 
 import org.bonitasoft.bpm.connector.model.ConnectorModelRegistration;
@@ -35,13 +36,13 @@ class MigrationIT {
     void migrateConfigurationInProc() throws Exception {
         // first copy source file to avoid corrupting it
         File file = new File(MigrationIT.class.getResource("/ProcessWithConfigurations-1.0.proc").getFile());
-        File copy = file.createTempFile("ProcessWithConfigurations-1.0", ".proc");
-        Files.copy(file.toPath(), copy.toPath(), StandardCopyOption.REPLACE_EXISTING);
+        Path copy = Files.createTempFile("ProcessWithConfigurations-1.0", ".proc");
+        Files.copy(file.toPath(), copy, StandardCopyOption.REPLACE_EXISTING);
 
         var resource = ModelLoader.create()
                 .withPrerequisite(Prerequisite.fromRunnableWhenNotInOSGi(ConnectorModelRegistration.REGISTER))
                 .withPrerequisite(Prerequisite.fromRunnableWhenNotInOSGi(NotationPackage.eINSTANCE::getNsURI))
-                .loadModel(URI.createFileURI(copy.getAbsolutePath()));
+                .loadModel(URI.createFileURI(copy.toFile().getAbsolutePath()));
 
         MainProcess mainProcess = (MainProcess) resource.getContents().get(0);
         Pool pool = (Pool) mainProcess.getElements().get(0);

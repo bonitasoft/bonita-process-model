@@ -100,45 +100,6 @@ public final class ModelLoader {
 
     }
 
-    /**
-     * Creates model loaders, usefull for loading a model in a non-OSGi environment.
-     * 
-     * @author Vincent Hemery
-     */
-    public static class Factory {
-
-        /** Lazy singleton holder */
-        private static class LazyHolder {
-
-            /** singleton instance */
-            static final Factory INSTANCE = new Factory();
-        }
-
-        /**
-         * Default Constructor. Initializes everything to work without extension points.
-         */
-        private Factory() {
-        }
-
-        /**
-         * Get singleton instance
-         * 
-         * @return model loader factory
-         */
-        public static Factory getInstance() {
-            return LazyHolder.INSTANCE;
-        }
-
-        /**
-         * Create a new model loader with default configuration
-         * 
-         * @return model loader
-         */
-        public ModelLoader create() {
-            return new ModelLoader();
-        }
-    }
-
     private static final Prerequisite[] DEFAULT_PREREQUISITE = new Prerequisite[] {
             // registration of history is necessary when we migrate a model not using HistoryUtils
             HistoryUtils.REGISTRATION,
@@ -176,7 +137,7 @@ public final class ModelLoader {
      * @return model loader
      */
     public static ModelLoader create() {
-        return Factory.getInstance().create();
+        return new ModelLoader();
     }
 
     private Map<String, Object> loadOptions = new HashMap<>();

@@ -14,15 +14,12 @@
  */
 package org.bonitasoft.bpm.model;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.Comparator;
-import java.util.stream.Stream;
 
 public class FileUtil {
 
@@ -46,8 +43,6 @@ public class FileUtil {
     }
 
     public static void deleteDir(Path directory) throws IOException {
-        try (Stream<Path> pathStream = Files.walk(directory)) {
-            pathStream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
-        }
+        org.bonitasoft.bpm.model.util.FileUtil.deleteDir(directory);
     }
 }

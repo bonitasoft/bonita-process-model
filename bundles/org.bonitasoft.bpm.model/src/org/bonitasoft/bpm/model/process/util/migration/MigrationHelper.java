@@ -14,7 +14,6 @@
  */
 package org.bonitasoft.bpm.model.process.util.migration;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -37,6 +36,7 @@ import org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPac
 import org.bonitasoft.bpm.model.process.Messages;
 import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.process.util.ProcessResourceImpl;
+import org.bonitasoft.bpm.model.util.FileUtil;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
@@ -288,18 +288,19 @@ public class MigrationHelper extends AdapterImpl {
         protected void demandLoad(Resource resource) throws IOException {
             URI uri = resource.getURI();
             if (uri.equals(getTarget().getURI())) {
-                String fileExt = "." + uri.fileExtension();
-                String fileName = uri.lastSegment().replace(fileExt, "");
-                File temp = File.createTempFile(fileName, fileExt);
-                try (var out = new FileOutputStream(temp)) {
-                    getTarget().save(out, saveOptions);
-                } catch (IOException e) {
-                    handleDemandLoadException(resource, e);
-                    return;
-                }
-                try (var in = new FileInputStream(temp)) {
-                    resource.load(in, getLoadOptions());
-                }
+
+                FileUtil.withTempFile(uri.lastSegment(), path -> {
+                    var temp = path.toFile();
+                    try (var out = new FileOutputStream(temp)) {
+                        getTarget().save(out, saveOptions);
+                    } catch (IOException e) {
+                        handleDemandLoadException(resource, e);
+                        return;
+                    }
+                    try (var in = new FileInputStream(temp)) {
+                        resource.load(in, getLoadOptions());
+                    }
+                });
             } else {
                 super.demandLoad(resource);
             }
@@ -453,17 +454,17 @@ public class MigrationHelper extends AdapterImpl {
             String name = uri.lastSegment();
             // ask migration policy what to do
             MigrationResult desiredResult = migrationPolicy.decideMigration(modelVersionStatus, name, isReadOnly);
+            boolean hasActuallyMigrated = false;
             if (desiredResult.doMigrate()) {
                 String modelVersion = getModelVersion();
                 String nsUri = getNsURI();
-                boolean hasActuallyMigrated = false;
                 // main migration
                 Migrator actualMigrator = getMigrator(nsUri);
                 // other namespaces may also contain a migration
                 Map<Release, Migrator> extraMigrators = collectExtraMigrators(actualMigrator);
                 Map<Object, Object> loadOptions = new HashMap<>(defaultLoadOptions);
                 Map<String, Object> saveOptions = new HashMap<>();
-                saveOptions.forEach((k, v) -> saveOptions.put(k.toString(), v));
+                defaultSaveOptions.forEach((k, v) -> saveOptions.put(k.toString(), v));
                 if (!extraMigrators.isEmpty()) {
                     // the main migration will encounter some old (hence unknown) metamodels, we must be enable partial load
                     loadOptions.putAll(Map.of(
@@ -487,9 +488,9 @@ public class MigrationHelper extends AdapterImpl {
                             extraMigrator, currentRelease,
                             hasActuallyMigrated && !desiredResult.doEraseResource());
                 }
-                if (hasActuallyMigrated) {
-                    return desiredResult;
-                }
+            }
+            if (hasActuallyMigrated) {
+                return desiredResult;
             }
         }
         return MigrationResult.NO_MIGRATION;
