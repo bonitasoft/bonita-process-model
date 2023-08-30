@@ -14,10 +14,11 @@
  */
 package org.bonitasoft.bpm.model.process.util.migration;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -45,7 +46,6 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -286,21 +286,19 @@ public class MigrationHelper extends AdapterImpl {
          */
         @Override
         protected void demandLoad(Resource resource) throws IOException {
-            if (resource.getURI().equals(getTarget().getURI())) {
-                try (PipedInputStream in = new PipedInputStream();) {
-                    Thread save = new Thread(() -> {
-                        try (PipedOutputStream out = new PipedOutputStream(in);) {
-                            getTarget().save(out, saveOptions);
-                        } catch (IOException e) {
-                            handleDemandLoadException(resource, e);
-                        }
-                    });
-                    save.start();
+            URI uri = resource.getURI();
+            if (uri.equals(getTarget().getURI())) {
+                String fileExt = "." + uri.fileExtension();
+                String fileName = uri.lastSegment().replace(fileExt, "");
+                File temp = File.createTempFile(fileName, fileExt);
+                try (var out = new FileOutputStream(temp)) {
+                    getTarget().save(out, saveOptions);
+                } catch (IOException e) {
+                    handleDemandLoadException(resource, e);
+                    return;
+                }
+                try (var in = new FileInputStream(temp)) {
                     resource.load(in, getLoadOptions());
-                    // make sure the save thread has ended to avoid a Pipe closed exception (after EOF?)
-                    save.join();
-                } catch (InterruptedException e) {
-                    EcorePlugin.INSTANCE.log(e);
                 }
             } else {
                 super.demandLoad(resource);

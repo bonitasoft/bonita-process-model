@@ -194,6 +194,11 @@ public class ProcessResourceImpl extends XMIResourceImpl {
                 }
                 // else, resource has already been updated
             }
+            /*
+             * Closing early may close the pipe...
+             * That's a risk we assume and that has a workaround in
+             * ResourceSetLoadingFromTarget.demandLoad(Resource)
+             */
         }
     }
 
