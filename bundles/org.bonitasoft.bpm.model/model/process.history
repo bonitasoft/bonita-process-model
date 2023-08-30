@@ -10765,9 +10765,9 @@
         <element href="form.ecore#//Widget/returnTypeModifier"/>
       </changes>
     </changes>
-      <changes xsi:type="history:Set" xmi:id="_15DvJWnREeaTLbmqFFisdA" featureName="defaultValueLiteral" dataValue="Up" oldDataValue="0">
-        <element href="form.ecore#//Widget/labelPosition"/>
-      </changes>
+    <changes xsi:type="history:Set" xmi:id="_15DvJWnREeaTLbmqFFisdA" featureName="defaultValueLiteral" dataValue="Up" oldDataValue="0">
+      <element href="form.ecore#//Widget/labelPosition"/>
+    </changes>
     <changes xsi:type="history:CompositeChange" xmi:id="_15DvJmnREeaTLbmqFFisdA">
       <changes xsi:type="history:Set" xmi:id="_15DvJ2nREeaTLbmqFFisdA" featureName="lowerBound" dataValue="0" oldDataValue="1">
         <element href="ActorMapping.ecore#//Users/user"/>
@@ -10898,39 +10898,39 @@
     <changes xsi:type="history:MigrationChange" xmi:id="_15EWS2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.expression.PatternExpressionMigration"/>
   </releases>
   <releases xmi:id="_15E9QGnREeaTLbmqFFisdA" date="2013-04-22T11:30:12.379+0200" label="6.0.0-ga-003">
-      <changes xsi:type="history:OperationChange" xmi:id="_15E9QmnREeaTLbmqFFisdA">
-        <changes xsi:type="history:Create" xmi:id="_15E9Q2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures" element="_yc75gixOEe68VI8bFfHDew">
-          <target href="process.ecore#//MainProcess"/>
-          <changes xsi:type="history:Set" xmi:id="_15E9RGnREeaTLbmqFFisdA" element="_yc75gixOEe68VI8bFfHDew" featureName="name" dataValue="configId"/>
-          <changes xsi:type="history:Set" xmi:id="_15E9RWnREeaTLbmqFFisdA" element="_yc75gixOEe68VI8bFfHDew" featureName="eType">
-            <referenceValue href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-          </changes>
+    <changes xsi:type="history:OperationChange" xmi:id="_15E9QmnREeaTLbmqFFisdA">
+      <changes xsi:type="history:Create" xmi:id="_15E9Q2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures" element="_yc75gixOEe68VI8bFfHDew">
+        <target href="process.ecore#//MainProcess"/>
+        <changes xsi:type="history:Set" xmi:id="_15E9RGnREeaTLbmqFFisdA" element="_yc75gixOEe68VI8bFfHDew" featureName="name" dataValue="configId"/>
+        <changes xsi:type="history:Set" xmi:id="_15E9RWnREeaTLbmqFFisdA" element="_yc75gixOEe68VI8bFfHDew" featureName="eType">
+          <referenceValue href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </changes>
-        <operation xmi:id="_15E9RmnREeaTLbmqFFisdA" name="newAttribute">
-          <parameters xmi:id="_15E9R2nREeaTLbmqFFisdA" name="eClass">
-            <referenceValue xmi:id="_15E9SGnREeaTLbmqFFisdA">
-              <element href="process.ecore#//MainProcess"/>
-            </referenceValue>
-          </parameters>
-          <parameters xmi:id="_15E9SWnREeaTLbmqFFisdA" name="name">
-            <dataValue>configId</dataValue>
-          </parameters>
-          <parameters xmi:id="_15E9SmnREeaTLbmqFFisdA" name="type">
-            <referenceValue xmi:id="_15E9S2nREeaTLbmqFFisdA">
-              <element href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
-            </referenceValue>
-          </parameters>
-          <parameters xmi:id="_15E9TGnREeaTLbmqFFisdA" name="lowerBound">
-            <dataValue>0</dataValue>
-          </parameters>
-          <parameters xmi:id="_15E9TWnREeaTLbmqFFisdA" name="upperBound">
-            <dataValue>1</dataValue>
-          </parameters>
-          <parameters xmi:id="_15E9TmnREeaTLbmqFFisdA" name="defaultValue">
-            <dataValue xsi:nil="true"/>
-          </parameters>
-        </operation>
       </changes>
+      <operation xmi:id="_15E9RmnREeaTLbmqFFisdA" name="newAttribute">
+        <parameters xmi:id="_15E9R2nREeaTLbmqFFisdA" name="eClass">
+          <referenceValue xmi:id="_15E9SGnREeaTLbmqFFisdA">
+            <element href="process.ecore#//MainProcess"/>
+          </referenceValue>
+        </parameters>
+        <parameters xmi:id="_15E9SWnREeaTLbmqFFisdA" name="name">
+          <dataValue>configId</dataValue>
+        </parameters>
+        <parameters xmi:id="_15E9SmnREeaTLbmqFFisdA" name="type">
+          <referenceValue xmi:id="_15E9S2nREeaTLbmqFFisdA">
+            <element href="http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+          </referenceValue>
+        </parameters>
+        <parameters xmi:id="_15E9TGnREeaTLbmqFFisdA" name="lowerBound">
+          <dataValue>0</dataValue>
+        </parameters>
+        <parameters xmi:id="_15E9TWnREeaTLbmqFFisdA" name="upperBound">
+          <dataValue>1</dataValue>
+        </parameters>
+        <parameters xmi:id="_15E9TmnREeaTLbmqFFisdA" name="defaultValue">
+          <dataValue xsi:nil="true"/>
+        </parameters>
+      </operation>
+    </changes>
     <changes xsi:type="history:MigrationChange" xmi:id="_15E9T2nREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.DeadlineToNonInterruptingEventMigration">
       <changes xsi:type="history:OperationChange" xmi:id="_15E9UGnREeaTLbmqFFisdA">
         <changes xsi:type="history:Create" xmi:id="_15E9UWnREeaTLbmqFFisdA" referenceName="eClassifiers">
@@ -11414,141 +11414,141 @@
     </changes>
   </releases>
   <releases xmi:id="_15GykGnREeaTLbmqFFisdA" date="2014-03-31T13:36:39.611+0200" label="6.3.0-002">
-      <changes xsi:type="history:OperationChange" xmi:id="_15GykmnREeaTLbmqFFisdA">
-        <changes xsi:type="history:Delete" xmi:id="_15Gyk2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
-          <target href="form.ecore#//Group"/>
-          <element xsi:type="ecore:EAttribute" xmi:id="_15GylGnREeaTLbmqFFisdA" name="iteratorName">
-            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-          </element>
-        </changes>
-        <operation xmi:id="_15GylmnREeaTLbmqFFisdA" name="deleteFeature2">
-          <parameters xmi:id="_15Gyl2nREeaTLbmqFFisdA" name="feature">
-            <referenceValue xmi:id="_15GymGnREeaTLbmqFFisdA" element="_15GylGnREeaTLbmqFFisdA"/>
-          </parameters>
-        </operation>
+    <changes xsi:type="history:OperationChange" xmi:id="_15GykmnREeaTLbmqFFisdA">
+      <changes xsi:type="history:Delete" xmi:id="_15Gyk2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
+        <target href="form.ecore#//Group"/>
+        <element xsi:type="ecore:EAttribute" xmi:id="_15GylGnREeaTLbmqFFisdA" name="iteratorName">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </element>
       </changes>
-      <changes xsi:type="history:OperationChange" xmi:id="_15GymWnREeaTLbmqFFisdA">
-        <changes xsi:type="history:Delete" xmi:id="_15GymmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
-          <target href="form.ecore#//Group"/>
-          <element xsi:type="ecore:EAttribute" xmi:id="_15Gym2nREeaTLbmqFFisdA" name="iteratorClassName">
-            <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-          </element>
-        </changes>
-        <operation xmi:id="_15GynWnREeaTLbmqFFisdA" name="deleteFeature2">
-          <parameters xmi:id="_15GynmnREeaTLbmqFFisdA" name="feature">
-            <referenceValue xmi:id="_15Gyn2nREeaTLbmqFFisdA" element="_15Gym2nREeaTLbmqFFisdA"/>
-          </parameters>
-        </operation>
+      <operation xmi:id="_15GylmnREeaTLbmqFFisdA" name="deleteFeature2">
+        <parameters xmi:id="_15Gyl2nREeaTLbmqFFisdA" name="feature">
+          <referenceValue xmi:id="_15GymGnREeaTLbmqFFisdA" element="_15GylGnREeaTLbmqFFisdA"/>
+        </parameters>
+      </operation>
+    </changes>
+    <changes xsi:type="history:OperationChange" xmi:id="_15GymWnREeaTLbmqFFisdA">
+      <changes xsi:type="history:Delete" xmi:id="_15GymmnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
+        <target href="form.ecore#//Group"/>
+        <element xsi:type="ecore:EAttribute" xmi:id="_15Gym2nREeaTLbmqFFisdA" name="iteratorClassName">
+          <eType xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </element>
       </changes>
-      <changes xsi:type="history:OperationChange" xmi:id="_15GyoGnREeaTLbmqFFisdA">
-        <changes xsi:type="history:Create" xmi:id="_15GyoWnREeaTLbmqFFisdA" referenceName="eClassifiers">
-          <target href="form.ecore#/"/>
+      <operation xmi:id="_15GynWnREeaTLbmqFFisdA" name="deleteFeature2">
+        <parameters xmi:id="_15GynmnREeaTLbmqFFisdA" name="feature">
+          <referenceValue xmi:id="_15Gyn2nREeaTLbmqFFisdA" element="_15Gym2nREeaTLbmqFFisdA"/>
+        </parameters>
+      </operation>
+    </changes>
+    <changes xsi:type="history:OperationChange" xmi:id="_15GyoGnREeaTLbmqFFisdA">
+      <changes xsi:type="history:Create" xmi:id="_15GyoWnREeaTLbmqFFisdA" referenceName="eClassifiers">
+        <target href="form.ecore#/"/>
+        <element href="form.ecore#//GroupIterator"/>
+        <changes xsi:type="history:Set" xmi:id="_15HZgGnREeaTLbmqFFisdA" featureName="name" dataValue="GroupIterator">
           <element href="form.ecore#//GroupIterator"/>
-          <changes xsi:type="history:Set" xmi:id="_15HZgGnREeaTLbmqFFisdA" featureName="name" dataValue="GroupIterator">
-            <element href="form.ecore#//GroupIterator"/>
-          </changes>
-          <changes xsi:type="history:Add" xmi:id="_15HZgWnREeaTLbmqFFisdA" featureName="eSuperTypes">
-            <element href="form.ecore#//GroupIterator"/>
-            <referenceValue href="process.ecore#//Element"/>
-          </changes>
         </changes>
-        <operation xmi:id="_15HZgmnREeaTLbmqFFisdA" name="newClass">
-          <parameters xmi:id="_15HZg2nREeaTLbmqFFisdA" name="ePackage">
-            <referenceValue xmi:id="_15HZhGnREeaTLbmqFFisdA">
-              <element href="form.ecore#/"/>
-            </referenceValue>
-          </parameters>
-          <parameters xmi:id="_15HZhWnREeaTLbmqFFisdA" name="name">
-            <dataValue>GroupIterator</dataValue>
-          </parameters>
-          <parameters xmi:id="_15HZhmnREeaTLbmqFFisdA" name="superClasses">
-            <referenceValue xmi:id="_15HZh2nREeaTLbmqFFisdA">
-              <element href="process.ecore#//Element"/>
-            </referenceValue>
-          </parameters>
-          <parameters xmi:id="_15HZiGnREeaTLbmqFFisdA" name="abstr">
-            <dataValue>false</dataValue>
-          </parameters>
-        </operation>
+        <changes xsi:type="history:Add" xmi:id="_15HZgWnREeaTLbmqFFisdA" featureName="eSuperTypes">
+          <element href="form.ecore#//GroupIterator"/>
+          <referenceValue href="process.ecore#//Element"/>
+        </changes>
       </changes>
-      <changes xsi:type="history:OperationChange" xmi:id="_15HZiWnREeaTLbmqFFisdA">
-        <changes xsi:type="history:Create" xmi:id="_15HZimnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
-          <target href="form.ecore#//GroupIterator"/>
+      <operation xmi:id="_15HZgmnREeaTLbmqFFisdA" name="newClass">
+        <parameters xmi:id="_15HZg2nREeaTLbmqFFisdA" name="ePackage">
+          <referenceValue xmi:id="_15HZhGnREeaTLbmqFFisdA">
+            <element href="form.ecore#/"/>
+          </referenceValue>
+        </parameters>
+        <parameters xmi:id="_15HZhWnREeaTLbmqFFisdA" name="name">
+          <dataValue>GroupIterator</dataValue>
+        </parameters>
+        <parameters xmi:id="_15HZhmnREeaTLbmqFFisdA" name="superClasses">
+          <referenceValue xmi:id="_15HZh2nREeaTLbmqFFisdA">
+            <element href="process.ecore#//Element"/>
+          </referenceValue>
+        </parameters>
+        <parameters xmi:id="_15HZiGnREeaTLbmqFFisdA" name="abstr">
+          <dataValue>false</dataValue>
+        </parameters>
+      </operation>
+    </changes>
+    <changes xsi:type="history:OperationChange" xmi:id="_15HZiWnREeaTLbmqFFisdA">
+      <changes xsi:type="history:Create" xmi:id="_15HZimnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
+        <target href="form.ecore#//GroupIterator"/>
+        <element href="form.ecore#//GroupIterator/className"/>
+        <changes xsi:type="history:Set" xmi:id="_15HZi2nREeaTLbmqFFisdA" featureName="name" dataValue="className">
           <element href="form.ecore#//GroupIterator/className"/>
-          <changes xsi:type="history:Set" xmi:id="_15HZi2nREeaTLbmqFFisdA" featureName="name" dataValue="className">
-            <element href="form.ecore#//GroupIterator/className"/>
-          </changes>
-          <changes xsi:type="history:Set" xmi:id="_15HZjGnREeaTLbmqFFisdA" featureName="eType">
-            <element href="form.ecore#//GroupIterator/className"/>
-            <referenceValue href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-          </changes>
         </changes>
-        <operation xmi:id="_15HZjWnREeaTLbmqFFisdA" name="newAttribute">
-          <parameters xmi:id="_15HZjmnREeaTLbmqFFisdA" name="eClass">
-            <referenceValue xmi:id="_15HZj2nREeaTLbmqFFisdA">
-              <element href="form.ecore#//GroupIterator"/>
-            </referenceValue>
-          </parameters>
-          <parameters xmi:id="_15HZkGnREeaTLbmqFFisdA" name="name">
-            <dataValue>className</dataValue>
-          </parameters>
-          <parameters xmi:id="_15HZkWnREeaTLbmqFFisdA" name="type">
-            <referenceValue xmi:id="_15HZkmnREeaTLbmqFFisdA">
-              <element href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-            </referenceValue>
-          </parameters>
-          <parameters xmi:id="_15HZk2nREeaTLbmqFFisdA" name="lowerBound">
-            <dataValue>0</dataValue>
-          </parameters>
-          <parameters xmi:id="_15HZlGnREeaTLbmqFFisdA" name="upperBound">
-            <dataValue>1</dataValue>
-          </parameters>
-          <parameters xmi:id="_15HZlWnREeaTLbmqFFisdA" name="defaultValue">
-            <dataValue xsi:nil="true"/>
-          </parameters>
-        </operation>
+        <changes xsi:type="history:Set" xmi:id="_15HZjGnREeaTLbmqFFisdA" featureName="eType">
+          <element href="form.ecore#//GroupIterator/className"/>
+          <referenceValue href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        </changes>
       </changes>
-      <changes xsi:type="history:OperationChange" xmi:id="_15HZlmnREeaTLbmqFFisdA">
-        <changes xsi:type="history:Create" xmi:id="_15HZl2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
-          <target href="form.ecore#//Group"/>
+      <operation xmi:id="_15HZjWnREeaTLbmqFFisdA" name="newAttribute">
+        <parameters xmi:id="_15HZjmnREeaTLbmqFFisdA" name="eClass">
+          <referenceValue xmi:id="_15HZj2nREeaTLbmqFFisdA">
+            <element href="form.ecore#//GroupIterator"/>
+          </referenceValue>
+        </parameters>
+        <parameters xmi:id="_15HZkGnREeaTLbmqFFisdA" name="name">
+          <dataValue>className</dataValue>
+        </parameters>
+        <parameters xmi:id="_15HZkWnREeaTLbmqFFisdA" name="type">
+          <referenceValue xmi:id="_15HZkmnREeaTLbmqFFisdA">
+            <element href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+          </referenceValue>
+        </parameters>
+        <parameters xmi:id="_15HZk2nREeaTLbmqFFisdA" name="lowerBound">
+          <dataValue>0</dataValue>
+        </parameters>
+        <parameters xmi:id="_15HZlGnREeaTLbmqFFisdA" name="upperBound">
+          <dataValue>1</dataValue>
+        </parameters>
+        <parameters xmi:id="_15HZlWnREeaTLbmqFFisdA" name="defaultValue">
+          <dataValue xsi:nil="true"/>
+        </parameters>
+      </operation>
+    </changes>
+    <changes xsi:type="history:OperationChange" xmi:id="_15HZlmnREeaTLbmqFFisdA">
+      <changes xsi:type="history:Create" xmi:id="_15HZl2nREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
+        <target href="form.ecore#//Group"/>
+        <element href="form.ecore#//Group/iterator"/>
+        <changes xsi:type="history:Set" xmi:id="_15HZmGnREeaTLbmqFFisdA" featureName="name" dataValue="iterator">
           <element href="form.ecore#//Group/iterator"/>
-          <changes xsi:type="history:Set" xmi:id="_15HZmGnREeaTLbmqFFisdA" featureName="name" dataValue="iterator">
-            <element href="form.ecore#//Group/iterator"/>
-          </changes>
-          <changes xsi:type="history:Set" xmi:id="_15HZmWnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false">
-            <element href="form.ecore#//Group/iterator"/>
-          </changes>
-          <changes xsi:type="history:Set" xmi:id="_15HZmmnREeaTLbmqFFisdA" featureName="eType">
-            <element href="form.ecore#//Group/iterator"/>
-            <referenceValue href="form.ecore#//GroupIterator"/>
-          </changes>
         </changes>
-        <operation xmi:id="_15HZm2nREeaTLbmqFFisdA" name="newReference">
-          <parameters xmi:id="_15HZnGnREeaTLbmqFFisdA" name="eClass">
-            <referenceValue xmi:id="_15HZnWnREeaTLbmqFFisdA">
-              <element href="form.ecore#//Group"/>
-            </referenceValue>
-          </parameters>
-          <parameters xmi:id="_15HZnmnREeaTLbmqFFisdA" name="name">
-            <dataValue>iterator</dataValue>
-          </parameters>
-          <parameters xmi:id="_15HZn2nREeaTLbmqFFisdA" name="type">
-            <referenceValue xmi:id="_15HZoGnREeaTLbmqFFisdA">
-              <element href="form.ecore#//GroupIterator"/>
-            </referenceValue>
-          </parameters>
-          <parameters xmi:id="_15HZoWnREeaTLbmqFFisdA" name="lowerBound">
-            <dataValue>0</dataValue>
-          </parameters>
-          <parameters xmi:id="_15HZomnREeaTLbmqFFisdA" name="upperBound">
-            <dataValue>1</dataValue>
-          </parameters>
-          <parameters xmi:id="_15HZo2nREeaTLbmqFFisdA" name="containment">
-            <dataValue>true</dataValue>
-          </parameters>
-          <parameters xmi:id="_15HZpGnREeaTLbmqFFisdA" name="opposite"/>
-        </operation>
+        <changes xsi:type="history:Set" xmi:id="_15HZmWnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false">
+          <element href="form.ecore#//Group/iterator"/>
+        </changes>
+        <changes xsi:type="history:Set" xmi:id="_15HZmmnREeaTLbmqFFisdA" featureName="eType">
+          <element href="form.ecore#//Group/iterator"/>
+          <referenceValue href="form.ecore#//GroupIterator"/>
+        </changes>
       </changes>
+      <operation xmi:id="_15HZm2nREeaTLbmqFFisdA" name="newReference">
+        <parameters xmi:id="_15HZnGnREeaTLbmqFFisdA" name="eClass">
+          <referenceValue xmi:id="_15HZnWnREeaTLbmqFFisdA">
+            <element href="form.ecore#//Group"/>
+          </referenceValue>
+        </parameters>
+        <parameters xmi:id="_15HZnmnREeaTLbmqFFisdA" name="name">
+          <dataValue>iterator</dataValue>
+        </parameters>
+        <parameters xmi:id="_15HZn2nREeaTLbmqFFisdA" name="type">
+          <referenceValue xmi:id="_15HZoGnREeaTLbmqFFisdA">
+            <element href="form.ecore#//GroupIterator"/>
+          </referenceValue>
+        </parameters>
+        <parameters xmi:id="_15HZoWnREeaTLbmqFFisdA" name="lowerBound">
+          <dataValue>0</dataValue>
+        </parameters>
+        <parameters xmi:id="_15HZomnREeaTLbmqFFisdA" name="upperBound">
+          <dataValue>1</dataValue>
+        </parameters>
+        <parameters xmi:id="_15HZo2nREeaTLbmqFFisdA" name="containment">
+          <dataValue>true</dataValue>
+        </parameters>
+        <parameters xmi:id="_15HZpGnREeaTLbmqFFisdA" name="opposite"/>
+      </operation>
+    </changes>
   </releases>
   <releases xmi:id="_15HZpWnREeaTLbmqFFisdA" date="2014-05-12T13:36:39.611+0200" label="6.3.1-001">
     <changes xsi:type="history:MigrationChange" xmi:id="_15HZpmnREeaTLbmqFFisdA" migration="org.bonitasoft.bpm.migration.custom.migration.expression.CleanReferenceMigration"/>
@@ -15174,6 +15174,9 @@
     </changes>
     <changes xsi:type="history:Set" xmi:id="_ln2BMF6cEe2-2NKBMlb2Tw" featureName="nsURI" dataValue="http://www.bonitasoft.org/ns/bpm/parameter" oldDataValue="http://www.bonitasoft.org/ns/studio/parameter">
       <element href="parameter.ecore#/"/>
+    </changes>
+    <changes xsi:type="history:Set" xmi:id="_uSYiwEW3Ee6US5JvmbFnXA" featureName="nsURI" dataValue="http://www.bonitasoft.org/model/connector/configuration" oldDataValue="http://wwww.bonitasoft.org/model/connector/configuration">
+      <element href="connector-configuration.ecore#/"/>
     </changes>
     <changes xsi:type="history:Move" xmi:id="__WTvQG8KEe2Gisyj-XM1Fw" referenceName="eClassifiers" source="__6VCUW8KEe2Gisyj-XM1Fw">
       <target href="transitions.ecore#/"/>

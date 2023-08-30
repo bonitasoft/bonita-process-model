@@ -53,7 +53,7 @@ public interface ConnectorConfigurationPackage extends EPackage {
      * <!-- end-user-doc -->
      * @generated
      */
-    String eNS_URI = "http://wwww.bonitasoft.org/model/connector/configuration"; //$NON-NLS-1$
+    String eNS_URI = "http://www.bonitasoft.org/model/connector/configuration"; //$NON-NLS-1$
 
     /**
      * The package namespace name.

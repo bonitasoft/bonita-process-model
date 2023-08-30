@@ -54,7 +54,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated process -->
       <package
-            uri="http://wwww.bonitasoft.org/model/connector/configuration"
+            uri="http://www.bonitasoft.org/model/connector/configuration"
             class="org.bonitasoft.bpm.model.connectorconfiguration.ConnectorConfigurationPackage"
             genModel="model/process.genmodel"/>
    </extension>
