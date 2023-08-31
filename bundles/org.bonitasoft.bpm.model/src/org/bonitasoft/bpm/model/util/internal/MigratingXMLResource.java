@@ -28,6 +28,7 @@ import org.bonitasoft.bpm.model.process.util.migration.MigrationResult;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMLResourceImpl;
 import org.eclipse.emf.edapt.migration.MigrationException;
 import org.xml.sax.SAXException;
@@ -88,6 +89,11 @@ public class MigratingXMLResource extends XMLResourceImpl {
                 setMigrationPolicy((MigrationPolicy) optionValue);
             }
         }
+        // when loaded with extended metadata, use the same option value for saving... (save may occur during load migration)
+        Object extendedMetadataOption = options.get(XMLResource.OPTION_EXTENDED_META_DATA);
+        if (extendedMetadataOption != null) {
+            getDefaultSaveOptions().putIfAbsent(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadataOption);
+        }
         // migrate if needed
         if (getURIConverter().exists(uri, options)) {
             // easier to just reopen the resource when we need it
@@ -126,7 +132,7 @@ public class MigratingXMLResource extends XMLResourceImpl {
         try {
             MigrationHelper migration = MigrationHelper.getHelper(this, streamSupplier);
             if (migration.getModelVersionStatus().getSeverity() == IStatus.WARNING) {
-                return migration.tryAndMigrate(migrationPolicy);
+                return migration.tryAndMigrate(migrationPolicy, options, getDefaultSaveOptions());
             }
         } catch (SAXException | ParserConfigurationException | MigrationException exception) {
             Notification notification = setLoaded(true);

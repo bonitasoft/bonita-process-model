@@ -58,7 +58,7 @@
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
       <!-- @generated process -->
       <factory
-            uri="http://wwww.bonitasoft.org/model/connector/configuration"
+            uri="http://www.bonitasoft.org/model/connector/configuration"
             class="org.bonitasoft.bpm.model.connectorconfiguration.provider.ConnectorConfigurationItemProviderAdapterFactory"
             supportedTypes=
               "org.eclipse.emf.edit.provider.IEditingDomainItemProvider

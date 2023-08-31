@@ -70,7 +70,7 @@ class CustomGroovyArtifactProviderTest {
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
 
         File confFolder = projectRoot.resolve("app").resolve("process_configurations").toFile();
-        var configurationResource = ModelLoader.getInstance()
+        var configurationResource = ModelLoader.create()
                 .loadModel(URI.createFileURI(new File(confFolder, "_xQhDcRxzEeiplJoiu3AUHg.conf").getAbsolutePath()));
 
         // when

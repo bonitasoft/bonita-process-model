@@ -23,6 +23,60 @@ MyDiagram (1.0)
       └─ AND Gateway And
       └─ AND Gateway Then
       └─ Service Task AutoLogout
+         └─ Connector logout
+            └─ Connector Configuration
+               └─ Connector Parameter url
+                  └─ Expression http://localhost/logout.html
+               └─ Connector Parameter urlCookies
+                  └─ Table Expression
+               └─ Connector Parameter urlHeaders
+                  └─ Table Expression
+               └─ Connector Parameter do_not_follow_redirect
+                  └─ Expression false
+               └─ Connector Parameter ignore_body
+                  └─ Expression false
+               └─ Connector Parameter TLS
+                  └─ Expression true
+               └─ Connector Parameter hostname_verifier
+                  └─ Expression
+               └─ Connector Parameter trust_store_file
+                  └─ Expression
+               └─ Connector Parameter trust_store_password
+                  └─ Expression
+               └─ Connector Parameter key_store_file
+                  └─ Expression
+               └─ Connector Parameter key_store_password
+                  └─ Expression
+               └─ Connector Parameter auth_type
+                  └─ Expression NONE
+               └─ Connector Parameter auth_username
+                  └─ Expression
+               └─ Connector Parameter auth_password
+                  └─ Expression
+               └─ Connector Parameter auth_host
+                  └─ Expression
+               └─ Connector Parameter auth_port
+                  └─ Expression
+               └─ Connector Parameter auth_realm
+                  └─ Expression
+               └─ Connector Parameter auth_preemptive
+                  └─ Expression true
+               └─ Connector Parameter proxy_protocol
+                  └─ Expression
+               └─ Connector Parameter proxy_host
+                  └─ Expression
+               └─ Connector Parameter proxy_port
+                  └─ Expression
+               └─ Connector Parameter proxy_username
+                  └─ Expression
+               └─ Connector Parameter proxy_password
+                  └─ Expression
+               └─ Connector Parameter socket_timeout_ms
+                  └─ Expression 60000
+               └─ Connector Parameter connection_timeout_ms
+                  └─ Expression 60000
+               └─ Connector Parameter trust_strategy
+                  └─ Expression DEFAULT
          └─ Expression
          └─ Expression
          └─ Expression

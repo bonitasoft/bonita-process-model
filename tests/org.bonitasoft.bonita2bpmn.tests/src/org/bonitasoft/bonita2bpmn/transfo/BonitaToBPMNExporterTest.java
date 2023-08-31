@@ -22,6 +22,7 @@ import java.nio.file.Path;
 import java.util.Collections;
 
 import org.bonitasoft.bonita2bpmn.extension.BonitaModelExporterImpl;
+import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.bpm.model.util.IModelSearch;
 import org.bonitasoft.bpm.model.util.ModelLoader;
 import org.bonitasoft.bpm.model.util.ModelSearch;
@@ -46,16 +47,16 @@ class BonitaToBPMNExporterTest {
     }
 
     @ParameterizedTest
-    @CsvSource(value = { "/diagramToTestConnectorBPMNImportExport-1.0.proc",
-            "/diagramWithEventSubProcess-1.0.proc",
-            "/MessageDataTestValue-1.0.proc",
-            "/MyDiagramToTestDefaultFlowInBPMN-1.0.proc",
-            "/Request_For_Advance_Payment-6.0.proc",
-            "/testBPMNDataMapping-1.0.proc",
-            "/TestExportToBPMNDiagram_1_0.proc" })
+    @CsvSource(value = { "/resources/diagramToTestConnectorBPMNImportExport-1.0.proc",
+            "/resources/diagramWithEventSubProcess-1.0.proc",
+            "/resources/MessageDataTestValue-1.0.proc",
+            "/resources/MyDiagramToTestDefaultFlowInBPMN-1.0.proc",
+            "/resources/Request_For_Advance_Payment-6.0.proc",
+            "/resources/testBPMNDataMapping-1.0.proc",
+            "/resources/TestExportToBPMNDiagram_1_0.proc" })
     void exportProcToBpmn(String procResource) throws Exception {
 
-        var resource = ModelLoader.getInstance()
+        var resource = ModelLoader.create().withPolicy(MigrationPolicy.SOFT_MIGRATE_POLICY)
                 .loadModel(createURI(procResource));
 
         bonitaToBPMNExporter.export(new BonitaModelExporterImpl(resource, modelSearch), modelSearch,

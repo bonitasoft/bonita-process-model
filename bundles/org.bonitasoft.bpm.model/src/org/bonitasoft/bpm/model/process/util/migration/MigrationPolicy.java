@@ -39,6 +39,15 @@ public interface MigrationPolicy {
     public static MigrationPolicy NEVER_MIGRATE_POLICY = (versionComparisonStatus, fileName,
             isReadOnly) -> MigrationResult.NO_MIGRATION;
 
+    /** A default migration policy which always migrates the model, but without erasing it. */
+    public static MigrationPolicy SOFT_MIGRATE_POLICY = (versionComparisonStatus, fileName, isReadOnly) -> {
+        if (versionComparisonStatus.getSeverity() == IStatus.WARNING) {
+            return MigrationResult.SOFT_MIGRATION;
+        } else {
+            return MigrationResult.NO_MIGRATION;
+        }
+    };
+
     /**
      * Decide whether to migrate the file, based on the relevant information.
      * 

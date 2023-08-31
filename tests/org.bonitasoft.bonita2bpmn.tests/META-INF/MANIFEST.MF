@@ -16,4 +16,5 @@ Require-Bundle: assertj-core,
  junit-jupiter-api,
  org.mockito.mockito-core,
  org.mockito.junit-jupiter,
- org.bonitasoft.bpm.migration
+ org.bonitasoft.bpm.migration,
+ org.junit.platform.commons

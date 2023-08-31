@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import org.bonitasoft.bpm.model.process.ProcessPackage;
 import org.bonitasoft.bpm.model.process.util.migration.internal.CustomMigrationFactoryImpl;
 import org.bonitasoft.bpm.model.util.EnvironmentUtil;
+import org.bonitasoft.bpm.model.util.ModelLoader.Prerequisite;
 import org.bonitasoft.bpm.model.util.internal.ProcContentHandler;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.common.util.URI;
@@ -75,39 +76,36 @@ public class HistoryUtils {
         }
     }
 
-    static {
-        // make sure History metamodel is loaded first, even in maven env
-        HistoryPackage.eINSTANCE.getHistory();
-        if (!EnvironmentUtil.isOSGi()) {
-            // register EPackages
-            EPackage.Registry.INSTANCE.put(HistoryPackage.eNS_URI, HistoryPackage.eINSTANCE);
-            // register the content handler (which may be overridden e.g. by extension mapping)
-            ContentHandler.Registry.INSTANCE.put(ContentHandler.Registry.VERY_LOW_PRIORITY, new ProcContentHandler());
-            // register the resource factory
-            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
-                    HistoryPackage.eNS_PREFIX, new HistoryResourceFactoryImpl());
+    /** Makes sure History metamodel is loaded first, even in maven env. Otherwise extensions take care of it. */
+    public static final Prerequisite REGISTRATION = Prerequisite.fromRunnableWhenNotInOSGi(() -> {
+        // register EPackages
+        HistoryPackage.eINSTANCE.getNsURI();
+        // register the content handler (which may be overridden e.g. by extension mapping)
+        ContentHandler.Registry.INSTANCE.put(ContentHandler.Registry.VERY_LOW_PRIORITY, new ProcContentHandler());
+        // register the resource factory
+        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
+                HistoryPackage.eNS_PREFIX, new HistoryResourceFactoryImpl());
 
-            // also register CustomMigrationFactoryImpl with Bonita Patch for Notation model
-            // instead of org.eclipse.emf.ecore.factory_override extension
-            EPackage.Registry.INSTANCE.put(MigrationPackage.eNS_URI, new EPackage.Descriptor() {
+        // also register CustomMigrationFactoryImpl with Bonita Patch for Notation model
+        // instead of org.eclipse.emf.ecore.factory_override extension
+        EPackage.Registry.INSTANCE.put(MigrationPackage.eNS_URI, new EPackage.Descriptor() {
 
-                public EPackage getEPackage() {
-                    return null;
-                }
+            public EPackage getEPackage() {
+                return null;
+            }
 
-                public EFactory getEFactory() {
-                    return new CustomMigrationFactoryImpl();
-                }
-            });
-        }
-        // else, nothing to initialize. Extensions take care of it.
-    }
+            public EFactory getEFactory() {
+                return new CustomMigrationFactoryImpl();
+            }
+        });
+    });
 
     /** The current model version (latest release) */
     public static final String CURRENT_MODEL_VERSION;
     /** A predicate to test whether a version exists in history */
     public static final Predicate<String> IS_KNOWN_VERSION;
     static {
+        REGISTRATION.run();
         // now get versions from history
         Resource historyResource = new ResourceSetImpl().getResource(getMigrationHistoryURI(), true);
         History history = (History) historyResource.getContents().get(0);
@@ -131,7 +129,7 @@ public class HistoryUtils {
                     Map<Object, Object> context) {
                 Optional<EClass> instanceEClass = Optional.of(instance).map(Instance::getEClass)
                         .filter(Objects::nonNull);
-                if (instanceEClass.filter(ec -> !ec.getESuperTypes().contains(XMLTypePackage.Literals.ANY_TYPE))
+                if (instanceEClass.filter(ec -> !XMLTypePackage.Literals.ANY_TYPE.isSuperTypeOf(ec))
                         .isPresent()) {
                     return super.validateInstance_validContainment(instance, diagnostics, context);
                 } else {

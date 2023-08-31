@@ -24,8 +24,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.bonitasoft.bpm.connector.model.ConnectorModelRegistration;
 import org.bonitasoft.bpm.model.process.MainProcess;
 import org.bonitasoft.bpm.model.util.ModelLoader;
+import org.bonitasoft.bpm.model.util.ModelLoader.Prerequisite;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -151,7 +153,9 @@ public class App {
         }
 
         // load the model from file URL
-        Resource model = ModelLoader.getInstance().loadModel(inURL);
+        Resource model = ModelLoader.create().enablePartial()
+                .withPrerequisite(Prerequisite.fromRunnableWhenNotInOSGi(ConnectorModelRegistration.REGISTER))
+                .loadModel(inURL);
         /*
          * Get the model content at index 0.
          * Notation is at index 1.

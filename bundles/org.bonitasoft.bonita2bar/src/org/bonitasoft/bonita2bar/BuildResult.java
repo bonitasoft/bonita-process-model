@@ -19,13 +19,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.bonitasoft.bonita2bar.configuration.ConfigurationArchiveBuilder;
 import org.bonitasoft.bonita2bar.configuration.EnvironmentConfiguration;
 import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
+import org.bonitasoft.bpm.model.util.FileUtil;
 import org.bonitasoft.engine.bpm.bar.BusinessArchive;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveFactory;
 import org.bonitasoft.engine.bpm.process.DesignProcessDefinition;
@@ -75,7 +74,7 @@ public class BuildResult {
     public void writeBonitaConfigurationTo(Path bonitaConfigurationFile) throws IOException {
         var configurationTmpFolder = workdir.resolve("bconf");
         if (Files.exists(bonitaConfigurationFile)) {
-            deleteDir(bonitaConfigurationFile);
+            FileUtil.deleteDir(bonitaConfigurationFile);
         }
         Files.createDirectory(configurationTmpFolder);
         try {
@@ -92,7 +91,7 @@ public class BuildResult {
                 LOGGER.warn("No configuration found for {} environment.", environment);
             }
         } finally {
-            deleteDir(configurationTmpFolder);
+            FileUtil.deleteDir(configurationTmpFolder);
         }
     }
 
@@ -119,12 +118,6 @@ public class BuildResult {
             Files.createDirectories(targetFolder);
         }
         configuration.writeParameters(targetFolder);
-    }
-
-    private static void deleteDir(Path directory) throws IOException {
-        try (Stream<Path> pathStream = Files.walk(directory)) {
-            pathStream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
-        }
     }
 
     public void add(BuildResult result) {

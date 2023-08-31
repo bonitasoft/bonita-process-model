@@ -14,11 +14,13 @@
  */
 package org.bonitasoft.bpm.model.process.util;
 
-import org.bonitasoft.bpm.model.util.ModelLoader;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 
 /**
  * <!-- begin-user-doc -->
@@ -42,14 +44,29 @@ public class ProcessResourceFactoryImpl extends ResourceFactoryImpl {
         super();
     }
 
+    /** default load options */
+    private static final Map<Object, Object> loadOptions = Map.of(
+            XMLResource.OPTION_LAX_FEATURE_PROCESSING, Boolean.TRUE,
+            XMLResource.OPTION_USE_PACKAGE_NS_URI_AS_LOCATION, Boolean.FALSE);
+
+    /** default save options */
+    private static final Map<Object, Object> saveOptions = Map.of(
+            XMLResource.OPTION_DECLARE_XML, Boolean.TRUE,
+            XMLResource.OPTION_PROCESS_DANGLING_HREF, XMLResource.OPTION_PROCESS_DANGLING_HREF_DISCARD,
+            XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE,
+            XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE,
+            XMLResource.OPTION_SAVE_TYPE_INFORMATION, Boolean.TRUE,
+            XMLResource.OPTION_SKIP_ESCAPE_URI, Boolean.FALSE,
+            XMLResource.OPTION_ENCODING, DEFAULT_ENCODING);
+
     /**
      * Creates an instance of the resource.
      */
     @Override
     public Resource createResource(URI uri) {
         XMIResource result = new ProcessResourceImpl(uri);
-        result.getDefaultLoadOptions().putAll(ModelLoader.getInstance().getDefaultLoadOptions());
-        result.getDefaultSaveOptions().putAll(ModelLoader.getInstance().getDefaultSaveOptions());
+        result.getDefaultLoadOptions().putAll(loadOptions);
+        result.getDefaultSaveOptions().putAll(saveOptions);
         result.setEncoding(DEFAULT_ENCODING);
         return result;
     }

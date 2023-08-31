@@ -57,4 +57,13 @@ public class EnvironmentUtil {
         return classLoaderClass.filter(isOSGiBundleRef).isPresent();
     }
 
+    /**
+     * Test whether we are on a Windows OS. Otherwise, we can use POSIX permissions.
+     * 
+     * @return true when Windows
+     */
+    public static boolean isWindows() {
+        return Optional.ofNullable(System.getProperty("os.name")).map(os -> os.startsWith("Windows")).orElse(false);
+    }
+
 }

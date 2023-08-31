@@ -24,6 +24,12 @@
     </dependency>
     <dependency>
       <groupId>org.bonitasoft.bpm</groupId>
+      <artifactId>org.bonitasoft.bpm.connector.model</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.bonitasoft.bpm</groupId>
       <artifactId>org.bonitasoft.bpm.migration</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
@@ -34,8 +40,20 @@
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.bonitasoft.bpm</groupId>
+      <artifactId>org.bonitasoft.bpm.connector.model.edit</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
+    <testResources>
+      <testResource>
+        <!-- Override the value from parent pom to go with default maven style -->
+        <directory>src/test/resources</directory>
+      </testResource>
+    </testResources>
     <plugins>
       <!-- Patch archetype-metadata.xml and archetype.properties files to reference correct versions  -->
       <plugin>

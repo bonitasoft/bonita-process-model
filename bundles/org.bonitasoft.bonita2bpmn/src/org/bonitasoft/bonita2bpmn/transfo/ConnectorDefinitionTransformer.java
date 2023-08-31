@@ -22,13 +22,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 import javax.xml.namespace.QName;
 import javax.xml.transform.Result;
@@ -42,6 +40,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 import org.bonitasoft.bpm.connector.model.definition.ConnectorDefinition;
+import org.bonitasoft.bpm.model.util.FileUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.omg.spec.bpmn.model.ModelFactory;
 import org.omg.spec.bpmn.model.TImport;
@@ -162,7 +161,7 @@ public class ConnectorDefinitionTransformer {
                 return null;
             }
         } finally {
-            deleteDir(tmpDir);
+            FileUtil.deleteDir(tmpDir);
         }
     }
 
@@ -250,11 +249,5 @@ public class ConnectorDefinitionTransformer {
                     modelRegistry.getDefinitions().getRootElement().add(tMessageInputBonitaConnector);
                     return tMessageInputBonitaConnector;
                 });
-    }
-
-    private static void deleteDir(Path directory) throws IOException {
-        try (Stream<Path> pathStream = Files.walk(directory)) {
-            pathStream.sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
-        }
     }
 }
