@@ -513,7 +513,7 @@ public class MigrationHelper extends AdapterImpl {
                     // perform extra migration (the version is in the nsUri)
                     Optional<Release> currentRelease = extraMigrator.getReleases().stream()
                             .filter(r -> extraNsUri.endsWith("/" + r.getLabel())).findFirst();
-                    if (currentRelease.filter(r -> !r.isLastRelease()).isPresent()) {
+                    if (currentRelease.filter(r -> !r.isLatestRelease()).isPresent()) {
                         extraMigrators.put(currentRelease.get(), extraMigrator);
                     }
                 }
