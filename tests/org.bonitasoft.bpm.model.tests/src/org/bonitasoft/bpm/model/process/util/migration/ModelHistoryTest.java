@@ -29,6 +29,7 @@ import org.eclipse.emf.edapt.spi.history.HistoryPackage;
 import org.eclipse.emf.edapt.spi.history.Release;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.osgi.framework.Version;
 
 class ModelHistoryTest {
 
@@ -56,6 +57,12 @@ class ModelHistoryTest {
     void should_history_latest_release_label_equals_current_model_version() throws Exception {
         final Release release = history.getLatestRelease();
         assertThat(release.getLabel()).isEqualTo(HistoryUtils.CURRENT_MODEL_VERSION);
+    }
+
+    @Test
+    void keepSyncBetweenModelAndComponentVersion() throws Exception {
+        Version componentVersion = Platform.getBundle("org.bonitasoft.bpm.model").getVersion();
+        assertThat(Integer.toString(componentVersion.getMajor())).isEqualTo(HistoryUtils.CURRENT_MODEL_VERSION);
     }
 
 }
