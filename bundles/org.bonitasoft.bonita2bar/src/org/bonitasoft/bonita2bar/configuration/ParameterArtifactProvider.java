@@ -45,12 +45,35 @@ public class ParameterArtifactProvider implements BarArtifactProvider {
     @Override
     public void build(BusinessArchiveBuilder builder, Pool process, Configuration configuration) {
         if (addParametersInBar) {
-            builder.setParameters(getParameterMapFromConfiguration(configuration, process));
+            builder.setParameters(toParameterMapFromConfiguration(configuration, process));
         }
     }
 
-    private Map<String, String> getParameterMapFromConfiguration(Configuration configuration, Pool process) {
+    @Override
+    public void configure(EnvironmentConfigurationBuilder builder, Configuration configuration, Pool process) {
+        if (configuration != null && !configuration.getParameters().isEmpty()) {
+            LOGGER.info("Adding parameters for '{}' environment...",
+                    configuration.getName() != null ? configuration.getName().toLowerCase() : null);
+        }
+        var processConfiguration = toProcessConfiguration(configuration, process);
+        if (!processConfiguration.getParameters().isEmpty()) {
+            parametersConfiguration.getProcessConfigurations().add(processConfiguration);
+        }
+        builder.addParameters(toParameterMapFromConfiguration(configuration, process));
+    }
+
+    private Map<String, String> toParameterMapFromConfiguration(Configuration configuration, Pool process) {
         final Map<String, String> result = new HashMap<>();
+        if (configuration == null) {
+            configuration = ConfigurationFactory.eINSTANCE.createConfiguration();
+        }
+        for (final Parameter defParam : process.getParameters()) {
+            result.put(defParam.getName(), valueFromConfiguration(configuration, defParam));
+        }
+        return result;
+    }
+
+    private ProcessConfiguration toProcessConfiguration(Configuration configuration, Pool process) {
         if (configuration == null) {
             configuration = ConfigurationFactory.eINSTANCE.createConfiguration();
         }
@@ -60,19 +83,14 @@ public class ParameterArtifactProvider implements BarArtifactProvider {
             parameters.add(org.bonitasoft.bonita2bar.configuration.model.Parameter.builder().name(defParam.getName())
                     .description(defParam.getDescription()).type(toSimpleTypeName(defParam.getTypeClassname()))
                     .value(paramValue(configuration, defParam, defParam.getTypeClassname())).build());
-            result.put(defParam.getName(), valueFromConfiguration(configuration, defParam));
             if (defParam.getDescription() != null) {
                 LOGGER.debug("{} ({}) -- {}", defParam.getName(), defParam.getTypeClassname(),
                         defParam.getDescription());
             } else {
                 LOGGER.debug("{} ({})", defParam.getName(), defParam.getTypeClassname());
             }
-
         }
-        if (!parameters.isEmpty()) {
-            parametersConfiguration.getProcessConfigurations().add(builder.parameters(parameters).build());
-        }
-        return result;
+        return builder.parameters(parameters).build();
     }
 
     private Object paramValue(Configuration configuration, final Parameter p, String type) {
@@ -119,15 +137,6 @@ public class ParameterArtifactProvider implements BarArtifactProvider {
             default:
                 throw new IllegalStateException(String.format("Unknown parameter type: %s", typeClassname));
         }
-    }
-
-    @Override
-    public void configure(EnvironmentConfigurationBuilder builder, Configuration configuration, Pool process) {
-        if (configuration != null && !configuration.getParameters().isEmpty()) {
-            LOGGER.info("Adding parameters for '{}' environment...",
-                    configuration.getName() != null ? configuration.getName().toLowerCase() : null);
-        }
-        builder.addParameters(getParameterMapFromConfiguration(configuration, process));
     }
 
 }
