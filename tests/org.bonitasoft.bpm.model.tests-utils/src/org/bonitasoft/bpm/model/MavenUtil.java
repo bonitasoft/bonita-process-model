@@ -27,8 +27,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.bonitasoft.plugin.analyze.report.model.DependencyReport;
-
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,9 +42,9 @@ public class MavenUtil {
         // private constructor
     }
 
-    public static DependencyReport loadReport(Path reportFile)
+    public static Map<String, Object> loadReport(Path reportFile)
             throws IOException {
-        return mapper.readValue(reportFile.toFile(), DependencyReport.class);
+        return mapper.readValue(reportFile.toFile(), Map.class);
     }
 
     public static Path analyze(Path projectRoot, String mvnExecutable) throws InterruptedException, IOException {

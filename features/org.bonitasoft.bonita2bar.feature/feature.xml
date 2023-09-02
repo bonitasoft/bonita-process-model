@@ -34,7 +34,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
       <import feature="org.bonitasoft.bpm.model.feature" version="8.0.0.qualifier"/>
       <import feature="org.bonitasoft.bonita2bpmn.feature" version="8.0.0.qualifier"/>
       <import plugin="org.codehaus.groovy" version="3.0.0"/>
-      <import feature="org.bonitasoft.project.report.model.feature" version="0.2.0.qualifier"/>
       <import feature="com.fasterxml.jackson.feature" version="2.15.2.qualifier"/>
       <import feature="org.bonitasoft.artifacts.model.feature" version="1.0.0.qualifier"/>
    </requires>
