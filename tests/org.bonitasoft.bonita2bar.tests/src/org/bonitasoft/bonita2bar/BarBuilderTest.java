@@ -24,6 +24,7 @@ import java.io.File;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
@@ -32,7 +33,6 @@ import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.bonitasoft.engine.bpm.bar.InvalidBusinessArchiveFormatException;
-import org.bonitasoft.plugin.analyze.report.model.DependencyReport;
 import org.eclipse.core.runtime.FileLocator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,7 +54,8 @@ class BarBuilderTest {
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
         sourcePathProvider = SourcePathProvider.of(repoRoot.toPath().resolve("app"));
         barBuilder = BarBuilderFactory
-                .create(BuildConfig.builder().dependencyReport(new DependencyReport())
+                .create(BuildConfig.builder()
+                        .connectorImplementationRegistry(ConnectorImplementationRegistry.of(List.of()))
                         .formBuilder(id -> new byte[0]).workingDirectory(repoRoot.toPath().resolve("target"))
                         .sourcePathProvider(sourcePathProvider).processRegistry(processRegistry).build());
     }

@@ -56,7 +56,6 @@ Import-Package: org.bonitasoft.engine,
  org.bonitasoft.engine.operation,
  org.bonitasoft.engine.operation.impl,
  org.bonitasoft.engine.xml.parser,
- org.bonitasoft.plugin.analyze.report.model,
  org.slf4j;version="1.7.30"
 Export-Package: org.bonitasoft.bonita2bar,
  org.bonitasoft.bonita2bar.actor,

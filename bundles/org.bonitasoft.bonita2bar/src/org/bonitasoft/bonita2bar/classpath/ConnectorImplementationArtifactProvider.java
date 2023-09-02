@@ -28,6 +28,7 @@ import java.util.stream.Collectors;
 import org.bonitasoft.bonita2bar.BarArtifactProvider;
 import org.bonitasoft.bonita2bar.BuildBarException;
 import org.bonitasoft.bonita2bar.ClasspathResolver;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
 import org.bonitasoft.bpm.connector.model.implementation.util.ConnectorImplementationResourceFactoryImpl;
 import org.bonitasoft.bpm.connector.model.implementation.util.ConnectorImplementationXMLProcessor;
@@ -49,20 +50,18 @@ public class ConnectorImplementationArtifactProvider implements BarArtifactProvi
     private static final Logger LOGGER = LoggerFactory.getLogger(ConnectorImplementationArtifactProvider.class);
 
     private ConnectorImplementationResourceFactoryImpl resourceFactory;
-
     private ConnectorImplementationXMLProcessor xmlProcessor;
-
-    private ConnectorImplementationProvider implProvider;
+    private ConnectorImplementationRegistry implRegistry;
     private String type;
 
     private ClasspathResolver classpathResolver;
 
     public ConnectorImplementationArtifactProvider(ClasspathResolver classpathResolver,
-            ConnectorImplementationProvider implProvider,
+            ConnectorImplementationRegistry implRegistry,
             String type) {
         this.classpathResolver = classpathResolver;
         this.type = type;
-        this.implProvider = implProvider;
+        this.implRegistry = implRegistry;
         this.resourceFactory = new ConnectorImplementationResourceFactoryImpl();
         this.xmlProcessor = new ConnectorImplementationXMLProcessor();
     }
@@ -102,13 +101,10 @@ public class ConnectorImplementationArtifactProvider implements BarArtifactProvi
                     association.getImplementationId(), association.getImplementationVersion(), true);
             final String implId = association.getImplementationId();
             final String implVersion = association.getImplementationVersion();
-
-            ConnectorImplementation implementation = implProvider.getConnectorImplementation(implId, implVersion);
-            if (implementation == null) {
-                String message = String.format("Implementation %s (%s) not found in repository",
-                        association.getImplementationId(), association.getImplementationVersion());
-                throw new BuildBarException(message);
-            }
+            var implementation = implRegistry.find(implId, implVersion)
+                    .orElseThrow(
+                            () -> new BuildBarException(String.format("Implementation %s (%s) not found in repository",
+                                    association.getImplementationId(), association.getImplementationVersion())));
             try {
                 connectorImpl.setImplemetation(
                         createImplementationResource(connectorImplementationFilename, implementation));

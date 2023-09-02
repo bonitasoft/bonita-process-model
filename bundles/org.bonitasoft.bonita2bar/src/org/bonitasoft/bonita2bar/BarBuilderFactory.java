@@ -19,7 +19,6 @@ import java.util.Objects;
 
 import org.bonitasoft.bonita2bar.actor.ActorMappingArtifactProvider;
 import org.bonitasoft.bonita2bar.classpath.ConnectorImplementationArtifactProvider;
-import org.bonitasoft.bonita2bar.classpath.ConnectorImplementationProvider;
 import org.bonitasoft.bonita2bar.classpath.CustomGroovyArtifactProvider;
 import org.bonitasoft.bonita2bar.classpath.JarArtifactProvider;
 import org.bonitasoft.bonita2bar.configuration.ParameterArtifactProvider;
@@ -31,7 +30,6 @@ import org.bonitasoft.bonita2bar.resources.AdditionalResourcesArtifactProvider;
 import org.bonitasoft.bonita2bar.resources.BPMN2ArtifactProvider;
 import org.bonitasoft.bonita2bar.resources.DocumentArtifactProvider;
 import org.bonitasoft.bpm.model.util.FragmentTypes;
-import org.bonitasoft.plugin.analyze.report.model.DependencyReport;
 
 public class BarBuilderFactory {
 
@@ -44,7 +42,7 @@ public class BarBuilderFactory {
 
         var sourceProvider = config.getSourcePathProvider();
         var processRegistry = config.getProcessRegistry();
-        var dependencyReport = config.getDependencyReport();
+        var implementationRegistry = config.getConnectorImplementationRegistry();
         var classpathResolver = config.getClasspathResolver();
         var workingDirectory = config.getWorkingDirectory();
 
@@ -65,9 +63,9 @@ public class BarBuilderFactory {
                 new CustomGroovyArtifactProvider(sourceProvider.getGroovySource(), classpathResolver,
                         workingDirectory));
         barBuilder.register(new ConnectorImplementationArtifactProvider(classpathResolver,
-                new ConnectorImplementationProvider(dependencyReport), FragmentTypes.CONNECTOR));
+                implementationRegistry, FragmentTypes.CONNECTOR));
         barBuilder.register(new ConnectorImplementationArtifactProvider(classpathResolver,
-                new ConnectorImplementationProvider(dependencyReport), FragmentTypes.ACTOR_FILTER));
+                implementationRegistry, FragmentTypes.ACTOR_FILTER));
         barBuilder.register(new AdditionalResourcesArtifactProvider(sourceProvider.getResources()));
         return barBuilder;
     }
@@ -77,7 +75,7 @@ public class BarBuilderFactory {
         private boolean allowEmptyFormMapping;
         private boolean includeParameters;
         private Path workingDirectory;
-        private DependencyReport dependencyReport;
+        private ConnectorImplementationRegistry connectorImplementationRegistry;
         private FormBuilder formBuilder;
         private ProcessRegistry processRegistry;
         private SourcePathProvider sourcePathProvider;
@@ -87,7 +85,7 @@ public class BarBuilderFactory {
             this.allowEmptyFormMapping = builder.allowEmptyFormMapping;
             this.includeParameters = builder.includeParameters;
             this.workingDirectory = builder.workingDirectory;
-            this.dependencyReport = builder.dependencyReport;
+            this.connectorImplementationRegistry = builder.connectorImplementationRegistry;
             this.formBuilder = builder.formBuilder;
             this.processRegistry = builder.processRegistry;
             this.sourcePathProvider = builder.sourcePathProvider;
@@ -107,9 +105,9 @@ public class BarBuilderFactory {
             return workingDirectory;
         }
 
-        public DependencyReport getDependencyReport() {
-            Objects.requireNonNull(dependencyReport, "No DependencyReport configured.");
-            return dependencyReport;
+        public ConnectorImplementationRegistry getConnectorImplementationRegistry() {
+            Objects.requireNonNull(connectorImplementationRegistry, "No ConnectorImplementationRegistry configured.");
+            return connectorImplementationRegistry;
         }
 
         public FormBuilder getFormBuilder() {
@@ -142,7 +140,7 @@ public class BarBuilderFactory {
             /* Studio includes them, la-builder not... */
             private boolean includeParameters = false;
             private Path workingDirectory;
-            private DependencyReport dependencyReport;
+            private ConnectorImplementationRegistry connectorImplementationRegistry;
             private FormBuilder formBuilder;
             private ProcessRegistry processRegistry;
             private SourcePathProvider sourcePathProvider;
@@ -176,8 +174,9 @@ public class BarBuilderFactory {
                 return this;
             }
 
-            public BuildConfigBuilder dependencyReport(DependencyReport dependencyReport) {
-                this.dependencyReport = dependencyReport;
+            public BuildConfigBuilder connectorImplementationRegistry(
+                    ConnectorImplementationRegistry connectorImplementationRegistry) {
+                this.connectorImplementationRegistry = connectorImplementationRegistry;
                 return this;
             }
 

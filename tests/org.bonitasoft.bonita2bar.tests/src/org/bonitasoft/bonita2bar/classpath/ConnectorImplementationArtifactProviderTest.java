@@ -17,13 +17,20 @@ package org.bonitasoft.bonita2bar.classpath;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.ClasspathResolver;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
 import org.bonitasoft.bonita2bar.SourcePathProvider;
 import org.bonitasoft.bpm.model.FileUtil;
@@ -65,7 +72,7 @@ class ConnectorImplementationArtifactProviderTest {
         var processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
         var builder = BarBuilderFactory.create(BuildConfig.builder()
-                .dependencyReport(MavenUtil.loadReport(reportFile))
+                .connectorImplementationRegistry(createImplementationRegistry(reportFile))
                 .formBuilder(id -> new byte[0])
                 .workingDirectory(outputFolder)
                 .sourcePathProvider(SourcePathProvider.of(projectRoot.resolve("app")))
@@ -85,6 +92,25 @@ class ConnectorImplementationArtifactProviderTest {
 
         assertThat(businessArchive.getResource("connector/email-impl-1.3.0.impl")).isNotEmpty();
         assertThat(businessArchive.getResource("connector/rest-get-impl-1.0.10.impl")).isNotEmpty();
+    }
+
+    private static ConnectorImplementationRegistry createImplementationRegistry(Path reportFile) throws IOException {
+        var report = MavenUtil.loadReport(reportFile);
+        var implementations = new ArrayList<ConnectorImplementationJar>();
+        implementations.addAll(adapt(
+                (List<Map<String, Object>>) report.get("connectorImplementations")));
+        implementations.addAll(adapt(
+                (List<Map<String, Object>>) report.get("filterImplementations")));
+        return ConnectorImplementationRegistry.of(implementations);
+    }
+
+    private static List<ConnectorImplementationJar> adapt(List<Map<String, Object>> implementations) {
+        return implementations.stream()
+                .map(map -> ConnectorImplementationJar.of((String) map.get("implementationId"),
+                        (String) map.get("implementationVersion"),
+                        new File((String) ((Map<String, Object>) map.get("artifact")).get("file")),
+                        (String) map.get("jarEntry")))
+                .collect(Collectors.toList());
     }
 
 }

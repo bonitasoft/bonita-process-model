@@ -24,9 +24,6 @@
    <feature id="com.fasterxml.jackson.feature">
       <category name="Third party dependencies"/>
    </feature>
-   <feature id="org.bonitasoft.project.report.model.feature">
-      <category name="Third party dependencies"/>
-   </feature>
    <category-def name="Bonita Business Process Model" label="Contains the Bonita Process Domain Logic."/>
    <category-def name="Third party dependencies" label="Contains the required third party dependencies."/>
    <category-def name="Developer Resources" label="Test resource for developers"/>

@@ -17,13 +17,20 @@ package org.bonitasoft.bpm.standalone.tests;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.ClasspathResolver;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
 import org.bonitasoft.bonita2bar.SourcePathProvider;
 import org.bonitasoft.bpm.model.FileUtil;
@@ -58,7 +65,8 @@ class BarBuilderIT {
                 })
                 .workingDirectory(tmpDir.resolve("workdir"))
                 .classpathResolver(ClasspathResolver.of(MavenUtil.buildClasspath(projectRoot, mvnExecutable)))
-                .dependencyReport(MavenUtil.loadReport(MavenUtil.analyze(projectRoot, mvnExecutable)))
+                .connectorImplementationRegistry(
+                        createImplementationRegistry(MavenUtil.analyze(projectRoot, mvnExecutable)))
                 .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                         MigrationPolicy.ALWAYS_MIGRATE_POLICY))
                 .sourcePathProvider(SourcePathProvider.of(projectRoot.resolve("app")))
@@ -117,7 +125,8 @@ class BarBuilderIT {
                 })
                 .workingDirectory(tmpDir.resolve("workdir"))
                 .classpathResolver(ClasspathResolver.of(MavenUtil.buildClasspath(projectRoot, mvnExecutable)))
-                .dependencyReport(MavenUtil.loadReport(MavenUtil.analyze(projectRoot, mvnExecutable)))
+                .connectorImplementationRegistry(
+                        createImplementationRegistry(MavenUtil.analyze(projectRoot, mvnExecutable)))
                 .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                         MigrationPolicy.ALWAYS_MIGRATE_POLICY))
                 .sourcePathProvider(SourcePathProvider.of(projectRoot))
@@ -137,6 +146,25 @@ class BarBuilderIT {
                 .widgetsFolderName("web_widgets")
                 .fragmentsFolderName("web_fragments")
                 .build();
+    }
+
+    private static ConnectorImplementationRegistry createImplementationRegistry(Path reportFile) throws IOException {
+        var report = MavenUtil.loadReport(reportFile);
+        var implementations = new ArrayList<ConnectorImplementationJar>();
+        implementations.addAll(adapt(
+                (List<Map<String, Object>>) report.get("connectorImplementations")));
+        implementations.addAll(adapt(
+                (List<Map<String, Object>>) report.get("filterImplementations")));
+        return ConnectorImplementationRegistry.of(implementations);
+    }
+
+    private static List<ConnectorImplementationJar> adapt(List<Map<String, Object>> implementations) {
+        return implementations.stream()
+                .map(map -> ConnectorImplementationJar.of((String) map.get("implementationId"),
+                        (String) map.get("implementationVersion"),
+                        new File((String) ((Map<String, Object>) map.get("artifact")).get("file")),
+                        (String) map.get("jarEntry")))
+                .collect(Collectors.toList());
     }
 
 }

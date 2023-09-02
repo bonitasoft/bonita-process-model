@@ -20,4 +20,3 @@ Export-Package: org.bonitasoft.bpm.model,
  org.bonitasoft.bpm.model.parameter.builders,
  org.bonitasoft.bpm.model.process.assertions,
  org.bonitasoft.bpm.model.process.builders
-Import-Package: org.bonitasoft.plugin.analyze.report.model
