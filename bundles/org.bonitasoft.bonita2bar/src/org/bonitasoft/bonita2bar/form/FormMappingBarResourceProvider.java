@@ -165,7 +165,11 @@ public class FormMappingBarResourceProvider {
         switch (formMapping.getType()) {
             case INTERNAL:
                 final FormMappingType formMappingType = formMappingType(formMapping);
-                if (!allowEmptyMapping() && formMappingType != FormMappingType.PROCESS_OVERVIEW
+                if (formMappingType == FormMappingType.PROCESS_OVERVIEW) {
+                    // Use provided case overview when no mapping is defined
+                    return true;
+                }
+                if (!allowEmptyMapping()
                         && !formMapping.getTargetForm().hasName()) {
                     throw new InternalFormNotFoundException(formMapping);
                 }
