@@ -82,6 +82,23 @@ class BarBuilderTest {
     }
 
     @Test
+    void should_configure_process(@TempDir Path tmpFolder) throws Exception {
+        var result = barBuilder.buildConfiguration("local");
+
+        assertThat(result.getBusinessArchives()).isEmpty();
+        assertThat(result.getConfigurations()).hasSize(12);
+
+        var bonitaConfigurationFile = tmpFolder.resolve("test-repository.bconf");
+        result.writeBonitaConfigurationTo(bonitaConfigurationFile);
+
+        assertThat(bonitaConfigurationFile).exists();
+
+        var configurationArchive = new ConfigurationArchive(bonitaConfigurationFile.toFile());
+        var parametersConfig = configurationArchive.loadParametersConfiguration();
+        assertThat(parametersConfig.getProcessConfigurations()).hasSize(1);
+    }
+
+    @Test
     void should_throw_an_IllegalArgumentExcpetion_when_process_not_found() throws Exception {
         assertThatThrownBy(() -> barBuilder.build("Unknown", "1.0", "Local"))
                 .isInstanceOf(IllegalArgumentException.class);
