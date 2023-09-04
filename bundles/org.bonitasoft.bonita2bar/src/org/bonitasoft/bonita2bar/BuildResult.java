@@ -76,7 +76,7 @@ public class BuildResult {
         if (Files.exists(bonitaConfigurationFile)) {
             FileUtil.deleteDir(bonitaConfigurationFile);
         }
-        Files.createDirectory(configurationTmpFolder);
+        Files.createDirectories(configurationTmpFolder);
         try {
             for (final EnvironmentConfiguration configuration : configurations) {
                 writeConfiguration(configurationTmpFolder, configuration);
