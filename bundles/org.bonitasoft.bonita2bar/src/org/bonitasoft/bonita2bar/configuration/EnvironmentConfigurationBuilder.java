@@ -14,6 +14,8 @@
  */
 package org.bonitasoft.bonita2bar.configuration;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,9 +30,9 @@ public class EnvironmentConfigurationBuilder {
     private String processVersion;
 
     public EnvironmentConfigurationBuilder(String processName, String processVersion, String envName) {
-        this.processName = processName;
-        this.processVersion = processVersion;
-        this.envName = envName;
+        this.processName = requireNonNull(processName);
+        this.processVersion = requireNonNull(processVersion);
+        this.envName = requireNonNull(envName).toLowerCase();
     }
 
     public void addParameters(Map<String, String> parameters) {

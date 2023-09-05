@@ -21,7 +21,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Properties;
 
 import org.bonitasoft.bonita2bar.configuration.EnvironmentConfigurationBuilder;
@@ -77,7 +76,11 @@ public class BarBuilder {
     public BuildResult buildAll(String environment) throws BuildBarException {
         buildResult = new BuildResult(environment, parametersConfiguration, workdir);
         for (var process : processRegistry.getProcesses()) {
-            buildResult.add(buildBar(process, environment));
+            try {
+                buildResult.add(buildBar(process, getConfiguration(process, environment)));
+            } catch (IOException e) {
+                throw new BuildBarException(e);
+            }
         }
         return buildResult;
     }
@@ -113,9 +116,13 @@ public class BarBuilder {
         }
         var process = processRegistry.getProcess(name, version).orElseThrow(() -> new IllegalArgumentException(
                 String.format("No process found in registry for %s (%s)", name, version)));
-        var result = buildBar(process, environment);
-        buildResult.add(result);
-        return result;
+        try {
+            var result = buildBar(process, getConfiguration(process, environment));
+            buildResult.add(result);
+            return result;
+        } catch (IOException e) {
+            throw new BuildBarException(e);
+        }
     }
 
     /**
@@ -130,7 +137,28 @@ public class BarBuilder {
         if (buildResult == null) {
             buildResult = new BuildResult(environment, parametersConfiguration, workdir);
         }
-        var result = buildBar(process, environment);
+        try {
+            var result = buildBar(process, getConfiguration(process, environment));
+            buildResult.add(result);
+            return result;
+        } catch (IOException e) {
+            throw new BuildBarException(e);
+        }
+    }
+
+    /**
+     * Build a process.
+     * 
+     * @param process A process
+     * @param environment The configuration environment name. Local environment is used if null
+     * @return a BuildResult
+     * @throws BuildBarException
+     */
+    public BuildResult build(Pool process, Configuration configuration) throws BuildBarException {
+        if (buildResult == null) {
+            buildResult = new BuildResult(configuration.getName(), parametersConfiguration, workdir);
+        }
+        var result = buildBar(process, configuration);
         buildResult.add(result);
         return result;
     }
@@ -142,27 +170,19 @@ public class BarBuilder {
         return buildResult;
     }
 
-    private BuildResult buildBar(Pool process, String environment) throws BuildBarException {
+    private BuildResult buildBar(Pool process, Configuration configuration) throws BuildBarException {
         LOGGER.info("Building {} ({})...", process.getName(), process.getVersion());
-        Optional<Configuration> configuration;
-        try {
-            configuration = getConfiguration(process, environment);
-        } catch (IOException e) {
-            throw new BuildBarException("Failed to load local configuration", e);
-        }
-        if (!configuration.isPresent()) {
-            LOGGER.warn("{} configuration not found.", environment);
-        }
+
         final BusinessArchiveBuilder barBuilder = createBusinessArchiveBuilder();
         final EnvironmentConfigurationBuilder confBuilder = createEnvironmentConfigurationBuilder(process.getName(),
-                process.getVersion(), environment);
+                process.getVersion(), configuration.getName());
         try {
             for (final BarArtifactProvider provider : providers) {
-                var defaultConfiguration = configuration.orElse(emptyConfiguration(environment));
-                provider.build(barBuilder, process, defaultConfiguration);
-                provider.configure(confBuilder, defaultConfiguration, process);
+                provider.build(barBuilder, process, configuration);
+                provider.configure(confBuilder, configuration, process);
             }
-            var result = new BuildResult(environment, parametersConfiguration, workdir);
+            var result = new BuildResult(configuration.getName() == null ? LOCAL_ENVIRONMENT : configuration.getName(),
+                    parametersConfiguration, workdir);
             result.addBusinessArchive(barBuilder.done());
             result.addConfiguration(confBuilder.done());
             return result;
@@ -174,14 +194,11 @@ public class BarBuilder {
 
     private BuildResult configureProcess(Pool process, String environment) throws IOException {
         LOGGER.info("Configure {} ({})...", process.getName(), process.getVersion());
-        Optional<Configuration> configuration = getConfiguration(process, environment);
-        if (!configuration.isPresent()) {
-            LOGGER.warn("{} configuration not found.", environment);
-        }
         final EnvironmentConfigurationBuilder confBuilder = createEnvironmentConfigurationBuilder(process.getName(),
                 process.getVersion(), environment);
+        var configuration = getConfiguration(process, environment);
         for (final BarArtifactProvider provider : providers) {
-            provider.configure(confBuilder, configuration.orElse(emptyConfiguration(environment)), process);
+            provider.configure(confBuilder, configuration, process);
         }
         var result = new BuildResult(environment, parametersConfiguration, workdir);
         result.addConfiguration(confBuilder.done());
@@ -190,27 +207,29 @@ public class BarBuilder {
 
     private static Configuration emptyConfiguration(String environment) {
         Configuration defaultConfiguration = ConfigurationFactory.eINSTANCE.createConfiguration();
-        defaultConfiguration.setName(environment);
+        defaultConfiguration.setName(environment != null ? environment : LOCAL_ENVIRONMENT);
         return defaultConfiguration;
     }
 
     private EnvironmentConfigurationBuilder createEnvironmentConfigurationBuilder(String processName,
             String processVersion, String environment) {
-        return new EnvironmentConfigurationBuilder(processName, processVersion, environment);
+        return new EnvironmentConfigurationBuilder(processName, processVersion,
+                environment == null ? LOCAL_ENVIRONMENT : environment);
     }
 
     protected BusinessArchiveBuilder createBusinessArchiveBuilder() {
         return new BusinessArchiveBuilder().createNewBusinessArchive();
     }
 
-    Optional<Configuration> getConfiguration(Pool process, String environment)
+    Configuration getConfiguration(Pool process, String environment)
             throws IOException {
         final String uuid = getEObjectID(process);
         if (LOCAL_ENVIRONMENT.equalsIgnoreCase(environment) || environment == null) {// Use local environment
             final File configurationFolder = localConfiguration.toFile();
             final File confFile = new File(configurationFolder, String.format("%s.conf", uuid));
             if (!confFile.exists()) {
-                return Optional.empty();
+                LOGGER.warn("{} configuration not found.", environment);
+                return emptyConfiguration(environment);
             }
             var resource = ModelLoader.create().withPolicy(processRegistry.getMigrationPolicy())
                     .loadModel(URI.createFileURI(confFile.getAbsolutePath()));
@@ -218,11 +237,15 @@ public class BarBuilder {
                 throw new IOException(String.format("No Configuration found in file %s", confFile.getAbsolutePath()));
             }
             final EList<EObject> contents = resource.getContents();
-            return Optional.ofNullable((Configuration) contents.get(0));
+            return (Configuration) contents.get(0);
         }
         return process.getConfigurations().stream()
                 .filter(conf -> Objects.equals(toLowerCase(conf.getName()), toLowerCase(environment)))
-                .findFirst();
+                .findFirst()
+                .orElseGet(() -> {
+                    LOGGER.warn("{} configuration not found.", environment);
+                    return emptyConfiguration(environment);
+                });
     }
 
     private String toLowerCase(String name) {

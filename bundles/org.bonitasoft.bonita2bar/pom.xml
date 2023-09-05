@@ -39,12 +39,7 @@
     <dependency>
       <groupId>org.bonitasoft.engine</groupId>
       <artifactId>bonita-business-archive</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    <dependency>
-      <groupId>org.bonitasoft.maven</groupId>
-      <artifactId>bonita-project-report-model</artifactId>
-      <version>0.1.1</version>
+      <version>1.0.0-alpha-01</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -66,7 +61,7 @@
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy</artifactId>
-      <version>3.0.18</version>
+      <version>3.0.19</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jdt</groupId>

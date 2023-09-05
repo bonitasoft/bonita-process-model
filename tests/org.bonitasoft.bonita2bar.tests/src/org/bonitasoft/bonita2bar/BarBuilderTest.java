@@ -25,7 +25,6 @@ import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-import java.util.Optional;
 
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.configuration.ConfigurationArchive;
@@ -119,9 +118,10 @@ class BarBuilderTest {
     void should_retieve_local_configuration_for_a_pool() throws Exception {
         var process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0").orElseThrow();
 
-        final Optional<Configuration> configuration = barBuilder.getConfiguration(process, "Local");
+        Configuration configuration = barBuilder.getConfiguration(process, "Local");
 
-        assertThat(configuration).isPresent();
+        assertThat(configuration).isNotNull();
+        assertThat(configuration.getParameters()).isNotEmpty();
     }
 
     @Test

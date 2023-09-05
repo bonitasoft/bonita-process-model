@@ -53,12 +53,14 @@ public class EngineDataBuilder extends ProcessSwitch<DataDefinitionBuilder> {
 
     private Expression createExpression(final Data data) {
         try {
-            return data.isMultiple() ? EngineExpressionUtil.createEmptyListExpression()
-                    : EngineExpressionUtil.createExpression(data.getDefaultValue());
+            var expression = EngineExpressionUtil.createExpression(data.getDefaultValue());
+            if (expression == null && data.isMultiple()) {
+                return EngineExpressionUtil.createEmptyListExpression();
+            }
+            return expression;
         } catch (InvalidExpressionException e) {
             throw new IllegalArgumentException(e);
         }
-
     }
 
     public Expression getDefaultValueExpression() {

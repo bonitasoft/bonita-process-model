@@ -14,6 +14,8 @@
  */
 package org.bonitasoft.bonita2bar;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -44,9 +46,9 @@ public class BuildResult {
     private Path workdir;
 
     BuildResult(String environment, ParametersConfiguration parametersConfiguration, Path workdir) {
-        this.environment = environment;
-        this.parametersConfiguration = parametersConfiguration;
-        this.workdir = workdir;
+        this.environment = requireNonNull(environment).toLowerCase();
+        this.parametersConfiguration = requireNonNull(parametersConfiguration);
+        this.workdir = requireNonNull(workdir);
     }
 
     public void addBusinessArchive(BusinessArchive businessArchive) {
