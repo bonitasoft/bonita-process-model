@@ -81,7 +81,7 @@ public class ZipUtil extends SimpleFileVisitor<Path> implements java.lang.AutoCl
      * So the client doesn't have to manage this.
      */
     public static String normalizePath(Path path) {
-        return path.toString().replace("\\\\", "/");
+        return path.toString().replace(File.separator, "/");
     }
 
     @Override
