@@ -71,10 +71,6 @@ public class EngineDataBuilder extends ProcessSwitch<DataDefinitionBuilder> {
         return data;
     }
 
-    public FlowElementBuilder getBuilder() {
-        return builder;
-    }
-
     @Override
     public DataDefinitionBuilder caseStringType(final StringType type) {
         if (data.isMultiple()) {
@@ -121,10 +117,7 @@ public class EngineDataBuilder extends ProcessSwitch<DataDefinitionBuilder> {
 
     @Override
     public DataDefinitionBuilder caseFloatType(final FloatType type) {
-        if (data.isMultiple()) {
-            return addCollectionData(data.getName(), expr);
-        }
-        return builder.addDoubleData(data.getName(), expr);
+        throw new UnsupportedOperationException("FloatType is not supported");
     }
 
     @Override
