@@ -178,7 +178,7 @@ public class MigrationHelper extends AdapterImpl {
         } else {
             ArtifactVersion version = new DefaultArtifactVersion(modelVersion);
             ArtifactVersion currentVersion = new DefaultArtifactVersion(HistoryUtils.CURRENT_MODEL_VERSION);
-            switch (currentVersion.compareTo(version)) {
+            switch (Integer.signum(currentVersion.compareTo(version))) {
                 case 0:
                     return Status.OK_STATUS;
                 case 1:
