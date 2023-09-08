@@ -84,7 +84,7 @@
           </execution>
         </executions>
       </plugin>
-      <!-- Ensure the model and model.edit plugins are installed in a dedicated repository
+      <!-- Ensure the model and model.edit plugins are installed in repository
              before the archetype generated project is tested.
              For this purpose, the plugins are in this module's test dependencies -->
       <plugin>
@@ -96,10 +96,6 @@
             <goals>
               <goal>install</goal>
             </goals>
-            <configuration>
-              <localRepositoryPath>${project.build.directory}/repoForArchetypeTest</localRepositoryPath>
-              <useLocalRepository>true</useLocalRepository>
-            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -108,9 +104,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-archetype-plugin</artifactId>
-        <configuration>
-          <localRepositoryPath>${project.build.directory}/repoForArchetypeTest</localRepositoryPath>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
