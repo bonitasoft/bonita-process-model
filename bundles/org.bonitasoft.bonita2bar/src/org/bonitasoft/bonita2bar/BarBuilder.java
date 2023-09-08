@@ -171,7 +171,12 @@ public class BarBuilder {
     }
 
     private BuildResult buildBar(Pool process, Configuration configuration) throws BuildBarException {
-        LOGGER.info("Building {} ({})...", process.getName(), process.getVersion());
+        if (process.eResource() != null && process.eResource().getURI() != null) {
+            var resourceName = URI.decode(process.eResource().getURI().lastSegment());
+            LOGGER.info("Building {}-{} ({})...", process.getName(), process.getVersion(), resourceName);
+        } else {
+            LOGGER.info("Building {}-{}...", process.getName(), process.getVersion());
+        }
 
         final BusinessArchiveBuilder barBuilder = createBusinessArchiveBuilder();
         final EnvironmentConfigurationBuilder confBuilder = createEnvironmentConfigurationBuilder(process.getName(),
@@ -228,7 +233,7 @@ public class BarBuilder {
             final File configurationFolder = localConfiguration.toFile();
             final File confFile = new File(configurationFolder, String.format("%s.conf", uuid));
             if (!confFile.exists()) {
-                LOGGER.warn("{} configuration not found.", environment);
+                warnConfigurationNotFound(process, environment);
                 return emptyConfiguration(environment);
             }
             var resource = ModelLoader.create().withPolicy(processRegistry.getMigrationPolicy())
@@ -243,9 +248,13 @@ public class BarBuilder {
                 .filter(conf -> Objects.equals(toLowerCase(conf.getName()), toLowerCase(environment)))
                 .findFirst()
                 .orElseGet(() -> {
-                    LOGGER.warn("{} configuration not found.", environment);
+                    warnConfigurationNotFound(process, environment);
                     return emptyConfiguration(environment);
                 });
+    }
+
+    private void warnConfigurationNotFound(Pool process, String environment) {
+        LOGGER.warn("{} configuration not found for {}-{}.", environment, process.getName(), process.getVersion());
     }
 
     private String toLowerCase(String name) {
