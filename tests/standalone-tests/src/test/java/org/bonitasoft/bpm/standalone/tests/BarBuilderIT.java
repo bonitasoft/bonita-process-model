@@ -36,11 +36,6 @@ import org.bonitasoft.bonita2bar.SourcePathProvider;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
-import org.bonitasoft.web.designer.ArtifactBuilderFactory;
-import org.bonitasoft.web.designer.config.UiDesignerProperties;
-import org.bonitasoft.web.designer.config.UiDesignerPropertiesBuilder;
-import org.bonitasoft.web.designer.controller.export.ExportException;
-import org.bonitasoft.web.designer.model.ModelException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -52,17 +47,9 @@ class BarBuilderIT {
         FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/test-repository").getFile()).getAbsolutePath(),
                 projectRoot.toFile().getAbsolutePath());
         var mvnExecutable = SystemUtils.IS_OS_WINDOWS ? "mvn.cmd" : "mvn";
-        var artifactBuilder = new ArtifactBuilderFactory(uidWorkspaceProperties(projectRoot, tmpDir.resolve("uid")))
-                .create();
 
         var barBuilder = BarBuilderFactory.create(BuildConfig.builder()
-                .formBuilder(formId -> {
-                    try {
-                        return artifactBuilder.buildPage(formId);
-                    } catch (ExportException | ModelException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
+                .formBuilder(formId -> formId.getBytes())
                 .workingDirectory(tmpDir.resolve("workdir"))
                 .classpathResolver(ClasspathResolver.of(MavenUtil.buildClasspath(projectRoot, mvnExecutable)))
                 .connectorImplementationRegistry(
@@ -112,17 +99,9 @@ class BarBuilderIT {
         FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/test-repository").getFile()).getAbsolutePath(),
                 projectRoot.toFile().getAbsolutePath());
         var mvnExecutable = SystemUtils.IS_OS_WINDOWS ? "mvn.cmd" : "mvn";
-        var artifactBuilder = new ArtifactBuilderFactory(uidWorkspaceProperties(projectRoot, tmpDir.resolve("uid")))
-                .create();
 
         var barBuilder = BarBuilderFactory.create(BuildConfig.builder()
-                .formBuilder(formId -> {
-                    try {
-                        return artifactBuilder.buildPage(formId);
-                    } catch (ExportException | ModelException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
+                .formBuilder(formId -> formId.getBytes())
                 .workingDirectory(tmpDir.resolve("workdir"))
                 .classpathResolver(ClasspathResolver.of(MavenUtil.buildClasspath(projectRoot, mvnExecutable)))
                 .connectorImplementationRegistry(
@@ -135,17 +114,6 @@ class BarBuilderIT {
         var result = barBuilder.build("ProcessWithAdditionalResource", "1.0", "Local");
 
         assertThat(result.getBusinessArchives()).hasSize(1);
-    }
-
-    private UiDesignerProperties uidWorkspaceProperties(Path projectRoot, Path uidWorkdir) {
-        return new UiDesignerPropertiesBuilder()
-                .workspaceUidPath(uidWorkdir)
-                .experimental(false)
-                .workspacePath(projectRoot.resolve("app"))
-                .pagesFolderName("web_page")
-                .widgetsFolderName("web_widgets")
-                .fragmentsFolderName("web_fragments")
-                .build();
     }
 
     private static ConnectorImplementationRegistry createImplementationRegistry(Path reportFile) throws IOException {

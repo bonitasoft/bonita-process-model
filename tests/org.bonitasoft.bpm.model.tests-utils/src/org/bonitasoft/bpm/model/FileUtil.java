@@ -15,11 +15,13 @@
 package org.bonitasoft.bpm.model;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
+import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.SimpleFileVisitor;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributes;
 
 public class FileUtil {
 
@@ -29,17 +31,25 @@ public class FileUtil {
 
     public static void copyDirectory(String sourceDirectoryLocation, String destinationDirectoryLocation)
             throws IOException {
-        try (var files = Files.walk(Paths.get(sourceDirectoryLocation))) {
-            files.forEach(source -> {
-                Path destination = Paths.get(destinationDirectoryLocation,
-                        source.toString().substring(sourceDirectoryLocation.length()));
-                try {
-                    Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
-                } catch (IOException e) {
-                    throw new UncheckedIOException(e);
-                }
-            });
-        }
+        var source = Paths.get(sourceDirectoryLocation);
+        var target = Paths.get(destinationDirectoryLocation);
+        Files.walkFileTree(Paths.get(sourceDirectoryLocation), new SimpleFileVisitor<Path>() {
+
+            @Override
+            public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
+                    throws IOException {
+                Files.createDirectories(target.resolve(source.relativize(dir).toString()));
+                return FileVisitResult.CONTINUE;
+            }
+
+            @Override
+            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs)
+                    throws IOException {
+                Files.copy(file, target.resolve(source.relativize(file).toString()),
+                        StandardCopyOption.REPLACE_EXISTING);
+                return FileVisitResult.CONTINUE;
+            }
+        });
     }
 
     public static void deleteDir(Path directory) throws IOException {
