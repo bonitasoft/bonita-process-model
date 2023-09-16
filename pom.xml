@@ -528,6 +528,22 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
       <build>
         <plugins>
           <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>remap-artifacts-to-m2-repo</id>
+      <activation>
+        <file>
+          <exists>category.xml</exists>
+        </file>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
             <groupId>org.eclipse.tycho</groupId>
             <artifactId>tycho-p2-repository-plugin</artifactId>
             <version>${tycho.version}</version>
@@ -540,10 +556,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
                 <phase>prepare-package</phase>
               </execution>
             </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.sonatype.plugins</groupId>
-            <artifactId>nexus-staging-maven-plugin</artifactId>
           </plugin>
         </plugins>
       </build>

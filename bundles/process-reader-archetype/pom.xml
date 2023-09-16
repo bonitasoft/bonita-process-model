@@ -96,6 +96,9 @@
             <goals>
               <goal>install</goal>
             </goals>
+            <configuration>
+              <skipInstallation>${skipTests}</skipInstallation>
+            </configuration>
           </execution>
         </executions>
       </plugin>
@@ -104,6 +107,9 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-archetype-plugin</artifactId>
+        <configuration>
+          <skip>${skipTests}</skip>
+        </configuration>
       </plugin>
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
