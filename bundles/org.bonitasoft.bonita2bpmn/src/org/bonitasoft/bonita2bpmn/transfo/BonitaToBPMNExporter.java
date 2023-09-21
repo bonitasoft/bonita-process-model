@@ -478,7 +478,7 @@ public class BonitaToBPMNExporter {
             SequenceFlow bonitaFlow) {
         final TSequenceFlow bpmnFlow = ModelFactory.eINSTANCE.createTSequenceFlow();
         setCommonAttributes(bonitaFlow, bpmnFlow);
-        if (bonitaFlow.getCondition() != null && bonitaFlow.getCondition().hasContent()) {
+        if (!bonitaFlow.isIsDefault() && bonitaFlow.getCondition() != null && bonitaFlow.getCondition().hasContent()) {
             bpmnFlow.setConditionExpression(convertExpression(bonitaFlow.getCondition()));
         }
         final TFlowElement source = mapping.get(bonitaFlow.getSource());

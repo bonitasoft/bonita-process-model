@@ -44,7 +44,7 @@ public class FormalExpressionFunction implements Function<Expression, TFormalExp
 
     protected TFormalExpression addContent(final Expression bonitaExpression,
             final TFormalExpression formalExpression) {
-        FeatureMapUtil.addText(formalExpression.getMixed(), bonitaExpression.getContent());
+        FeatureMapUtil.addCDATA(formalExpression.getMixed(), bonitaExpression.getContent());
         return formalExpression;
     }
 
