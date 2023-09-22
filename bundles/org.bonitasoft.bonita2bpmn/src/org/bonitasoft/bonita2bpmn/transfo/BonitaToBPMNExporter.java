@@ -271,7 +271,7 @@ public class BonitaToBPMNExporter {
         final String documentation = bonitaElement.getDocumentation();
         if (documentation != null && !documentation.isEmpty()) {
             final TDocumentation doc = ModelFactory.eINSTANCE.createTDocumentation();
-            FeatureMapUtil.addText(doc.getMixed(), documentation);
+            FeatureMapUtil.addCDATA(doc.getMixed(), documentation);
             bpmnElement.getDocumentation().add(doc);
         }
     }
@@ -380,17 +380,18 @@ public class BonitaToBPMNExporter {
             final QName dataItemDefinitionIdAsQname = QName.valueOf(dataItemDefinition.getId());
 
             /* Add the dataObject using the reference */
-            createDataObject(bpmnProcess, bonitaData, dataItemDefinitionIdAsQname);
+            var dataObject = createDataObject(bpmnProcess, bonitaData, dataItemDefinitionIdAsQname);
 
             /* Define required data on the process, facultative? */
             final TDataInput tDataInput = DataIOTransformer.fillIOSpecification(bpmnProcess,
                     dataItemDefinitionIdAsQname);
 
-            /* Add default value as inputdata on the process */
+            /* Add default value as input data on the process */
             final Expression defaultValue = bonitaData.getDefaultValue();
             if (defaultValue != null) {
                 final TDataInputAssociation tDataInputAssociation = createDataInputAssociation(tDataInput,
                         defaultValue);
+                dataObject.setItemSubjectRef(dataItemDefinitionIdAsQname);
                 tDataInputAssociation.getAnyAttribute();
             }
         }
@@ -433,7 +434,7 @@ public class BonitaToBPMNExporter {
         return tDataInputAssociation;
     }
 
-    private void createDataObject(final TProcess bpmnProcess, final Data bonitaData,
+    private TDataObject createDataObject(final TProcess bpmnProcess, final Data bonitaData,
             final QName dataItemDefinitionIdAsQname) {
         final TDataObject bpmnData = ModelFactory.eINSTANCE.createTDataObject();
         bpmnData.setItemSubjectRef(dataItemDefinitionIdAsQname);
@@ -443,6 +444,7 @@ public class BonitaToBPMNExporter {
                                                                                    // dataobject and itemDefinition
         bpmnProcess.getFlowElement().add(bpmnData);
         bpmnData.setIsCollection(bonitaData.isMultiple());
+        return bpmnData;
     }
 
     private TItemDefinition createDataItemDefinition(final Data bonitaData) {
