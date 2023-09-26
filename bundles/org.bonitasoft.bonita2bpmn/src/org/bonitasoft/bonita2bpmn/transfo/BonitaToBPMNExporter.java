@@ -80,7 +80,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.ElementHandlerImpl;
-import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 import org.omg.spec.bpmn.di.BPMNEdge;
 import org.omg.spec.bpmn.di.BPMNPlane;
 import org.omg.spec.bpmn.di.BPMNShape;
@@ -330,7 +329,7 @@ public class BonitaToBPMNExporter {
             final TProcess bpmnProcess, Bounds processBounds, TextAnnotation source) {
         final TTextAnnotation annotation = ModelFactory.eINSTANCE.createTTextAnnotation();
         final TText text = ModelFactory.eINSTANCE.createTText();
-        text.getMixed().add(XMLTypePackage.Literals.XML_TYPE_DOCUMENT_ROOT__TEXT, source.getText());
+        FeatureMapUtil.addCDATA(text.getMixed(), source.getText());
         annotation.setText(text);
         annotation.setId(EcoreUtil.generateUUID());
         final List<TextAnnotationAttachment> textAnnotationAttachments = modelSearch.getAllItemsOfType(pool,
