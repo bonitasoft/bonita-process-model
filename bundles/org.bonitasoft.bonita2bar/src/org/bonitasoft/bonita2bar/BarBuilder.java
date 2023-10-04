@@ -277,7 +277,7 @@ public class BarBuilder {
     }
 
     public static String builderVersion() {
-        URL url = BarBuilder.class.getResource("/info.properties");
+        URL url = BarBuilder.class.getResource("info.properties");
         try (var is = url.openStream()) {
             var info = new Properties();
             info.load(is);
