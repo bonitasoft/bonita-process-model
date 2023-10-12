@@ -39,7 +39,7 @@
     <dependency>
       <groupId>org.bonitasoft.engine</groupId>
       <artifactId>bonita-business-archive</artifactId>
-      <version>1.0.0-alpha-01</version>
+      <version>1.0.0</version>
     </dependency>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
