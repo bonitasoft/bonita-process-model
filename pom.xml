@@ -35,6 +35,15 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</comments>
     </license>
   </licenses>
+  <developers>
+    <developer>
+      <id>bonitasoft</id>
+      <name>Bonitasoft</name>
+      <email>rd.user@bonitasoft.com</email>
+      <organization>Bonitasoft</organization>
+      <organizationUrl>https://www.bonitasoft.com</organizationUrl>
+    </developer>
+  </developers>
   <modules>
     <module>releng/target-platform</module>
     <module>bundles/</module>
