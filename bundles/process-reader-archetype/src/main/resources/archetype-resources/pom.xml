@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
+  <packaging>jar</packaging>
+  
+  <name>${displayName}</name>
+  <description>${description}</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <java.version>${java-version}</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <bonita-bpm.version>${bonita-process-model-version}</bonita-bpm.version>
+    
+    <maven-clean-plugin.version>${maven-clean-version}</maven-clean-plugin.version>
+    <maven-resources-plugin.version>${maven-resources-version}</maven-resources-plugin.version>
+    <maven-compiler-plugin.version>${maven-compiler-version}</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>${maven-surefire-version}</maven-surefire-plugin.version>
+    <maven-jar-plugin.version>${maven-jar-version}</maven-jar-plugin.version>
+    <maven-install-plugin.version>${maven-install-version}</maven-install-plugin.version>
+    <maven-deploy-plugin.version>${maven-deploy-version}</maven-deploy-plugin.version>
+    
+    <!-- Tests -->
+    <junit-jupiter-engine.version>5.7.2</junit-jupiter-engine.version>
+    <assertj-core.version>3.20.2</assertj-core.version>
+    <mockito-core.version>3.11.2</mockito-core.version>
+    <logback-classic.version>1.2.3</logback-classic.version>
+  </properties>
+
+  <dependencies>
+    <!-- Bonita Process Model -->
+    <dependency>
+      <groupId>org.bonitasoft.bpm</groupId>
+      <artifactId>org.bonitasoft.bpm.model</artifactId>
+      <version>${bonita-bpm.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bonitasoft.bpm</groupId>
+      <artifactId>org.bonitasoft.bpm.connector.model</artifactId>
+      <version>${bonita-bpm.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bonitasoft.bpm</groupId>
+      <artifactId>org.bonitasoft.bpm.migration</artifactId>
+      <version>${bonita-bpm.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bonitasoft.bpm</groupId>
+      <artifactId>org.bonitasoft.bpm.model.edit</artifactId>
+      <version>${bonita-bpm.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.bonitasoft.bpm</groupId>
+      <artifactId>org.bonitasoft.bpm.connector.model.edit</artifactId>
+      <version>${bonita-bpm.version}</version>
+    </dependency>
+    <!-- Tests -->
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit-jupiter-engine.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.assertj</groupId>
+      <artifactId>assertj-core</artifactId>
+      <version>${assertj-core.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <version>${mockito-core.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback-classic.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+	<defaultGoal>verify</defaultGoal>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>${maven-clean-plugin.version}</version>
+        </plugin>
+        <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${maven-resources-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven-jar-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>${maven-install-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${maven-deploy-plugin.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

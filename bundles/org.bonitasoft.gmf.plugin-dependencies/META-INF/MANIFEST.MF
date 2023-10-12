@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.bonitasoft.gmf.plugin-dependencies
+Bundle-Version: 8.0.0.beta-01
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Automatic-Module-Name: org.bonitasoft.gmf.plugin.dependencies
+Require-Bundle: org.eclipse.gmf.runtime.notation,
+ org.eclipse.gmf.runtime.diagram.ui

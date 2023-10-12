@@ -1,0 +1,18 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bonita to Business Archive Tests
+Bundle-SymbolicName: org.bonitasoft.bonita2bar.tests
+Bundle-Version: 8.0.0.beta-01
+Bundle-Vendor: Bonitasoft S.A.
+Fragment-Host: org.bonitasoft.bonita2bar
+Automatic-Module-Name: org.bonitasoft.bonita2bpmn.tests
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: assertj-core,
+ net.bytebuddy.byte-buddy,
+ org.objenesis,
+ org.bonitasoft.bpm.model,
+ org.bonitasoft.bpm.model.tests-utils,
+ org.eclipse.core.runtime,
+ junit-jupiter-api,
+ org.mockito.junit-jupiter,
+ org.mockito.mockito-core

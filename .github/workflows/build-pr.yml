@@ -1,0 +1,40 @@
+name: Build Pull Request
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - release/*
+      - support/*
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Cache local Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml, **/target-platform.target') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+      - name: Build with Sonarcloud
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        if: ${{ env.SONAR_TOKEN != '' }}
+        run: ./mvnw -B -ntp verify sonar:sonar -Pjacoco
+        
+      - name: Build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        if: ${{ env.SONAR_TOKEN == '' }}
+        run: ./mvnw -B -ntp verify

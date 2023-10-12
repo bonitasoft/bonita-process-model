@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Version to release (leave empty to use pom version)
+        type: string
+        default: ''
+        required: false
+      nextVersion:
+        description: 'Next development version (leave empty to use default version incrementation policy)'
+        type: string
+        required: false
+        default: 'x.y.z-SNAPSHOT'
+
+jobs:
+  build:
+    name: Release pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+        
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+       
+      - name: Configure Git user
+        run: |
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+      
+      - name: Create Release 
+        run: ./mvnw -ntp --batch-mode -Dstyle.color=always gitflow:release -DdevelopmentVersion=${{ github.event.inputs.nextVersion }} -DreleaseVersion=${{ github.event.inputs.version }} -Dverbose

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="org.bonitasoft.bpm.definitions.feature">
+      <category name="Bonita Business Process Model"/>
+   </feature>
+   <feature id="org.bonitasoft.bonita2bpmn.feature">
+      <category name="Bonita Business Process Model"/>
+   </feature>
+   <feature id="org.bonitasoft.bpm.connector.feature">
+      <category name="Bonita Business Process Model"/>
+   </feature>
+   <feature id="org.bonitasoft.bpm.model.feature">
+      <category name="Bonita Business Process Model"/>
+   </feature>
+   <feature id="org.bonitasoft.bpm.tests.feature">
+      <category name="Developer Resources"/>
+   </feature>
+   <feature id="org.bonitasoft.bonita2bar.feature">
+      <category name="Bonita Business Process Model"/>
+   </feature>
+   <feature id="org.bonitasoft.artifacts.model.feature">
+      <category name="Third party dependencies"/>
+   </feature>
+   <feature id="com.fasterxml.jackson.feature">
+      <category name="Third party dependencies"/>
+   </feature>
+   <category-def name="Bonita Business Process Model" label="Contains the Bonita Process Domain Logic."/>
+   <category-def name="Third party dependencies" label="Contains the required third party dependencies."/>
+   <category-def name="Developer Resources" label="Test resource for developers"/>
+</site>

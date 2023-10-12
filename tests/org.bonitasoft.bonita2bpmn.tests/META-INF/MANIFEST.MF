@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bonita to BPMN transformation Tests
+Bundle-SymbolicName: org.bonitasoft.bonita2bpmn.tests
+Bundle-Version: 8.0.0.beta-01
+Bundle-Vendor: BonitaSoft S.A.
+Fragment-Host: org.bonitasoft.bonita2bpmn
+Automatic-Module-Name: org.bonitasoft.bonita2bpmn.tests
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: assertj-core,
+ net.bytebuddy.byte-buddy,
+ org.objenesis,
+ org.bonitasoft.bpm.model,
+ org.bonitasoft.bpm.model.tests-utils,
+ org.junit.jupiter.params,
+ junit-jupiter-api,
+ org.mockito.mockito-core,
+ org.mockito.junit-jupiter,
+ org.bonitasoft.bpm.migration,
+ org.junit.platform.commons

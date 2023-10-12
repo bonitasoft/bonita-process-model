@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<archetype-descriptor xmlns="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/plugins/maven-archetype-plugin/archetype-descriptor/1.1.0 http://maven.apache.org/xsd/archetype-descriptor-1.1.0.xsd"
+  name="${artifactId}">
+
+  <requiredProperties>
+	<requiredProperty key="displayName"/>
+	<requiredProperty key="description">
+      <defaultValue>Describe your project here</defaultValue>
+	</requiredProperty>
+	<requiredProperty key="wrapper">
+      <defaultValue>true</defaultValue>
+	</requiredProperty>
+    <requiredProperty key="java-version">
+      <defaultValue>11</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="bonita-process-model-version">
+      <defaultValue>8.0.0-SNAPSHOT</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-clean-version">
+      <defaultValue>3.3.1</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-resources-version">
+      <defaultValue>3.3.1</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-compiler-version">
+      <defaultValue>3.10.1</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-surefire-version">
+      <defaultValue>3.1.2</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-jar-version">
+      <defaultValue>3.3.0</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-install-version">
+      <defaultValue>3.1.1</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="maven-deploy-version">
+      <defaultValue>3.1.1</defaultValue>
+    </requiredProperty>
+  </requiredProperties>
+  
+  <fileSets>
+    <fileSet filtered="true" packaged="true">
+      <directory>src/main/java</directory>
+    </fileSet>
+    <fileSet filtered="false" packaged="false">
+      <directory>src/main/resources</directory>
+    </fileSet>
+    <fileSet filtered="true" packaged="true">
+      <directory>src/test/java</directory>
+    </fileSet>
+    <fileSet filtered="false" packaged="false">
+      <directory>src/test/resources</directory>
+    </fileSet>
+  </fileSets>
+</archetype-descriptor>

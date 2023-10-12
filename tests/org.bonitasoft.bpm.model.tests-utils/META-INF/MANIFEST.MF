@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Bonita Process Model tests utilities
+Bundle-SymbolicName: org.bonitasoft.bpm.model.tests-utils
+Bundle-Version: 8.0.0.beta-01
+Bundle-Vendor: BonitasSoft S.A.
+Automatic-Module-Name: org.bonitasoft.bpm.model.tests.utils
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.bonitasoft.bpm.model,
+ assertj-core,
+ net.bytebuddy.byte-buddy,
+ com.fasterxml.jackson.core.jackson-databind,
+ com.fasterxml.jackson.core.jackson-core,
+ com.fasterxml.jackson.core.jackson-annotations
+Export-Package: org.bonitasoft.bpm.model,
+ org.bonitasoft.bpm.model.configuration.builders,
+ org.bonitasoft.bpm.model.connectorconfiguration.builders,
+ org.bonitasoft.bpm.model.expression.assertions,
+ org.bonitasoft.bpm.model.expression.builders,
+ org.bonitasoft.bpm.model.parameter.builders,
+ org.bonitasoft.bpm.model.process.assertions,
+ org.bonitasoft.bpm.model.process.builders
