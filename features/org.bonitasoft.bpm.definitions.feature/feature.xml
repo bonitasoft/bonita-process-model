@@ -2,7 +2,7 @@
 <feature
       id="org.bonitasoft.bpm.definitions.feature"
       label="Bonita Business Process Model definitions"
-      version="8.0.0"
+      version="8.1.0.qualifier"
       provider-name="BonitaSoft S.A.">
 
    <description url="https://github.com/bonitasoft/bonita-process-model">

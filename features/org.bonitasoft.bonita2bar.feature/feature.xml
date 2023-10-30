@@ -2,7 +2,7 @@
 <feature
       id="org.bonitasoft.bonita2bar.feature"
       label="Bonita Business Process Model to Business Archive transformation"
-      version="8.0.0"
+      version="8.1.0.qualifier"
       provider-name="BonitaSoft S.A.">
 
    <description url="https://github.com/bonitasoft/bonita-process-model">

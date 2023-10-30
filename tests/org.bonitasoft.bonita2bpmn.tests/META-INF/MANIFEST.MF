@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Bonita to BPMN transformation Tests
 Bundle-SymbolicName: org.bonitasoft.bonita2bpmn.tests
-Bundle-Version: 8.0.0
+Bundle-Version: 8.1.0.qualifier
 Bundle-Vendor: BonitaSoft S.A.
 Fragment-Host: org.bonitasoft.bonita2bpmn
 Automatic-Module-Name: org.bonitasoft.bonita2bpmn.tests
