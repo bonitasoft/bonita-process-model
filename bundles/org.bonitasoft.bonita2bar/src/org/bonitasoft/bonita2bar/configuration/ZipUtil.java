@@ -104,6 +104,9 @@ public class ZipUtil extends SimpleFileVisitor<Path> implements java.lang.AutoCl
     private static void unzipEntry(Path targetDir, ZipInputStream zis, ZipEntry entry)
             throws IOException {
         File target = targetDir.toFile().toPath().resolve(entry.getName()).toFile();
+        if (!target.toPath().normalize().startsWith(targetDir)) {
+            throw new IOException(String.format("Bad zip entry: %s", entry.getName()));
+        }
         if (entry.isDirectory()) {
             if (!target.exists()) {
                 target.mkdirs();
