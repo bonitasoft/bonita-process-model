@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Bonita to Business Archive Tests
 Bundle-SymbolicName: org.bonitasoft.bonita2bar.tests
-Bundle-Version: 8.0.0.beta-01
+Bundle-Version: 8.0.0
 Bundle-Vendor: Bonitasoft S.A.
 Fragment-Host: org.bonitasoft.bonita2bar
 Automatic-Module-Name: org.bonitasoft.bonita2bpmn.tests

@@ -2,7 +2,7 @@
 <feature
       id="org.bonitasoft.bonita2bpmn.feature"
       label="Bonita Business Process Model to BPMN transformation"
-      version="8.0.0.beta-01"
+      version="8.0.0"
       provider-name="BonitaSoft S.A.">
 
    <description url="https://github.com/bonitasoft/bonita-process-model">
