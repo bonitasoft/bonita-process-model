@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.bonitasoft.bpm.connector.model.edit;singleton:=true
 Automatic-Module-Name: org.bonitasoft.bpm.connector.model.edit
-Bundle-Version: 8.0.0
+Bundle-Version: 8.0.1.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.bonitasoft.bpm.connector.model.definition.provider.ConnectorEditPlugin$Implementation
 Bundle-Vendor: %providerName
