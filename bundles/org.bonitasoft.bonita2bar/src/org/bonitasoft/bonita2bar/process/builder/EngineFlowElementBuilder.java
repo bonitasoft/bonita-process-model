@@ -511,7 +511,8 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
         } else {
             final List<EObject> referencedElements = mapping.getProcessSource().getReferencedElements();
             String type = LeftOperand.TYPE_DATA;
-            if (!referencedElements.isEmpty()) {
+            if (!referencedElements.isEmpty()
+                    && Objects.equals(ExpressionConstants.VARIABLE_TYPE, mapping.getProcessSource().getType())) {
                 type = getLeftOperandTypeForData(referencedElements.get(0));
             }
             leftOperandbuilder.setType(type);
