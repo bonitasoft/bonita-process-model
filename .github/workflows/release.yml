@@ -35,10 +35,9 @@ jobs:
           distribution: 'temurin'
           java-version: 17
        
-      - name: Configure Git user
-        run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
+      - uses: bonitasoft/git-setup-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
       
       - name: Create Release 
         run: ./mvnw -ntp --batch-mode -Dstyle.color=always gitflow:release -DgitFlowConfig.developmentBranch=${{ github.ref_name }} -DdevelopmentVersion=${{ github.event.inputs.nextVersion }} -DreleaseVersion=${{ github.event.inputs.version }} -DskipReleaseMergeProdBranch=${{ github.event.inputs.skipMergeReleaseInMaster }} -Dverbose

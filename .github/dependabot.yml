@@ -15,6 +15,11 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+    groups:
+      production-dependencies:
+        dependency-type: "production"
+      development-dependencies:
+        dependency-type: "development"
 
   # Maintain dependencies for maven
   - package-ecosystem: "maven" 
@@ -25,3 +30,8 @@ updates:
     commit-message:
       prefix: "chore"
       include: "scope"
+    groups:
+      production-dependencies:
+        dependency-type: "production"
+      development-dependencies:
+        dependency-type: "development"
