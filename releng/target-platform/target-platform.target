@@ -72,7 +72,7 @@
 		        </dependencies>
 	        </location>
 	        <location includeDependencyDepth="none" includeDependencyScopes="compile,runtime,system" includeSource="true" missingManifest="generate" type="Maven">
-		        <feature id="org.bonitasoft.artifacts.model.feature" label="Bonita Artifacts Models Feature" provider-name="Bonitasoft S.A" version="1.0.0">
+		        <feature id="org.bonitasoft.artifacts.model.feature" label="Bonita Artifacts Models Feature" provider-name="Bonitasoft S.A" version="1.0.1">
 			        <description url="https://github.com/bonitasoft/bonita-process-model">
       Bonita Artifacts Model Feature
    </description>
@@ -123,25 +123,25 @@
 			        <dependency>
 				        <groupId>org.bonitasoft.engine</groupId>
 				        <artifactId>bonita-business-archive</artifactId>
-				        <version>1.0.0</version>
+				        <version>1.0.1</version>
 				        <type>jar</type>
 			        </dependency>
 			        <dependency>
 				        <groupId>org.bonitasoft.engine</groupId>
 				        <artifactId>bonita-common-artifacts-model</artifactId>
-				        <version>1.0.0</version>
+				        <version>1.0.1</version>
 				        <type>jar</type>
 			        </dependency>
 			        <dependency>
 				        <groupId>org.bonitasoft.engine</groupId>
 				        <artifactId>bonita-form-mapping-model</artifactId>
-				        <version>1.0.0</version>
+				        <version>1.0.1</version>
 				        <type>jar</type>
 			        </dependency>
 			        <dependency>
 				        <groupId>org.bonitasoft.engine</groupId>
 				        <artifactId>bonita-process-definition-model</artifactId>
-				        <version>1.0.0</version>
+				        <version>1.0.1</version>
 				        <type>jar</type>
 			        </dependency>
 			        <dependency>
