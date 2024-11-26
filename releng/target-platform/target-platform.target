@@ -12,7 +12,8 @@
             <unit id="org.eclipse.m2e.feature.feature.group" version="0.0.0"/>
         </location>
         <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-            <repository location="https://groovy.jfrog.io/artifactory/plugins-release/e4.24"/>
+            <!-- workaround as https://groovy.jfrog.io/artifactory/plugins-release/e4.24 generates very long path with Google API which make the build fail -->
+            <repository location="https://update-site.bonitasoft.com/p2/4.24/"/>
             <unit id="org.codehaus.groovy30.feature.feature.group" version="0.0.0"/>
         </location>
 	        <location includeDependencyDepth="infinite" includeDependencyScopes="compile,runtime,system" includeSource="true" missingManifest="generate" type="Maven">
