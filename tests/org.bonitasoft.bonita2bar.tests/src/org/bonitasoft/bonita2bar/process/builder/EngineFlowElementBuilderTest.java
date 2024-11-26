@@ -273,6 +273,67 @@ class EngineFlowElementBuilderTest {
     }
 
     @Test
+    void caseCallActivityWithInputMappingAssignedToDataWithScriptSource() throws Exception {
+        var businessVariable = aBusinessData().withName("sourceData")
+                .withClassname("classname")
+                .build();
+        final Pool pool = aPool()
+                .havingElements(aCallActivity().withName("Call Activity")
+                        .havingCalledActivityName(aConstantExpression().withContent("Pool1"))
+                        .havingInputMappings(anInputMapping()
+                                .setSubProcessTarget(InputMappingAssignationType.DATA, "subProcessData")
+                                .setProcessSource(aGroovyScriptExpression()
+                                        .havingReferencedElements(aBusinessData().withName("sourceData")
+                                                .withClassname("classname")
+                                                .build())
+                                        .withContent("sourceData.name")
+                                        .withReturnType(String.class.getName())
+                                        .build())
+                                .build()))
+                .havingData(businessVariable).build();
+
+        flowElementSwitch.caseCallActivity((CallActivity) pool.getElements().get(0));
+
+        var processDefinition = processDefinitionBuilder.done();
+        var callActivity = processDefinition.getFlowElementContainer().getActivity("Call Activity");
+        assertThat(callActivity).isInstanceOf(CallActivityDefinition.class);
+        assertThat(((CallActivityDefinition) callActivity).getDataInputOperations()).hasSize(1)
+                .extracting("type", "leftOperand.name", "leftOperand.type", "rightOperand.content")
+                .contains(tuple(OperatorType.ASSIGNMENT, "subProcessData", LeftOperand.TYPE_DATA, "sourceData.name"));
+    }
+
+    @Test
+    void caseCallActivityWithInputMappingAssignedToBusinessData() throws Exception {
+        var businessVariable = aBusinessData().withName("sourceData")
+                .withClassname("classname")
+                .build();
+        final Pool pool = aPool()
+                .havingElements(aCallActivity().withName("Call Activity")
+                        .havingCalledActivityName(aConstantExpression().withContent("Pool1"))
+                        .havingInputMappings(anInputMapping()
+                                .setSubProcessTarget(InputMappingAssignationType.DATA, "subProcessData")
+                                .setProcessSource(aVariableExpression()
+                                        .havingReferencedElements(aBusinessData().withName("sourceData")
+                                                .withClassname("classname")
+                                                .build())
+                                        .withContent("sourceData")
+                                        .withReturnType("classname")
+                                        .build())
+                                .build()))
+                .havingData(businessVariable).build();
+
+        flowElementSwitch.caseCallActivity((CallActivity) pool.getElements().get(0));
+
+        var processDefinition = processDefinitionBuilder.done();
+        var callActivity = processDefinition.getFlowElementContainer().getActivity("Call Activity");
+        assertThat(callActivity).isInstanceOf(CallActivityDefinition.class);
+        assertThat(((CallActivityDefinition) callActivity).getDataInputOperations()).hasSize(1)
+                .extracting("type", "leftOperand.name", "leftOperand.type", "rightOperand.content")
+                .contains(
+                        tuple(OperatorType.ASSIGNMENT, "subProcessData", LeftOperand.TYPE_BUSINESS_DATA, "sourceData"));
+    }
+
+    @Test
     void caseCallActivityWithInputMappingAssignedToContractInput() throws Exception {
         final Pool pool = aPool()
                 .havingElements(aCallActivity().withName("Call Activity")
