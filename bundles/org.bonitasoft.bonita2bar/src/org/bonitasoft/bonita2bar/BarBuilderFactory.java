@@ -43,6 +43,7 @@ public class BarBuilderFactory {
         var sourceProvider = config.getSourcePathProvider();
         var processRegistry = config.getProcessRegistry();
         var implementationRegistry = config.getConnectorImplementationRegistry();
+        var singleAssemblyExecutor = config.getSingleAssemblyExecutor();
         var classpathResolver = config.getClasspathResolver();
         var workingDirectory = config.getWorkingDirectory();
 
@@ -62,9 +63,9 @@ public class BarBuilderFactory {
         barBuilder.register(
                 new CustomGroovyArtifactProvider(sourceProvider.getGroovySource(), classpathResolver,
                         workingDirectory));
-        barBuilder.register(new ConnectorImplementationArtifactProvider(classpathResolver,
+        barBuilder.register(new ConnectorImplementationArtifactProvider(singleAssemblyExecutor,
                 implementationRegistry, FragmentTypes.CONNECTOR));
-        barBuilder.register(new ConnectorImplementationArtifactProvider(classpathResolver,
+        barBuilder.register(new ConnectorImplementationArtifactProvider(singleAssemblyExecutor,
                 implementationRegistry, FragmentTypes.ACTOR_FILTER));
         barBuilder.register(new AdditionalResourcesArtifactProvider(sourceProvider.getResources()));
         return barBuilder;
@@ -76,6 +77,7 @@ public class BarBuilderFactory {
         private boolean includeParameters;
         private Path workingDirectory;
         private ConnectorImplementationRegistry connectorImplementationRegistry;
+        private SingleAssemblyExecutor singleAssemblyExecutor;
         private FormBuilder formBuilder;
         private ProcessRegistry processRegistry;
         private SourcePathProvider sourcePathProvider;
@@ -86,6 +88,7 @@ public class BarBuilderFactory {
             this.includeParameters = builder.includeParameters;
             this.workingDirectory = builder.workingDirectory;
             this.connectorImplementationRegistry = builder.connectorImplementationRegistry;
+            this.singleAssemblyExecutor = builder.singleAssemblyExecutor;
             this.formBuilder = builder.formBuilder;
             this.processRegistry = builder.processRegistry;
             this.sourcePathProvider = builder.sourcePathProvider;
@@ -108,6 +111,11 @@ public class BarBuilderFactory {
         public ConnectorImplementationRegistry getConnectorImplementationRegistry() {
             Objects.requireNonNull(connectorImplementationRegistry, "No ConnectorImplementationRegistry configured.");
             return connectorImplementationRegistry;
+        }
+
+        public SingleAssemblyExecutor getSingleAssemblyExecutor() {
+            Objects.requireNonNull(singleAssemblyExecutor, "No SingleAssemblyExecutor configured.");
+            return singleAssemblyExecutor;
         }
 
         public FormBuilder getFormBuilder() {
@@ -141,6 +149,7 @@ public class BarBuilderFactory {
             private boolean includeParameters = false;
             private Path workingDirectory;
             private ConnectorImplementationRegistry connectorImplementationRegistry;
+            private SingleAssemblyExecutor singleAssemblyExecutor;
             private FormBuilder formBuilder;
             private ProcessRegistry processRegistry;
             private SourcePathProvider sourcePathProvider;
@@ -177,6 +186,12 @@ public class BarBuilderFactory {
             public BuildConfigBuilder connectorImplementationRegistry(
                     ConnectorImplementationRegistry connectorImplementationRegistry) {
                 this.connectorImplementationRegistry = connectorImplementationRegistry;
+                return this;
+            }
+
+            public BuildConfigBuilder singleAssemblyExecutor(
+                    SingleAssemblyExecutor singleAssemblyExecutor) {
+                this.singleAssemblyExecutor = singleAssemblyExecutor;
                 return this;
             }
 

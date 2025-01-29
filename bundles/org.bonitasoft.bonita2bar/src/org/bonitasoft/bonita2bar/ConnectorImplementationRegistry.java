@@ -22,6 +22,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.jar.JarFile;
 
+import org.apache.maven.artifact.Artifact;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
 import org.bonitasoft.bpm.connector.model.implementation.DocumentRoot;
 import org.bonitasoft.bpm.connector.model.implementation.util.ConnectorImplementationResourceFactoryImpl;
@@ -36,10 +37,12 @@ public interface ConnectorImplementationRegistry {
 
     Optional<ConnectorImplementation> find(String id, String version);
 
+    Optional<Artifact> findArtifact(String id, String version);
+
     /**
      * {@link ConnectorImplementationRegistry} factory method.
      * 
-     * @param implementations A lsit of {@link ConnectorImplementationJar}
+     * @param implementations A list of {@link ConnectorImplementationJar}
      * @return A default implementation of {@link ConnectorImplementationRegistry} that search for
      *         connector implementations from the given list of {@link ConnectorImplementationJar}.
      */
@@ -51,6 +54,15 @@ public interface ConnectorImplementationRegistry {
                 return implementations.stream()
                         .filter(impl -> Objects.equals(impl.getId(), id) && Objects.equals(impl.getVersion(), version))
                         .map(this::loadImplementation).filter(Objects::nonNull).findFirst();
+            }
+
+            @Override
+            public Optional<Artifact> findArtifact(String id, String version) {
+                return implementations.stream()
+                        .filter(impl -> Objects.equals(impl.getId(), id) && Objects.equals(impl.getVersion(), version))
+                        .map(ConnectorImplementationJar::getArtifact)
+                        .filter(Objects::nonNull)
+                        .findFirst();
             }
 
             private ConnectorImplementation loadImplementation(ConnectorImplementationJar implementation) {
@@ -73,14 +85,20 @@ public interface ConnectorImplementationRegistry {
         private final String version;
         private final File jarFile;
         private final String entry;
+        private Artifact artifact;
 
-        public static ConnectorImplementationJar of(String id, String version, File jarFile, String entry) {
-            return new ConnectorImplementationJar(id, version, jarFile, entry);
+        public static ConnectorImplementationJar of(String id, String version, Artifact artifact, File jarFile,
+                String entry) {
+            return new ConnectorImplementationJar(id, version, artifact, jarFile, entry);
         }
 
-        private ConnectorImplementationJar(String id, String version, File jarFile, String entry) {
+        private ConnectorImplementationJar(String id, String version,
+                Artifact artifact,
+                File jarFile,
+                String entry) {
             this.id = id;
             this.version = version;
+            this.artifact = artifact;
             this.jarFile = jarFile;
             this.entry = entry;
         }
@@ -91,6 +109,10 @@ public interface ConnectorImplementationRegistry {
 
         public String getVersion() {
             return version;
+        }
+
+        public Artifact getArtifact() {
+            return artifact;
         }
 
         public File getJarFile() {

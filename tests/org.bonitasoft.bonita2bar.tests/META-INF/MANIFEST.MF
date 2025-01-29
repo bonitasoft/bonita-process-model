@@ -15,4 +15,5 @@ Require-Bundle: assertj-core,
  org.eclipse.core.runtime,
  junit-jupiter-api,
  org.mockito.junit-jupiter,
- org.mockito.mockito-core
+ org.mockito.mockito-core,
+ org.eclipse.m2e.maven.runtime

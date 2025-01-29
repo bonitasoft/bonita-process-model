@@ -26,12 +26,17 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.DefaultArtifact;
+import org.apache.maven.artifact.handler.DefaultArtifactHandler;
+import org.bonitasoft.bonita2bar.AssemblyExecutionException;
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.ClasspathResolver;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
+import org.bonitasoft.bonita2bar.SingleAssemblyExecutor;
 import org.bonitasoft.bonita2bar.SourcePathProvider;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
@@ -43,8 +48,8 @@ class BarBuilderIT {
 
     @Test
     void buildProjectBusinessArchives(@TempDir Path tmpDir) throws Exception {
-        var projectRoot = tmpDir.resolve("test-respository");
-        FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/test-repository").getFile()).getAbsolutePath(),
+        var projectRoot = tmpDir.resolve("my-project");
+        FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/my-project").getFile()).getAbsolutePath(),
                 projectRoot.toFile().getAbsolutePath());
         var mvnExecutable = SystemUtils.IS_OS_WINDOWS ? "mvn.cmd" : "mvn";
 
@@ -54,6 +59,18 @@ class BarBuilderIT {
                 .classpathResolver(ClasspathResolver.of(MavenUtil.buildClasspath(projectRoot, mvnExecutable)))
                 .connectorImplementationRegistry(
                         createImplementationRegistry(MavenUtil.analyze(projectRoot, mvnExecutable)))
+                .singleAssemblyExecutor(new SingleAssemblyExecutor() {
+
+                    @Override
+                    public Path execute(Artifact artifact) throws AssemblyExecutionException {
+                        try {
+                            return MavenUtil.singleAssembly(projectRoot, mvnExecutable, getGoal(),
+                                    getUserProperties(artifact.getGroupId(), artifact.getArtifactId()));
+                        } catch (InterruptedException | IOException e) {
+                            throw new AssemblyExecutionException("Failed to execute Maven assembly.", e);
+                        }
+                    }
+                })
                 .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                         MigrationPolicy.ALWAYS_MIGRATE_POLICY))
                 .sourcePathProvider(SourcePathProvider.of(projectRoot.resolve("app")))
@@ -95,8 +112,8 @@ class BarBuilderIT {
 
     @Test
     void buildBusinessArchivesWithMigration(@TempDir Path tmpDir) throws Exception {
-        var projectRoot = tmpDir.resolve("test-respository");
-        FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/test-repository").getFile()).getAbsolutePath(),
+        var projectRoot = tmpDir.resolve("my-project");
+        FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/my-project").getFile()).getAbsolutePath(),
                 projectRoot.toFile().getAbsolutePath());
         var mvnExecutable = SystemUtils.IS_OS_WINDOWS ? "mvn.cmd" : "mvn";
 
@@ -106,6 +123,18 @@ class BarBuilderIT {
                 .classpathResolver(ClasspathResolver.of(MavenUtil.buildClasspath(projectRoot, mvnExecutable)))
                 .connectorImplementationRegistry(
                         createImplementationRegistry(MavenUtil.analyze(projectRoot, mvnExecutable)))
+                .singleAssemblyExecutor(new SingleAssemblyExecutor() {
+
+                    @Override
+                    public Path execute(Artifact artifact) throws AssemblyExecutionException {
+                        try {
+                            return MavenUtil.singleAssembly(projectRoot, mvnExecutable, getGoal(),
+                                    getUserProperties(artifact.getGroupId(), artifact.getArtifactId()));
+                        } catch (InterruptedException | IOException e) {
+                            throw new AssemblyExecutionException("Failed to execute Maven assembly.", e);
+                        }
+                    }
+                })
                 .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                         MigrationPolicy.ALWAYS_MIGRATE_POLICY))
                 .sourcePathProvider(SourcePathProvider.of(projectRoot))
@@ -130,6 +159,10 @@ class BarBuilderIT {
         return implementations.stream()
                 .map(map -> ConnectorImplementationJar.of((String) map.get("implementationId"),
                         (String) map.get("implementationVersion"),
+                        new DefaultArtifact(((Map<String, String>) map.get("artifact")).get("groupId"),
+                                ((Map<String, String>) map.get("artifact")).get("artifactId"),
+                                ((Map<String, String>) map.get("artifact")).get("version"), "runtime", "jar", null,
+                                new DefaultArtifactHandler()),
                         new File((String) ((Map<String, Object>) map.get("artifact")).get("file")),
                         (String) map.get("jarEntry")))
                 .collect(Collectors.toList());

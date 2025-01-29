@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -57,6 +58,23 @@ public class MavenUtil {
         new MavenCommandBuilder(mvnExecutable).directory(appModule.toFile()).addGoal("bonita-project:analyze").start()
                 .waitFor();
         return appModule.resolve("target").resolve("bonita-dependencies.json");
+    }
+
+    public static Path singleAssembly(Path projectRoot, String mvnExecutable, String goal, Properties configuration)
+            throws InterruptedException, IOException {
+        var appModule = projectRoot.resolve("app");
+        File pomFile = appModule.resolve("pom.xml").toFile();
+        if (!pomFile.isFile()) {
+            throw new IllegalArgumentException("Not a maven project !");
+        }
+
+        var builder = new MavenCommandBuilder(mvnExecutable).directory(appModule.toFile()).addGoal(goal);
+        for (var entry : configuration.entrySet()) {
+            builder.addProperty((String) entry.getKey(), (String) entry.getValue());
+        }
+        builder.start()
+                .waitFor();
+        return appModule.resolve("target").resolve("extension-classpath");
     }
 
     public static List<String> buildClasspath(Path projectRoot, String mvnExecutable)

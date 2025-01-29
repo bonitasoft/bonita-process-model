@@ -26,6 +26,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
+import org.apache.maven.artifact.Artifact;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.configuration.ConfigurationArchive;
 import org.bonitasoft.bpm.model.configuration.Configuration;
@@ -55,6 +56,13 @@ class BarBuilderTest {
         barBuilder = BarBuilderFactory
                 .create(BuildConfig.builder()
                         .connectorImplementationRegistry(ConnectorImplementationRegistry.of(List.of()))
+                        .singleAssemblyExecutor(new SingleAssemblyExecutor() {
+
+                            @Override
+                            public Path execute(Artifact artifact) throws AssemblyExecutionException {
+                                return null;
+                            }
+                        })
                         .formBuilder(id -> new byte[0]).workingDirectory(repoRoot.toPath().resolve("target"))
                         .sourcePathProvider(sourcePathProvider).processRegistry(processRegistry).build());
     }

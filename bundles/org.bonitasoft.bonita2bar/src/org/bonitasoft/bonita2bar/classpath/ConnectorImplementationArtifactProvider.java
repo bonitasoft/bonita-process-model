@@ -14,29 +14,28 @@
  */
 package org.bonitasoft.bonita2bar.classpath;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.bonitasoft.bonita2bar.AssemblyExecutionException;
 import org.bonitasoft.bonita2bar.BarArtifactProvider;
 import org.bonitasoft.bonita2bar.BuildBarException;
-import org.bonitasoft.bonita2bar.ClasspathResolver;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
+import org.bonitasoft.bonita2bar.SingleAssemblyExecutor;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
 import org.bonitasoft.bpm.connector.model.implementation.util.ConnectorImplementationResourceFactoryImpl;
 import org.bonitasoft.bpm.connector.model.implementation.util.ConnectorImplementationXMLProcessor;
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.configuration.DefinitionMapping;
-import org.bonitasoft.bpm.model.configuration.Fragment;
-import org.bonitasoft.bpm.model.configuration.FragmentContainer;
 import org.bonitasoft.bpm.model.process.Pool;
+import org.bonitasoft.bpm.model.util.FileUtil;
 import org.bonitasoft.bpm.model.util.FragmentTypes;
 import org.bonitasoft.engine.bpm.bar.BarResource;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
@@ -54,12 +53,12 @@ public class ConnectorImplementationArtifactProvider implements BarArtifactProvi
     private ConnectorImplementationRegistry implRegistry;
     private String type;
 
-    private ClasspathResolver classpathResolver;
+    private SingleAssemblyExecutor singleAssemblyExecutor;
 
-    public ConnectorImplementationArtifactProvider(ClasspathResolver classpathResolver,
+    public ConnectorImplementationArtifactProvider(SingleAssemblyExecutor singleAssemblyExecutor,
             ConnectorImplementationRegistry implRegistry,
             String type) {
-        this.classpathResolver = classpathResolver;
+        this.singleAssemblyExecutor = singleAssemblyExecutor;
         this.type = type;
         this.implRegistry = implRegistry;
         this.resourceFactory = new ConnectorImplementationResourceFactoryImpl();
@@ -105,44 +104,68 @@ public class ConnectorImplementationArtifactProvider implements BarArtifactProvi
                     .orElseThrow(
                             () -> new BuildBarException(String.format("Implementation %s (%s) not found in repository",
                                     association.getImplementationId(), association.getImplementationVersion())));
+            var artifact = implRegistry.findArtifact(implId, implVersion)
+                    .orElseThrow(
+                            () -> new BuildBarException(String.format("No Artifact found for implementation %s (%s)",
+                                    association.getImplementationId(), association.getImplementationVersion())));
+            Path targetPath = null;
             try {
                 connectorImpl.setImplemetation(
                         createImplementationResource(connectorImplementationFilename, implementation));
-                addProcessDependencies(connectorImpl, configuration, implementation);
+                targetPath = singleAssemblyExecutor.execute(artifact);
+                if (targetPath != null && Files.exists(targetPath)) {
+                    for (var jarFile : targetPath.toFile().listFiles(f -> f.getName().endsWith(".jar"))) {
+                        var barResource = new BarResource(jarFile.getName(), Files.readAllBytes(jarFile.toPath()));
+                        LOGGER.info("Adding {} to bar classpath...", jarFile.getName());
+                        connectorImpl.addDependency(barResource);
+                    }
+                }
                 implResources.add(connectorImpl);
             } catch (IOException e) {
                 String message = String.format("Failed to add implementation %s-%s in bar file",
                         association.getImplementationId(), association.getImplementationVersion());
                 throw new BuildBarException(message, e);
+            } catch (AssemblyExecutionException e) {
+                String message = String.format("Failed to resolve implementation %s-%s dependencies",
+                        association.getImplementationId(), association.getImplementationVersion());
+                throw new BuildBarException(message, e);
+            } finally {
+                if (targetPath != null && Files.exists(targetPath)) {
+                    try {
+                        FileUtil.deleteDir(targetPath);
+                    } catch (IOException e) {
+                        LOGGER.warn(e.getMessage());
+                    }
+                }
             }
         }
         return implResources;
     }
 
-    private void addProcessDependencies(final ConnectorImplementationResources implResources,
-            final Configuration configuration, final ConnectorImplementation implementation) throws IOException {
-        final Optional<FragmentContainer> fragmentContainer = configuration.getProcessDependencies().stream()
-                .filter(fc -> fc.getId().equals(type)).findFirst();
-        if (fragmentContainer.isPresent()) {
-            final Optional<FragmentContainer> implementationContainer = fragmentContainer.get().getChildren().stream()
-                    .filter(fragment -> Objects.equals(fragment.getId(), toConnectorImplementationFilename(
-                            implementation.getImplementationId(), implementation.getImplementationVersion(), false)))
-                    .findFirst();
-            if (implementationContainer.isPresent()) {
-                for (final Fragment fragment : implementationContainer.get().getFragments().stream()
-                        .filter(Fragment::isExported).collect(Collectors.toList())) {
-                    File jarFile = classpathResolver.findJarFile(fragment.getValue());
-                    if (jarFile != null && jarFile.exists()) {
-                        LOGGER.info("Adding {} to bar classpath...", jarFile.getName());
-                        implResources.addDependency(
-                                new BarResource(jarFile.getName(), Files.readAllBytes(jarFile.toPath())));
-                    } else {
-                        LOGGER.warn("Expected jar file {} not found in classpath.", fragment.getValue());
-                    }
-                }
-            }
-        }
-    }
+    //    private void addProcessDependencies(final ConnectorImplementationResources implResources,
+    //            final Configuration configuration, final ConnectorImplementation implementation) throws IOException {
+    //        final Optional<FragmentContainer> fragmentContainer = configuration.getProcessDependencies().stream()
+    //                .filter(fc -> fc.getId().equals(type)).findFirst();
+    //        if (fragmentContainer.isPresent()) {
+    //            final Optional<FragmentContainer> implementationContainer = fragmentContainer.get().getChildren().stream()
+    //                    .filter(fragment -> Objects.equals(fragment.getId(), toConnectorImplementationFilename(
+    //                            implementation.getImplementationId(), implementation.getImplementationVersion(), false)))
+    //                    .findFirst();
+    //            if (implementationContainer.isPresent()) {
+    //                for (final Fragment fragment : implementationContainer.get().getFragments().stream()
+    //                        .filter(Fragment::isExported).collect(Collectors.toList())) {
+    //                    File jarFile = classpathResolver.findJarFile(fragment.getValue());
+    //                    if (jarFile != null && jarFile.exists()) {
+    //                        LOGGER.info("Adding {} to bar classpath...", jarFile.getName());
+    //                        implResources.addDependency(
+    //                                new BarResource(jarFile.getName(), Files.readAllBytes(jarFile.toPath())));
+    //                    } else {
+    //                        LOGGER.warn("Expected jar file {} not found in classpath.", fragment.getValue());
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
 
     private BarResource createImplementationResource(final String connectorImplementationFilename,
             final ConnectorImplementation implementation) throws IOException {
