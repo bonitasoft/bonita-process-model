@@ -17,11 +17,17 @@ package org.bonitasoft.bonita2bar.process.pomgen;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
 import org.apache.maven.model.Build;
+import org.apache.maven.model.Model;
 import org.apache.maven.project.MavenProject;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
+import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
+import org.bonitasoft.bpm.model.process.Connector;
 import org.bonitasoft.bpm.model.process.Pool;
 
 /**
@@ -31,6 +37,7 @@ public class ProcessPomGenerator {
 
     private MavenProject applicationProject;
     private Pool process;
+    private ConnectorImplementationRegistry connectorImplementationRegistry;
 
     /**
      * Default Constructor.
@@ -43,12 +50,15 @@ public class ProcessPomGenerator {
      * 
      * @param applicationProject the application maven project
      * @param process the process to generate the pom for
+     * @param connectorImplementationRegistry the connector implementation registry
      * @return a new instance of {@link ProcessPomGenerator}
      */
-    public static ProcessPomGenerator create(MavenProject applicationProject, Pool process) {
+    public static ProcessPomGenerator create(MavenProject applicationProject, Pool process,
+            ConnectorImplementationRegistry connectorImplementationRegistry) {
         var gen = new ProcessPomGenerator();
         gen.applicationProject = applicationProject;
         gen.process = process;
+        gen.connectorImplementationRegistry = connectorImplementationRegistry;
         return gen;
     }
 
@@ -80,8 +90,37 @@ public class ProcessPomGenerator {
                     .relativize(applicationProject.getBasedir().toPath().resolve(Path.of(relPath)));
             model.getParent().setRelativePath(fixedPath.toString());
         });
+        // remove connector dependencies from other processes
+        filterUnusedConnectorDependencies(model);
         pomAccess.writePom(model);
         return pomAccess;
+    }
+
+    /**
+     * Remove connector dependencies from other processes, with help of the dependency report.
+     * 
+     * @param model the maven model to update
+     */
+    private void filterUnusedConnectorDependencies(Model model) {
+        List<Connector> processUsedConnectors = new ArrayList<>();
+        process.eAllContents().forEachRemaining(obj -> {
+            if (obj instanceof Connector) {
+                processUsedConnectors.add((Connector) obj);
+            }
+        });
+
+        model.getDependencies().removeIf(dep -> {
+            // get related connector implementation
+            //FIXME: the find method uses implementation id, not artifact id...
+            Optional<ConnectorImplementation> connectorImplementation = connectorImplementationRegistry
+                    .find(dep.getArtifactId(), dep.getVersion());
+            return connectorImplementation.filter(connImpl -> {
+                // check if the connector is used in the process
+                return processUsedConnectors.stream()
+                        .noneMatch(connDef -> connDef.getDefinitionId().equals(connImpl.getDefinitionId())
+                                && connDef.getDefinitionVersion().equals(connImpl.getDefinitionVersion()));
+            }).isPresent();
+        });
     }
 
 }

@@ -20,18 +20,29 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.apache.maven.model.Dependency;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.project.MavenProject;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
+import org.bonitasoft.bpm.model.FileUtil;
+import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -45,18 +56,27 @@ public class ProcessPomGeneratorTest {
         return "org.bonitasoft.connectors:bonita-connector-email:jar".equals(dep.getManagementKey())
                 && "1.3.0".equals(dep.getVersion());
     };
+    private Path projectRoot;
     private MavenProject appProject;
     private ProcessRegistry processRegistry;
+    private ConnectorImplementationRegistry connectorImplementationRegistry;
 
     @BeforeEach
     void setUp() throws Exception {
-        var repoRoot = new File(URLDecoder.decode(
+        var mvnExecutable = Platform.getOS().contains("win") ? "mvn.cmd" : "mvn";
+
+        projectRoot = Files.createTempDirectory("test-repository");
+        var testRepoRoot = new File(URLDecoder.decode(
                 FileLocator.toFileURL(ProcessPomGeneratorTest.class.getResource("/test-repository")).getFile(),
                 "UTF-8"));
+        FileUtil.copyDirectory(testRepoRoot.getAbsolutePath(), projectRoot.toFile().getAbsolutePath());
 
-        processRegistry = ProcessRegistry.of(repoRoot.toPath().resolve("app").resolve("diagrams"),
+        var jsonReportFile = MavenUtil.analyze(projectRoot, mvnExecutable);
+        connectorImplementationRegistry = createImplementationRegistry(jsonReportFile);
+
+        processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
-        var appPomFile = repoRoot.toPath().resolve("app").resolve("pom.xml").toFile();
+        var appPomFile = projectRoot.resolve("app").resolve("pom.xml").toFile();
         // load maven project
 
         MavenXpp3Reader reader = new MavenXpp3Reader();
@@ -68,10 +88,29 @@ public class ProcessPomGeneratorTest {
 
     }
 
+    private static ConnectorImplementationRegistry createImplementationRegistry(Path jsonReportFile) throws IOException {
+        var report = MavenUtil.loadReport(jsonReportFile);
+        var implementations = new ArrayList<ConnectorImplementationJar>();
+        implementations.addAll(adapt(
+                (List<Map<String, Object>>) report.get("connectorImplementations")));
+        implementations.addAll(adapt(
+                (List<Map<String, Object>>) report.get("filterImplementations")));
+        return ConnectorImplementationRegistry.of(implementations);
+    }
+
+    private static List<ConnectorImplementationJar> adapt(List<Map<String, Object>> implementations) {
+        return implementations.stream()
+                .map(map -> ConnectorImplementationJar.of((String) map.get("implementationId"),
+                        (String) map.get("implementationVersion"),
+                        new File((String) ((Map<String, Object>) map.get("artifact")).get("file")),
+                        (String) map.get("jarEntry")))
+                .collect(Collectors.toList());
+    }
+
     @Test
     void should_generate_pom_without_connector_dep() throws IOException, XmlPullParserException {
         Optional<Pool> process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0");
-        var gen = ProcessPomGenerator.create(appProject, process.get());
+        var gen = ProcessPomGenerator.create(appProject, process.get(), connectorImplementationRegistry);
         Model processPom = gen.generatePom().readPom();
         assertThat(processPom.getDependencies()).noneMatch(IS_EMAIL_CONNECTOR);
     }
@@ -79,7 +118,7 @@ public class ProcessPomGeneratorTest {
     @Test
     void should_generate_pom_with_connector_dep() throws IOException, XmlPullParserException {
         Optional<Pool> process = processRegistry.getProcess("ProcessWithConnectors", "1.0");
-        var gen = ProcessPomGenerator.create(appProject, process.get());
+        var gen = ProcessPomGenerator.create(appProject, process.get(), connectorImplementationRegistry);
         Model processPom = gen.generatePom().readPom();
         assertThat(processPom.getDependencies()).anyMatch(IS_EMAIL_CONNECTOR);
     }
