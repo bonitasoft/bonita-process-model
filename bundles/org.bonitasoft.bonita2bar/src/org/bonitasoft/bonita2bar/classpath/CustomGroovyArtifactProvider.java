@@ -122,7 +122,7 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
             CompilerConfiguration configuration = new CompilerConfiguration();
             configuration.setTargetDirectory(targetClasses.getAbsolutePath());
             configuration.setSourceEncoding("utf-8");
-            configuration.setTargetBytecode("11");
+            configuration.setTargetBytecode("17");
             CompilationUnit compileUnit = new CompilationUnit(configuration, null, classLoader);
             compileUnit.addSources(filesToCompile.toArray(new File[filesToCompile.size()]));
             if (EnvironmentUtil.isOSGi()) {

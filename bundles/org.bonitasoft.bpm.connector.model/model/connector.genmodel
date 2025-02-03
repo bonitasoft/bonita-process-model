@@ -6,7 +6,7 @@
     forceOverwrite="true" modelName="Connector" modelPluginClass="" editorPluginClass="org.bonitasoft.bpm.connector.model.definition.presentation.ConnectorEditorPlugin"
     nonNLSMarkers="true" testsDirectory="/org.bonitasoft.bpm.connector.model.tests/src-gen"
     testSuiteClass="org.bonitasoft.bpm.connector.model.definition.tests.ConnectorAllTests"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="11.0" copyrightFields="false"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="17.0" copyrightFields="false"
     providerRootExtendsClass="" testsPluginID="org.bonitasoft.bpm.connector.model.tests"
     optimizedHasChildren="true" runtimeVersion="2.9">
   <foreignModel>definition.ecore</foreignModel>

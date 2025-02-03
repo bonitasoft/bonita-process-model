@@ -8,7 +8,7 @@
     editorPluginClass="org.bonitasoft.bpm.model..presentation.ProcessEditorPlugin"
     nonNLSMarkers="true" testsDirectory="/org.bonitasoft.bpm.model.tests/src-gen"
     testSuiteClass="org.bonitasoft.bpm.model..tests.ProcessAllTests" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="11.0" copyrightFields="false" editPluginID="org.bonitasoft.bpm.model.edit"
+    complianceLevel="17.0" copyrightFields="false" editPluginID="org.bonitasoft.bpm.model.edit"
     editorPluginID="org.bonitasoft.bpm.model.editor" testsPluginID="org.bonitasoft.bpm.model.tests"
     runtimeVersion="2.9" language="">
   <foreignModel>ActorMapping.ecore</foreignModel>
