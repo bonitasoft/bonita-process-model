@@ -126,7 +126,7 @@ public class BarBuilderFactory {
         }
 
         public ClasspathResolver getClasspathResolver() {
-            Objects.requireNonNull(sourcePathProvider, "No ClasspathResolver configured.");
+            Objects.requireNonNull(classpathResolver, "No ClasspathResolver configured.");
             return classpathResolver;
         }
 

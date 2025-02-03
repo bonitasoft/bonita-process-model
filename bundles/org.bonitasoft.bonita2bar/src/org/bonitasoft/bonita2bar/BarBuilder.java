@@ -158,9 +158,19 @@ public class BarBuilder {
         if (buildResult == null) {
             buildResult = new BuildResult(configuration.getName(), parametersConfiguration, workdir);
         }
+        generateProcessPom(process);
         var result = buildBar(process, configuration);
         buildResult.add(result);
         return result;
+    }
+
+    /**
+     * Generate the process' specific pom.xml file in the app target folder
+     * 
+     * @param process The process
+     */
+    private void generateProcessPom(Pool process) {
+        process.getName();
     }
 
     /**
