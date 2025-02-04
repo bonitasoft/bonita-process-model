@@ -24,12 +24,14 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import org.apache.maven.model.Dependency;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
 import org.bonitasoft.bpm.connector.model.implementation.DocumentRoot;
@@ -46,10 +48,12 @@ public interface ConnectorImplementationRegistry {
 
     Optional<ConnectorImplementation> find(String id, String version);
 
+    Optional<ConnectorImplementation> find(Predicate<ArtifactInfo> predicate);
+
     /**
      * {@link ConnectorImplementationRegistry} factory method.
      * 
-     * @param implementations A lsit of {@link ConnectorImplementationJar}
+     * @param implementations A list of {@link ConnectorImplementationJar}
      * @return A default implementation of {@link ConnectorImplementationRegistry} that search for
      *         connector implementations from the given list of {@link ConnectorImplementationJar}.
      */
@@ -60,6 +64,17 @@ public interface ConnectorImplementationRegistry {
             public Optional<ConnectorImplementation> find(String id, String version) {
                 return implementations.stream()
                         .filter(impl -> Objects.equals(impl.getId(), id) && Objects.equals(impl.getVersion(), version))
+                        .map(this::loadImplementation).filter(Objects::nonNull).findFirst();
+            }
+
+            /*
+             * (non-Javadoc)
+             * @see org.bonitasoft.bonita2bar.ConnectorImplementationRegistry#find(java.util.function.Predicate)
+             */
+            @Override
+            public Optional<ConnectorImplementation> find(Predicate<ArtifactInfo> predicate) {
+                return implementations.stream()
+                        .filter(impl -> predicate.test(impl.getArtifactInformation()))
                         .map(this::loadImplementation).filter(Objects::nonNull).findFirst();
             }
 
@@ -82,6 +97,13 @@ public interface ConnectorImplementationRegistry {
      */
     public static record ArtifactInfo(String groupId, String artifactId, String version, String classifier,
             String file) {
+        public static Predicate<ArtifactInfo> matchesDep(Dependency dep) {
+            return info -> {
+                return Objects.equals(dep.getGroupId(), info.groupId()) && Objects.equals(dep.getArtifactId(), info.artifactId())
+                        && Objects.equals(dep.getVersion(), info.version())
+                        && Objects.equals(dep.getClassifier(), info.classifier());
+            };
+        }
     }
 
     public static class ConnectorImplementationJar {

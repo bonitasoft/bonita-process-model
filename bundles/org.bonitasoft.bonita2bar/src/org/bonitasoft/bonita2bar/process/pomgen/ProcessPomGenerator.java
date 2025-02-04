@@ -26,6 +26,7 @@ import org.apache.maven.model.Build;
 import org.apache.maven.model.Model;
 import org.apache.maven.project.MavenProject;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
 import org.bonitasoft.bpm.model.process.Connector;
 import org.bonitasoft.bpm.model.process.Pool;
@@ -111,9 +112,8 @@ public class ProcessPomGenerator {
 
         model.getDependencies().removeIf(dep -> {
             // get related connector implementation
-            //FIXME: the find method uses implementation id, not artifact id...
             Optional<ConnectorImplementation> connectorImplementation = connectorImplementationRegistry
-                    .find(dep.getArtifactId(), dep.getVersion());
+                    .find(ArtifactInfo.matchesDep(dep));
             return connectorImplementation.filter(connImpl -> {
                 // check if the connector is used in the process
                 return processUsedConnectors.stream()
