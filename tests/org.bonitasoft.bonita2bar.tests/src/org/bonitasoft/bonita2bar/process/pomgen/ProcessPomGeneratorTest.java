@@ -34,6 +34,7 @@ import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.project.MavenProject;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
 import org.bonitasoft.bpm.model.FileUtil;
@@ -88,7 +89,8 @@ public class ProcessPomGeneratorTest {
 
     }
 
-    private static ConnectorImplementationRegistry createImplementationRegistry(Path jsonReportFile) throws IOException {
+    private static ConnectorImplementationRegistry createImplementationRegistry(Path jsonReportFile)
+            throws IOException {
         var report = MavenUtil.loadReport(jsonReportFile);
         var implementations = new ArrayList<ConnectorImplementationJar>();
         implementations.addAll(adapt(
@@ -100,10 +102,15 @@ public class ProcessPomGeneratorTest {
 
     private static List<ConnectorImplementationJar> adapt(List<Map<String, Object>> implementations) {
         return implementations.stream()
-                .map(map -> ConnectorImplementationJar.of((String) map.get("implementationId"),
-                        (String) map.get("implementationVersion"),
-                        new File((String) ((Map<String, Object>) map.get("artifact")).get("file")),
-                        (String) map.get("jarEntry")))
+                .map(map -> {
+                    var artifact = ((Map<String, String>) map.get("artifact"));
+                    var artifactInfo = new ArtifactInfo(artifact.get("groupId"), artifact.get("artifactId"),
+                            artifact.get("version"), artifact.get("classifier"), artifact.get("file"));
+                    return ConnectorImplementationJar.of((String) map.get("implementationId"),
+                            (String) map.get("implementationVersion"),
+                            artifactInfo,
+                            (String) map.get("jarEntry"));
+                })
                 .collect(Collectors.toList());
     }
 

@@ -16,15 +16,25 @@ package org.bonitasoft.bonita2bar;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.function.Supplier;
 import java.util.jar.JarFile;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
 import org.bonitasoft.bpm.connector.model.implementation.DocumentRoot;
 import org.bonitasoft.bpm.connector.model.implementation.util.ConnectorImplementationResourceFactoryImpl;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,21 +77,117 @@ public interface ConnectorImplementationRegistry {
         };
     }
 
+    /**
+     * A record class with maven artifact information
+     */
+    public static record ArtifactInfo(String groupId, String artifactId, String version, String classifier,
+            String file) {
+    }
+
     public static class ConnectorImplementationJar {
 
         private final String id;
         private final String version;
-        private final File jarFile;
+        private final ArtifactInfo artifactInformation;
         private final String entry;
 
-        public static ConnectorImplementationJar of(String id, String version, File jarFile, String entry) {
-            return new ConnectorImplementationJar(id, version, jarFile, entry);
+        public static ConnectorImplementationJar of(String id, String version, ArtifactInfo artifactInformation,
+                String entry) {
+            return new ConnectorImplementationJar(id, version, artifactInformation, entry);
         }
 
-        private ConnectorImplementationJar(String id, String version, File jarFile, String entry) {
+        /**
+         * @deprecated use {@link #of(String, String, ArtifactInfo, String)} instead
+         */
+        @Deprecated
+        public static ConnectorImplementationJar of(String id, String version, File jarFile, String entry) {
+            try (var jar = new JarFile(jarFile)) {
+                // find pom.xml within the jar
+                var jarEntries = StreamSupport.stream(
+                        Spliterators.spliteratorUnknownSize(jar.entries().asIterator(), Spliterator.ORDERED), false);
+                var inMavenEntries = jarEntries.filter(e -> e.getName().contains("META-INF/maven/"))
+                        .collect(Collectors.toList());
+                var propertiesEntry = inMavenEntries.stream().filter(e -> e.getName().endsWith("pom.properties"))
+                        .findFirst();
+                // try to get artifact information from pom.properties
+                var artifactFromProp = propertiesEntry.map(e -> {
+                    // parse the pom.properties to get the maven artifact information
+                    try (var entryReader = new InputStreamReader(jar.getInputStream(e))) {
+                        var properties = new java.util.Properties();
+                        properties.load(entryReader);
+                        return new ArtifactInfo(properties.getProperty("groupId"), properties.getProperty("artifactId"),
+                                properties.getProperty("version"), properties.getProperty("classifier"),
+                                jarFile.getAbsolutePath());
+                    } catch (IOException e1) {
+                        LOGGER.error("Failed to read pom.properties", e1);
+                        return null;
+                    }
+                }).filter(Objects::nonNull);
+                // try to get artifact information from pom.xml
+                var pomEntry = inMavenEntries.stream().filter(e -> e.getName().endsWith("pom.xml")).findFirst();
+                Supplier<Optional<ArtifactInfo>> getArtifactFromPom = () -> pomEntry.map(e -> {
+                    // parse the pom.xml to get the maven artifact information
+                    MavenXpp3Reader reader = new MavenXpp3Reader();
+                    try (var entryReader = new InputStreamReader(jar.getInputStream(e))) {
+                        var model = reader.read(entryReader);
+                        return new ArtifactInfo(model.getGroupId(), model.getArtifactId(), model.getVersion(), null,
+                                jarFile.getAbsolutePath());
+                    } catch (IOException | XmlPullParserException e1) {
+                        LOGGER.error("Failed to read pom.xml", e1);
+                        return null;
+                    }
+                }).filter(Objects::nonNull);
+                // try to get artifact information from file location in repository
+                Supplier<Optional<ArtifactInfo>> getArtifactFromFileLocation = () -> {
+                    File versionFolder = jarFile.getParentFile();
+                    if (versionFolder != null) {
+                        var jarVersion = versionFolder.getName();
+                        File artifactFolder = versionFolder.getParentFile();
+                        if (artifactFolder != null) {
+                            var jarArtifactId = artifactFolder.getName();
+                            File groupFolder = artifactFolder.getParentFile();
+                            if (groupFolder != null) {
+                                var jarGroupId = groupFolder.getName();
+                                var supposedFileName = jarArtifactId + "-" + jarVersion + ".jar";
+                                if (supposedFileName.equals(jarFile.getName())) {
+                                    return Optional.of(new ArtifactInfo(jarGroupId, jarArtifactId, jarVersion, null,
+                                            jarFile.getAbsolutePath()));
+                                } else {
+                                    var supposedFileNameWithClassifier = jarArtifactId + "-" + jarVersion
+                                            + "-([\\w]*).jar";
+                                    var matcher = Pattern.compile(supposedFileNameWithClassifier)
+                                            .matcher(jarFile.getName());
+                                    if (matcher.matches()) {
+                                        return Optional.of(
+                                                new ArtifactInfo(jarGroupId, jarArtifactId, jarVersion,
+                                                        matcher.group(1),
+                                                        jarFile.getAbsolutePath()));
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    return Optional.empty();
+                };
+                var artifactInfo = artifactFromProp.or(getArtifactFromPom).or(getArtifactFromFileLocation)
+                        .orElseThrow(() -> {
+                            var msg = MessageFormat.format("Failed to get artifact information for {0}",
+                                    jarFile.getAbsolutePath());
+                            return new IllegalArgumentException(msg);
+                        });
+                return new ConnectorImplementationJar(id, version, artifactInfo, entry);
+            } catch (IOException e) {
+                var msg = MessageFormat.format("Failed to get artifact information for {0}",
+                        jarFile.getAbsolutePath());
+                LOGGER.error(msg, e);
+                throw new IllegalArgumentException(msg);
+            }
+        }
+
+        private ConnectorImplementationJar(String id, String version, ArtifactInfo artifactInformation, String entry) {
             this.id = id;
             this.version = version;
-            this.jarFile = jarFile;
+            this.artifactInformation = artifactInformation;
             this.entry = entry;
         }
 
@@ -94,7 +200,11 @@ public interface ConnectorImplementationRegistry {
         }
 
         public File getJarFile() {
-            return jarFile;
+            return new File(artifactInformation.file());
+        }
+
+        public ArtifactInfo getArtifactInformation() {
+            return artifactInformation;
         }
 
         public String getEntry() {
@@ -103,7 +213,7 @@ public interface ConnectorImplementationRegistry {
 
         @Override
         public int hashCode() {
-            return Objects.hash(entry, id, jarFile, version);
+            return Objects.hash(entry, id, artifactInformation, version);
         }
 
         @Override
@@ -116,7 +226,8 @@ public interface ConnectorImplementationRegistry {
                 return false;
             ConnectorImplementationJar other = (ConnectorImplementationJar) obj;
             return Objects.equals(entry, other.entry) && Objects.equals(id, other.id)
-                    && Objects.equals(jarFile, other.jarFile) && Objects.equals(version, other.version);
+                    && Objects.equals(artifactInformation, other.artifactInformation)
+                    && Objects.equals(version, other.version);
         }
 
     }
