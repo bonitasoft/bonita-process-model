@@ -21,7 +21,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 ## Prerequisites
 For building the code in this repository : Java [JDK 17+]
 
-For using the libraries released : Java [JDK 11+]
+For using the libraries released : Java [JDK 17+]
 
 ## How to build
 

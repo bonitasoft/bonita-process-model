@@ -7,7 +7,7 @@ Bundle-Version: 8.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.bonitasoft.bpm.model.actormapping,
  org.bonitasoft.bpm.model.actormapping.impl,
  org.bonitasoft.bpm.model.actormapping.util,

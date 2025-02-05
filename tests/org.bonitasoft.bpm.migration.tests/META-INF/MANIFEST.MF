@@ -6,7 +6,7 @@ Bundle-Version: 8.2.0.qualifier
 Bundle-Vendor: Bonitasoft S.A.
 Fragment-Host: org.bonitasoft.bpm.migration;bundle-version="8.0.0"
 Automatic-Module-Name: org.bonitasoft.studio.migration.tests
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: assertj-core,
  net.bytebuddy.byte-buddy,
  org.objenesis,

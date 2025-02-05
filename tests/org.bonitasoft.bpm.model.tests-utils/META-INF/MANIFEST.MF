@@ -5,7 +5,7 @@ Bundle-SymbolicName: org.bonitasoft.bpm.model.tests-utils
 Bundle-Version: 8.2.0.qualifier
 Bundle-Vendor: BonitasSoft S.A.
 Automatic-Module-Name: org.bonitasoft.bpm.model.tests.utils
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.bonitasoft.bpm.model,
  assertj-core,
  net.bytebuddy.byte-buddy,

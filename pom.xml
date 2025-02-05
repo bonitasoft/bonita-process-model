@@ -111,7 +111,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <sonar.sources></sonar.sources>
     <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/releng/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>11</java.version>
+    <java.version>17</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
@@ -345,7 +345,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         <artifactId>target-platform-configuration</artifactId>
         <version>${tycho.version}</version>
         <configuration>
-          <executionEnvironment>JavaSE-11</executionEnvironment>
+          <executionEnvironment>JavaSE-17</executionEnvironment>
           <target>
             <artifact>
               <groupId>${project.groupId}</groupId>

@@ -15,7 +15,7 @@ Export-Package: org.bonitasoft.bpm.connector.model,
  org.bonitasoft.bpm.connector.model.implementation,
  org.bonitasoft.bpm.connector.model.implementation.impl,
  org.bonitasoft.bpm.connector.model.implementation.util
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: org.eclipse.core.runtime;resolution:=optional,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;visibility:=reexport,
