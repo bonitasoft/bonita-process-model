@@ -41,7 +41,6 @@ import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.BeforeEach;
@@ -78,8 +77,8 @@ public class ProcessPomGeneratorTest {
         processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
         var appPomFile = projectRoot.resolve("app").resolve("pom.xml").toFile();
-        // load maven project
 
+        // load maven project
         MavenXpp3Reader reader = new MavenXpp3Reader();
         try (var fileReader = new FileReader(appPomFile)) {
             var model = reader.read(fileReader);
@@ -115,19 +114,25 @@ public class ProcessPomGeneratorTest {
     }
 
     @Test
-    void should_generate_pom_without_connector_dep() throws IOException, XmlPullParserException {
+    void should_generate_pom_without_connector_dep() throws Exception {
         Optional<Pool> process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0");
-        var gen = ProcessPomGenerator.create(appProject, process.get(), connectorImplementationRegistry);
-        Model processPom = gen.generatePom().readPom();
-        assertThat(processPom.getDependencies()).noneMatch(IS_EMAIL_CONNECTOR);
+        var gen = ProcessPomGenerator.create(appProject, connectorImplementationRegistry);
+        gen.withGeneratedPom(process.get(), pomAccess -> {
+            Model processPom = pomAccess.readPom();
+            assertThat(processPom.getDependencies()).noneMatch(IS_EMAIL_CONNECTOR);
+            return null;
+        });
     }
 
     @Test
-    void should_generate_pom_with_connector_dep() throws IOException, XmlPullParserException {
+    void should_generate_pom_with_connector_dep() throws Exception {
         Optional<Pool> process = processRegistry.getProcess("ProcessWithConnectors", "1.0");
-        var gen = ProcessPomGenerator.create(appProject, process.get(), connectorImplementationRegistry);
-        Model processPom = gen.generatePom().readPom();
-        assertThat(processPom.getDependencies()).anyMatch(IS_EMAIL_CONNECTOR);
+        var gen = ProcessPomGenerator.create(appProject, connectorImplementationRegistry);
+        gen.withGeneratedPom(process.get(), pomAccess -> {
+            Model processPom = pomAccess.readPom();
+            assertThat(processPom.getDependencies()).anyMatch(IS_EMAIL_CONNECTOR);
+            return null;
+        });
     }
 
 }

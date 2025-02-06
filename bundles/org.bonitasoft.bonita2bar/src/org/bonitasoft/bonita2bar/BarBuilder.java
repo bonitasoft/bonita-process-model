@@ -25,6 +25,7 @@ import java.util.Properties;
 
 import org.bonitasoft.bonita2bar.configuration.EnvironmentConfigurationBuilder;
 import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
+import org.bonitasoft.bonita2bar.process.pomgen.ProcessPomGenerator;
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.configuration.ConfigurationFactory;
 import org.bonitasoft.bpm.model.process.Pool;
@@ -54,16 +55,20 @@ public class BarBuilder {
 
     private Path workdir;
 
+    private ProcessPomGenerator processPomGenerator;
+
     private BuildResult buildResult;
 
     BarBuilder(ProcessRegistry processRegistry,
             Path localConfiguration,
             ParametersConfiguration parametersConfiguration,
-            Path workdir) {
+            Path workdir,
+            ProcessPomGenerator processPomGenerator) {
         this.processRegistry = processRegistry;
         this.localConfiguration = localConfiguration;
         this.parametersConfiguration = parametersConfiguration;
         this.workdir = workdir;
+        this.processPomGenerator = processPomGenerator;
     }
 
     /**
@@ -158,19 +163,9 @@ public class BarBuilder {
         if (buildResult == null) {
             buildResult = new BuildResult(configuration.getName(), parametersConfiguration, workdir);
         }
-        generateProcessPom(process);
         var result = buildBar(process, configuration);
         buildResult.add(result);
         return result;
-    }
-
-    /**
-     * Generate the process' specific pom.xml file in the app target folder
-     * 
-     * @param process The process
-     */
-    private void generateProcessPom(Pool process) {
-        process.getName();
     }
 
     /**
@@ -181,27 +176,37 @@ public class BarBuilder {
     }
 
     private BuildResult buildBar(Pool process, Configuration configuration) throws BuildBarException {
-        if (process.eResource() != null && process.eResource().getURI() != null) {
-            var resourceName = URI.decode(process.eResource().getURI().lastSegment());
-            LOGGER.info("Building {}-{} ({})...", process.getName(), process.getVersion(), resourceName);
-        } else {
-            LOGGER.info("Building {}-{}...", process.getName(), process.getVersion());
-        }
-
-        final BusinessArchiveBuilder barBuilder = createBusinessArchiveBuilder();
-        final EnvironmentConfigurationBuilder confBuilder = createEnvironmentConfigurationBuilder(process.getName(),
-                process.getVersion(), configuration.getName());
+        // Generate the process' specific pom.xml file in the app target folder
         try {
-            for (final BarArtifactProvider provider : providers) {
-                provider.build(barBuilder, process, configuration);
-                provider.configure(confBuilder, configuration, process);
-            }
-            var result = new BuildResult(configuration.getName() == null ? LOCAL_ENVIRONMENT : configuration.getName(),
-                    parametersConfiguration, workdir);
-            result.addBusinessArchive(barBuilder.done());
-            result.addConfiguration(confBuilder.done());
-            return result;
-        } catch (InvalidBusinessArchiveFormatException e) {
+            return processPomGenerator.withGeneratedPom(process, pomAccess -> {
+                try {
+                    if (process.eResource() != null && process.eResource().getURI() != null) {
+                        var resourceName = URI.decode(process.eResource().getURI().lastSegment());
+                        LOGGER.info("Building {}-{} ({})...", process.getName(), process.getVersion(), resourceName);
+                    } else {
+                        LOGGER.info("Building {}-{}...", process.getName(), process.getVersion());
+                    }
+
+                    final BusinessArchiveBuilder barBuilder = createBusinessArchiveBuilder();
+                    final EnvironmentConfigurationBuilder confBuilder = createEnvironmentConfigurationBuilder(
+                            process.getName(),
+                            process.getVersion(), configuration.getName());
+                    for (final BarArtifactProvider provider : providers) {
+                        provider.build(barBuilder, process, configuration);
+                        provider.configure(confBuilder, configuration, process);
+                    }
+                    var result = new BuildResult(
+                            configuration.getName() == null ? LOCAL_ENVIRONMENT : configuration.getName(),
+                            parametersConfiguration, workdir);
+                    result.addBusinessArchive(barBuilder.done());
+                    result.addConfiguration(confBuilder.done());
+                    return result;
+                } catch (InvalidBusinessArchiveFormatException e) {
+                    String errorMessage = String.format("%s-%s build failed", process.getName(), process.getVersion());
+                    throw new BuildBarException(errorMessage, e);
+                }
+            });
+        } catch (IOException e) {
             String errorMessage = String.format("%s-%s build failed", process.getName(), process.getVersion());
             throw new BuildBarException(errorMessage, e);
         }

@@ -17,6 +17,7 @@ package org.bonitasoft.bonita2bar.classpath;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
@@ -26,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.apache.maven.project.MavenProject;
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.ClasspathResolver;
@@ -33,7 +36,6 @@ import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
-import org.bonitasoft.bonita2bar.SourcePathProvider;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
@@ -46,6 +48,7 @@ import org.junit.jupiter.api.Test;
 class ConnectorImplementationArtifactProviderTest {
 
     private Path projectRoot;
+    private MavenProject appProject;
 
     @BeforeEach
     void setup() throws Exception {
@@ -53,6 +56,15 @@ class ConnectorImplementationArtifactProviderTest {
         FileUtil.copyDirectory(new File(URLDecoder.decode(
                 FileLocator.toFileURL(CustomGroovyArtifactProviderTest.class.getResource("/test-repository")).getFile(),
                 "UTF-8")).getAbsolutePath(), projectRoot.toFile().getAbsolutePath());
+
+        var appPomFile = projectRoot.resolve("app").resolve("pom.xml").toFile();
+        // load maven project
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        try (var fileReader = new FileReader(appPomFile)) {
+            var model = reader.read(fileReader);
+            appProject = new MavenProject(model);
+            appProject.setFile(appPomFile);
+        }
     }
 
     @AfterEach
@@ -76,7 +88,7 @@ class ConnectorImplementationArtifactProviderTest {
                 .connectorImplementationRegistry(createImplementationRegistry(reportFile))
                 .formBuilder(id -> new byte[0])
                 .workingDirectory(outputFolder)
-                .sourcePathProvider(SourcePathProvider.of(projectRoot.resolve("app")))
+                .mavenProject(appProject)
                 .processRegistry(processRegistry)
                 .classpathResolver(ClasspathResolver.of(classpath))
                 .build());

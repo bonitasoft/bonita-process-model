@@ -37,7 +37,6 @@ import org.bonitasoft.bpm.model.process.Pool;
 public class ProcessPomGenerator {
 
     private MavenProject applicationProject;
-    private Pool process;
     private ConnectorImplementationRegistry connectorImplementationRegistry;
 
     /**
@@ -50,26 +49,57 @@ public class ProcessPomGenerator {
      * Creates a new generator
      * 
      * @param applicationProject the application maven project
-     * @param process the process to generate the pom for
      * @param connectorImplementationRegistry the connector implementation registry
      * @return a new instance of {@link ProcessPomGenerator}
      */
-    public static ProcessPomGenerator create(MavenProject applicationProject, Pool process,
+    public static ProcessPomGenerator create(MavenProject applicationProject,
             ConnectorImplementationRegistry connectorImplementationRegistry) {
         var gen = new ProcessPomGenerator();
         gen.applicationProject = applicationProject;
-        gen.process = process;
         gen.connectorImplementationRegistry = connectorImplementationRegistry;
         return gen;
     }
 
     /**
+     * Consumer of the generated pom.xml file.
+     *
+     * @param <R> the expected result type (may be {@link Void})
+     * @param <E> the exception type
+     */
+    @FunctionalInterface
+    public static interface ProcessPomConsumer<R, E extends Exception> {
+
+        R consume(ProcessPom pomAccess) throws E;
+    }
+
+    /**
      * Generates the temporary pom.xml dedicated to a specific {@link Pool} process.
+     * Then executes the consumer with the generated pom.xml file.
      * 
-     * @return access to the generated pom.xml file
+     * @param process the process to generate the pom for
+     * @param consumer the consumer to execute with access to the generated pom.xml file
+     * @return the result of the consumer
      * @throws IOException if an error occurs while generating
      */
-    public ProcessPom generatePom() throws IOException {
+    public <R, E extends Exception> R withGeneratedPom(Pool process, ProcessPomConsumer<R, E> consumer)
+            throws IOException, E {
+        try (var pomAccess = generatePom(process)) {
+            return consumer.consume(pomAccess);
+        }
+    }
+
+    /**
+     * Generates the temporary pom.xml dedicated to a specific {@link Pool} process.
+     * <b>Always invoke this method in a try-with-resources block</b> to ensure the generated pom.xml file is closed properly.
+     * <br/>
+     * This method is private to ensure the correct usage and ignore java:S2095 warning.
+     * 
+     * @param process the process to generate the pom for
+     * @return access to the generated pom.xml file (to be closed after use)
+     * @throws IOException if an error occurs while generating
+     */
+    @SuppressWarnings("java:S2095")
+    private ProcessPom generatePom(Pool process) throws IOException {
         // get target dir
         var target = Optional.ofNullable(applicationProject.getBuild()).map(Build::getDirectory)
                 .filter(Objects::nonNull)
@@ -92,7 +122,7 @@ public class ProcessPomGenerator {
             model.getParent().setRelativePath(fixedPath.toString());
         });
         // remove connector dependencies from other processes
-        filterUnusedConnectorDependencies(model);
+        filterUnusedConnectorDependencies(model, process);
         pomAccess.writePom(model);
         return pomAccess;
     }
@@ -101,12 +131,13 @@ public class ProcessPomGenerator {
      * Remove connector dependencies from other processes, with help of the dependency report.
      * 
      * @param model the maven model to update
+     * @param process the process to keep the dependencies for
      */
-    private void filterUnusedConnectorDependencies(Model model) {
+    private void filterUnusedConnectorDependencies(Model model, Pool process) {
         List<Connector> processUsedConnectors = new ArrayList<>();
         process.eAllContents().forEachRemaining(obj -> {
-            if (obj instanceof Connector) {
-                processUsedConnectors.add((Connector) obj);
+            if (obj instanceof Connector c) {
+                processUsedConnectors.add(c);
             }
         });
 

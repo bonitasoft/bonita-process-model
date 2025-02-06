@@ -16,7 +16,13 @@ package org.bonitasoft.bonita2bar;
 
 import java.nio.file.Path;
 import java.util.Objects;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import org.apache.maven.artifact.DependencyResolutionRequiredException;
+import org.apache.maven.project.MavenProject;
 import org.bonitasoft.bonita2bar.actor.ActorMappingArtifactProvider;
 import org.bonitasoft.bonita2bar.classpath.ConnectorImplementationArtifactProvider;
 import org.bonitasoft.bonita2bar.classpath.CustomGroovyArtifactProvider;
@@ -26,6 +32,7 @@ import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
 import org.bonitasoft.bonita2bar.form.FormBuilder;
 import org.bonitasoft.bonita2bar.form.FormMappingArtifactProvider;
 import org.bonitasoft.bonita2bar.process.ProcessDefinitionArtifactProvider;
+import org.bonitasoft.bonita2bar.process.pomgen.ProcessPomGenerator;
 import org.bonitasoft.bonita2bar.resources.AdditionalResourcesArtifactProvider;
 import org.bonitasoft.bonita2bar.resources.BPMN2ArtifactProvider;
 import org.bonitasoft.bonita2bar.resources.DocumentArtifactProvider;
@@ -46,10 +53,13 @@ public class BarBuilderFactory {
         var classpathResolver = config.getClasspathResolver();
         var workingDirectory = config.getWorkingDirectory();
 
+        var pomGen = ProcessPomGenerator.create(config.getMavenProject(), implementationRegistry);
+
         var barBuilder = new BarBuilder(processRegistry,
                 sourceProvider.getLocalConfiguration(),
                 parametersConfiguration,
-                workingDirectory);
+                workingDirectory,
+                pomGen);
         barBuilder.register(new ParameterArtifactProvider(parametersConfiguration, config.includeParameters()));
         barBuilder.register(new ActorMappingArtifactProvider());
         barBuilder.register(new ProcessDefinitionArtifactProvider(config.getProcessRegistry()));
@@ -78,18 +88,49 @@ public class BarBuilderFactory {
         private ConnectorImplementationRegistry connectorImplementationRegistry;
         private FormBuilder formBuilder;
         private ProcessRegistry processRegistry;
+        private MavenProject mavenProject;
         private SourcePathProvider sourcePathProvider;
         private ClasspathResolver classpathResolver;
 
-        private BuildConfig(BuildConfigBuilder builder) {
+        private BuildConfig(BuildConfigBuilder builder) throws BuildBarException {
             this.allowEmptyFormMapping = builder.allowEmptyFormMapping;
             this.includeParameters = builder.includeParameters;
             this.workingDirectory = builder.workingDirectory;
             this.connectorImplementationRegistry = builder.connectorImplementationRegistry;
             this.formBuilder = builder.formBuilder;
             this.processRegistry = builder.processRegistry;
-            this.sourcePathProvider = builder.sourcePathProvider;
-            this.classpathResolver = builder.classpathResolver;
+            this.mavenProject = builder.mavenProject;
+            this.sourcePathProvider = Optional.ofNullable(builder.sourcePathProvider).orElseGet(() -> {
+                if (mavenProject != null) {
+                    var baseDir = mavenProject.getBasedir();
+                    if (baseDir != null) {
+                        return SourcePathProvider.of(baseDir.toPath());
+                    }
+                }
+                return null;
+            });
+            AtomicReference<DependencyResolutionRequiredException> exceptionDuringClasspathResolver = new AtomicReference<>();
+            this.classpathResolver = Optional.ofNullable(builder.classpathResolver).orElseGet(() -> {
+                if (mavenProject != null) {
+                    // build classpath
+                    try {
+                        var classpath = Stream
+                                .concat(mavenProject.getCompileClasspathElements().stream(),
+                                        mavenProject.getRuntimeClasspathElements().stream())
+                                .distinct().collect(Collectors.toList());
+                        if (!classpath.isEmpty()) {
+                            return ClasspathResolver.of(classpath);
+                        }
+                    } catch (DependencyResolutionRequiredException e) {
+                        exceptionDuringClasspathResolver.set(e);
+                    }
+                }
+                return null;
+            });
+            // rethrow exception if needed
+            if (exceptionDuringClasspathResolver.get() != null) {
+                throw new BuildBarException(exceptionDuringClasspathResolver.get());
+            }
         }
 
         public boolean includeParameters() {
@@ -120,6 +161,11 @@ public class BarBuilderFactory {
             return processRegistry;
         }
 
+        public MavenProject getMavenProject() {
+            Objects.requireNonNull(mavenProject, "No MavenProject configured.");
+            return mavenProject;
+        }
+
         public SourcePathProvider getSourcePathProvider() {
             Objects.requireNonNull(sourcePathProvider, "No SourcePathProvider configured.");
             return sourcePathProvider;
@@ -143,6 +189,7 @@ public class BarBuilderFactory {
             private ConnectorImplementationRegistry connectorImplementationRegistry;
             private FormBuilder formBuilder;
             private ProcessRegistry processRegistry;
+            private MavenProject mavenProject;
             private SourcePathProvider sourcePathProvider;
             private ClasspathResolver classpathResolver;
 
@@ -150,7 +197,7 @@ public class BarBuilderFactory {
 
             }
 
-            public BuildConfig build() {
+            public BuildConfig build() throws BuildBarException {
                 return new BuildConfig(this);
             }
 
@@ -185,13 +232,30 @@ public class BarBuilderFactory {
                 return this;
             }
 
+            /**
+             * Optional, if not provided, will use the mavenProject's paths
+             * 
+             * @param sourcePathProvider source path provider
+             * @return builder
+             */
             public BuildConfigBuilder sourcePathProvider(SourcePathProvider sourcePathProvider) {
                 this.sourcePathProvider = sourcePathProvider;
                 return this;
             }
 
+            /**
+             * Optional, if not provided, will use the mavenProject's classpath (if set)
+             * 
+             * @param classpathResolver classpath resolver
+             * @return builder
+             */
             public BuildConfigBuilder classpathResolver(ClasspathResolver classpathResolver) {
                 this.classpathResolver = classpathResolver;
+                return this;
+            }
+
+            public BuildConfigBuilder mavenProject(MavenProject mavenProject) {
+                this.mavenProject = mavenProject;
                 return this;
             }
 
