@@ -23,23 +23,68 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.maven.project.DefaultProjectBuildingRequest;
+import org.apache.maven.project.MavenProject;
+import org.apache.maven.project.ProjectBuildingException;
+import org.apache.maven.project.ProjectBuildingRequest;
+import org.apache.maven.project.ProjectBuildingResult;
+import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
-import org.bonitasoft.bonita2bar.ClasspathResolver;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
-import org.bonitasoft.bonita2bar.SourcePathProvider;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
+import org.codehaus.plexus.PlexusContainer;
+import org.codehaus.plexus.testing.PlexusTest;
+import org.eclipse.aether.DefaultRepositorySystemSession;
+import org.eclipse.aether.repository.LocalRepository;
+import org.eclipse.aether.repository.LocalRepositoryManager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-class BarBuilderIT {
+@PlexusTest
+class BarBuilderIT {//extends org.apache.maven.AbstractCoreMavenComponentTestCase {
+
+    @Inject
+    protected PlexusContainer container;
+
+    @Inject
+    protected org.eclipse.aether.RepositorySystem repositorySystem;
+
+    @Inject
+    protected org.apache.maven.project.ProjectBuilder projectBuilder;
+
+    @BeforeEach
+    void setUp() throws Exception {
+        LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).setLevel(Level.WARNING);
+    }
+
+    private MavenProject getMavenProject(File pomFile) throws ProjectBuildingException {
+        DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
+        LocalRepository localRepo = new LocalRepository("target/local-repo");
+        LocalRepositoryManager localRepoManager = repositorySystem.newLocalRepositoryManager(session, localRepo);
+        session.setLocalRepositoryManager(localRepoManager);
+
+        ProjectBuildingRequest buildingRequest = new DefaultProjectBuildingRequest();
+        buildingRequest.setRepositorySession(session);
+        buildingRequest.setProcessPlugins(false);
+        buildingRequest.setResolveDependencies(true);
+
+        ProjectBuildingResult result = projectBuilder.build(pomFile, buildingRequest);
+        return result.getProject();
+    }
 
     @Test
     void buildProjectBusinessArchives(@TempDir Path tmpDir) throws Exception {
@@ -47,16 +92,16 @@ class BarBuilderIT {
         FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/test-repository").getFile()).getAbsolutePath(),
                 projectRoot.toFile().getAbsolutePath());
         var mvnExecutable = SystemUtils.IS_OS_WINDOWS ? "mvn.cmd" : "mvn";
+        MavenProject mavenProject = getMavenProject(projectRoot.resolve("app").resolve("pom.xml").toFile());
 
         var barBuilder = BarBuilderFactory.create(BuildConfig.builder()
                 .formBuilder(formId -> formId.getBytes())
                 .workingDirectory(tmpDir.resolve("workdir"))
-                .classpathResolver(ClasspathResolver.of(MavenUtil.buildClasspath(projectRoot, mvnExecutable)))
                 .connectorImplementationRegistry(
                         createImplementationRegistry(MavenUtil.analyze(projectRoot, mvnExecutable)))
                 .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                         MigrationPolicy.ALWAYS_MIGRATE_POLICY))
-                .sourcePathProvider(SourcePathProvider.of(projectRoot.resolve("app")))
+                .mavenProject(mavenProject)
                 .build());
 
         var result = barBuilder.buildAll("Local");
@@ -99,16 +144,16 @@ class BarBuilderIT {
         FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/test-repository").getFile()).getAbsolutePath(),
                 projectRoot.toFile().getAbsolutePath());
         var mvnExecutable = SystemUtils.IS_OS_WINDOWS ? "mvn.cmd" : "mvn";
+        MavenProject mavenProject = getMavenProject(projectRoot.resolve("app").resolve("pom.xml").toFile());
 
         var barBuilder = BarBuilderFactory.create(BuildConfig.builder()
                 .formBuilder(formId -> formId.getBytes())
                 .workingDirectory(tmpDir.resolve("workdir"))
-                .classpathResolver(ClasspathResolver.of(MavenUtil.buildClasspath(projectRoot, mvnExecutable)))
                 .connectorImplementationRegistry(
                         createImplementationRegistry(MavenUtil.analyze(projectRoot, mvnExecutable)))
                 .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                         MigrationPolicy.ALWAYS_MIGRATE_POLICY))
-                .sourcePathProvider(SourcePathProvider.of(projectRoot))
+                .mavenProject(mavenProject)
                 .build());
 
         var result = barBuilder.build("ProcessWithAdditionalResource", "1.0", "Local");

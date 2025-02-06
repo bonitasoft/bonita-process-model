@@ -5,6 +5,6 @@
         <mapEntry key="JAVA_HOME" value="${ee_home:JavaSE-17}"/>
     </mapAttribute>
     <stringAttribute key="org.eclipse.ui.externaltools.ATTR_LOCATION" value="${workspace_loc:/bonita-process-model/mvnw.cmd}"/>
-    <stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="clean spotless:apply install --no-transfer-progress"/>
+    <stringAttribute key="org.eclipse.ui.externaltools.ATTR_TOOL_ARGUMENTS" value="clean spotless:apply install --no-transfer-progress -Dtycho.localArtifacts=ignore"/>
     <stringAttribute key="org.eclipse.ui.externaltools.ATTR_WORKING_DIRECTORY" value="${workspace_loc:/bonita-process-model}"/>
 </launchConfiguration>
