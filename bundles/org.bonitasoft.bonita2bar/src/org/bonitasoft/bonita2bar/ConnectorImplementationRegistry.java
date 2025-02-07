@@ -14,9 +14,15 @@
  */
 package org.bonitasoft.bonita2bar;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +32,7 @@ import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -136,6 +143,8 @@ public interface ConnectorImplementationRegistry {
                         .findFirst();
                 // try to get artifact information from pom.properties
                 var artifactFromProp = propertiesEntry.map(e -> {
+                    // first prevent a Zip Bomb Attack
+                    preventZipBombAttack(jar, e);
                     // parse the pom.properties to get the maven artifact information
                     try (var entryReader = new InputStreamReader(jar.getInputStream(e))) {
                         var properties = new java.util.Properties();
@@ -151,6 +160,8 @@ public interface ConnectorImplementationRegistry {
                 // try to get artifact information from pom.xml
                 var pomEntry = inMavenEntries.stream().filter(e -> e.getName().endsWith("pom.xml")).findFirst();
                 Supplier<Optional<ArtifactInfo>> getArtifactFromPom = () -> pomEntry.map(e -> {
+                    // first prevent a Zip Bomb Attack
+                    preventZipBombAttack(jar, e);
                     // parse the pom.xml to get the maven artifact information
                     MavenXpp3Reader reader = new MavenXpp3Reader();
                     try (var entryReader = new InputStreamReader(jar.getInputStream(e))) {
@@ -204,6 +215,40 @@ public interface ConnectorImplementationRegistry {
             } catch (IOException e) {
                 var msg = MessageFormat.format("Failed to get artifact information for {0}",
                         jarFile.getAbsolutePath());
+                LOGGER.error(msg, e);
+                throw new IllegalArgumentException(msg);
+            }
+        }
+
+        /**
+         * Prevent a zip bomb attack by analyzing the entry size
+         * 
+         * @param jar jar file
+         * @param entry entry to analyze
+         */
+        private static void preventZipBombAttack(JarFile jar, JarEntry entry) {
+            int THRESHOLD_SIZE = 1_000_000; // 1 MB
+            double THRESHOLD_RATIO = 10.0;
+            byte[] buffer = new byte[2048];
+            int totalSizeEntry = 0;
+            int nBytes = -1;
+            try (InputStream in = new BufferedInputStream(jar.getInputStream(entry))) {
+                var output = Files.createTempFile("outputForTesting", ".txt");
+                OutputStream out = new BufferedOutputStream(new FileOutputStream(output.toFile()));
+                while ((nBytes = in.read(buffer)) > 0) {
+                    out.write(buffer, 0, nBytes);
+                    totalSizeEntry += nBytes;
+                    double compressionRatio = totalSizeEntry / entry.getCompressedSize();
+                    if (compressionRatio > THRESHOLD_RATIO) {
+                        // ratio between compressed and uncompressed data is highly suspicious, looks like a Zip Bomb Attack
+                        throw new IllegalArgumentException("Zip Bomb Attack detected");
+                    } else if (totalSizeEntry > THRESHOLD_SIZE) {
+                        // entry size is too big, looks like a Zip Bomb Attack
+                        throw new IllegalArgumentException("Zip Bomb Attack detected");
+                    }
+                }
+            } catch (IOException e) {
+                String msg = "Zip Bomb Attack detection failed with exception";
                 LOGGER.error(msg, e);
                 throw new IllegalArgumentException(msg);
             }
