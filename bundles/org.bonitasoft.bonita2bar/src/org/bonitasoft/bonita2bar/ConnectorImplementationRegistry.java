@@ -29,6 +29,7 @@ import java.util.function.Supplier;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import org.apache.maven.model.Dependency;
@@ -97,9 +98,11 @@ public interface ConnectorImplementationRegistry {
      */
     public static record ArtifactInfo(String groupId, String artifactId, String version, String classifier,
             String file) {
+
         public static Predicate<ArtifactInfo> matchesDep(Dependency dep) {
             return info -> {
-                return Objects.equals(dep.getGroupId(), info.groupId()) && Objects.equals(dep.getArtifactId(), info.artifactId())
+                return Objects.equals(dep.getGroupId(), info.groupId())
+                        && Objects.equals(dep.getArtifactId(), info.artifactId())
                         && Objects.equals(dep.getVersion(), info.version())
                         && Objects.equals(dep.getClassifier(), info.classifier());
             };
@@ -169,7 +172,7 @@ public interface ConnectorImplementationRegistry {
                             var jarArtifactId = artifactFolder.getName();
                             File groupFolder = artifactFolder.getParentFile();
                             if (groupFolder != null) {
-                                var jarGroupId = groupFolder.getName();
+                                var jarGroupId = getGroupId(groupFolder);
                                 var supposedFileName = jarArtifactId + "-" + jarVersion + ".jar";
                                 if (supposedFileName.equals(jarFile.getName())) {
                                     return Optional.of(new ArtifactInfo(jarGroupId, jarArtifactId, jarVersion, null,
@@ -204,6 +207,28 @@ public interface ConnectorImplementationRegistry {
                 LOGGER.error(msg, e);
                 throw new IllegalArgumentException(msg);
             }
+        }
+
+        /**
+         * Get the group id out of the group folder in a maven repository
+         * 
+         * @param groupFolder the group folder
+         * @return the group id
+         */
+        private static String getGroupId(File groupFolder) {
+            var nameBuilder = new StringBuilder(groupFolder.getName());
+            var parentFolder = groupFolder.getParentFile();
+            Predicate<File> isRepositoryRoot = d -> {
+                // root of repository is expected to contain directories like "org", "com", "fr"
+                var commonRootFolders = Stream.of("org", "com", "fr");
+                return commonRootFolders.map(n -> new File(d, n)).anyMatch(f -> f.exists() && f.isDirectory());
+            };
+            while (!isRepositoryRoot.test(parentFolder)) {
+                nameBuilder.insert(0, '.');
+                nameBuilder.insert(0, parentFolder.getName());
+                parentFolder = parentFolder.getParentFile();
+            }
+            return nameBuilder.toString();
         }
 
         private ConnectorImplementationJar(String id, String version, ArtifactInfo artifactInformation, String entry) {
