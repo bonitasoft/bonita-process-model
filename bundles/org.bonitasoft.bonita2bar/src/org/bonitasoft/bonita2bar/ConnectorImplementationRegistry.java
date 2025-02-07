@@ -227,8 +227,8 @@ public interface ConnectorImplementationRegistry {
          * @param entry entry to analyze
          */
         private static void preventZipBombAttack(JarFile jar, JarEntry entry) {
-            int THRESHOLD_SIZE = 1_000_000; // 1 MB
-            double THRESHOLD_RATIO = 10.0;
+            int thresholdSize = 1_000_000; // 1 MB
+            double thresholdRatio = 10.0;
             byte[] buffer = new byte[2048];
             int totalSizeEntry = 0;
             int nBytes = -1;
@@ -239,11 +239,9 @@ public interface ConnectorImplementationRegistry {
                     out.write(buffer, 0, nBytes);
                     totalSizeEntry += nBytes;
                     double compressionRatio = totalSizeEntry / entry.getCompressedSize();
-                    if (compressionRatio > THRESHOLD_RATIO) {
-                        // ratio between compressed and uncompressed data is highly suspicious, looks like a Zip Bomb Attack
-                        throw new IllegalArgumentException("Zip Bomb Attack detected");
-                    } else if (totalSizeEntry > THRESHOLD_SIZE) {
-                        // entry size is too big, looks like a Zip Bomb Attack
+                    if (compressionRatio > thresholdRatio || totalSizeEntry > thresholdSize) {
+                        // ratio between compressed and uncompressed data is highly suspicious or entry size is too big
+                        // looks like a Zip Bomb Attack
                         throw new IllegalArgumentException("Zip Bomb Attack detected");
                     }
                 }
