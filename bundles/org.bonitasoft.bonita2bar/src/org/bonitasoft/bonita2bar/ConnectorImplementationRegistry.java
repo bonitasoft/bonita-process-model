@@ -234,16 +234,19 @@ public interface ConnectorImplementationRegistry {
             int nBytes = -1;
             try (InputStream in = new BufferedInputStream(jar.getInputStream(entry))) {
                 var output = Files.createTempFile("outputForTesting", ".txt");
-                OutputStream out = new BufferedOutputStream(new FileOutputStream(output.toFile()));
-                while ((nBytes = in.read(buffer)) > 0) {
-                    out.write(buffer, 0, nBytes);
-                    totalSizeEntry += nBytes;
-                    double compressionRatio = totalSizeEntry / entry.getCompressedSize();
-                    if (compressionRatio > thresholdRatio || totalSizeEntry > thresholdSize) {
-                        // ratio between compressed and uncompressed data is highly suspicious or entry size is too big
-                        // looks like a Zip Bomb Attack
-                        throw new IllegalArgumentException("Zip Bomb Attack detected");
+                try (OutputStream out = new BufferedOutputStream(new FileOutputStream(output.toFile()))) {
+                    while ((nBytes = in.read(buffer)) > 0) {
+                        out.write(buffer, 0, nBytes);
+                        totalSizeEntry += nBytes;
+                        double compressionRatio = Double.valueOf(totalSizeEntry) / entry.getCompressedSize();
+                        if (compressionRatio > thresholdRatio || totalSizeEntry > thresholdSize) {
+                            // ratio between compressed and uncompressed data is highly suspicious or entry size is too big
+                            // looks like a Zip Bomb Attack
+                            throw new IllegalArgumentException("Zip Bomb Attack detected");
+                        }
                     }
+                } finally {
+                    output.toFile().delete();
                 }
             } catch (IOException e) {
                 String msg = "Zip Bomb Attack detection failed with exception";
