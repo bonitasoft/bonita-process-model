@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import org.apache.maven.model.Build;
 import org.apache.maven.model.Model;
@@ -147,9 +148,10 @@ public class ProcessPomGenerator {
                     .find(ArtifactInfo.matchesDep(dep));
             return connectorImplementation.filter(connImpl -> {
                 // check if the connector is used in the process
-                return processUsedConnectors.stream()
-                        .noneMatch(connDef -> connDef.getDefinitionId().equals(connImpl.getDefinitionId())
-                                && connDef.getDefinitionVersion().equals(connImpl.getDefinitionVersion()));
+                Predicate<Connector> matchesImpl = connDef -> connDef.getDefinitionId()
+                        .equals(connImpl.getDefinitionId())
+                        && connDef.getDefinitionVersion().equals(connImpl.getDefinitionVersion());
+                return processUsedConnectors.stream().noneMatch(matchesImpl);
             }).isPresent();
         });
     }

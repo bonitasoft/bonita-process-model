@@ -31,7 +31,6 @@ import org.apache.maven.shared.utils.StringUtils;
 import org.assertj.core.api.Condition;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
-import org.bonitasoft.bonita2bar.process.pomgen.ProcessPomGeneratorTest;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.codehaus.plexus.util.FileUtils;
@@ -43,7 +42,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test class for ConnectorImplementationRegistry
  */
-public class ConnectorImplementationRegistryTest {
+class ConnectorImplementationRegistryTest {
 
     private Path projectRoot;
 
@@ -51,7 +50,8 @@ public class ConnectorImplementationRegistryTest {
     void setUp() throws Exception {
         projectRoot = Files.createTempDirectory("test-repository");
         var testRepoRoot = new File(URLDecoder.decode(
-                FileLocator.toFileURL(ProcessPomGeneratorTest.class.getResource("/test-repository")).getFile(),
+                FileLocator.toFileURL(ConnectorImplementationRegistryTest.class.getResource("/test-repository"))
+                        .getFile(),
                 "UTF-8"));
         FileUtil.copyDirectory(testRepoRoot.getAbsolutePath(), projectRoot.toFile().getAbsolutePath());
     }
@@ -68,6 +68,7 @@ public class ConnectorImplementationRegistryTest {
                 .filter(impl -> impl.get("definitionId").equals("email"))
                 .findFirst().get();
         var artifact = ((Map<String, String>) emailImpl.get("artifact"));
+        @SuppressWarnings("deprecation")
         var legacy = ConnectorImplementationJar.of(
                 (String) emailImpl.get("implementationId"),
                 (String) emailImpl.get("implementationVersion"),
@@ -109,7 +110,8 @@ public class ConnectorImplementationRegistryTest {
                 out.closeEntry();
             }
 
-            // when we create a ConnectorImplementationJar for the jar
+            // when we create a ConnectorImplementationJar for the jar (test of deprecated method for compatibility)
+            @SuppressWarnings("deprecation")
             var impl = ConnectorImplementationJar.of("implId", "0.1.0", jarFilePath.toFile(), "myLib.jar");
 
             // then artifact info match the pom.xml content
@@ -138,7 +140,8 @@ public class ConnectorImplementationRegistryTest {
                 out.closeEntry();
             }
 
-            // when we create a ConnectorImplementationJar for the jar
+            // when we create a ConnectorImplementationJar for the jar (test of deprecated method for compatibility)
+            @SuppressWarnings("deprecation")
             var impl = ConnectorImplementationJar.of("implId", "0.1.0", jarFilePath.toFile(), "myLib.jar");
 
             // then artifact info match the path
@@ -167,7 +170,8 @@ public class ConnectorImplementationRegistryTest {
                 out.closeEntry();
             }
 
-            // when we create a ConnectorImplementationJar for the jar
+            // when we create a ConnectorImplementationJar for the jar (test of deprecated method for compatibility)
+            @SuppressWarnings("deprecation")
             var impl = ConnectorImplementationJar.of("implId", "0.1.0", jarFilePath.toFile(), "myLib.jar");
 
             // then artifact info match the path

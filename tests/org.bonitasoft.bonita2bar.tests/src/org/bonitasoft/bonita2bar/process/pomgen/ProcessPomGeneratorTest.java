@@ -49,7 +49,7 @@ import org.junit.jupiter.api.Test;
 /**
  * Test {@link ProcessPomGenerator}
  */
-public class ProcessPomGeneratorTest {
+class ProcessPomGeneratorTest {
 
     /** Test the email connector dependency */
     private static final Predicate<Dependency> IS_EMAIL_CONNECTOR = dep -> {

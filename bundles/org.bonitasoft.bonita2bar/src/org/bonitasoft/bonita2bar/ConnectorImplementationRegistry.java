@@ -31,11 +31,9 @@ import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
@@ -107,12 +105,10 @@ public interface ConnectorImplementationRegistry {
             String file) {
 
         public static Predicate<ArtifactInfo> matchesDep(Dependency dep) {
-            return info -> {
-                return Objects.equals(dep.getGroupId(), info.groupId())
-                        && Objects.equals(dep.getArtifactId(), info.artifactId())
-                        && Objects.equals(dep.getVersion(), info.version())
-                        && Objects.equals(dep.getClassifier(), info.classifier());
-            };
+            return info -> Objects.equals(dep.getGroupId(), info.groupId())
+                    && Objects.equals(dep.getArtifactId(), info.artifactId())
+                    && Objects.equals(dep.getVersion(), info.version())
+                    && Objects.equals(dep.getClassifier(), info.classifier());
         }
     }
 
@@ -137,80 +133,18 @@ public interface ConnectorImplementationRegistry {
                 // find pom.xml within the jar
                 var jarEntries = StreamSupport.stream(
                         Spliterators.spliteratorUnknownSize(jar.entries().asIterator(), Spliterator.ORDERED), false);
-                var inMavenEntries = jarEntries.filter(e -> e.getName().contains("META-INF/maven/"))
-                        .collect(Collectors.toList());
-                var propertiesEntry = inMavenEntries.stream().filter(e -> e.getName().endsWith("pom.properties"))
-                        .findFirst();
+                var inMavenEntries = jarEntries.filter(e -> e.getName().contains("META-INF/maven/")).toList();
                 // try to get artifact information from pom.properties
-                var artifactFromProp = propertiesEntry.map(e -> {
-                    // first prevent a Zip Bomb Attack
-                    preventZipBombAttack(jar, e);
-                    // parse the pom.properties to get the maven artifact information
-                    try (var entryReader = new InputStreamReader(jar.getInputStream(e))) {
-                        var properties = new java.util.Properties();
-                        properties.load(entryReader);
-                        return new ArtifactInfo(properties.getProperty("groupId"), properties.getProperty("artifactId"),
-                                properties.getProperty("version"), properties.getProperty("classifier"),
-                                jarFile.getAbsolutePath());
-                    } catch (IOException e1) {
-                        LOGGER.error("Failed to read pom.properties", e1);
-                        return null;
-                    }
-                }).filter(Objects::nonNull);
-                // try to get artifact information from pom.xml
-                var pomEntry = inMavenEntries.stream().filter(e -> e.getName().endsWith("pom.xml")).findFirst();
-                Supplier<Optional<ArtifactInfo>> getArtifactFromPom = () -> pomEntry.map(e -> {
-                    // first prevent a Zip Bomb Attack
-                    preventZipBombAttack(jar, e);
-                    // parse the pom.xml to get the maven artifact information
-                    MavenXpp3Reader reader = new MavenXpp3Reader();
-                    try (var entryReader = new InputStreamReader(jar.getInputStream(e))) {
-                        var model = reader.read(entryReader);
-                        return new ArtifactInfo(model.getGroupId(), model.getArtifactId(), model.getVersion(), null,
-                                jarFile.getAbsolutePath());
-                    } catch (IOException | XmlPullParserException e1) {
-                        LOGGER.error("Failed to read pom.xml", e1);
-                        return null;
-                    }
-                }).filter(Objects::nonNull);
-                // try to get artifact information from file location in repository
-                Supplier<Optional<ArtifactInfo>> getArtifactFromFileLocation = () -> {
-                    File versionFolder = jarFile.getParentFile();
-                    if (versionFolder != null) {
-                        var jarVersion = versionFolder.getName();
-                        File artifactFolder = versionFolder.getParentFile();
-                        if (artifactFolder != null) {
-                            var jarArtifactId = artifactFolder.getName();
-                            File groupFolder = artifactFolder.getParentFile();
-                            if (groupFolder != null) {
-                                var jarGroupId = getGroupId(groupFolder);
-                                var supposedFileName = jarArtifactId + "-" + jarVersion + ".jar";
-                                if (supposedFileName.equals(jarFile.getName())) {
-                                    return Optional.of(new ArtifactInfo(jarGroupId, jarArtifactId, jarVersion, null,
-                                            jarFile.getAbsolutePath()));
-                                } else {
-                                    var supposedFileNameWithClassifier = jarArtifactId + "-" + jarVersion
-                                            + "-([\\w]*).jar";
-                                    var matcher = Pattern.compile(supposedFileNameWithClassifier)
-                                            .matcher(jarFile.getName());
-                                    if (matcher.matches()) {
-                                        return Optional.of(
-                                                new ArtifactInfo(jarGroupId, jarArtifactId, jarVersion,
-                                                        matcher.group(1),
-                                                        jarFile.getAbsolutePath()));
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    return Optional.empty();
-                };
-                var artifactInfo = artifactFromProp.or(getArtifactFromPom).or(getArtifactFromFileLocation)
-                        .orElseThrow(() -> {
-                            var msg = MessageFormat.format("Failed to get artifact information for {0}",
-                                    jarFile.getAbsolutePath());
-                            return new IllegalArgumentException(msg);
-                        });
+                var artifactInfoOpt = getArtifactInfoFromProperties(jarFile, jar, inMavenEntries);
+                // or try to get artifact information from pom.xml
+                artifactInfoOpt = artifactInfoOpt.or(() -> getArtifactInfoFromPomXml(jarFile, jar, inMavenEntries));
+                // or try to get artifact information from file location in repository
+                artifactInfoOpt = artifactInfoOpt.or(() -> getArtifactInfoFromFileLocation(jarFile));
+                var artifactInfo = artifactInfoOpt.orElseThrow(() -> {
+                    var msg = MessageFormat.format("Failed to get artifact information for {0}",
+                            jarFile.getAbsolutePath());
+                    return new IllegalArgumentException(msg);
+                });
                 return new ConnectorImplementationJar(id, version, artifactInfo, entry);
             } catch (IOException e) {
                 var msg = MessageFormat.format("Failed to get artifact information for {0}",
@@ -218,6 +152,96 @@ public interface ConnectorImplementationRegistry {
                 LOGGER.error(msg, e);
                 throw new IllegalArgumentException(msg);
             }
+        }
+
+        /**
+         * Extract {@link ArtifactInfo} from the pom.xml jar entry
+         * 
+         * @param jarFile jar file
+         * @param jar jar file
+         * @param inMavenEntries jar entries in maven folder
+         * @return {@link ArtifactInfo} if present
+         */
+        private static Optional<ArtifactInfo> getArtifactInfoFromPomXml(File jarFile, JarFile jar,
+                List<JarEntry> inMavenEntries) {
+            // try to get artifact information from pom.xml
+            var pomEntry = inMavenEntries.stream().filter(e -> e.getName().endsWith("pom.xml")).findFirst();
+            return pomEntry.map(e -> {
+                // first prevent a Zip Bomb Attack
+                preventZipBombAttack(jar, e);
+                // parse the pom.xml to get the maven artifact information
+                MavenXpp3Reader reader = new MavenXpp3Reader();
+                try (var entryReader = new InputStreamReader(jar.getInputStream(e))) {
+                    var model = reader.read(entryReader);
+                    return new ArtifactInfo(model.getGroupId(), model.getArtifactId(), model.getVersion(), null,
+                            jarFile.getAbsolutePath());
+                } catch (IOException | XmlPullParserException e1) {
+                    LOGGER.error("Failed to read pom.xml", e1);
+                    return null;
+                }
+            }).filter(Objects::nonNull);
+        }
+
+        /**
+         * Extract {@link ArtifactInfo} from the pom.properties jar entry
+         * 
+         * @param jarFile jar file
+         * @param jar jar file
+         * @param inMavenEntries jar entries in maven folder
+         * @return {@link ArtifactInfo} if present
+         */
+        private static Optional<ArtifactInfo> getArtifactInfoFromProperties(File jarFile, JarFile jar,
+                List<JarEntry> inMavenEntries) {
+            var propertiesEntry = inMavenEntries.stream().filter(e -> e.getName().endsWith("pom.properties"))
+                    .findFirst();
+            // try to get artifact information from pom.properties
+            return propertiesEntry.map(e -> {
+                // first prevent a Zip Bomb Attack
+                preventZipBombAttack(jar, e);
+                // parse the pom.properties to get the maven artifact information
+                try (var entryReader = new InputStreamReader(jar.getInputStream(e))) {
+                    var properties = new java.util.Properties();
+                    properties.load(entryReader);
+                    return new ArtifactInfo(properties.getProperty("groupId"), properties.getProperty("artifactId"),
+                            properties.getProperty("version"), properties.getProperty("classifier"),
+                            jarFile.getAbsolutePath());
+                } catch (IOException e1) {
+                    LOGGER.error("Failed to read pom.properties", e1);
+                    return null;
+                }
+            }).filter(Objects::nonNull);
+        }
+
+        /**
+         * Extract {@link ArtifactInfo} from the jar location
+         * 
+         * @param jarFile jar file
+         * @return {@link ArtifactInfo} if present
+         */
+        private static Optional<ArtifactInfo> getArtifactInfoFromFileLocation(File jarFile) {
+            File versionFolder = jarFile.getParentFile();
+            if (versionFolder != null) {
+                var jarVersion = versionFolder.getName();
+                File artifactFolder = versionFolder.getParentFile();
+                if (artifactFolder != null) {
+                    var jarArtifactId = artifactFolder.getName();
+                    File groupFolder = artifactFolder.getParentFile();
+                    if (groupFolder != null) {
+                        var jarGroupId = getGroupId(groupFolder);
+                        // classifier is optional at the end
+                        var supposedFileName = jarArtifactId + "-" + jarVersion + "(?:-([\\w]*))?.jar";
+                        var matcher = Pattern.compile(supposedFileName)
+                                .matcher(jarFile.getName());
+                        if (matcher.matches()) {
+                            // may be null when non-capturing group "(?:)?" is not present
+                            var classifier = matcher.group(1);
+                            return Optional.of(new ArtifactInfo(jarGroupId, jarArtifactId, jarVersion, classifier,
+                                    jarFile.getAbsolutePath()));
+                        }
+                    }
+                }
+            }
+            return Optional.empty();
         }
 
         /**
@@ -246,7 +270,7 @@ public interface ConnectorImplementationRegistry {
                         }
                     }
                 } finally {
-                    output.toFile().delete();
+                    Files.delete(output);
                 }
             } catch (IOException e) {
                 String msg = "Zip Bomb Attack detection failed with exception";
