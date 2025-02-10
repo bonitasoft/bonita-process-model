@@ -19,7 +19,8 @@ Require-Bundle: org.bonitasoft.bonita2bpmn,
  org.bonitasoft.bpm.migration,
  org.eclipse.gmf.runtime.notation,
  com.sun.xml.bind.jaxb-osgi,
- org.glassfish.hk2.osgi-resource-locator
+ org.glassfish.hk2.osgi-resource-locator,
+ org.eclipse.m2e.maven.runtime
 Import-Package: org.bonitasoft.engine,
  org.bonitasoft.engine.bpm,
  org.bonitasoft.engine.bpm.actor,
