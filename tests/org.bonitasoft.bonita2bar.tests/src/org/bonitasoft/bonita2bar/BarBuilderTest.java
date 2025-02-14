@@ -37,7 +37,6 @@ import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.bonitasoft.engine.bpm.bar.InvalidBusinessArchiveFormatException;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -52,7 +51,7 @@ class BarBuilderTest {
     @BeforeEach
     void setUp() throws Exception {
         var repoRoot = new File(URLDecoder.decode(
-                FileLocator.toFileURL(BarBuilderTest.class.getResource("/test-repository")).getFile(), "UTF-8"));
+                FileLocator.toFileURL(BarBuilderTest.class.getResource("/my-project")).getFile(), "UTF-8"));
         Path appPath = repoRoot.toPath().resolve("app");
         var appPomFile = appPath.resolve("pom.xml").toFile();
         // load maven project
@@ -62,7 +61,7 @@ class BarBuilderTest {
             appProject = new MavenProject(model);
             appProject.setFile(appPomFile);
         }
-        var mvnExecutable = Platform.getOS().contains("win") ? "mvn.cmd" : "mvn";
+        var mvnExecutable = MavenUtil.getMvnExecutable();
         var classpath = MavenUtil.buildClasspath(repoRoot.toPath(), mvnExecutable);
 
         processRegistry = ProcessRegistry.of(appPath.resolve("diagrams"),
@@ -87,7 +86,7 @@ class BarBuilderTest {
         var barOutput = Files.createDirectory(tmpFolder.resolve("bars"));
 
         result.writeBusinessArchivesTo(barOutput);
-        var bonitaConfigurationFile = tmpFolder.resolve("test-repository.bconf");
+        var bonitaConfigurationFile = tmpFolder.resolve("my-project.bconf");
         result.writeBonitaConfigurationTo(bonitaConfigurationFile);
 
         assertThat(barOutput.resolve("SimpleProcessWithParameters--1.0.bar")).exists();
@@ -105,7 +104,7 @@ class BarBuilderTest {
         assertThat(result.getBusinessArchives()).isEmpty();
         assertThat(result.getConfigurations()).hasSize(12);
 
-        var bonitaConfigurationFile = tmpFolder.resolve("test-repository.bconf");
+        var bonitaConfigurationFile = tmpFolder.resolve("my-project.bconf");
         result.writeBonitaConfigurationTo(bonitaConfigurationFile);
 
         assertThat(bonitaConfigurationFile).exists();

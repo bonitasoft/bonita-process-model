@@ -32,7 +32,6 @@ import org.bonitasoft.bpm.model.util.FragmentTypes;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.bonitasoft.engine.bpm.process.impl.ProcessDefinitionBuilder;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -62,8 +61,7 @@ class JarArtifactProviderTest {
                 new ProcessDefinitionBuilder().createNewInstance("P", "1").addAutomaticTask("step1").getProcess());
         lib = repositoryFolder.resolve("lib");
         Files.createDirectories(lib);
-        var classpath = MavenUtil.buildClasspath(repositoryFolder,
-                Platform.getOS().contains("win") ? "mvn.cmd" : "mvn");
+        var classpath = MavenUtil.buildClasspath(repositoryFolder, MavenUtil.getMvnExecutable());
 
         jarArtifactProvider = new JarArtifactProvider(ClasspathResolver.of(classpath));
     }

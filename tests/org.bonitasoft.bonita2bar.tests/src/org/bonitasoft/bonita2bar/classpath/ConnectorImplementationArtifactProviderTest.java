@@ -40,7 +40,6 @@ import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,9 +51,9 @@ class ConnectorImplementationArtifactProviderTest {
 
     @BeforeEach
     void setup() throws Exception {
-        projectRoot = Files.createTempDirectory("test-repository");
+        projectRoot = Files.createTempDirectory("my-project");
         FileUtil.copyDirectory(new File(URLDecoder.decode(
-                FileLocator.toFileURL(CustomGroovyArtifactProviderTest.class.getResource("/test-repository")).getFile(),
+                FileLocator.toFileURL(CustomGroovyArtifactProviderTest.class.getResource("/my-project")).getFile(),
                 "UTF-8")).getAbsolutePath(), projectRoot.toFile().getAbsolutePath());
 
         var appPomFile = projectRoot.resolve("app").resolve("pom.xml").toFile();
@@ -78,7 +77,7 @@ class ConnectorImplementationArtifactProviderTest {
     void should_add_connector_in_bar() throws Exception {
         //given
         var outputFolder = projectRoot.resolve("target");
-        var mvnExecutable = Platform.getOS().contains("win") ? "mvn.cmd" : "mvn";
+        var mvnExecutable = MavenUtil.getMvnExecutable();
         var classpath = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
         var reportFile = MavenUtil.analyze(projectRoot, mvnExecutable);
 

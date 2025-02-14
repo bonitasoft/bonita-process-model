@@ -31,7 +31,6 @@ import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.bpm.model.util.ModelLoader;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,9 +42,9 @@ class CustomGroovyArtifactProviderTest {
 
     @BeforeEach
     void setup() throws Exception {
-        projectRoot = Files.createTempDirectory("test-repository");
+        projectRoot = Files.createTempDirectory("my-project");
         FileUtil.copyDirectory(new File(URLDecoder.decode(
-                FileLocator.toFileURL(CustomGroovyArtifactProviderTest.class.getResource("/test-repository")).getFile(),
+                FileLocator.toFileURL(CustomGroovyArtifactProviderTest.class.getResource("/my-project")).getFile(),
                 "UTF-8")).getAbsolutePath(), projectRoot.toFile().getAbsolutePath());
     }
 
@@ -60,7 +59,7 @@ class CustomGroovyArtifactProviderTest {
     void should_compile_groovy_classes() throws Exception {
         // given
         var outputFolder = projectRoot.resolve("target");
-        var classpath = MavenUtil.buildClasspath(projectRoot, Platform.getOS().contains("win") ? "mvn.cmd" : "mvn");
+        var classpath = MavenUtil.buildClasspath(projectRoot, MavenUtil.getMvnExecutable());
 
         CustomGroovyArtifactProvider customGroovyArtifactProvider = new CustomGroovyArtifactProvider(
                 SourcePathProvider.of(projectRoot.resolve("app")).getGroovySource(), ClasspathResolver.of(classpath),

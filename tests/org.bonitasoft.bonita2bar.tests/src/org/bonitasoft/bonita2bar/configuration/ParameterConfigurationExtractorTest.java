@@ -36,7 +36,7 @@ class ParameterConfigurationExtractorTest {
     void setup() throws IOException {
         extractor = new ParameterConfigurationExtractor();
         configurationFile = new File(FileLocator
-                .toFileURL(ParameterConfigurationExtractorTest.class.getResource("/test-repository.bconf")).getFile());
+                .toFileURL(ParameterConfigurationExtractorTest.class.getResource("/my-project.bconf")).getFile());
         parametersConfigurationMapper = new ParametersConfigurationMapper();
     }
 

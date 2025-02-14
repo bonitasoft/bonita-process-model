@@ -42,7 +42,6 @@ import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -63,11 +62,11 @@ class ProcessPomGeneratorTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        var mvnExecutable = Platform.getOS().contains("win") ? "mvn.cmd" : "mvn";
+        var mvnExecutable = MavenUtil.getMvnExecutable();
 
-        projectRoot = Files.createTempDirectory("test-repository");
+        projectRoot = Files.createTempDirectory("my-project");
         var testRepoRoot = new File(URLDecoder.decode(
-                FileLocator.toFileURL(ProcessPomGeneratorTest.class.getResource("/test-repository")).getFile(),
+                FileLocator.toFileURL(ProcessPomGeneratorTest.class.getResource("/my-project")).getFile(),
                 "UTF-8"));
         FileUtil.copyDirectory(testRepoRoot.getAbsolutePath(), projectRoot.toFile().getAbsolutePath());
 
