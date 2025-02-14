@@ -51,7 +51,9 @@ public class ProcessPom implements Closeable {
         }
         var reader = new MavenXpp3Reader();
         try (var fileReader = new FileReader(pom)) {
-            return reader.read(fileReader);
+            var pomModel = reader.read(fileReader);
+            pomModel.setPomFile(pom);
+            return pomModel;
         }
     }
 

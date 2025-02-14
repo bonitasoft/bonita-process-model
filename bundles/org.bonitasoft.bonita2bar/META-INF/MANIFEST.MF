@@ -67,4 +67,5 @@ Export-Package: org.bonitasoft.bonita2bar,
  org.bonitasoft.bonita2bar.process,
  org.bonitasoft.bonita2bar.process.builder,
  org.bonitasoft.bonita2bar.process.expression,
+ org.bonitasoft.bonita2bar.process.pomgen,
  org.bonitasoft.bonita2bar.resources
