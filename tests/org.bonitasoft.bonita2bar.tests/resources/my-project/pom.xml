@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.bonitasoft</groupId>
     <artifactId>bonita-project</artifactId>
-    <version>10.3-SNAPSHOT</version>
+    <version>10.2.0</version>
   </parent>
   <groupId>com.company</groupId>
   <artifactId>my-project-parent</artifactId>

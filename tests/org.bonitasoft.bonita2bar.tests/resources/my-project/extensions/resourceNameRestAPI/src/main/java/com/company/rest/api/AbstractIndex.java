@@ -1,3 +1,17 @@
+/**
+ * Copyright (C) 2025 Bonitasoft S.A.
+ * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2.0 of the License, or
+ * (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.company.rest.api;
 
 import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
@@ -41,7 +55,8 @@ public abstract class AbstractIndex implements RestApiController {
     }
 
     @Override
-    public RestApiResponse doHandle(HttpServletRequest request, RestApiResponseBuilder responseBuilder, RestAPIContext context) {
+    public RestApiResponse doHandle(HttpServletRequest request, RestApiResponseBuilder responseBuilder,
+            RestAPIContext context) {
 
         // Validate request
         try {
@@ -67,8 +82,8 @@ public abstract class AbstractIndex implements RestApiController {
      * Build an HTTP response.
      *
      * @param responseBuilder the Rest API response builder
-     * @param httpStatus      the status of the response
-     * @param body            the response body
+     * @param httpStatus the status of the response
+     * @param body the response body
      * @return a RestAPIResponse
      */
     RestApiResponse jsonResponse(RestApiResponseBuilder responseBuilder, int httpStatus, Object body) {
@@ -82,19 +97,19 @@ public abstract class AbstractIndex implements RestApiController {
         }
     }
 
-
     /**
      * Returns a paged result like Bonita BPM REST APIs.
      * Build a response with a content-range.
      *
      * @param responseBuilder the Rest API response builder
-     * @param body            the response body
-     * @param p               the page index
-     * @param c               the number of result per page
-     * @param total           the total number of results
+     * @param body the response body
+     * @param p the page index
+     * @param c the number of result per page
+     * @param total the total number of results
      * @return a RestAPIResponse
      */
-    RestApiResponse pagedJsonResponse(RestApiResponseBuilder responseBuilder, int httpStatus, Object body, int p, int c, long total) {
+    RestApiResponse pagedJsonResponse(RestApiResponseBuilder responseBuilder, int httpStatus, Object body, int p, int c,
+            long total) {
         try {
             return responseBuilder
                     .withContentRange(p, c, total)
@@ -110,7 +125,7 @@ public abstract class AbstractIndex implements RestApiController {
      * Load a property file into a java.util.Properties
      */
     protected Properties loadProperties(String fileName, ResourceProvider resourceProvider) {
-        try (InputStream is = resourceProvider.getResourceAsStream(fileName)){
+        try (InputStream is = resourceProvider.getResourceAsStream(fileName)) {
             Properties props = new Properties();
             props.load(is);
             return props;

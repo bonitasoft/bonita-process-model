@@ -45,7 +45,7 @@ class JarArtifactProviderTest {
     private Path lib;
 
     @BeforeEach
-    public void before(@TempDir Path repositoryFolder) throws Exception {
+    void before(@TempDir Path repositoryFolder) throws Exception {
         var appFolder = Files.createDirectory(repositoryFolder.resolve("app"));
         try (InputStream is = FileLocator.toFileURL(JarArtifactProviderTest.class.getResource("/pom.xml.example"))
                 .openStream()) {

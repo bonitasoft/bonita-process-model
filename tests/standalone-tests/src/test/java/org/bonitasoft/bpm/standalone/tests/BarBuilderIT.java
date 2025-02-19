@@ -41,7 +41,6 @@ import org.apache.maven.project.ProjectBuildingResult;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.apache.maven.settings.Settings;
 import org.apache.maven.settings.SettingsUtils;
-import org.apache.maven.settings.building.SettingsBuildingException;
 import org.apache.maven.settings.io.xpp3.SettingsXpp3Reader;
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
@@ -102,7 +101,7 @@ class BarBuilderIT {
     }
 
     private MavenProject getMavenProject(File pomFile)
-            throws ProjectBuildingException, SettingsBuildingException, IOException, XmlPullParserException {
+            throws ProjectBuildingException, IOException, XmlPullParserException {
         DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
         LocalRepository localRepo = new LocalRepository("target/local-repo");
         LocalRepositoryManager localRepoManager = repositorySystem.newLocalRepositoryManager(session, localRepo);
