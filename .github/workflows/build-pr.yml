@@ -26,6 +26,9 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
+      - uses: bonitasoft/maven-settings-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
       - name: Cache local Maven repository
         uses: actions/cache@v4
         with:

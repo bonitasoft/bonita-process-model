@@ -18,11 +18,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -37,6 +39,9 @@ import org.apache.maven.project.ProjectBuildingException;
 import org.apache.maven.project.ProjectBuildingRequest;
 import org.apache.maven.project.ProjectBuildingResult;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
+import org.apache.maven.settings.Settings;
+import org.apache.maven.settings.SettingsUtils;
+import org.apache.maven.settings.io.xpp3.SettingsXpp3Reader;
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
@@ -48,9 +53,13 @@ import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.codehaus.plexus.PlexusContainer;
 import org.codehaus.plexus.testing.PlexusTest;
+import org.codehaus.plexus.util.ReaderFactory;
+import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.eclipse.aether.repository.LocalRepository;
 import org.eclipse.aether.repository.LocalRepositoryManager;
+import org.eclipse.aether.util.repository.AuthenticationBuilder;
+import org.eclipse.aether.util.repository.DefaultAuthenticationSelector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -72,7 +81,27 @@ class BarBuilderIT {
         LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).setLevel(Level.WARNING);
     }
 
-    private MavenProject getMavenProject(File pomFile) throws ProjectBuildingException {
+    public static final File DEFAULT_USER_SETTINGS_FILE = new File(System.getProperty("user.home"), ".m2/settings.xml");
+    public static final File DEFAULT_GLOBAL_SETTINGS_FILE = new File(
+            System.getProperty("maven.home", Optional.ofNullable(System.getenv("M2_HOME")).orElse("")),
+            "conf/settings.xml");
+
+    private static Settings readSettingsFile()
+            throws IOException, XmlPullParserException {
+        File settingsFile = new File(System.getProperty("user.home"), ".m2/settings.xml");
+        Settings settings = null;
+        if (settingsFile.exists()) {
+            try (Reader reader = ReaderFactory.newXmlReader(settingsFile)) {
+                SettingsXpp3Reader modelReader = new SettingsXpp3Reader();
+
+                settings = modelReader.read(reader);
+            }
+        }
+        return settings;
+    }
+
+    private MavenProject getMavenProject(File pomFile)
+            throws ProjectBuildingException, IOException, XmlPullParserException {
         DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
         LocalRepository localRepo = new LocalRepository("target/local-repo");
         LocalRepositoryManager localRepoManager = repositorySystem.newLocalRepositoryManager(session, localRepo);
@@ -82,6 +111,22 @@ class BarBuilderIT {
         buildingRequest.setRepositorySession(session);
         buildingRequest.setProcessPlugins(false);
         buildingRequest.setResolveDependencies(true);
+        buildingRequest.setSystemProperties(System.getProperties());
+
+        Settings settings = readSettingsFile();
+        settings.getProfiles().stream().map(SettingsUtils::convertFromSettingsProfile)
+                .forEach(buildingRequest::addProfile);
+        buildingRequest.setActiveProfileIds(settings.getActiveProfiles());
+
+        DefaultAuthenticationSelector authSelector = new DefaultAuthenticationSelector();
+        settings.getServers().forEach(server -> {
+            AuthenticationBuilder authBuilder = new AuthenticationBuilder();
+            authBuilder.addUsername(server.getUsername());
+            authBuilder.addPassword(server.getPassword());
+
+            authSelector.add(server.getId(), authBuilder.build());
+        });
+        session.setAuthenticationSelector(authSelector);
 
         ProjectBuildingResult result = projectBuilder.build(pomFile, buildingRequest);
         return result.getProject();
@@ -90,7 +135,7 @@ class BarBuilderIT {
     @Test
     void buildProjectBusinessArchives(@TempDir Path tmpDir) throws Exception {
         var projectRoot = tmpDir.resolve("test-respository");
-        FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/test-repository").getFile()).getAbsolutePath(),
+        FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/my-project").getFile()).getAbsolutePath(),
                 projectRoot.toFile().getAbsolutePath());
         var mvnExecutable = SystemUtils.IS_OS_WINDOWS ? "mvn.cmd" : "mvn";
         MavenProject mavenProject = getMavenProject(projectRoot.resolve("app").resolve("pom.xml").toFile());
@@ -108,7 +153,7 @@ class BarBuilderIT {
         var result = barBuilder.buildAll("Local");
         var barOutputFolder = projectRoot.resolve("target").resolve("processes");
         result.writeBusinessArchivesTo(barOutputFolder);
-        var bonitaConfigurationFile = projectRoot.resolve("target").resolve("test-repository.bconf");
+        var bonitaConfigurationFile = projectRoot.resolve("target").resolve("my-project.bconf");
         result.writeBonitaConfigurationTo(bonitaConfigurationFile);
 
         assertThat(result.getBusinessArchives()).hasSize(12);
@@ -142,7 +187,7 @@ class BarBuilderIT {
     @Test
     void buildBusinessArchivesWithMigration(@TempDir Path tmpDir) throws Exception {
         var projectRoot = tmpDir.resolve("test-respository");
-        FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/test-repository").getFile()).getAbsolutePath(),
+        FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/my-project").getFile()).getAbsolutePath(),
                 projectRoot.toFile().getAbsolutePath());
         var mvnExecutable = SystemUtils.IS_OS_WINDOWS ? "mvn.cmd" : "mvn";
         MavenProject mavenProject = getMavenProject(projectRoot.resolve("app").resolve("pom.xml").toFile());

@@ -38,7 +38,7 @@ class BPMN2ArtifactProviderTest {
     void before() throws Exception {
         // given
         File repoRoot = new File(URLDecoder.decode(
-                FileLocator.toFileURL(BPMN2ArtifactProvider.class.getResource("/test-repository/")).getFile(),
+                FileLocator.toFileURL(BPMN2ArtifactProvider.class.getResource("/my-project/")).getFile(),
                 "UTF-8"));
         processRegistry = ProcessRegistry.of(repoRoot.toPath().resolve("app").resolve("diagrams"),
                 MigrationPolicy.NEVER_MIGRATE_POLICY);

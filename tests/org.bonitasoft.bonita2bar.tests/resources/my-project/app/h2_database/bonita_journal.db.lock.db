@@ -1,0 +1,6 @@
+#FileLock
+#Mon Feb 17 08:19:54 CET 2025
+hostName=LAP-00341
+id=19512c71d6c8e093826b17bc4f764743734ec960e84
+method=file
+server=192.168.0.24\:56084

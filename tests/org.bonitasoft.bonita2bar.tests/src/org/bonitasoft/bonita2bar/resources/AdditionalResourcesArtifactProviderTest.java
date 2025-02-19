@@ -41,7 +41,7 @@ class AdditionalResourcesArtifactProviderTest {
     void before() throws Exception {
         repositoryFolder = new File(URLDecoder
                 .decode(FileLocator.toFileURL(AdditionalResourcesArtifactProviderTest.class
-                        .getResource("/test-repository")).getFile(), "UTF-8"));
+                        .getResource("/my-project")).getFile(), "UTF-8"));
         pool = ProcessFactory.eINSTANCE.createPool();
         pool.setName("ProcessName");
         pool.setVersion("1.0");

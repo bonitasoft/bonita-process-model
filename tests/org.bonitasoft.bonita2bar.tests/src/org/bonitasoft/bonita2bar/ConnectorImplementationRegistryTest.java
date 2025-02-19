@@ -35,7 +35,6 @@ import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.codehaus.plexus.util.FileUtils;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -48,9 +47,9 @@ class ConnectorImplementationRegistryTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        projectRoot = Files.createTempDirectory("test-repository");
+        projectRoot = Files.createTempDirectory("my-project");
         var testRepoRoot = new File(URLDecoder.decode(
-                FileLocator.toFileURL(ConnectorImplementationRegistryTest.class.getResource("/test-repository"))
+                FileLocator.toFileURL(ConnectorImplementationRegistryTest.class.getResource("/my-project"))
                         .getFile(),
                 "UTF-8"));
         FileUtil.copyDirectory(testRepoRoot.getAbsolutePath(), projectRoot.toFile().getAbsolutePath());
@@ -58,7 +57,7 @@ class ConnectorImplementationRegistryTest {
 
     @Test
     void should_ConnectorImplementationJar_legacyEqualModernContructor() throws Exception {
-        var mvnExecutable = Platform.getOS().contains("win") ? "mvn.cmd" : "mvn";
+        var mvnExecutable = MavenUtil.getMvnExecutable();
         var jsonReportFile = MavenUtil.analyze(projectRoot, mvnExecutable);
 
         // jsonReportFile should contain e.g. the email connector
