@@ -15,14 +15,27 @@
 package org.bonitasoft.bonita2bar;
 
 import org.bonitasoft.bonita2bar.configuration.EnvironmentConfigurationBuilder;
+import org.bonitasoft.bonita2bar.process.pomgen.ProcessPom;
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 
 public interface BarArtifactProvider {
 
-    void build(BusinessArchiveBuilder builder, Pool process, Configuration configuration)
-            throws BuildBarException;
+    /**
+     * @deprecated use {@link #build(BusinessArchiveBuilder, Pool, ProcessPom, Configuration)} instead
+     */
+    @Deprecated
+    default void build(BusinessArchiveBuilder builder, Pool process, Configuration configuration)
+            throws BuildBarException {
+        // do nothing, we'll use the other build method
+    }
+
+    default void build(BusinessArchiveBuilder builder, Pool process, ProcessPom pomAccess, Configuration configuration)
+            throws BuildBarException {
+        // call the deprecated method for old implementations compatibility
+        build(builder, process, configuration);
+    }
 
     default void configure(EnvironmentConfigurationBuilder builder, Configuration configuration, Pool process) {
         //No configuration

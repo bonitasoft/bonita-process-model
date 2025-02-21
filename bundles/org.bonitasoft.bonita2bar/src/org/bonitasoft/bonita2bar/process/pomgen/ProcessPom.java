@@ -18,13 +18,13 @@ import java.io.Closeable;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
+import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 
 /**
@@ -79,12 +79,7 @@ public class ProcessPom implements Closeable {
     public void close() throws IOException {
         // get rid of temporary folder
         if (folderPath != null && Files.exists(folderPath)) {
-            try (DirectoryStream<Path> stream = Files.newDirectoryStream(folderPath)) {
-                for (Path entry : stream) {
-                    Files.delete(entry);
-                }
-            }
-            Files.delete(folderPath);
+            FileUtils.deleteDirectory(folderPath.toFile());
         }
     }
 

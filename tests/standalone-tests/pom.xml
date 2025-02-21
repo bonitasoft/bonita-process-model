@@ -24,7 +24,6 @@
     <assertj-core.version>3.24.2</assertj-core.version>
     <logback.version>1.2.13</logback.version>
     <sonar.tests>src/test/java</sonar.tests>
-    <maven-core.version>3.8.4</maven-core.version>
     <plexus-testing.version>1.2.0</plexus-testing.version>
   </properties>
   <dependencyManagement>
@@ -37,13 +36,6 @@
         <scope>import</scope>
       </dependency>
       <dependency>
-        <groupId>org.apache.maven</groupId>
-        <artifactId>maven</artifactId>
-        <version>${maven-core.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-      <dependency>
         <groupId>org.apache.maven.resolver</groupId>
         <artifactId>maven-resolver-transport-http</artifactId>
         <version>1.6.3</version>
@@ -52,11 +44,6 @@
         <groupId>org.apache.maven.resolver</groupId>
         <artifactId>maven-resolver-transport-file</artifactId>
         <version>1.6.3</version>
-      </dependency>
-      <dependency>
-        <groupId>org.apache.maven.wagon</groupId>
-        <artifactId>wagon-http</artifactId>
-        <version>3.4.3</version>
       </dependency>
       <dependency>
         <groupId>org.apache.maven.wagon</groupId>
@@ -97,7 +84,6 @@
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
-      <version>${logback.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>

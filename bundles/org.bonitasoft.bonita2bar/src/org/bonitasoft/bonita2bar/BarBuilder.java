@@ -192,7 +192,7 @@ public class BarBuilder {
                             process.getName(),
                             process.getVersion(), configuration.getName());
                     for (final BarArtifactProvider provider : providers) {
-                        provider.build(barBuilder, process, configuration);
+                        provider.build(barBuilder, process, pomAccess, configuration);
                         provider.configure(confBuilder, configuration, process);
                     }
                     var result = new BuildResult(
