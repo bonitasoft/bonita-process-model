@@ -15,7 +15,6 @@
 package org.bonitasoft.bpm.standalone.tests;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.File;
 import java.io.IOException;
@@ -52,7 +51,6 @@ import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
 import org.bonitasoft.bonita2bar.MavenExecutor;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
-import org.bonitasoft.bonita2bar.internal.M2eMavenExecutor;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
@@ -247,11 +245,6 @@ class BarBuilderIT {
 
         assertThat(mavenExecutorCalled).isTrue();
         assertThat(result.getBusinessArchives()).hasSize(1);
-    }
-
-    @Test
-    void cantUseM2eMavenExecutor() throws Exception {
-        assertThatThrownBy(M2eMavenExecutor::new).isInstanceOf(IllegalStateException.class);
     }
 
     private static ConnectorImplementationRegistry createImplementationRegistry(Path reportFile) throws IOException {

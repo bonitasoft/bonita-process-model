@@ -68,7 +68,7 @@ public interface MavenExecutor {
             // keep error to display it in the exception
             try (ByteArrayOutputStream errStream = new ByteArrayOutputStream()) {
                 // something may go wrong when loading the mojo here, when plexus is not configured correctly.
-                int buildResult = cli.doMain(args, pomFolder.getAbsolutePath(), System.out, new PrintStream(errStream));
+                int buildResult = cli.doMain(args, pomFolder.getAbsolutePath(), null, new PrintStream(errStream));
                 if (buildResult != 0) {
                     throw new BuildBarException(errorMessageBase.get() + "\n" + errStream.toString());
                 }
