@@ -14,6 +14,7 @@
  */
 package org.bonitasoft.bonita2bar;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Optional;
@@ -104,13 +105,8 @@ public class BarBuilderFactory {
             this.processRegistry = builder.processRegistry;
             this.mavenProject = builder.mavenProject;
             this.sourcePathProvider = Optional.ofNullable(builder.sourcePathProvider).orElseGet(() -> {
-                if (mavenProject != null) {
-                    var baseDir = mavenProject.getBasedir();
-                    if (baseDir != null) {
-                        return SourcePathProvider.of(baseDir.toPath());
-                    }
-                }
-                return null;
+                var baseDir = Optional.ofNullable(mavenProject).map(MavenProject::getBasedir).filter(Objects::nonNull);
+                return baseDir.map(File::toPath).map(SourcePathProvider::of).orElse(null);
             });
             this.mavenExecutor = Optional.ofNullable(builder.mavenExecutor).orElseGet(
                     () -> EnvironmentUtil.isOSGi() ? new M2eMavenExecutor() : MavenExecutor.getCliImplementation());

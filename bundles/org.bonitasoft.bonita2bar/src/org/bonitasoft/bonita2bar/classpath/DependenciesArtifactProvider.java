@@ -72,29 +72,53 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
 
             // explore all files in the dependencies folder
             if (dependenciesFolder.exists()) {
-                try (Stream<Path> walker = Files.walk(dependenciesFolder.toPath())) {
-                    List<Path> files = walker
-                            .filter(Files::isRegularFile).toList();
-                    for (var file : files) {
-                        try {
-                            BarResource barResource = new BarResource(file.getFileName().toString(),
-                                    Files.readAllBytes(file));
-                            if (file.toString().endsWith(".jar")) {
-                                builder.addClasspathResource(barResource);
-                            } else {
-                                builder.addExternalResource(barResource);
-                            }
-                        } catch (IOException e) {
-                            throw new BuildBarException(String.format("Unable to get content of the %s ", file), e);
-                        }
-                    }
-                }
+                exploreDependencies(builder, dependenciesFolder);
             }
         } catch (IOException | XmlPullParserException e) {
             throw new BuildBarException(String.format("Failed to add dependencies in bar %s-%s.bar.", process.getName(),
                     process.getVersion()), e);
         }
 
+    }
+
+    /**
+     * Explore dependencies folder and add all files to the business archive.
+     * 
+     * @param builder archive builder
+     * @param dependenciesFolder folder containing dependencies
+     * @throws BuildBarException if an error occurs while building the archive
+     * @throws IOException if an error occurs while reading the dependencies
+     */
+    private void exploreDependencies(BusinessArchiveBuilder builder, File dependenciesFolder)
+            throws BuildBarException, IOException {
+        try (Stream<Path> walker = Files.walk(dependenciesFolder.toPath())) {
+            List<Path> files = walker
+                    .filter(Files::isRegularFile).toList();
+            for (var file : files) {
+                addDependencyToBuild(builder, file);
+            }
+        }
+    }
+
+    /**
+     * Add a file as dependency to the business archive.
+     * 
+     * @param builder archive builder
+     * @param file file to add as dependency
+     * @throws BuildBarException if an error occurs while building the archive
+     */
+    private void addDependencyToBuild(BusinessArchiveBuilder builder, Path file) throws BuildBarException {
+        try {
+            BarResource barResource = new BarResource(file.getFileName().toString(),
+                    Files.readAllBytes(file));
+            if (file.toString().endsWith(".jar")) {
+                builder.addClasspathResource(barResource);
+            } else {
+                builder.addExternalResource(barResource);
+            }
+        } catch (IOException e) {
+            throw new BuildBarException(String.format("Unable to get content of the %s ", file), e);
+        }
     }
 
 }
