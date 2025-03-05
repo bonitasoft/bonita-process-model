@@ -66,7 +66,6 @@ public class BarBuilderFactory {
         barBuilder.register(new ActorMappingArtifactProvider());
         barBuilder.register(new ProcessDefinitionArtifactProvider(config.getProcessRegistry()));
         barBuilder.register(new DependenciesArtifactProvider(config.getMavenExecutor()));
-        //        barBuilder.register(new JarArtifactProvider(classpathResolver));
         barBuilder.register(new FormMappingArtifactProvider(sourceProvider.getForms(), config.getFormBuilder(),
                 config.allowEmptyFormMapping()));
 

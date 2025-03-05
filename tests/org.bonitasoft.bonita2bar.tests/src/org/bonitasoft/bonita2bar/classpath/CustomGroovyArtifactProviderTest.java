@@ -79,8 +79,11 @@ class CustomGroovyArtifactProviderTest {
 
         // then
         File targetClasses = outputFolder.resolve("groovy-classes").toFile();
-        assertThat(targetClasses.listFiles()).doesNotContain(new File(targetClasses, "MyLib3.class"))
-                .contains(new File(targetClasses, "MyLib.class"), new File(targetClasses, "MyLib2.class"));
+        // we now include all groovy libs no matter what...
+        assertThat(targetClasses.listFiles()).contains(new File(targetClasses, "MyLib.class"),
+                new File(targetClasses, "MyLib2.class"),
+                // even MyLib3 which is not used in the process
+                new File(targetClasses, "MyLib3.class"));
 
         assertThat(outputFolder.resolve(CustomGroovyArtifactProvider.GROOVYSCRIPT_JAR)).exists();
     }

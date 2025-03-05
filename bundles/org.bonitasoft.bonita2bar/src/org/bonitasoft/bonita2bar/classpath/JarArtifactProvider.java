@@ -35,6 +35,11 @@ import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @deprecated use {@link DependenciesArtifactProvider} instead.
+ *             Candidate for removal.
+ */
+@Deprecated
 public class JarArtifactProvider implements BarArtifactProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JarArtifactProvider.class);
