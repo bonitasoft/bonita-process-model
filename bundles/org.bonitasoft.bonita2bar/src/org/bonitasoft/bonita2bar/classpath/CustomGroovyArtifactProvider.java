@@ -66,12 +66,8 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
     public void build(BusinessArchiveBuilder builder, Pool process, Configuration configuration)
             throws BuildBarException {
         LOGGER.info("Adding custom groovy scripts in classpath...");
-        Set<File> filesToCompile = collectGroovySourceFile(groovySource, process);
-        if (filesToCompile.isEmpty()) {
-            LOGGER.info("No custom groovy script to compile found.");
-            return;
-        }
 
+        // make sure to delete the target folder before even when there is no file to compile
         var targetClasses = workingDirectory.resolve("groovy-classes");
         if (Files.exists(targetClasses)) {
             try {
@@ -80,6 +76,19 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
                 throw new BuildBarException(String.format("Failed to delete folder %s", targetClasses), e);
             }
         }
+        var outputJarFile = workingDirectory.resolve(GROOVYSCRIPT_JAR);
+        try {
+            Files.deleteIfExists(outputJarFile);
+        } catch (IOException e) {
+            throw new BuildBarException(String.format("Failed to delete custom groovy jar %s.", outputJarFile), e);
+        }
+
+        Set<File> filesToCompile = collectGroovySourceFile(groovySource, process);
+        if (filesToCompile.isEmpty()) {
+            LOGGER.info("No custom groovy script to compile found.");
+            return;
+        }
+
         try {
             Files.createDirectories(targetClasses);
         } catch (IOException e) {
@@ -88,21 +97,15 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
         try {
             compile(filesToCompile, targetClasses.toFile());
         } catch (CompilationFailedException | IOException e) {
-            throw new BuildBarException(
-                    String.format("Failed to compile custom groovy files for %s (%s)",
-                            process.getName(), process.getVersion()),
-                    e);
+            throw new BuildBarException(String.format("Failed to compile custom groovy files for %s (%s)",
+                    process.getName(), process.getVersion()), e);
         }
         try {
-            var outputJarFile = workingDirectory.resolve(GROOVYSCRIPT_JAR);
-            Files.deleteIfExists(outputJarFile);
             var jarFile = JarBuilder.createJar(targetClasses.toFile(), outputJarFile);
             builder.addClasspathResource(new BarResource(GROOVYSCRIPT_JAR, Files.readAllBytes(jarFile)));
         } catch (IOException e) {
-            throw new BuildBarException(
-                    String.format("Failed to add custom groovy jar in %s (%s) bar.",
-                            process.getName(), process.getVersion()),
-                    e);
+            throw new BuildBarException(String.format("Failed to add custom groovy jar in %s (%s) bar.",
+                    process.getName(), process.getVersion()), e);
         }
     }
 
@@ -167,10 +170,8 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
                 return groovyPath.toFile();
             }).collect(Collectors.toSet());
         } catch (IOException e) {
-            throw new BuildBarException(
-                    String.format("Failed to read custom groovy libraries for %s (%s) bar.",
-                            process.getName(), process.getVersion()),
-                    e);
+            throw new BuildBarException(String.format("Failed to read custom groovy libraries for %s (%s) bar.",
+                    process.getName(), process.getVersion()), e);
         }
     }
 }

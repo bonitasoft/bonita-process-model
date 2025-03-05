@@ -20,6 +20,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import org.bonitasoft.bonita2bar.BarArtifactProvider;
@@ -48,10 +49,10 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
     /**
      * Default Constructor.
      * 
-     * @param maventExecutor the maven executor
+     * @param mavenExecutor the maven executor
      */
-    public DependenciesArtifactProvider(MavenExecutor maventExecutor) {
-        this.mavenExecutor = maventExecutor;
+    public DependenciesArtifactProvider(MavenExecutor mavenExecutor) {
+        this.mavenExecutor = mavenExecutor;
     }
 
     @Override
@@ -63,10 +64,11 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
             var dependenciesFolder = new File(processPomFolder, "dependencies");
             var profileToUse = String.format(ENV_PROFILE_FORMAT, configuration.getName());
 
+            Supplier<String> errMsg = () -> String.format("Failed to build dependencies for process %s-%s",
+                    process.getName(), process.getVersion());
             mavenExecutor.execute(pom.getPomFile(), List.of("dependency:copy-dependencies"),
                     Map.of("outputDirectory", "./" + dependenciesFolder.getName()),
-                    List.of(profileToUse), () -> "Failed to build dependencies for process " + process.getName() + "-"
-                            + process.getVersion());
+                    List.of(profileToUse), errMsg);
 
             // explore all files in the dependencies folder
             if (dependenciesFolder.exists()) {
@@ -83,16 +85,14 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
                                 builder.addExternalResource(barResource);
                             }
                         } catch (IOException e) {
-                            throw new BuildBarException(String.format("Unable to get content of the %s ", file),
-                                    e);
+                            throw new BuildBarException(String.format("Unable to get content of the %s ", file), e);
                         }
                     }
                 }
             }
         } catch (IOException | XmlPullParserException e) {
-            String message = String.format("Failed to add dependencies in bar %s-%s.bar.",
-                    process.getName(), process.getVersion());
-            throw new BuildBarException(message, e);
+            throw new BuildBarException(String.format("Failed to add dependencies in bar %s-%s.bar.", process.getName(),
+                    process.getVersion()), e);
         }
 
     }

@@ -15,6 +15,7 @@
 package org.bonitasoft.bpm.standalone.tests;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.Supplier;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -47,7 +50,9 @@ import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
+import org.bonitasoft.bonita2bar.MavenExecutor;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
+import org.bonitasoft.bonita2bar.internal.M2eMavenExecutor;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
@@ -205,6 +210,48 @@ class BarBuilderIT {
         var result = barBuilder.build("ProcessWithAdditionalResource", "1.0", "Local");
 
         assertThat(result.getBusinessArchives()).hasSize(1);
+    }
+
+    @Test
+    void buildBusinessArchivesWithMavenExecutor(@TempDir Path tmpDir) throws Exception {
+        var projectRoot = tmpDir.resolve("test-respository");
+        FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/my-project").getFile()).getAbsolutePath(),
+                projectRoot.toFile().getAbsolutePath());
+        var mvnExecutable = SystemUtils.IS_OS_WINDOWS ? "mvn.cmd" : "mvn";
+        MavenProject mavenProject = getMavenProject(projectRoot.resolve("app").resolve("pom.xml").toFile());
+
+        AtomicBoolean mavenExecutorCalled = new AtomicBoolean(false);
+        MavenExecutor executor = (File pomFile, List<String> goals, Map<String, String> properties,
+                List<String> activeProfiles, Supplier<String> errorMessageBase) -> {
+            try {
+                MavenUtil.execute(pomFile,
+                        mvnExecutable, goals, properties, activeProfiles);
+                mavenExecutorCalled.set(true);
+            } catch (InterruptedException | IOException e) {
+                throw new RuntimeException(e);
+            }
+        };
+
+        var barBuilder = BarBuilderFactory.create(BuildConfig.builder()
+                .formBuilder(formId -> formId.getBytes())
+                .workingDirectory(tmpDir.resolve("workdir"))
+                .connectorImplementationRegistry(
+                        createImplementationRegistry(MavenUtil.analyze(projectRoot, mvnExecutable)))
+                .processRegistry(ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
+                        MigrationPolicy.ALWAYS_MIGRATE_POLICY))
+                .mavenProject(mavenProject)
+                .mavenExecutor(executor)
+                .build());
+
+        var result = barBuilder.build("SimpleProcessWithParameters", "1.0", "Local");
+
+        assertThat(mavenExecutorCalled).isTrue();
+        assertThat(result.getBusinessArchives()).hasSize(1);
+    }
+
+    @Test
+    void cantUseM2eMavenExecutor() throws Exception {
+        assertThatThrownBy(M2eMavenExecutor::new).isInstanceOf(IllegalStateException.class);
     }
 
     private static ConnectorImplementationRegistry createImplementationRegistry(Path reportFile) throws IOException {

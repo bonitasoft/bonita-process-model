@@ -70,8 +70,7 @@ public interface MavenExecutor {
                 // something may go wrong when loading the mojo here, when plexus is not configured correctly.
                 int buildResult = cli.doMain(args, pomFolder.getAbsolutePath(), System.out, new PrintStream(errStream));
                 if (buildResult != 0) {
-                    throw new BuildBarException(errorMessageBase.get()
-                            + "\n" + errStream.toString());
+                    throw new BuildBarException(errorMessageBase.get() + "\n" + errStream.toString());
                 }
             } catch (IOException e) {
                 throw new BuildBarException(errorMessageBase.get(), e);

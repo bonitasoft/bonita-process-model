@@ -74,10 +74,10 @@ public class BarBuilderFactory {
         barBuilder.register(
                 new CustomGroovyArtifactProvider(sourceProvider.getGroovySource(), classpathResolver,
                         workingDirectory));
-        barBuilder.register(new ConnectorImplementationArtifactProvider(classpathResolver,
-                implementationRegistry, FragmentTypes.CONNECTOR));
-        barBuilder.register(new ConnectorImplementationArtifactProvider(classpathResolver,
-                implementationRegistry, FragmentTypes.ACTOR_FILTER));
+        barBuilder
+                .register(new ConnectorImplementationArtifactProvider(implementationRegistry, FragmentTypes.CONNECTOR));
+        barBuilder.register(
+                new ConnectorImplementationArtifactProvider(implementationRegistry, FragmentTypes.ACTOR_FILTER));
         barBuilder.register(new AdditionalResourcesArtifactProvider(sourceProvider.getResources()));
         return barBuilder;
     }
