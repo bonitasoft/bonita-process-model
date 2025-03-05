@@ -29,6 +29,7 @@ public interface BarArtifactProvider {
     default void build(BusinessArchiveBuilder builder, Pool process, Configuration configuration)
             throws BuildBarException {
         // do nothing, we'll use the other build method
+        throw new UnsupportedOperationException("This method is deprecated, use the other build method");
     }
 
     default void build(BusinessArchiveBuilder builder, Pool process, ProcessPom pomAccess, Configuration configuration)

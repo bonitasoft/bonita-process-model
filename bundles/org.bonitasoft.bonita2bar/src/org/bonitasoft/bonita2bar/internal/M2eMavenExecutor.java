@@ -45,8 +45,7 @@ public class M2eMavenExecutor implements MavenExecutor {
      */
     public M2eMavenExecutor() {
         if (!EnvironmentUtil.isOSGi()) {
-            throw new IllegalStateException(
-                    "This class should be used only in a P2 context with the org.eclipse.m2e.core plugin.");
+            throw new IllegalStateException("Use only in a P2 context with the org.eclipse.m2e.core plugin.");
         }
     }
 

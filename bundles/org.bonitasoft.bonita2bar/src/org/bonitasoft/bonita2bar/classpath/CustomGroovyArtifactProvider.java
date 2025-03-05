@@ -22,6 +22,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -129,9 +130,7 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
 
                     // ensure the path is ready for the file
                     File directory = path.getParentFile();
-                    if (directory != null && !directory.exists()) {
-                        directory.mkdirs();
-                    }
+                    Optional.ofNullable(directory).filter(d -> !d.exists()).ifPresent(File::mkdirs);
 
                     // create the file and write out the data
                     try (FileOutputStream stream = new FileOutputStream(path)) {
