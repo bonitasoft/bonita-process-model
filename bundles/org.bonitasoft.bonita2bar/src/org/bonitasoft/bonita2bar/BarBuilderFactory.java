@@ -14,6 +14,7 @@
  */
 package org.bonitasoft.bonita2bar;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,16 +27,18 @@ import org.apache.maven.project.MavenProject;
 import org.bonitasoft.bonita2bar.actor.ActorMappingArtifactProvider;
 import org.bonitasoft.bonita2bar.classpath.ConnectorImplementationArtifactProvider;
 import org.bonitasoft.bonita2bar.classpath.CustomGroovyArtifactProvider;
-import org.bonitasoft.bonita2bar.classpath.JarArtifactProvider;
+import org.bonitasoft.bonita2bar.classpath.DependenciesArtifactProvider;
 import org.bonitasoft.bonita2bar.configuration.ParameterArtifactProvider;
 import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
 import org.bonitasoft.bonita2bar.form.FormBuilder;
 import org.bonitasoft.bonita2bar.form.FormMappingArtifactProvider;
+import org.bonitasoft.bonita2bar.internal.M2eMavenExecutor;
 import org.bonitasoft.bonita2bar.process.ProcessDefinitionArtifactProvider;
 import org.bonitasoft.bonita2bar.process.pomgen.ProcessPomGenerator;
 import org.bonitasoft.bonita2bar.resources.AdditionalResourcesArtifactProvider;
 import org.bonitasoft.bonita2bar.resources.BPMN2ArtifactProvider;
 import org.bonitasoft.bonita2bar.resources.DocumentArtifactProvider;
+import org.bonitasoft.bpm.model.util.EnvironmentUtil;
 import org.bonitasoft.bpm.model.util.FragmentTypes;
 
 public class BarBuilderFactory {
@@ -63,7 +66,7 @@ public class BarBuilderFactory {
         barBuilder.register(new ParameterArtifactProvider(parametersConfiguration, config.includeParameters()));
         barBuilder.register(new ActorMappingArtifactProvider());
         barBuilder.register(new ProcessDefinitionArtifactProvider(config.getProcessRegistry()));
-        barBuilder.register(new JarArtifactProvider(classpathResolver));
+        barBuilder.register(new DependenciesArtifactProvider(config.getMavenExecutor()));
         barBuilder.register(new FormMappingArtifactProvider(sourceProvider.getForms(), config.getFormBuilder(),
                 config.allowEmptyFormMapping()));
 
@@ -72,10 +75,10 @@ public class BarBuilderFactory {
         barBuilder.register(
                 new CustomGroovyArtifactProvider(sourceProvider.getGroovySource(), classpathResolver,
                         workingDirectory));
-        barBuilder.register(new ConnectorImplementationArtifactProvider(classpathResolver,
-                implementationRegistry, FragmentTypes.CONNECTOR));
-        barBuilder.register(new ConnectorImplementationArtifactProvider(classpathResolver,
-                implementationRegistry, FragmentTypes.ACTOR_FILTER));
+        barBuilder
+                .register(new ConnectorImplementationArtifactProvider(implementationRegistry, FragmentTypes.CONNECTOR));
+        barBuilder.register(
+                new ConnectorImplementationArtifactProvider(implementationRegistry, FragmentTypes.ACTOR_FILTER));
         barBuilder.register(new AdditionalResourcesArtifactProvider(sourceProvider.getResources()));
         return barBuilder;
     }
@@ -91,6 +94,7 @@ public class BarBuilderFactory {
         private MavenProject mavenProject;
         private SourcePathProvider sourcePathProvider;
         private ClasspathResolver classpathResolver;
+        private MavenExecutor mavenExecutor;
 
         private BuildConfig(BuildConfigBuilder builder) throws BuildBarException {
             this.allowEmptyFormMapping = builder.allowEmptyFormMapping;
@@ -101,14 +105,11 @@ public class BarBuilderFactory {
             this.processRegistry = builder.processRegistry;
             this.mavenProject = builder.mavenProject;
             this.sourcePathProvider = Optional.ofNullable(builder.sourcePathProvider).orElseGet(() -> {
-                if (mavenProject != null) {
-                    var baseDir = mavenProject.getBasedir();
-                    if (baseDir != null) {
-                        return SourcePathProvider.of(baseDir.toPath());
-                    }
-                }
-                return null;
+                var baseDir = Optional.ofNullable(mavenProject).map(MavenProject::getBasedir).filter(Objects::nonNull);
+                return baseDir.map(File::toPath).map(SourcePathProvider::of).orElse(null);
             });
+            this.mavenExecutor = Optional.ofNullable(builder.mavenExecutor).orElseGet(
+                    () -> EnvironmentUtil.isOSGi() ? new M2eMavenExecutor() : MavenExecutor.getCliImplementation());
             AtomicReference<DependencyResolutionRequiredException> exceptionDuringClasspathResolver = new AtomicReference<>();
             this.classpathResolver = Optional.ofNullable(builder.classpathResolver).orElseGet(() -> {
                 if (mavenProject != null) {
@@ -131,6 +132,10 @@ public class BarBuilderFactory {
             if (exceptionDuringClasspathResolver.get() != null) {
                 throw new BuildBarException(exceptionDuringClasspathResolver.get());
             }
+        }
+
+        public MavenExecutor getMavenExecutor() {
+            return mavenExecutor;
         }
 
         public boolean includeParameters() {
@@ -192,6 +197,7 @@ public class BarBuilderFactory {
             private MavenProject mavenProject;
             private SourcePathProvider sourcePathProvider;
             private ClasspathResolver classpathResolver;
+            private MavenExecutor mavenExecutor;
 
             private BuildConfigBuilder() {
 
@@ -256,6 +262,17 @@ public class BarBuilderFactory {
 
             public BuildConfigBuilder mavenProject(MavenProject mavenProject) {
                 this.mavenProject = mavenProject;
+                return this;
+            }
+
+            /**
+             * Optional, if not provided, will use a default MavenExecutor
+             * 
+             * @param mavenExecutor maven executor
+             * @return builder
+             */
+            public BuildConfigBuilder mavenExecutor(MavenExecutor mavenExecutor) {
+                this.mavenExecutor = mavenExecutor;
                 return this;
             }
 

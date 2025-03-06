@@ -54,7 +54,7 @@ public interface ConnectorImplementationRegistry {
 
     Optional<ConnectorImplementation> find(String id, String version);
 
-    Optional<ConnectorImplementation> find(Predicate<ArtifactInfo> predicate);
+    List<ConnectorImplementation> findAll(Predicate<ArtifactInfo> predicate);
 
     /**
      * {@link ConnectorImplementationRegistry} factory method.
@@ -75,13 +75,13 @@ public interface ConnectorImplementationRegistry {
 
             /*
              * (non-Javadoc)
-             * @see org.bonitasoft.bonita2bar.ConnectorImplementationRegistry#find(java.util.function.Predicate)
+             * @see org.bonitasoft.bonita2bar.ConnectorImplementationRegistry#findAll(java.util.function.Predicate)
              */
             @Override
-            public Optional<ConnectorImplementation> find(Predicate<ArtifactInfo> predicate) {
+            public List<ConnectorImplementation> findAll(Predicate<ArtifactInfo> predicate) {
                 return implementations.stream()
                         .filter(impl -> predicate.test(impl.getArtifactInformation()))
-                        .map(this::loadImplementation).filter(Objects::nonNull).findFirst();
+                        .map(this::loadImplementation).filter(Objects::nonNull).toList();
             }
 
             private ConnectorImplementation loadImplementation(ConnectorImplementationJar implementation) {

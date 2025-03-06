@@ -21,24 +21,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.bonitasoft.bonita2bar.BarArtifactProvider;
 import org.bonitasoft.bonita2bar.BuildBarException;
 import org.bonitasoft.bonita2bar.ClasspathResolver;
 import org.bonitasoft.bpm.model.configuration.Configuration;
-import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.util.EnvironmentUtil;
 import org.bonitasoft.bpm.model.util.FileUtil;
-import org.bonitasoft.bpm.model.util.FragmentTypes;
-import org.bonitasoft.bpm.model.util.IModelSearch;
-import org.bonitasoft.bpm.model.util.ModelSearch;
 import org.bonitasoft.engine.bpm.bar.BarResource;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.codehaus.groovy.control.CompilationFailedException;
@@ -57,7 +52,6 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
     static final String GROOVYSCRIPT_JAR = "groovyscripts.jar";
     static final String GROOVY_SOURCE_FOLDER = "src-groovy";
 
-    private IModelSearch modelSearch = new ModelSearch(Collections::emptyList);
     private ClasspathResolver classpathResolver;
     private Path workingDirectory;
     private Path groovySource;
@@ -72,16 +66,9 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
     @Override
     public void build(BusinessArchiveBuilder builder, Pool process, Configuration configuration)
             throws BuildBarException {
-        if (configuration == null) {
-            return;
-        }
         LOGGER.info("Adding custom groovy scripts in classpath...");
-        Set<File> filesToCompile = collectGroovySourceFile(groovySource, configuration);
-        if (filesToCompile.isEmpty()) {
-            LOGGER.info("No custom groovy script to compile found.");
-            return;
-        }
 
+        // make sure to delete the target folder before even when there is no file to compile
         var targetClasses = workingDirectory.resolve("groovy-classes");
         if (Files.exists(targetClasses)) {
             try {
@@ -90,6 +77,19 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
                 throw new BuildBarException(String.format("Failed to delete folder %s", targetClasses), e);
             }
         }
+        var outputJarFile = workingDirectory.resolve(GROOVYSCRIPT_JAR);
+        try {
+            Files.deleteIfExists(outputJarFile);
+        } catch (IOException e) {
+            throw new BuildBarException(String.format("Failed to delete custom groovy jar %s.", outputJarFile), e);
+        }
+
+        Set<File> filesToCompile = collectGroovySourceFile(groovySource, process);
+        if (filesToCompile.isEmpty()) {
+            LOGGER.info("No custom groovy script to compile found.");
+            return;
+        }
+
         try {
             Files.createDirectories(targetClasses);
         } catch (IOException e) {
@@ -98,21 +98,15 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
         try {
             compile(filesToCompile, targetClasses.toFile());
         } catch (CompilationFailedException | IOException e) {
-            throw new BuildBarException(
-                    String.format("Failed to compile custom groovy files for %s (%s) with %s configuration",
-                            process.getName(), process.getVersion(), configuration.getName()),
-                    e);
+            throw new BuildBarException(String.format("Failed to compile custom groovy files for %s (%s)",
+                    process.getName(), process.getVersion()), e);
         }
         try {
-            var outputJarFile = workingDirectory.resolve(GROOVYSCRIPT_JAR);
-            Files.deleteIfExists(outputJarFile);
             var jarFile = JarBuilder.createJar(targetClasses.toFile(), outputJarFile);
             builder.addClasspathResource(new BarResource(GROOVYSCRIPT_JAR, Files.readAllBytes(jarFile)));
         } catch (IOException e) {
-            throw new BuildBarException(
-                    String.format("Failed to add custom groovy jar in %s (%s) bar with %s configuration.",
-                            process.getName(), process.getVersion(), configuration.getName()),
-                    e);
+            throw new BuildBarException(String.format("Failed to add custom groovy jar in %s (%s) bar.",
+                    process.getName(), process.getVersion()), e);
         }
     }
 
@@ -136,9 +130,7 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
 
                     // ensure the path is ready for the file
                     File directory = path.getParentFile();
-                    if (directory != null && !directory.exists()) {
-                        directory.mkdirs();
-                    }
+                    Optional.ofNullable(directory).filter(d -> !d.exists()).ifPresent(File::mkdirs);
 
                     // create the file and write out the data
                     try (FileOutputStream stream = new FileOutputStream(path)) {
@@ -167,20 +159,18 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
                 }).collect(Collectors.toList());
     }
 
-    private Set<File> collectGroovySourceFile(Path groovySource, final Configuration configuration) {
-        return configuration.getProcessDependencies().stream()
-                .map(container -> modelSearch.getAllItemsOfType(container, Fragment.class)).flatMap(Collection::stream)
-                .filter(fragment -> Objects.equals(fragment.getType(), FragmentTypes.GROOVY_SCRIPT)
-                        && fragment.isExported())
-                .map(fragment -> {
-                    File groovySourceFile = groovySource.resolve(fragment.getValue()).toFile();
-                    if (groovySourceFile.exists()) {
-                        LOGGER.info("{} added to compilation classpath.",
-                                groovySource.relativize(groovySourceFile.toPath()));
-                        return groovySourceFile;
-                    }
-                    LOGGER.warn("{} not found with name in src-groovy", groovySourceFile.getName());
-                    return null;
-                }).filter(Objects::nonNull).collect(Collectors.toSet());
+    private Set<File> collectGroovySourceFile(Path groovySource, final Pool process) throws BuildBarException {
+        try (Stream<Path> walker = Files.walk(groovySource)) {
+            List<Path> groovyPaths = walker.filter(Files::isRegularFile)
+                    .filter(file -> file.toString().endsWith(".groovy")).toList();
+            return groovyPaths.stream().map(groovyPath -> {
+                LOGGER.info("{} added to compilation classpath.",
+                        groovySource.relativize(groovyPath));
+                return groovyPath.toFile();
+            }).collect(Collectors.toSet());
+        } catch (IOException e) {
+            throw new BuildBarException(String.format("Failed to read custom groovy libraries for %s (%s) bar.",
+                    process.getName(), process.getVersion()), e);
+        }
     }
 }

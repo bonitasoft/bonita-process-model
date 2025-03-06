@@ -17,9 +17,11 @@ package org.bonitasoft.bonita2bar.classpath;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 import org.bonitasoft.bonita2bar.ClasspathResolver;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
@@ -79,10 +81,55 @@ class CustomGroovyArtifactProviderTest {
 
         // then
         File targetClasses = outputFolder.resolve("groovy-classes").toFile();
-        assertThat(targetClasses.listFiles()).doesNotContain(new File(targetClasses, "MyLib3.class"))
-                .contains(new File(targetClasses, "MyLib.class"), new File(targetClasses, "MyLib2.class"));
+        // we now include all groovy libs no matter what...
+        assertThat(targetClasses.listFiles()).contains(new File(targetClasses, "MyLib.class"),
+                new File(targetClasses, "MyLib2.class"),
+                // even MyLib3 which is not used in the process
+                new File(targetClasses, "MyLib3.class"));
 
         assertThat(outputFolder.resolve(CustomGroovyArtifactProvider.GROOVYSCRIPT_JAR)).exists();
+    }
+
+    @Test
+    void should_pass_on_empty_groovy_folder() throws Exception {
+        // given
+        var outputFolder = projectRoot.resolve("target");
+        var classpath = MavenUtil.buildClasspath(projectRoot, MavenUtil.getMvnExecutable());
+
+        Path groovySource = SourcePathProvider.of(projectRoot.resolve("app")).getGroovySource();
+        //delete all files in the groovy folder
+        try (Stream<Path> walker = Files.walk(groovySource)) {
+            walker.filter(Files::isRegularFile).forEach(file -> {
+                try {
+                    Files.delete(file);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+        }
+
+        CustomGroovyArtifactProvider customGroovyArtifactProvider = new CustomGroovyArtifactProvider(groovySource,
+                ClasspathResolver.of(classpath), outputFolder);
+        BusinessArchiveBuilder builder = new BusinessArchiveBuilder().createNewBusinessArchive();
+        var registry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
+                MigrationPolicy.NEVER_MIGRATE_POLICY);
+
+        File confFolder = projectRoot.resolve("app").resolve("process_configurations").toFile();
+        var configurationResource = ModelLoader.create()
+                .loadModel(URI.createFileURI(new File(confFolder, "_xQhDcRxzEeiplJoiu3AUHg.conf").getAbsolutePath()));
+
+        // when
+        customGroovyArtifactProvider.build(builder,
+                registry.getProcess("ProcessWithCustonGroovyDep", "1.0").orElseThrow(),
+                (Configuration) configurationResource.getContents().get(0));
+
+        // then
+        File targetClasses = outputFolder.resolve("groovy-classes").toFile();
+        // no groovy class
+        assertThat(targetClasses).satisfiesAnyOf(
+                dir -> assertThat(dir).doesNotExist(),
+                dir -> assertThat(dir).isEmptyDirectory());
+        assertThat(outputFolder.resolve(CustomGroovyArtifactProvider.GROOVYSCRIPT_JAR)).doesNotExist();
     }
 
 }

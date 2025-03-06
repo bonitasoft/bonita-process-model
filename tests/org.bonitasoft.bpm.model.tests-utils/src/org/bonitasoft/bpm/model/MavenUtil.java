@@ -52,6 +52,18 @@ public class MavenUtil {
         return os.startsWith("Windows") ? "mvn.cmd" : "mvn";
     }
 
+    public static void execute(File pomFile, String mvnExecutable, List<String> goals, Map<String, String> properties,
+            List<String> activeProfiles) throws InterruptedException, IOException {
+        MavenCommandBuilder builder = new MavenCommandBuilder(mvnExecutable).directory(pomFile.getParentFile());
+        goals.forEach(builder::addGoal);
+        properties.forEach(builder::addProperty);
+        if (!activeProfiles.isEmpty()) {
+            builder.activeProfiles(activeProfiles.stream().collect(Collectors.joining(",")));
+        }
+        activeProfiles.forEach(builder::addGoal);
+        builder.start().waitFor();
+    }
+
     public static Path analyze(Path projectRoot, String mvnExecutable) throws InterruptedException, IOException {
         var appModule = projectRoot.resolve("app");
         File pomFile = appModule.resolve("pom.xml").toFile();
@@ -111,6 +123,11 @@ public class MavenUtil {
 
         public MavenCommandBuilder addGoal(String goal) {
             this.goals.add(goal);
+            return this;
+        }
+
+        public MavenCommandBuilder activeProfiles(String activeProfiles) {
+            this.activeProfiles = activeProfiles;
             return this;
         }
 

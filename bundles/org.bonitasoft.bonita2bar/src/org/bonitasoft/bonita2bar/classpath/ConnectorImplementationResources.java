@@ -19,6 +19,10 @@ import java.util.List;
 
 import org.bonitasoft.engine.bpm.bar.BarResource;
 
+/**
+ * @deprecated internal implementation candidate for removal
+ */
+@Deprecated
 public class ConnectorImplementationResources {
 
     private BarResource implemetation;

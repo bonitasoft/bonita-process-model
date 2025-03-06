@@ -20,7 +20,8 @@ Require-Bundle: org.bonitasoft.bonita2bpmn,
  org.eclipse.gmf.runtime.notation,
  com.sun.xml.bind.jaxb-osgi,
  org.glassfish.hk2.osgi-resource-locator,
- org.eclipse.m2e.maven.runtime
+ org.eclipse.m2e.maven.runtime,
+ org.eclipse.m2e.core
 Import-Package: org.bonitasoft.engine,
  org.bonitasoft.engine.bpm,
  org.bonitasoft.engine.bpm.actor,
@@ -57,6 +58,7 @@ Import-Package: org.bonitasoft.engine,
  org.bonitasoft.engine.operation,
  org.bonitasoft.engine.operation.impl,
  org.bonitasoft.engine.xml.parser,
+ org.eclipse.core.runtime;version="[3.7.0,4.0.0)",
  org.slf4j;version="1.7.30"
 Export-Package: org.bonitasoft.bonita2bar,
  org.bonitasoft.bonita2bar.actor,

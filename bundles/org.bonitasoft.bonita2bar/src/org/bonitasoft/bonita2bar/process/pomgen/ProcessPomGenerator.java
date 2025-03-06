@@ -143,16 +143,16 @@ public class ProcessPomGenerator {
         });
 
         model.getDependencies().removeIf(dep -> {
-            // get related connector implementation
-            Optional<ConnectorImplementation> connectorImplementation = connectorImplementationRegistry
-                    .find(ArtifactInfo.matchesDep(dep));
-            return connectorImplementation.filter(connImpl -> {
-                // check if the connector is used in the process
+            // get related connector implementation(s) (a same dependency may be multiple connector implementations, like the REST one)
+            List<ConnectorImplementation> connectorImplementations = connectorImplementationRegistry
+                    .findAll(ArtifactInfo.matchesDep(dep));
+            return connectorImplementations.stream().allMatch(connImpl -> {
+                // check whether connector implementation is used in the process
                 Predicate<Connector> matchesImpl = connDef -> connDef.getDefinitionId()
                         .equals(connImpl.getDefinitionId())
                         && connDef.getDefinitionVersion().equals(connImpl.getDefinitionVersion());
                 return processUsedConnectors.stream().noneMatch(matchesImpl);
-            }).isPresent();
+            });
         });
     }
 

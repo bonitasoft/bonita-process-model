@@ -26,6 +26,7 @@ import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.project.MavenProject;
@@ -148,4 +149,21 @@ class BarBuilderTest {
         assertThat(version).isNotNull().isNotEmpty();
     }
 
+    @Test
+    void barArtifactProvider_must_have_implementation() throws Exception {
+        var barBarArtifactProvider = new BarArtifactProvider() {
+        };
+        assertThatThrownBy(() -> barBarArtifactProvider.build(null, null, null))
+                .isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> barBarArtifactProvider.build(null, null, null, null))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    @Test
+    void should_mavenCliExecutor_fail() throws Exception {
+        var mavenCliExecutor = MavenExecutor.getCliImplementation();
+        // Plexus is not configured for Maven CLI executor in Eclipse P2 context
+        assertThatThrownBy(() -> mavenCliExecutor.execute(appProject.getFile(), List.of("clean", "install"),
+                Map.of(), List.of(), () -> "")).isInstanceOf(BuildBarException.class);
+    }
 }
