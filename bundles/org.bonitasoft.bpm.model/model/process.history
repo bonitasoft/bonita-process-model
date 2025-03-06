@@ -15237,7 +15237,7 @@
     <changes xsi:type="history:MigrationChange" xmi:id="_76wRECxJEe68VI8bFfHDew" migration="org.bonitasoft.bpm.migration.custom.migration.expression.JavaGetterExpressionMigration"/>
     <changes xsi:type="history:MigrationChange" xmi:id="_3R2iEG81Ee2Gisyj-XM1Fw" migration="org.bonitasoft.bpm.model.process.util.migration.UpgradeModelVersionAttributeMigration"/>
   </releases>
-  <releases xmi:id="_xyMngF9HEe24H9qpSeta3A">
+  <releases xmi:id="_xyMngF9HEe24H9qpSeta3A" date="2025-03-07T00:00:00.000+0100" label="9">
     <changes xsi:type="history:Delete" xmi:id="_WUdYYPpqEe-tM7_3NMtiQg" referenceName="eStructuralFeatures">
       <target href="configuration.ecore#//Configuration"/>
       <element xsi:type="ecore:EReference" xmi:id="_WUdYYfpqEe-tM7_3NMtiQg" name="applicationDependencies" upperBound="-1" containment="true">
