@@ -15244,5 +15244,6 @@
         <eType xsi:type="ecore:EClass" href="configuration.ecore#//FragmentContainer"/>
       </element>
     </changes>
+    <changes xsi:type="history:MigrationChange" xmi:id="_aWw2kPpyEe-tM7_3NMtiQg" migration="org.bonitasoft.bpm.migration.custom.migration.configuration.RemoveJarAndGroovyFragmentsMigration"/>
   </releases>
 </history:History>
