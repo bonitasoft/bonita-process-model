@@ -42,7 +42,7 @@ public class SingleResourceMigrator extends LenientResourceMigrator {
         var r = rset.getResources().get(0);
         if (r instanceof XMLResource) {
             var extMap = ((XMLResource) r).getEObjectToExtensionMap();
-            // collect operations to ConcurrentModificationException
+            // collect operations to avoid ConcurrentModificationException
             List<Runnable> operations = extMap.entrySet().stream().flatMap(entry -> {
                 var obj = entry.getKey();
                 var featMap = entry.getValue().getMixed();
@@ -51,9 +51,9 @@ public class SingleResourceMigrator extends LenientResourceMigrator {
                     var feat = obj.eClass().getEStructuralFeature(featEntry.getEStructuralFeature().getName());
                     var val = featEntry.getValue();
                     // extensions are usually EObject typed references
-                    if (feat.getEType().isInstance(val)) {
+                    if (feat == null || feat.getEType().isInstance(val)) {
                         final Runnable run;
-                        if (feat instanceof EReference && ((EReference) feat).isContainer()) {
+                        if (feat == null || feat instanceof EReference && ((EReference) feat).isContainer()) {
                             // skip
                             run = null;
                         } else if (feat.isMany()) {

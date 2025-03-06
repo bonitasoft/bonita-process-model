@@ -14,6 +14,7 @@
  */
 package org.bonitasoft.bpm.migration.custom.migration.configuration;
 
+import org.bonitasoft.bpm.model.configuration.ConfigurationPackage;
 import org.eclipse.emf.edapt.migration.CustomMigration;
 import org.eclipse.emf.edapt.migration.MigrationException;
 import org.eclipse.emf.edapt.spi.migration.Instance;
@@ -29,16 +30,25 @@ public class RemoveJarAndGroovyFragmentsMigration extends CustomMigration {
 
     /*
      * (non-Javadoc)
-     * @see org.eclipse.emf.edapt.migration.CustomMigration#migrateAfter(org.eclipse.emf.edapt.spi.migration.Model,
+     * @see org.eclipse.emf.edapt.migration.CustomMigration#migrateBefore(org.eclipse.emf.edapt.spi.migration.Model,
      * org.eclipse.emf.edapt.spi.migration.Metamodel)
      */
     @Override
-    public void migrateAfter(Model model, Metamodel metamodel) throws MigrationException {
-        for (final Instance fragment : model.getAllInstances("configuration.Fragment")) {
-            String fragmentType = fragment.get("type");
+    public void migrateBefore(Model model, Metamodel metamodel) throws MigrationException {
+        for (final Instance fragment : model.getAllInstances(
+                ConfigurationPackage.eNS_PREFIX + "." + ConfigurationPackage.Literals.FRAGMENT.getName())) {
+            String fragmentType = fragment.get(ConfigurationPackage.Literals.FRAGMENT__TYPE.getName());
             if ("JAR".equals(fragmentType) || "GROOVY_SCRIPT".equals(fragmentType)) {
                 // this fragment is no longer used in environment configuration
                 model.delete(fragment);
+            }
+        }
+        for (final Instance fragmentContainer : model.getAllInstances(
+                ConfigurationPackage.eNS_PREFIX + "." + ConfigurationPackage.Literals.FRAGMENT_CONTAINER.getName())) {
+            if (fragmentContainer.get(ConfigurationPackage.Literals.FRAGMENT_CONTAINER__ID.getName())
+                    .equals("GROOVY_SCRIPT")) {
+                // this fragment container is no longer necessary
+                model.delete(fragmentContainer);
             }
         }
     }
