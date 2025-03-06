@@ -238,14 +238,6 @@
           <fragments xmi:type="configuration:Fragment" xmi:id="_9Mg2QVSaEeqnXbuKo_kdGQ" key="MyLib3.groovy" value="MyLib3.groovy" exported="false" type="GROOVY_SCRIPT"/>
         </processDependencies>
         <processDependencies xmi:type="configuration:FragmentContainer" xmi:id="_J7Z3yxyTEeilko6C1BVDUQ" id="OTHER"/>
-        <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_J7Z3zByTEeilko6C1BVDUQ" id="DATA_TYPES"/>
-        <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_J7Z3zRyTEeilko6C1BVDUQ" id="GROOVY_SCRIPT">
-          <fragments xmi:type="configuration:Fragment" xmi:id="_J7Z3zhyTEeilko6C1BVDUQ" key="MyLib.groovy" value="MyLib.groovy" exported="false" type="GROOVY_SCRIPT"/>
-          <fragments xmi:type="configuration:Fragment" xmi:id="_9Mg2QlSaEeqnXbuKo_kdGQ" key="MyLib2.groovy" value="MyLib2.groovy" exported="false" type="GROOVY_SCRIPT"/>
-          <fragments xmi:type="configuration:Fragment" xmi:id="_9Mg2Q1SaEeqnXbuKo_kdGQ" key="MyLib3.groovy" value="MyLib3.groovy" exported="false" type="GROOVY_SCRIPT"/>
-        </applicationDependencies>
-        <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_J7Z3zxyTEeilko6C1BVDUQ" id="VALIDATOR"/>
-        <applicationDependencies xmi:type="configuration:FragmentContainer" xmi:id="_J7Z30ByTEeilko6C1BVDUQ" id="OTHER"/>
       </configurations>
       <contract xmi:type="process:Contract" xmi:id="_-Bk08xyQEeiplJoiu3AUHg"/>
       <searchIndexes xmi:type="process:SearchIndex" xmi:id="_-Bk09ByQEeiplJoiu3AUHg">
