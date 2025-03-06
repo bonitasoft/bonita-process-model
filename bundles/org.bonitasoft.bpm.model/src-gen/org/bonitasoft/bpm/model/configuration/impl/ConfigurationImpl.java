@@ -58,7 +58,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bonitasoft.bpm.model.configuration.impl.ConfigurationImpl#getAnonymousPassword <em>Anonymous Password</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.configuration.impl.ConfigurationImpl#getDefinitionMappings <em>Definition Mappings</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.configuration.impl.ConfigurationImpl#getProcessDependencies <em>Process Dependencies</em>}</li>
- *   <li>{@link org.bonitasoft.bpm.model.configuration.impl.ConfigurationImpl#getApplicationDependencies <em>Application Dependencies</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.configuration.impl.ConfigurationImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.configuration.impl.ConfigurationImpl#getVersion <em>Version</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.configuration.impl.ConfigurationImpl#getUsername <em>Username</em>}</li>
@@ -178,16 +177,6 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
      * @ordered
      */
     protected EList<FragmentContainer> processDependencies;
-
-    /**
-     * The cached value of the '{@link #getApplicationDependencies() <em>Application Dependencies</em>}' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getApplicationDependencies()
-     * @generated
-     * @ordered
-     */
-    protected EList<FragmentContainer> applicationDependencies;
 
     /**
      * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
@@ -457,19 +446,6 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
      * @generated
      */
     @Override
-    public EList<FragmentContainer> getApplicationDependencies() {
-        if (applicationDependencies == null) {
-            applicationDependencies = new EObjectContainmentEList<FragmentContainer>(FragmentContainer.class, this, ConfigurationPackage.CONFIGURATION__APPLICATION_DEPENDENCIES);
-        }
-        return applicationDependencies;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public EList<Parameter> getParameters() {
         if (parameters == null) {
             parameters = new EObjectContainmentEList<Parameter>(Parameter.class, this, ConfigurationPackage.CONFIGURATION__PARAMETERS);
@@ -573,8 +549,6 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
                 return ((InternalEList<?>)getDefinitionMappings()).basicRemove(otherEnd, msgs);
             case ConfigurationPackage.CONFIGURATION__PROCESS_DEPENDENCIES:
                 return ((InternalEList<?>)getProcessDependencies()).basicRemove(otherEnd, msgs);
-            case ConfigurationPackage.CONFIGURATION__APPLICATION_DEPENDENCIES:
-                return ((InternalEList<?>)getApplicationDependencies()).basicRemove(otherEnd, msgs);
             case ConfigurationPackage.CONFIGURATION__PARAMETERS:
                 return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
             case ConfigurationPackage.CONFIGURATION__ADDITIONAL_RESOURCES:
@@ -605,8 +579,6 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
                 return getDefinitionMappings();
             case ConfigurationPackage.CONFIGURATION__PROCESS_DEPENDENCIES:
                 return getProcessDependencies();
-            case ConfigurationPackage.CONFIGURATION__APPLICATION_DEPENDENCIES:
-                return getApplicationDependencies();
             case ConfigurationPackage.CONFIGURATION__PARAMETERS:
                 return getParameters();
             case ConfigurationPackage.CONFIGURATION__VERSION:
@@ -652,10 +624,6 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
             case ConfigurationPackage.CONFIGURATION__PROCESS_DEPENDENCIES:
                 getProcessDependencies().clear();
                 getProcessDependencies().addAll((Collection<? extends FragmentContainer>)newValue);
-                return;
-            case ConfigurationPackage.CONFIGURATION__APPLICATION_DEPENDENCIES:
-                getApplicationDependencies().clear();
-                getApplicationDependencies().addAll((Collection<? extends FragmentContainer>)newValue);
                 return;
             case ConfigurationPackage.CONFIGURATION__PARAMETERS:
                 getParameters().clear();
@@ -707,9 +675,6 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
             case ConfigurationPackage.CONFIGURATION__PROCESS_DEPENDENCIES:
                 getProcessDependencies().clear();
                 return;
-            case ConfigurationPackage.CONFIGURATION__APPLICATION_DEPENDENCIES:
-                getApplicationDependencies().clear();
-                return;
             case ConfigurationPackage.CONFIGURATION__PARAMETERS:
                 getParameters().clear();
                 return;
@@ -751,8 +716,6 @@ public class ConfigurationImpl extends EObjectImpl implements Configuration {
                 return definitionMappings != null && !definitionMappings.isEmpty();
             case ConfigurationPackage.CONFIGURATION__PROCESS_DEPENDENCIES:
                 return processDependencies != null && !processDependencies.isEmpty();
-            case ConfigurationPackage.CONFIGURATION__APPLICATION_DEPENDENCIES:
-                return applicationDependencies != null && !applicationDependencies.isEmpty();
             case ConfigurationPackage.CONFIGURATION__PARAMETERS:
                 return parameters != null && !parameters.isEmpty();
             case ConfigurationPackage.CONFIGURATION__VERSION:

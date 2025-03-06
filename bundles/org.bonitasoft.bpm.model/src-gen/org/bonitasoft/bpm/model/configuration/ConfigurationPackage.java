@@ -145,22 +145,13 @@ public interface ConfigurationPackage extends EPackage {
     int CONFIGURATION__PROCESS_DEPENDENCIES = 6;
 
     /**
-     * The feature id for the '<em><b>Application Dependencies</b></em>' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     * @ordered
-     */
-    int CONFIGURATION__APPLICATION_DEPENDENCIES = 7;
-
-    /**
      * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      * @ordered
      */
-    int CONFIGURATION__PARAMETERS = 8;
+    int CONFIGURATION__PARAMETERS = 7;
 
     /**
      * The feature id for the '<em><b>Version</b></em>' attribute.
@@ -169,7 +160,7 @@ public interface ConfigurationPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int CONFIGURATION__VERSION = 9;
+    int CONFIGURATION__VERSION = 8;
 
     /**
      * The feature id for the '<em><b>Username</b></em>' attribute.
@@ -178,7 +169,7 @@ public interface ConfigurationPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int CONFIGURATION__USERNAME = 10;
+    int CONFIGURATION__USERNAME = 9;
 
     /**
      * The feature id for the '<em><b>Password</b></em>' attribute.
@@ -187,7 +178,7 @@ public interface ConfigurationPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int CONFIGURATION__PASSWORD = 11;
+    int CONFIGURATION__PASSWORD = 10;
 
     /**
      * The feature id for the '<em><b>Additional Resources</b></em>' containment reference list.
@@ -196,7 +187,7 @@ public interface ConfigurationPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int CONFIGURATION__ADDITIONAL_RESOURCES = 12;
+    int CONFIGURATION__ADDITIONAL_RESOURCES = 11;
 
     /**
      * The number of structural features of the '<em>Configuration</em>' class.
@@ -205,7 +196,7 @@ public interface ConfigurationPackage extends EPackage {
      * @generated
      * @ordered
      */
-    int CONFIGURATION_FEATURE_COUNT = 13;
+    int CONFIGURATION_FEATURE_COUNT = 12;
 
     /**
      * The meta object id for the '{@link org.bonitasoft.bpm.model.configuration.impl.FragmentImpl <em>Fragment</em>}' class.
@@ -505,17 +496,6 @@ public interface ConfigurationPackage extends EPackage {
      * @generated
      */
     EReference getConfiguration_ProcessDependencies();
-
-    /**
-     * Returns the meta object for the containment reference list '{@link org.bonitasoft.bpm.model.configuration.Configuration#getApplicationDependencies <em>Application Dependencies</em>}'.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the meta object for the containment reference list '<em>Application Dependencies</em>'.
-     * @see org.bonitasoft.bpm.model.configuration.Configuration#getApplicationDependencies()
-     * @see #getConfiguration()
-     * @generated
-     */
-    EReference getConfiguration_ApplicationDependencies();
 
     /**
      * Returns the meta object for the containment reference list '{@link org.bonitasoft.bpm.model.configuration.Configuration#getParameters <em>Parameters</em>}'.
@@ -864,14 +844,6 @@ public interface ConfigurationPackage extends EPackage {
          * @generated
          */
         EReference CONFIGURATION__PROCESS_DEPENDENCIES = eINSTANCE.getConfiguration_ProcessDependencies();
-
-        /**
-         * The meta object literal for the '<em><b>Application Dependencies</b></em>' containment reference list feature.
-         * <!-- begin-user-doc -->
-         * <!-- end-user-doc -->
-         * @generated
-         */
-        EReference CONFIGURATION__APPLICATION_DEPENDENCIES = eINSTANCE.getConfiguration_ApplicationDependencies();
 
         /**
          * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.

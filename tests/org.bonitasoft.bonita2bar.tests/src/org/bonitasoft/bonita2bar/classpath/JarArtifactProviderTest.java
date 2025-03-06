@@ -28,7 +28,6 @@ import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.configuration.FragmentContainer;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.ProcessFactory;
-import org.bonitasoft.bpm.model.util.FragmentTypes;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.bonitasoft.engine.bpm.process.impl.ProcessDefinitionBuilder;
 import org.eclipse.core.runtime.FileLocator;
@@ -71,7 +70,8 @@ class JarArtifactProviderTest {
         //given
         configuration.getProcessDependencies()
                 .add(fragmentContainer(
-                        fragment(FragmentTypes.JAR, true, "commons-text-1.9.jar", "commons-text-1.9.jar")));
+                        fragment(JarArtifactProvider.FRAGMENT_TYPE_JAR, true, "commons-text-1.9.jar",
+                                "commons-text-1.9.jar")));
 
         //when
         jarArtifactProvider.build(businessArchiveBuilder, pool,
