@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2025 BonitaSoft S.A.
+ * Copyright (C) 2025 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.BasicExtendedMetaData;
 
 /**
@@ -67,42 +66,6 @@ public class MigrationExtendedMetaData extends BasicExtendedMetaData {
             return actorMappingExt.get();
         }
         return super.getExtendedMetaData(ePackage);
-    }
-
-    /*
-     * (non-Javadoc)
-     * @see org.eclipse.emf.ecore.util.BasicExtendedMetaData#demandPackage(java.lang.String)
-     */
-    @Override
-    public EPackage demandPackage(String namespace) {
-        /*
-         * The migrated packages have the same namespace as old ones.
-         * Do not take them from global registry while migrating.
-         */
-        //        if (getPackage(namespace) != null) {
-        //            return getPackage(namespace);
-        //        }
-        if (useOldPackagesRatherThanGlobalRegistry
-                && SingleResourceMigrator.getInstance().getNsURIs().contains(namespace)
-                && demandRegistry.get(namespace) == null) {
-            // we should use old dynamic package, not latest one from delegated registry
-            EPackage ePackage = EcoreFactory.eINSTANCE.createEPackage();
-            //            ePackage.setNsURI(namespace);
-            //            setQualified(ePackage, namespace != null);
-            //            if (namespace != null) {
-            //                ePackage.setNsPrefix(namespace.equals(ExtendedMetaData.XMLNS_URI)
-            //                        ? namespace.equals(ExtendedMetaData.XML_URI) ? "xml" : "xmlns" : computePrefix(namespace));
-            //            }
-            //            demandRegistry.put(namespace, ePackage);
-            //
-            //            EClass documentRootEClass = EcoreFactory.eINSTANCE.createEClass();
-            //            documentRootEClass.getESuperTypes().add(XMLTypePackage.eINSTANCE.getXMLTypeDocumentRoot());
-            //            documentRootEClass.setName("DocumentRoot");
-            //            ePackage.getEClassifiers().add(documentRootEClass);
-            //            setDocumentRoot(documentRootEClass);
-            //            return ePackage;
-        }
-        return super.demandPackage(namespace);
     }
 
     /*
