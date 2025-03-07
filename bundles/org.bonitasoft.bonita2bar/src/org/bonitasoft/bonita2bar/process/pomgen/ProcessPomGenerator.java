@@ -108,7 +108,8 @@ public class ProcessPomGenerator {
         Files.createDirectories(Path.of(target));
         // create a temporary folder with the process name and version
         // pattern similar to the one in org.bonitasoft.bonita2bar.BuildResult.writeBar(Path, BusinessArchive)
-        final String folderName = String.format("%s--%s", process.getName(), process.getVersion());
+        String notNormalizedName = String.format("%s--%s", process.getName(), process.getVersion());
+        final String folderName = notNormalizedName.toLowerCase().replaceAll("[^a-z0-9\\-]", "-");
         var tempFolderPath = Files.createTempDirectory(Path.of(target), folderName + "_");
         // access to pom.xml file
         var pomAccess = new ProcessPom(tempFolderPath);
