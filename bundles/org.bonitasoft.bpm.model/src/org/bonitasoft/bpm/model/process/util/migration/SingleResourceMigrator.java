@@ -47,7 +47,7 @@ public class SingleResourceMigrator extends LenientResourceMigrator {
                 var obj = entry.getKey();
                 var featMap = entry.getValue().getMixed();
                 return featMap.stream().map(featEntry -> {
-                    // get original feature, not the one created for unkown type
+                    // get original feature, not the one created for unknown type
                     var feat = obj.eClass().getEStructuralFeature(featEntry.getEStructuralFeature().getName());
                     var val = featEntry.getValue();
                     // extensions are usually EObject typed references

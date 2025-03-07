@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:actormapping="http://www.bonitasoft.org/ns/actormapping/6.0" xmlns:configuration="http://www.bonitasoft.org/ns/bpm/configuration" xmlns:connectorconfiguration="http://www.bonitasoft.org/model/connector/configuration" xmlns:decision="http://www.bonitasoft.org/ns/bpm/process/decision" xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1" xmlns:expression="http://www.bonitasoft.org/ns/bpm/expression" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:process="http://www.bonitasoft.org/ns/bpm/process">
-  <process:MainProcess xmi:id="_-BkN4ByQEeiplJoiu3AUHg" name="ProcessWithConnectors" bonitaModelVersion="8">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:actormapping="http://www.bonitasoft.org/ns/actormapping/6.0" xmlns:configuration="http://www.bonitasoft.org/ns/bpm/configuration" xmlns:connectorconfiguration="http://www.bonitasoft.org/model/connector/configuration" xmlns:decision="http://www.bonitasoft.org/ns/bpm/process/decision" xmlns:definition="http://www.bonitasoft.org/ns/connector/definition/6.1" xmlns:expression="http://www.bonitasoft.org/ns/bpm/expression" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:process="http://www.bonitasoft.org/ns/bpm/process" xsi:schemaLocation="http://www.bonitasoft.org/ns/actormapping/6.0 ../../../../../org.bonitasoft.bpm.model.tests/metamodel.ecore#/3 http://www.bonitasoft.org/ns/bpm/configuration ../../../../../org.bonitasoft.bpm.model.tests/metamodel.ecore#/4 http://www.bonitasoft.org/model/connector/configuration ../../../../../org.bonitasoft.bpm.model.tests/metamodel.ecore#/5 http://www.bonitasoft.org/ns/bpm/process/decision ../../../../../org.bonitasoft.bpm.model.tests/metamodel.ecore#/9 http://www.bonitasoft.org/ns/bpm/expression ../../../../../org.bonitasoft.bpm.model.tests/metamodel.ecore#/6 http://www.bonitasoft.org/ns/bpm/process ../../../../../org.bonitasoft.bpm.model.tests/metamodel.ecore#/0">
+  <process:MainProcess xmi:id="_-BkN4ByQEeiplJoiu3AUHg" name="ProcessWithConnectors" bonitaModelVersion="9">
     <elements xmi:type="process:Pool" xmi:id="_-BkN4RyQEeiplJoiu3AUHg" name="ProcessWithConnectors">
       <elements xmi:type="process:Lane" xmi:id="_-BkN4hyQEeiplJoiu3AUHg" name="Employee lane" actor="_-Bk08hyQEeiplJoiu3AUHg">
         <elements xmi:type="process:StartEvent" xmi:id="_-BkN4xyQEeiplJoiu3AUHg" name="Start1" outgoing="_-BkOCByQEeiplJoiu3AUHg">
@@ -25,7 +25,7 @@
         </elements>
       </elements>
       <connectors xmi:type="process:Connector" xmi:id="_fXD9gBySEeilko6C1BVDUQ" name="emailNotification" definitionId="email" event="ON_FINISH" definitionVersion="1.2.0">
-        <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_fXEkkBySEeilko6C1BVDUQ" definitionId="email" version="1.2.0" modelVersion="7.6.0-002">
+        <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_fXEkkBySEeilko6C1BVDUQ" definitionId="email" version="1.2.0" modelVersion="9">
           <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_fXEkkRySEeilko6C1BVDUQ" key="smtpHost">
             <expression xmi:type="expression:Expression" xmi:id="_fXEkkhySEeilko6C1BVDUQ" name="smtp.gmail.com" content="smtp.gmail.com" returnTypeFixed="true"/>
           </parameters>
@@ -83,7 +83,7 @@
         </configuration>
       </connectors>
       <connectors xmi:type="process:Connector" xmi:id="_kVat4BySEeilko6C1BVDUQ" name="getinfo" definitionId="rest-get" event="ON_ENTER" definitionVersion="1.1.0">
-        <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_kVbU8BySEeilko6C1BVDUQ" definitionId="rest-get" version="1.1.0" modelVersion="7.6.0-002">
+        <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_kVbU8BySEeilko6C1BVDUQ" definitionId="rest-get" version="1.1.0" modelVersion="9">
           <parameters xmi:type="connectorconfiguration:ConnectorParameter" xmi:id="_kVbU8RySEeilko6C1BVDUQ" key="url">
             <expression xmi:type="expression:Expression" xmi:id="_kVbU8hySEeilko6C1BVDUQ" name="http://localhost:8080/myResource" content="http://localhost:8080/myResource" returnTypeFixed="true"/>
           </parameters>
@@ -204,7 +204,7 @@
         <condition xmi:type="expression:Expression" xmi:id="_-Bk08RyQEeiplJoiu3AUHg" name="" type="TYPE_CONDITION" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
       <actors xmi:type="process:Actor" xmi:id="_-Bk08hyQEeiplJoiu3AUHg" documentation="This is an example of actor that is mapped to any ACME users" name="Employee actor" initiator="true"/>
-      <configurations xmi:type="configuration:Configuration" xmi:id="_J7ZQsByTEeilko6C1BVDUQ" name="customEnv" version="8" username="walter.bates" password="bpm">
+      <configurations xmi:type="configuration:Configuration" xmi:id="_J7ZQsByTEeilko6C1BVDUQ" name="customEnv" username="walter.bates" password="bpm" version="9">
         <actorMappings xmi:type="actormapping:ActorMappingsType" xmi:id="_J7ZQsRyTEeilko6C1BVDUQ">
           <actorMapping xmi:type="actormapping:ActorMapping" xmi:id="_J7ZQshyTEeilko6C1BVDUQ" name="Employee actor">
             <groups xmi:type="actormapping:Groups" xmi:id="_J7ZQsxyTEeilko6C1BVDUQ">
@@ -232,11 +232,6 @@
           </children>
         </processDependencies>
         <processDependencies xmi:type="configuration:FragmentContainer" xmi:id="_J7Z3yByTEeilko6C1BVDUQ" id="DATA_TYPES"/>
-        <processDependencies xmi:type="configuration:FragmentContainer" xmi:id="_J7Z3yRyTEeilko6C1BVDUQ" id="GROOVY_SCRIPT">
-          <fragments xmi:type="configuration:Fragment" xmi:id="_J7Z3yhyTEeilko6C1BVDUQ" key="MyLib.groovy" value="MyLib.groovy" exported="false" type="GROOVY_SCRIPT"/>
-          <fragments xmi:type="configuration:Fragment" xmi:id="_9Mg2QFSaEeqnXbuKo_kdGQ" key="MyLib2.groovy" value="MyLib2.groovy" exported="false" type="GROOVY_SCRIPT"/>
-          <fragments xmi:type="configuration:Fragment" xmi:id="_9Mg2QVSaEeqnXbuKo_kdGQ" key="MyLib3.groovy" value="MyLib3.groovy" exported="false" type="GROOVY_SCRIPT"/>
-        </processDependencies>
         <processDependencies xmi:type="configuration:FragmentContainer" xmi:id="_J7Z3yxyTEeilko6C1BVDUQ" id="OTHER"/>
       </configurations>
       <contract xmi:type="process:Contract" xmi:id="_-Bk08xyQEeiplJoiu3AUHg"/>
