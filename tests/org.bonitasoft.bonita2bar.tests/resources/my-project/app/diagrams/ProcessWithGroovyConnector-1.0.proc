@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:actormapping="http://www.bonitasoft.org/ns/actormapping/6.0" xmlns:configuration="http://www.bonitasoft.org/ns/bpm/configuration" xmlns:connectorconfiguration="http://www.bonitasoft.org/model/connector/configuration" xmlns:decision="http://www.bonitasoft.org/ns/bpm/process/decision" xmlns:expression="http://www.bonitasoft.org/ns/bpm/expression" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:process="http://www.bonitasoft.org/ns/bpm/process">
-  <process:MainProcess xmi:id="_ShQVoG1YEeiCEL-TB0cSfQ" name="ProcessWithGroovyConnector" bonitaModelVersion="8">
+  <process:MainProcess xmi:id="_ShQVoG1YEeiCEL-TB0cSfQ" name="ProcessWithGroovyConnector" bonitaModelVersion="9">
     <elements xmi:type="process:Pool" xmi:id="_ShQVoW1YEeiCEL-TB0cSfQ" name="ProcessWithGroovyConnector">
       <elements xmi:type="process:Lane" xmi:id="_ShQVom1YEeiCEL-TB0cSfQ" name="Employé (lane)" actor="_ShQ80W1YEeiCEL-TB0cSfQ">
         <elements xmi:type="process:StartEvent" xmi:id="_ShQVo21YEeiCEL-TB0cSfQ" name="Démarrer1" outgoing="_ShQ8zm1YEeiCEL-TB0cSfQ">
@@ -13,7 +13,7 @@
           <dynamicDescription xmi:type="expression:Expression" xmi:id="_ShQVq21YEeiCEL-TB0cSfQ" name="" content="" returnTypeFixed="true"/>
           <stepSummary xmi:type="expression:Expression" xmi:id="_ShQ8sG1YEeiCEL-TB0cSfQ" name="" content="" returnTypeFixed="true"/>
           <connectors xmi:type="process:Connector" xmi:id="_ShQ8sW1YEeiCEL-TB0cSfQ" name="myScript" definitionId="scriptConnector" event="ON_ENTER" definitionVersion="1.0.0">
-            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_ShQ8sm1YEeiCEL-TB0cSfQ" definitionId="scriptConnector" version="1.0.0" modelVersion="7.6.0-002"/>
+            <configuration xmi:type="connectorconfiguration:ConnectorConfiguration" xmi:id="_ShQ8sm1YEeiCEL-TB0cSfQ" definitionId="scriptConnector" version="1.0.0" modelVersion="9"/>
           </connectors>
           <loopCondition xmi:type="expression:Expression" xmi:id="_ShQ8s21YEeiCEL-TB0cSfQ" name="" content="" returnType="java.lang.Boolean" returnTypeFixed="true"/>
           <loopMaximum xmi:type="expression:Expression" xmi:id="_ShQ8tG1YEeiCEL-TB0cSfQ" name="" content="" returnType="java.lang.Integer" returnTypeFixed="true"/>
@@ -47,7 +47,7 @@
         <condition xmi:type="expression:Expression" xmi:id="_T90aQW1YEeiCEL-TB0cSfQ" name="" type="TYPE_CONDITION" returnType="java.lang.Boolean" returnTypeFixed="true"/>
       </connections>
       <actors xmi:type="process:Actor" xmi:id="_ShQ80W1YEeiCEL-TB0cSfQ" documentation="Ceci est un exemple d'acteur associé à tous les utilisateurs d'ACME" name="Employee actor" initiator="true"/>
-      <configurations xmi:type="configuration:Configuration" xmi:id="_OLHmYG1ZEeiCEL-TB0cSfQ" name="Production" version="8" username="walter.bates" password="bpm">
+      <configurations xmi:type="configuration:Configuration" xmi:id="_OLHmYG1ZEeiCEL-TB0cSfQ" name="Production" version="9" username="walter.bates" password="bpm">
         <actorMappings xmi:type="actormapping:ActorMappingsType" xmi:id="_OLHmYW1ZEeiCEL-TB0cSfQ">
           <actorMapping xmi:type="actormapping:ActorMapping" xmi:id="_OLHmYm1ZEeiCEL-TB0cSfQ" name="Employee actor">
             <groups xmi:type="actormapping:Groups" xmi:id="_OLHmY21ZEeiCEL-TB0cSfQ">
@@ -66,11 +66,6 @@
           </children>
         </processDependencies>
         <processDependencies xmi:type="configuration:FragmentContainer" xmi:id="_OLHmbG1ZEeiCEL-TB0cSfQ" id="DATA_TYPES"/>
-        <processDependencies xmi:type="configuration:FragmentContainer" xmi:id="_OLHmbW1ZEeiCEL-TB0cSfQ" id="GROOVY_SCRIPT">
-          <fragments xmi:type="configuration:Fragment" xmi:id="_9Ska8FSaEeqnXbuKo_kdGQ" key="MyLib.groovy" value="MyLib.groovy" exported="false" type="GROOVY_SCRIPT"/>
-          <fragments xmi:type="configuration:Fragment" xmi:id="_9Ska8VSaEeqnXbuKo_kdGQ" key="MyLib2.groovy" value="MyLib2.groovy" exported="false" type="GROOVY_SCRIPT"/>
-          <fragments xmi:type="configuration:Fragment" xmi:id="_9Ska8lSaEeqnXbuKo_kdGQ" key="MyLib3.groovy" value="MyLib3.groovy" exported="false" type="GROOVY_SCRIPT"/>
-        </processDependencies>
         <processDependencies xmi:type="configuration:FragmentContainer" xmi:id="_OLHmbm1ZEeiCEL-TB0cSfQ" id="OTHER"/>
       </configurations>
       <contract xmi:type="process:Contract" xmi:id="_ShQ80m1YEeiCEL-TB0cSfQ"/>
