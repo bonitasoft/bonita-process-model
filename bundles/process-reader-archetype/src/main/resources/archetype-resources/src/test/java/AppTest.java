@@ -54,7 +54,7 @@ import org.junit.jupiter.api.Test;
 public class AppTest {
 
     /** The URL of model to load */
-    private static URL MODEL_URL = AppTest.class.getClassLoader().getResource("MyDiagram-8.proc");
+    private static URL MODEL_URL = AppTest.class.getClassLoader().getResource("MyDiagram-9.proc");
 
     /** The URL of model to load */
     private static URL MIGRATION_MODEL_URL = AppTest.class.getClassLoader().getResource("MyDiagram-7.12.proc");
