@@ -28,6 +28,7 @@ import org.bonitasoft.bonita2bar.actor.ActorMappingArtifactProvider;
 import org.bonitasoft.bonita2bar.classpath.ConnectorImplementationArtifactProvider;
 import org.bonitasoft.bonita2bar.classpath.CustomGroovyArtifactProvider;
 import org.bonitasoft.bonita2bar.classpath.DependenciesArtifactProvider;
+import org.bonitasoft.bonita2bar.classpath.WithoutDependencyJarsArtifactProvider;
 import org.bonitasoft.bonita2bar.configuration.ParameterArtifactProvider;
 import org.bonitasoft.bonita2bar.configuration.model.ParametersConfiguration;
 import org.bonitasoft.bonita2bar.form.FormBuilder;
@@ -58,15 +59,16 @@ public class BarBuilderFactory {
 
         var pomGen = ProcessPomGenerator.create(config.getMavenProject(), implementationRegistry);
 
-        var barBuilder = new BarBuilder(processRegistry,
-                sourceProvider.getLocalConfiguration(),
-                parametersConfiguration,
-                workingDirectory,
-                pomGen);
+        var barBuilder = new BarBuilder(processRegistry, sourceProvider.getLocalConfiguration(),
+                parametersConfiguration, workingDirectory, pomGen);
         barBuilder.register(new ParameterArtifactProvider(parametersConfiguration, config.includeParameters()));
         barBuilder.register(new ActorMappingArtifactProvider());
         barBuilder.register(new ProcessDefinitionArtifactProvider(config.getProcessRegistry()));
-        barBuilder.register(new DependenciesArtifactProvider(config.getMavenExecutor()));
+        if (config.withDependencyJars) {
+            barBuilder.register(new DependenciesArtifactProvider(config.getMavenExecutor()));
+        } else {
+            barBuilder.register(new WithoutDependencyJarsArtifactProvider());
+        }
         barBuilder.register(new FormMappingArtifactProvider(sourceProvider.getForms(), config.getFormBuilder(),
                 config.allowEmptyFormMapping()));
 
@@ -95,6 +97,7 @@ public class BarBuilderFactory {
         private SourcePathProvider sourcePathProvider;
         private ClasspathResolver classpathResolver;
         private MavenExecutor mavenExecutor;
+        private boolean withDependencyJars;
 
         private BuildConfig(BuildConfigBuilder builder) throws BuildBarException {
             this.allowEmptyFormMapping = builder.allowEmptyFormMapping;
@@ -111,6 +114,7 @@ public class BarBuilderFactory {
             this.mavenExecutor = Optional.ofNullable(builder.mavenExecutor).orElseGet(
                     () -> EnvironmentUtil.isOSGi() ? new M2eMavenExecutor() : MavenExecutor.getCliImplementation());
             AtomicReference<DependencyResolutionRequiredException> exceptionDuringClasspathResolver = new AtomicReference<>();
+            this.withDependencyJars = builder.withDependencyJars;
             this.classpathResolver = Optional.ofNullable(builder.classpathResolver).orElseGet(() -> {
                 if (mavenProject != null) {
                     // build classpath
@@ -198,6 +202,7 @@ public class BarBuilderFactory {
             private SourcePathProvider sourcePathProvider;
             private ClasspathResolver classpathResolver;
             private MavenExecutor mavenExecutor;
+            private boolean withDependencyJars = true;
 
             private BuildConfigBuilder() {
 
@@ -273,6 +278,18 @@ public class BarBuilderFactory {
              */
             public BuildConfigBuilder mavenExecutor(MavenExecutor mavenExecutor) {
                 this.mavenExecutor = mavenExecutor;
+                return this;
+            }
+
+            /**
+             * Tell whether to include dependency jars in the bar file.
+             * Optional, with dependency jars is the default behavior.
+             * 
+             * @param withJars true to include dependency jars, false for a jarless bar file
+             * @return builder
+             */
+            public BuildConfigBuilder withDependencyJars(boolean withDependencyJars) {
+                this.withDependencyJars = withDependencyJars;
                 return this;
             }
 
