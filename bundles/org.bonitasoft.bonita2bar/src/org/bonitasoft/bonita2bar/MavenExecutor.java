@@ -58,10 +58,12 @@ public interface MavenExecutor {
             File pomFolder = pomFile.getParentFile();
             // use the maven cli to execute
             Stream<String> argumentsStream = Stream.concat(
-                    goals.stream(),
                     Stream.concat(
-                            properties.entrySet().stream().map(e -> "-D" + e.getKey() + "=" + e.getValue()),
-                            activeProfiles.stream().map(p -> "-P" + p)));
+                            goals.stream(),
+                            properties.entrySet().stream().map(e -> "-D" + e.getKey() + "=" + e.getValue())),
+                    Stream.concat(
+                            activeProfiles.stream().map(p -> "-P" + p),
+                            Stream.of("-q")));
             var args = argumentsStream.toArray(String[]::new);
             var cli = new MavenCli();
             System.setProperty(MavenCli.MULTIMODULE_PROJECT_DIRECTORY, pomFolder.getAbsolutePath());
