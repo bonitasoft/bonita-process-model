@@ -108,7 +108,8 @@ public class ProcessPomGenerator {
         Files.createDirectories(Path.of(target));
         // create a temporary folder with the process name and version
         // pattern similar to the one in org.bonitasoft.bonita2bar.BuildResult.writeBar(Path, BusinessArchive)
-        final String folderName = String.format("%s--%s", process.getName(), process.getVersion());
+        String notNormalizedName = String.format("%s--%s", process.getName(), process.getVersion());
+        final String folderName = notNormalizedName.toLowerCase().replaceAll("[^a-z0-9\\-]", "-");
         var tempFolderPath = Files.createTempDirectory(Path.of(target), folderName + "_");
         // access to pom.xml file
         var pomAccess = new ProcessPom(tempFolderPath);
@@ -146,7 +147,8 @@ public class ProcessPomGenerator {
             // get related connector implementation(s) (a same dependency may be multiple connector implementations, like the REST one)
             List<ConnectorImplementation> connectorImplementations = connectorImplementationRegistry
                     .findAll(ArtifactInfo.matchesDep(dep));
-            return connectorImplementations.stream().allMatch(connImpl -> {
+            boolean isConnectorDep = !connectorImplementations.isEmpty();
+            return isConnectorDep && connectorImplementations.stream().allMatch(connImpl -> {
                 // check whether connector implementation is used in the process
                 Predicate<Connector> matchesImpl = connDef -> connDef.getDefinitionId()
                         .equals(connImpl.getDefinitionId())
