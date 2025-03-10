@@ -2,7 +2,7 @@
 <feature
       id="org.bonitasoft.bpm.connector.feature"
       label="Bonita Business Process Model connector definition"
-      version="8.2.0.qualifier"
+      version="9.0.0.qualifier"
       provider-name="BonitaSoft S.A.">
 
    <description url="https://github.com/bonitasoft/bonita-process-model">
