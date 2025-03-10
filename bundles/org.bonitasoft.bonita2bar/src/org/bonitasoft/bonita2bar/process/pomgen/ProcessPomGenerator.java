@@ -147,7 +147,8 @@ public class ProcessPomGenerator {
             // get related connector implementation(s) (a same dependency may be multiple connector implementations, like the REST one)
             List<ConnectorImplementation> connectorImplementations = connectorImplementationRegistry
                     .findAll(ArtifactInfo.matchesDep(dep));
-            return connectorImplementations.stream().allMatch(connImpl -> {
+            boolean isConnectorDep = !connectorImplementations.isEmpty();
+            return isConnectorDep && connectorImplementations.stream().allMatch(connImpl -> {
                 // check whether connector implementation is used in the process
                 Predicate<Connector> matchesImpl = connDef -> connDef.getDefinitionId()
                         .equals(connImpl.getDefinitionId())

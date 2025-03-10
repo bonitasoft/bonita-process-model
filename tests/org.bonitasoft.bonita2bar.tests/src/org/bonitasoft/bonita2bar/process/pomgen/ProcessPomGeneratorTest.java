@@ -134,4 +134,27 @@ class ProcessPomGeneratorTest {
         });
     }
 
+    @Test
+    void should_generate_pom_with_app_dep() throws Exception {
+        appProject.getDependencies().add(new Dependency() {
+
+            private static final long serialVersionUID = 1L;
+
+            {
+                setGroupId("org.eclipse.emf");
+                setArtifactId("org.eclipse.emf.common");
+                setVersion("2.25.0");
+            }
+        });
+        Optional<Pool> process = processRegistry.getProcess("ProcessWithConnectors", "1.0");
+        var gen = ProcessPomGenerator.create(appProject, connectorImplementationRegistry);
+        gen.withGeneratedPom(process.get(), pomAccess -> {
+            Model processPom = pomAccess.readPom();
+            assertThat(processPom.getDependencies())
+                    .anyMatch(dep -> "org.eclipse.emf:org.eclipse.emf.common:jar".equals(dep.getManagementKey())
+                            && "2.25.0".equals(dep.getVersion()));
+            return null;
+        });
+    }
+
 }
