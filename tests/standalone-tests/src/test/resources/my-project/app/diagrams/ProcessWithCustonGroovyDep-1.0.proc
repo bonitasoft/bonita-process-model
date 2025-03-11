@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:decision="http://www.bonitasoft.org/ns/bpm/process/decision" xmlns:expression="http://www.bonitasoft.org/ns/bpm/expression" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:process="http://www.bonitasoft.org/ns/bpm/process">
-  <process:MainProcess xmi:id="_xQhDcBxzEeiplJoiu3AUHg" name="ProcessWithCustonGroovyDep" bonitaModelVersion="8">
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:decision="http://www.bonitasoft.org/ns/bpm/process/decision" xmlns:expression="http://www.bonitasoft.org/ns/bpm/expression" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.3/notation" xmlns:process="http://www.bonitasoft.org/ns/bpm/process" xsi:schemaLocation="http://www.bonitasoft.org/ns/bpm/process/decision ../../../../../org.bonitasoft.bpm.model.tests/metamodel.ecore#_91bMBftqEe-qI-SgA0yE7w http://www.bonitasoft.org/ns/bpm/expression ../../../../../org.bonitasoft.bpm.model.tests/metamodel.ecore#_91bLuftqEe-qI-SgA0yE7w http://www.bonitasoft.org/ns/bpm/process ../../../../../org.bonitasoft.bpm.model.tests/metamodel.ecore#_91ai0PtqEe-qI-SgA0yE7w">
+  <process:MainProcess xmi:id="_xQhDcBxzEeiplJoiu3AUHg" name="ProcessWithCustonGroovyDep" bonitaModelVersion="9">
     <elements xmi:type="process:Pool" xmi:id="_xQhDcRxzEeiplJoiu3AUHg" name="ProcessWithCustonGroovyDep">
       <elements xmi:type="process:Lane" xmi:id="_xQhDchxzEeiplJoiu3AUHg" name="Employee lane" actor="_xQhDmxxzEeiplJoiu3AUHg">
         <elements xmi:type="process:StartEvent" xmi:id="_xQhDcxxzEeiplJoiu3AUHg" name="Start1" outgoing="_xQhDmBxzEeiplJoiu3AUHg">
