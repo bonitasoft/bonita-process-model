@@ -53,14 +53,4 @@ class ProcessMigrationTest {
         // and test that content is similar
         assertTrue(EcoreUtil.equals(oldModel.getContents().get(0), latestModel.getContents().get(0)));
     }
-
-    @Test
-    void migrate() throws Exception {
-        // temp test to migrate model from 8 to 9
-        String FOLDER = "C:/Dev/bonita-studio-sp-dev/git/bonita-process-model/tests/org.bonitasoft.bpm.model.tests/resources/";
-        ModelLoader loader = ModelLoader.create().enablePartial().withPolicy(MigrationPolicy.ALWAYS_MIGRATE_POLICY);
-        Resource model = loader.loadModel(URI.createFileURI(FOLDER + "MyDiagram-8.proc"));
-        assertTrue(model.isLoaded());
-        model.save(null);
-    }
 }
