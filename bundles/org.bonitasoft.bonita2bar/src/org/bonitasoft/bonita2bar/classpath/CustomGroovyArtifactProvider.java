@@ -160,6 +160,9 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
     }
 
     private Set<File> collectGroovySourceFile(Path groovySource, final Pool process) throws BuildBarException {
+        if (!Files.exists(groovySource)) {
+            return Set.of();
+        }
         try (Stream<Path> walker = Files.walk(groovySource)) {
             List<Path> groovyPaths = walker.filter(Files::isRegularFile)
                     .filter(file -> file.toString().endsWith(".groovy")).toList();
