@@ -106,6 +106,41 @@ class ConnectorImplementationArtifactProviderTest {
         assertThat(businessArchive.getResource("connector/rest-get-impl-1.0.10.impl")).isNotEmpty();
     }
 
+    @Test
+    void should_build_jarless_bar() throws Exception {
+        //given
+        var outputFolder = projectRoot.resolve("target");
+        var mvnExecutable = MavenUtil.getMvnExecutable();
+        var classpath = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
+        var reportFile = MavenUtil.analyze(projectRoot, mvnExecutable);
+
+        var processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
+                MigrationPolicy.NEVER_MIGRATE_POLICY);
+        var builder = BarBuilderFactory.create(BuildConfig.builder()
+                .connectorImplementationRegistry(createImplementationRegistry(reportFile))
+                .formBuilder(id -> new byte[0])
+                .workingDirectory(outputFolder)
+                .mavenProject(appProject)
+                .processRegistry(processRegistry)
+                .classpathResolver(ClasspathResolver.of(classpath))
+                .withDependencyJars(false)
+                .build());
+
+        var barOutput = builder.build("ProcessWithConnectors", "1.0", "customEnv");
+
+        assertThat(barOutput.getBusinessArchives()).hasSize(1);
+        var businessArchive = barOutput.getBusinessArchives().get(0);
+
+        assertThat(businessArchive.hasDependencyJars()).isFalse();
+        assertThat(businessArchive.getResource("classpath/bonita-connector-email-1.3.0.jar")).isNull();
+        assertThat(businessArchive.getResource("classpath/javax.mail-1.6.2.jar")).isNull();
+        assertThat(businessArchive.getResource("classpath/javax.mail-api-1.6.2.jar")).isNull();
+        assertThat(businessArchive.getResource("classpath/bonita-connector-rest-1.0.10.jar")).isNull();
+
+        assertThat(businessArchive.getResource("connector/email-impl-1.3.0.impl")).isNotEmpty();
+        assertThat(businessArchive.getResource("connector/rest-get-impl-1.0.10.impl")).isNotEmpty();
+    }
+
     private static ConnectorImplementationRegistry createImplementationRegistry(Path reportFile) throws IOException {
         var report = MavenUtil.loadReport(reportFile);
         var implementations = new ArrayList<ConnectorImplementationJar>();
