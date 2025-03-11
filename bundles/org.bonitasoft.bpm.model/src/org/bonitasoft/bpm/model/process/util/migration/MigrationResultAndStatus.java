@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2012 Bonitasoft S.A.
+ * Copyright (C) 2025 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,18 +12,13 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.bonitasoft.bpm.model.util;
+package org.bonitasoft.bpm.model.process.util.migration;
 
-public class FragmentTypes {
+import org.eclipse.core.runtime.IStatus;
 
-    private FragmentTypes() {
-        // private constructor
-    }
-
-    public static final String CONNECTOR = "CONNECTOR";
-    public static final String ACTOR_FILTER = "ACTOR_FILTER";
-    public static final String VALIDATOR = "VALIDATOR";
-    public static final String DATA_TYPES = "DATA_TYPES";
-    public static final String OTHER = "OTHER";
+/**
+ * Migration result and model version status to know whether the model is up to date
+ */
+public record MigrationResultAndStatus(MigrationResult migrationResult, IStatus modelVersionStatus) {
 
 }

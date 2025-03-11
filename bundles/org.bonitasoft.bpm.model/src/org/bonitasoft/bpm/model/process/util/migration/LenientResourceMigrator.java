@@ -206,15 +206,16 @@ public class LenientResourceMigrator extends Migrator {
      * @param monitor
      *        Progress monitor
      * @return The model in the generic structure
+     * @throws MigrationException
      */
     private Model doMigrate(List<URI> modelURIs, Release sourceRelease, Release targetRelease,
-            IProgressMonitor monitor) {
+            IProgressMonitor monitor) throws MigrationException {
         try {
             Migrator migratorToInvokeOn = wrappedMigrator.orElse(this);
             return (Model) migrateMethod.invoke(migratorToInvokeOn, modelURIs, sourceRelease, targetRelease, monitor);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             EcorePlugin.INSTANCE.log(e);
-            return null;
+            throw new MigrationException(e);
         }
     }
 

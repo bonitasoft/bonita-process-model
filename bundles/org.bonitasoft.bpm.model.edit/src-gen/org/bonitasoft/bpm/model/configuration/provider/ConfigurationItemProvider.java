@@ -264,7 +264,6 @@ public class ConfigurationItemProvider
             childrenFeatures.add(ConfigurationPackage.Literals.CONFIGURATION__ACTOR_MAPPINGS);
             childrenFeatures.add(ConfigurationPackage.Literals.CONFIGURATION__DEFINITION_MAPPINGS);
             childrenFeatures.add(ConfigurationPackage.Literals.CONFIGURATION__PROCESS_DEPENDENCIES);
-            childrenFeatures.add(ConfigurationPackage.Literals.CONFIGURATION__APPLICATION_DEPENDENCIES);
             childrenFeatures.add(ConfigurationPackage.Literals.CONFIGURATION__PARAMETERS);
             childrenFeatures.add(ConfigurationPackage.Literals.CONFIGURATION__ADDITIONAL_RESOURCES);
         }
@@ -334,7 +333,6 @@ public class ConfigurationItemProvider
             case ConfigurationPackage.CONFIGURATION__ACTOR_MAPPINGS:
             case ConfigurationPackage.CONFIGURATION__DEFINITION_MAPPINGS:
             case ConfigurationPackage.CONFIGURATION__PROCESS_DEPENDENCIES:
-            case ConfigurationPackage.CONFIGURATION__APPLICATION_DEPENDENCIES:
             case ConfigurationPackage.CONFIGURATION__PARAMETERS:
             case ConfigurationPackage.CONFIGURATION__ADDITIONAL_RESOURCES:
                 fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -371,11 +369,6 @@ public class ConfigurationItemProvider
 
         newChildDescriptors.add
             (createChildParameter
-                (ConfigurationPackage.Literals.CONFIGURATION__APPLICATION_DEPENDENCIES,
-                 ConfigurationFactory.eINSTANCE.createFragmentContainer()));
-
-        newChildDescriptors.add
-            (createChildParameter
                 (ConfigurationPackage.Literals.CONFIGURATION__PARAMETERS,
                  ParameterFactory.eINSTANCE.createParameter()));
 
@@ -383,29 +376,6 @@ public class ConfigurationItemProvider
             (createChildParameter
                 (ConfigurationPackage.Literals.CONFIGURATION__ADDITIONAL_RESOURCES,
                  ConfigurationFactory.eINSTANCE.createResource()));
-    }
-
-    /**
-     * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-        Object childFeature = feature;
-        Object childObject = child;
-
-        boolean qualify =
-            childFeature == ConfigurationPackage.Literals.CONFIGURATION__PROCESS_DEPENDENCIES ||
-            childFeature == ConfigurationPackage.Literals.CONFIGURATION__APPLICATION_DEPENDENCIES;
-
-        if (qualify) {
-            return getString
-                ("_UI_CreateChild_text2", //$NON-NLS-1$
-                 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-        }
-        return super.getCreateChildText(owner, feature, child, selection);
     }
 
     /**

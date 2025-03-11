@@ -302,7 +302,7 @@ public class ConfigurationPackageImpl extends EPackageImpl implements Configurat
      * @generated
      */
     @Override
-    public EReference getConfiguration_ApplicationDependencies() {
+    public EReference getConfiguration_Parameters() {
         return (EReference)configurationEClass.getEStructuralFeatures().get(7);
     }
 
@@ -312,18 +312,8 @@ public class ConfigurationPackageImpl extends EPackageImpl implements Configurat
      * @generated
      */
     @Override
-    public EReference getConfiguration_Parameters() {
-        return (EReference)configurationEClass.getEStructuralFeatures().get(8);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
     public EAttribute getConfiguration_Version() {
-        return (EAttribute)configurationEClass.getEStructuralFeatures().get(9);
+        return (EAttribute)configurationEClass.getEStructuralFeatures().get(8);
     }
 
     /**
@@ -333,7 +323,7 @@ public class ConfigurationPackageImpl extends EPackageImpl implements Configurat
      */
     @Override
     public EAttribute getConfiguration_Username() {
-        return (EAttribute)configurationEClass.getEStructuralFeatures().get(10);
+        return (EAttribute)configurationEClass.getEStructuralFeatures().get(9);
     }
 
     /**
@@ -343,7 +333,7 @@ public class ConfigurationPackageImpl extends EPackageImpl implements Configurat
      */
     @Override
     public EAttribute getConfiguration_Password() {
-        return (EAttribute)configurationEClass.getEStructuralFeatures().get(11);
+        return (EAttribute)configurationEClass.getEStructuralFeatures().get(10);
     }
 
     /**
@@ -353,7 +343,7 @@ public class ConfigurationPackageImpl extends EPackageImpl implements Configurat
      */
     @Override
     public EReference getConfiguration_AdditionalResources() {
-        return (EReference)configurationEClass.getEStructuralFeatures().get(12);
+        return (EReference)configurationEClass.getEStructuralFeatures().get(11);
     }
 
     /**
@@ -583,7 +573,6 @@ public class ConfigurationPackageImpl extends EPackageImpl implements Configurat
         createEAttribute(configurationEClass, CONFIGURATION__ANONYMOUS_PASSWORD);
         createEReference(configurationEClass, CONFIGURATION__DEFINITION_MAPPINGS);
         createEReference(configurationEClass, CONFIGURATION__PROCESS_DEPENDENCIES);
-        createEReference(configurationEClass, CONFIGURATION__APPLICATION_DEPENDENCIES);
         createEReference(configurationEClass, CONFIGURATION__PARAMETERS);
         createEAttribute(configurationEClass, CONFIGURATION__VERSION);
         createEAttribute(configurationEClass, CONFIGURATION__USERNAME);
@@ -656,7 +645,6 @@ public class ConfigurationPackageImpl extends EPackageImpl implements Configurat
         initEAttribute(getConfiguration_AnonymousPassword(), ecorePackage.getEString(), "anonymousPassword", null, 0, 1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEReference(getConfiguration_DefinitionMappings(), this.getDefinitionMapping(), null, "definitionMappings", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEReference(getConfiguration_ProcessDependencies(), this.getFragmentContainer(), null, "processDependencies", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
-        initEReference(getConfiguration_ApplicationDependencies(), this.getFragmentContainer(), null, "applicationDependencies", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEReference(getConfiguration_Parameters(), theParameterPackage.getParameter(), null, "parameters", null, 0, -1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEAttribute(getConfiguration_Version(), ecorePackage.getEString(), "version", null, 0, 1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$
         initEAttribute(getConfiguration_Username(), ecorePackage.getEString(), "username", null, 0, 1, Configuration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED); //$NON-NLS-1$

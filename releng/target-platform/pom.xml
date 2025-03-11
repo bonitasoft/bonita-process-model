@@ -4,7 +4,7 @@
   <parent>
     <groupId>org.bonitasoft.bpm</groupId>
     <artifactId>bonita-process-model</artifactId>
-    <version>8.2.0-SNAPSHOT</version>
+    <version>9.0.0-SNAPSHOT</version>
     <relativePath>../../pom.xml</relativePath>
   </parent>
   <artifactId>target-platform</artifactId>

@@ -8336,20 +8336,12 @@
           <referenceValue href="configuration.ecore#//FragmentContainer"/>
         </changes>
       </changes>
-      <changes xsi:type="history:Create" xmi:id="_141swWnREeaTLbmqFFisdA" referenceName="eStructuralFeatures">
+      <changes xsi:type="history:Create" xmi:id="_141swWnREeaTLbmqFFisdA" referenceName="eStructuralFeatures" element="_54UAsvqREe-tM7_3NMtiQg">
         <target href="configuration.ecore#//Configuration"/>
-        <element href="configuration.ecore#//Configuration/applicationDependencies"/>
-        <changes xsi:type="history:Set" xmi:id="_141swmnREeaTLbmqFFisdA" featureName="name" dataValue="applicationDependencies">
-          <element href="configuration.ecore#//Configuration/applicationDependencies"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_141sw2nREeaTLbmqFFisdA" featureName="upperBound" dataValue="-1" oldDataValue="1">
-          <element href="configuration.ecore#//Configuration/applicationDependencies"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_141sxGnREeaTLbmqFFisdA" featureName="containment" dataValue="true" oldDataValue="false">
-          <element href="configuration.ecore#//Configuration/applicationDependencies"/>
-        </changes>
-        <changes xsi:type="history:Set" xmi:id="_141sxWnREeaTLbmqFFisdA" featureName="eType">
-          <element href="configuration.ecore#//Configuration/applicationDependencies"/>
+        <changes xsi:type="history:Set" xmi:id="_141swmnREeaTLbmqFFisdA" element="_54UAsvqREe-tM7_3NMtiQg" featureName="name" dataValue="applicationDependencies"/>
+        <changes xsi:type="history:Set" xmi:id="_141sw2nREeaTLbmqFFisdA" element="_54UAsvqREe-tM7_3NMtiQg" featureName="upperBound" dataValue="-1" oldDataValue="1"/>
+        <changes xsi:type="history:Set" xmi:id="_141sxGnREeaTLbmqFFisdA" element="_54UAsvqREe-tM7_3NMtiQg" featureName="containment" dataValue="true" oldDataValue="false"/>
+        <changes xsi:type="history:Set" xmi:id="_141sxWnREeaTLbmqFFisdA" element="_54UAsvqREe-tM7_3NMtiQg" featureName="eType">
           <referenceValue href="configuration.ecore#//FragmentContainer"/>
         </changes>
       </changes>
@@ -15245,5 +15237,22 @@
     <changes xsi:type="history:MigrationChange" xmi:id="_76wRECxJEe68VI8bFfHDew" migration="org.bonitasoft.bpm.migration.custom.migration.expression.JavaGetterExpressionMigration"/>
     <changes xsi:type="history:MigrationChange" xmi:id="_3R2iEG81Ee2Gisyj-XM1Fw" migration="org.bonitasoft.bpm.model.process.util.migration.UpgradeModelVersionAttributeMigration"/>
   </releases>
-  <releases xmi:id="_xyMngF9HEe24H9qpSeta3A"/>
+  <releases xmi:id="_xyMngF9HEe24H9qpSeta3A" date="2025-03-06T14:50:48.481+0100" label="9">
+    <changes xsi:type="history:OperationChange" xmi:id="_54UAsPqREe-tM7_3NMtiQg">
+      <changes xsi:type="history:Delete" xmi:id="_54UAsfqREe-tM7_3NMtiQg" referenceName="eStructuralFeatures">
+        <target href="configuration.ecore#//Configuration"/>
+        <element xsi:type="ecore:EReference" xmi:id="_54UAsvqREe-tM7_3NMtiQg" name="applicationDependencies" upperBound="-1" containment="true">
+          <eType xsi:type="ecore:EClass" href="configuration.ecore#//FragmentContainer"/>
+        </element>
+      </changes>
+      <operation xmi:id="_54UAtPqREe-tM7_3NMtiQg" name="deleteFeature2">
+        <parameters xmi:id="_54UAtfqREe-tM7_3NMtiQg" name="feature">
+          <referenceValue xmi:id="_54UAtvqREe-tM7_3NMtiQg" element="_54UAsvqREe-tM7_3NMtiQg"/>
+        </parameters>
+      </operation>
+    </changes>
+    <changes xsi:type="history:MigrationChange" xmi:id="_aWw2kPpyEe-tM7_3NMtiQg" migration="org.bonitasoft.bpm.migration.custom.migration.configuration.RemoveJarAndGroovyFragmentsMigration"/>
+    <changes xsi:type="history:MigrationChange" xmi:id="_OuutYPp7Ee-tM7_3NMtiQg" migration="org.bonitasoft.bpm.model.process.util.migration.UpgradeModelVersionAttributeMigration"/>
+  </releases>
+  <releases xmi:id="_Am-REPqSEe-tM7_3NMtiQg"/>
 </history:History>

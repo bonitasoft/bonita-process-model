@@ -65,7 +65,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//Configuration/anonymousPassword"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//Configuration/definitionMappings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//Configuration/processDependencies"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//Configuration/applicationDependencies"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference configuration.ecore#//Configuration/parameters"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//Configuration/version"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute configuration.ecore#//Configuration/username"/>
@@ -274,7 +273,6 @@
     <genClasses ecoreClass="process.ecore#//AbstractPageFlow"/>
     <genClasses image="false" ecoreClass="process.ecore#//AbstractProcess">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//AbstractProcess/version"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//AbstractProcess/author"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//AbstractProcess/creationDate"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//AbstractProcess/modificationDate"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//AbstractProcess/datatypes"/>
@@ -459,13 +457,11 @@
     <genClasses ecoreClass="process.ecore#//LinkEvent"/>
     <genClasses ecoreClass="process.ecore#//LongType"/>
     <genClasses ecoreClass="process.ecore#//MainProcess">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//MainProcess/bonitaVersion"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//MainProcess/bonitaModelVersion"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//MainProcess/includedEntries"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference process.ecore#//MainProcess/messageConnections"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//MainProcess/generatedLibs"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//MainProcess/enableValidation"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//MainProcess/configId"/>
     </genClasses>
     <genClasses ecoreClass="process.ecore#//Message">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute process.ecore#//Message/throwEvent"/>
