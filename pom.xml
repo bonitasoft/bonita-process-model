@@ -73,11 +73,12 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <cyclonedx.version>2.7.9</cyclonedx.version>
     <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
     <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
-    <tycho.version>4.0.7</tycho.version>
-    <emf-ecore.version>2.27.0</emf-ecore.version>
-    <emf-common.version>2.25.0</emf-common.version>
-    <emf-xmi.version>2.16.0</emf-xmi.version>
-    <emf-edit.version>2.17.0</emf-edit.version>
+    <tycho.version>4.0.12</tycho.version>
+    <bonita-artifacts-model.version>1.2.0</bonita-artifacts-model.version>
+    <emf-ecore.version>2.37.0</emf-ecore.version>
+    <emf-common.version>2.31.0</emf-common.version>
+    <emf-xmi.version>2.38.0</emf-xmi.version>
+    <emf-edit.version>2.22.0</emf-edit.version>
     <maven-artifact.version>3.9.3</maven-artifact.version>
     <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
     <maven-invoker-plugin.version>3.3.0</maven-invoker-plugin.version>
