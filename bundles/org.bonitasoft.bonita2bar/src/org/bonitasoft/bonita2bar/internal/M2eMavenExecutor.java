@@ -17,6 +17,7 @@ package org.bonitasoft.bonita2bar.internal;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.function.Supplier;
 
@@ -27,6 +28,7 @@ import org.apache.maven.execution.MavenExecutionResult;
 import org.bonitasoft.bonita2bar.BuildBarException;
 import org.bonitasoft.bonita2bar.MavenExecutor;
 import org.bonitasoft.bpm.model.util.EnvironmentUtil;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.m2e.core.MavenPlugin;
@@ -57,7 +59,13 @@ public class M2eMavenExecutor implements MavenExecutor {
     public void execute(File pomFile, List<String> goals, Map<String, String> properties, List<String> activeProfiles,
             Supplier<String> errorMessageBase) throws BuildBarException {
         try {
-            IMaven maven = MavenPlugin.getMaven();
+            IMaven maven = Optional.ofNullable(MavenPlugin.getMaven()).orElseGet(() -> {
+                // workaround mentioned on https://github.com/eclipse-m2e/m2e-core/issues/966
+                // just the class dependency should be enough to start the plugin early
+                ResourcesPlugin.getPlugin();
+                return Optional.ofNullable(MavenPlugin.getMaven())
+                        .orElseThrow(() -> new IllegalStateException("Maven is not available."));
+            });
             var ctx = maven.createExecutionContext();
             var request = ctx.getExecutionRequest();
             request.setGoals(goals);

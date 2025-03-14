@@ -7,7 +7,7 @@ Bundle-Version: 9.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.omg.spec.bpmn.di,
  org.omg.spec.bpmn.di.impl,
  org.omg.spec.bpmn.di.util,
