@@ -34,6 +34,10 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
+          
+      - uses: bonitasoft/maven-settings-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
        
       - uses: bonitasoft/git-setup-action@v1
         with:

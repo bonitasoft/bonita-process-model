@@ -13,43 +13,61 @@
   <name>Archetype - Bonita Business Process Model Reader</name>
   <properties>
     <maven.deploy.skip>false</maven.deploy.skip>
+    <bonita-process-model.version>${project.version}</bonita-process-model.version>
   </properties>
   <dependencies>
     <!-- Artifacts from reactor are required for testing the project built from archetype -->
     <dependency>
       <groupId>org.bonitasoft.bpm</groupId>
       <artifactId>org.bonitasoft.bpm.model</artifactId>
-      <version>${project.version}</version>
+      <version>${bonita-process-model.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.bonitasoft.bpm</groupId>
       <artifactId>org.bonitasoft.bpm.connector.model</artifactId>
-      <version>${project.version}</version>
+      <version>${bonita-process-model.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.bonitasoft.bpm</groupId>
       <artifactId>org.bonitasoft.bpm.migration</artifactId>
-      <version>${project.version}</version>
+      <version>${bonita-process-model.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.bonitasoft.bpm</groupId>
       <artifactId>org.bonitasoft.bpm.model.edit</artifactId>
-      <version>${project.version}</version>
+      <version>${bonita-process-model.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.bonitasoft.bpm</groupId>
       <artifactId>org.bonitasoft.bpm.connector.model.edit</artifactId>
-      <version>${project.version}</version>
+      <version>${bonita-process-model.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
   <build>
+    <resources>
+      <resource>
+        <filtering>true</filtering>
+        <directory>src/main/resources</directory>
+        <includes>
+          <include>META-INF/maven/archetype-metadata.xml</include>
+        </includes>
+      </resource>
+      <resource>
+        <filtering>false</filtering>
+        <directory>src/main/resources</directory>
+        <excludes>
+          <exclude>META-INF/maven/archetype-metadata.xml</exclude>
+        </excludes>
+      </resource>
+    </resources>
     <testResources>
       <testResource>
+        <filtering>true</filtering>
         <!-- Override the value from parent pom to go with default maven style -->
         <directory>src/test/resources</directory>
       </testResource>
@@ -70,7 +88,7 @@
               <defaults>
                 <src.dir>${project.basedir}/src</src.dir>
                 <java-version>${java.version}</java-version>
-                <bonita-process-model-version>${project.version}</bonita-process-model-version>
+                <bonita-process-model-version>${bonita-process-model.version}</bonita-process-model-version>
                 <maven-clean-version>${maven-clean-plugin.version}</maven-clean-version>
                 <maven-resources-version>${maven-resources-plugin.version}</maven-resources-version>
                 <maven-compiler-version>${maven-compiler-plugin.version}</maven-compiler-version>
