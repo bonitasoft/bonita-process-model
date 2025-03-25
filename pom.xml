@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.bonitasoft.bpm</groupId>
   <artifactId>bonita-process-model</artifactId>
-  <version>9.0.0-SNAPSHOT</version>
+  <version>9.0.0</version>
   <packaging>pom</packaging>
   <name>Bonita Business Process Model</name>
   <description>Contains the Bonita Process Domain Logic.</description>
