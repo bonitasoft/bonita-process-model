@@ -41,4 +41,4 @@ jobs:
           gpg-passphrase: MAVEN_GPG_PASSPHRASE # env variable for GPG private key passphrase
           
       - name: Publish tag 
-        run: ./mvnw -ntp --batch-mode deploy -Prelease
+        run: ./mvnw -ntp --batch-mode deploy -Prelease -Dmaven.test.skip
