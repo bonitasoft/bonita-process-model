@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Process Model Tests Fragment
 Bundle-SymbolicName: org.bonitasoft.bpm.model.tests
-Bundle-Version: 9.0.0
+Bundle-Version: 9.1.0.qualifier
 Bundle-Vendor: Bonitasoft S.A.
 Fragment-Host: org.bonitasoft.bpm.model;bundle-version="8.0.0"
 Import-Package: org.bonitasoft.engine.expression,
