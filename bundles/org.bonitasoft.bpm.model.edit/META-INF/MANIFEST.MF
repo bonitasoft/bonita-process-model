@@ -3,12 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.bonitasoft.bpm.model.edit;singleton:=true
 Automatic-Module-Name: org.bonitasoft.bpm.model.edit
-Bundle-Version: 8.1.0
+Bundle-Version: 9.0.0
 Bundle-ClassPath: .
 Bundle-Activator: org.bonitasoft.bpm.model.edit.ProcessEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Export-Package: org.bonitasoft.bpm.model.actormapping.provider,
  org.bonitasoft.bpm.model.configuration.provider,
  org.bonitasoft.bpm.model.connectorconfiguration.provider,

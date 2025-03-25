@@ -21,13 +21,18 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 
 import java.io.File;
+import java.io.FileReader;
 import java.net.URLDecoder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.apache.maven.project.MavenProject;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.configuration.ConfigurationArchive;
+import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
@@ -42,21 +47,34 @@ class BarBuilderTest {
 
     private BarBuilder barBuilder;
     private ProcessRegistry processRegistry;
-    private SourcePathProvider sourcePathProvider;
+    private MavenProject appProject;
 
     @BeforeEach
     void setUp() throws Exception {
         var repoRoot = new File(URLDecoder.decode(
-                FileLocator.toFileURL(BarBuilderTest.class.getResource("/test-repository")).getFile(), "UTF-8"));
+                FileLocator.toFileURL(BarBuilderTest.class.getResource("/my-project")).getFile(), "UTF-8"));
+        Path appPath = repoRoot.toPath().resolve("app");
+        var appPomFile = appPath.resolve("pom.xml").toFile();
+        // load maven project
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        try (var fileReader = new FileReader(appPomFile)) {
+            var model = reader.read(fileReader);
+            appProject = new MavenProject(model);
+            appProject.setFile(appPomFile);
+        }
+        var mvnExecutable = MavenUtil.getMvnExecutable();
+        var classpath = MavenUtil.buildClasspath(repoRoot.toPath(), mvnExecutable);
 
-        processRegistry = ProcessRegistry.of(repoRoot.toPath().resolve("app").resolve("diagrams"),
+        processRegistry = ProcessRegistry.of(appPath.resolve("diagrams"),
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
-        sourcePathProvider = SourcePathProvider.of(repoRoot.toPath().resolve("app"));
         barBuilder = BarBuilderFactory
                 .create(BuildConfig.builder()
                         .connectorImplementationRegistry(ConnectorImplementationRegistry.of(List.of()))
                         .formBuilder(id -> new byte[0]).workingDirectory(repoRoot.toPath().resolve("target"))
-                        .sourcePathProvider(sourcePathProvider).processRegistry(processRegistry).build());
+                        .mavenProject(appProject)
+                        .processRegistry(processRegistry)
+                        .classpathResolver(ClasspathResolver.of(classpath))
+                        .build());
     }
 
     @Test
@@ -69,7 +87,7 @@ class BarBuilderTest {
         var barOutput = Files.createDirectory(tmpFolder.resolve("bars"));
 
         result.writeBusinessArchivesTo(barOutput);
-        var bonitaConfigurationFile = tmpFolder.resolve("test-repository.bconf");
+        var bonitaConfigurationFile = tmpFolder.resolve("my-project.bconf");
         result.writeBonitaConfigurationTo(bonitaConfigurationFile);
 
         assertThat(barOutput.resolve("SimpleProcessWithParameters--1.0.bar")).exists();
@@ -87,7 +105,7 @@ class BarBuilderTest {
         assertThat(result.getBusinessArchives()).isEmpty();
         assertThat(result.getConfigurations()).hasSize(12);
 
-        var bonitaConfigurationFile = tmpFolder.resolve("test-repository.bconf");
+        var bonitaConfigurationFile = tmpFolder.resolve("my-project.bconf");
         result.writeBonitaConfigurationTo(bonitaConfigurationFile);
 
         assertThat(bonitaConfigurationFile).exists();
@@ -131,4 +149,21 @@ class BarBuilderTest {
         assertThat(version).isNotNull().isNotEmpty();
     }
 
+    @Test
+    void barArtifactProvider_must_have_implementation() throws Exception {
+        var barBarArtifactProvider = new BarArtifactProvider() {
+        };
+        assertThatThrownBy(() -> barBarArtifactProvider.build(null, null, null))
+                .isInstanceOf(UnsupportedOperationException.class);
+        assertThatThrownBy(() -> barBarArtifactProvider.build(null, null, null, null))
+                .isInstanceOf(UnsupportedOperationException.class);
+    }
+
+    @Test
+    void should_mavenCliExecutor_fail() throws Exception {
+        var mavenCliExecutor = MavenExecutor.getCliImplementation();
+        // Plexus is not configured for Maven CLI executor in Eclipse P2 context
+        assertThatThrownBy(() -> mavenCliExecutor.execute(appProject.getFile(), List.of("clean", "install"),
+                Map.of(), List.of(), () -> "")).isInstanceOf(BuildBarException.class);
+    }
 }

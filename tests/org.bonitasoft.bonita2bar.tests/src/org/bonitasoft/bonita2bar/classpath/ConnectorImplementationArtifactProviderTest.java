@@ -17,6 +17,7 @@ package org.bonitasoft.bonita2bar.classpath;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
@@ -26,18 +27,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
+import org.apache.maven.project.MavenProject;
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.ClasspathResolver;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
+import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplementationJar;
 import org.bonitasoft.bonita2bar.ProcessRegistry;
-import org.bonitasoft.bonita2bar.SourcePathProvider;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,13 +47,23 @@ import org.junit.jupiter.api.Test;
 class ConnectorImplementationArtifactProviderTest {
 
     private Path projectRoot;
+    private MavenProject appProject;
 
     @BeforeEach
     void setup() throws Exception {
-        projectRoot = Files.createTempDirectory("test-repository");
+        projectRoot = Files.createTempDirectory("my-project");
         FileUtil.copyDirectory(new File(URLDecoder.decode(
-                FileLocator.toFileURL(CustomGroovyArtifactProviderTest.class.getResource("/test-repository")).getFile(),
+                FileLocator.toFileURL(CustomGroovyArtifactProviderTest.class.getResource("/my-project")).getFile(),
                 "UTF-8")).getAbsolutePath(), projectRoot.toFile().getAbsolutePath());
+
+        var appPomFile = projectRoot.resolve("app").resolve("pom.xml").toFile();
+        // load maven project
+        MavenXpp3Reader reader = new MavenXpp3Reader();
+        try (var fileReader = new FileReader(appPomFile)) {
+            var model = reader.read(fileReader);
+            appProject = new MavenProject(model);
+            appProject.setFile(appPomFile);
+        }
     }
 
     @AfterEach
@@ -65,7 +77,7 @@ class ConnectorImplementationArtifactProviderTest {
     void should_add_connector_in_bar() throws Exception {
         //given
         var outputFolder = projectRoot.resolve("target");
-        var mvnExecutable = Platform.getOS().contains("win") ? "mvn.cmd" : "mvn";
+        var mvnExecutable = MavenUtil.getMvnExecutable();
         var classpath = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
         var reportFile = MavenUtil.analyze(projectRoot, mvnExecutable);
 
@@ -75,7 +87,7 @@ class ConnectorImplementationArtifactProviderTest {
                 .connectorImplementationRegistry(createImplementationRegistry(reportFile))
                 .formBuilder(id -> new byte[0])
                 .workingDirectory(outputFolder)
-                .sourcePathProvider(SourcePathProvider.of(projectRoot.resolve("app")))
+                .mavenProject(appProject)
                 .processRegistry(processRegistry)
                 .classpathResolver(ClasspathResolver.of(classpath))
                 .build());
@@ -94,6 +106,41 @@ class ConnectorImplementationArtifactProviderTest {
         assertThat(businessArchive.getResource("connector/rest-get-impl-1.0.10.impl")).isNotEmpty();
     }
 
+    @Test
+    void should_build_jarless_bar() throws Exception {
+        //given
+        var outputFolder = projectRoot.resolve("target");
+        var mvnExecutable = MavenUtil.getMvnExecutable();
+        var classpath = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
+        var reportFile = MavenUtil.analyze(projectRoot, mvnExecutable);
+
+        var processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
+                MigrationPolicy.NEVER_MIGRATE_POLICY);
+        var builder = BarBuilderFactory.create(BuildConfig.builder()
+                .connectorImplementationRegistry(createImplementationRegistry(reportFile))
+                .formBuilder(id -> new byte[0])
+                .workingDirectory(outputFolder)
+                .mavenProject(appProject)
+                .processRegistry(processRegistry)
+                .classpathResolver(ClasspathResolver.of(classpath))
+                .withDependencyJars(false)
+                .build());
+
+        var barOutput = builder.build("ProcessWithConnectors", "1.0", "customEnv");
+
+        assertThat(barOutput.getBusinessArchives()).hasSize(1);
+        var businessArchive = barOutput.getBusinessArchives().get(0);
+
+        assertThat(businessArchive.hasDependencyJars()).isFalse();
+        assertThat(businessArchive.getResource("classpath/bonita-connector-email-1.3.0.jar")).isNull();
+        assertThat(businessArchive.getResource("classpath/javax.mail-1.6.2.jar")).isNull();
+        assertThat(businessArchive.getResource("classpath/javax.mail-api-1.6.2.jar")).isNull();
+        assertThat(businessArchive.getResource("classpath/bonita-connector-rest-1.0.10.jar")).isNull();
+
+        assertThat(businessArchive.getResource("connector/email-impl-1.3.0.impl")).isNotEmpty();
+        assertThat(businessArchive.getResource("connector/rest-get-impl-1.0.10.impl")).isNotEmpty();
+    }
+
     private static ConnectorImplementationRegistry createImplementationRegistry(Path reportFile) throws IOException {
         var report = MavenUtil.loadReport(reportFile);
         var implementations = new ArrayList<ConnectorImplementationJar>();
@@ -106,10 +153,15 @@ class ConnectorImplementationArtifactProviderTest {
 
     private static List<ConnectorImplementationJar> adapt(List<Map<String, Object>> implementations) {
         return implementations.stream()
-                .map(map -> ConnectorImplementationJar.of((String) map.get("implementationId"),
-                        (String) map.get("implementationVersion"),
-                        new File((String) ((Map<String, Object>) map.get("artifact")).get("file")),
-                        (String) map.get("jarEntry")))
+                .map(map -> {
+                    var artifact = ((Map<String, String>) map.get("artifact"));
+                    var artifactInfo = new ArtifactInfo(artifact.get("groupId"), artifact.get("artifactId"),
+                            artifact.get("version"), artifact.get("classifier"), artifact.get("file"));
+                    return ConnectorImplementationJar.of((String) map.get("implementationId"),
+                            (String) map.get("implementationVersion"),
+                            artifactInfo,
+                            (String) map.get("jarEntry"));
+                })
                 .collect(Collectors.toList());
     }
 

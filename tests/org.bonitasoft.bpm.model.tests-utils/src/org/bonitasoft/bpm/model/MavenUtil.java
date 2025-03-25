@@ -47,11 +47,40 @@ public class MavenUtil {
         return mapper.readValue(reportFile.toFile(), Map.class);
     }
 
+    public static String getMvnExecutable() {
+        String os = System.getProperty("os.name");
+        return os.startsWith("Windows") ? "mvn.cmd" : "mvn";
+    }
+
+    public static void execute(File pomFile, String mvnExecutable, List<String> goals, Map<String, String> properties,
+            List<String> activeProfiles) throws InterruptedException, IOException {
+        MavenCommandBuilder builder = new MavenCommandBuilder(mvnExecutable).directory(pomFile.getParentFile());
+        goals.forEach(builder::addGoal);
+        properties.forEach(builder::addProperty);
+        if (!activeProfiles.isEmpty()) {
+            builder.activeProfiles(activeProfiles.stream().collect(Collectors.joining(",")));
+        }
+        activeProfiles.forEach(builder::addGoal);
+        builder.start().waitFor();
+    }
+
     public static Path analyze(Path projectRoot, String mvnExecutable) throws InterruptedException, IOException {
         var appModule = projectRoot.resolve("app");
         File pomFile = appModule.resolve("pom.xml").toFile();
         if (!pomFile.isFile()) {
             throw new IllegalArgumentException("Not a maven project !");
+        }
+        /*
+         * Extensions must be built and installed first. If not, we may encounter this error:
+         * [ERROR] Failed to execute goal org.bonitasoft.maven:bonita-project-maven-plugin:1.0.3:analyze (default-cli) on project my-project:
+         * Execution default-cli of goal org.bonitasoft.maven:bonita-project-maven-plugin:1.0.3:analyze failed:
+         * Failed to analyze artifact com.company:resourceNameRestAPI:zip:0.0.1:compile: com.company:resourceNameRestAPI:zip:0.0.1 was not found
+         */
+        var extensionsModule = projectRoot.resolve("extensions");
+        File extensionsPomFile = extensionsModule.resolve("pom.xml").toFile();
+        if (extensionsPomFile.isFile()) {
+            new MavenCommandBuilder(mvnExecutable).directory(extensionsModule.toFile()).addGoal("install").start()
+                    .waitFor();
         }
 
         new MavenCommandBuilder(mvnExecutable).directory(appModule.toFile()).addGoal("bonita-project:analyze").start()
@@ -87,11 +116,18 @@ public class MavenUtil {
 
         public MavenCommandBuilder(String mvnExecutable) {
             builder = new ProcessBuilder(mvnExecutable);
+            // make sure correct Java version is used
+            builder.environment().put("JAVA_HOME", System.getProperty("java.home"));
             commands = builder.command();
         }
 
         public MavenCommandBuilder addGoal(String goal) {
             this.goals.add(goal);
+            return this;
+        }
+
+        public MavenCommandBuilder activeProfiles(String activeProfiles) {
+            this.activeProfiles = activeProfiles;
             return this;
         }
 

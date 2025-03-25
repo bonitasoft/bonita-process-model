@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.bonitasoft.bpm.plugin-dependencies
-Bundle-Version: 8.1.0
+Bundle-Version: 9.0.0
 Require-Bundle: org.eclipse.emf.edapt.common,
  org.eclipse.emf.edapt.history,
  org.eclipse.emf.edapt.migration

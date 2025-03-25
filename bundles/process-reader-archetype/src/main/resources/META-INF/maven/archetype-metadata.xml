@@ -13,10 +13,10 @@
       <defaultValue>true</defaultValue>
 	</requiredProperty>
     <requiredProperty key="java-version">
-      <defaultValue>11</defaultValue>
+      <defaultValue>17</defaultValue>
     </requiredProperty>
     <requiredProperty key="bonita-process-model-version">
-      <defaultValue>8.1.0-SNAPSHOT</defaultValue>
+      <defaultValue>${bonita-process-model.version}</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-clean-version">
       <defaultValue>3.3.1</defaultValue>

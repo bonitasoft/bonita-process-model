@@ -91,15 +91,6 @@ public class ConfigurationBuilder {
     }
 
     @SafeVarargs
-    public final ConfigurationBuilder havingApplicationDependencies(
-            final Buildable<? extends FragmentContainer>... dependencies) {
-        for (final Buildable<? extends FragmentContainer> dep : dependencies) {
-            configuration.getApplicationDependencies().add(dep.build());
-        }
-        return this;
-    }
-
-    @SafeVarargs
     public final ConfigurationBuilder havingParameters(final Buildable<? extends Parameter>... parameters) {
         for (final Buildable<? extends Parameter> parameter : parameters) {
             configuration.getParameters().add(parameter.build());

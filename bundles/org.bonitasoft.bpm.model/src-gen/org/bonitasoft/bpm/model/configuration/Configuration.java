@@ -41,7 +41,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.bonitasoft.bpm.model.configuration.Configuration#getAnonymousPassword <em>Anonymous Password</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.configuration.Configuration#getDefinitionMappings <em>Definition Mappings</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.configuration.Configuration#getProcessDependencies <em>Process Dependencies</em>}</li>
- *   <li>{@link org.bonitasoft.bpm.model.configuration.Configuration#getApplicationDependencies <em>Application Dependencies</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.configuration.Configuration#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.configuration.Configuration#getVersion <em>Version</em>}</li>
  *   <li>{@link org.bonitasoft.bpm.model.configuration.Configuration#getUsername <em>Username</em>}</li>
@@ -187,18 +186,6 @@ public interface Configuration extends EObject {
      * @generated
      */
     EList<FragmentContainer> getProcessDependencies();
-
-    /**
-     * Returns the value of the '<em><b>Application Dependencies</b></em>' containment reference list.
-     * The list contents are of type {@link org.bonitasoft.bpm.model.configuration.FragmentContainer}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Application Dependencies</em>' containment reference list.
-     * @see org.bonitasoft.bpm.model.configuration.ConfigurationPackage#getConfiguration_ApplicationDependencies()
-     * @model containment="true"
-     * @generated
-     */
-    EList<FragmentContainer> getApplicationDependencies();
 
     /**
      * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.

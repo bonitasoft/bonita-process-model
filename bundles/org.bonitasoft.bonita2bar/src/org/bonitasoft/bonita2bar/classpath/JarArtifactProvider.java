@@ -27,7 +27,6 @@ import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.configuration.FragmentContainer;
 import org.bonitasoft.bpm.model.process.Pool;
-import org.bonitasoft.bpm.model.util.FragmentTypes;
 import org.bonitasoft.bpm.model.util.IModelSearch;
 import org.bonitasoft.bpm.model.util.ModelSearch;
 import org.bonitasoft.engine.bpm.bar.BarResource;
@@ -35,6 +34,11 @@ import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @deprecated use {@link DependenciesArtifactProvider} instead.
+ *             Candidate for removal.
+ */
+@Deprecated
 public class JarArtifactProvider implements BarArtifactProvider {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(JarArtifactProvider.class);
@@ -42,6 +46,14 @@ public class JarArtifactProvider implements BarArtifactProvider {
     private IModelSearch modelSearch = new ModelSearch(Collections::emptyList);
 
     private ClasspathResolver classpathResolver;
+
+    /**
+     * Replaces the org.bonitasoft.bpm.model.util.FragmentTypes.JAR constant until removal.
+     * 
+     * @deprecated
+     */
+    @Deprecated
+    public static String FRAGMENT_TYPE_JAR = "JAR";
 
     public JarArtifactProvider(ClasspathResolver classpathResolver) {
         this.classpathResolver = classpathResolver;
@@ -58,7 +70,7 @@ public class JarArtifactProvider implements BarArtifactProvider {
         for (final FragmentContainer fc : configuration.getProcessDependencies()) {
             final List<Fragment> fragments = modelSearch.getAllItemsOfType(fc, Fragment.class);
             for (final Fragment fragment : fragments) {
-                if (fragment.getType().equals(FragmentTypes.JAR) && fragment.isExported()) {
+                if (fragment.getType().equals(FRAGMENT_TYPE_JAR) && fragment.isExported()) {
                     try {
                         addJarToBusinessArchive(builder, fragment, configuration);
                     } catch (IOException e) {

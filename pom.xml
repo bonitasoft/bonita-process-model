@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.bonitasoft.bpm</groupId>
   <artifactId>bonita-process-model</artifactId>
-  <version>8.1.0</version>
+  <version>9.0.0</version>
   <packaging>pom</packaging>
   <name>Bonita Business Process Model</name>
   <description>Contains the Bonita Process Domain Logic.</description>
@@ -73,11 +73,12 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <cyclonedx.version>2.7.9</cyclonedx.version>
     <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
     <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
-    <tycho.version>4.0.7</tycho.version>
-    <emf-ecore.version>2.27.0</emf-ecore.version>
-    <emf-common.version>2.25.0</emf-common.version>
-    <emf-xmi.version>2.16.0</emf-xmi.version>
-    <emf-edit.version>2.17.0</emf-edit.version>
+    <tycho.version>4.0.12</tycho.version>
+    <bonita-artifacts-model.version>1.2.0</bonita-artifacts-model.version>
+    <emf-ecore.version>2.37.0</emf-ecore.version>
+    <emf-common.version>2.31.0</emf-common.version>
+    <emf-xmi.version>2.38.0</emf-xmi.version>
+    <emf-edit.version>2.22.0</emf-edit.version>
     <maven-artifact.version>3.9.3</maven-artifact.version>
     <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
     <maven-invoker-plugin.version>3.3.0</maven-invoker-plugin.version>
@@ -90,6 +91,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <gitflow-maven-plugin.version>1.20.0</gitflow-maven-plugin.version>
     <build-helper-maven-plugin.version>3.4.0</build-helper-maven-plugin.version>
     <!-- standard maven plugins versions -->
+    <maven-core.version>3.8.4</maven-core.version>
     <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
     <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -111,10 +113,28 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <sonar.sources></sonar.sources>
     <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/releng/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>11</java.version>
+    <java.version>17</java.version>
     <maven.compiler.release>${java.version}</maven.compiler.release>
     <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.fasterxml.jackson</groupId>
+        <artifactId>jackson-bom</artifactId>
+        <version>2.15.2</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven</artifactId>
+        <version>${maven-core.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <repositories>
     <repository>
       <releases>
@@ -345,7 +365,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
         <artifactId>target-platform-configuration</artifactId>
         <version>${tycho.version}</version>
         <configuration>
-          <executionEnvironment>JavaSE-11</executionEnvironment>
+          <executionEnvironment>JavaSE-17</executionEnvironment>
           <target>
             <artifact>
               <groupId>${project.groupId}</groupId>

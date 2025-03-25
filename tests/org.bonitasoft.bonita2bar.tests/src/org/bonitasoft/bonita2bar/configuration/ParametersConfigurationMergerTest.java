@@ -35,7 +35,7 @@ class ParametersConfigurationMergerTest {
     void setup() throws IOException {
         merger = new ParametersConfigurationMerger();
         configurationFile = new File(FileLocator
-                .toFileURL(ParametersConfigurationMergerTest.class.getResource("/test-repository.bconf")).getFile());
+                .toFileURL(ParametersConfigurationMergerTest.class.getResource("/my-project.bconf")).getFile());
         parametersFile = new File(FileLocator
                 .toFileURL(ParametersConfigurationMergerTest.class.getResource("/toMerge.yaml")).getFile());
     }

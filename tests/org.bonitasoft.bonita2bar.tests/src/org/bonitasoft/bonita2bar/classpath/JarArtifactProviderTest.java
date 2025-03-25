@@ -28,11 +28,9 @@ import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.configuration.FragmentContainer;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.ProcessFactory;
-import org.bonitasoft.bpm.model.util.FragmentTypes;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.bonitasoft.engine.bpm.process.impl.ProcessDefinitionBuilder;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.Platform;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -46,7 +44,7 @@ class JarArtifactProviderTest {
     private Path lib;
 
     @BeforeEach
-    public void before(@TempDir Path repositoryFolder) throws Exception {
+    void before(@TempDir Path repositoryFolder) throws Exception {
         var appFolder = Files.createDirectory(repositoryFolder.resolve("app"));
         try (InputStream is = FileLocator.toFileURL(JarArtifactProviderTest.class.getResource("/pom.xml.example"))
                 .openStream()) {
@@ -62,8 +60,7 @@ class JarArtifactProviderTest {
                 new ProcessDefinitionBuilder().createNewInstance("P", "1").addAutomaticTask("step1").getProcess());
         lib = repositoryFolder.resolve("lib");
         Files.createDirectories(lib);
-        var classpath = MavenUtil.buildClasspath(repositoryFolder,
-                Platform.getOS().contains("win") ? "mvn.cmd" : "mvn");
+        var classpath = MavenUtil.buildClasspath(repositoryFolder, MavenUtil.getMvnExecutable());
 
         jarArtifactProvider = new JarArtifactProvider(ClasspathResolver.of(classpath));
     }
@@ -73,7 +70,8 @@ class JarArtifactProviderTest {
         //given
         configuration.getProcessDependencies()
                 .add(fragmentContainer(
-                        fragment(FragmentTypes.JAR, true, "commons-text-1.9.jar", "commons-text-1.9.jar")));
+                        fragment(JarArtifactProvider.FRAGMENT_TYPE_JAR, true, "commons-text-1.9.jar",
+                                "commons-text-1.9.jar")));
 
         //when
         jarArtifactProvider.build(businessArchiveBuilder, pool,

@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Process Model Tests Fragment
 Bundle-SymbolicName: org.bonitasoft.bpm.model.tests
-Bundle-Version: 8.1.0
+Bundle-Version: 9.0.0
 Bundle-Vendor: Bonitasoft S.A.
 Fragment-Host: org.bonitasoft.bpm.model;bundle-version="8.0.0"
 Import-Package: org.bonitasoft.engine.expression,
  org.bonitasoft.engine.operation
 Automatic-Module-Name: org.bonitasoft.bpm.model.tests
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-17
 Require-Bundle: assertj-core,
  org.bonitasoft.bpm.migration,
  junit-jupiter-api

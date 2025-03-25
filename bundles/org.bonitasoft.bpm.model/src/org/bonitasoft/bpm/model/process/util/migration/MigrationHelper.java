@@ -442,7 +442,7 @@ public class MigrationHelper extends AdapterImpl {
      * @return how the model has actually been migrated
      * @throws MigrationException exception during migration
      */
-    public MigrationResult tryAndMigrate(MigrationPolicy migrationPolicy, Map<?, ?> defaultLoadOptions,
+    public MigrationResultAndStatus tryAndMigrate(MigrationPolicy migrationPolicy, Map<?, ?> defaultLoadOptions,
             Map<?, ?> defaultSaveOptions)
             throws MigrationException {
         if (modelVersionStatus.getSeverity() == IStatus.WARNING) {
@@ -490,10 +490,11 @@ public class MigrationHelper extends AdapterImpl {
                 }
             }
             if (hasActuallyMigrated) {
-                return desiredResult;
+                // status is now OK
+                return new MigrationResultAndStatus(desiredResult, Status.OK_STATUS);
             }
         }
-        return MigrationResult.NO_MIGRATION;
+        return new MigrationResultAndStatus(MigrationResult.NO_MIGRATION, modelVersionStatus);
     }
 
     /**

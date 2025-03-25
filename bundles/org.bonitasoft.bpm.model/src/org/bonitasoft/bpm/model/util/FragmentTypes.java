@@ -25,7 +25,5 @@ public class FragmentTypes {
     public static final String VALIDATOR = "VALIDATOR";
     public static final String DATA_TYPES = "DATA_TYPES";
     public static final String OTHER = "OTHER";
-    public static final String JAR = "JAR";
-    public static final String GROOVY_SCRIPT = "GROOVY_SCRIPT";
 
 }

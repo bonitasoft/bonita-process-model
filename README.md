@@ -21,7 +21,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
 ## Prerequisites
 For building the code in this repository : Java [JDK 17+]
 
-For using the libraries released : Java [JDK 11+]
+For using the libraries released : Java [JDK 17+]
 
 ## How to build
 
@@ -65,7 +65,7 @@ mvn archetype:generate \
 | -------------------------------|------------|------------------------------------|------------------------------|
 | -DarchetypeGroupId             | __true__   | __org.bonitasoft.archetypes__      | Group id of the archetype    |
 | -DarchetypeArtifactId          | __true__   | __process-reader-archetype__       | Artifact id of the archetype (must be fixed to the given value) |
-| -DarchetypeVersion             | __false__  | Latest release version (8.0.0)     | Version id of the archetype  |
+| -DarchetypeVersion             | __false__  | Latest release version (9.0.0)     | Version id of the archetype  |
 | -DgroupId                      | __true__   |                                    | Group id of the project      |
 | -DartifactId                   | __true__   |                                    | Artifact id of the project   |
 | -Dversion                      | __true__   | suggested and asked interactively  | Version of the project, suggested to use 0.0.1-SNAPSHOT |

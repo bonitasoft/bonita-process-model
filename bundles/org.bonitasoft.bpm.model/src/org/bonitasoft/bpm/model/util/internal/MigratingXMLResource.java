@@ -17,6 +17,7 @@ package org.bonitasoft.bpm.model.util.internal;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.BiPredicate;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -25,6 +26,7 @@ import org.bonitasoft.bpm.model.process.util.migration.InputStreamSupplier;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationHelper;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationResult;
+import org.bonitasoft.bpm.model.process.util.migration.MigrationResultAndStatus;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
@@ -94,25 +96,42 @@ public class MigratingXMLResource extends XMLResourceImpl {
         if (extendedMetadataOption != null) {
             getDefaultSaveOptions().putIfAbsent(XMLResource.OPTION_EXTENDED_META_DATA, extendedMetadataOption);
         }
+        Optional<MigrationExtendedMetaData> extended = Optional.ofNullable(extendedMetadataOption)
+                .filter(MigrationExtendedMetaData.class::isInstance)
+                .map(MigrationExtendedMetaData.class::cast);
         // migrate if needed
         if (getURIConverter().exists(uri, options)) {
             // easier to just reopen the resource when we need it
             InputStreamSupplier streamSupplier = () -> getURIConverter().createInputStream(uri, options);
-            MigrationResult result = checkMigration(streamSupplier, options);
-            if (!MigrationResult.SOFT_MIGRATION.equals(result)) {
+            MigrationResultAndStatus result = checkMigration(streamSupplier, options);
+            if (!MigrationResult.SOFT_MIGRATION.equals(result.migrationResult())) {
                 // then load (or reload) the model
-                super.doLoad(inputStream, options);
+                if (!result.modelVersionStatus().isOK()) {
+                    // loading an old model version
+                    extended.ifPresent(e -> e.setIsLoadingAnOldMetamodel(true));
+                }
+                try {
+                    super.doLoad(inputStream, options);
+                } finally {
+                    extended.ifPresent(e -> e.setIsLoadingAnOldMetamodel(false));
+                }
             }
             // else, resource has already been updated
         } else {
             // probably a virtual resource, we must duplicate the stream...
             try (DuplicatingInputStream buffered = new DuplicatingInputStream(inputStream);) {
                 InputStreamSupplier streamSupplier = buffered::getNonClosingStreamCopy;
-                MigrationResult result = checkMigration(streamSupplier, options);
-                if (!MigrationResult.SOFT_MIGRATION.equals(result)) {
+                MigrationResultAndStatus result = checkMigration(streamSupplier, options);
+                if (!MigrationResult.SOFT_MIGRATION.equals(result.migrationResult())) {
                     // then load (or reload) the model
+                    if (!result.modelVersionStatus().isOK()) {
+                        // loading an old model version
+                        extended.ifPresent(e -> e.setIsLoadingAnOldMetamodel(true));
+                    }
                     try (InputStream streamForSuper = buffered.getClosingMasterStreamCopy();) {
                         super.doLoad(streamForSuper, options);
+                    } finally {
+                        extended.ifPresent(e -> e.setIsLoadingAnOldMetamodel(false));
                     }
                 }
                 // else, resource has already been updated
@@ -128,12 +147,14 @@ public class MigratingXMLResource extends XMLResourceImpl {
      * @return how the model has actually been migrated
      * @throws IOException exception accessing the resource content
      */
-    protected MigrationResult checkMigration(InputStreamSupplier streamSupplier, Map<?, ?> options) throws IOException {
+    protected MigrationResultAndStatus checkMigration(InputStreamSupplier streamSupplier, Map<?, ?> options)
+            throws IOException {
         try {
             MigrationHelper migration = MigrationHelper.getHelper(this, streamSupplier);
             if (migration.getModelVersionStatus().getSeverity() == IStatus.WARNING) {
                 return migration.tryAndMigrate(migrationPolicy, options, getDefaultSaveOptions());
             }
+            return new MigrationResultAndStatus(MigrationResult.NO_MIGRATION, migration.getModelVersionStatus());
         } catch (SAXException | ParserConfigurationException | MigrationException exception) {
             Notification notification = setLoaded(true);
             isLoading = true;
@@ -166,7 +187,6 @@ public class MigratingXMLResource extends XMLResourceImpl {
 
             throw exception;
         }
-        return MigrationResult.NO_MIGRATION;
     }
 
 }
