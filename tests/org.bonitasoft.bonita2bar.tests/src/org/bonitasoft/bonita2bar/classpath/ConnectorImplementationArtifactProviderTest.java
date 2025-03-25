@@ -78,8 +78,9 @@ class ConnectorImplementationArtifactProviderTest {
         //given
         var outputFolder = projectRoot.resolve("target");
         var mvnExecutable = MavenUtil.getMvnExecutable();
-        var classpath = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
+        // analyze first and ensure extensions are built
         var reportFile = MavenUtil.analyze(projectRoot, mvnExecutable);
+        var classpath = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
 
         var processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
@@ -111,8 +112,9 @@ class ConnectorImplementationArtifactProviderTest {
         //given
         var outputFolder = projectRoot.resolve("target");
         var mvnExecutable = MavenUtil.getMvnExecutable();
-        var classpath = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
+        // analyze first and ensure extensions are built
         var reportFile = MavenUtil.analyze(projectRoot, mvnExecutable);
+        var classpath = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
 
         var processRegistry = ProcessRegistry.of(projectRoot.resolve("app").resolve("diagrams"),
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
