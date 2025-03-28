@@ -24,6 +24,7 @@ import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 import org.bonitasoft.bonita2bar.BarArtifactProvider;
+import org.bonitasoft.bonita2bar.BarBuilder;
 import org.bonitasoft.bonita2bar.BuildBarException;
 import org.bonitasoft.bonita2bar.MavenExecutor;
 import org.bonitasoft.bonita2bar.process.pomgen.ProcessPom;
@@ -62,7 +63,8 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
             var pom = pomAccess.readPom();
             File processPomFolder = pom.getPomFile().getParentFile();
             var dependenciesFolder = new File(processPomFolder, "dependencies");
-            var profileToUse = String.format(ENV_PROFILE_FORMAT, configuration.getName());
+            String envName = configuration.getName() == null ? BarBuilder.LOCAL_ENVIRONMENT : configuration.getName();
+            var profileToUse = String.format(ENV_PROFILE_FORMAT, envName);
 
             Supplier<String> errMsg = () -> String.format("Failed to build dependencies for process %s-%s",
                     process.getName(), process.getVersion());

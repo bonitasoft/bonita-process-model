@@ -20,17 +20,46 @@ You can activate and switch the target platform in the Eclipse Preferences. Sele
 
 == Updating the target platform
 
-The Tycho build uses the `platform.target` file. However, in addition, we use a `remote_platform.target` that keeps the reference to the actual p2 update sites. In order to ensure reliability of our builds, we mirror the required content of those update sites and publish it to `https://update-site.bonitasoft.com/p2/<eclipse_version>/`.
+We use these target platform related files:
 
-During the development phase, you can update the `remote_platform.target` and the `target-platform.target` to be in sync and pointing to the actual p2 update sites. The mirror is build and published before the RC version.
+* `target-platform.tpd` file is the one you should manipulate from your IDE. +
+You may use it to define your target platform constraints and use the contextual menus:
+    ** Validate
+    ** Create Target Definition file
+    ** Set as Target Platform
+* `target-platform.target` file contains the actual resolved versions and is pointing to the actual p2 update sites. +
+You will be using it typically during development phases.
 
-When possible, do not explicitly set the plugins/features version. It eases the update process. Often eclipse update sites are already versioned (eg: __https://download.eclipse.org/releases/2022-06__, __https://download.eclipse.org/technology/swtbot/releases/4.0.0/__...).
+In the `remote_platform.tpd` file, do not explicitly set the plugins/features version unless there is a strict compatiblity requirement. It eases the update process. Often eclipse update sites are already versioned (eg: __https://download.eclipse.org/releases/2022-06__, __https://download.eclipse.org/technology/swtbot/releases/4.0.0/__...).
+
+[WARNING]
+====
+Once you have regenerated the `target-platform.target` file, you need to add this instructions block in the `BonitaArtifactsModels` location to tell Tycho how to generate feature plugins:
+
+[source, xml]
+----
+      <instructions><![CDATA[
+Bundle-Name:           ${mvnGroupId}:${mvnArtifactId}:${mvnVersion}
+version:               ${version_cleanup;${mvnVersion}}
+Bundle-SymbolicName:   ${mvnGroupId}.${mvnArtifactId}
+Bundle-Version:        ${version}
+Import-Package:        *;resolution:=optional
+Export-Package:        *;version="${version}";-noimport:=true
+DynamicImport-Package: *
+]]></instructions>
+----
+
+====
 
 == Validating the target platform
 
-You may use the `target-platform-validation-plugin` to validate the target platform:
+The .tpd editor offers validation on the contextual menu.
+
+You may use the `target-platform-validation-plugin` to validate the final target platform:
 
 [source, shell]
 ----
 ./mvnw -f releng/target-platform/pom.xml validate -Pvalidate
 ----
+
+Although this shouldn't be necessary if you validated first in the .tpd editor.
