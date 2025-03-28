@@ -77,6 +77,15 @@
           <url>https://repo1.maven.org/maven2</url>
         </repository>
       </repositories>
+      <instructions><![CDATA[
+Bundle-Name:           ${mvnGroupId}:${mvnArtifactId}:${mvnVersion}
+version:               ${version_cleanup;${mvnVersion}}
+Bundle-SymbolicName:   ${mvnGroupId}.${mvnArtifactId}
+Bundle-Version:        ${version}
+Import-Package:        *;resolution:=optional
+Export-Package:        *;version="${version}";-noimport:=true
+DynamicImport-Package: *
+]]></instructions>
     </location>
     <location includeDependencyDepth="infinite" includeDependencyScopes="compile,runtime,system" includeSource="false" missingManifest="generate" type="Maven" label="MavenJackson">
       <feature id="com.fasterxml.jackson.feature" label="Jackson Feature" provider-name="Bonitasoft S.A" version="2.18.3">
