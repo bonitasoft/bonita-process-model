@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
 
 public class BarBuilder {
 
-    private static final String LOCAL_ENVIRONMENT = "local";
+    public static final String LOCAL_ENVIRONMENT = "Local";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BarBuilder.class);
 
