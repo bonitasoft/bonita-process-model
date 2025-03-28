@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.bonitasoft.bpm.model.edit;singleton:=true
 Automatic-Module-Name: org.bonitasoft.bpm.model.edit
-Bundle-Version: 9.0.0
+Bundle-Version: 9.0.1.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.bonitasoft.bpm.model.edit.ProcessEditPlugin$Implementation
 Bundle-Vendor: %providerName
