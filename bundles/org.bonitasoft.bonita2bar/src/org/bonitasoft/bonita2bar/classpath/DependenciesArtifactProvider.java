@@ -69,7 +69,9 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
             Supplier<String> errMsg = () -> String.format("Failed to build dependencies for process %s-%s",
                     process.getName(), process.getVersion());
             mavenExecutor.execute(pom.getPomFile(), List.of("dependency:copy-dependencies"),
-                    Map.of("outputDirectory", "./" + dependenciesFolder.getName()),
+                    Map.of("outputDirectory", "./" + dependenciesFolder.getName(),
+                            "includeScope", "runtime",
+                            "includeTypes", "jar"),
                     List.of(profileToUse), errMsg);
 
             // explore all files in the dependencies folder
