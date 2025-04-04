@@ -55,7 +55,6 @@ public class DependenciesArtifactProviderTest {
     private ProcessRegistry processRegistry;
     private Configuration configuration;
     private ProcessPomGenerator pomGenerator;
-    private JarArtifactProvider jarArtifactProvider;
 
     @BeforeEach
     void before() throws Exception {
@@ -136,7 +135,7 @@ public class DependenciesArtifactProviderTest {
         assertThat(resources).allSatisfy((key, value) -> {
             assertThat(key).matches("classpath/(\\Qeclipse-collections-\\E.*)\\.jar");
             assertThat(value).isNotNull();
-            assertThat(value.length).isPositive();
+            assertThat(value).isNotEmpty();
         });
     }
 
