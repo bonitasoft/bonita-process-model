@@ -125,8 +125,19 @@ public class ProcessPomGenerator {
         });
         // remove connector dependencies from other processes
         filterUnusedConnectorDependencies(model, process);
+        // remove zip dependencies (custom extensions deployed on their own and application pages handled otherwise)
+        filterZipDependencies(model);
         pomAccess.writePom(model);
         return pomAccess;
+    }
+
+    /**
+     * Remove zip dependencies.
+     * 
+     * @param model the maven model to update
+     */
+    private void filterZipDependencies(Model model) {
+        model.getDependencies().removeIf(dep -> "zip".equalsIgnoreCase(dep.getType()));
     }
 
     /**
