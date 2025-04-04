@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2025 BonitaSoft S.A.
+ * Copyright (C) 2025 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -130,10 +130,11 @@ public class DependenciesArtifactProviderTest {
         /*
          * Zip of REST API is ignored, it must be installed independently (only jars are installed).
          * Provided-scoped jars are ignored.
+         * Jackson libs, which are transitive dependencies from the custom REST API, are ignored.
          * In the end, there should be only a few jars left...
          */
         assertThat(resources).allSatisfy((key, value) -> {
-            assertThat(key).matches("classpath/(\\Qjackson-\\E.*|\\Qeclipse-collections-\\E.*)\\.jar");
+            assertThat(key).matches("classpath/(\\Qeclipse-collections-\\E.*)\\.jar");
             assertThat(value).isNotNull();
             assertThat(value.length).isPositive();
         });
