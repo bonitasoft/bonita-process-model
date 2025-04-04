@@ -56,7 +56,10 @@ class BPMN2ArtifactProviderTest {
         bpmn2ArtifactProvider.build(businessArchiveBuilder, pool, null);
         // then
         businessArchiveBuilder.setProcessDefinition(fakeProcessDef());
-        assertThat(businessArchiveBuilder.done().getResource("resources/process.bpmn")).isNotNull().isNotEmpty();
+        byte[] bpmn = businessArchiveBuilder.done().getResource("resources/process.bpmn");
+        assertThat(bpmn).isNotNull().isNotEmpty();
+        // check the exporter version is a correct semantic one
+        assertThat(new String(bpmn)).containsPattern(" exporterVersion=\"\\d+\\.\\d+\\.\\d+(\\Q-SNAPSHOT\\E)?\"");
     }
 
     private static DesignProcessDefinitionImpl fakeProcessDef() {
