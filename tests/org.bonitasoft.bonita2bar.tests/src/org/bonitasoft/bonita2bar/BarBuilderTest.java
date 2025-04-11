@@ -32,6 +32,7 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.project.MavenProject;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.configuration.ConfigurationArchive;
+import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
@@ -51,9 +52,12 @@ class BarBuilderTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        var repoRoot = new File(URLDecoder.decode(
-                FileLocator.toFileURL(BarBuilderTest.class.getResource("/my-project")).getFile(), "UTF-8"));
-        Path appPath = repoRoot.toPath().resolve("app");
+        Path projectRoot = Files.createTempDirectory("my-project");
+        FileUtil.copyDirectory(new File(URLDecoder.decode(
+                FileLocator.toFileURL(BarBuilderTest.class.getResource("/my-project")).getFile(),
+                "UTF-8")).getAbsolutePath(), projectRoot.toFile().getAbsolutePath());
+
+        Path appPath = projectRoot.resolve("app");
         var appPomFile = appPath.resolve("pom.xml").toFile();
         // load maven project
         MavenXpp3Reader reader = new MavenXpp3Reader();
@@ -63,14 +67,17 @@ class BarBuilderTest {
             appProject.setFile(appPomFile);
         }
         var mvnExecutable = MavenUtil.getMvnExecutable();
-        var classpath = MavenUtil.buildClasspath(repoRoot.toPath(), mvnExecutable);
+        // install project's REST api extension first, before building classpath
+        MavenUtil.execute(projectRoot.resolve("pom.xml").toFile(), mvnExecutable, List.of("clean", "install"), Map.of(),
+                List.of());
+        var classpath = MavenUtil.buildClasspath(projectRoot, mvnExecutable);
 
         processRegistry = ProcessRegistry.of(appPath.resolve("diagrams"),
                 MigrationPolicy.NEVER_MIGRATE_POLICY);
         barBuilder = BarBuilderFactory
                 .create(BuildConfig.builder()
                         .connectorImplementationRegistry(ConnectorImplementationRegistry.of(List.of()))
-                        .formBuilder(id -> new byte[0]).workingDirectory(repoRoot.toPath().resolve("target"))
+                        .formBuilder(id -> new byte[0]).workingDirectory(projectRoot.resolve("target"))
                         .mavenProject(appProject)
                         .processRegistry(processRegistry)
                         .classpathResolver(ClasspathResolver.of(classpath))
