@@ -17,21 +17,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: Keeper-Security/ksm-action@v1
-        with:
-          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
-          secrets: |
-            ${{ vars.KEEPER_SONARCLOUD_RECORD_ID }}/field/password > env:SONAR_TOKEN
-
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: 17
+          cache: maven
 
-      - uses: bonitasoft/maven-settings-action@v1
+      - name: Configure Maven Settings
+        uses: bonitasoft/maven-settings-action@v1
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+
       - name: Cache local Maven repository
         uses: actions/cache@v4
         with:
@@ -42,5 +39,6 @@ jobs:
 
       - name: Build and deploy
         env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         run: ./mvnw -B -ntp deploy sonar:sonar -Pjacoco
