@@ -22,7 +22,7 @@ on:
 jobs:
   build:
     name: Release pipeline
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,6 +34,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
+
+      - name: Setup Groovy
+        # this is required for tests to compile groovy code correctly
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install groovy
           
       - uses: bonitasoft/maven-settings-action@v1
         with:

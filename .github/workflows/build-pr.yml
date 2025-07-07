@@ -10,7 +10,7 @@ on:
 jobs:
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - name: Setup Java
@@ -19,6 +19,12 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: maven
+
+      - name: Setup Groovy
+        # this is required for tests to compile groovy code correctly
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install groovy
 
       - name: Configure Maven Settings
         uses: bonitasoft/maven-settings-action@v1
