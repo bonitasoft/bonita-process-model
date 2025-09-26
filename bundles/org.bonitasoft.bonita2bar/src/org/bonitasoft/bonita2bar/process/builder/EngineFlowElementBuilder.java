@@ -108,9 +108,12 @@ import org.bonitasoft.engine.operation.OperationBuilder;
 import org.bonitasoft.engine.operation.OperatorType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EngineFlowElementBuilder extends AbstractProcessBuilder {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(EngineFlowElementBuilder.class);
     private final FlowElementBuilder builder;
     private TaskContractEngineDefinitionBuilder contractBuilder;
 
@@ -525,9 +528,15 @@ public class EngineFlowElementBuilder extends AbstractProcessBuilder {
     private void exportOutputMappingForCallActivities(final CallActivity object,
             final CallActivityBuilder activityBuilder) throws InvalidExpressionException {
         for (final OutputMapping mapping : object.getOutputMappings()) {
+            Data processTarget = mapping.getProcessTarget();
+            if (processTarget == null) {
+                LOGGER.warn("Skipping output mapping for call activity {} because target data is null",
+                        object.getName());
+                continue;
+            }
             final OperationBuilder opBuilder = new OperationBuilder();
             opBuilder.createNewInstance();
-            final Data d = EcoreUtil.copy(mapping.getProcessTarget());
+            final Data d = EcoreUtil.copy(processTarget);
             d.setName(mapping.getSubprocessSource());
             opBuilder.setRightOperand(EngineExpressionUtil.createVariableExpression(d));
             var leftOperandbuilder = new LeftOperandBuilder();
