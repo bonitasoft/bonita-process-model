@@ -15,7 +15,7 @@
       <repository location="http://download.eclipse.org/edapt/releases/15x/150"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.codehaus.groovy30.feature.feature.group" version="5.6.0.v202501010114-e2409"/>
+      <unit id="org.codehaus.groovy30.feature.feature.group" version="5.5.0.v202409302028-e2409"/>
       <!-- Workaround as https://groovy.jfrog.io/artifactory/plugins-release/e4.33 generates very long paths with the Google API, which makes the build fail -->
       <repository location="https://update-site.bonitasoft.com/p2/4.33/"/>
     </location>
