@@ -10,7 +10,9 @@ location E2024-09 "https://download.eclipse.org/releases/2024-09" {
 location "http://download.eclipse.org/edapt/releases/15x/150" {
     org.eclipse.emf.edapt.runtime.feature.feature.group
 }
-location "https://groovy.jfrog.io/artifactory/plugins-release/e4.33/" {
+// Workaround as https://groovy.jfrog.io/artifactory/plugins-release/e4.33 generates
+// very long paths with the Google API, which makes the build fail
+location "https://update-site.bonitasoft.com/p2/4.33/" {
     org.codehaus.groovy30.feature.feature.group
 }
 maven MavenDependenciesWithInfiniteDepth scope=compile,runtime,system dependencyDepth=infinite missingManifest=generate {
