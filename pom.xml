@@ -231,8 +231,12 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
           <artifactId>gitflow-maven-plugin</artifactId>
           <version>${gitflow-maven-plugin.version}</version>
           <configuration>
-            <!-- 0: increment major digit on develop, 1: increment minor digit on develop, 2: increment patch digit on develop -->
-            <versionDigitToIncrement>1</versionDigitToIncrement>
+            <gitFlowConfig>
+              <productionBranch>develop</productionBranch>
+              <developmentBranch>develop</developmentBranch>
+              <supportBranchPrefix>support/</supportBranchPrefix>
+            </gitFlowConfig>
+            <skipReleaseMergeProdBranch>true</skipReleaseMergeProdBranch>
             <commitMessagePrefix xml:space="preserve">chore(release): </commitMessagePrefix>
             <tychoBuild>true</tychoBuild>
             <tychoVersionsPluginVersion>${tycho.version}</tychoVersionsPluginVersion>

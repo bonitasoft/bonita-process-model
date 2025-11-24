@@ -1,23 +1,26 @@
 name: Release
 
+run-name: Release ${{ github.event.inputs.version || '' }}
+
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: Version to release (leave empty to use pom version)
+        description: 'Version to release (leave empty to use pom version)'
         type: string
         default: ''
-        required: false
-      nextVersion:
-        description: 'Next development version (leave empty to use default version incrementation policy)'
+      nextDevelopmentVersion:
+        description: 'Next development version (leave empty to use versionDigitToIncrement policy)'
         type: string
-        required: false
         default: ''
-      skipMergeReleaseInMaster:
-        description: 'Whether release branch merge should be skip into master (major/minor version only should be merged)'
-        type: boolean
-        required: false
-        default: false
+      versionDigitToIncrement:
+        description: 'Version digit to increment in the next development version: 0=major (X.0.0), 1=minor (X.Y.0), 2=patch (X.Y.Z)'
+        type: choice
+        default: '2'
+        options:
+          - '0'
+          - '1'
+          - '2'
 
 jobs:
   build:
@@ -27,17 +30,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: '0'
-        
+          fetch-depth: 0
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
+          distribution: temurin
           java-version: 17
-       
+          cache: maven
+
       - uses: bonitasoft/git-setup-action@v1
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
-      
-      - name: Create Release 
-        run: ./mvnw -ntp --batch-mode -Dstyle.color=always gitflow:release -DgitFlowConfig.developmentBranch=${{ github.ref_name }} -DdevelopmentVersion=${{ github.event.inputs.nextVersion }} -DreleaseVersion=${{ github.event.inputs.version }} -DskipReleaseMergeProdBranch=${{ github.event.inputs.skipMergeReleaseInMaster }} -Dverbose
+
+      - name: Create Release
+        run: >
+          ./mvnw -ntp --batch-mode gitflow:release
+          -DgitFlowConfig.developmentBranch=${{ github.ref_name }}
+          -DreleaseVersion=${{ github.event.inputs.version }}
+          -DdevelopmentVersion=${{ github.event.inputs.nextDevelopmentVersion }}
+          -DversionDigitToIncrement=${{ github.event.inputs.versionDigitToIncrement }}

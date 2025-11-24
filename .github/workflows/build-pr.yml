@@ -6,6 +6,10 @@ on:
       - develop
       - release/*
       - support/*
+    paths-ignore:
+      - '**/README.md'
+      - '.github/**'
+      - '!.github/workflows/build-pr.yml'
 
 jobs:
 
@@ -13,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -24,14 +29,6 @@ jobs:
         uses: bonitasoft/maven-settings-action@v1
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
-
-      - name: Cache local Maven repository
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml, **/target-platform.target') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
 
       - name: Build
         env:
