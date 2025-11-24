@@ -1,11 +1,17 @@
 name: Build
 
+run-name: Build ${{ github.ref_name }}
+
 on:
   push:
     branches:
       - develop
       - release/*
       - support/*
+    paths-ignore:
+      - '**/README.md'
+      - '.github/**'
+      - '!.github/workflows/build.yml'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -34,14 +40,6 @@ jobs:
         uses: bonitasoft/maven-settings-action@v1
         with:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
-
-      - name: Cache local Maven repository
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml, **/target-platform.target') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
 
       - name: Build and deploy
         env:

@@ -17,8 +17,6 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ "develop" ]
-  schedule:
-    - cron: '33 20 * * 5'
 
 jobs:
   analyze:
@@ -65,6 +63,7 @@ jobs:
       with:
         distribution: 'temurin'
         java-version: 17
+        cache: 'maven'
 
     # Autobuild attempts to build any compiled languages (C/C++, C#, Go, Java, or Swift).
     # If this step fails, then you should remove it and run the build manually (see below)
