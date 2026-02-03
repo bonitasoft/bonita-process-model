@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.apache.maven.model.Build;
 import org.apache.maven.model.Model;
@@ -29,6 +31,8 @@ import org.apache.maven.project.MavenProject;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
+import org.bonitasoft.bpm.model.configuration.Configuration;
+import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.process.Connector;
 import org.bonitasoft.bpm.model.process.Pool;
 
@@ -76,7 +80,7 @@ public class ProcessPomGenerator {
     /**
      * Generates the temporary pom.xml dedicated to a specific {@link Pool} process.
      * Then executes the consumer with the generated pom.xml file.
-     * 
+     *
      * @param process the process to generate the pom for
      * @param consumer the consumer to execute with access to the generated pom.xml file
      * @return the result of the consumer
@@ -84,7 +88,23 @@ public class ProcessPomGenerator {
      */
     public <R, E extends Exception> R withGeneratedPom(Pool process, ProcessPomConsumer<R, E> consumer)
             throws IOException, E {
-        try (var pomAccess = generatePom(process)) {
+        return withGeneratedPom(process, null, consumer);
+    }
+
+    /**
+     * Generates the temporary pom.xml dedicated to a specific {@link Pool} process.
+     * Then executes the consumer with the generated pom.xml file.
+     *
+     * @param process the process to generate the pom for
+     * @param configuration the configuration to use for filtering dependencies (can be null)
+     * @param consumer the consumer to execute with access to the generated pom.xml file
+     * @return the result of the consumer
+     * @throws IOException if an error occurs while generating
+     */
+    public <R, E extends Exception> R withGeneratedPom(Pool process, Configuration configuration,
+            ProcessPomConsumer<R, E> consumer)
+            throws IOException, E {
+        try (var pomAccess = generatePom(process, configuration)) {
             return consumer.consume(pomAccess);
         }
     }
@@ -94,13 +114,14 @@ public class ProcessPomGenerator {
      * <b>Always invoke this method in a try-with-resources block</b> to ensure the generated pom.xml file is closed properly.
      * <br/>
      * This method is private to ensure the correct usage and ignore java:S2095 warning.
-     * 
+     *
      * @param process the process to generate the pom for
+     * @param configuration the configuration to use for filtering dependencies (can be null)
      * @return access to the generated pom.xml file (to be closed after use)
      * @throws IOException if an error occurs while generating
      */
     @SuppressWarnings("java:S2095")
-    private ProcessPom generatePom(Pool process) throws IOException {
+    private ProcessPom generatePom(Pool process, Configuration configuration) throws IOException {
         // get target dir
         var target = Optional.ofNullable(applicationProject.getBuild()).map(Build::getDirectory)
                 .filter(Objects::nonNull)
@@ -127,6 +148,10 @@ public class ProcessPomGenerator {
         filterUnusedConnectorDependencies(model, process);
         // remove zip dependencies (custom extensions deployed on their own and application pages handled otherwise)
         filterZipDependencies(model);
+        // filter dependencies based on configuration.processDependencies
+        if (configuration != null) {
+            filterDependenciesFromConfiguration(model, configuration);
+        }
         pomAccess.writePom(model);
         return pomAccess;
     }
@@ -142,7 +167,7 @@ public class ProcessPomGenerator {
 
     /**
      * Remove connector dependencies from other processes, with help of the dependency report.
-     * 
+     *
      * @param model the maven model to update
      * @param process the process to keep the dependencies for
      */
@@ -166,6 +191,49 @@ public class ProcessPomGenerator {
                         && connDef.getDefinitionVersion().equals(connImpl.getDefinitionVersion());
                 return processUsedConnectors.stream().noneMatch(matchesImpl);
             });
+        });
+    }
+
+    /**
+     * Filter dependencies based on configuration.processDependencies.
+     * Only keep dependencies that are marked as exported=true in the configuration.
+     *
+     * @param model the maven model to update
+     * @param configuration the configuration containing processDependencies fragments
+     */
+    private void filterDependenciesFromConfiguration(Model model, Configuration configuration) {
+        var processDepsContainers = configuration.getProcessDependencies();
+        if (processDepsContainers.isEmpty()) {
+            return; // No filter, keep all dependencies
+        }
+
+        // Count total fragments (checked or not) to detect old .conf files
+        long totalFragments = processDepsContainers.stream()
+                .flatMap(container -> container.getFragments().stream())
+                .count();
+
+        // Build set of selected JARs (exported=true) from ALL containers
+        Set<String> selectedJars = processDepsContainers.stream()
+                .flatMap(container -> container.getFragments().stream())
+                .filter(Fragment::isExported)
+                .map(Fragment::getValue)
+                .collect(Collectors.toSet());
+
+        // If no fragments at all (old .conf before our changes), keep all dependencies (backward compatibility)
+        if (totalFragments == 0) {
+            return;
+        }
+
+        // If fragments exist but none selected (user unchecked all), remove all JAR dependencies
+        if (selectedJars.isEmpty()) {
+            model.getDependencies().clear();
+            return;
+        }
+
+        // Remove dependencies not in the selected set
+        model.getDependencies().removeIf(dep -> {
+            String jarName = dep.getArtifactId() + "-" + dep.getVersion() + ".jar";
+            return !selectedJars.contains(jarName);
         });
     }
 
