@@ -56,6 +56,7 @@ jobs:
       - name: Create Release
         run: >
           ./mvnw -ntp --batch-mode gitflow:release
+          -DgitFlowConfig.productionBranch=${{ github.ref_name }}
           -DgitFlowConfig.developmentBranch=${{ github.ref_name }}
           -DreleaseVersion=${{ github.event.inputs.version }}
           -DdevelopmentVersion=${{ github.event.inputs.nextDevelopmentVersion }}

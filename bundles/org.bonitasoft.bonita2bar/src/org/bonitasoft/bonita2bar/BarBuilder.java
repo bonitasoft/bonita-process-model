@@ -178,7 +178,7 @@ public class BarBuilder {
     private BuildResult buildBar(Pool process, Configuration configuration) throws BuildBarException {
         // Generate the process' specific pom.xml file in the app target folder
         try {
-            return processPomGenerator.withGeneratedPom(process, pomAccess -> {
+            return processPomGenerator.withGeneratedPom(process, configuration, pomAccess -> {
                 try {
                     if (process.eResource() != null && process.eResource().getURI() != null) {
                         var resourceName = URI.decode(process.eResource().getURI().lastSegment());
