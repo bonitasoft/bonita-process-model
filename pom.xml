@@ -251,11 +251,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
           <artifactId>gitflow-maven-plugin</artifactId>
           <version>${gitflow-maven-plugin.version}</version>
           <configuration>
-            <gitFlowConfig>
-              <productionBranch>develop</productionBranch>
-              <developmentBranch>develop</developmentBranch>
-              <supportBranchPrefix>support/</supportBranchPrefix>
-            </gitFlowConfig>
             <skipReleaseMergeProdBranch>true</skipReleaseMergeProdBranch>
             <commitMessagePrefix xml:space="preserve">chore(release): </commitMessagePrefix>
             <tychoBuild>true</tychoBuild>
