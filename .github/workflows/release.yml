@@ -1,14 +1,17 @@
 name: Release
 
-run-name: Release ${{ github.event.inputs.version || '' }}
+run-name: Release ${{ github.event.inputs.version }}
 
 on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to release (leave empty to use pom version)'
+        # Required because tychoBuild=true in gitflow-maven-plugin causes the plugin
+        # to skip POM version updates when releaseVersion is blank (it sets the default
+        # version to the current version including -SNAPSHOT, so no change is detected).
+        description: 'Version to release (e.g. 8.0.3). Required for Tycho builds.'
         type: string
-        default: ''
+        required: true
       nextDevelopmentVersion:
         description: 'Next development version (leave empty to use versionDigitToIncrement policy)'
         type: string
