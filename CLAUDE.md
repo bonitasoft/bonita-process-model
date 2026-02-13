@@ -1,13 +1,14 @@
-# Bonita Process Model - Architecture Guide for Claude
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Project Overview
 
-This repository contains the **Bonita Process Domain Logic** used by Bonita Studio and related tools. It provides EMF-based models for defining business processes compatible with BPMN 2.0, along with transformation and export capabilities.
+Bonita Process Model — EMF-based domain models for defining BPMN 2.0 business processes, used by Bonita Studio. Includes process model definitions, BAR/BPMN export transformations, and model migration support.
 
-**License:** GNU General Public License v2.0 or later
-**Current Version:** 9.0.4-SNAPSHOT
-**Java Version:** 17+
-**Primary Technologies:** Eclipse Modeling Framework (EMF), Eclipse Tycho, Maven
+**Modules:** `bundles/` (OSGi plugins), `features/` (Eclipse features), `tests/` (test fragments), `sites/` (P2 update site), `releng/` (target platform, coverage).
+
+**Tech Stack:** Java 17, Eclipse Modeling Framework (EMF), Eclipse Tycho, Maven
 
 ---
 
@@ -122,37 +123,37 @@ The project follows a modular, plugin-based architecture using Eclipse Tycho for
                             │
 ┌─────────────────────────────────────────────────────────────┐
 │                   Transformation Layer                      │
-│  ┌──────────────────┐  ┌──────────────────┐                │
-│  │  bonita2bar      │  │  bonita2bpmn     │                │
-│  │  (BAR Export)    │  │  (BPMN Export)   │                │
-│  └──────────────────┘  └──────────────────┘                │
+│  ┌──────────────────┐  ┌──────────────────┐                 │
+│  │  bonita2bar      │  │  bonita2bpmn     │                 │
+│  │  (BAR Export)    │  │  (BPMN Export)   │                 │
+│  └──────────────────┘  └──────────────────┘                 │
 └─────────────────────────────────────────────────────────────┘
                             ▲
                             │
 ┌─────────────────────────────────────────────────────────────┐
 │                   Business Logic Layer                      │
-│  ┌──────────────────┐  ┌──────────────────┐                │
-│  │  bpm.migration   │  │  bpm.model.edit  │                │
-│  │  (Migrations)    │  │  (Edit Support)  │                │
-│  └──────────────────┘  └──────────────────┘                │
+│  ┌──────────────────┐  ┌──────────────────┐                 │
+│  │  bpm.migration   │  │  bpm.model.edit  │                 │
+│  │  (Migrations)    │  │  (Edit Support)  │                 │
+│  └──────────────────┘  └──────────────────┘                 │
 └─────────────────────────────────────────────────────────────┘
                             ▲
                             │
 ┌─────────────────────────────────────────────────────────────┐
 │                   Domain Model Layer (EMF)                  │
-│  ┌──────────────────┐  ┌──────────────────┐                │
-│  │  bpm.model       │  │ connector.model  │                │
-│  │  (Process Model) │  │ (Connectors)     │                │
-│  └──────────────────┘  └──────────────────┘                │
+│  ┌──────────────────┐  ┌──────────────────┐                 │
+│  │  bpm.model       │  │ connector.model  │                 │
+│  │  (Process Model) │  │ (Connectors)     │                 │
+│  └──────────────────┘  └──────────────────┘                 │
 └─────────────────────────────────────────────────────────────┘
                             ▲
                             │
 ┌─────────────────────────────────────────────────────────────┐
 │              Foundation Layer (Dependencies)                │
-│  ┌──────────────────┐  ┌──────────────────┐                │
-│  │ plugin-deps      │  │ gmf-plugin-deps  │                │
-│  │ (EMF, Maven)     │  │ (GMF Notation)   │                │
-│  └──────────────────┘  └──────────────────┘                │
+│  ┌──────────────────┐  ┌──────────────────┐                 │
+│  │ plugin-deps      │  │ gmf-plugin-deps  │                 │
+│  │ (EMF, Maven)     │  │ (GMF Notation)   │                 │
+│  └──────────────────┘  └──────────────────┘                 │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -402,47 +403,10 @@ Pool process = (Pool) resource.getContents().get(0);
 
 ## Code Style & Formatting
 
-### Spotless Configuration
-- **Formatter:** `formatter.xml` (Eclipse Java formatter - 291 lines)
+- **Formatter:** `formatter.xml` (Eclipse Java formatter)
 - **Import Order:** `eclipse.importorder` (java, javax, org, com)
 - **License Header:** `header.txt` (GPL v2.0)
-- **Enforcement:** Runs on `mvn validate` phase
-
-### Import Order
-1. java.*
-2. javax.*
-3. org.*
-4. com.*
-
-### License Header Template
-```java
-/**
- * Copyright (C) $YEAR Bonitasoft S.A.
- * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 2.0 of the License, or
- * (at your option) any later version.
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
-```
-
-### Code Formatting Commands
-```bash
-# Check formatting
-./mvnw spotless:check
-
-# Apply formatting
-./mvnw spotless:apply
-
-# Format specific files
-./mvnw spotless:apply -Dspotless.apply.skip=false
-```
+- **Enforcement:** Runs on `mvn validate` phase via Spotless
 
 ---
 
@@ -500,18 +464,6 @@ tests/
 - **OSGi Tests:** Run with `tycho-surefire-plugin` in Eclipse runtime
 - **Standalone Tests:** Pure Maven tests without Eclipse runtime
 - **Test Resources:** `.proc` files and sample projects in `resources/` or `src/test/resources/`
-
-### Test Execution
-```bash
-# All tests
-./mvnw test
-
-# With coverage
-./mvnw test -Pjacoco
-
-# Specific test module
-./mvnw test -pl tests/org.bonitasoft.bonita2bar.tests
-```
 
 ---
 
@@ -591,52 +543,32 @@ Defined in `sites/org.bonitasoft.bpm/category.xml`:
 
 ---
 
-## Dependencies & Technology Stack
+## Key Dependencies
 
-### Core Technologies
-- **EMF (Eclipse Modeling Framework):** 2.37.0
-- **Tycho (Maven/OSGi build):** 4.0.12
-- **Java:** 17
-- **Maven:** 3.9.3
-
-### Key Dependencies
-- `org.eclipse.emf.ecore` - EMF core
-- `org.eclipse.emf.edapt` - Model migration
-- `org.eclipse.gmf.runtime.notation` - Diagram notation
-- `bonita-artifacts-model` - Bonita engine models (1.2.0)
-- `jackson` - JSON/YAML processing (2.15.2)
-- `groovy` - Scripting support (3.0.19)
-- `maven-artifact` - Maven POM manipulation (3.9.3)
-
-### Development Dependencies
-- `jacoco-maven-plugin` - Code coverage
-- `spotless-maven-plugin` - Code formatting
-- `cyclonedx-maven-plugin` - SBOM generation
-- `gitflow-maven-plugin` - Release management
+Versions are managed in `pom.xml` properties.
+Key libraries: EMF (ecore, edapt), GMF Notation, Jackson, Groovy, Maven Artifact, bonita-artifacts-model.
 
 ---
 
 ## Important Files & Locations
 
 ### Configuration
-- `pom.xml` - Root Maven configuration
-- `formatter.xml` - Eclipse Java code formatter
-- `eclipse.importorder` - Import organization rules
-- `header.txt` - License header template
+- `pom.xml` - Root Maven configuration (all version properties defined here)
+- `formatter.xml`, `eclipse.importorder`, `header.txt` - Spotless code style config
+
 
 ### Model Definitions
-- `bundles/org.bonitasoft.bpm.model/model/*.ecore` - Domain models
+- `bundles/org.bonitasoft.bpm.model/model/*.ecore` - EMF domain models
 - `bundles/org.bonitasoft.bpm.model/model/process.genmodel` - Generation config
-- `bundles/org.bonitasoft.bpm.model/model/process.history` - Migration history (1MB)
+- `bundles/org.bonitasoft.bpm.model/model/process.history` - Migration history (Edapt)
 
 ### Build & CI
-- `.github/workflows/` - GitHub Actions pipelines
-- `releng/target-platform/` - Eclipse target platform
+- `releng/target-platform/` - Eclipse target platform definition
 - `releng/coverage-report/` - Jacoco aggregation
 
 ### Distribution
-- `sites/org.bonitasoft.bpm/` - P2 update site
-- `bundles/process-reader-archetype/` - Maven archetype
+- `sites/org.bonitasoft.bpm/` - P2 update site (Eclipse repository)
+- `bundles/process-reader-archetype/` - Maven archetype for process reader projects
 
 ---
 
@@ -665,47 +597,8 @@ Defined in `sites/org.bonitasoft.bpm/category.xml`:
 
 ---
 
-## External Resources
+## References
 
-### Documentation
 - **EMF Official Docs:** https://eclipse.dev/emf/docs.html
-- **Vogella EMF Tutorial:** https://www.vogella.com/tutorials/EclipseEMF/article.html
-- **Eclipse RCP Guide:** https://www.vogella.com/tutorials/EclipseRCP/article.html
-- **Target Platform Guide:** https://www.vogella.com/tutorials/EclipseTargetPlatform/article.html
-
-### Project Links
-- **GitHub:** https://github.com/bonitasoft/bonita-process-model
 - **SonarCloud:** https://sonarcloud.io/project/overview?id=bonitasoft_bonita-process-model
-- **Organization:** https://www.bonitasoft.com/
 
-### Maven Central
-- **Group ID:** org.bonitasoft.bpm
-- **Artifacts:** org.bonitasoft.bpm.model, org.bonitasoft.bonita2bar, etc.
-
----
-
-## Quick Reference Commands
-
-```bash
-# Most common development commands
-./mvnw clean install                    # Full build
-./mvnw spotless:apply                   # Format code
-./mvnw test                             # Run tests
-./mvnw -B -ntp deploy -Pjacoco         # CI build with coverage
-
-# Code quality
-./mvnw spotless:check                   # Check formatting
-./mvnw sonar:sonar -Pjacoco            # SonarQube analysis
-
-# Archetype usage
-mvn archetype:generate \
-    -DarchetypeGroupId=org.bonitasoft.archetypes \
-    -DarchetypeArtifactId=process-reader-archetype
-
-# Release (via GitHub Actions)
-# Trigger "Release" workflow with version parameters
-```
-
----
-
-*This document was generated to help Claude understand the Bonita Process Model codebase architecture and development practices.*
