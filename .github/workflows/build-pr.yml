@@ -7,9 +7,9 @@ on:
       - release/*
       - support/*
     paths-ignore:
-      - '**/README.md'
       - '.github/**'
       - '!.github/workflows/build-pr.yml'
+      - '**/*.md'
 
 jobs:
 
