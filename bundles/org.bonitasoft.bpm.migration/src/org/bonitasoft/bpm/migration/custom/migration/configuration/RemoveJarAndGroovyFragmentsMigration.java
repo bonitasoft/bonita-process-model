@@ -40,13 +40,13 @@ public class RemoveJarAndGroovyFragmentsMigration extends CustomMigration {
         for (final Instance fragment : model.getAllInstances(
                 ConfigurationPackage.eNS_PREFIX + "." + ConfigurationPackage.Literals.FRAGMENT.getName())) {
             String fragmentType = fragment.get(ConfigurationPackage.Literals.FRAGMENT__TYPE.getName());
-            if ("GROOVY_SCRIPT".equals(fragmentType)) {
+            if (FragmentTypes.GROOVY_SCRIPT.equals(fragmentType)) {
                 model.delete(fragment);
-            } else if ("JAR".equals(fragmentType)) {
+            } else if (FragmentTypes.JAR.equals(fragmentType)) {
                 // Preserve JAR fragments in the OTHER container: they are used for dependency filtering
                 Instance container = fragment.getContainer();
-                String containerId = container.get(ConfigurationPackage.Literals.FRAGMENT_CONTAINER__ID.getName());
-                if (!FragmentTypes.OTHER.equals(containerId)) {
+                if (container == null || !FragmentTypes.OTHER.equals(
+                        container.get(ConfigurationPackage.Literals.FRAGMENT_CONTAINER__ID.getName()))) {
                     model.delete(fragment);
                 }
             }

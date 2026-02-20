@@ -279,16 +279,11 @@ class ProcessPomGeneratorTest {
     }
 
     private Dependency createDependency(String groupId, String artifactId, String version) {
-        return new Dependency() {
-
-            private static final long serialVersionUID = 1L;
-
-            {
-                setGroupId(groupId);
-                setArtifactId(artifactId);
-                setVersion(version);
-            }
-        };
+        var dep = new Dependency();
+        dep.setGroupId(groupId);
+        dep.setArtifactId(artifactId);
+        dep.setVersion(version);
+        return dep;
     }
 
 }
