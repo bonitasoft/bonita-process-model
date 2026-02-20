@@ -9,9 +9,9 @@ on:
       - release/*
       - support/*
     paths-ignore:
-      - '**/README.md'
       - '.github/**'
       - '!.github/workflows/build.yml'
+      - '**/*.md'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
