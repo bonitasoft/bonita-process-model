@@ -2,7 +2,7 @@
 <feature
       id="org.bonitasoft.bpm.tests.feature"
       label="Test libraries for developers"
-      version="9.0.6"
+      version="9.0.7.qualifier"
       provider-name="BonitaSoft S.A.">
 
    <description url="https://github.com/bonitasoft/bonita-process-model">
