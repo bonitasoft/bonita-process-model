@@ -219,7 +219,7 @@ public class ProcessPomGenerator {
                 .map(Fragment::getValue)
                 .collect(Collectors.toSet());
 
-        // If no fragments at all (.conf is likely coming form a project made with the changes introduced in version 10.3.0), keep all dependencies (backward compatibility)
+        // No fragments found: old .conf file predating the dependency-selection feature (introduced in 10.3.0), keep all dependencies for backward compatibility
         if (totalFragments == 0) {
             return;
         }
