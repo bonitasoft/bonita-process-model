@@ -15,6 +15,7 @@
 package org.bonitasoft.bpm.migration.custom.migration.configuration;
 
 import org.bonitasoft.bpm.model.configuration.ConfigurationPackage;
+import org.bonitasoft.bpm.model.util.FragmentTypes;
 import org.eclipse.emf.edapt.migration.CustomMigration;
 import org.eclipse.emf.edapt.migration.MigrationException;
 import org.eclipse.emf.edapt.spi.migration.Instance;
@@ -23,7 +24,8 @@ import org.eclipse.emf.edapt.spi.migration.Model;
 
 /**
  * Removes the Jar and Groovy configuration fragments as they are no longer used for environment configuration.
- * 
+ * JAR fragments in the OTHER container are preserved as they are used for dependency filtering.
+ *
  * @author Vincent Hemery
  */
 public class RemoveJarAndGroovyFragmentsMigration extends CustomMigration {
@@ -38,9 +40,15 @@ public class RemoveJarAndGroovyFragmentsMigration extends CustomMigration {
         for (final Instance fragment : model.getAllInstances(
                 ConfigurationPackage.eNS_PREFIX + "." + ConfigurationPackage.Literals.FRAGMENT.getName())) {
             String fragmentType = fragment.get(ConfigurationPackage.Literals.FRAGMENT__TYPE.getName());
-            if ("JAR".equals(fragmentType) || "GROOVY_SCRIPT".equals(fragmentType)) {
-                // this fragment is no longer used in environment configuration
+            if (FragmentTypes.GROOVY_SCRIPT.equals(fragmentType)) {
                 model.delete(fragment);
+            } else if (FragmentTypes.JAR.equals(fragmentType)) {
+                // Preserve JAR fragments in the OTHER container: they are used for dependency filtering
+                Instance container = fragment.getContainer();
+                if (container == null || !FragmentTypes.OTHER.equals(
+                        container.get(ConfigurationPackage.Literals.FRAGMENT_CONTAINER__ID.getName()))) {
+                    model.delete(fragment);
+                }
             }
         }
         for (final Instance fragmentContainer : model.getAllInstances(

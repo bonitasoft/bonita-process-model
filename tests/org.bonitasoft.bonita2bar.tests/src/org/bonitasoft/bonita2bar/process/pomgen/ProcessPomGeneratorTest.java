@@ -39,6 +39,10 @@ import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplem
 import org.bonitasoft.bonita2bar.ProcessRegistry;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
+import org.bonitasoft.bpm.model.configuration.Configuration;
+import org.bonitasoft.bpm.model.configuration.builders.ConfigurationBuilder;
+import org.bonitasoft.bpm.model.configuration.builders.FragmentBuilder;
+import org.bonitasoft.bpm.model.configuration.builders.FragmentContainerBuilder;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.eclipse.core.runtime.FileLocator;
@@ -155,6 +159,131 @@ class ProcessPomGeneratorTest {
                             && "2.25.0".equals(dep.getVersion()));
             return null;
         });
+    }
+
+    @Test
+    void should_filter_dependencies_based_on_configuration_exported_flags() throws Exception {
+        // Add test dependencies
+        appProject.getDependencies().add(createDependency("org.example", "lib1", "1.0.0"));
+        appProject.getDependencies().add(createDependency("org.example", "lib2", "2.0.0"));
+        appProject.getDependencies().add(createDependency("org.example", "lib3", "3.0.0"));
+
+        // Create configuration with only lib1 and lib3 exported
+        Configuration configuration = ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("dependencies")
+                                .havingFragments(
+                                        FragmentBuilder.aFragment()
+                                                .withValue("lib1-1.0.0.jar")
+                                                .exported(),
+                                        FragmentBuilder.aFragment()
+                                                .withValue("lib2-2.0.0.jar")
+                                                .notExported(),
+                                        FragmentBuilder.aFragment()
+                                                .withValue("lib3-3.0.0.jar")
+                                                .exported()))
+                .build();
+
+        Optional<Pool> process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0");
+        var gen = ProcessPomGenerator.create(appProject, connectorImplementationRegistry);
+
+        gen.withGeneratedPom(process.get(), configuration, pomAccess -> {
+            Model processPom = pomAccess.readPom();
+            // Should contain lib1 and lib3 (exported=true)
+            assertThat(processPom.getDependencies())
+                    .anyMatch(dep -> "org.example:lib1:jar".equals(dep.getManagementKey()));
+            assertThat(processPom.getDependencies())
+                    .anyMatch(dep -> "org.example:lib3:jar".equals(dep.getManagementKey()));
+            // Should NOT contain lib2 (exported=false)
+            assertThat(processPom.getDependencies())
+                    .noneMatch(dep -> "org.example:lib2:jar".equals(dep.getManagementKey()));
+            return null;
+        });
+    }
+
+    @Test
+    void should_keep_all_dependencies_when_configuration_has_no_fragments() throws Exception {
+        // Add test dependencies
+        appProject.getDependencies().add(createDependency("org.example", "lib1", "1.0.0"));
+        appProject.getDependencies().add(createDependency("org.example", "lib2", "2.0.0"));
+
+        // Configuration with no fragments (backward compatibility)
+        Configuration configuration = ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("dependencies"))
+                .build();
+
+        Optional<Pool> process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0");
+        var gen = ProcessPomGenerator.create(appProject, connectorImplementationRegistry);
+
+        gen.withGeneratedPom(process.get(), configuration, pomAccess -> {
+            Model processPom = pomAccess.readPom();
+            // Should keep all dependencies
+            assertThat(processPom.getDependencies())
+                    .anyMatch(dep -> "org.example:lib1:jar".equals(dep.getManagementKey()));
+            assertThat(processPom.getDependencies())
+                    .anyMatch(dep -> "org.example:lib2:jar".equals(dep.getManagementKey()));
+            return null;
+        });
+    }
+
+    @Test
+    void should_remove_all_dependencies_when_all_fragments_are_not_exported() throws Exception {
+        // Add test dependencies
+        appProject.getDependencies().add(createDependency("org.example", "lib1", "1.0.0"));
+        appProject.getDependencies().add(createDependency("org.example", "lib2", "2.0.0"));
+
+        // Configuration with all fragments not exported
+        Configuration configuration = ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("dependencies")
+                                .havingFragments(
+                                        FragmentBuilder.aFragment()
+                                                .withValue("lib1-1.0.0.jar")
+                                                .notExported(),
+                                        FragmentBuilder.aFragment()
+                                                .withValue("lib2-2.0.0.jar")
+                                                .notExported()))
+                .build();
+
+        Optional<Pool> process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0");
+        var gen = ProcessPomGenerator.create(appProject, connectorImplementationRegistry);
+
+        gen.withGeneratedPom(process.get(), configuration, pomAccess -> {
+            Model processPom = pomAccess.readPom();
+            // Should have no dependencies
+            assertThat(processPom.getDependencies()).isEmpty();
+            return null;
+        });
+    }
+
+    @Test
+    void should_keep_all_dependencies_when_configuration_is_null() throws Exception {
+        // Add test dependencies
+        appProject.getDependencies().add(createDependency("org.example", "lib1", "1.0.0"));
+        appProject.getDependencies().add(createDependency("org.example", "lib2", "2.0.0"));
+
+        Optional<Pool> process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0");
+        var gen = ProcessPomGenerator.create(appProject, connectorImplementationRegistry);
+
+        // Call with null configuration
+        gen.withGeneratedPom(process.get(), null, pomAccess -> {
+            Model processPom = pomAccess.readPom();
+            // Should keep all dependencies
+            assertThat(processPom.getDependencies())
+                    .anyMatch(dep -> "org.example:lib1:jar".equals(dep.getManagementKey()));
+            assertThat(processPom.getDependencies())
+                    .anyMatch(dep -> "org.example:lib2:jar".equals(dep.getManagementKey()));
+            return null;
+        });
+    }
+
+    private Dependency createDependency(String groupId, String artifactId, String version) {
+        var dep = new Dependency();
+        dep.setGroupId(groupId);
+        dep.setArtifactId(artifactId);
+        dep.setVersion(version);
+        return dep;
     }
 
 }
