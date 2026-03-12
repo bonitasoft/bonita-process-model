@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import org.apache.maven.model.Build;
 import org.apache.maven.model.Model;
@@ -32,7 +30,6 @@ import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
 import org.bonitasoft.bpm.model.configuration.Configuration;
-import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.process.Connector;
 import org.bonitasoft.bpm.model.process.Pool;
 
@@ -148,10 +145,10 @@ public class ProcessPomGenerator {
         filterUnusedConnectorDependencies(model, process);
         // remove zip dependencies (custom extensions deployed on their own and application pages handled otherwise)
         filterZipDependencies(model);
-        // filter dependencies based on configuration.processDependencies
-        if (configuration != null) {
-            filterDependenciesFromConfiguration(model, configuration);
-        }
+        // Note: dependency filtering based on configuration.processDependencies exported flags
+        // is now handled by DependenciesArtifactProvider after dependency:copy-dependencies.
+        // This ensures transitive dependencies are correctly filtered individually,
+        // rather than being implicitly included/excluded via Maven resolution.
         pomAccess.writePom(model);
         return pomAccess;
     }
@@ -191,49 +188,6 @@ public class ProcessPomGenerator {
                         && connDef.getDefinitionVersion().equals(connImpl.getDefinitionVersion());
                 return processUsedConnectors.stream().noneMatch(matchesImpl);
             });
-        });
-    }
-
-    /**
-     * Filter dependencies based on configuration.processDependencies.
-     * Only keep dependencies that are marked as exported=true in the configuration.
-     *
-     * @param model the maven model to update
-     * @param configuration the configuration containing processDependencies fragments
-     */
-    private void filterDependenciesFromConfiguration(Model model, Configuration configuration) {
-        var processDepsContainers = configuration.getProcessDependencies();
-        if (processDepsContainers.isEmpty()) {
-            return; // No filter, keep all dependencies
-        }
-
-        // Count total fragments (checked or not) to detect old .conf files
-        long totalFragments = processDepsContainers.stream()
-                .flatMap(container -> container.getFragments().stream())
-                .count();
-
-        // Build set of selected JARs (exported=true) from ALL containers
-        Set<String> selectedJars = processDepsContainers.stream()
-                .flatMap(container -> container.getFragments().stream())
-                .filter(Fragment::isExported)
-                .map(Fragment::getValue)
-                .collect(Collectors.toSet());
-
-        // No fragments found: old .conf file predating the dependency-selection feature (introduced in 10.3.0), keep all dependencies for backward compatibility
-        if (totalFragments == 0) {
-            return;
-        }
-
-        // If fragments exist but none selected (user unchecked all), remove all JAR dependencies
-        if (selectedJars.isEmpty()) {
-            model.getDependencies().clear();
-            return;
-        }
-
-        // Remove dependencies not in the selected set
-        model.getDependencies().removeIf(dep -> {
-            String jarName = dep.getArtifactId() + "-" + dep.getVersion() + ".jar";
-            return !selectedJars.contains(jarName);
         });
     }
 
