@@ -22,8 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Supplier;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,8 +32,8 @@ import org.bonitasoft.bonita2bar.MavenExecutor;
 import org.bonitasoft.bonita2bar.process.pomgen.ProcessPom;
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.configuration.Fragment;
-import org.bonitasoft.bpm.model.configuration.FragmentContainer;
 import org.bonitasoft.bpm.model.process.Pool;
+import org.bonitasoft.bpm.model.util.FragmentUtils;
 import org.bonitasoft.engine.bpm.bar.BarResource;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
@@ -53,14 +51,6 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
      * Format for building the profile name used for a specific environment.
      */
     private static final String ENV_PROFILE_FORMAT = "env-%s";
-
-    /**
-     * Pattern to extract the artifact base name (artifactId) from a jar filename.
-     * Matches everything before the last hyphen-digit sequence that looks like a version.
-     * Examples: {@code bcpkix-jdk18on-1.78.1.jar} → {@code bcpkix-jdk18on},
-     * {@code commons-collections4-4.4.jar} → {@code commons-collections4}
-     */
-    static final Pattern ARTIFACT_BASE_PATTERN = Pattern.compile("^(.+)-(\\d[\\d.]*)(?:-[\\w]+)?\\.jar$");
 
     /** Executes maven command */
     private MavenExecutor mavenExecutor;
@@ -130,7 +120,7 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
 
         // Collect all fragments once to avoid multiple tree traversals
         var allFragments = containers.stream()
-                .flatMap(DependenciesArtifactProvider::walkAllFragments)
+                .flatMap(FragmentUtils::walkAllFragments)
                 .toList();
 
         // No fragments = old configuration file, don't filter (backward compatibility)
@@ -148,7 +138,7 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
         Map<String, String> exportedBaseToExact = allFragments.stream()
                 .filter(Fragment::isExported)
                 .collect(Collectors.toMap(
-                        f -> extractArtifactBase(f.getValue()),
+                        f -> FragmentUtils.extractArtifactBase(f.getValue()),
                         Fragment::getValue,
                         (a, b) -> a));
 
@@ -163,7 +153,7 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
 
         Set<String> excludedBases = allFragments.stream()
                 .filter(f -> !f.isExported())
-                .map(f -> extractArtifactBase(f.getValue()))
+                .map(f -> FragmentUtils.extractArtifactBase(f.getValue()))
                 .collect(Collectors.toSet());
 
         exportedExactNames.removeAll(excludedExactNames);
@@ -174,7 +164,7 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
         if (files != null) {
             for (File file : files) {
                 String fileName = file.getName();
-                String fileBase = extractArtifactBase(fileName);
+                String fileBase = FragmentUtils.extractArtifactBase(fileName);
 
                 if (exportedExactNames.contains(fileName)) {
                     // Exact filename match with exported=true → keep
@@ -196,29 +186,6 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
                 }
             }
         }
-    }
-
-    /**
-     * Extract the artifact base name (artifactId) from a jar filename, stripping the version suffix.
-     * <p>
-     * Examples:
-     * <ul>
-     * <li>{@code bcpkix-jdk18on-1.78.1.jar} → {@code bcpkix-jdk18on}</li>
-     * <li>{@code commons-collections4-4.4.jar} → {@code commons-collections4}</li>
-     * <li>{@code FastInfoset-1.2.15.jar} → {@code FastInfoset}</li>
-     * </ul>
-     * If the filename does not match the expected pattern, it is returned as-is (without .jar extension).
-     *
-     * @param filename the jar filename
-     * @return the artifact base name
-     */
-    static String extractArtifactBase(String filename) {
-        Matcher m = ARTIFACT_BASE_PATTERN.matcher(filename);
-        if (m.matches()) {
-            return m.group(1);
-        }
-        // Fallback: strip .jar extension
-        return filename.endsWith(".jar") ? filename.substring(0, filename.length() - 4) : filename;
     }
 
     /**
@@ -259,12 +226,6 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
         } catch (IOException e) {
             throw new BuildBarException(String.format("Unable to get content of the %s ", file), e);
         }
-    }
-
-    static Stream<Fragment> walkAllFragments(FragmentContainer container) {
-        return Stream.concat(
-                container.getFragments().stream(),
-                container.getChildren().stream().flatMap(DependenciesArtifactProvider::walkAllFragments));
     }
 
 }

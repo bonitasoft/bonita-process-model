@@ -26,13 +26,11 @@ import org.bonitasoft.bpm.model.configuration.builders.ConfigurationBuilder;
 import org.bonitasoft.bpm.model.configuration.builders.FragmentBuilder;
 import org.bonitasoft.bpm.model.configuration.builders.FragmentContainerBuilder;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
- * Unit tests for {@link DependenciesArtifactProvider#filterCopiedDependencies(File, Configuration)}
- * and {@link DependenciesArtifactProvider#extractArtifactBase(String)}.
+ * Unit tests for {@link DependenciesArtifactProvider#filterCopiedDependencies(File, Configuration)}.
  */
 class DependenciesArtifactProviderFilterTest {
 
@@ -418,54 +416,6 @@ class DependenciesArtifactProviderFilterTest {
         assertThat(dependenciesFolder.listFiles())
                 .extracting(File::getName)
                 .containsExactlyInAnyOrder("asm-3.3.1.jar");
-    }
-
-    // ── extractArtifactBase tests ──────────────────────────────────────────
-
-    @Nested
-    class ExtractArtifactBaseTest {
-
-        @Test
-        void should_extract_base_from_standard_jar() {
-            assertThat(DependenciesArtifactProvider.extractArtifactBase("bcpkix-jdk18on-1.78.1.jar"))
-                    .isEqualTo("bcpkix-jdk18on");
-        }
-
-        @Test
-        void should_extract_base_when_artifactId_contains_digit() {
-            assertThat(DependenciesArtifactProvider.extractArtifactBase("commons-collections4-4.4.jar"))
-                    .isEqualTo("commons-collections4");
-        }
-
-        @Test
-        void should_extract_base_from_simple_jar() {
-            assertThat(DependenciesArtifactProvider.extractArtifactBase("FastInfoset-1.2.15.jar"))
-                    .isEqualTo("FastInfoset");
-        }
-
-        @Test
-        void should_extract_base_from_long_artifactId() {
-            assertThat(DependenciesArtifactProvider.extractArtifactBase("bonita-connector-ai-mistral-1.1.0.jar"))
-                    .isEqualTo("bonita-connector-ai-mistral");
-        }
-
-        @Test
-        void should_extract_base_with_log4j_style() {
-            assertThat(DependenciesArtifactProvider.extractArtifactBase("log4j-api-2.25.3.jar"))
-                    .isEqualTo("log4j-api");
-        }
-
-        @Test
-        void should_handle_snapshot_qualifier() {
-            assertThat(DependenciesArtifactProvider.extractArtifactBase("my-lib-1.0.0-SNAPSHOT.jar"))
-                    .isEqualTo("my-lib");
-        }
-
-        @Test
-        void should_fallback_for_non_standard_filename() {
-            assertThat(DependenciesArtifactProvider.extractArtifactBase("weirdname.jar"))
-                    .isEqualTo("weirdname");
-        }
     }
 
     private void createJarFile(String name) throws IOException {

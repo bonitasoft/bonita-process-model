@@ -39,6 +39,9 @@ import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplem
 import org.bonitasoft.bonita2bar.ProcessRegistry;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
+import org.bonitasoft.bpm.model.configuration.builders.ConfigurationBuilder;
+import org.bonitasoft.bpm.model.configuration.builders.FragmentBuilder;
+import org.bonitasoft.bpm.model.configuration.builders.FragmentContainerBuilder;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.eclipse.core.runtime.FileLocator;
@@ -158,8 +161,7 @@ class ProcessPomGeneratorTest {
     }
 
     @Test
-    void should_keep_all_dependencies_in_pom_regardless_of_configuration_exported_flags() throws Exception {
-        // Dependency filtering is now done by DependenciesArtifactProvider after dependency:copy-dependencies
+    void should_keep_all_dependencies_in_pom_when_no_configuration() throws Exception {
         appProject.getDependencies().add(createDependency("org.example", "lib1", "1.0.0"));
         appProject.getDependencies().add(createDependency("org.example", "lib2", "2.0.0"));
         appProject.getDependencies().add(createDependency("org.example", "lib3", "3.0.0"));
@@ -169,13 +171,50 @@ class ProcessPomGeneratorTest {
 
         gen.withGeneratedPom(process.get(), pomAccess -> {
             Model processPom = pomAccess.readPom();
-            // All dependencies should be kept in the pom (filtering happens later)
             assertThat(processPom.getDependencies())
                     .anyMatch(dep -> "org.example:lib1:jar".equals(dep.getManagementKey()));
             assertThat(processPom.getDependencies())
                     .anyMatch(dep -> "org.example:lib2:jar".equals(dep.getManagementKey()));
             assertThat(processPom.getDependencies())
                     .anyMatch(dep -> "org.example:lib3:jar".equals(dep.getManagementKey()));
+            return null;
+        });
+    }
+
+    @Test
+    void should_remove_excluded_dependencies_from_pom_when_configuration_provided() throws Exception {
+        appProject.getDependencies().add(createDependency("org.example", "kept-lib", "1.0.0"));
+        appProject.getDependencies().add(createDependency("org.example", "excluded-lib", "2.0.0"));
+        appProject.getDependencies().add(createDependency("org.example", "untracked-lib", "3.0.0"));
+
+        var configuration = ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("OTHER")
+                                .havingFragments(
+                                        FragmentBuilder.aFragment()
+                                                .withValue("kept-lib-1.0.0.jar")
+                                                .withType("JAR")
+                                                .exported(),
+                                        FragmentBuilder.aFragment()
+                                                .withValue("excluded-lib-2.0.0.jar")
+                                                .withType("JAR")
+                                                .notExported()))
+                .build();
+
+        Optional<Pool> process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0");
+        var gen = ProcessPomGenerator.create(appProject, connectorImplementationRegistry);
+
+        gen.withGeneratedPom(process.get(), configuration, pomAccess -> {
+            Model processPom = pomAccess.readPom();
+            // kept-lib: exported=true → kept
+            assertThat(processPom.getDependencies())
+                    .anyMatch(dep -> "org.example:kept-lib:jar".equals(dep.getManagementKey()));
+            // excluded-lib: exported=false → removed
+            assertThat(processPom.getDependencies())
+                    .noneMatch(dep -> "org.example:excluded-lib:jar".equals(dep.getManagementKey()));
+            // untracked-lib: not in any fragment → kept (don't break untracked deps)
+            assertThat(processPom.getDependencies())
+                    .anyMatch(dep -> "org.example:untracked-lib:jar".equals(dep.getManagementKey()));
             return null;
         });
     }

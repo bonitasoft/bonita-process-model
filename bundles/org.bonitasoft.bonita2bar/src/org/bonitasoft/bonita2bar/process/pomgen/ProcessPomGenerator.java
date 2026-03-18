@@ -21,7 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.apache.maven.model.Build;
 import org.apache.maven.model.Model;
@@ -32,6 +34,7 @@ import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.process.Connector;
 import org.bonitasoft.bpm.model.process.Pool;
+import org.bonitasoft.bpm.model.util.FragmentUtils;
 
 /**
  * Generates the temporary pom.xml dedicated to a specific {@link Pool} process.
@@ -145,10 +148,8 @@ public class ProcessPomGenerator {
         filterUnusedConnectorDependencies(model, process);
         // remove zip dependencies (custom extensions deployed on their own and application pages handled otherwise)
         filterZipDependencies(model);
-        // Note: dependency filtering based on configuration.processDependencies exported flags
-        // is now handled by DependenciesArtifactProvider after dependency:copy-dependencies.
-        // This ensures transitive dependencies are correctly filtered individually,
-        // rather than being implicitly included/excluded via Maven resolution.
+        // remove dependencies excluded by the process configuration (exported=false)
+        filterExcludedDependencies(model, configuration);
         pomAccess.writePom(model);
         return pomAccess;
     }
@@ -160,6 +161,48 @@ public class ProcessPomGenerator {
      */
     private void filterZipDependencies(Model model) {
         model.getDependencies().removeIf(dep -> "zip".equalsIgnoreCase(dep.getType()));
+    }
+
+    /**
+     * Remove dependencies that are explicitly excluded (exported=false) in the process configuration.
+     * <p>
+     * Matches Maven dependencies to configuration fragments by comparing the dependency's
+     * artifactId with the base name extracted from the fragment's JAR filename.
+     * Exclusion (exported=false) takes priority over inclusion (exported=true) when the
+     * same base name appears in multiple fragments.
+     * </p>
+     *
+     * @param model the maven model to update
+     * @param configuration the configuration containing exported fragment information (can be null)
+     */
+    private void filterExcludedDependencies(Model model, Configuration configuration) {
+        if (configuration == null) {
+            return;
+        }
+        var containers = configuration.getProcessDependencies();
+        if (containers.isEmpty()) {
+            return;
+        }
+
+        var allFragments = containers.stream()
+                .flatMap(FragmentUtils::walkAllFragments)
+                .toList();
+
+        if (allFragments.isEmpty()) {
+            return;
+        }
+
+        // Collect base names of explicitly non-exported fragments
+        Set<String> excludedBases = allFragments.stream()
+                .filter(f -> !f.isExported())
+                .map(f -> FragmentUtils.extractArtifactBase(f.getValue()))
+                .collect(Collectors.toSet());
+
+        model.getDependencies().removeIf(dep -> {
+            String artifactId = dep.getArtifactId();
+            // If this dependency's artifactId matches an excluded base name, remove it
+            return excludedBases.contains(artifactId);
+        });
     }
 
     /**
