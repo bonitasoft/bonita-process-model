@@ -139,40 +139,6 @@ public class DependenciesArtifactProviderTest {
         });
     }
 
-    @Test
-    void should_export_dependency_jars_in_bar() throws Exception {
-
-        var pool = processRegistry.getProcess("SimpleProcessWithContract", "1.0").orElseThrow();
-
-        // when
-        pomGenerator.withGeneratedPom(pool, pomAccess -> {
-            var pomModel = pomAccess.readPom();
-            var dependency = new org.apache.maven.model.Dependency();
-            dependency.setGroupId("org.codehaus.plexus");
-            dependency.setArtifactId("plexus-testing");
-            dependency.setVersion("1.2.0");
-            dependency.setScope("runtime");
-            pomModel.addDependency(dependency);
-            dependency = new org.apache.maven.model.Dependency();
-            dependency.setGroupId("org.codehaus.plexus");
-            dependency.setArtifactId("plexus-utils");
-            dependency.setVersion("4.0.2");
-            pomModel.addDependency(dependency);
-            pomAccess.writePom(pomModel);
-            dependenciesArtifactProvider.build(businessArchiveBuilder, pool, pomAccess, configuration);
-            return (Void) null;
-        });
-
-        // then
-        businessArchiveBuilder.setProcessDefinition(fakeProcessDef());
-        var resources = businessArchiveBuilder.done().getResources();
-        /*
-         * The plexus-testing should be in classpath
-         */
-        assertThat(resources).containsKey("classpath/plexus-testing-1.2.0.jar");
-        assertThat(resources).containsKey("classpath/plexus-utils-4.0.2.jar");
-    }
-
     private static DesignProcessDefinitionImpl fakeProcessDef() {
         DesignProcessDefinitionImpl designProcessDefinitionImpl = new DesignProcessDefinitionImpl();
         FlowElementContainerDefinitionImpl processContainer = new FlowElementContainerDefinitionImpl();

@@ -32,9 +32,9 @@ import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
 import org.bonitasoft.bpm.model.configuration.Configuration;
-import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.process.Connector;
 import org.bonitasoft.bpm.model.process.Pool;
+import org.bonitasoft.bpm.model.util.FragmentUtils;
 
 /**
  * Generates the temporary pom.xml dedicated to a specific {@link Pool} process.
@@ -148,10 +148,8 @@ public class ProcessPomGenerator {
         filterUnusedConnectorDependencies(model, process);
         // remove zip dependencies (custom extensions deployed on their own and application pages handled otherwise)
         filterZipDependencies(model);
-        // filter dependencies based on configuration.processDependencies
-        if (configuration != null) {
-            filterDependenciesFromConfiguration(model, configuration);
-        }
+        // remove dependencies excluded by the process configuration (exported=false)
+        filterExcludedDependencies(model, configuration);
         pomAccess.writePom(model);
         return pomAccess;
     }
@@ -163,6 +161,48 @@ public class ProcessPomGenerator {
      */
     private void filterZipDependencies(Model model) {
         model.getDependencies().removeIf(dep -> "zip".equalsIgnoreCase(dep.getType()));
+    }
+
+    /**
+     * Remove dependencies that are explicitly excluded (exported=false) in the process configuration.
+     * <p>
+     * Matches Maven dependencies to configuration fragments by comparing the dependency's
+     * artifactId with the base name extracted from the fragment's JAR filename.
+     * Exclusion (exported=false) takes priority over inclusion (exported=true) when the
+     * same base name appears in multiple fragments.
+     * </p>
+     *
+     * @param model the maven model to update
+     * @param configuration the configuration containing exported fragment information (can be null)
+     */
+    private void filterExcludedDependencies(Model model, Configuration configuration) {
+        if (configuration == null) {
+            return;
+        }
+        var containers = configuration.getProcessDependencies();
+        if (containers.isEmpty()) {
+            return;
+        }
+
+        var allFragments = containers.stream()
+                .flatMap(FragmentUtils::walkAllFragments)
+                .toList();
+
+        if (allFragments.isEmpty()) {
+            return;
+        }
+
+        // Collect base names of explicitly non-exported fragments
+        Set<String> excludedBases = allFragments.stream()
+                .filter(f -> !f.isExported())
+                .map(f -> FragmentUtils.extractArtifactBase(f.getValue()))
+                .collect(Collectors.toSet());
+
+        model.getDependencies().removeIf(dep -> {
+            String artifactId = dep.getArtifactId();
+            // If this dependency's artifactId matches an excluded base name, remove it
+            return excludedBases.contains(artifactId);
+        });
     }
 
     /**
@@ -191,49 +231,6 @@ public class ProcessPomGenerator {
                         && connDef.getDefinitionVersion().equals(connImpl.getDefinitionVersion());
                 return processUsedConnectors.stream().noneMatch(matchesImpl);
             });
-        });
-    }
-
-    /**
-     * Filter dependencies based on configuration.processDependencies.
-     * Only keep dependencies that are marked as exported=true in the configuration.
-     *
-     * @param model the maven model to update
-     * @param configuration the configuration containing processDependencies fragments
-     */
-    private void filterDependenciesFromConfiguration(Model model, Configuration configuration) {
-        var processDepsContainers = configuration.getProcessDependencies();
-        if (processDepsContainers.isEmpty()) {
-            return; // No filter, keep all dependencies
-        }
-
-        // Count total fragments (checked or not) to detect old .conf files
-        long totalFragments = processDepsContainers.stream()
-                .flatMap(container -> container.getFragments().stream())
-                .count();
-
-        // Build set of selected JARs (exported=true) from ALL containers
-        Set<String> selectedJars = processDepsContainers.stream()
-                .flatMap(container -> container.getFragments().stream())
-                .filter(Fragment::isExported)
-                .map(Fragment::getValue)
-                .collect(Collectors.toSet());
-
-        // No fragments found: old .conf file predating the dependency-selection feature (introduced in 10.3.0), keep all dependencies for backward compatibility
-        if (totalFragments == 0) {
-            return;
-        }
-
-        // If fragments exist but none selected (user unchecked all), remove all JAR dependencies
-        if (selectedJars.isEmpty()) {
-            model.getDependencies().clear();
-            return;
-        }
-
-        // Remove dependencies not in the selected set
-        model.getDependencies().removeIf(dep -> {
-            String jarName = dep.getArtifactId() + "-" + dep.getVersion() + ".jar";
-            return !selectedJars.contains(jarName);
         });
     }
 
