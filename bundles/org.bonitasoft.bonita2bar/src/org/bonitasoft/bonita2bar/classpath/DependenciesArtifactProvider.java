@@ -96,15 +96,18 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
     }
 
     /**
-     * Filter copied dependencies using a dual matching strategy:
-     * <ul>
-     * <li><b>Runtime container JARs</b> (base name in {@code runtimeContainerBaseNames}):
-     * kept using base-name matching (tolerant of version differences), because Maven may
-     * resolve a different version than the one in the Bonita runtime container (Tomcat).</li>
-     * <li><b>All other exported JARs</b>: require exact filename matching. If Maven resolves
-     * a different version than what the fragment references, the JAR is excluded and a warning
-     * is logged.</li>
-     * </ul>
+     * Filter copied dependencies by matching each JAR against the exported/excluded
+     * fragments from the configuration. For each file in the dependencies folder:
+     * <ol>
+     * <li><b>Exact filename match with an exported fragment</b>: keep the JAR.</li>
+     * <li><b>Base-name excluded</b> (user set {@code exported=false}): delete the JAR.</li>
+     * <li><b>Base-name matches an exported fragment but version differs</b>: delete the JAR
+     * and log a warning (Maven resolved a different version than referenced in the fragment).</li>
+     * <li><b>Unknown JAR</b> (no matching fragment at all): delete the JAR.</li>
+     * </ol>
+     * <p>
+     * Explicit exclusion ({@code exported=false}) always takes priority over export flags,
+     * to handle cases where the same artifact appears in multiple containers with conflicting flags.
      *
      * @param dependenciesFolder the folder containing copied dependencies
      * @param configuration the configuration containing exported fragment information
