@@ -20,7 +20,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.bonitasoft.bonita2bar.BarArtifactProvider;
@@ -29,15 +31,21 @@ import org.bonitasoft.bonita2bar.BuildBarException;
 import org.bonitasoft.bonita2bar.MavenExecutor;
 import org.bonitasoft.bonita2bar.process.pomgen.ProcessPom;
 import org.bonitasoft.bpm.model.configuration.Configuration;
+import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.process.Pool;
+import org.bonitasoft.bpm.model.util.FragmentUtils;
 import org.bonitasoft.engine.bpm.bar.BarResource;
 import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides artifacts for building the BAR file, based on the dependencies from maven and connectors used by the process.
  */
 public class DependenciesArtifactProvider implements BarArtifactProvider {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(DependenciesArtifactProvider.class);
 
     /**
      * Format for building the profile name used for a specific environment.
@@ -49,7 +57,7 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
 
     /**
      * Default Constructor.
-     * 
+     *
      * @param mavenExecutor the maven executor
      */
     public DependenciesArtifactProvider(MavenExecutor mavenExecutor) {
@@ -74,8 +82,10 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
                             "includeTypes", "jar"),
                     List.of(profileToUse), errMsg);
 
-            // explore all files in the dependencies folder
+            // filter copied dependencies based on configuration exported flags,
+            // then add remaining files to the business archive
             if (dependenciesFolder.exists()) {
+                filterCopiedDependencies(dependenciesFolder, configuration);
                 exploreDependencies(builder, dependenciesFolder);
             }
         } catch (IOException | XmlPullParserException e) {
@@ -83,6 +93,102 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
                     process.getVersion()), e);
         }
 
+    }
+
+    /**
+     * Filter copied dependencies by matching each JAR against the exported/excluded
+     * fragments from the configuration. For each file in the dependencies folder:
+     * <ol>
+     * <li><b>Exact filename match with an exported fragment</b>: keep the JAR.</li>
+     * <li><b>Base-name excluded</b> (user set {@code exported=false}): delete the JAR.</li>
+     * <li><b>Base-name matches an exported fragment but version differs</b>: delete the JAR
+     * and log a warning (Maven resolved a different version than referenced in the fragment).</li>
+     * <li><b>Unknown JAR</b> (no matching fragment at all): delete the JAR.</li>
+     * </ol>
+     * <p>
+     * Explicit exclusion ({@code exported=false}) always takes priority over export flags,
+     * to handle cases where the same artifact appears in multiple containers with conflicting flags.
+     *
+     * @param dependenciesFolder the folder containing copied dependencies
+     * @param configuration the configuration containing exported fragment information
+     */
+    void filterCopiedDependencies(File dependenciesFolder, Configuration configuration) throws IOException {
+        if (configuration == null) {
+            return;
+        }
+        var containers = configuration.getProcessDependencies();
+        if (containers.isEmpty()) {
+            return;
+        }
+
+        // Collect all fragments once to avoid multiple tree traversals
+        var allFragments = containers.stream()
+                .flatMap(FragmentUtils::walkAllFragments)
+                .toList();
+
+        // No fragments = old configuration file, don't filter (backward compatibility)
+        if (allFragments.isEmpty()) {
+            return;
+        }
+
+        // Whitelist: collect exact filenames of exported fragments
+        Set<String> exportedExactNames = allFragments.stream()
+                .filter(Fragment::isExported)
+                .map(Fragment::getValue)
+                .collect(Collectors.toSet());
+
+        // Also collect base name -> exact filename for version mismatch detection
+        Map<String, String> exportedBaseToExact = allFragments.stream()
+                .filter(Fragment::isExported)
+                .collect(Collectors.toMap(
+                        f -> FragmentUtils.extractArtifactBase(f.getValue()),
+                        Fragment::getValue,
+                        (a, b) -> a));
+
+        // Exclusion: explicitly non-exported fragments take priority.
+        // After flattenFragmentsToOther, a jar may appear as exported=true in a connector
+        // child container while the user has set exported=false in the OTHER container.
+        // The user's explicit exclusion must win.
+        Set<String> excludedExactNames = allFragments.stream()
+                .filter(f -> !f.isExported())
+                .map(Fragment::getValue)
+                .collect(Collectors.toSet());
+
+        Set<String> excludedBases = allFragments.stream()
+                .filter(f -> !f.isExported())
+                .map(f -> FragmentUtils.extractArtifactBase(f.getValue()))
+                .collect(Collectors.toSet());
+
+        exportedExactNames.removeAll(excludedExactNames);
+        excludedBases.forEach(exportedBaseToExact::remove);
+
+        // Filter files
+        File[] files = dependenciesFolder.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                String fileName = file.getName();
+                String fileBase = FragmentUtils.extractArtifactBase(fileName);
+
+                if (exportedExactNames.contains(fileName)) {
+                    // Exact filename match with exported=true → keep
+                    // This takes priority over base-name exclusion to handle the case
+                    // where two versions of the same artifact have different exported flags
+                    // (e.g. asm-3.3.1.jar exported=true, asm-9.8.jar exported=false)
+                } else if (excludedBases.contains(fileBase)) {
+                    // Base-name excluded by user (exported=false) and no exact match exported
+                    Files.delete(file.toPath());
+                } else if (exportedBaseToExact.containsKey(fileBase)) {
+                    // Non-runtime JAR: base name matches but version differs → exclude + warning
+                    String expected = exportedBaseToExact.get(fileBase);
+                    LOGGER.warn("Version mismatch: fragment expects '{}' but Maven resolved '{}'. "
+                            + "Excluding from BAR.", expected, fileName);
+                    Files.delete(file.toPath());
+                } else {
+                    // Unknown jar, not tracked by any fragment → exclude
+                    Files.delete(file.toPath());
+                }
+            }
+        }
     }
 
     /**
