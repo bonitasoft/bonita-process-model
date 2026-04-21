@@ -131,7 +131,10 @@ class DependenciesArtifactProviderFilterTest {
     }
 
     @Test
-    void should_not_filter_when_no_fragments_exist_for_backward_compatibility() throws IOException {
+    void should_remove_all_jars_when_containers_exist_but_no_fragments_are_declared() throws IOException {
+        // BPA-449: a modern configuration of a pool with no declared dependency
+        // has its containers created (e.g. OTHER) but no Fragment inside.
+        // The whitelist is empty, so every copied jar must be excluded from the BAR.
         createJarFile("lib1-1.0.jar");
         createJarFile("lib2-2.0.jar");
 
@@ -142,9 +145,7 @@ class DependenciesArtifactProviderFilterTest {
 
         provider.filterCopiedDependencies(dependenciesFolder, configuration);
 
-        assertThat(dependenciesFolder.listFiles())
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("lib1-1.0.jar", "lib2-2.0.jar");
+        assertThat(dependenciesFolder).isEmptyDirectory();
     }
 
     @Test
