@@ -121,15 +121,12 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
             return;
         }
 
-        // Collect all fragments once to avoid multiple tree traversals
+        // Collect all fragments once to avoid multiple tree traversals.
+        // An empty stream is a legitimate modern state (pool with no declared dependency):
+        // the whitelist is then empty and every copied jar is excluded from the BAR.
         var allFragments = containers.stream()
                 .flatMap(FragmentUtils::walkAllFragments)
                 .toList();
-
-        // No fragments = old configuration file, don't filter (backward compatibility)
-        if (allFragments.isEmpty()) {
-            return;
-        }
 
         // Whitelist: collect exact filenames of exported fragments
         Set<String> exportedExactNames = allFragments.stream()
