@@ -88,7 +88,7 @@ class FormMappingBarResourceProviderTest {
         verify(builder).setFormMappings(formMappingModel);
         assertThat(formMappingModel.getFormMappings()).hasSize(2);
         assertThat(formMappingModel.getFormMappings()).extracting("target", "form", "type", "taskname").contains(
-                tuple(FormMappingTarget.URL, "http://www.bonitasoft.com", FormMappingType.PROCESS_OVERVIEW, null),
+                tuple(FormMappingTarget.URL, "http://www.ofelia.com", FormMappingType.PROCESS_OVERVIEW, null),
                 tuple(FormMappingTarget.INTERNAL, "custompage_StepForm", FormMappingType.TASK, "Step1"));
     }
 
@@ -169,7 +169,7 @@ class FormMappingBarResourceProviderTest {
     private Pool aPoolAndTaskWithAllTypeOfFormMappings() {
         return aPool().withName("Pool1").withVersion("1.0")
                 .havingOverviewFormMapping(aFormMapping().withType(org.bonitasoft.bpm.model.process.FormMappingType.URL)
-                        .withURL("http://www.bonitasoft.com"))
+                        .withURL("http://www.ofelia.com"))
                 .havingElements(
                         aTask().withName("Step1")
                                 .havingFormMapping(aFormMapping().havingTargetForm(
