@@ -20,6 +20,9 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Stream;
 
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.configuration.builders.ConfigurationBuilder;
@@ -30,7 +33,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
- * Unit tests for {@link DependenciesArtifactProvider#filterCopiedDependencies(File, Configuration)}.
+ * Unit tests for {@link DependenciesArtifactProvider#selectExcludedDependencies(File, Configuration)}.
  */
 class DependenciesArtifactProviderFilterTest {
 
@@ -50,7 +53,7 @@ class DependenciesArtifactProviderFilterTest {
     // ── Whitelist filtering tests ──────────────────────────────────────────
 
     @Test
-    void should_remove_unchecked_transitive_when_parent_is_checked() throws IOException {
+    void should_exclude_unchecked_transitive_when_parent_is_checked() throws IOException {
         createJarFile("parent-1.0.jar");
         createJarFile("transitive-1.0.jar");
 
@@ -68,15 +71,13 @@ class DependenciesArtifactProviderFilterTest {
                                                 .notExported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
-        assertThat(dependenciesFolder.listFiles())
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("parent-1.0.jar");
+        assertThat(keptFileNames(excluded)).containsExactlyInAnyOrder("parent-1.0.jar");
     }
 
     @Test
-    void should_remove_unchecked_parent_but_keep_checked_transitives() throws IOException {
+    void should_exclude_unchecked_parent_but_keep_checked_transitives() throws IOException {
         createJarFile("parent-1.0.jar");
         createJarFile("transitive-a-1.0.jar");
         createJarFile("transitive-b-1.0.jar");
@@ -99,16 +100,15 @@ class DependenciesArtifactProviderFilterTest {
                                                 .exported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
-        assertThat(dependenciesFolder.listFiles())
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("transitive-a-1.0.jar", "transitive-b-1.0.jar");
+        assertThat(keptFileNames(excluded)).containsExactlyInAnyOrder("transitive-a-1.0.jar",
+                "transitive-b-1.0.jar");
     }
 
     @Test
-    void should_remove_unknown_jars_not_tracked_by_any_fragment() throws IOException {
-        // Whitelist approach: unknown jars (not in any fragment) are removed
+    void should_exclude_unknown_jars_not_tracked_by_any_fragment() throws IOException {
+        // Whitelist approach: unknown jars (not in any fragment) are excluded
         createJarFile("parent-1.0.jar");
         createJarFile("unknown-lib-2.0.jar");
 
@@ -122,16 +122,14 @@ class DependenciesArtifactProviderFilterTest {
                                                 .exported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
-        // Only exported jars remain, unknown jar is removed
-        assertThat(dependenciesFolder.listFiles())
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("parent-1.0.jar");
+        // Only exported jars remain, unknown jar is excluded
+        assertThat(keptFileNames(excluded)).containsExactlyInAnyOrder("parent-1.0.jar");
     }
 
     @Test
-    void should_remove_all_jars_when_containers_exist_but_no_fragments_are_declared() throws IOException {
+    void should_exclude_all_jars_when_containers_exist_but_no_fragments_are_declared() throws IOException {
         // BPA-449: a modern configuration of a pool with no declared dependency
         // has its containers created (e.g. OTHER) but no Fragment inside.
         // The whitelist is empty, so every copied jar must be excluded from the BAR.
@@ -143,13 +141,13 @@ class DependenciesArtifactProviderFilterTest {
                         FragmentContainerBuilder.aFragmentContainer("OTHER"))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
-        assertThat(dependenciesFolder).isEmptyDirectory();
+        assertThat(keptFileNames(excluded)).isEmpty();
     }
 
     @Test
-    void should_remove_all_known_jars_when_none_are_exported() throws IOException {
+    void should_exclude_all_known_jars_when_none_are_exported() throws IOException {
         createJarFile("lib1-1.0.jar");
         createJarFile("lib2-2.0.jar");
 
@@ -167,26 +165,57 @@ class DependenciesArtifactProviderFilterTest {
                                                 .notExported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
-        assertThat(dependenciesFolder).isEmptyDirectory();
+        assertThat(keptFileNames(excluded)).isEmpty();
     }
 
     @Test
     void should_not_filter_when_configuration_is_null() throws IOException {
         createJarFile("lib1-1.0.jar");
 
-        provider.filterCopiedDependencies(dependenciesFolder, null);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, null);
 
+        assertThat(excluded).isEmpty();
+        assertThat(keptFileNames(excluded)).containsExactlyInAnyOrder("lib1-1.0.jar");
+    }
+
+    @Test
+    void should_not_delete_any_copied_file() throws IOException {
+        // The excluded files are selected, not deleted: deleting a freshly copied jar
+        // races with antivirus/indexer transient locks on Windows
+        createJarFile("kept-1.0.jar");
+        createJarFile("excluded-1.0.jar");
+        createJarFile("unknown-lib-2.0.jar");
+
+        Configuration configuration = ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("OTHER")
+                                .havingFragments(
+                                        FragmentBuilder.aFragment()
+                                                .withValue("kept-1.0.jar")
+                                                .withType("JAR")
+                                                .exported(),
+                                        FragmentBuilder.aFragment()
+                                                .withValue("excluded-1.0.jar")
+                                                .withType("JAR")
+                                                .notExported()))
+                .build();
+
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
+
+        assertThat(excluded)
+                .extracting(path -> path.getFileName().toString())
+                .containsExactlyInAnyOrder("excluded-1.0.jar", "unknown-lib-2.0.jar");
         assertThat(dependenciesFolder.listFiles())
                 .extracting(File::getName)
-                .containsExactlyInAnyOrder("lib1-1.0.jar");
+                .containsExactlyInAnyOrder("kept-1.0.jar", "excluded-1.0.jar", "unknown-lib-2.0.jar");
     }
 
     // ── Version mismatch tests ─────────────────────────────────────────────
 
     @Test
-    void should_remove_unchecked_jar_even_when_maven_resolves_different_version() throws IOException {
+    void should_exclude_unchecked_jar_even_when_maven_resolves_different_version() throws IOException {
         // Fragment says bcpkix-jdk18on-1.78.1 (exported=false)
         // but Maven resolved bcpkix-jdk18on-1.83
         createJarFile("bcpkix-jdk18on-1.83.jar");
@@ -206,12 +235,10 @@ class DependenciesArtifactProviderFilterTest {
                                                 .exported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
-        // bcpkix removed despite version mismatch, exported-lib kept
-        assertThat(dependenciesFolder.listFiles())
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("exported-lib-1.0.jar");
+        // bcpkix excluded despite version mismatch, exported-lib kept
+        assertThat(keptFileNames(excluded)).containsExactlyInAnyOrder("exported-lib-1.0.jar");
     }
 
     @Test
@@ -230,10 +257,10 @@ class DependenciesArtifactProviderFilterTest {
                                                 .exported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
         // Excluded: base name matches but exact version differs
-        assertThat(dependenciesFolder).isEmptyDirectory();
+        assertThat(keptFileNames(excluded)).isEmpty();
     }
 
     @Test
@@ -251,11 +278,9 @@ class DependenciesArtifactProviderFilterTest {
                                                 .exported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
-        assertThat(dependenciesFolder.listFiles())
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("guava-33.0.jar");
+        assertThat(keptFileNames(excluded)).containsExactlyInAnyOrder("guava-33.0.jar");
     }
 
     @Test
@@ -278,13 +303,11 @@ class DependenciesArtifactProviderFilterTest {
                                                 .exported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
         // pdfbox excluded (version mismatch: 3.0.3 expected, 2.0.1 resolved)
         // mistral connector kept (exact match)
-        assertThat(dependenciesFolder.listFiles())
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("bonita-connector-ai-mistral-1.1.0.jar");
+        assertThat(keptFileNames(excluded)).containsExactlyInAnyOrder("bonita-connector-ai-mistral-1.1.0.jar");
     }
 
     @Test
@@ -330,14 +353,12 @@ class DependenciesArtifactProviderFilterTest {
                                                 .notExported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
-        // Exported fragments kept, version-mismatched unchecked jars and unknown jars removed
-        assertThat(dependenciesFolder.listFiles())
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder(
-                        "bonita-connector-ai-mistral-1.1.0.jar",
-                        "FastInfoset-1.2.15.jar");
+        // Exported fragments kept, version-mismatched unchecked jars and unknown jars excluded
+        assertThat(keptFileNames(excluded)).containsExactlyInAnyOrder(
+                "bonita-connector-ai-mistral-1.1.0.jar",
+                "FastInfoset-1.2.15.jar");
     }
 
     // ── Conflicting exported flags across containers (post-flatten scenario) ──
@@ -381,13 +402,12 @@ class DependenciesArtifactProviderFilterTest {
                                                 .exported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
         // pdfbox excluded (user's exported=false in OTHER wins over exported=true in CONNECTOR child)
         // fontbox and openhtmltopdf-pdfbox kept (exported=true in OTHER)
-        assertThat(dependenciesFolder.listFiles())
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("fontbox-2.0.24.jar", "openhtmltopdf-pdfbox-1.0.10.jar");
+        assertThat(keptFileNames(excluded)).containsExactlyInAnyOrder("fontbox-2.0.24.jar",
+                "openhtmltopdf-pdfbox-1.0.10.jar");
     }
 
     @Test
@@ -411,16 +431,22 @@ class DependenciesArtifactProviderFilterTest {
                                                 .notExported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var excluded = provider.selectExcludedDependencies(dependenciesFolder, configuration);
 
-        // asm-3.3.1.jar kept (exact match exported), asm-9.8.jar removed (not exported)
-        assertThat(dependenciesFolder.listFiles())
-                .extracting(File::getName)
-                .containsExactlyInAnyOrder("asm-3.3.1.jar");
+        // asm-3.3.1.jar kept (exact match exported), asm-9.8.jar excluded (not exported)
+        assertThat(keptFileNames(excluded)).containsExactlyInAnyOrder("asm-3.3.1.jar");
     }
 
     private void createJarFile(String name) throws IOException {
         Files.write(dependenciesFolder.toPath().resolve(name), new byte[] { 0 });
+    }
+
+    private List<String> keptFileNames(Set<Path> excluded) {
+        return Stream.of(dependenciesFolder.listFiles())
+                .map(File::toPath)
+                .filter(path -> !excluded.contains(path))
+                .map(path -> path.getFileName().toString())
+                .toList();
     }
 
 }
