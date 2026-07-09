@@ -168,11 +168,16 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
         exportedExactNames.removeAll(excludedExactNames);
         excludedBases.forEach(exportedBaseToExact::remove);
 
-        // Select files to exclude
+        // Select files to exclude. Only regular files participate in the exclusion decision:
+        // the archive is built by walking regular files, so excluding a directory path would
+        // have no effect (dependency:copy-dependencies produces a flat, jar-only output anyway)
         Set<Path> excluded = new HashSet<>();
         File[] files = dependenciesFolder.listFiles();
         if (files != null) {
             for (File file : files) {
+                if (!file.isFile()) {
+                    continue;
+                }
                 String fileName = file.getName();
                 String fileBase = FragmentUtils.extractArtifactBase(fileName);
 
