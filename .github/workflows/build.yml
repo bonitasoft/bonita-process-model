@@ -42,7 +42,16 @@ jobs:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
 
       - name: Build and deploy
+        run: ./mvnw -B -ntp deploy -Pjacoco
+
+      - name: Setup Java 21 for Sonar Scanner
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Sonar Scanner
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-        run: ./mvnw -B -ntp deploy sonar:sonar -Pjacoco
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # PR decoration / PR info for SonarCloud
+        run: ./mvnw -B -ntp sonar:sonar
