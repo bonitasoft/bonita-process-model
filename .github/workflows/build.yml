@@ -20,9 +20,6 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -48,4 +45,7 @@ jobs:
           java-version: 21
 
       - name: Sonar Scanner
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # PR decoration / PR info for SonarCloud
         run: ./mvnw -B -ntp sonar:sonar
