@@ -11,8 +11,6 @@ updates:
       prefix: "chore"
       include: "scope"
     groups:
-      major:
-        update-types: ["major"]
       minor-patch:
         update-types: ["minor", "patch"]
 
@@ -26,8 +24,6 @@ updates:
       prefix: "chore"
       include: "scope"
     groups:
-      major:
-        update-types: ["major"]
       minor-patch:
         update-types: ["minor", "patch"]
 
@@ -41,8 +37,6 @@ updates:
       prefix: "chore"
       include: "scope"
     groups:
-      major:
-        update-types: ["major"]
       minor-patch:
         update-types: ["minor", "patch"]
 
@@ -56,8 +50,6 @@ updates:
       prefix: "chore"
       include: "scope"
     groups:
-      major:
-        update-types: ["major"]
       minor-patch:
         update-types: ["minor", "patch"]
 
