@@ -60,7 +60,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
   </scm>
   <properties>
     <cyclonedx.version>2.7.9</cyclonedx.version>
-    <sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
+    <sonar-maven-plugin.version>5.1.0.4751</sonar-maven-plugin.version>
     <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
     <tycho.version>4.0.7</tycho.version>
     <emf-ecore.version>2.27.0</emf-ecore.version>
@@ -84,7 +84,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
     <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
-    <maven-install-plugin.version>3.1.1</maven-install-plugin.version>
+    <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
     <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
     <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
     <!-- Spotless resources location -->
