@@ -62,7 +62,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <cyclonedx.version>2.7.9</cyclonedx.version>
     <sonar-maven-plugin.version>5.1.0.4751</sonar-maven-plugin.version>
     <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
-    <tycho.version>4.0.12</tycho.version>
+    <tycho.version>4.0.13</tycho.version>
     <bonita-artifacts-model.version>1.2.2</bonita-artifacts-model.version>
     <emf-ecore.version>2.37.0</emf-ecore.version>
     <emf-common.version>2.31.0</emf-common.version>
