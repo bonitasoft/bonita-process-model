@@ -56,7 +56,7 @@ class CreateContractCustomMigrationTest {
 
     @Test
     void should_migrateAfter_add_an_empty_contract_to_a_task() throws Exception {
-    	when(model.newInstance("process.Contract")).thenReturn(newContractInstance);
+        when(model.newInstance("process.Contract")).thenReturn(newContractInstance);
         customMigration.migrateAfter(model, metamodel);
         verify(originalTaskInstance).set("contract", newContractInstance);
     }

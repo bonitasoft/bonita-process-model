@@ -65,7 +65,8 @@ class MultipleDocumentEngineDefinitionBuilderTest {
         document.setDocumentType(DocumentType.INTERNAL);
         process.getDocuments().add(document);
 
-        final MultipleDocumentEngineDefinitionBuilder builder = new MultipleDocumentEngineDefinitionBuilder(document, processBuilder, scriptFactory);
+        final MultipleDocumentEngineDefinitionBuilder builder = new MultipleDocumentEngineDefinitionBuilder(document,
+                processBuilder, scriptFactory);
 
         builder.build();
 
@@ -76,9 +77,11 @@ class MultipleDocumentEngineDefinitionBuilderTest {
     void should_not_add_initial_content_if_initial_expression_is_null_or_empty() throws Exception {
         when(processBuilder.addDocumentListDefinition(anyString())).thenReturn(docDefinitionListBuilder);
 
-        final MultipleDocumentEngineDefinitionBuilder builder = new MultipleDocumentEngineDefinitionBuilder(aDocument().multiple()
-                .withDocumentType(DocumentType.NONE).havingInitialMultipleContent(anExpression())
-                .build(), processBuilder, scriptFactory);
+        final MultipleDocumentEngineDefinitionBuilder builder = new MultipleDocumentEngineDefinitionBuilder(
+                aDocument().multiple()
+                        .withDocumentType(DocumentType.NONE).havingInitialMultipleContent(anExpression())
+                        .build(),
+                processBuilder, scriptFactory);
         builder.build();
 
         verify(docDefinitionListBuilder, never()).addInitialValue(notNull());
@@ -88,9 +91,11 @@ class MultipleDocumentEngineDefinitionBuilderTest {
     void should_not_add_initial_content_for_CONTRACT_type_if_contract_input_is_null() throws Exception {
         when(processBuilder.addDocumentListDefinition(anyString())).thenReturn(docDefinitionListBuilder);
 
-        final MultipleDocumentEngineDefinitionBuilder builder = new MultipleDocumentEngineDefinitionBuilder(aDocument().multiple()
-                .withDocumentType(DocumentType.CONTRACT)
-                .build(), processBuilder, scriptFactory);
+        final MultipleDocumentEngineDefinitionBuilder builder = new MultipleDocumentEngineDefinitionBuilder(
+                aDocument().multiple()
+                        .withDocumentType(DocumentType.CONTRACT)
+                        .build(),
+                processBuilder, scriptFactory);
         builder.build();
 
         verify(docDefinitionListBuilder, never()).addInitialValue(notNull());
@@ -101,9 +106,11 @@ class MultipleDocumentEngineDefinitionBuilderTest {
         when(processBuilder.addDocumentListDefinition(anyString())).thenReturn(docDefinitionListBuilder);
         when(scriptFactory.createMultipleDocumentInitialContentScriptExpression(any(ContractInput.class))).thenReturn(
                 aGroovyScriptExpression().withContent("script content").build());
-        final MultipleDocumentEngineDefinitionBuilder builder = new MultipleDocumentEngineDefinitionBuilder(aDocument().multiple()
-                .withDocumentType(DocumentType.CONTRACT).havingContractInput(aContractInput().withName("input"))
-                .build(), processBuilder, scriptFactory);
+        final MultipleDocumentEngineDefinitionBuilder builder = new MultipleDocumentEngineDefinitionBuilder(
+                aDocument().multiple()
+                        .withDocumentType(DocumentType.CONTRACT).havingContractInput(aContractInput().withName("input"))
+                        .build(),
+                processBuilder, scriptFactory);
         builder.build();
 
         verify(docDefinitionListBuilder).addInitialValue(notNull());
@@ -112,8 +119,10 @@ class MultipleDocumentEngineDefinitionBuilderTest {
     @Test
     void should_add_initial_content_for_NONE_type_if_contract_input_is_not_null() throws Exception {
         when(processBuilder.addDocumentListDefinition(anyString())).thenReturn(docDefinitionListBuilder);
-        final MultipleDocumentEngineDefinitionBuilder builder = new MultipleDocumentEngineDefinitionBuilder(aDocument().multiple()
-                .withDocumentType(DocumentType.NONE).build(), processBuilder, scriptFactory);
+        final MultipleDocumentEngineDefinitionBuilder builder = new MultipleDocumentEngineDefinitionBuilder(
+                aDocument().multiple()
+                        .withDocumentType(DocumentType.NONE).build(),
+                processBuilder, scriptFactory);
         builder.build();
 
         verify(docDefinitionListBuilder, never()).addInitialValue(notNull());
