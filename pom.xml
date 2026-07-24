@@ -60,35 +60,35 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
   </scm>
   <properties>
     <cyclonedx.version>2.7.9</cyclonedx.version>
-    <sonar-maven-plugin.version>5.1.0.4751</sonar-maven-plugin.version>
+    <sonar-maven-plugin.version>5.7.0.6970</sonar-maven-plugin.version>
     <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
-    <tycho.version>4.0.12</tycho.version>
+    <tycho.version>4.0.13</tycho.version>
     <bonita-artifacts-model.version>1.2.2</bonita-artifacts-model.version>
     <emf-ecore.version>2.37.0</emf-ecore.version>
     <emf-common.version>2.31.0</emf-common.version>
     <emf-xmi.version>2.38.0</emf-xmi.version>
     <emf-edit.version>2.22.0</emf-edit.version>
     <maven-artifact.version>3.9.3</maven-artifact.version>
-    <maven-gpg-plugin.version>3.0.1</maven-gpg-plugin.version>
+    <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
     <maven-invoker-plugin.version>3.3.0</maven-invoker-plugin.version>
     <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
     <groovy-maven-plugin.groovy.version>3.0.18</groovy-maven-plugin.groovy.version>
-    <archetype-packaging.version>3.2.1</archetype-packaging.version>
+    <archetype-packaging.version>3.4.1</archetype-packaging.version>
     <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
     <central-publishing-maven-plugin.version>0.8.0</central-publishing-maven-plugin.version>
     <spotless-maven-plugin.version>2.37.0</spotless-maven-plugin.version>
-    <gitflow-maven-plugin.version>1.20.0</gitflow-maven-plugin.version>
-    <build-helper-maven-plugin.version>3.4.0</build-helper-maven-plugin.version>
+    <gitflow-maven-plugin.version>1.21.0</gitflow-maven-plugin.version>
+    <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
     <!-- standard maven plugins versions -->
     <maven-core.version>3.8.4</maven-core.version>
-    <maven-clean-plugin.version>3.3.1</maven-clean-plugin.version>
-    <maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
-    <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
-    <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
-    <maven-jar-plugin.version>3.3.0</maven-jar-plugin.version>
+    <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
+    <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
+    <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
+    <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
     <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
-    <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
-    <maven-assembly-plugin.version>3.6.0</maven-assembly-plugin.version>
+    <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+    <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
     <!-- Spotless resources location -->
     <eclipse.formatter.file>${maven.multiModuleProjectDirectory}/formatter.xml</eclipse.formatter.file>
     <eclipse.importorder.file>${maven.multiModuleProjectDirectory}/eclipse.importorder</eclipse.importorder.file>
