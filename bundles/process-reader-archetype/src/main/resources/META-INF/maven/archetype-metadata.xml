@@ -16,7 +16,7 @@
       <defaultValue>11</defaultValue>
     </requiredProperty>
     <requiredProperty key="bonita-process-model-version">
-      <defaultValue>8.0.2-SNAPSHOT</defaultValue>
+      <defaultValue>8.0.3-SNAPSHOT</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-clean-version">
       <defaultValue>3.3.1</defaultValue>
@@ -34,7 +34,7 @@
       <defaultValue>3.3.0</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-install-version">
-      <defaultValue>3.1.1</defaultValue>
+      <defaultValue>3.1.4</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-deploy-version">
       <defaultValue>3.1.1</defaultValue>
