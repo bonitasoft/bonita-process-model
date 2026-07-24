@@ -56,6 +56,13 @@ updates:
   # Maintain dependencies for maven
   - package-ecosystem: "maven"
     directory: "/"
+    # Exclude the pomless submodules (Tycho generates their pom.xml at build time)
+    # so Dependabot doesn't fail on them and still parses the root pom.xml.
+    exclude-paths:
+      - "bundles/**"
+      - "features/**"
+      - "tests/**"
+      - "sites/**"
     target-branch: develop
     schedule:
       interval: "weekly"
