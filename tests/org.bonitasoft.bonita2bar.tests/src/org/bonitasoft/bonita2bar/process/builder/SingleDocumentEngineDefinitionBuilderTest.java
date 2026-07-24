@@ -55,8 +55,11 @@ class SingleDocumentEngineDefinitionBuilderTest {
     void testMimeTypeAddedIfThereIsADefaultValue() throws Exception {
         when(processBuilder.addDocumentDefinition(anyString())).thenReturn(docDefinitionBuilder);
 
-        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(aDocument().withDocumentType(DocumentType.EXTERNAL)
-                .havingURL(anExpression().withContent("http://test.com")).havingMimeType(anExpression().withContent("octet/stream")).build(), processBuilder,
+        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(
+                aDocument().withDocumentType(DocumentType.EXTERNAL)
+                        .havingURL(anExpression().withContent("http://test.com"))
+                        .havingMimeType(anExpression().withContent("octet/stream")).build(),
+                processBuilder,
                 scriptFactory);
         builder.build();
 
@@ -67,8 +70,10 @@ class SingleDocumentEngineDefinitionBuilderTest {
     void testMimeTypeAddedEvenIfThereIsNoDefaultValue() throws Exception {
         when(processBuilder.addDocumentDefinition(anyString())).thenReturn(docDefinitionBuilder);
 
-        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(aDocument().withDocumentType(DocumentType.EXTERNAL)
-                .havingURL(anExpression()).havingMimeType(anExpression().withContent("octet/stream")).build(), processBuilder, scriptFactory);
+        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(
+                aDocument().withDocumentType(DocumentType.EXTERNAL)
+                        .havingURL(anExpression()).havingMimeType(anExpression().withContent("octet/stream")).build(),
+                processBuilder, scriptFactory);
         builder.build();
 
         verify(docDefinitionBuilder).addMimeType(anyString());
@@ -78,8 +83,12 @@ class SingleDocumentEngineDefinitionBuilderTest {
     void testIntialContentForExternalSimpleDocumentAdded() throws Exception {
         when(processBuilder.addDocumentDefinition(anyString())).thenReturn(docDefinitionBuilder);
 
-        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(aDocument().withDocumentType(DocumentType.EXTERNAL)
-                .havingURL(aGroovyScriptExpression().withReturnType(List.class.getName()).withContent("http://test.com")).build(), processBuilder,
+        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(
+                aDocument().withDocumentType(DocumentType.EXTERNAL)
+                        .havingURL(aGroovyScriptExpression().withReturnType(List.class.getName())
+                                .withContent("http://test.com"))
+                        .build(),
+                processBuilder,
                 scriptFactory);
         builder.build();
 
@@ -90,8 +99,10 @@ class SingleDocumentEngineDefinitionBuilderTest {
     void testIntialContentForExternalSimpleDocumentNotAddedIfUrlNotSpecified() throws Exception {
         when(processBuilder.addDocumentDefinition(anyString())).thenReturn(docDefinitionBuilder);
 
-        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(aDocument().withDocumentType(DocumentType.EXTERNAL)
-                .build(), processBuilder, scriptFactory);
+        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(
+                aDocument().withDocumentType(DocumentType.EXTERNAL)
+                        .build(),
+                processBuilder, scriptFactory);
         builder.build();
 
         verify(docDefinitionBuilder, Mockito.never()).addUrl(Mockito.anyString());
@@ -101,8 +112,10 @@ class SingleDocumentEngineDefinitionBuilderTest {
     void testIntialContentForInteralSimpleDocumentAdded() throws Exception {
         when(processBuilder.addDocumentDefinition(anyString())).thenReturn(docDefinitionBuilder);
 
-        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(aDocument().withDocumentType(DocumentType.INTERNAL)
-                .withDefaultValueIdOfDocumentStore("idTest").build(), processBuilder, scriptFactory);
+        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(
+                aDocument().withDocumentType(DocumentType.INTERNAL)
+                        .withDefaultValueIdOfDocumentStore("idTest").build(),
+                processBuilder, scriptFactory);
         builder.build();
 
         verify(docDefinitionBuilder).addFile(Mockito.anyString());
@@ -113,8 +126,10 @@ class SingleDocumentEngineDefinitionBuilderTest {
     void testIntialContentNotAddedForInternalSimpleDocumentAddedIfStoreIdNotSpecified() throws Exception {
         when(processBuilder.addDocumentDefinition(anyString())).thenReturn(docDefinitionBuilder);
 
-        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(aDocument().withDocumentType(DocumentType.INTERNAL)
-                .build(), processBuilder, scriptFactory);
+        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(
+                aDocument().withDocumentType(DocumentType.INTERNAL)
+                        .build(),
+                processBuilder, scriptFactory);
         builder.build();
 
         verify(docDefinitionBuilder, Mockito.never()).addFile(Mockito.anyString());
@@ -125,8 +140,10 @@ class SingleDocumentEngineDefinitionBuilderTest {
     void should_not_add_initial_content_for_CONTRACT_type_if_contract_input_is_null() throws Exception {
         when(processBuilder.addDocumentDefinition(anyString())).thenReturn(docDefinitionBuilder);
 
-        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(aDocument().withDocumentType(DocumentType.CONTRACT)
-                .build(), processBuilder, scriptFactory);
+        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(
+                aDocument().withDocumentType(DocumentType.CONTRACT)
+                        .build(),
+                processBuilder, scriptFactory);
         builder.build();
 
         verify(docDefinitionBuilder, never()).addInitialValue(notNull());
@@ -140,8 +157,10 @@ class SingleDocumentEngineDefinitionBuilderTest {
 
         final ContractInputBuilder fileInput = aContractInput().withName("myFile").withType(ContractInputType.FILE);
         aContractInput().withName("parent").withType(ContractInputType.COMPLEX).havingInput(fileInput).build();
-        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(aDocument().withDocumentType(DocumentType.CONTRACT)
-                .havingContractInput(fileInput).build(), processBuilder, scriptFactory);
+        final SingleDocumentEngineDefinitionBuilder builder = new SingleDocumentEngineDefinitionBuilder(
+                aDocument().withDocumentType(DocumentType.CONTRACT)
+                        .havingContractInput(fileInput).build(),
+                processBuilder, scriptFactory);
         builder.build();
 
         verify(docDefinitionBuilder).addInitialValue(notNull());

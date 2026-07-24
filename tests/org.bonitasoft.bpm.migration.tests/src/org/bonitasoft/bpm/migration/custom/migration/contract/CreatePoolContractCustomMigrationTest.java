@@ -56,7 +56,7 @@ class CreatePoolContractCustomMigrationTest {
 
     @Test
     void should_migrateAfter_add_an_empty_contract_to_a_pool() throws Exception {
-    	when(model.newInstance("process.Contract")).thenReturn(newContractInstance);
+        when(model.newInstance("process.Contract")).thenReturn(newContractInstance);
         customMigration.migrateAfter(model, metamodel);
         verify(originalPoolInstance).set("contract", newContractInstance);
     }

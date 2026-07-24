@@ -104,25 +104,25 @@ class ContractEngineDefinitionBuilderTest {
     }
 
     @Test
-	void should_build_create_a_contract_with_simple_input() throws Exception {
-		 when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
-		addInput(aContract, "name", ContractInputType.TEXT, "name of an employee");
-		addInput(aContract, "birthDate", ContractInputType.DATE, "Birth date of an employee");
-		addInput(aContract, "age", ContractInputType.INTEGER, null);
-		addInput(aContract, "salary", ContractInputType.DECIMAL, null);
-		addInput(aContract, "isMarried", ContractInputType.BOOLEAN, null);
-		userTaskengineContractBuilder.build(aContract);
-		verify(taskBuilder).addContract();
-		verify(contractDefBuilder).addInput("name", Type.TEXT, "name of an employee", false);
-		verify(contractDefBuilder).addInput("birthDate", Type.DATE, "Birth date of an employee", false);
-		verify(contractDefBuilder).addInput("age", Type.INTEGER, null, false);
-		verify(contractDefBuilder).addInput("salary", Type.DECIMAL, null, false);
-		verify(contractDefBuilder).addInput("isMarried", Type.BOOLEAN, null, false);
-	}
+    void should_build_create_a_contract_with_simple_input() throws Exception {
+        when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
+        addInput(aContract, "name", ContractInputType.TEXT, "name of an employee");
+        addInput(aContract, "birthDate", ContractInputType.DATE, "Birth date of an employee");
+        addInput(aContract, "age", ContractInputType.INTEGER, null);
+        addInput(aContract, "salary", ContractInputType.DECIMAL, null);
+        addInput(aContract, "isMarried", ContractInputType.BOOLEAN, null);
+        userTaskengineContractBuilder.build(aContract);
+        verify(taskBuilder).addContract();
+        verify(contractDefBuilder).addInput("name", Type.TEXT, "name of an employee", false);
+        verify(contractDefBuilder).addInput("birthDate", Type.DATE, "Birth date of an employee", false);
+        verify(contractDefBuilder).addInput("age", Type.INTEGER, null, false);
+        verify(contractDefBuilder).addInput("salary", Type.DECIMAL, null, false);
+        verify(contractDefBuilder).addInput("isMarried", Type.BOOLEAN, null, false);
+    }
 
     @Test
     void should_build_create_a_contract_with_simple_input_for_process() throws Exception {
-		when(processBuilder.addContract()).thenReturn(contractDefBuilder);
+        when(processBuilder.addContract()).thenReturn(contractDefBuilder);
         addInput(aContract, "name", ContractInputType.TEXT, "name of an employee");
         addInput(aContract, "birthDate", ContractInputType.DATE, "Birth date of an employee");
         addInput(aContract, "age", ContractInputType.INTEGER, null);
@@ -169,78 +169,78 @@ class ContractEngineDefinitionBuilderTest {
     }
 
     @Test
-	void should_build_create_a_contract_with_constraint() throws Exception {
-		 when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
-		final ContractInput nameInput = addInput(aContract, "name", ContractInputType.TEXT, "name of an employee");
-		aContract.getConstraints().add(aContractConstraint().withName("myConstraint").withExpression("name.length < 50")
-				.withErrorMessage("name is too long").havingInput(nameInput.getName()).build());
-		userTaskengineContractBuilder.build(aContract);
-		verify(taskBuilder).addContract();
-		verify(contractDefBuilder).addInput("name", Type.TEXT, "name of an employee", nameInput.isMultiple());
-		verify(contractDefBuilder).addConstraint("myConstraint", "name.length < 50", "name is too long",
-				nameInput.getName());
-	}
+    void should_build_create_a_contract_with_constraint() throws Exception {
+        when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
+        final ContractInput nameInput = addInput(aContract, "name", ContractInputType.TEXT, "name of an employee");
+        aContract.getConstraints().add(aContractConstraint().withName("myConstraint").withExpression("name.length < 50")
+                .withErrorMessage("name is too long").havingInput(nameInput.getName()).build());
+        userTaskengineContractBuilder.build(aContract);
+        verify(taskBuilder).addContract();
+        verify(contractDefBuilder).addInput("name", Type.TEXT, "name of an employee", nameInput.isMultiple());
+        verify(contractDefBuilder).addConstraint("myConstraint", "name.length < 50", "name is too long",
+                nameInput.getName());
+    }
 
     @Test
-	void should_build_create_a_contract_with_mandatory_constraint() throws Exception {
-		when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
-		final ContractInput nameInput = addInput(aContract, "name", ContractInputType.TEXT, "name of an employee");
-		userTaskengineContractBuilder.build(aContract);
-		verify(taskBuilder).addContract();
-		verify(contractDefBuilder).addInput("name", Type.TEXT, "name of an employee", nameInput.isMultiple());
-	}
+    void should_build_create_a_contract_with_mandatory_constraint() throws Exception {
+        when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
+        final ContractInput nameInput = addInput(aContract, "name", ContractInputType.TEXT, "name of an employee");
+        userTaskengineContractBuilder.build(aContract);
+        verify(taskBuilder).addContract();
+        verify(contractDefBuilder).addInput("name", Type.TEXT, "name of an employee", nameInput.isMultiple());
+    }
 
     @Test
-	void should_build_create_operation_for_input_mapping() throws Exception {
-		when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
-		final ContractInput nameInput = addInput(aContract, "name", ContractInputType.TEXT, "name of an employee");
-		final ContractInputMapping mapping = ProcessFactory.eINSTANCE.createContractInputMapping();
-		final Data textData = ProcessFactory.eINSTANCE.createData();
-		final DataType textDt = ProcessFactory.eINSTANCE.createStringType();
-		textDt.setName("String");
-		textData.setDataType(textDt);
-		textData.setName("employeeName");
-		mapping.setData(textData);
-		nameInput.setMapping(mapping);
-		userTaskengineContractBuilder.build(aContract);
-		verify(taskBuilder).addContract();
-		verify(contractDefBuilder).addInput("name", Type.TEXT, "name of an employee", nameInput.isMultiple());
-	}
+    void should_build_create_operation_for_input_mapping() throws Exception {
+        when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
+        final ContractInput nameInput = addInput(aContract, "name", ContractInputType.TEXT, "name of an employee");
+        final ContractInputMapping mapping = ProcessFactory.eINSTANCE.createContractInputMapping();
+        final Data textData = ProcessFactory.eINSTANCE.createData();
+        final DataType textDt = ProcessFactory.eINSTANCE.createStringType();
+        textDt.setName("String");
+        textData.setDataType(textDt);
+        textData.setName("employeeName");
+        mapping.setData(textData);
+        nameInput.setMapping(mapping);
+        userTaskengineContractBuilder.build(aContract);
+        verify(taskBuilder).addContract();
+        verify(contractDefBuilder).addInput("name", Type.TEXT, "name of an employee", nameInput.isMultiple());
+    }
 
     @Test
-	void should_create_complex_input_recursively() throws Exception {
-	  when(contractInputDefinitionBuilder.addComplexInput(any(), any(), anyBoolean()))
-      .thenReturn(contractInputDefinitionBuilder);
-	  when(contractDefBuilder.addComplexInput(any(), any(), anyBoolean())).thenReturn(contractInputDefinitionBuilder);
-		when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
-		final ContractInput employeeInput = addInput(aContract, "employee", ContractInputType.COMPLEX,
-				"employee complex type");
-		addInput(employeeInput, "firstName", ContractInputType.TEXT, null);
-		addInput(employeeInput, "lastName", ContractInputType.TEXT, null);
-		addInput(employeeInput, "birthDate", ContractInputType.DATE, null);
-		final ContractInput skillsInput = addInput(employeeInput, "skills", ContractInputType.COMPLEX, null);
-		skillsInput.setMultiple(true);
-		addInput(skillsInput, "name", ContractInputType.TEXT, "name of the skills");
-		addInput(skillsInput, "rate", ContractInputType.INTEGER, "rate of the skill");
+    void should_create_complex_input_recursively() throws Exception {
+        when(contractInputDefinitionBuilder.addComplexInput(any(), any(), anyBoolean()))
+                .thenReturn(contractInputDefinitionBuilder);
+        when(contractDefBuilder.addComplexInput(any(), any(), anyBoolean())).thenReturn(contractInputDefinitionBuilder);
+        when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
+        final ContractInput employeeInput = addInput(aContract, "employee", ContractInputType.COMPLEX,
+                "employee complex type");
+        addInput(employeeInput, "firstName", ContractInputType.TEXT, null);
+        addInput(employeeInput, "lastName", ContractInputType.TEXT, null);
+        addInput(employeeInput, "birthDate", ContractInputType.DATE, null);
+        final ContractInput skillsInput = addInput(employeeInput, "skills", ContractInputType.COMPLEX, null);
+        skillsInput.setMultiple(true);
+        addInput(skillsInput, "name", ContractInputType.TEXT, "name of the skills");
+        addInput(skillsInput, "rate", ContractInputType.INTEGER, "rate of the skill");
 
-		userTaskengineContractBuilder.build(aContract);
+        userTaskengineContractBuilder.build(aContract);
 
-		verify(contractDefBuilder).addComplexInput("employee", "employee complex type", false);
-		verify(contractInputDefinitionBuilder).addInput("firstName", Type.TEXT, null, false);
-		verify(contractInputDefinitionBuilder).addInput("lastName", Type.TEXT, null, false);
-		verify(contractInputDefinitionBuilder).addInput("birthDate", Type.DATE, null, false);
-		verify(contractInputDefinitionBuilder).addComplexInput("skills", null, true);
-		verify(contractInputDefinitionBuilder).addInput("name", Type.TEXT, "name of the skills", false);
-		verify(contractInputDefinitionBuilder).addInput("rate", Type.INTEGER, "rate of the skill", false);
-	}
+        verify(contractDefBuilder).addComplexInput("employee", "employee complex type", false);
+        verify(contractInputDefinitionBuilder).addInput("firstName", Type.TEXT, null, false);
+        verify(contractInputDefinitionBuilder).addInput("lastName", Type.TEXT, null, false);
+        verify(contractInputDefinitionBuilder).addInput("birthDate", Type.DATE, null, false);
+        verify(contractInputDefinitionBuilder).addComplexInput("skills", null, true);
+        verify(contractInputDefinitionBuilder).addInput("name", Type.TEXT, "name of the skills", false);
+        verify(contractInputDefinitionBuilder).addInput("rate", Type.INTEGER, "rate of the skill", false);
+    }
 
     @Test
-	void should_add_a_file_contrac_input() throws Exception {
-		when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
-		userTaskengineContractBuilder.build(
-				aContract().havingInput(aContractInput().withName("myFile").withType(ContractInputType.FILE)).build());
+    void should_add_a_file_contrac_input() throws Exception {
+        when(taskBuilder.addContract()).thenReturn(contractDefBuilder);
+        userTaskengineContractBuilder.build(
+                aContract().havingInput(aContractInput().withName("myFile").withType(ContractInputType.FILE)).build());
 
-		verify(contractDefBuilder).addFileInput("myFile", null, false);
-	}
+        verify(contractDefBuilder).addFileInput("myFile", null, false);
+    }
 
 }

@@ -101,7 +101,11 @@ public interface ConnectorImplementationRegistry {
     /**
      * A record class with maven artifact information
      */
-    public static record ArtifactInfo(String groupId, String artifactId, String version, String classifier,
+    public static record ArtifactInfo(
+            String groupId,
+            String artifactId,
+            String version,
+            String classifier,
             String file) {
 
         public static Predicate<ArtifactInfo> matchesDep(Dependency dep) {
