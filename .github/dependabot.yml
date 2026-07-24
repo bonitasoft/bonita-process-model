@@ -70,11 +70,21 @@ updates:
       prefix: "chore"
       include: "scope"
     groups:
-      production-dependencies:
-        dependency-type: "production"
+      tycho:
+        patterns:
+          - "org.eclipse.tycho:*"
+      apache-maven-plugins:
+        patterns:
+          - "org.apache.maven.plugins:*"
+      maven-plugins:
+        patterns:
+          - "*maven-plugin"
       development-dependencies:
         dependency-type: "development"
     ignore:
       # Skip maven-jar-plugin 3.5.0+ due to Guice incompatibility (BPA-427)
       - dependency-name: "*maven-jar-plugin*"
         versions: ["[3.5.0,)"]
+      # Tycho v5 requires Java 21
+      - dependency-name: "org.eclipse.tycho:*"
+        update-types: [ "version-update:semver-major" ]
