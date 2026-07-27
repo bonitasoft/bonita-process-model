@@ -21,20 +21,15 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.function.Supplier;
 
-import org.apache.maven.Maven;
 import org.apache.maven.execution.BuildSuccess;
 import org.apache.maven.execution.BuildSummary;
-import org.apache.maven.execution.MavenExecutionResult;
 import org.bonitasoft.bonita2bar.BuildBarException;
 import org.bonitasoft.bonita2bar.MavenExecutor;
 import org.bonitasoft.bpm.model.util.EnvironmentUtil;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.m2e.core.MavenPlugin;
-import org.eclipse.m2e.core.embedder.ICallable;
 import org.eclipse.m2e.core.embedder.IMaven;
-import org.eclipse.m2e.core.embedder.IMavenExecutionContext;
 
 /**
  * {@link MavenExecutor} using the M2E maven plugin.
@@ -74,18 +69,16 @@ public class M2eMavenExecutor implements MavenExecutor {
             request.setUserProperties(userProperties);
             request.setActiveProfiles(activeProfiles);
             request.setPom(pomFile);
-            var executionResult = ctx.execute(new ICallable<MavenExecutionResult>() {
-
-                @Override
-                public MavenExecutionResult call(IMavenExecutionContext context, IProgressMonitor monitor)
-                        throws CoreException {
-                    return maven.lookup(Maven.class).execute(request);
-                }
-
-            }, null);
+            // Run the request through the m2e execution context so that the Maven session is fully
+            // set up (projects, workspace reader, event spies) before the build starts. Looking up and
+            // executing Maven ourselves leaves the session incompletely initialized and fails with a
+            // ReactorReader NPE on MavenSession.getProjects() with maven-core 3.9.x.
+            var executionResult = ctx.execute(request);
             BuildSummary buildSummary = executionResult.getBuildSummary(executionResult.getProject());
             if (!(buildSummary instanceof BuildSuccess)) {
-                throw new BuildBarException(errorMessageBase.get(), executionResult.getExceptions().get(0));
+                var exceptions = executionResult.getExceptions();
+                throw new BuildBarException(errorMessageBase.get(),
+                        exceptions.isEmpty() ? null : exceptions.get(0));
             }
         } catch (CoreException e) {
             throw new BuildBarException(errorMessageBase.get(), e);
