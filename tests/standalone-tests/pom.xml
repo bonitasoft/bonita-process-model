@@ -198,6 +198,13 @@
     <plugins>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <!-- Drop the m2e maven runtime (pulled in via bonita2bar's Require-Bundle) so its bundled
+               maven-core doesn't clash with the declared one on BarBuilderIT's in-process MavenCli. -->
+          <classpathDependencyExcludes>
+            <classpathDependencyExclude>p2.eclipse.plugin:org.eclipse.m2e.maven.runtime</classpathDependencyExclude>
+          </classpathDependencyExcludes>
+        </configuration>
         <executions>
           <execution>
             <goals>
