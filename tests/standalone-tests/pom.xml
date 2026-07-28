@@ -22,6 +22,8 @@
     <!-- Test -->
     <junit.version>5.9.3</junit.version>
     <assertj-core.version>3.24.2</assertj-core.version>
+    <!-- required at runtime by maven-artifact since maven 3.9 dropped it as a transitive dependency -->
+    <commons-lang3.version>3.12.0</commons-lang3.version>
     <logback.version>1.2.13</logback.version>
     <sonar.tests>src/test/java</sonar.tests>
     <plexus-testing.version>1.2.0</plexus-testing.version>
@@ -89,6 +91,12 @@
     <dependency>
       <groupId>org.apache.maven</groupId>
       <artifactId>maven-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+      <version>${commons-lang3.version}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -190,6 +198,13 @@
     <plugins>
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
+        <configuration>
+          <!-- Drop the m2e maven runtime (pulled in via bonita2bar's Require-Bundle) so its bundled
+               maven-core doesn't clash with the declared one on BarBuilderIT's in-process MavenCli. -->
+          <classpathDependencyExcludes>
+            <classpathDependencyExclude>p2.eclipse.plugin:org.eclipse.m2e.maven.runtime</classpathDependencyExclude>
+          </classpathDependencyExcludes>
+        </configuration>
         <executions>
           <execution>
             <goals>

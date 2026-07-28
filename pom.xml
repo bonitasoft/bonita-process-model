@@ -80,7 +80,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <gitflow-maven-plugin.version>1.21.0</gitflow-maven-plugin.version>
     <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
     <!-- standard maven plugins versions -->
-    <maven-core.version>3.8.4</maven-core.version>
+    <maven-core.version>3.9.16</maven-core.version>
     <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
     <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
     <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
