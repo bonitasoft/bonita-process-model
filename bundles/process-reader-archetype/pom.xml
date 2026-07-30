@@ -14,6 +14,8 @@
   <properties>
     <maven.deploy.skip>false</maven.deploy.skip>
     <bonita-process-model.version>${project.version}</bonita-process-model.version>
+    <!-- Alias for java.version, which would be shadowed by the JVM system property during resource filtering -->
+    <archetype-java.version>${java.version}</archetype-java.version>
   </properties>
   <dependencies>
     <!-- Artifacts from reactor are required for testing the project built from archetype -->
@@ -73,35 +75,6 @@
       </testResource>
     </testResources>
     <plugins>
-      <!-- Patch archetype-metadata.xml and archetype.properties files to reference correct versions  -->
-      <plugin>
-        <groupId>org.codehaus.gmaven</groupId>
-        <artifactId>groovy-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>report-versions-to-archetype</id>
-            <goals>
-              <goal>execute</goal>
-            </goals>
-            <phase>process-resources</phase>
-            <configuration>
-              <defaults>
-                <src.dir>${project.basedir}/src</src.dir>
-                <java-version>${java.version}</java-version>
-                <bonita-process-model-version>${bonita-process-model.version}</bonita-process-model-version>
-                <maven-clean-version>${maven-clean-plugin.version}</maven-clean-version>
-                <maven-resources-version>${maven-resources-plugin.version}</maven-resources-version>
-                <maven-compiler-version>${maven-compiler-plugin.version}</maven-compiler-version>
-                <maven-surefire-version>${maven-surefire-plugin.version}</maven-surefire-version>
-                <maven-jar-version>${maven-jar-plugin.version}</maven-jar-version>
-                <maven-install-version>${maven-install-plugin.version}</maven-install-version>
-                <maven-deploy-version>${maven-deploy-plugin.version}</maven-deploy-version>
-              </defaults>
-              <source>${project.basedir}/report-versions-to-archetype.groovy</source>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
       <!-- Ensure the model and model.edit plugins are installed in repository
              before the archetype generated project is tested.
              For this purpose, the plugins are in this module's test dependencies -->
