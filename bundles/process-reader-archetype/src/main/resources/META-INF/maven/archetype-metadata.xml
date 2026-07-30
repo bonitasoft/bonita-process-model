@@ -13,31 +13,31 @@
       <defaultValue>true</defaultValue>
 	</requiredProperty>
     <requiredProperty key="java-version">
-      <defaultValue>17</defaultValue>
+      <defaultValue>${archetype-java.version}</defaultValue>
     </requiredProperty>
     <requiredProperty key="bonita-process-model-version">
       <defaultValue>${bonita-process-model.version}</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-clean-version">
-      <defaultValue>3.3.1</defaultValue>
+      <defaultValue>${maven-clean-plugin.version}</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-resources-version">
-      <defaultValue>3.3.1</defaultValue>
+      <defaultValue>${maven-resources-plugin.version}</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-compiler-version">
-      <defaultValue>3.10.1</defaultValue>
+      <defaultValue>${maven-compiler-plugin.version}</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-surefire-version">
-      <defaultValue>3.1.2</defaultValue>
+      <defaultValue>${maven-surefire-plugin.version}</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-jar-version">
-      <defaultValue>3.3.0</defaultValue>
+      <defaultValue>${maven-jar-plugin.version}</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-install-version">
-      <defaultValue>3.1.4</defaultValue>
+      <defaultValue>${maven-install-plugin.version}</defaultValue>
     </requiredProperty>
     <requiredProperty key="maven-deploy-version">
-      <defaultValue>3.1.1</defaultValue>
+      <defaultValue>${maven-deploy-plugin.version}</defaultValue>
     </requiredProperty>
   </requiredProperties>
 
