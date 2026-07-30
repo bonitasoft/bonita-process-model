@@ -71,8 +71,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <maven-artifact.version>3.9.3</maven-artifact.version>
     <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
     <maven-invoker-plugin.version>3.3.0</maven-invoker-plugin.version>
-    <groovy-maven-plugin.version>2.1.1</groovy-maven-plugin.version>
-    <groovy-maven-plugin.groovy.version>3.0.18</groovy-maven-plugin.groovy.version>
     <archetype-packaging.version>3.4.1</archetype-packaging.version>
     <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
     <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
@@ -171,18 +169,6 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
           <groupId>org.codehaus.mojo</groupId>
           <artifactId>flatten-maven-plugin</artifactId>
           <version>${flatten-maven-plugin.version}</version>
-        </plugin>
-        <plugin>
-          <groupId>org.codehaus.gmaven</groupId>
-          <artifactId>groovy-maven-plugin</artifactId>
-          <version>${groovy-maven-plugin.version}</version>
-          <dependencies>
-            <dependency>
-              <groupId>org.codehaus.groovy</groupId>
-              <artifactId>groovy-xml</artifactId>
-              <version>${groovy-maven-plugin.groovy.version}</version>
-            </dependency>
-          </dependencies>
         </plugin>
         <plugin>
           <groupId>org.cyclonedx</groupId>
