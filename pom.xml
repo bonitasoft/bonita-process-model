@@ -72,9 +72,9 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
     <maven-invoker-plugin.version>3.3.0</maven-invoker-plugin.version>
     <archetype-packaging.version>3.4.1</archetype-packaging.version>
-    <flatten-maven-plugin.version>1.7.3</flatten-maven-plugin.version>
+    <flatten-maven-plugin.version>1.8.0</flatten-maven-plugin.version>
     <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
-    <spotless-maven-plugin.version>3.8.0</spotless-maven-plugin.version>
+    <spotless-maven-plugin.version>3.9.0</spotless-maven-plugin.version>
     <gitflow-maven-plugin.version>1.21.0</gitflow-maven-plugin.version>
     <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
     <!-- standard maven plugins versions -->
