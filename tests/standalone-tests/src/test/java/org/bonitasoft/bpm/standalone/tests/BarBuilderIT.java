@@ -42,6 +42,8 @@ import org.apache.maven.project.ProjectBuildingResult;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.apache.maven.settings.Settings;
 import org.apache.maven.settings.SettingsUtils;
+import org.apache.maven.settings.crypto.DefaultSettingsDecryptionRequest;
+import org.apache.maven.settings.crypto.SettingsDecrypter;
 import org.apache.maven.settings.io.xpp3.SettingsXpp3Reader;
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
@@ -77,6 +79,9 @@ class BarBuilderIT {
 
     @Inject
     protected org.apache.maven.project.ProjectBuilder projectBuilder;
+
+    @Inject
+    protected SettingsDecrypter settingsDecrypter;
 
     @BeforeEach
     void setUp() throws Exception {
@@ -121,7 +126,9 @@ class BarBuilderIT {
         buildingRequest.setActiveProfileIds(settings.getActiveProfiles());
 
         DefaultAuthenticationSelector authSelector = new DefaultAuthenticationSelector();
-        settings.getServers().forEach(server -> {
+        // decrypt server passwords like the Maven CLI does
+        var decryptedSettings = settingsDecrypter.decrypt(new DefaultSettingsDecryptionRequest(settings));
+        decryptedSettings.getServers().forEach(server -> {
             AuthenticationBuilder authBuilder = new AuthenticationBuilder();
             authBuilder.addUsername(server.getUsername());
             authBuilder.addPassword(server.getPassword());
