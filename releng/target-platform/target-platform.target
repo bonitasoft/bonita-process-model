@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="platform" sequenceNumber="1744213320">
+<target name="platform" sequenceNumber="1744213321">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.equinox.sdk.feature.group" version="3.23.1400.v20240820-0604"/>
@@ -19,49 +19,49 @@
       <repository location="https://groovy.jfrog.io/artifactory/plugins-release/e4.33/"/>
     </location>
     <location includeDependencyDepth="none" includeDependencyScopes="compile,runtime,system" includeSource="true" missingManifest="generate" type="Maven" label="BonitaArtifactsModels">
-      <feature id="org.bonitasoft.artifacts.model.feature" label="Bonita Artifacts Models Feature" provider-name="Bonitasoft S.A" version="1.2.2">
+      <feature id="org.bonitasoft.artifacts.model.feature" label="Bonita Artifacts Models Feature" provider-name="Bonitasoft S.A" version="2.0.0">
       </feature>
       <dependencies>
         <dependency>
           <groupId>com.sun.activation</groupId>
           <artifactId>jakarta.activation</artifactId>
-          <version>1.2.2</version>
+          <version>2.0.1</version>
           <type>jar</type>
         </dependency>
         <dependency>
           <groupId>com.sun.xml.bind</groupId>
           <artifactId>jaxb-osgi</artifactId>
-          <version>2.3.8</version>
+          <version>3.0.2</version>
           <type>jar</type>
         </dependency>
         <dependency>
           <groupId>jakarta.xml.bind</groupId>
           <artifactId>jakarta.xml.bind-api</artifactId>
-          <version>2.3.3</version>
+          <version>3.0.1</version>
           <type>jar</type>
         </dependency>
         <dependency>
           <groupId>org.bonitasoft.engine</groupId>
           <artifactId>bonita-business-archive</artifactId>
-          <version>1.2.2</version>
+          <version>2.0.0</version>
           <type>jar</type>
         </dependency>
         <dependency>
           <groupId>org.bonitasoft.engine</groupId>
           <artifactId>bonita-common-artifacts-model</artifactId>
-          <version>1.2.2</version>
+          <version>2.0.0</version>
           <type>jar</type>
         </dependency>
         <dependency>
           <groupId>org.bonitasoft.engine</groupId>
           <artifactId>bonita-form-mapping-model</artifactId>
-          <version>1.2.2</version>
+          <version>2.0.0</version>
           <type>jar</type>
         </dependency>
         <dependency>
           <groupId>org.bonitasoft.engine</groupId>
           <artifactId>bonita-process-definition-model</artifactId>
-          <version>1.2.2</version>
+          <version>2.0.0</version>
           <type>jar</type>
         </dependency>
         <dependency>
