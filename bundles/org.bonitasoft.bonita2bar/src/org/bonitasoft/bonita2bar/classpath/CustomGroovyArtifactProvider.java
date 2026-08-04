@@ -121,9 +121,11 @@ public class CustomGroovyArtifactProvider implements BarArtifactProvider {
             compileUnit.addSources(filesToCompile.toArray(new File[filesToCompile.size()]));
             if (EnvironmentUtil.isOSGi()) {
                 // When using Groovy eclipse compiler, the CompilationUnit is modified and do
-                // not execute the OUTPUT phase
+                // not execute the OUTPUT phase (verified still the case for the groovy40 base
+                // shipped by groovy-eclipse 5.9.0: the 'skip output phase' edit removes the
+                // default class-file writer from the constructor)
                 // See
-                // https://github.com/groovy/groovy-eclipse/blob/v4.9.0/base/org.codehaus.groovy30/src/org/codehaus/groovy/control/CompilationUnit.java#L295
+                // https://github.com/groovy/groovy-eclipse/blob/v5.9.0/base/org.codehaus.groovy40/src/org/codehaus/groovy/control/CompilationUnit.java#L313
                 compileUnit.addPhaseOperation(groovyClass -> {
                     String name = groovyClass.getName().replace('.', File.separatorChar) + ".class";
                     File path = new File(configuration.getTargetDirectory(), name);
