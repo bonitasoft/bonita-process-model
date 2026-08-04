@@ -59,34 +59,47 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <url>https://github.com/bonitasoft/bonita-process-model</url>
   </scm>
   <properties>
-    <cyclonedx.version>2.9.2</cyclonedx.version>
-    <sonar-maven-plugin.version>5.7.0.6970</sonar-maven-plugin.version>
-    <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
-    <tycho.version>4.0.13</tycho.version>
-    <bonita-artifacts-model.version>1.2.2</bonita-artifacts-model.version>
-    <emf-ecore.version>2.37.0</emf-ecore.version>
+    <!-- Java version -->
+    <java.version>17</java.version>
+    <maven.compiler.release>${java.version}</maven.compiler.release>
+    <!-- Properties encoding used by the maven compiler -->
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!-- Skip deploy for all modules by default, and only activate it for the ones we want to deploy -->
+    <maven.deploy.skip>true</maven.deploy.skip>
+    <!-- Bonitasoft dependencies versions -->
+    <bonita-artifacts-model.version>2.0.0</bonita-artifacts-model.version>
+    <!-- Dependency versions -->
+    <ecj.version>3.26.0</ecj.version>
     <emf-common.version>2.31.0</emf-common.version>
-    <emf-xmi.version>2.38.0</emf-xmi.version>
+    <emf-ecore.version>2.37.0</emf-ecore.version>
     <emf-edit.version>2.22.0</emf-edit.version>
+    <emf-xmi.version>2.38.0</emf-xmi.version>
+    <groovy.version>3.0.19</groovy.version>
+    <jackson-bom.version>2.22.1</jackson-bom.version>
     <maven-artifact.version>3.9.3</maven-artifact.version>
-    <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
-    <maven-invoker-plugin.version>3.3.0</maven-invoker-plugin.version>
-    <archetype-packaging.version>3.4.1</archetype-packaging.version>
-    <flatten-maven-plugin.version>1.8.0</flatten-maven-plugin.version>
-    <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
-    <spotless-maven-plugin.version>3.9.0</spotless-maven-plugin.version>
-    <gitflow-maven-plugin.version>1.21.0</gitflow-maven-plugin.version>
-    <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
-    <!-- standard maven plugins versions -->
     <maven-core.version>3.9.16</maven-core.version>
-    <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
-    <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
-    <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
-    <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
-    <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
-    <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
-    <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+    <slf4j.version>1.7.36</slf4j.version>
+    <!-- Maven plugin versions -->
+    <archetype-packaging.version>3.4.1</archetype-packaging.version>
+    <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
+    <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
+    <cyclonedx.version>2.9.2</cyclonedx.version>
+    <flatten-maven-plugin.version>1.8.0</flatten-maven-plugin.version>
+    <gitflow-maven-plugin.version>1.21.0</gitflow-maven-plugin.version>
+    <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
     <maven-assembly-plugin.version>3.8.0</maven-assembly-plugin.version>
+    <maven-clean-plugin.version>3.5.0</maven-clean-plugin.version>
+    <maven-compiler-plugin.version>3.15.0</maven-compiler-plugin.version>
+    <maven-deploy-plugin.version>3.1.4</maven-deploy-plugin.version>
+    <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+    <maven-install-plugin.version>3.1.4</maven-install-plugin.version>
+    <maven-invoker-plugin.version>3.3.0</maven-invoker-plugin.version>
+    <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+    <maven-resources-plugin.version>3.5.0</maven-resources-plugin.version>
+    <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
+    <sonar-maven-plugin.version>5.7.0.6970</sonar-maven-plugin.version>
+    <spotless-maven-plugin.version>3.9.0</spotless-maven-plugin.version>
+    <tycho.version>4.0.13</tycho.version>
     <!-- Spotless resources location -->
     <eclipse.formatter.file>${maven.multiModuleProjectDirectory}/formatter.xml</eclipse.formatter.file>
     <eclipse.importorder.file>${maven.multiModuleProjectDirectory}/eclipse.importorder</eclipse.importorder.file>
@@ -99,17 +112,13 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <sonar.exclusions>src-gen/**/*</sonar.exclusions>
     <sonar.sources></sonar.sources>
     <sonar.coverage.jacoco.xmlReportPaths>${maven.multiModuleProjectDirectory}/releng/coverage-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>17</java.version>
-    <maven.compiler.release>${java.version}</maven.compiler.release>
-    <maven.deploy.skip>true</maven.deploy.skip>
   </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>com.fasterxml.jackson</groupId>
         <artifactId>jackson-bom</artifactId>
-        <version>2.22.1</version>
+        <version>${jackson-bom.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
