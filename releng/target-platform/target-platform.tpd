@@ -11,7 +11,7 @@ location "http://download.eclipse.org/edapt/releases/15x/150" {
     org.eclipse.emf.edapt.runtime.feature.feature.group
 }
 location "https://groovy.jfrog.io/artifactory/plugins-release/e4.33/" {
-    org.codehaus.groovy30.feature.feature.group
+    org.codehaus.groovy40.feature.feature.group
 }
 maven MavenDependenciesWithInfiniteDepth scope=compile,runtime,system dependencyDepth=infinite missingManifest=generate {
     dependency {

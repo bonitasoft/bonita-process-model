@@ -15,7 +15,7 @@
       <repository location="http://download.eclipse.org/edapt/releases/15x/150"/>
     </location>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
-      <unit id="org.codehaus.groovy30.feature.feature.group" version="5.6.0.v202501010114-e2409"/>
+      <unit id="org.codehaus.groovy40.feature.feature.group" version="5.9.0.v202509301436-e2409"/>
       <repository location="https://groovy.jfrog.io/artifactory/plugins-release/e4.33/"/>
     </location>
     <location includeDependencyDepth="none" includeDependencyScopes="compile,runtime,system" includeSource="true" missingManifest="generate" type="Maven" label="BonitaArtifactsModels">
