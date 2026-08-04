@@ -53,17 +53,17 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.36</version>
+      <version>${slf4j.version}</version>
     </dependency>
     <dependency>
       <groupId>org.codehaus.groovy</groupId>
       <artifactId>groovy</artifactId>
-      <version>3.0.19</version>
+      <version>${groovy.version}</version>
     </dependency>
     <dependency>
       <groupId>org.eclipse.jdt</groupId>
       <artifactId>ecj</artifactId>
-      <version>3.26.0</version>
+      <version>${ecj.version}</version>
     </dependency>
   </dependencies>
   <build>
@@ -74,14 +74,6 @@
       </resource>
     </resources>
     <plugins>
-      <plugin>
-        <groupId>org.eclipse.tycho</groupId>
-        <artifactId>tycho-compiler-plugin</artifactId>
-        <configuration>
-          <!-- Do not overwrite the filtered resources -->
-          <copyResources>false</copyResources>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>org.eclipse.tycho</groupId>
         <artifactId>tycho-compiler-plugin</artifactId>
