@@ -88,13 +88,13 @@ DynamicImport-Package: *
 ]]></instructions>
     </location>
     <location includeDependencyDepth="infinite" includeDependencyScopes="compile,runtime,system" includeSource="false" missingManifest="generate" type="Maven" label="MavenJackson">
-      <feature id="com.fasterxml.jackson.feature" label="Jackson Feature" provider-name="Bonitasoft S.A" version="2.18.3">
+      <feature id="com.fasterxml.jackson.feature" label="Jackson Feature" provider-name="Bonitasoft S.A" version="2.22.1">
       </feature>
       <dependencies>
         <dependency>
           <groupId>com.fasterxml.jackson.dataformat</groupId>
           <artifactId>jackson-dataformat-yaml</artifactId>
-          <version>2.18.3</version>
+          <version>2.22.1</version>
           <type>jar</type>
         </dependency>
       </dependencies>
