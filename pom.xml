@@ -74,7 +74,10 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <emf-ecore.version>2.37.0</emf-ecore.version>
     <emf-edit.version>2.22.0</emf-edit.version>
     <emf-xmi.version>2.38.0</emf-xmi.version>
-    <groovy.version>3.0.19</groovy.version>
+    <!-- must stay within the compiler level of the target platform's groovy-eclipse feature
+         (org.codehaus.groovy40.feature -> 4.0.x); when bumping, also update the hardcoded
+         version in the test fixture poms under tests/**/my-project/app/pom.xml -->
+    <groovy.version>4.0.32</groovy.version>
     <jackson-bom.version>2.22.1</jackson-bom.version>
     <maven-artifact.version>3.9.3</maven-artifact.version>
     <maven-core.version>3.9.16</maven-core.version>

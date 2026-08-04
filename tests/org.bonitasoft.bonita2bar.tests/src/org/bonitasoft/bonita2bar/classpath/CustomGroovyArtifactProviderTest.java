@@ -60,6 +60,9 @@ class CustomGroovyArtifactProviderTest {
     @Test
     void should_compile_groovy_classes() throws Exception {
         // given
+        // build-time Groovy level: must match the 4.0.x engine runtime BARs are deployed on
+        // (here the level of the org.codehaus.groovy target-platform bundle)
+        assertThat(groovy.lang.GroovySystem.getVersion()).startsWith("4.");
         var outputFolder = projectRoot.resolve("target");
         var classpath = MavenUtil.buildClasspath(projectRoot, MavenUtil.getMvnExecutable());
 
@@ -86,6 +89,9 @@ class CustomGroovyArtifactProviderTest {
                 new File(targetClasses, "MyLib2.class"),
                 // even MyLib3 which is not used in the process
                 new File(targetClasses, "MyLib3.class"));
+        // non-default package: exercises the directory-creation branch of the OSGi
+        // output-phase workaround
+        assertThat(targetClasses.toPath().resolve("com/company/Groovy4LevelCheck.class")).exists();
 
         assertThat(outputFolder.resolve(CustomGroovyArtifactProvider.GROOVYSCRIPT_JAR)).exists();
     }

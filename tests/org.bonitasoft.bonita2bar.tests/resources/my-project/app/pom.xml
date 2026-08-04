@@ -14,15 +14,20 @@
             <artifactId>bonita-common-sp</artifactId>
             <scope>provided</scope>
         </dependency>
+        <!-- versions inline until the fixture parent moves to the Bonita 12 project parent,
+             which manages the org.apache.groovy coordinates (the 10.2.0 parent only manages
+             org.codehaus.groovy) -->
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-all</artifactId>
+            <version>4.0.32</version>
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.codehaus.groovy</groupId>
+            <groupId>org.apache.groovy</groupId>
             <artifactId>groovy-dateutil</artifactId>
+            <version>4.0.32</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
