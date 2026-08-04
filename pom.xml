@@ -86,7 +86,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <archetype-packaging.version>3.4.1</archetype-packaging.version>
     <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
     <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
-    <cyclonedx.version>2.9.2</cyclonedx.version>
+    <cyclonedx.version>2.9.3</cyclonedx.version>
     <flatten-maven-plugin.version>1.8.0</flatten-maven-plugin.version>
     <gitflow-maven-plugin.version>1.21.0</gitflow-maven-plugin.version>
     <jacoco-maven-plugin.version>0.8.15</jacoco-maven-plugin.version>
