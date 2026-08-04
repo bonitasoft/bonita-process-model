@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde?>
 <!-- generated with https://github.com/eclipse-cbi/targetplatform-dsl -->
-<target name="platform" sequenceNumber="1744213320">
+<target name="platform" sequenceNumber="1744213321">
   <locations>
     <location includeMode="planner" includeAllPlatforms="false" includeSource="true" includeConfigurePhase="true" type="InstallableUnit">
       <unit id="org.eclipse.equinox.sdk.feature.group" version="3.23.1400.v20240820-0604"/>
@@ -88,13 +88,13 @@ DynamicImport-Package: *
 ]]></instructions>
     </location>
     <location includeDependencyDepth="infinite" includeDependencyScopes="compile,runtime,system" includeSource="false" missingManifest="generate" type="Maven" label="MavenJackson">
-      <feature id="com.fasterxml.jackson.feature" label="Jackson Feature" provider-name="Bonitasoft S.A" version="2.18.3">
+      <feature id="com.fasterxml.jackson.feature" label="Jackson Feature" provider-name="Bonitasoft S.A" version="2.22.1">
       </feature>
       <dependencies>
         <dependency>
           <groupId>com.fasterxml.jackson.dataformat</groupId>
           <artifactId>jackson-dataformat-yaml</artifactId>
-          <version>2.18.3</version>
+          <version>2.22.1</version>
           <type>jar</type>
         </dependency>
       </dependencies>

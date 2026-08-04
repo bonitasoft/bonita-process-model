@@ -34,13 +34,13 @@ maven MavenJackson scope=compile,runtime,system dependencyDepth=infinite missing
     feature {
         id="com.fasterxml.jackson.feature"
         name="Jackson Feature"
-        version="2.18.3"
+        version="2.22.1"
         vendor="Bonitasoft S.A"
     }
     dependency {
         groupId="com.fasterxml.jackson.dataformat"
         artifactId="jackson-dataformat-yaml"
-        version="2.18.3"
+        version="2.22.1"
     }
 }
 maven BonitaArtifactsModels scope=compile,runtime,system dependencyDepth=none missingManifest=generate includeSources {
