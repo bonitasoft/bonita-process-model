@@ -72,7 +72,7 @@ updates:
     groups:
       tycho:
         patterns:
-          - "org.eclipse.tycho:*"
+          - "org.eclipse.tycho*"
       apache-maven-plugins:
         patterns:
           - "org.apache.maven.plugins:*"
@@ -87,5 +87,5 @@ updates:
         versions: ["[3.5.0,)"]
       # Only update Tycho within 4.x: Tycho 5+ requires Java 21+ to run the build (see issue #154).
       # Remove this ignore rule when the build moves to Java 21.
-      - dependency-name: "org.eclipse.tycho:*"
+      - dependency-name: "org.eclipse.tycho*"
         versions: ["[5,)"]
