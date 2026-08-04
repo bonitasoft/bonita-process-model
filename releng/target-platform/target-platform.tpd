@@ -47,7 +47,7 @@ maven BonitaArtifactsModels scope=compile,runtime,system dependencyDepth=none mi
     feature {
         id="org.bonitasoft.artifacts.model.feature"
         name="Bonita Artifacts Models Feature"
-        version="2.0.0"
+        version="2.0.1"
         vendor="Bonitasoft S.A"
     }
     dependency {
@@ -68,22 +68,22 @@ maven BonitaArtifactsModels scope=compile,runtime,system dependencyDepth=none mi
     dependency {
         groupId="org.bonitasoft.engine"
         artifactId="bonita-business-archive"
-        version="2.0.0"
+        version="2.0.1"
     }
     dependency {
         groupId="org.bonitasoft.engine"
         artifactId="bonita-common-artifacts-model"
-        version="2.0.0"
+        version="2.0.1"
     }
     dependency {
         groupId="org.bonitasoft.engine"
         artifactId="bonita-form-mapping-model"
-        version="2.0.0"
+        version="2.0.1"
     }
     dependency {
         groupId="org.bonitasoft.engine"
         artifactId="bonita-process-definition-model"
-        version="2.0.0"
+        version="2.0.1"
     }
     dependency {
         groupId="org.glassfish.hk2"
