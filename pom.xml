@@ -67,7 +67,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
     <!-- Skip deploy for all modules by default, and only activate it for the ones we want to deploy -->
     <maven.deploy.skip>true</maven.deploy.skip>
     <!-- Bonitasoft dependencies versions -->
-    <bonita-artifacts-model.version>2.0.0</bonita-artifacts-model.version>
+    <bonita-artifacts-model.version>2.0.1</bonita-artifacts-model.version>
     <!-- Dependency versions -->
     <ecj.version>3.26.0</ecj.version>
     <emf-common.version>2.31.0</emf-common.version>
