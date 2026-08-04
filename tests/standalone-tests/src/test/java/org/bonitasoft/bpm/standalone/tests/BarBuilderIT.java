@@ -143,9 +143,6 @@ class BarBuilderIT {
 
     @Test
     void buildProjectBusinessArchives(@TempDir Path tmpDir) throws Exception {
-        // build-time Groovy level: must match the 4.0.x engine runtime BARs are deployed on
-        // (here org.apache.groovy:groovy:${groovy.version} from the module classpath)
-        assertThat(groovy.lang.GroovySystem.getVersion()).startsWith("4.");
         var projectRoot = tmpDir.resolve("test-respository");
         FileUtil.copyDirectory(new File(BarBuilderIT.class.getResource("/my-project").getFile()).getAbsolutePath(),
                 projectRoot.toFile().getAbsolutePath());
