@@ -85,6 +85,7 @@ updates:
       # Skip maven-jar-plugin 3.5.0+ due to Guice incompatibility (BPA-427)
       - dependency-name: "*maven-jar-plugin*"
         versions: ["[3.5.0,)"]
-      # Tycho v5 requires Java 21
+      # Only update Tycho within 4.x: Tycho 5+ requires Java 21+ to run the build (see issue #154).
+      # Remove this ignore rule when the build moves to Java 21.
       - dependency-name: "org.eclipse.tycho:*"
-        update-types: [ "version-update:semver-major" ]
+        versions: ["[5,)"]
