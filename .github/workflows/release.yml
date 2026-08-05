@@ -64,3 +64,32 @@ jobs:
           -DreleaseVersion=${{ github.event.inputs.version }}
           -DdevelopmentVersion=${{ github.event.inputs.nextDevelopmentVersion }}
           -DversionDigitToIncrement=${{ github.event.inputs.versionDigitToIncrement }}
+
+      - name: Detect pre-release
+        id: check
+        run: |
+          VERSION="${{ github.event.inputs.version }}"
+          if [[ "$VERSION" == *-* || "$VERSION" == *SNAPSHOT* ]]; then
+            echo "Pre-release detected ($VERSION), skipping downstream notifications"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Notify bonita-project
+        if: steps.check.outputs.skip == 'false'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.BONITA_CI_PAT }}
+          repository: bonitasoft/bonita-project
+          event-type: new-process-model-release
+          client-payload: '{"release": "${{ github.event.inputs.version }}", "release_notes_url": "${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.event.inputs.version }}"}'
+
+      - name: Notify bonita-studio-sp
+        if: steps.check.outputs.skip == 'false'
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.BONITA_CI_PAT }}
+          repository: bonitasoft/bonita-studio-sp
+          event-type: new-process-model-release
+          client-payload: '{"release": "${{ github.event.inputs.version }}", "release_notes_url": "${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.event.inputs.version }}"}'
