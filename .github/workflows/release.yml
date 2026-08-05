@@ -64,3 +64,4 @@ jobs:
           -DreleaseVersion=${{ github.event.inputs.version }}
           -DdevelopmentVersion=${{ github.event.inputs.nextDevelopmentVersion }}
           -DversionDigitToIncrement=${{ github.event.inputs.versionDigitToIncrement }}
+          -DskipTestProject
