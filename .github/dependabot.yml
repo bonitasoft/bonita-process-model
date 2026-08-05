@@ -53,6 +53,19 @@ updates:
       minor-patch:
         update-types: ["minor", "patch"]
 
+  # Maintain dependencies for GitHub Actions (support/10.0.x)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    target-branch: support/10.0.x
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    groups:
+      minor-patch:
+        update-types: ["minor", "patch"]
+
   # Maintain dependencies for maven
   - package-ecosystem: "maven"
     directory: "/"
