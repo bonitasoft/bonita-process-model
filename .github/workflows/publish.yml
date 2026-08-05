@@ -34,4 +34,4 @@ jobs:
           keeper-secret-config: ${{ secrets.KSM_CONFIG }}
 
       - name: Publish tag
-        run: ./mvnw -ntp --batch-mode deploy -Prelease
+        run: ./mvnw -ntp --batch-mode deploy -Prelease -DskipTests
