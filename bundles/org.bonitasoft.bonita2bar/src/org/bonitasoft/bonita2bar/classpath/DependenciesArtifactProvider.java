@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -82,11 +83,13 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
                             "includeTypes", "jar"),
                     List.of(profileToUse), errMsg);
 
-            // filter copied dependencies based on configuration exported flags,
-            // then add remaining files to the business archive
+            // select the copied dependencies to exclude based on configuration exported flags,
+            // then add the remaining files to the business archive. The excluded files are NOT
+            // deleted: deleting a freshly copied jar races with antivirus/indexer scans that
+            // transiently lock it on Windows, failing the whole BAR build
             if (dependenciesFolder.exists()) {
-                filterCopiedDependencies(dependenciesFolder, configuration);
-                exploreDependencies(builder, dependenciesFolder);
+                var excludedDependencies = selectExcludedDependencies(dependenciesFolder, configuration);
+                exploreDependencies(builder, dependenciesFolder, excludedDependencies);
             }
         } catch (IOException | XmlPullParserException e) {
             throw new BuildBarException(String.format("Failed to add dependencies in bar %s-%s.bar.", process.getName(),
@@ -96,29 +99,35 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
     }
 
     /**
-     * Filter copied dependencies by matching each JAR against the exported/excluded
-     * fragments from the configuration. For each file in the dependencies folder:
+     * Select the copied dependencies to exclude from the archive by matching each JAR against
+     * the exported/excluded fragments from the configuration. For each file in the dependencies
+     * folder:
      * <ol>
      * <li><b>Exact filename match with an exported fragment</b>: keep the JAR.</li>
-     * <li><b>Base-name excluded</b> (user set {@code exported=false}): delete the JAR.</li>
-     * <li><b>Base-name matches an exported fragment but version differs</b>: delete the JAR
+     * <li><b>Base-name excluded</b> (user set {@code exported=false}): exclude the JAR.</li>
+     * <li><b>Base-name matches an exported fragment but version differs</b>: exclude the JAR
      * and log a warning (Maven resolved a different version than referenced in the fragment).</li>
-     * <li><b>Unknown JAR</b> (no matching fragment at all): delete the JAR.</li>
+     * <li><b>Unknown JAR</b> (no matching fragment at all): exclude the JAR.</li>
      * </ol>
      * <p>
      * Explicit exclusion ({@code exported=false}) always takes priority over export flags,
      * to handle cases where the same artifact appears in multiple containers with conflicting flags.
+     * <p>
+     * The excluded files are left on disk on purpose: they live in a temporary per-process
+     * folder, and deleting a file right after it has been copied can fail on Windows when an
+     * antivirus or indexer holds a transient lock on it.
      *
      * @param dependenciesFolder the folder containing copied dependencies
      * @param configuration the configuration containing exported fragment information
+     * @return the paths of the copied dependencies to exclude from the archive
      */
-    void filterCopiedDependencies(File dependenciesFolder, Configuration configuration) throws IOException {
+    Set<Path> selectExcludedDependencies(File dependenciesFolder, Configuration configuration) {
         if (configuration == null) {
-            return;
+            return Set.of();
         }
         var containers = configuration.getProcessDependencies();
         if (containers.isEmpty()) {
-            return;
+            return Set.of();
         }
 
         // Collect all fragments once to avoid multiple tree traversals.
@@ -159,10 +168,16 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
         exportedExactNames.removeAll(excludedExactNames);
         excludedBases.forEach(exportedBaseToExact::remove);
 
-        // Filter files
+        // Select files to exclude. Only regular files participate in the exclusion decision:
+        // the archive is built by walking regular files, so excluding a directory path would
+        // have no effect (dependency:copy-dependencies produces a flat, jar-only output anyway)
+        Set<Path> excluded = new HashSet<>();
         File[] files = dependenciesFolder.listFiles();
         if (files != null) {
             for (File file : files) {
+                if (!file.isFile()) {
+                    continue;
+                }
                 String fileName = file.getName();
                 String fileBase = FragmentUtils.extractArtifactBase(fileName);
 
@@ -173,34 +188,39 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
                     // (e.g. asm-3.3.1.jar exported=true, asm-9.8.jar exported=false)
                 } else if (excludedBases.contains(fileBase)) {
                     // Base-name excluded by user (exported=false) and no exact match exported
-                    Files.delete(file.toPath());
+                    excluded.add(file.toPath());
                 } else if (exportedBaseToExact.containsKey(fileBase)) {
                     // Non-runtime JAR: base name matches but version differs → exclude + warning
                     String expected = exportedBaseToExact.get(fileBase);
                     LOGGER.warn("Version mismatch: fragment expects '{}' but Maven resolved '{}'. "
                             + "Excluding from BAR.", expected, fileName);
-                    Files.delete(file.toPath());
+                    excluded.add(file.toPath());
                 } else {
                     // Unknown jar, not tracked by any fragment → exclude
-                    Files.delete(file.toPath());
+                    excluded.add(file.toPath());
                 }
             }
         }
+        return excluded;
     }
 
     /**
-     * Explore dependencies folder and add all files to the business archive.
-     * 
+     * Explore dependencies folder and add all files but the excluded ones to the business archive.
+     *
      * @param builder archive builder
      * @param dependenciesFolder folder containing dependencies
+     * @param excludedDependencies paths of the copied dependencies to exclude from the archive
      * @throws BuildBarException if an error occurs while building the archive
      * @throws IOException if an error occurs while reading the dependencies
      */
-    private void exploreDependencies(BusinessArchiveBuilder builder, File dependenciesFolder)
+    private void exploreDependencies(BusinessArchiveBuilder builder, File dependenciesFolder,
+            Set<Path> excludedDependencies)
             throws BuildBarException, IOException {
         try (Stream<Path> walker = Files.walk(dependenciesFolder.toPath())) {
             List<Path> files = walker
-                    .filter(Files::isRegularFile).toList();
+                    .filter(Files::isRegularFile)
+                    .filter(file -> !excludedDependencies.contains(file))
+                    .toList();
             for (var file : files) {
                 addDependencyToBuild(builder, file);
             }

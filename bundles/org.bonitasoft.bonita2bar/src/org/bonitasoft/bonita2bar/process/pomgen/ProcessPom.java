@@ -26,11 +26,15 @@ import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.model.io.xpp3.MavenXpp3Writer;
 import org.codehaus.plexus.util.FileUtils;
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Gives access to the pom.xml generated for a specific process.
  */
 public class ProcessPom implements Closeable {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProcessPom.class);
 
     Path folderPath;
 
@@ -79,7 +83,14 @@ public class ProcessPom implements Closeable {
     public void close() throws IOException {
         // get rid of temporary folder
         if (folderPath != null && Files.exists(folderPath)) {
-            FileUtils.deleteDirectory(folderPath.toFile());
+            try {
+                FileUtils.deleteDirectory(folderPath.toFile());
+            } catch (IOException e) {
+                // Best-effort cleanup: a transient lock on a freshly written file (e.g. an
+                // antivirus scan on Windows) must not fail the build for a temporary folder
+                LOGGER.warn("Could not fully delete the temporary folder {} ({}). "
+                        + "It will be removed by the next clean build.", folderPath, e.getMessage());
+            }
         }
     }
 
