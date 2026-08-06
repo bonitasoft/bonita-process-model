@@ -173,6 +173,25 @@ workflow [Release](https://github.com/bonitasoft/bonita-process-model/actions/wo
 - Example: `9.0.3 → 10.0.0-SNAPSHOT`
 - Use for: Major version bumps
 
+#### Major Release: bump the model version too
+
+The process model version is the label of the latest release in
+`bundles/org.bonitasoft.bpm.model/model/process.history`, and `ModelHistoryTest` / `VersionsSyncTest` assert that it
+equals the major digit of the bundle version. The release plugin does not touch the history, and the release workflows
+skip the tests (`-DskipTestProject`, `-DskipTests`), so a mismatch only shows up on the next `Build` run.
+
+So a major release must be followed by:
+
+1. **`process.history`**: label the open (unlabelled) trailing release with the new major and a date, add a
+   `MigrationChange` on `UpgradeModelVersionAttributeMigration` inside it, and append a new empty release.
+2. **`.proc` fixtures**: re-version `bonitaModelVersion`, connector `modelVersion` and `configuration:Configuration/@version`.
+3. **Reader archetype**: rename its `MyDiagram-<version>.proc` fixture, update `AppTest` and `referenceOuput.txt`.
+4. **Check** with `./mvnw verify` — `./mvnw test` runs no test at all on the test fragments.
+
+Use Eclipse (Edapt history editor) for step 1 and Bonita Studio (open and re-save the diagrams) for steps 2-3; editing
+the XMI by hand is only safe when the `.ecore` did not change. Full checklist in
+[CLAUDE.md](CLAUDE.md#major-version-upgrade-model-version-bump).
+
 ### Release Process
 
 When you run the workflow from any branch (develop or support/*), it will:

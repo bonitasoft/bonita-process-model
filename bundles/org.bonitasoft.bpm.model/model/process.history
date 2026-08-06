@@ -15254,5 +15254,8 @@
     <changes xsi:type="history:MigrationChange" xmi:id="_aWw2kPpyEe-tM7_3NMtiQg" migration="org.bonitasoft.bpm.migration.custom.migration.configuration.RemoveJarAndGroovyFragmentsMigration"/>
     <changes xsi:type="history:MigrationChange" xmi:id="_OuutYPp7Ee-tM7_3NMtiQg" migration="org.bonitasoft.bpm.model.process.util.migration.UpgradeModelVersionAttributeMigration"/>
   </releases>
-  <releases xmi:id="_Am-REPqSEe-tM7_3NMtiQg"/>
+  <releases xmi:id="_Am-REPqSEe-tM7_3NMtiQg" date="2026-08-05T16:30:00.000+0200" label="10">
+    <changes xsi:type="history:MigrationChange" xmi:id="_bK4pQPtBEfAaN2_4OQuiRg" migration="org.bonitasoft.bpm.model.process.util.migration.UpgradeModelVersionAttributeMigration"/>
+  </releases>
+  <releases xmi:id="_cV7sMPtBEfAaN2_4OQuiRg"/>
 </history:History>
