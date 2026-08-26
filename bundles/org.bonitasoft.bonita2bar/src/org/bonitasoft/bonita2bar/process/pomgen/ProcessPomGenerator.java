@@ -237,6 +237,10 @@ public class ProcessPomGenerator {
      * {@code DependenciesArtifactProvider} expects to keep the jar in the BAR.
      * </p>
      * <p>
+     * A {@code dependencyManagement} entry only drives transitive dependencies and declarations without a
+     * version, so the version of a matching direct dependency is set as well.
+     * </p>
+     * <p>
      * Nothing is pinned when the version cannot be read from the file name, when the group id cannot be
      * resolved unambiguously, or when several versions of the same library are selected - in that last
      * case the user arbitrates by unselecting the unwanted one.
@@ -302,15 +306,22 @@ public class ProcessPomGenerator {
         }
         for (var dependency : managedDependencies) {
             // an explicit entry supersedes any entry inherited from the application pom
-            dependencyManagement.getDependencies()
-                    .removeIf(existing -> Objects.equals(existing.getGroupId(), dependency.getGroupId())
-                            && Objects.equals(existing.getArtifactId(), dependency.getArtifactId())
-                            && existing.getClassifier() == null
-                            && (existing.getType() == null || "jar".equals(existing.getType())));
+            dependencyManagement.getDependencies().removeIf(existing -> isSameArtifact(existing, dependency));
             dependencyManagement.addDependency(dependency);
+            // dependencyManagement is ignored for a direct dependency holding an explicit version
+            model.getDependencies().stream()
+                    .filter(direct -> isSameArtifact(direct, dependency))
+                    .forEach(direct -> direct.setVersion(dependency.getVersion()));
             LOGGER.debug("Pinning {}:{} to version {} for this process.", dependency.getGroupId(),
                     dependency.getArtifactId(), dependency.getVersion());
         }
+    }
+
+    private static boolean isSameArtifact(Dependency candidate, Dependency reference) {
+        return Objects.equals(candidate.getGroupId(), reference.getGroupId())
+                && Objects.equals(candidate.getArtifactId(), reference.getArtifactId())
+                && candidate.getClassifier() == null
+                && (candidate.getType() == null || "jar".equals(candidate.getType()));
     }
 
     /**

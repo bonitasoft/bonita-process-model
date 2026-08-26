@@ -243,6 +243,24 @@ class ProcessPomGeneratorTest {
     }
 
     @Test
+    void should_override_the_version_of_a_direct_dependency() throws Exception {
+        // a dependencyManagement entry is ignored for a direct dependency holding an explicit version,
+        // so the declared version has to be rewritten as well
+        appProject.getDependencies().add(createDependency("org.apache.commons", "commons-text", "1.9"));
+
+        var configuration = aConfigurationWith(
+                FragmentBuilder.aFragment().withValue("commons-text-1.12.0.jar").withType("JAR").exported());
+
+        withProcessPom(configuration, processPom -> {
+            assertThat(processPom.getDependencies())
+                    .filteredOn(dep -> "commons-text".equals(dep.getArtifactId()))
+                    .extracting(Dependency::getVersion)
+                    .containsExactly("1.12.0");
+            assertThat(managedVersionOf(processPom, "org.apache.commons", "commons-text")).isEqualTo("1.12.0");
+        });
+    }
+
+    @Test
     void should_pin_transitive_library_using_group_id_of_resolved_artifact() throws Exception {
         // the library is not declared in the pom, it only exists as a resolved (transitive) artifact
         appProject.setArtifacts(Set.of(anArtifact("org.apache.commons", "commons-text", "1.9")));
