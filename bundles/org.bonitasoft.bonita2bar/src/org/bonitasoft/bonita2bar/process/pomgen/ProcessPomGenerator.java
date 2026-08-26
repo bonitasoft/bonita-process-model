@@ -18,7 +18,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -26,20 +30,27 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.maven.model.Build;
+import org.apache.maven.model.Dependency;
+import org.apache.maven.model.DependencyManagement;
 import org.apache.maven.model.Model;
 import org.apache.maven.project.MavenProject;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
 import org.bonitasoft.bpm.model.configuration.Configuration;
+import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.process.Connector;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.util.FragmentUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Generates the temporary pom.xml dedicated to a specific {@link Pool} process.
  */
 public class ProcessPomGenerator {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProcessPomGenerator.class);
 
     private MavenProject applicationProject;
     private ConnectorImplementationRegistry connectorImplementationRegistry;
@@ -150,6 +161,8 @@ public class ProcessPomGenerator {
         filterZipDependencies(model);
         // remove dependencies excluded by the process configuration (exported=false)
         filterExcludedDependencies(model, configuration);
+        // pin the versions selected by the user in the process configuration
+        injectDependencyManagement(model, configuration);
         pomAccess.writePom(model);
         return pomAccess;
     }
@@ -198,11 +211,131 @@ public class ProcessPomGenerator {
                 .map(f -> FragmentUtils.extractArtifactBase(f.getValue()))
                 .collect(Collectors.toSet());
 
+        // A library may appear several times with different versions, typically when two connectors
+        // declare it. Selecting one of those versions must keep the library: the arbitration is then
+        // done by injectDependencyManagement, not by dropping the dependency altogether.
+        Set<String> exportedBases = allFragments.stream()
+                .filter(Fragment::isExported)
+                .map(f -> FragmentUtils.extractArtifactBase(f.getValue()))
+                .collect(Collectors.toSet());
+
         model.getDependencies().removeIf(dep -> {
             String artifactId = dep.getArtifactId();
-            // If this dependency's artifactId matches an excluded base name, remove it
-            return excludedBases.contains(artifactId);
+            // If this dependency's artifactId matches an excluded base name, and no other fragment of
+            // the same library is selected, remove it
+            return excludedBases.contains(artifactId) && !exportedBases.contains(artifactId);
         });
+    }
+
+    /**
+     * Pin, in the generated pom, the versions selected by the user in the process configuration.
+     * <p>
+     * Every selected fragment carries a jar file name, hence a version. When a library has exactly one
+     * selected version, a {@code dependencyManagement} entry is added so that Maven resolves that very
+     * version - including for a transitive dependency of a connector. This also guarantees that the copied
+     * jar file name matches the fragment value, which is what
+     * {@code DependenciesArtifactProvider} expects to keep the jar in the BAR.
+     * </p>
+     * <p>
+     * Nothing is pinned when the version cannot be read from the file name, when the group id cannot be
+     * resolved unambiguously, or when several versions of the same library are selected - in that last
+     * case the user arbitrates by unselecting the unwanted one.
+     * </p>
+     *
+     * @param model the maven model to update
+     * @param configuration the configuration holding the user selection (can be null)
+     */
+    private void injectDependencyManagement(Model model, Configuration configuration) {
+        if (configuration == null) {
+            return;
+        }
+        var containers = configuration.getProcessDependencies();
+        if (containers.isEmpty()) {
+            return;
+        }
+        // library base name -> versions explicitly selected by the user
+        Map<String, Set<String>> selectedVersions = new LinkedHashMap<>();
+        containers.stream()
+                .flatMap(FragmentUtils::walkAllFragments)
+                .filter(Fragment::isExported)
+                .map(Fragment::getValue)
+                .filter(Objects::nonNull)
+                .forEach(value -> FragmentUtils.extractArtifactVersion(value)
+                        .ifPresent(version -> selectedVersions
+                                .computeIfAbsent(FragmentUtils.extractArtifactBase(value),
+                                        k -> new LinkedHashSet<>())
+                                .add(version)));
+        if (selectedVersions.isEmpty()) {
+            return;
+        }
+        Map<String, Set<String>> groupIds = groupIdsByArtifactId(model);
+        List<Dependency> managedDependencies = new ArrayList<>();
+        selectedVersions.forEach((artifactId, versions) -> {
+            if (versions.size() > 1) {
+                LOGGER.warn(
+                        "Several versions of '{}' are selected in the configuration ({}). Maven arbitration"
+                                + " applies. Unselect the unwanted one to choose the embedded version.",
+                        artifactId, String.join(", ", versions));
+                return;
+            }
+            Set<String> candidates = groupIds.getOrDefault(artifactId, Set.of());
+            if (candidates.size() != 1) {
+                if (candidates.size() > 1) {
+                    LOGGER.warn("Cannot pin the version of '{}': several group ids match ({}).", artifactId,
+                            String.join(", ", candidates));
+                }
+                return;
+            }
+            var dependency = new Dependency();
+            dependency.setGroupId(candidates.iterator().next());
+            dependency.setArtifactId(artifactId);
+            dependency.setVersion(versions.iterator().next());
+            managedDependencies.add(dependency);
+        });
+        if (managedDependencies.isEmpty()) {
+            return;
+        }
+        var dependencyManagement = model.getDependencyManagement();
+        if (dependencyManagement == null) {
+            dependencyManagement = new DependencyManagement();
+            model.setDependencyManagement(dependencyManagement);
+        }
+        for (var dependency : managedDependencies) {
+            // an explicit entry supersedes any entry inherited from the application pom
+            dependencyManagement.getDependencies()
+                    .removeIf(existing -> Objects.equals(existing.getGroupId(), dependency.getGroupId())
+                            && Objects.equals(existing.getArtifactId(), dependency.getArtifactId())
+                            && existing.getClassifier() == null
+                            && (existing.getType() == null || "jar".equals(existing.getType())));
+            dependencyManagement.addDependency(dependency);
+            LOGGER.debug("Pinning {}:{} to version {} for this process.", dependency.getGroupId(),
+                    dependency.getArtifactId(), dependency.getVersion());
+        }
+    }
+
+    /**
+     * Index the group ids known for each artifact id, from the resolved artifacts of the application
+     * project and from the dependencies declared in the generated model.
+     *
+     * @param model the maven model being generated
+     * @return the group ids indexed by artifact id
+     */
+    private Map<String, Set<String>> groupIdsByArtifactId(Model model) {
+        Map<String, Set<String>> groupIds = new HashMap<>();
+        var artifacts = applicationProject.getArtifacts();
+        if (artifacts != null) {
+            artifacts.forEach(artifact -> index(groupIds, artifact.getArtifactId(), artifact.getGroupId()));
+        }
+        model.getDependencies().forEach(dep -> index(groupIds, dep.getArtifactId(), dep.getGroupId()));
+        return groupIds;
+    }
+
+    private static void index(Map<String, Set<String>> groupIds, String artifactId, String groupId) {
+        // an unresolved property cannot be used as a group id
+        if (artifactId == null || groupId == null || groupId.contains("${")) {
+            return;
+        }
+        groupIds.computeIfAbsent(artifactId, k -> new LinkedHashSet<>()).add(groupId);
     }
 
     /**

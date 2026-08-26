@@ -65,4 +65,46 @@ class FragmentUtilsTest {
                 .isEqualTo("weirdname");
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // extractArtifactVersion
+    // ---------------------------------------------------------------------------------------------
+
+    @Test
+    void should_extract_version_from_standard_jar() {
+        assertThat(FragmentUtils.extractArtifactVersion("commons-text-1.9.jar")).contains("1.9");
+        assertThat(FragmentUtils.extractArtifactVersion("bcpkix-jdk18on-1.78.1.jar")).contains("1.78.1");
+        assertThat(FragmentUtils.extractArtifactVersion("commons-collections4-4.4.jar")).contains("4.4");
+    }
+
+    @Test
+    void should_keep_qualifier_in_version() {
+        assertThat(FragmentUtils.extractArtifactVersion("guava-31.1-jre.jar")).contains("31.1-jre");
+        assertThat(FragmentUtils.extractArtifactVersion("netty-buffer-4.1.100.Final.jar"))
+                .contains("4.1.100.Final");
+    }
+
+    @Test
+    void should_keep_snapshot_suffix_in_version() {
+        assertThat(FragmentUtils.extractArtifactVersion("bonita-common-6.2.0-SNAPSHOT.jar"))
+                .contains("6.2.0-SNAPSHOT");
+    }
+
+    @Test
+    void should_not_extract_version_when_file_name_holds_none() {
+        assertThat(FragmentUtils.extractArtifactVersion("catalina.jar")).isEmpty();
+    }
+
+    @Test
+    void should_not_extract_version_from_null_or_non_jar() {
+        assertThat(FragmentUtils.extractArtifactVersion(null)).isEmpty();
+        assertThat(FragmentUtils.extractArtifactVersion("commons-text-1.9")).isEmpty();
+    }
+
+    @Test
+    void should_be_consistent_with_extractArtifactBase() {
+        var fileName = "bcpkix-jdk18on-1.78.1.jar";
+        assertThat(FragmentUtils.extractArtifactBase(fileName) + "-"
+                + FragmentUtils.extractArtifactVersion(fileName).orElseThrow() + ".jar").isEqualTo(fileName);
+    }
+
 }

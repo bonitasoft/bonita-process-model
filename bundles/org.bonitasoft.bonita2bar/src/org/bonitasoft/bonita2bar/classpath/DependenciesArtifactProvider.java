@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,6 +29,7 @@ import java.util.stream.Stream;
 import org.bonitasoft.bonita2bar.BarArtifactProvider;
 import org.bonitasoft.bonita2bar.BarBuilder;
 import org.bonitasoft.bonita2bar.BuildBarException;
+import org.bonitasoft.bonita2bar.BuildDiagnostic;
 import org.bonitasoft.bonita2bar.MavenExecutor;
 import org.bonitasoft.bonita2bar.process.pomgen.ProcessPom;
 import org.bonitasoft.bpm.model.configuration.Configuration;
@@ -65,8 +67,8 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
     }
 
     @Override
-    public void build(BusinessArchiveBuilder builder, Pool process, ProcessPom pomAccess, Configuration configuration)
-            throws BuildBarException {
+    public List<BuildDiagnostic> build(BusinessArchiveBuilder builder, Pool process, ProcessPom pomAccess,
+            Configuration configuration) throws BuildBarException {
         try {
             var pom = pomAccess.readPom();
             File processPomFolder = pom.getPomFile().getParentFile();
@@ -85,14 +87,29 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
             // filter copied dependencies based on configuration exported flags,
             // then add remaining files to the business archive
             if (dependenciesFolder.exists()) {
-                filterCopiedDependencies(dependenciesFolder, configuration);
+                var diagnostics = filterCopiedDependencies(dependenciesFolder, configuration).stream()
+                        .map(mismatch -> BuildDiagnostic.warning(
+                                "%s-%s: '%s' is selected but Maven resolved '%s', so it is not embedded in the BAR."
+                                        + " Align the selection on the resolved version, or pin the expected one.",
+                                process.getName(), process.getVersion(), mismatch.expected(), mismatch.resolved()))
+                        .toList();
                 exploreDependencies(builder, dependenciesFolder);
+                return diagnostics;
             }
+            return List.of();
         } catch (IOException | XmlPullParserException e) {
             throw new BuildBarException(String.format("Failed to add dependencies in bar %s-%s.bar.", process.getName(),
                     process.getVersion()), e);
         }
+    }
 
+    /**
+     * A jar that the configuration asks for, in a version Maven did not resolve.
+     *
+     * @param expected the jar file name held by the configuration
+     * @param resolved the jar file name Maven actually resolved
+     */
+    public record VersionMismatch(String expected, String resolved) {
     }
 
     /**
@@ -111,15 +128,18 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
      *
      * @param dependenciesFolder the folder containing copied dependencies
      * @param configuration the configuration containing exported fragment information
+     * @return the version mismatches met while filtering, never {@code null}
      */
-    void filterCopiedDependencies(File dependenciesFolder, Configuration configuration) throws IOException {
+    List<VersionMismatch> filterCopiedDependencies(File dependenciesFolder, Configuration configuration)
+            throws IOException {
         if (configuration == null) {
-            return;
+            return List.of();
         }
         var containers = configuration.getProcessDependencies();
         if (containers.isEmpty()) {
-            return;
+            return List.of();
         }
+        List<VersionMismatch> mismatches = new ArrayList<>();
 
         // Collect all fragments once to avoid multiple tree traversals.
         // An empty stream is a legitimate modern state (pool with no declared dependency):
@@ -179,6 +199,7 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
                     String expected = exportedBaseToExact.get(fileBase);
                     LOGGER.warn("Version mismatch: fragment expects '{}' but Maven resolved '{}'. "
                             + "Excluding from BAR.", expected, fileName);
+                    mismatches.add(new VersionMismatch(expected, fileName));
                     Files.delete(file.toPath());
                 } else {
                     // Unknown jar, not tracked by any fragment → exclude
@@ -186,6 +207,7 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
                 }
             }
         }
+        return mismatches;
     }
 
     /**

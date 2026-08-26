@@ -14,6 +14,7 @@
  */
 package org.bonitasoft.bpm.model.util;
 
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -60,6 +61,35 @@ public class FragmentUtils {
         }
         // Fallback: strip .jar extension
         return filename.endsWith(".jar") ? filename.substring(0, filename.length() - 4) : filename;
+    }
+
+    /**
+     * Extract the artifact version from a jar filename, keeping any qualifier.
+     * <p>
+     * Examples:
+     * <ul>
+     * <li>{@code commons-text-1.9.jar} &rarr; {@code 1.9}</li>
+     * <li>{@code guava-31.1-jre.jar} &rarr; {@code 31.1-jre}</li>
+     * <li>{@code bonita-common-6.2.0-SNAPSHOT.jar} &rarr; {@code 6.2.0-SNAPSHOT}</li>
+     * </ul>
+     * Everything between the artifact base name and the {@code .jar} extension is returned, so that
+     * classifiers and qualifiers are preserved. An empty optional is returned when the filename does not
+     * hold a readable version, for instance {@code catalina.jar}.
+     *
+     * @param filename the jar filename
+     * @return the artifact version, or an empty optional when it cannot be read
+     */
+    public static Optional<String> extractArtifactVersion(String filename) {
+        if (filename == null) {
+            return Optional.empty();
+        }
+        Matcher m = ARTIFACT_BASE_PATTERN.matcher(filename);
+        if (!m.matches()) {
+            return Optional.empty();
+        }
+        int start = m.group(1).length() + 1;
+        int end = filename.length() - 4;
+        return start < end ? Optional.of(filename.substring(start, end)) : Optional.empty();
     }
 
     /**
