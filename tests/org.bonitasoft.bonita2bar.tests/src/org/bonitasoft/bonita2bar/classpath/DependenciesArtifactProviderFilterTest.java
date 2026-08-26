@@ -230,10 +230,14 @@ class DependenciesArtifactProviderFilterTest {
                                                 .exported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var mismatches = provider.filterCopiedDependencies(dependenciesFolder, configuration);
 
         // Excluded: base name matches but exact version differs
         assertThat(dependenciesFolder).isEmptyDirectory();
+        // ...and the exclusion is reported, not only logged
+        assertThat(mismatches).containsExactly(
+                new DependenciesArtifactProvider.VersionMismatch("commons-collections4-4.4.jar",
+                        "commons-collections4-4.5.0.jar"));
     }
 
     @Test
@@ -278,13 +282,56 @@ class DependenciesArtifactProviderFilterTest {
                                                 .exported()))
                 .build();
 
-        provider.filterCopiedDependencies(dependenciesFolder, configuration);
+        var mismatches = provider.filterCopiedDependencies(dependenciesFolder, configuration);
 
         // pdfbox excluded (version mismatch: 3.0.3 expected, 2.0.1 resolved)
         // mistral connector kept (exact match)
         assertThat(dependenciesFolder.listFiles())
                 .extracting(File::getName)
                 .containsExactlyInAnyOrder("bonita-connector-ai-mistral-1.1.0.jar");
+        // only the mismatching jar is reported
+        assertThat(mismatches).containsExactly(
+                new DependenciesArtifactProvider.VersionMismatch("pdfbox-3.0.3.jar", "pdfbox-2.0.1.jar"));
+    }
+
+    @Test
+    void should_not_report_any_mismatch_when_versions_match() throws IOException {
+        createJarFile("guava-33.0.jar");
+
+        Configuration configuration = ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("OTHER")
+                                .havingFragments(
+                                        FragmentBuilder.aFragment()
+                                                .withValue("guava-33.0.jar")
+                                                .withType("JAR")
+                                                .exported()))
+                .build();
+
+        var mismatches = provider.filterCopiedDependencies(dependenciesFolder, configuration);
+
+        assertThat(mismatches).isEmpty();
+    }
+
+    @Test
+    void should_not_report_a_mismatch_when_the_user_excluded_the_library() throws IOException {
+        // an unselected library is not a mismatch, the user asked for its removal
+        createJarFile("commons-collections4-4.5.0.jar");
+
+        Configuration configuration = ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("OTHER")
+                                .havingFragments(
+                                        FragmentBuilder.aFragment()
+                                                .withValue("commons-collections4-4.4.jar")
+                                                .withType("JAR")
+                                                .notExported()))
+                .build();
+
+        var mismatches = provider.filterCopiedDependencies(dependenciesFolder, configuration);
+
+        assertThat(dependenciesFolder).isEmptyDirectory();
+        assertThat(mismatches).isEmpty();
     }
 
     @Test
