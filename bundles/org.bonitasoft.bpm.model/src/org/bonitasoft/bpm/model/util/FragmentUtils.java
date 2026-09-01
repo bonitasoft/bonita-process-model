@@ -14,11 +14,18 @@
  */
 package org.bonitasoft.bpm.model.util;
 
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.configuration.FragmentContainer;
 
@@ -90,6 +97,58 @@ public class FragmentUtils {
         int start = m.group(1).length() + 1;
         int end = filename.length() - 4;
         return start < end ? Optional.of(filename.substring(start, end)) : Optional.empty();
+    }
+
+    /**
+     * Index the versions selected by the user, by artifact base name.
+     * <p>
+     * Every selected (exported) fragment carries a jar file name, hence a version. A library may appear
+     * several times with different versions, typically when two connectors bring it transitively, which
+     * is why the value is a set.
+     * </p>
+     * <p>
+     * Fragments whose version cannot be read from the file name are left out, since nothing can be
+     * decided about them. Iteration order follows the configuration, so callers get stable messages.
+     * </p>
+     *
+     * @param configuration the configuration holding the user selection, may be {@code null}
+     * @return the selected versions indexed by artifact base name, never {@code null}
+     */
+    public static Map<String, Set<String>> selectedVersionsByArtifactBase(Configuration configuration) {
+        Map<String, Set<String>> selectedVersions = new LinkedHashMap<>();
+        if (configuration == null) {
+            return selectedVersions;
+        }
+        configuration.getProcessDependencies().stream()
+                .flatMap(FragmentUtils::walkAllFragments)
+                .filter(Fragment::isExported)
+                .map(Fragment::getValue)
+                .filter(Objects::nonNull)
+                .forEach(value -> extractArtifactVersion(value)
+                        .ifPresent(version -> selectedVersions
+                                .computeIfAbsent(extractArtifactBase(value), k -> new LinkedHashSet<>())
+                                .add(version)));
+        return selectedVersions;
+    }
+
+    /**
+     * List the libraries for which the user selected more than one version.
+     * <p>
+     * Such a selection cannot be honoured: a {@code dependencyManagement} entry is indexed by
+     * {@code groupId:artifactId}, so only one version can be pinned. Maven arbitration applies instead,
+     * and the user has to unselect the unwanted version to decide. This is the predicate both the pom
+     * generation and the configuration wizard rely on, so that the warning shown to the user matches
+     * what actually happens.
+     * </p>
+     *
+     * @param configuration the configuration holding the user selection, may be {@code null}
+     * @return the artifact base names carrying several selected versions, never {@code null}
+     */
+    public static Set<String> conflictingArtifactBases(Configuration configuration) {
+        return selectedVersionsByArtifactBase(configuration).entrySet().stream()
+                .filter(entry -> entry.getValue().size() > 1)
+                .map(Map.Entry::getKey)
+                .collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /**

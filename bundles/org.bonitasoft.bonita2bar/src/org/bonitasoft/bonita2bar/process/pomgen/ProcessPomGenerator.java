@@ -19,7 +19,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -250,25 +249,9 @@ public class ProcessPomGenerator {
      * @param configuration the configuration holding the user selection (can be null)
      */
     private void injectDependencyManagement(Model model, Configuration configuration) {
-        if (configuration == null) {
-            return;
-        }
-        var containers = configuration.getProcessDependencies();
-        if (containers.isEmpty()) {
-            return;
-        }
-        // library base name -> versions explicitly selected by the user
-        Map<String, Set<String>> selectedVersions = new LinkedHashMap<>();
-        containers.stream()
-                .flatMap(FragmentUtils::walkAllFragments)
-                .filter(Fragment::isExported)
-                .map(Fragment::getValue)
-                .filter(Objects::nonNull)
-                .forEach(value -> FragmentUtils.extractArtifactVersion(value)
-                        .ifPresent(version -> selectedVersions
-                                .computeIfAbsent(FragmentUtils.extractArtifactBase(value),
-                                        k -> new LinkedHashSet<>())
-                                .add(version)));
+        // library base name -> versions explicitly selected by the user. The configuration wizard warns
+        // on the very same grouping, so that what the user is told matches what is pinned here.
+        Map<String, Set<String>> selectedVersions = FragmentUtils.selectedVersionsByArtifactBase(configuration);
         if (selectedVersions.isEmpty()) {
             return;
         }
