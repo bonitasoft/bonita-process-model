@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2018 Bonitasoft S.A.
+ * Copyright (C) 2026 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,17 +21,7 @@ package org.bonitasoft.bonita2bar;
  * @param severity how much attention the message deserves
  * @param message the human readable message
  */
-public record BuildDiagnostic(Severity severity,String message){
-
-/** Severity of a {@link BuildDiagnostic}. */
-public enum Severity {
-
-    /** Something the user should look at: the built BAR may not be what was expected. */
-    WARNING,
-    /** Purely informative. */
-    INFO
-
-    }
+public record BuildDiagnostic(Severity severity, String message) {
 
     /**
      * Creates a warning diagnostic.
@@ -42,6 +32,13 @@ public enum Severity {
      */
     public static BuildDiagnostic warning(String format, Object... args) {
         return new BuildDiagnostic(Severity.WARNING, String.format(format, args));
+    }
+
+    /** Severity of a {@link BuildDiagnostic}. */
+    public enum Severity {
+
+        /** Something the user should look at: the built BAR may not be what was expected. */
+        WARNING
     }
 
 }
