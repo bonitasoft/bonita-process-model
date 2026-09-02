@@ -14,6 +14,7 @@
  */
 package org.bonitasoft.bpm.model.util;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
@@ -100,15 +101,48 @@ public class FragmentUtils {
     }
 
     /**
-     * Index the versions selected by the user, by artifact base name.
+     * List the jar file names the user actually selected.
      * <p>
-     * Every selected (exported) fragment carries a jar file name, hence a version. A library may appear
-     * several times with different versions, typically when two connectors bring it transitively, which
-     * is why the value is a set.
+     * The same jar value may be carried by several fragments with conflicting flags: a jar
+     * automatically selected in a connector child container also appears in the {@code OTHER}
+     * container, with the flag the user set there. The explicit exclusion wins, which is the very
+     * precedence the copied jars are filtered with, so that what is pinned cannot disagree with what
+     * ends up in the archive.
      * </p>
      * <p>
-     * Fragments whose version cannot be read from the file name are left out, since nothing can be
-     * decided about them. Iteration order follows the configuration, so callers get stable messages.
+     * Fragments without a value are left out, since nothing can be decided about them. Iteration order
+     * follows the configuration, so callers get stable messages.
+     * </p>
+     *
+     * @param fragments the fragments to read the selection from
+     * @return the selected jar file names, never {@code null}
+     */
+    public static Set<String> selectedJarNames(Collection<Fragment> fragments) {
+        Set<String> excludedNames = fragments.stream()
+                .filter(fragment -> !fragment.isExported())
+                .map(Fragment::getValue)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+        return fragments.stream()
+                .filter(Fragment::isExported)
+                .map(Fragment::getValue)
+                .filter(Objects::nonNull)
+                .filter(value -> !excludedNames.contains(value))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+    }
+
+    /**
+     * Index the versions selected by the user, by artifact base name.
+     * <p>
+     * Every selected fragment carries a jar file name, hence a version. A library may appear several
+     * times with different versions, typically when two connectors bring it transitively, which is why
+     * the value is a set.
+     * </p>
+     * <p>
+     * The selection is read through {@link #selectedJarNames(Collection)}, so a jar the user unselected
+     * is not reported as selected because another fragment still exports it. Fragments whose version
+     * cannot be read from the file name are left out, since nothing can be decided about them.
+     * Iteration order follows the configuration, so callers get stable messages.
      * </p>
      *
      * @param configuration the configuration holding the user selection, may be {@code null}
@@ -119,11 +153,10 @@ public class FragmentUtils {
         if (configuration == null) {
             return selectedVersions;
         }
-        configuration.getProcessDependencies().stream()
+        var allFragments = configuration.getProcessDependencies().stream()
                 .flatMap(FragmentUtils::walkAllFragments)
-                .filter(Fragment::isExported)
-                .map(Fragment::getValue)
-                .filter(Objects::nonNull)
+                .toList();
+        selectedJarNames(allFragments)
                 .forEach(value -> extractArtifactVersion(value)
                         .ifPresent(version -> selectedVersions
                                 .computeIfAbsent(extractArtifactBase(value), k -> new LinkedHashSet<>())

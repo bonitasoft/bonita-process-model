@@ -37,7 +37,6 @@ import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ArtifactInfo;
 import org.bonitasoft.bpm.connector.model.implementation.ConnectorImplementation;
 import org.bonitasoft.bpm.model.configuration.Configuration;
-import org.bonitasoft.bpm.model.configuration.Fragment;
 import org.bonitasoft.bpm.model.process.Connector;
 import org.bonitasoft.bpm.model.process.Pool;
 import org.bonitasoft.bpm.model.util.FragmentUtils;
@@ -212,17 +211,18 @@ public class ProcessPomGenerator {
 
         // A library may appear several times with different versions, typically when two connectors
         // declare it. Selecting one of those versions must keep the library: the arbitration is then
-        // done by injectDependencyManagement, not by dropping the dependency altogether.
-        Set<String> exportedBases = allFragments.stream()
-                .filter(Fragment::isExported)
-                .map(f -> FragmentUtils.extractArtifactBase(f.getValue()))
+        // done by injectDependencyManagement, not by dropping the dependency altogether. The selection
+        // is read with the same exclusion precedence as the copied jars, so that a jar the user
+        // unselected does not keep its library here just because a connector child still exports it.
+        Set<String> selectedBases = FragmentUtils.selectedJarNames(allFragments).stream()
+                .map(FragmentUtils::extractArtifactBase)
                 .collect(Collectors.toSet());
 
         model.getDependencies().removeIf(dep -> {
             String artifactId = dep.getArtifactId();
-            // If this dependency's artifactId matches an excluded base name, and no other fragment of
+            // If this dependency's artifactId matches an excluded base name, and no other version of
             // the same library is selected, remove it
-            return excludedBases.contains(artifactId) && !exportedBases.contains(artifactId);
+            return excludedBases.contains(artifactId) && !selectedBases.contains(artifactId);
         });
     }
 

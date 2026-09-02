@@ -361,6 +361,33 @@ class ProcessPomGeneratorTest {
     }
 
     @Test
+    void should_not_pin_a_jar_unselected_by_the_user_though_exported_in_a_connector_child() throws Exception {
+        // the jar is automatically selected in the connector child container that brings it, while the
+        // user unselected it in OTHER: the explicit exclusion wins, as it does for the copied jars
+        appProject.getDependencies().add(createDependency("org.apache.pdfbox", "pdfbox", "2.0.24"));
+
+        var configuration = ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("CONNECTOR")
+                                .havingChildren(FragmentContainerBuilder
+                                        .aFragmentContainer("openhtmltopdf-pdfbox-1.0.10.jar")
+                                        .havingFragments(FragmentBuilder.aFragment()
+                                                .withValue("pdfbox-2.0.24.jar").withType("JAR").exported())),
+                        FragmentContainerBuilder.aFragmentContainer("OTHER")
+                                .havingFragments(FragmentBuilder.aFragment()
+                                        .withValue("pdfbox-2.0.24.jar").withType("JAR").notExported()))
+                .build();
+
+        withProcessPom(configuration, processPom -> {
+            // no version is pinned for a library the user unselected...
+            assertThat(processPom.getDependencyManagement()).isNull();
+            // ...and the dependency is still pruned from the tree, so it is not resolved for nothing
+            assertThat(processPom.getDependencies())
+                    .noneMatch(dep -> "org.apache.pdfbox:pdfbox:jar".equals(dep.getManagementKey()));
+        });
+    }
+
+    @Test
     void should_supersede_inherited_managed_version() throws Exception {
         appProject.getDependencies().add(createDependency("org.example", "managed-lib", null));
         var inherited = new DependencyManagement();

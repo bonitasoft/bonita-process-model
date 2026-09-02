@@ -1,5 +1,5 @@
 /**
- * Copyright (C) 2025 Bonitasoft S.A.
+ * Copyright (C) 2026 Bonitasoft S.A.
  * BonitaSoft, 32 rue Gustave Eiffel - 38000 Grenoble
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@ package org.bonitasoft.bpm.model.util;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.List;
 import java.util.Set;
 
 import org.bonitasoft.bpm.model.configuration.Configuration;
@@ -169,6 +170,32 @@ class FragmentUtilsTest {
     }
 
     @Test
+    void should_ignore_a_jar_unselected_by_the_user_though_exported_in_a_child() {
+        // the flag the user set in OTHER wins over the one the connector child carries, which is the
+        // precedence the copied jars are filtered with
+        var configuration = aConfigurationWithChild(notExported("pdfbox-2.0.24.jar"),
+                exported("pdfbox-2.0.24.jar"));
+
+        assertThat(FragmentUtils.selectedVersionsByArtifactBase(configuration)).isEmpty();
+    }
+
+    @Test
+    void should_keep_the_selected_version_when_another_version_is_unselected_in_a_child() {
+        // different file names: unselecting one version says nothing about the other one
+        var configuration = aConfigurationWithChild(notExported("asm-9.8.jar"), exported("asm-3.3.1.jar"));
+
+        assertThat(FragmentUtils.selectedVersionsByArtifactBase(configuration))
+                .containsEntry("asm", Set.of("3.3.1"));
+    }
+
+    @Test
+    void should_list_the_selected_jar_names_without_the_unselected_ones() {
+        assertThat(FragmentUtils.selectedJarNames(List.of(exported("commons-text-1.9.jar"),
+                exported("asm-3.3.1.jar"), notExported("asm-3.3.1.jar"), notExported("guava-31.1-jre.jar"))))
+                .containsExactly("commons-text-1.9.jar");
+    }
+
+    @Test
     void should_return_an_empty_result_for_a_null_configuration() {
         assertThat(FragmentUtils.selectedVersionsByArtifactBase(null)).isEmpty();
         assertThat(FragmentUtils.conflictingArtifactBases(null)).isEmpty();
@@ -198,6 +225,19 @@ class FragmentUtilsTest {
                 exported("commons-text-1.9.jar"));
 
         assertThat(FragmentUtils.conflictingArtifactBases(configuration)).isEmpty();
+    }
+
+    /**
+     * A configuration shaped like the one the export works on: the jar sits in the {@code OTHER}
+     * container with the flag the user set, and in a connector child container with the automatic one.
+     */
+    private static Configuration aConfigurationWithChild(Fragment otherFragment, Fragment childFragment) {
+        var configuration = aConfigurationWith(otherFragment);
+        var child = ConfigurationFactory.eINSTANCE.createFragmentContainer();
+        child.setId("CONNECTOR");
+        child.getFragments().add(childFragment);
+        configuration.getProcessDependencies().get(0).getChildren().add(child);
+        return configuration;
     }
 
     private static Fragment exported(String value) {
