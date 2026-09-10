@@ -104,15 +104,6 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
     }
 
     /**
-     * A jar that the configuration asks for, in a version Maven did not resolve.
-     *
-     * @param expected the jar file name held by the configuration
-     * @param resolved the jar file name Maven actually resolved
-     */
-    public record VersionMismatch(String expected, String resolved) {
-    }
-
-    /**
      * Filter copied dependencies by matching each JAR against the exported/excluded
      * fragments from the configuration. For each file in the dependencies folder:
      * <ol>
@@ -248,6 +239,18 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
         } catch (IOException e) {
             throw new BuildBarException(String.format("Unable to get content of the %s ", file), e);
         }
+    }
+
+    /**
+     * A jar that the configuration asks for, in a version Maven did not resolve.
+     * <p>
+     * Internal to the filtering: {@link #build(BusinessArchiveBuilder, Pool, ProcessPom, Configuration)} turns it into
+     * a {@link BuildDiagnostic}, which is the form callers consume.
+     *
+     * @param expected the jar file name held by the configuration
+     * @param resolved the jar file name Maven actually resolved
+     */
+    private record VersionMismatch(String expected, String resolved) {
     }
 
 }
