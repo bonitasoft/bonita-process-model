@@ -26,10 +26,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import org.apache.maven.artifact.Artifact;
+import org.apache.maven.artifact.DefaultArtifact;
+import org.apache.maven.artifact.handler.DefaultArtifactHandler;
 import org.apache.maven.model.Dependency;
+import org.apache.maven.model.DependencyManagement;
 import org.apache.maven.model.Model;
 import org.apache.maven.model.io.xpp3.MavenXpp3Reader;
 import org.apache.maven.project.MavenProject;
@@ -39,6 +45,7 @@ import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry.ConnectorImplem
 import org.bonitasoft.bonita2bar.ProcessRegistry;
 import org.bonitasoft.bpm.model.FileUtil;
 import org.bonitasoft.bpm.model.MavenUtil;
+import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.configuration.builders.ConfigurationBuilder;
 import org.bonitasoft.bpm.model.configuration.builders.FragmentBuilder;
 import org.bonitasoft.bpm.model.configuration.builders.FragmentContainerBuilder;
@@ -217,6 +224,217 @@ class ProcessPomGeneratorTest {
                     .anyMatch(dep -> "org.example:untracked-lib:jar".equals(dep.getManagementKey()));
             return null;
         });
+    }
+
+    // ---------------------------------------------------------------------------------------------
+    // Version pinning: the user selection drives the versions Maven resolves for this process
+    // ---------------------------------------------------------------------------------------------
+
+    @Test
+    void should_pin_selected_version_in_dependency_management() throws Exception {
+        appProject.getDependencies().add(createDependency("org.example", "pinned-lib", "1.0.0"));
+
+        var configuration = aConfigurationWith(
+                FragmentBuilder.aFragment().withValue("pinned-lib-2.5.0.jar").withType("JAR").exported());
+
+        withProcessPom(configuration, processPom -> {
+            assertThat(managedVersionOf(processPom, "org.example", "pinned-lib")).isEqualTo("2.5.0");
+        });
+    }
+
+    @Test
+    void should_override_the_version_of_a_direct_dependency() throws Exception {
+        // a dependencyManagement entry is ignored for a direct dependency holding an explicit version,
+        // so the declared version has to be rewritten as well
+        appProject.getDependencies().add(createDependency("org.apache.commons", "commons-text", "1.9"));
+
+        var configuration = aConfigurationWith(
+                FragmentBuilder.aFragment().withValue("commons-text-1.12.0.jar").withType("JAR").exported());
+
+        withProcessPom(configuration, processPom -> {
+            assertThat(processPom.getDependencies())
+                    .filteredOn(dep -> "commons-text".equals(dep.getArtifactId()))
+                    .extracting(Dependency::getVersion)
+                    .containsExactly("1.12.0");
+            assertThat(managedVersionOf(processPom, "org.apache.commons", "commons-text")).isEqualTo("1.12.0");
+        });
+    }
+
+    @Test
+    void should_pin_transitive_library_using_group_id_of_resolved_artifact() throws Exception {
+        // the library is not declared in the pom, it only exists as a resolved (transitive) artifact
+        appProject.setArtifacts(Set.of(anArtifact("org.apache.commons", "commons-text", "1.9")));
+
+        var configuration = aConfigurationWith(
+                FragmentBuilder.aFragment().withValue("commons-text-1.12.0.jar").withType("JAR").exported());
+
+        withProcessPom(configuration, processPom -> {
+            assertThat(managedVersionOf(processPom, "org.apache.commons", "commons-text")).isEqualTo("1.12.0");
+        });
+    }
+
+    @Test
+    void should_keep_qualifier_when_pinning_version() throws Exception {
+        appProject.getDependencies().add(createDependency("com.google.guava", "guava", "30.0-jre"));
+
+        var configuration = aConfigurationWith(
+                FragmentBuilder.aFragment().withValue("guava-31.1-jre.jar").withType("JAR").exported());
+
+        withProcessPom(configuration, processPom -> {
+            assertThat(managedVersionOf(processPom, "com.google.guava", "guava")).isEqualTo("31.1-jre");
+        });
+    }
+
+    @Test
+    void should_not_pin_when_several_versions_of_the_same_library_are_selected() throws Exception {
+        appProject.getDependencies().add(createDependency("org.apache.commons", "commons-text", "1.9"));
+
+        var configuration = aConfigurationWith(
+                FragmentBuilder.aFragment().withValue("commons-text-1.9.jar").withType("JAR").exported(),
+                FragmentBuilder.aFragment().withValue("commons-text-1.12.0.jar").withType("JAR").exported());
+
+        withProcessPom(configuration, processPom -> {
+            // ambiguous selection: Maven arbitration is left untouched
+            assertThat(managedVersionOf(processPom, "org.apache.commons", "commons-text")).isNull();
+        });
+    }
+
+    @Test
+    void should_not_pin_when_group_id_is_ambiguous() throws Exception {
+        appProject.setArtifacts(Set.of(anArtifact("asm", "asm", "3.3.1"),
+                anArtifact("org.ow2.asm", "asm", "9.8")));
+
+        var configuration = aConfigurationWith(
+                FragmentBuilder.aFragment().withValue("asm-9.8.jar").withType("JAR").exported());
+
+        withProcessPom(configuration, processPom -> {
+            assertThat(processPom.getDependencyManagement()).isNull();
+        });
+    }
+
+    @Test
+    void should_not_pin_when_version_cannot_be_read_from_file_name() throws Exception {
+        appProject.getDependencies().add(createDependency("org.example", "catalina", "1.0.0"));
+
+        var configuration = aConfigurationWith(
+                FragmentBuilder.aFragment().withValue("catalina.jar").withType("JAR").exported());
+
+        withProcessPom(configuration, processPom -> {
+            assertThat(processPom.getDependencyManagement()).isNull();
+        });
+    }
+
+    @Test
+    void should_not_pin_unselected_library() throws Exception {
+        appProject.getDependencies().add(createDependency("org.example", "excluded-lib", "2.0.0"));
+
+        var configuration = aConfigurationWith(
+                FragmentBuilder.aFragment().withValue("excluded-lib-2.0.0.jar").withType("JAR").notExported());
+
+        withProcessPom(configuration, processPom -> {
+            assertThat(processPom.getDependencyManagement()).isNull();
+        });
+    }
+
+    @Test
+    void should_keep_library_when_one_of_its_versions_is_selected_and_pin_it() throws Exception {
+        // two connectors bring the same library in different versions, the user unselects one of them
+        appProject.getDependencies().add(createDependency("org.apache.commons", "commons-text", "1.9"));
+
+        var configuration = ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("CONNECTOR")
+                                .havingFragments(FragmentBuilder.aFragment()
+                                        .withValue("commons-text-1.9.jar").withType("JAR").notExported()),
+                        FragmentContainerBuilder.aFragmentContainer("OTHER")
+                                .havingFragments(FragmentBuilder.aFragment()
+                                        .withValue("commons-text-1.12.0.jar").withType("JAR").exported()))
+                .build();
+
+        withProcessPom(configuration, processPom -> {
+            // the library must not be dropped from the pom...
+            assertThat(processPom.getDependencies())
+                    .anyMatch(dep -> "org.apache.commons:commons-text:jar".equals(dep.getManagementKey()));
+            // ...and the selected version wins
+            assertThat(managedVersionOf(processPom, "org.apache.commons", "commons-text")).isEqualTo("1.12.0");
+        });
+    }
+
+    @Test
+    void should_not_pin_a_jar_unselected_by_the_user_though_exported_in_a_connector_child() throws Exception {
+        // the jar is automatically selected in the connector child container that brings it, while the
+        // user unselected it in OTHER: the explicit exclusion wins, as it does for the copied jars
+        appProject.getDependencies().add(createDependency("org.apache.pdfbox", "pdfbox", "2.0.24"));
+
+        var configuration = ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("CONNECTOR")
+                                .havingChildren(FragmentContainerBuilder
+                                        .aFragmentContainer("openhtmltopdf-pdfbox-1.0.10.jar")
+                                        .havingFragments(FragmentBuilder.aFragment()
+                                                .withValue("pdfbox-2.0.24.jar").withType("JAR").exported())),
+                        FragmentContainerBuilder.aFragmentContainer("OTHER")
+                                .havingFragments(FragmentBuilder.aFragment()
+                                        .withValue("pdfbox-2.0.24.jar").withType("JAR").notExported()))
+                .build();
+
+        withProcessPom(configuration, processPom -> {
+            // no version is pinned for a library the user unselected...
+            assertThat(processPom.getDependencyManagement()).isNull();
+            // ...and the dependency is still pruned from the tree, so it is not resolved for nothing
+            assertThat(processPom.getDependencies())
+                    .noneMatch(dep -> "org.apache.pdfbox:pdfbox:jar".equals(dep.getManagementKey()));
+        });
+    }
+
+    @Test
+    void should_supersede_inherited_managed_version() throws Exception {
+        appProject.getDependencies().add(createDependency("org.example", "managed-lib", null));
+        var inherited = new DependencyManagement();
+        inherited.addDependency(createDependency("org.example", "managed-lib", "1.0.0"));
+        appProject.getModel().setDependencyManagement(inherited);
+
+        var configuration = aConfigurationWith(
+                FragmentBuilder.aFragment().withValue("managed-lib-3.0.0.jar").withType("JAR").exported());
+
+        withProcessPom(configuration, processPom -> {
+            assertThat(processPom.getDependencyManagement().getDependencies())
+                    .filteredOn(dep -> "managed-lib".equals(dep.getArtifactId()))
+                    .hasSize(1);
+            assertThat(managedVersionOf(processPom, "org.example", "managed-lib")).isEqualTo("3.0.0");
+        });
+    }
+
+    private Configuration aConfigurationWith(FragmentBuilder... fragments) {
+        return ConfigurationBuilder.aConfiguration()
+                .havingProcessDependencies(
+                        FragmentContainerBuilder.aFragmentContainer("OTHER").havingFragments(fragments))
+                .build();
+    }
+
+    private void withProcessPom(Configuration configuration, Consumer<Model> assertions) throws Exception {
+        Optional<Pool> process = processRegistry.getProcess("SimpleProcessWithParameters", "1.0");
+        var gen = ProcessPomGenerator.create(appProject, connectorImplementationRegistry);
+        gen.withGeneratedPom(process.get(), configuration, pomAccess -> {
+            assertions.accept(pomAccess.readPom());
+            return null;
+        });
+    }
+
+    private static String managedVersionOf(Model pom, String groupId, String artifactId) {
+        return Optional.ofNullable(pom.getDependencyManagement())
+                .map(DependencyManagement::getDependencies)
+                .stream()
+                .flatMap(List::stream)
+                .filter(dep -> groupId.equals(dep.getGroupId()) && artifactId.equals(dep.getArtifactId()))
+                .map(Dependency::getVersion)
+                .findFirst()
+                .orElse(null);
+    }
+
+    private static Artifact anArtifact(String groupId, String artifactId, String version) {
+        return new DefaultArtifact(groupId, artifactId, version, "compile", "jar", null,
+                new DefaultArtifactHandler("jar"));
     }
 
     private Dependency createDependency(String groupId, String artifactId, String version) {
