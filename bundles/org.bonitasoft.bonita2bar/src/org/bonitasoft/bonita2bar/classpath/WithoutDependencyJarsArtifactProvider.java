@@ -14,7 +14,10 @@
  */
 package org.bonitasoft.bonita2bar.classpath;
 
+import java.util.List;
+
 import org.bonitasoft.bonita2bar.BarArtifactProvider;
+import org.bonitasoft.bonita2bar.BuildDiagnostic;
 import org.bonitasoft.bonita2bar.process.pomgen.ProcessPom;
 import org.bonitasoft.bpm.model.configuration.Configuration;
 import org.bonitasoft.bpm.model.process.Pool;
@@ -26,8 +29,10 @@ import org.bonitasoft.engine.bpm.bar.BusinessArchiveBuilder;
 public class WithoutDependencyJarsArtifactProvider implements BarArtifactProvider {
 
     @Override
-    public void build(BusinessArchiveBuilder builder, Pool process, ProcessPom pomAccess, Configuration configuration) {
+    public List<BuildDiagnostic> build(BusinessArchiveBuilder builder, Pool process, ProcessPom pomAccess,
+            Configuration configuration) {
         builder.withoutDependencyJars();
+        return List.of();
     }
 
 }
