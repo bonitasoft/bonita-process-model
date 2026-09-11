@@ -191,13 +191,15 @@ public class BarBuilder {
                     final EnvironmentConfigurationBuilder confBuilder = createEnvironmentConfigurationBuilder(
                             process.getName(),
                             process.getVersion(), configuration.getName());
+                    var buildDiagnostics = new ArrayList<BuildDiagnostic>();
                     for (final BarArtifactProvider provider : providers) {
-                        provider.build(barBuilder, process, pomAccess, configuration);
+                        buildDiagnostics.addAll(provider.build(barBuilder, process, pomAccess, configuration));
                         provider.configure(confBuilder, configuration, process);
                     }
                     var result = new BuildResult(
                             configuration.getName() == null ? LOCAL_ENVIRONMENT : configuration.getName(),
                             parametersConfiguration, workdir);
+                    result.addDiagnostics(buildDiagnostics);
                     result.addBusinessArchive(barBuilder.done());
                     result.addConfiguration(confBuilder.done());
                     return result;
