@@ -39,6 +39,7 @@ public class BuildResult {
 
     private List<BusinessArchive> businessArchives = new ArrayList<>();
     private List<EnvironmentConfiguration> configurations = new ArrayList<>();
+    private List<BuildDiagnostic> diagnostics = new ArrayList<>();
 
     private ParametersConfiguration parametersConfiguration;
     private String environment;
@@ -65,6 +66,19 @@ public class BuildResult {
 
     public List<EnvironmentConfiguration> getConfigurations() {
         return configurations;
+    }
+
+    public void addDiagnostics(List<BuildDiagnostic> buildDiagnostics) {
+        diagnostics.addAll(buildDiagnostics);
+    }
+
+    /**
+     * Messages reported while building, to be surfaced to the user by the caller.
+     *
+     * @return the diagnostics, never {@code null}
+     */
+    public List<BuildDiagnostic> getDiagnostics() {
+        return diagnostics;
     }
 
     public void writeBusinessArchivesTo(Path barOutputFolder) throws IOException {
@@ -125,5 +139,6 @@ public class BuildResult {
     public void add(BuildResult result) {
         businessArchives.addAll(result.getBusinessArchives());
         configurations.addAll(result.getConfigurations());
+        diagnostics.addAll(result.getDiagnostics());
     }
 }
