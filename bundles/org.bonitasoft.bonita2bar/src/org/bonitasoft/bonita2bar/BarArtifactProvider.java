@@ -14,6 +14,8 @@
  */
 package org.bonitasoft.bonita2bar;
 
+import java.util.List;
+
 import org.bonitasoft.bonita2bar.configuration.EnvironmentConfigurationBuilder;
 import org.bonitasoft.bonita2bar.process.pomgen.ProcessPom;
 import org.bonitasoft.bpm.model.configuration.Configuration;
@@ -32,10 +34,21 @@ public interface BarArtifactProvider {
         throw new UnsupportedOperationException("This method is deprecated, use the other build method");
     }
 
-    default void build(BusinessArchiveBuilder builder, Pool process, ProcessPom pomAccess, Configuration configuration)
-            throws BuildBarException {
+    /**
+     * Contributes to the business archive being built.
+     *
+     * @param builder the business archive builder
+     * @param process the process being built
+     * @param pomAccess access to the generated process pom
+     * @param configuration the process configuration
+     * @return the diagnostics to surface to the user, never {@code null}
+     * @throws BuildBarException if the contribution fails
+     */
+    default List<BuildDiagnostic> build(BusinessArchiveBuilder builder, Pool process, ProcessPom pomAccess,
+            Configuration configuration) throws BuildBarException {
         // call the deprecated method for old implementations compatibility
         build(builder, process, configuration);
+        return List.of();
     }
 
     default void configure(EnvironmentConfigurationBuilder builder, Configuration configuration, Pool process) {
