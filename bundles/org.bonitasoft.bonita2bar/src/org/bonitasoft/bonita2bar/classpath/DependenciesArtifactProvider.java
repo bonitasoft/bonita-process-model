@@ -250,7 +250,6 @@ public class DependenciesArtifactProvider implements BarArtifactProvider {
      * @param expected the jar file name held by the configuration
      * @param resolved the jar file name Maven actually resolved
      */
-    private record VersionMismatch(String expected, String resolved) {
-    }
+    private record VersionMismatch(String expected, String resolved) {}
 
 }
