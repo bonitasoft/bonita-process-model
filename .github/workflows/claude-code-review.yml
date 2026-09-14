@@ -2,19 +2,17 @@ name: Claude Code Review
 
 on:
   pull_request:
-    types: [ opened, labeled ]
+    types: [ labeled ]
   issue_comment:
     types: [ created ]
 
 jobs:
   claude-review:
     # Only run when:
-    # 1. PR is created
-    # 2. Comment on PR contains "@claude review"
-    # 3. Label "ask-claude-review" is added to PR
+    # 1. Comment on PR contains "@claude review"
+    # 2. Label "ask-claude-review" is added to PR
     if: |
       (
-        (github.event_name == 'pull_request' && github.event.action == 'opened') ||
         (github.event_name == 'issue_comment' && github.event.issue.pull_request && contains(github.event.comment.body, '@claude review')) ||
         (github.event_name == 'pull_request' && github.event.action == 'labeled' && github.event.label.name == 'ask-claude-review')
       ) && github.actor != 'dependabot[bot]'
@@ -42,7 +40,8 @@ jobs:
 
       - name: Run Claude Code Review
         id: claude-review
-        uses: anthropics/claude-code-action@5ef2e550a465a721f4f45e4a7d3c340c873e1dcc # v1.0.190
+        # Intentionally NOT pinned to a SHA: this action is released several times a day, tracking the major tag instead
+        uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ORGANIZATION_ANTHROPIC_API_KEY }}
           prompt: |
