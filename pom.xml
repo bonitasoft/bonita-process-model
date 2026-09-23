@@ -78,7 +78,7 @@ along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</com
          (org.codehaus.groovy40.feature -> 4.0.x); when bumping, also update the hardcoded
          version in the test fixture poms under tests/**/my-project/app/pom.xml -->
     <groovy.version>4.0.32</groovy.version>
-    <jackson-bom.version>2.22.1</jackson-bom.version>
+    <jackson-bom.version>2.22.3</jackson-bom.version>
     <maven-artifact.version>3.9.3</maven-artifact.version>
     <maven-core.version>3.9.16</maven-core.version>
     <slf4j.version>1.7.36</slf4j.version>
