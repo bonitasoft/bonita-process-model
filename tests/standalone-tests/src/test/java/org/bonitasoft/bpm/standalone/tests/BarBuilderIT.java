@@ -18,13 +18,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Reader;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Supplier;
 import java.util.logging.Level;
@@ -43,7 +41,12 @@ import org.apache.maven.project.ProjectBuildingResult;
 import org.apache.maven.repository.internal.MavenRepositorySystemUtils;
 import org.apache.maven.settings.Settings;
 import org.apache.maven.settings.SettingsUtils;
-import org.apache.maven.settings.io.xpp3.SettingsXpp3Reader;
+import org.apache.maven.settings.building.DefaultSettingsBuildingRequest;
+import org.apache.maven.settings.building.SettingsBuilder;
+import org.apache.maven.settings.building.SettingsBuildingException;
+import org.apache.maven.settings.crypto.DefaultSettingsDecryptionRequest;
+import org.apache.maven.settings.crypto.SettingsDecrypter;
+import org.apache.maven.settings.crypto.SettingsDecryptionResult;
 import org.bonitasoft.bonita2bar.BarBuilderFactory;
 import org.bonitasoft.bonita2bar.BarBuilderFactory.BuildConfig;
 import org.bonitasoft.bonita2bar.ConnectorImplementationRegistry;
@@ -56,8 +59,6 @@ import org.bonitasoft.bpm.model.MavenUtil;
 import org.bonitasoft.bpm.model.process.util.migration.MigrationPolicy;
 import org.codehaus.plexus.PlexusContainer;
 import org.codehaus.plexus.testing.PlexusTest;
-import org.codehaus.plexus.util.ReaderFactory;
-import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.eclipse.aether.DefaultRepositorySystemSession;
 import org.eclipse.aether.repository.LocalRepository;
 import org.eclipse.aether.repository.LocalRepositoryManager;
@@ -70,6 +71,9 @@ import org.junit.jupiter.api.io.TempDir;
 @PlexusTest
 class BarBuilderIT {
 
+    private static final File DEFAULT_USER_SETTINGS_FILE = new File(System.getProperty("user.home"),
+            ".m2/settings.xml");
+
     @Inject
     protected PlexusContainer container;
 
@@ -79,32 +83,34 @@ class BarBuilderIT {
     @Inject
     protected org.apache.maven.project.ProjectBuilder projectBuilder;
 
+    @Inject
+    protected SettingsBuilder settingsBuilder;
+
+    @Inject
+    protected SettingsDecrypter settingsDecrypter;
+
     @BeforeEach
     void setUp() throws Exception {
         LogManager.getLogManager().getLogger(Logger.GLOBAL_LOGGER_NAME).setLevel(Level.WARNING);
     }
 
-    public static final File DEFAULT_USER_SETTINGS_FILE = new File(System.getProperty("user.home"), ".m2/settings.xml");
-    public static final File DEFAULT_GLOBAL_SETTINGS_FILE = new File(
-            System.getProperty("maven.home", Optional.ofNullable(System.getenv("M2_HOME")).orElse("")),
-            "conf/settings.xml");
+    /**
+     * Read the user settings like Maven does: ${env.*} expressions are interpolated and server passwords are decrypted.
+     */
+    private Settings readSettingsFile() throws SettingsBuildingException {
+        DefaultSettingsBuildingRequest request = new DefaultSettingsBuildingRequest();
+        request.setUserSettingsFile(DEFAULT_USER_SETTINGS_FILE);
+        request.setSystemProperties(System.getProperties());
+        Settings settings = settingsBuilder.build(request).getEffectiveSettings();
 
-    private static Settings readSettingsFile()
-            throws IOException, XmlPullParserException {
-        File settingsFile = new File(System.getProperty("user.home"), ".m2/settings.xml");
-        Settings settings = null;
-        if (settingsFile.exists()) {
-            try (Reader reader = ReaderFactory.newXmlReader(settingsFile)) {
-                SettingsXpp3Reader modelReader = new SettingsXpp3Reader();
-
-                settings = modelReader.read(reader);
-            }
-        }
+        SettingsDecryptionResult decryptionResult = settingsDecrypter
+                .decrypt(new DefaultSettingsDecryptionRequest(settings));
+        settings.setServers(decryptionResult.getServers());
         return settings;
     }
 
     private MavenProject getMavenProject(File pomFile)
-            throws ProjectBuildingException, IOException, XmlPullParserException {
+            throws ProjectBuildingException, SettingsBuildingException {
         DefaultRepositorySystemSession session = MavenRepositorySystemUtils.newSession();
         LocalRepository localRepo = new LocalRepository("target/local-repo");
         LocalRepositoryManager localRepoManager = repositorySystem.newLocalRepositoryManager(session, localRepo);
