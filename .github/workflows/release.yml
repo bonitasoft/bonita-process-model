@@ -1,6 +1,6 @@
 name: Release
 
-run-name: Release ${{ github.event.inputs.version }}
+run-name: Release ${{ inputs.version }}
 
 on:
   workflow_dispatch:
@@ -24,16 +24,33 @@ on:
           - '0'
           - '1'
           - '2'
+      previous-tag:
+        description: 'Previous tag to use for release notes generation'
+        type: string
+        required: true
+      is-latest-release:
+        description: 'Is this the latest release?'
+        type: boolean
+        default: false
+
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
 
 jobs:
-  build:
-    name: Release pipeline
+  release:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
+
+      # Fail before anything is pushed: release notes generation runs last, after the Maven Central deploy
+      - name: Verify previous tag exists
+        env:
+          PREVIOUS_TAG: ${{ inputs.previous-tag }}
+        run: git rev-parse --verify --quiet "refs/tags/$PREVIOUS_TAG"
 
       - name: Setup Java
         uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
@@ -42,17 +59,65 @@ jobs:
           java-version: 17
           cache: maven
 
-      - name: Configure Git user
-        run: |
-          git config user.email "actions@github.com"
-          git config user.name "GitHub Actions"
+      - name: Setup Git Settings
+        uses: bonitasoft/git-setup-action@v1
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
 
       - name: Create Release
+        env:
+          BRANCH: ${{ github.ref_name }}
+          VERSION: ${{ inputs.version }}
+          NEXT_DEV_VERSION: ${{ inputs.nextDevelopmentVersion }}
+          VERSION_DIGIT: ${{ inputs.versionDigitToIncrement }}
         run: >
           ./mvnw -ntp --batch-mode gitflow:release
-          -DgitFlowConfig.productionBranch=${{ github.ref_name }}
-          -DgitFlowConfig.developmentBranch=${{ github.ref_name }}
-          -DreleaseVersion=${{ github.event.inputs.version }}
-          -DdevelopmentVersion=${{ github.event.inputs.nextDevelopmentVersion }}
-          -DversionDigitToIncrement=${{ github.event.inputs.versionDigitToIncrement }}
+          -DgitFlowConfig.productionBranch="$BRANCH"
+          -DgitFlowConfig.developmentBranch="$BRANCH"
+          -DreleaseVersion="$VERSION"
+          -DdevelopmentVersion="$NEXT_DEV_VERSION"
+          -DversionDigitToIncrement="$VERSION_DIGIT"
           -DskipTestProject
+
+  publish:
+    needs: release
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ inputs.version }}
+
+      - name: Setup Java
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Configure Maven Settings
+        uses: bonitasoft/maven-settings-action@v2
+        with:
+          keeper-secret-config: ${{ secrets.KSM_CONFIG }}
+
+      - name: Publish tag
+        run: ./mvnw -ntp --batch-mode deploy -Prelease -DskipTests
+
+  # Separate job so that a failure here can be re-run without redeploying to Maven Central
+  github-release:
+    needs: publish
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ secrets.BONITA_CI_PAT }}
+          GH_REPO: ${{ github.repository }}
+          VERSION: ${{ inputs.version }}
+          PREVIOUS_TAG: ${{ inputs.previous-tag }}
+          IS_LATEST: ${{ inputs.is-latest-release }}
+        run: >
+          gh release create "$VERSION"
+          --generate-notes
+          --notes-start-tag "$PREVIOUS_TAG"
+          --latest="$IS_LATEST"
+          --verify-tag
