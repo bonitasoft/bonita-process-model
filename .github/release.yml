@@ -1,7 +1,6 @@
 changelog:
   exclude:
     labels:
-      - dependencies
       - github_actions
       - ignore-for-release-notes
   categories:

@@ -102,6 +102,13 @@ Releases are managed via GitHub Actions using the gitflow-maven-plugin:
   - Patch (X.Y.Z): `versionDigitToIncrement=2`
   - Minor (X.Y.0): `versionDigitToIncrement=1`
   - Major (X.0.0): `versionDigitToIncrement=0`
+- **Jobs (sequential; one run at a time per branch, a newer pending run cancels an older pending one):**
+  1. `release` - verifies `previous-tag` exists, then `./mvnw gitflow:release` (release commit, tag, next dev version, push)
+  2. `publish` - checks out the tag, `./mvnw deploy -Prelease -DskipTests` (Maven Central)
+  3. `github-release` - `gh release create --generate-notes --verify-tag`; re-runnable on its own without redeploying
+     (only for transient failures: a re-run reuses the same inputs)
+- **Release notes:** generated from PR labels via `.github/release.yml` (`previous-tag` input sets the start tag)
+- Workflow inputs are passed to `run:` scripts through `env:` variables, never inlined with `${{ }}`
 
 ---
 
@@ -498,11 +505,9 @@ Defined in `sites/org.bonitasoft.bpm/category.xml`:
 
 **`.github/workflows/release.yml`** - Release Management
 - Trigger: Manual (workflow_dispatch)
-- Uses: gitflow-maven-plugin
-- Command: `./mvnw gitflow:release`
+- Details: see [Release Process](#release-process)
 
 **`.github/workflows/build-pr.yml`** - Pull Request validation
-**`.github/workflows/publish.yml`** - Publish to Maven Central
 **`.github/workflows/codeql.yml`** - Security analysis
 
 ### SonarQube Configuration
