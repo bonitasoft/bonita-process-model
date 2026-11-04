@@ -196,7 +196,7 @@ the XMI by hand is only safe when the `.ecore` did not change. Full checklist in
 
 ### Release Process
 
-When you run the workflow from any branch (develop or support/*), it runs three jobs in sequence:
+When you run the workflow from any branch (develop or support/*), it runs four jobs in sequence:
 
 1. **release** - runs `gitflow:release`:
     1. Update version to release version (removes -SNAPSHOT)
@@ -208,6 +208,9 @@ When you run the workflow from any branch (develop or support/*), it runs three 
 2. **publish** - checks out the release tag and deploys the artifacts to Maven Central (`./mvnw deploy -Prelease`)
 3. **github-release** - creates the GitHub Release for the tag, with release notes generated from `previous-tag` to
    the new tag
+4. **notify-consumers** - skipped for a pre-release (`-` or `SNAPSHOT` in the version); waits until the release is on
+   Maven Central, then sends a `new-process-model-release` event to `bonita-project` and `bonita-studio-sp`, which
+   open the version bump PR
 
 The `previous-tag` input is checked at the start of the **release** job, so a missing or mistyped tag fails the run
 before anything is pushed.
