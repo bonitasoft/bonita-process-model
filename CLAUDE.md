@@ -107,6 +107,8 @@ Releases are managed via GitHub Actions using the gitflow-maven-plugin:
   2. `publish` - checks out the tag, `./mvnw deploy -Prelease -DskipTests` (Maven Central)
   3. `github-release` - `gh release create --generate-notes --verify-tag`; re-runnable on its own without redeploying
      (only for transient failures: a re-run reuses the same inputs)
+  4. `notify-consumers` - waits for the release on Maven Central, then `repository_dispatch` `new-process-model-release`
+     to `bonita-project` and `bonita-studio-sp` (their `update-process-model-version.yml` opens the bump PR)
 - **Release notes:** generated from PR labels via `.github/release.yml` (`previous-tag` input sets the start tag)
 - Workflow inputs are passed to `run:` scripts through `env:` variables, never inlined with `${{ }}`
 
