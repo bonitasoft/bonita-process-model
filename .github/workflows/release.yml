@@ -121,3 +121,44 @@ jobs:
           --notes-start-tag "$PREVIOUS_TAG"
           --latest="$IS_LATEST"
           --verify-tag
+
+  # Separate job so that a failure here can be re-run without releasing again
+  notify-consumers:
+    needs: github-release
+    # a pre-release must not open version bump PRs in the consumers
+    if: ${{ !contains(inputs.version, '-') && !contains(inputs.version, 'SNAPSHOT') }}
+    runs-on: ubuntu-24.04
+    steps:
+      # the deploy returns once Maven Central has validated the bundle, before it is published: the bump PRs the
+      # consumers open would fail to resolve the artifact meanwhile
+      - name: Wait for the release on Maven Central
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          url="https://repo1.maven.org/maven2/org/bonitasoft/bpm/org.bonitasoft.bpm.eclipse-repository/$VERSION/org.bonitasoft.bpm.eclipse-repository-$VERSION.zip"
+          for attempt in $(seq 1 60); do
+            if curl --silent --fail --head --output /dev/null "$url"; then
+              echo "$VERSION is available on Maven Central"
+              exit 0
+            fi
+            echo "Not on Maven Central yet (attempt $attempt/60), retrying in 60s"
+            sleep 60
+          done
+          echo "::error::$VERSION is still not on Maven Central after 60 minutes: re-run this job once it is"
+          exit 1
+
+      - name: Notify bonita-project
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ secrets.BONITA_CI_PAT }}
+          repository: bonitasoft/bonita-project
+          event-type: new-process-model-release
+          client-payload: '{"release": "${{ inputs.version }}", "release_notes_url": "${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.version }}"}'
+
+      - name: Notify bonita-studio-sp
+        uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
+        with:
+          token: ${{ secrets.BONITA_CI_PAT }}
+          repository: bonitasoft/bonita-studio-sp
+          event-type: new-process-model-release
+          client-payload: '{"release": "${{ inputs.version }}", "release_notes_url": "${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.version }}"}'
